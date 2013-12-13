@@ -123,5 +123,3 @@ switch ($do) {
 }
 
 $pines->page->override_doc(json_encode($return));
-
-?>

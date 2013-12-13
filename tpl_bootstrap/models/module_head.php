@@ -11,4 +11,4 @@
 /* @var $pines pines */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
-<?php echo $this->content; ?>
+<?php echo $this->content;

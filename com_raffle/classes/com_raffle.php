@@ -39,5 +39,3 @@ class com_raffle extends component {
 		return $module;
 	}
 }
-
-?>

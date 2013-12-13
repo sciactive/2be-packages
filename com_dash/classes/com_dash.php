@@ -156,5 +156,3 @@ class com_dash extends component {
 		return $module;
 	}
 }
-
-?>

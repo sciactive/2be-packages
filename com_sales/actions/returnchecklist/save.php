@@ -62,5 +62,3 @@ if ($return_checklist->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'returnchecklist/list'));
-
-?>

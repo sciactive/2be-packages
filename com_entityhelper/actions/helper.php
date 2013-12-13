@@ -61,5 +61,3 @@ $module->render = 'footer';
 $module->entity = $entity;
 $result['footer'] = $module->render();
 $pines->page->override_doc(json_encode($result));
-
-?>

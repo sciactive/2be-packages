@@ -19,5 +19,3 @@ return array(
 		'type' => 'imodule',
 	),
 );
-
-?>

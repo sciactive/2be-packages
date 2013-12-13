@@ -57,5 +57,3 @@ if ($interaction->save()) {
 } else {
 	$pines->page->override_doc('false');
 }
-
-?>

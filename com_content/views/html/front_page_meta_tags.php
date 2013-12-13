@@ -18,4 +18,4 @@ foreach ((array) $pines->config->com_content->front_page_meta_tags as $cur_meta_
 	?>
 
 <meta name="<?php echo htmlspecialchars($name); ?>" content="<?php echo htmlspecialchars(format_content($content)); ?>" />
-<?php } ?>
+<?php }

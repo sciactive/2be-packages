@@ -100,5 +100,3 @@ if ($event->save()) {
 }
 
 date_default_timezone_set($cur_timezone);
-
-?>

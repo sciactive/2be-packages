@@ -33,5 +33,3 @@ class com_pinlock extends component {
 	 */
 	public $sessionid;
 }
-
-?>

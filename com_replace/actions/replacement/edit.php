@@ -21,5 +21,3 @@ if (!empty($_REQUEST['id'])) {
 
 $entity = com_replace_replacement::factory((int) $_REQUEST['id']);
 $entity->print_form();
-
-?>

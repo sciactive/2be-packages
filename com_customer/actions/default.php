@@ -12,5 +12,3 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 pines_action('com_customer', 'customer/list');
-
-?>

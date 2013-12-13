@@ -35,5 +35,3 @@ if (!$widget_location)
 $dashboard->tabs[$widget_location['tab']]['columns'][$widget_location['column']]['widgets'][$_REQUEST['key']]['options'] = json_decode($_REQUEST['options'], true);
 
 $pines->page->override_doc(json_encode($dashboard->save()));
-
-?>

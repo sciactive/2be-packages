@@ -65,5 +65,3 @@ if ($tax_fee->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'taxfee/list'));
-
-?>

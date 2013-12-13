@@ -104,5 +104,3 @@ foreach ($stock as $cur_stock) {
 $module->product = $product;
 
 $pines->page->override_doc($module->render());
-
-?>

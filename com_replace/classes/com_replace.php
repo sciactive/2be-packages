@@ -122,5 +122,3 @@ class com_replace extends component {
 		}
 	}
 }
-
-?>

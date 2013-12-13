@@ -87,5 +87,3 @@ if ($payment_type->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'paymenttype/list'));
-
-?>

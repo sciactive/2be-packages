@@ -65,5 +65,3 @@ $json_struct = (object) array(
 $pines->page->override_doc(json_encode($json_struct));
 
 date_default_timezone_set($cur_timezone);
-
-?>

@@ -49,5 +49,3 @@ foreach ($entity->products as $cur_product) {
 }
 
 $entity->print_ship();
-
-?>

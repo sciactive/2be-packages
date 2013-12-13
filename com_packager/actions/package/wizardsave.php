@@ -51,5 +51,3 @@ else
 	pines_notice('Created packages successfully.');
 
 pines_redirect(pines_url('com_packager', 'package/list'));
-
-?>

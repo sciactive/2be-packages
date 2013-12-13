@@ -39,5 +39,3 @@ class com_ptags extends component {
 		}
 	}
 }
-
-?>

@@ -39,5 +39,3 @@ return array(
 		array('help', 'Help With Testimonials', 'User can use the help section to learn how to create testimonial modules.')
 	),
 );
-
-?>

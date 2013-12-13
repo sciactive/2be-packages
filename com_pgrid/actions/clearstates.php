@@ -47,5 +47,3 @@ else
 	pines_error('There was an error while removing states. Do you have permission?');
 
 pines_redirect(pines_url());
-
-?>

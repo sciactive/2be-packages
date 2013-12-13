@@ -17,5 +17,3 @@ if (!$pines->config->com_storefront->catalog_mode) {
 
 	$module = new module('com_storefront', 'cart/view', 'content');
 }
-
-?>

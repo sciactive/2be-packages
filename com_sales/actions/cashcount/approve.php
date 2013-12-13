@@ -26,4 +26,3 @@ if (!$entity->final) {
 	return;
 }
 $entity->print_review();
-?>

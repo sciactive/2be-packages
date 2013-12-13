@@ -39,5 +39,3 @@ class com_notes extends component {
 		return $module;
 	}
 }
-
-?>

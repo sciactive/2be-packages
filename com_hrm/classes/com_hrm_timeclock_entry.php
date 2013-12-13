@@ -70,5 +70,3 @@ class com_hrm_timeclock_entry extends entity {
 		return null;
 	}
 }
-
-?>

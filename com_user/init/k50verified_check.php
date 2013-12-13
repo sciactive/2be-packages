@@ -23,5 +23,3 @@ if (gatekeeper() && isset($_SESSION['user']->secret) && !$pines->depend->check('
 	$module = new module('com_user', 'resend_verification', 'bottom');
 	unset($module);
 }
-
-?>

@@ -73,5 +73,3 @@ class tpl_print extends template {
 		return $return;
 	}
 }
-
-?>

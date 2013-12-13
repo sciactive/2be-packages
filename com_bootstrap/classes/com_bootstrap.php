@@ -60,5 +60,3 @@ class com_bootstrap extends component {
 	}
 	
 }
-
-?>

@@ -20,5 +20,3 @@ if (gatekeeper('com_hrm/listemployees') && !empty($_REQUEST['id'])) {
 } else {
 	punt_user(null, pines_url('com_hrm', 'employee/history', array('id' => $_REQUEST['id'])));
 }
-
-?>

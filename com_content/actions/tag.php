@@ -55,5 +55,3 @@ foreach ($pages as $cur_page) {
 		continue;
 	$module = $cur_page->print_intro();
 }
-
-?>

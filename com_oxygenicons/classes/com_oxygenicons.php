@@ -34,5 +34,3 @@ class com_oxygenicons extends component implements icons_interface {
 		}
 	}
 }
-
-?>

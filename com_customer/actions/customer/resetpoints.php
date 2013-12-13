@@ -34,5 +34,3 @@ if (!$failed_resets) {
 }
 
 pines_redirect(pines_url('com_customer', 'customer/list'));
-
-?>

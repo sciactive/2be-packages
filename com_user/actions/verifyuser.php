@@ -98,5 +98,3 @@ if ($user->save()) {
 } else {
 	pines_error('Error saving user.');
 }
-
-?>

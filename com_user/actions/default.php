@@ -20,5 +20,3 @@ if ( !gatekeeper() ) {
 }
 
 pines_action('com_user', 'listusers');
-
-?>

@@ -41,5 +41,3 @@ if (!file_exists($file)) {
 }
 
 pines_redirect(pines_url('com_repository', 'listpackages'));
-
-?>

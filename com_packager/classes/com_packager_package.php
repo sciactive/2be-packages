@@ -285,5 +285,3 @@ class com_packager_package extends entity {
 		return $module;
 	}
 }
-
-?>

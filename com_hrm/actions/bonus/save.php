@@ -49,5 +49,3 @@ if ($bonus->save()) {
 }
 
 pines_redirect(pines_url('com_hrm', 'bonus/list'));
-
-?>

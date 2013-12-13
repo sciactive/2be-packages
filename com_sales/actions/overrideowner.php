@@ -65,5 +65,3 @@ if ($entity->save()) {
 	pines_notice('The entity could not be overridden.');
 	$pines->page->override_doc('false');
 }
-
-?>

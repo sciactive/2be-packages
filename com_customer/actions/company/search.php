@@ -71,5 +71,3 @@ if (empty($companies))
 	$companies = null;
 
 $pines->page->override_doc(json_encode($companies));
-
-?>

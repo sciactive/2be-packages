@@ -1483,5 +1483,3 @@ class com_pgentity extends component implements entity_manager_interface {
 		return 0;
 	}
 }
-
-?>

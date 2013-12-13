@@ -53,5 +53,3 @@ if ($this->position == 'breadcrumbs')
 
 // Now call the Joomla! chrome function. This prints the output.
 call_user_func_array("modChrome_{$suffix}", array($module, &$params, &$options));
-
-?>

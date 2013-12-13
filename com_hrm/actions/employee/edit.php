@@ -16,5 +16,3 @@ if ( !gatekeeper('com_hrm/editemployee') )
 
 $entity = com_hrm_employee::factory((int) $_REQUEST['id']);
 $entity->print_form();
-
-?>

@@ -70,5 +70,3 @@ if ($entity->get_option('show_breadcrumbs')) {
 }
 
 $entity->print_page();
-
-?>

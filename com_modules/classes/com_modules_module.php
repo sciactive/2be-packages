@@ -187,5 +187,3 @@ class com_modules_module extends entity {
 		return $module;
 	}
 }
-
-?>

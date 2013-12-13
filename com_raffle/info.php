@@ -32,5 +32,3 @@ return array(
 		array('deleteraffle', 'Delete Raffles', 'User can delete current raffles.')
 	),
 );
-
-?>

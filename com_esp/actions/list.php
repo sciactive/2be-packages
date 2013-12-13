@@ -21,4 +21,3 @@ if ( !gatekeeper('com_esp/filterplans') || !isset($_REQUEST['show'])) {
 	$pines->com_esp->list_plans($_REQUEST['show']);
 	return;
 }
-?>

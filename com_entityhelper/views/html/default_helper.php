@@ -62,4 +62,4 @@ if ($this->render == 'body') {
 <a href="<?php echo htmlspecialchars($url_edit); ?>" class="btn">Edit</a>
 <?php } if (!$url_view && !$url_edit) { ?>
 <a href="javascript:void(0);" class="btn" data-dismiss="modal">Close</a>
-<?php } } ?>
+<?php } }

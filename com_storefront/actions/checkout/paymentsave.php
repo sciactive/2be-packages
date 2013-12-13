@@ -65,5 +65,3 @@ if ($pines->config->com_storefront->review_in_payment_page)
 	pines_action('com_storefront', 'checkout/reviewsave');
 else
 	pines_redirect(pines_url('com_storefront', 'checkout/review'));
-
-?>

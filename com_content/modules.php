@@ -69,5 +69,3 @@ return array(
 		'type' => 'module',
 	),
 );
-
-?>

@@ -47,5 +47,3 @@ if ($countsheet->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'countsheet/list'));
-
-?>

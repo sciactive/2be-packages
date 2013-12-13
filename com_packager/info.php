@@ -33,5 +33,3 @@ return array(
 		array('deletepackage', 'Delete Packages', 'User can delete current packages.')
 	),
 );
-
-?>

@@ -15,5 +15,3 @@ $module = new module('com_jquery', 'jquery', 'head');
 unset ($module);
 $module = new module('com_jquery', 'jquery-ui', 'head');
 unset ($module);
-
-?>

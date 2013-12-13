@@ -57,5 +57,3 @@ foreach ($threads as $cur_thread) {
 }
 
 $pines->page->override_doc(json_encode($return));
-
-?>

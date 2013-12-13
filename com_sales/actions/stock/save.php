@@ -209,5 +209,3 @@ foreach ($entities as $stock) {
 }
 
 pines_redirect(pines_url('com_sales', 'stock/list'));
-
-?>

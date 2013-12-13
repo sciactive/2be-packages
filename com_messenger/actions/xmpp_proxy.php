@@ -76,5 +76,3 @@ foreach (explode("\n", $response_headers) as $cur_header) {
 echo $response_body;
 
 curl_close($request);
-
-?>

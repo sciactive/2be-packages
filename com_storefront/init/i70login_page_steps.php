@@ -31,5 +31,3 @@ function com_storefront__catch_login_page(&$array) {
 }
 
 $pines->hook->add_callback('$pines->user_manager->print_login', -10, 'com_storefront__catch_login_page');
-
-?>

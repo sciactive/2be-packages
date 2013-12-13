@@ -53,5 +53,3 @@ $benchmark->delete[1] = microtime(true);
 $benchmark->time_end = microtime(true);
 
 $pines->page->override_doc(json_encode($benchmark));
-
-?>

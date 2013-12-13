@@ -58,5 +58,3 @@ $module->entity = $entity;
 
 $module = new module('com_storefront', 'product', 'content');
 $module->entity = $entity;
-
-?>

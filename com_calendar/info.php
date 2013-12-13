@@ -30,5 +30,3 @@ return array(
 		array('managecalendar', 'Manage Calendar', 'User can view private events and manage schedules for other employee.')
 	),
 );
-
-?>

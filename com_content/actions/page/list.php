@@ -21,4 +21,3 @@ if (isset($_REQUEST['category'])) {
 }
 
 $pines->com_content->list_pages($category);
-?>

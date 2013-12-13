@@ -27,4 +27,3 @@ if (!$default)
 	$pines->com_testimonials->list_testimonials($_REQUEST['type']);
 else
 	$pines->com_testimonials->list_testimonials();
-?>

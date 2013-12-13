@@ -32,5 +32,3 @@ foreach ($entity_classes as $cur_class) {
 $module = new module('com_entityhelper', 'classcheck', 'content');
 $module->entity_classes = $entity_classes;
 $module->no_helper = $no_helper;
-
-?>

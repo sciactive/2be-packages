@@ -15,5 +15,3 @@ if ( !gatekeeper('com_sales/warehouse') )
 	punt_user(null, pines_url('com_sales', 'warehouse/assigned'));
 
 $pines->com_sales->warehouse_assigned();
-
-?>

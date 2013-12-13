@@ -31,5 +31,3 @@ return array(
 		array('deletemodule', 'Delete Modules', 'User can delete current modules.')
 	),
 );
-
-?>

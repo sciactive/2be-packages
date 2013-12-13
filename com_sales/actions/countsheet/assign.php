@@ -31,5 +31,3 @@ if ($location->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'countsheet/list'));
-
-?>

@@ -44,5 +44,3 @@ function com_customer__hide_customers(&$args) {
 
 $pines->hook->add_callback('$pines->user_manager->list_users', -10, 'com_customer__hook_entities');
 $pines->hook->add_callback('$pines->user_manager->get_users', -10, 'com_customer__hook_entities');
-
-?>

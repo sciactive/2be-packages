@@ -114,4 +114,4 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 </table>
 <?php if (in_array('timezone', $pines->config->com_user->user_fields)) { ?>
 <small>Note: Under timezones (I) means inherited and (A) means assigned.</small>
-<?php } ?>
+<?php }

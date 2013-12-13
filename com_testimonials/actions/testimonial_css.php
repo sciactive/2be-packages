@@ -395,4 +395,4 @@ $misc_css = $pines->config->com_testimonials->misc_css;
 	}
 	<?php echo $misc_css; ?>
 	/* </style> */
-<?php exit; ?>
+<?php exit;

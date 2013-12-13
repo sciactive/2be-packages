@@ -22,5 +22,3 @@ if ($entity->complete) {
 }
 
 $entity->print_public();
-
-?>

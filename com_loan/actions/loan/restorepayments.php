@@ -137,4 +137,3 @@ $loan->save();
 //var_dump($loan->paid);
 //exit;
 pines_redirect(pines_url('com_loan', 'loan/editpayments', array('id' => $loan->guid)));
-?>

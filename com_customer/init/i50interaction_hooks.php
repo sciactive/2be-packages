@@ -112,5 +112,3 @@ function com_customer__check_return(&$arguments, $name, &$object) {
 }
 
 $pines->hook->add_callback('com_sales_return->save', -10, 'com_customer__check_return');
-
-?>

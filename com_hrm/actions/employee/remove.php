@@ -28,5 +28,3 @@ if (empty($failed_removes)) {
 }
 
 pines_redirect(pines_url('com_hrm', 'employee/list'));
-
-?>

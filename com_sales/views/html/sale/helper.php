@@ -326,4 +326,4 @@ if ($returns) { ?>
 <a href="<?php echo htmlspecialchars(pines_url('com_sales', 'sale/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
 <?php } if (gatekeeper('com_sales/newreturnwsale')) { ?>
 <a href="<?php echo htmlspecialchars(pines_url('com_sales', 'sale/return', array('id' => $this->entity->guid))); ?>" class="btn">Return</a>
-<?php } } ?>
+<?php } }

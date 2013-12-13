@@ -113,5 +113,3 @@ switch ($_REQUEST['sort']) {
 		$module->sort_reverse = true;
 		break;
 }
-
-?>

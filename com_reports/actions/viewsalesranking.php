@@ -31,5 +31,3 @@ if (!isset($entity->guid)) {
 }
 
 $entity->rank();
-
-?>

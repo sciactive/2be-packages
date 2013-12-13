@@ -13,5 +13,3 @@ defined('P_RUN') or die('Direct access prohibited');
 
 $_REQUEST['id'] = $_SESSION['user_id'];
 pines_action('com_user', 'edituser');
-
-?>

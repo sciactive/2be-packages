@@ -17,5 +17,3 @@ if ( !gatekeeper('com_sales/newsale') )
 $entity = com_sales_sale::factory();
 $entity->customer = com_customer_customer::factory((int) $_REQUEST['customer']);
 $entity->print_form();
-
-?>

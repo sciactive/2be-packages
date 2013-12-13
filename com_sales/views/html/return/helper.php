@@ -249,4 +249,4 @@ echo $module->render();
 <a href="<?php echo htmlspecialchars(pines_url('com_sales', 'return/list', array('location' => $this->entity->group->guid, 'descendants' => 'false', 'all_time' => 'false', 'start_date' => format_date($this->entity->p_cdate, 'custom', 'Y-m-d'), 'end_date' => format_date(strtotime('+1 day', $this->entity->p_cdate), 'custom', 'Y-m-d')))); ?>" class="btn">View in List</a>
 <?php } if (gatekeeper('com_sales/editreturn')) { ?>
 <a href="<?php echo htmlspecialchars(pines_url('com_sales', 'return/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
-<?php } } ?>
+<?php } }

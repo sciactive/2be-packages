@@ -1208,5 +1208,3 @@ class com_myentity extends component implements entity_manager_interface {
 		return 0;
 	}
 }
-
-?>

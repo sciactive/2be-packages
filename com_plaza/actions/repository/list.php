@@ -15,5 +15,3 @@ if ( !gatekeeper('com_plaza/editrepositories') )
 	punt_user(null, pines_url('com_plaza', 'repository/list'));
 
 $pines->com_plaza->list_repositories();
-
-?>

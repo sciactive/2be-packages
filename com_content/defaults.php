@@ -296,5 +296,3 @@ return array(
 		'peruser' => true,
 	),
 );
-
-?>

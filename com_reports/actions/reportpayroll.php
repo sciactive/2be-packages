@@ -26,5 +26,3 @@ if (isset($paystub->guid)) {
 } else {
 	$pines->com_reports->report_payroll($entire_company, $location, $descendants);
 }
-
-?>

@@ -15,5 +15,3 @@ if ( !gatekeeper('com_hrm/listbonuses') )
 	punt_user(null, pines_url('com_hrm', 'bonus/list'));
 
 $pines->com_hrm->list_bonuses();
-
-?>

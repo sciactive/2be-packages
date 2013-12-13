@@ -13,5 +13,3 @@ defined('P_RUN') or die('Direct access prohibited');
 
 $module = new module('com_pnotify', 'pnotify', 'head');
 unset ($module);
-
-?>

@@ -207,5 +207,3 @@ class com_testimonials extends component {
 	
 
 }
-
-?>

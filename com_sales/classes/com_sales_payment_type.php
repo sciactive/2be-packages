@@ -108,5 +108,3 @@ class com_sales_payment_type extends entity {
 		return $module;
 	}
 }
-
-?>

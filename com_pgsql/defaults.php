@@ -59,5 +59,4 @@ return array(
 		'value' => true,
 	),
 );
-
-?>
+

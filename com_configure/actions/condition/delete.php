@@ -27,5 +27,3 @@ if (empty($failed_deletes)) {
 }
 
 pines_redirect(pines_url('com_configure', 'list', array('percondition' => '1')));
-
-?>

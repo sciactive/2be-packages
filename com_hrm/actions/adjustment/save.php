@@ -49,5 +49,3 @@ if ($adjustment->save()) {
 }
 
 pines_redirect(pines_url('com_hrm', 'adjustment/list'));
-
-?>

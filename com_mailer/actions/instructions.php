@@ -15,4 +15,3 @@ if ( !gatekeeper('com_mailer/listtemplates') )
 	punt_user(null, pines_url('com_mailer', 'instructions'));
 
 $module = new module('com_mailer', 'instructions', 'content');
-?>

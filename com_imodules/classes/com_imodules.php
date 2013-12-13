@@ -137,5 +137,3 @@ class com_imodules extends component {
 		}
 	}
 }
-
-?>

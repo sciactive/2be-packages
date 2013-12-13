@@ -48,5 +48,3 @@ if ($item_action == 'swap') {
 }
 
 pines_redirect(pines_url('com_sales', 'sale/list'));
-
-?>

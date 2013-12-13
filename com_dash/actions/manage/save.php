@@ -88,5 +88,3 @@ else
 	pines_error('Error saving dashboard. Do you have permission?');
 
 pines_redirect(pines_url('com_dash', 'manage/list'));
-
-?>

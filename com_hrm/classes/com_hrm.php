@@ -244,5 +244,3 @@ class com_hrm extends component {
 		return $module;
 	}
 }
-
-?>

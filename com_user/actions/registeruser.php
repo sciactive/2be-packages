@@ -153,5 +153,3 @@ if ($user->save()) {
 } else {
 	pines_error('Error registering user.');
 }
-
-?>

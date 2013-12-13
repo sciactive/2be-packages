@@ -22,5 +22,3 @@ if (!isset($esp->guid)) {
 }
 
 $esp->swap_form();
-
-?>

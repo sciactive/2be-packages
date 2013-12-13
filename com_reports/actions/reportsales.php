@@ -28,4 +28,3 @@ if ( isset($_REQUEST['location']) ) {
 $descendants = ($_REQUEST['descendants'] == 'ON');
 
 $pines->com_reports->report_sales($start, $end, $location, $employee, $descendants);
-?>

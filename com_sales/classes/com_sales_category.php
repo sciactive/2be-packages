@@ -182,5 +182,3 @@ class com_sales_category extends entity {
 		return $module;
 	}
 }
-
-?>

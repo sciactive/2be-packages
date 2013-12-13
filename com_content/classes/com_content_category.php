@@ -247,5 +247,3 @@ class com_content_category extends entity {
 		return true;
 	}
 }
-
-?>

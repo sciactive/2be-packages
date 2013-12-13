@@ -15,4 +15,3 @@ if ( !gatekeeper('com_sales/listpaymenttypes') )
 	punt_user(null, pines_url('com_sales', 'paymenttype/list'));
 
 $pines->com_sales->list_payment_types();
-?>

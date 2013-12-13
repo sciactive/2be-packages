@@ -139,5 +139,3 @@ header('Content-Type: application/x-gzip');
 header('Content-Disposition: attachment; filename=image-archive.tar.gz');
 $pines->page->override = true;
 $pines->page->override_doc(file_get_contents("$tmp_dir/archive.tar.gz"));
-
-?>

@@ -39,4 +39,3 @@ class com_jqueryuitouch extends component {
 		}
 	}
 }
-?>

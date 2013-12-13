@@ -44,5 +44,3 @@ class com_markdown extends component {
 		return $this->parser->transform($text);
 	}
 }
-
-?>

@@ -22,5 +22,3 @@ if ( gatekeeper() ) {
 	$_SESSION['com_timeoutnotice__timeout'] = $pines->config->com_timeoutnotice->timeout;
 	pines_session('close');
 }
-
-?>

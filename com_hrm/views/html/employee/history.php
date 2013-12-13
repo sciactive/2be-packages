@@ -320,4 +320,4 @@ $pines->com_pgrid->load();
 </div>
 <?php if (gatekeeper('com_hrm/listemployees')) { ?>
 <input class="btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="&laquo; Employees" />
-<?php } ?>
+<?php }

@@ -28,5 +28,3 @@ if ( !isset($mail) ) {
 }
 
 $sendprep->mail = $mail;
-
-?>

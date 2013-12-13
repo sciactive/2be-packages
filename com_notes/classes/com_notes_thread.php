@@ -96,5 +96,3 @@ class com_notes_thread extends entity {
 		return $module;
 	}
 }
-
-?>

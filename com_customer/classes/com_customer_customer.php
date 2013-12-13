@@ -415,5 +415,3 @@ class com_customer_customer extends user {
 		return (time() < $this->member_exp);
 	}
 }
-
-?>

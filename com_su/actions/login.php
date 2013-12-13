@@ -52,5 +52,4 @@ if ( isset($user, $user->guid) ) {
 	pines_notice('Username and password not correct!');
 	$pines->user_manager->print_login();
 }
-
-?>
+

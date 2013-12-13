@@ -40,5 +40,3 @@ $location = empty($_REQUEST['location']) ? null : group::factory((int) $_REQUEST
 $descendants = ($_REQUEST['descendants'] == 'true');
 
 $pines->com_reports->hours_clocked($start_date, $end_date, $location, $employee, $descendants);
-
-?>

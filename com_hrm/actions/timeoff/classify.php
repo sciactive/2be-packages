@@ -40,5 +40,3 @@ if (empty($failed_updates)) {
 }
 
 pines_redirect(pines_url('com_hrm', 'employee/list'));
-
-?>

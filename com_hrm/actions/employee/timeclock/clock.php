@@ -47,5 +47,3 @@ if (!$success || !$employee->save()) {
 
 
 $pines->page->override_doc(json_encode($employee->timeclock->clocked_in_time()));
-
-?>

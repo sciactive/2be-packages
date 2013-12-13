@@ -106,5 +106,3 @@ class com_sales_return_checklist extends entity {
 		return $module;
 	}
 }
-
-?>

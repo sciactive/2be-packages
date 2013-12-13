@@ -46,5 +46,3 @@ if ($_SESSION['user']->group->com_sales_task_countsheet) {
 	}
 }
 $entity->print_form();
-
-?>

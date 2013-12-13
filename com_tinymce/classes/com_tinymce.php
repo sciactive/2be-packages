@@ -52,5 +52,3 @@ class com_tinymce extends component implements editor_interface {
 		}
 	}
 }
-
-?>

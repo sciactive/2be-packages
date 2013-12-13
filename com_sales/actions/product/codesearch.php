@@ -96,5 +96,3 @@ if (isset($product)) {
 }
 
 $pines->page->override_doc(json_encode($product));
-
-?>

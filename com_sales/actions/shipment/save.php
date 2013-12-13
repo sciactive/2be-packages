@@ -79,5 +79,3 @@ if ($entity->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'shipment/packinglist', array('id' => $entity->guid)));
-
-?>

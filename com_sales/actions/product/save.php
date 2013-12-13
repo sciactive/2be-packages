@@ -430,5 +430,3 @@ if ($product->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'product/list'));
-
-?>

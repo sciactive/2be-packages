@@ -15,5 +15,3 @@ if ( !gatekeeper('com_sales/editproduct') )
 	punt_user(null, pines_url('com_reports', 'maintenance/prodswocats'));
 
 $pines->com_reports->products_wo_categories();
-
-?>

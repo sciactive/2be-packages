@@ -30,5 +30,3 @@ return array(
 		array('pinesfeed', 'WonderPHP Feed', 'User can see the WonderPHP News Feed widget.')
 	),
 );
-
-?>

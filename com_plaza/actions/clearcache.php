@@ -21,4 +21,3 @@ if ($pines->com_plaza->clear_cache()) {
 }
 
 pines_action('com_plaza', 'reload');
-?>

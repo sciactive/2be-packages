@@ -68,5 +68,3 @@ class com_newsletter extends component {
 		return $module;
 	}
 }
-
-?>

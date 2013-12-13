@@ -38,5 +38,3 @@ class com_inuitcss extends component {
 		}
 	}
 }
-
-?>

@@ -25,5 +25,3 @@ if (!isset($entity->guid)) {
 }
 
 $pines->com_sales->override_form($entity);
-
-?>

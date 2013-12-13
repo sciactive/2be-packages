@@ -277,5 +277,3 @@ class configurator_component implements configurator_component_interface {
 		$this->user = $condition_obj;
 	}
 }
-
-?>

@@ -25,5 +25,3 @@ return array(
 		'value' => true,
 	),
 );
-
-?>

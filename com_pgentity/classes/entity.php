@@ -567,5 +567,3 @@ class entity implements entity_interface {
 		return array('pines_entity_reference', $this->guid, get_class($this));
 	}
 }
-
-?>

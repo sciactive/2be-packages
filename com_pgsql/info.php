@@ -26,5 +26,3 @@ return array(
 		'function' => 'pg_connect'
 	),
 );
-
-?>

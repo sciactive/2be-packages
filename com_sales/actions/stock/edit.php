@@ -36,5 +36,3 @@ if (count($list) > 1) {
 	$entity = com_sales_stock::factory((int) $list[0]);
 	$entity->print_form();
 }
-
-?>

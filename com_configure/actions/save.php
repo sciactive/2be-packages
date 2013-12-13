@@ -139,5 +139,3 @@ if ($_REQUEST['peruser']) {
 } else {
 	pines_redirect(pines_url('com_configure', 'list'));
 }
-
-?>

@@ -24,5 +24,3 @@ if ( !gatekeeper('com_reports/listsalesrankings') ) {
 } else {
 	$pines->com_reports->list_sales_rankings();
 }
-
-?>

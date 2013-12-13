@@ -29,5 +29,3 @@ if (!isset($package) || !in_array($do, array('install', 'upgrade', 'remove')))
 	return;
 
 $pines->page->override_doc(json_encode($pines->com_plaza->calculate_changes_full($package, $do)));
-
-?>

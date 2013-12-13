@@ -810,4 +810,4 @@ if (!$this->quickpage_options) {
 		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_content', 'page/list'))); ?>);" value="Cancel" />
 	</div>
 </form>
-<?php } ?>
+<?php }

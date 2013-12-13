@@ -102,5 +102,3 @@ $module->locations = array($location);
 $module->vendors = $vendors;
 $module->location_fixed = true;
 $module->item_ids = $item_ids;
-
-?>

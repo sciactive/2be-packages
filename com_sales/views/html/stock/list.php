@@ -182,4 +182,4 @@ $pines->com_jstree->load();
 </table>
 <?php if (gatekeeper('com_sales/managestock')) { ?>
 <small>Note: Last transaction is database intensive, so it is not loaded. Select rows and click the toolbar button to load it.</small>
-<?php } ?>
+<?php }

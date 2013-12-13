@@ -34,5 +34,3 @@ return array(
 		array('deletethread', 'Delete Threads', 'User can delete current threads.')
 	),
 );
-
-?>

@@ -482,5 +482,3 @@ class com_user extends component implements user_manager_interface {
 		}
 	}
 }
-
-?>

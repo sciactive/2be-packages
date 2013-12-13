@@ -242,5 +242,3 @@ class com_content_page extends entity {
 		return true;
 	}
 }
-
-?>

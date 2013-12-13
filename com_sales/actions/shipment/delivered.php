@@ -28,5 +28,3 @@ else
 	pines_error('Error saving shipment. Do you have permission?');
 
 pines_redirect(pines_url('com_sales', 'shipment/list'));
-
-?>

@@ -543,5 +543,3 @@ class com_mailer extends component {
 		return $email;
 	}
 }
-
-?>

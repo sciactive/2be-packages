@@ -347,5 +347,3 @@ class com_storefront extends component {
 		}
 	}
 }
-
-?>

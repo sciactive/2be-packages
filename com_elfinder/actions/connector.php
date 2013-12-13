@@ -123,5 +123,3 @@ if ($_REQUEST['temp'] == 'true') {
 
 $connector = new elFinderConnector(new elFinder($opts));
 $connector->run();
-
-?>

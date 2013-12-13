@@ -16,5 +16,3 @@ if ( !gatekeeper('com_configure/edit') )
 
 $entity = com_configure_condition::factory((int) $_REQUEST['id']);
 $entity->print_form();
-
-?>

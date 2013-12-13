@@ -25,4 +25,4 @@ defined('P_RUN') or die('Direct access prohibited');
 			<input class="pf-field" type="password" name="password" size="24" /></label>
 	</div>
 </form>
-<?php } ?>
+<?php }

@@ -54,5 +54,3 @@ foreach ((array) $_REQUEST['groups'] as $cur_group_guid) {
 
 pines_notice('Default groups saved.');
 pines_redirect(pines_url('com_customer', 'defaultgroups'));
-
-?>

@@ -16,5 +16,3 @@ if ( !gatekeeper('com_sales/editsale') && !gatekeeper('com_sales/newsale') )
 
 $entity = com_sales_sale::factory((int) $_REQUEST['id']);
 $entity->print_receipt($_REQUEST['autoprint'] == 'ok');
-
-?>

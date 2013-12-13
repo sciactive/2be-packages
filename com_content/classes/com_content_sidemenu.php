@@ -59,5 +59,3 @@ class com_content_sidemenu extends entity {
 		return parent::save();
 	}
 }
-
-?>

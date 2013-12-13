@@ -15,5 +15,3 @@ if ( !gatekeeper('com_sales/editproduct') )
 	punt_user(null, pines_url('com_storefront', 'verifystock'));
 
 $pines->com_storefront->verify_stock();
-
-?>

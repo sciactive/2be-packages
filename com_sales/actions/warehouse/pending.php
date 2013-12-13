@@ -40,5 +40,3 @@ if (!empty($_REQUEST['location']))
 $descendants = ($_REQUEST['descendants'] != 'false');
 
 $pines->com_sales->warehouse_pending($_REQUEST['ordered'] == 'true', $start_date, $end_date, $location, $descendants);
-
-?>

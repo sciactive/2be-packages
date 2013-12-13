@@ -58,5 +58,3 @@ class com_packager extends component {
 		}
 	}
 }
-
-?>

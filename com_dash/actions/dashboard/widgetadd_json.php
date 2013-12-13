@@ -65,5 +65,3 @@ foreach ($add_widgets as $cur_widget) {
 }
 
 $pines->page->override_doc(json_encode($dashboard->save()));
-
-?>

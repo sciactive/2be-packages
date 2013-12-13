@@ -39,5 +39,3 @@ return array(
 		'component' => 'com_pnotify'
 	),
 );
-
-?>

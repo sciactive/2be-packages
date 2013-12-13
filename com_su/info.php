@@ -29,5 +29,3 @@ return array(
 		array('nopassword', 'Switch Without Password', 'User can switch to any other user without providing a password.')
 	),
 );
-
-?>

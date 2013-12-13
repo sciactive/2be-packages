@@ -16,5 +16,3 @@ defined('P_RUN') or die('Direct access prohibited');
  * @global com_tinymce $pines->editor
  */
 $pines->editor = 'com_tinymce';
-
-?>

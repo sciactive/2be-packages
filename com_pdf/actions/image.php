@@ -47,5 +47,3 @@ if ($pdfpage >= 0 && $pdfpage < $pagecount) {
 	header('Content-Type: text/plain');
 	$pines->page->override_doc('Invalid file or page.');
 }
-
-?>

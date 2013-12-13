@@ -123,5 +123,3 @@ class com_customertimer_floor extends entity {
 		return $module;
 	}
 }
-
-?>

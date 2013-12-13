@@ -15,4 +15,3 @@ if ( !gatekeeper() )
 	punt_user(null, pines_url('com_example', 'content'));
 
 $pines->com_example->print_content();
-?>

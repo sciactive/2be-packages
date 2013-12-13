@@ -125,5 +125,3 @@ class com_sales_vendor extends entity {
 		return $module;
 	}
 }
-
-?>

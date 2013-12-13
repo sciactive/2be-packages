@@ -30,4 +30,3 @@ class com_googledrive extends component {
         $module->render();
     }
 }
-?>

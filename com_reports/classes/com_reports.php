@@ -1582,5 +1582,3 @@ class com_reports extends component {
 		return $module;
 	}
 }
-
-?>

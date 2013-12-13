@@ -34,5 +34,3 @@ return array(
 		array('claim', 'Claim ESPs', 'User can claim accidents for ESPs.')
 	),
 );
-
-?>

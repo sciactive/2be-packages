@@ -35,5 +35,3 @@ if (!$widget_location)
 unset($dashboard->tabs[$widget_location['tab']]['columns'][$widget_location['column']]['widgets'][$_REQUEST['key']]);
 
 $pines->page->override_doc(json_encode($dashboard->save()));
-
-?>

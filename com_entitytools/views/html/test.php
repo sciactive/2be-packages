@@ -57,4 +57,4 @@ have bugs.</p>
 	</ol>
 	The test is now complete. Test time was <?php echo htmlspecialchars($total_time); ?>s.
 </div>
-<?php } ?>
+<?php }

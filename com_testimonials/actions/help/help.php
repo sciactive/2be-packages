@@ -16,5 +16,3 @@ if ( !gatekeeper('com_testimonials/help')) {
 }
 
 $pines->com_testimonials->print_help();
-
-?>

@@ -29,5 +29,3 @@ if (isset($package)) {
 	header('Content-Type: '.$media['content-type']);
 	$pines->page->override_doc($media['data']);
 }
-
-?>

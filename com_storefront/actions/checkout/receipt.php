@@ -33,5 +33,3 @@ if ($pines->config->template_override && $pines->depend->check('component', 'tpl
 
 $module = new module('com_sales', 'sale/receipt', 'content');
 $module->entity = $sale;
-
-?>

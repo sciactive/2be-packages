@@ -20,4 +20,3 @@ if (!empty($_REQUEST['location']))
 $descendants = ($_REQUEST['descendants'] == 'true');
 
 $pines->com_sales->list_shipments($_REQUEST['removed'] == 'true', $location, $descendants);
-?>

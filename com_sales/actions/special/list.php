@@ -15,4 +15,3 @@ if ( !gatekeeper('com_sales/listspecials') )
 	punt_user(null, pines_url('com_sales', 'special/list'));
 
 $pines->com_sales->list_specials($_REQUEST['enabled'] != 'false');
-?>

@@ -77,5 +77,3 @@ foreach ($events as $cur_event) {
 $pines->page->override_doc(implode("\n", $errors));
 
 date_default_timezone_set($cur_timezone);
-
-?>

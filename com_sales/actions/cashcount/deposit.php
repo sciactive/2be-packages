@@ -55,5 +55,3 @@ if ($cashcount->status == 'closed' || $cashcount->status == 'flagged') {
 $deposit = com_sales_cashcount_deposit::factory();
 $deposit->cashcount = $cashcount;
 $deposit->print_form();
-
-?>

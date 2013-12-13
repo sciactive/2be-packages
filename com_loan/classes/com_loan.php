@@ -40,5 +40,3 @@ class com_loan extends component {
 	}
 
 }
-
-?>

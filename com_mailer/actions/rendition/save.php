@@ -90,5 +90,3 @@ if ($rendition->save()) {
 }
 
 pines_redirect(pines_url('com_mailer', 'rendition/list'));
-
-?>

@@ -81,5 +81,3 @@ class com_elfinderupload extends component implements uploader_interface {
 		return $root_url . join('/', array_map('urlencode', explode('/', substr($real, strlen($root)))));
 	}
 }
-
-?>

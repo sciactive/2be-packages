@@ -39,5 +39,3 @@ $module->dialog = true;
 
 if (!empty($_REQUEST['disabled_fields']))
 	$module->disabled_fields = explode(',', $_REQUEST['disabled_fields']);
-
-?>

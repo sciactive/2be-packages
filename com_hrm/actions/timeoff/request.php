@@ -19,5 +19,3 @@ if (!isset($rto->guid) || !$rto->user->is($_SESSION['user']))
 	$rto = com_hrm_rto::factory();
 
 $rto->print_form();
-
-?>

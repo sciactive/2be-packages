@@ -16,5 +16,4 @@ defined('P_RUN') or die('Direct access prohibited');
  * @global com_myentity $pines->entity_manager
  */
 $pines->entity_manager = 'com_myentity';
-
-?>
+

@@ -21,5 +21,3 @@ if (!empty($_REQUEST['id'])) {
 
 $entity = com_sales_po::factory((int) $_REQUEST['id']);
 $entity->print_form();
-
-?>

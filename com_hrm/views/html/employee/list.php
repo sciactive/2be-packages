@@ -481,4 +481,4 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</form>
 	<br />
 </div>
-<?php } ?>
+<?php }

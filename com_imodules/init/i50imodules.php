@@ -25,5 +25,3 @@ function com_imodules__parse_imodules(&$arguments) {
 }
 
 $pines->hook->add_callback('$pines->format_content', -10, 'com_imodules__parse_imodules');
-
-?>

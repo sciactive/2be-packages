@@ -103,7 +103,3 @@ if ($testimonial->save())
 else
 	pines_error('Error updating testimonial. Do you have permission?');
 pines_redirect(pines_url('com_testimonials', 'testimonial/list'));
-
-
-
-?>

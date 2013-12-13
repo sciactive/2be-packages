@@ -36,5 +36,3 @@ return array(
 		array('logout', 'Logout Users', 'User can log a customer out of the time tracker.')
 	),
 );
-
-?>

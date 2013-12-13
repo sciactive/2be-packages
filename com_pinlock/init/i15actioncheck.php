@@ -82,5 +82,4 @@ $pines->com_pinlock->component = $com_pinlock__request_component;
 $pines->com_pinlock->action = $com_pinlock__request_action;
 $pines->request_component = 'com_pinlock';
 $pines->request_action = 'enterpin';
-
-?>
+

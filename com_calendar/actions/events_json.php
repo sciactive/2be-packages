@@ -115,5 +115,3 @@ foreach ($events as $cur_event) {
 
 // Return the JSON structure.
 $pines->page->override_doc(json_encode($struct));
-
-?>

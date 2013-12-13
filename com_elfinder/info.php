@@ -28,5 +28,3 @@ return array(
 		array('finderself', 'Use elFinder for Own Files', 'User can manage files in their own folder with elFinder. Their folder is created under user root as their GUID.'),
 	),
 );
-
-?>

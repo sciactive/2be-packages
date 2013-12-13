@@ -98,5 +98,3 @@ function com_esp__check_sale(&$arguments, $name, &$object) {
 }
 
 $pines->hook->add_callback('com_sales_sale->save', 10, 'com_esp__check_sale');
-
-?>

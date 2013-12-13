@@ -64,5 +64,3 @@ if (isset($_REQUEST['employee'])) {
 		$pines->page->override_doc('false');
 	}
 }
-
-?>

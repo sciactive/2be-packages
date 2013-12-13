@@ -18,5 +18,3 @@ return array(
 		'type' => 'module imodule',
 	),
 );
-
-?>

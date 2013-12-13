@@ -21,5 +21,3 @@ if (file_put_contents($pines->config->com_logger->path, '') !== false) {
 }
 
 pines_redirect(pines_url('com_logger', 'view'));
-
-?>

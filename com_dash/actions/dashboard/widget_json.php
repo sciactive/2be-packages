@@ -84,5 +84,3 @@ foreach ($pines->page->modules['head'] as $cur_module)
 	$head .= $cur_module->render();
 
 $pines->page->override_doc(json_encode(array('title' => $module->title, 'content' => $content, 'head' => $head)));
-
-?>

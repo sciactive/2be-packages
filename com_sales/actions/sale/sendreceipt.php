@@ -26,5 +26,3 @@ if (isset($sale->guid)) {
 }
 
 pines_redirect(pines_url('com_sales', 'sale/receipt', array('id' => $_REQUEST['id'])));
-
-?>

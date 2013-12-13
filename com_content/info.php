@@ -39,5 +39,3 @@ return array(
 		array('edithead', 'Edit Custom Head Code', 'User can edit pages\' and categories\' custom head code.')
 	),
 );
-
-?>

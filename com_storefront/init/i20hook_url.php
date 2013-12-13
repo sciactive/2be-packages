@@ -55,5 +55,3 @@ function com_storefront__url_after(&$array, $name, &$object, &$function, &$data)
 
 $pines->hook->add_callback('$pines->template->url', -10, 'com_storefront__url');
 $pines->hook->add_callback('$pines->template->url', 10, 'com_storefront__url_after');
-
-?>

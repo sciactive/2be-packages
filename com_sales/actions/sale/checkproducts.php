@@ -90,5 +90,3 @@ foreach ($products as $key => $cur_product) {
 }
 
 $pines->page->override_doc(json_encode(array('result' => $success, 'messages' => $messages)));
-
-?>

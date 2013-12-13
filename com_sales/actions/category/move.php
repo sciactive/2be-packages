@@ -58,5 +58,3 @@ if ($key !== false) {
 }
 
 pines_redirect(pines_url('com_sales', 'category/list'));
-
-?>

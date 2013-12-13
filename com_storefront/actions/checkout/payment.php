@@ -49,5 +49,3 @@ if (empty($_SESSION['com_storefront_sale']->payments))
 	$module->payment = (object) array();
 else
 	$module->payment = (object) $_SESSION['com_storefront_sale']->payments[0];
-
-?>

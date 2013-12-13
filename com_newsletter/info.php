@@ -30,5 +30,3 @@ return array(
 		array('send', 'Send', 'Let users send out mailings.')
 	),
 );
-
-?>

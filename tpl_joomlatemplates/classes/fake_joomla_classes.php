@@ -1091,5 +1091,3 @@ class fake_joomla_dbo {
 class fake_joomla_user {
 	function get() { }
 }
-
-?>

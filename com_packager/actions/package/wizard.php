@@ -15,5 +15,3 @@ if ( !gatekeeper('com_packager/newpackage') )
 	punt_user(null, pines_url('com_packager', 'package/wizard'));
 
 $pines->com_packager->package_wizard();
-
-?>

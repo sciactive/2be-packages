@@ -59,5 +59,3 @@ if ($thread->save()) {
 } else {
 	$pines->page->override_doc(json_encode(false));
 }
-
-?>

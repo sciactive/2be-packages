@@ -168,5 +168,3 @@ class com_logger extends component implements log_manager_interface {
 		return $module;
 	}
 }
-
-?>

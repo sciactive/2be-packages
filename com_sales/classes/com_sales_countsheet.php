@@ -376,5 +376,3 @@ class com_sales_countsheet extends entity {
 		}
 	}
 }
-
-?>

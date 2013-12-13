@@ -276,5 +276,3 @@ class jtemplate_adapter {
 		return 0;
 	}
 }
-
-?>

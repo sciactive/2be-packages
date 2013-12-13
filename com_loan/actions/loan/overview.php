@@ -31,4 +31,3 @@ $loan->get_payments_array();
 //var_dump($loan->paid);
 $loan->print_overview();
 $loan->save();
-?>

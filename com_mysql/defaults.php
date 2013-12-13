@@ -43,5 +43,4 @@ return array(
 		'value' => 'pin_',
 	),
 );
-
-?>
+

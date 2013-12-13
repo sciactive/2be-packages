@@ -72,5 +72,3 @@ if ($success > 0) {
 //	pines_notice('The salesperson for this item could not be swapped.');
 //	$pines->page->override_doc('false');
 //}
-
-?>

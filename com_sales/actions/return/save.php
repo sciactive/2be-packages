@@ -267,5 +267,3 @@ if ($return->save()) {
 	pines_error('Error saving return. Do you have permission?');
 	return;
 }
-
-?>

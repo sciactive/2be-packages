@@ -46,5 +46,3 @@ class com_sales_tx extends entity {
 		return null;
 	}
 }
-
-?>

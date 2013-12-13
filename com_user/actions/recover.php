@@ -65,5 +65,3 @@ else
 	pines_error('Couldn\'t send recovery email.');
 
 pines_redirect(pines_url());
-
-?>

@@ -110,5 +110,3 @@ class tpl_bootstrap extends template {
 			return true;
 	}
 }
-
-?>

@@ -77,5 +77,3 @@ class com_customer_interaction extends entity {
 		return true;
 	}
 }
-
-?>

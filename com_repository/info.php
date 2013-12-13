@@ -39,5 +39,3 @@ return array(
 		array('gencert', 'Generate Certificate', 'Generate a repository certificate.')
 	),
 );
-
-?>

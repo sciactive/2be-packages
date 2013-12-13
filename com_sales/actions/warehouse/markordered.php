@@ -47,5 +47,3 @@ if ($successful)
 
 // Go back to the same page.
 pines_redirect(pines_url('com_sales', 'warehouse/pending', array('ordered' => ($_REQUEST['ordered'] == 'true' ? 'false' : 'true'))));
-
-?>

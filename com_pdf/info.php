@@ -26,5 +26,3 @@ return array(
 		'package' => 'com_pdf-data'
 	),
 );
-
-?>

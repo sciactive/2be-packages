@@ -264,5 +264,3 @@ class com_dash_dashboard extends entity {
 		return strtolower($aname) > strtolower($bname);
 	}
 }
-
-?>

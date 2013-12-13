@@ -15,4 +15,3 @@ if ( !gatekeeper('com_loan/listloans') )
 	punt_user(null, pines_url('com_loan', 'loan/list'));
 
 $pines->com_loan->list_loans();
-?>

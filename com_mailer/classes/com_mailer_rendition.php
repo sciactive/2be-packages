@@ -129,5 +129,3 @@ class com_mailer_rendition extends entity {
 		return true;
 	}
 }
-
-?>

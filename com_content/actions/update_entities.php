@@ -63,5 +63,3 @@ foreach ($entities as $cur_category) {
 //	$module->content("<p>Found $no_change entities that didn't require updating.</p>");
 //if ($failed)
 //	$module->content('<p>The following entities couldn\'t be updated:<ul><li>'.implode('</li><li>', $failed).'</li></ul></p>');
-
-?>

@@ -127,5 +127,3 @@ class com_hrm_rto extends entity {
 		$pines->page->override_doc($module->render());
 	}
 }
-
-?>

@@ -58,5 +58,3 @@ if (
 pines_session('close');
 
 pines_redirect(pines_url('com_storefront', 'checkout/payment'));
-
-?>

@@ -21,5 +21,3 @@ if (!empty($_REQUEST['id']))
 	$id = intval($_REQUEST['id']);
 
 $pines->page->override_doc(json_encode($pines->user_manager->check_email($_REQUEST['email'], $id)));
-
-?>

@@ -15,4 +15,3 @@ if ( !gatekeeper('com_sales/listtaxfees') )
 	punt_user(null, pines_url('com_sales', 'taxfee/list'));
 
 $pines->com_sales->list_tax_fees();
-?>

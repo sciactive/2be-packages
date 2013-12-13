@@ -195,4 +195,4 @@ if ($this->render == 'body' && gatekeeper('com_customer/listcustomers')) { ?>
 		</tbody>
 	</table>
 </div>
-<?php } } ?>
+<?php } }

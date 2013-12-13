@@ -25,5 +25,3 @@ if (!$entity->complete()) {
 	return;
 }
 $entity->print_complete();
-
-?>

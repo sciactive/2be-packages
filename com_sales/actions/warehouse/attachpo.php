@@ -64,5 +64,3 @@ $module = new module('com_sales', 'warehouse/attach_po', 'content');
 $module->pos = $pos;
 $module->id = $_REQUEST['id'];
 $module->products = $product_entities;
-
-?>

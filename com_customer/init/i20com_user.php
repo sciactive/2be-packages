@@ -26,5 +26,3 @@ function com_customer__save_user(&$array, $name, &$object) {
 }
 
 $pines->hook->add_callback('user->save', -50, 'com_customer__save_user');
-
-?>

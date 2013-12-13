@@ -17,5 +17,3 @@ header('Content-Type: application/json');
 
 
 $pines->page->override_doc(json_encode(true));
-
-?>

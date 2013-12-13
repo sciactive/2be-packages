@@ -45,4 +45,3 @@ if (!empty($_REQUEST['types'])) {
 }
 
 $pines->com_reports->report_product_details($start_date, $end_date, $location, $descendants, $types);
-?>

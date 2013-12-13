@@ -66,5 +66,3 @@ foreach ($category->products as $product) {
 }
 
 $pines->page->override_doc(json_encode($return));
-
-?>

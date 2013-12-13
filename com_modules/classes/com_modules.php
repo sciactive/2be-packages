@@ -65,5 +65,3 @@ class com_modules extends component {
 		return $return;
 	}
 }
-
-?>

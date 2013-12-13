@@ -43,5 +43,3 @@ if ($_REQUEST['reset_entities'] == 'ON')
 	$pines->user_manager->punt_user('You have been logged out.');
 else
 	$module = new module('com_entitytools', 'import', 'content');
-
-?>

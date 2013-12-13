@@ -32,5 +32,3 @@ return array(
 		array('content', 'Example Content', 'User can view example content.')
 	),
 );
-
-?>

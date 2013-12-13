@@ -15,4 +15,3 @@ if ( !gatekeeper('com_replace/listreplacements') )
 	punt_user(null, pines_url('com_replace', 'replacement/list'));
 
 $pines->com_replace->list_replacements();
-?>

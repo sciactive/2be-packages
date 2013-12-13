@@ -21,5 +21,3 @@ if (!is_callable(array($pines->entity_manager, 'export'))) {
 
 @set_time_limit(3600);
 $pines->entity_manager->export_print();
-
-?>

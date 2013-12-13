@@ -22,5 +22,3 @@ if (!isset($stock->guid)) {
 $pines->page->override = true;
 header('Content-Type: text/plain');
 $pines->page->override_doc($stock->last_reason());
-
-?>

@@ -39,5 +39,3 @@ if (empty($failed_disposals)) {
 }
 
 pines_redirect(pines_url('com_esp', 'list'));
-
-?>

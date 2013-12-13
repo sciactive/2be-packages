@@ -22,5 +22,3 @@ if (!file_exists($pines->config->com_logger->path))
 if (($view->log = $pines->log_manager->cat_logs()) === false)
 	pines_error('Error reading log files.');
 if (empty($view->log)) $view->log = 'Log file is empty.';
-
-?>

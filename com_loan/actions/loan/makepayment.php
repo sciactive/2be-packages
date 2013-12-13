@@ -135,5 +135,3 @@ if ($_REQUEST['edit'])
 	pines_redirect(pines_url('com_loan', 'loan/editpayments', array('id' => $loan->guid)));
 else
 	pines_redirect(pines_url('com_loan', 'loan/overview', array('id' => $loan->guid)));
-
-?>

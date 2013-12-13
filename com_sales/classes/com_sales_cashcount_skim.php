@@ -89,5 +89,3 @@ class com_sales_cashcount_skim extends entity {
 		return $module;
 	}
 }
-
-?>

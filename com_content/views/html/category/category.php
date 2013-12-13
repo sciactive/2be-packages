@@ -42,5 +42,3 @@ if (!empty($this->entity->intro)) {
 
 if ((!$this->show_title || (empty($this->title) && empty($this->note))) && empty($this->entity->intro))
 	$this->detach();
-
-?>

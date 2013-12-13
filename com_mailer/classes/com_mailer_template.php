@@ -178,5 +178,3 @@ EOF;
 		return true;
 	}
 }
-
-?>

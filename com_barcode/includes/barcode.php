@@ -360,5 +360,4 @@ class BarcodeObject {
 	function DestroyObject() {
 		ImageDestroy($this->mImg);
 	}
-}
-?>
+}

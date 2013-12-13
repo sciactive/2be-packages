@@ -50,5 +50,3 @@ return array(
 		array('defaultgroups', 'Change Default Groups', 'User can change which groups will be assigned to new users.')
 	),
 );
-
-?>

@@ -102,5 +102,3 @@ if ($pines->config->com_content->front_page_per_page !== 0 && (count($pages) > $
 		$pagination->page_url = pines_url('com_content', null, array('page' => '__page__'));
 	}
 }
-
-?>

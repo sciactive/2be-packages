@@ -205,5 +205,3 @@ if ($po->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'po/list'));
-
-?>

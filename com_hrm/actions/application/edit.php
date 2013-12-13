@@ -23,5 +23,3 @@ if (!gatekeeper('com_hrm/editapplication') &&
 }
 
 $entity->print_form();
-
-?>

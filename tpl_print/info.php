@@ -29,5 +29,3 @@ return array(
 		'component' => 'com_jquery&com_bootstrap'
 	),
 );
-
-?>

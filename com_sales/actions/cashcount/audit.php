@@ -55,5 +55,3 @@ if ($cashcount->status == 'closed' || $cashcount->status == 'flagged') {
 $audit = com_sales_cashcount_audit::factory();
 $audit->cashcount = $cashcount;
 $audit->print_form();
-
-?>

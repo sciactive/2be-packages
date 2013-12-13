@@ -88,5 +88,3 @@ class tpl_bamboo extends template {
 		return $return;
 	}
 }
-
-?>

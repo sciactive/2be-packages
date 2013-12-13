@@ -16,5 +16,3 @@ defined('P_RUN') or die('Direct access prohibited');
  * @global com_configure $pines->configurator
  */
 $pines->configurator = 'com_configure';
-
-?>

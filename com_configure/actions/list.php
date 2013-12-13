@@ -37,5 +37,3 @@ if ($_REQUEST['peruser']) {
 } else {
 	$pines->configurator->list_components();
 }
-
-?>

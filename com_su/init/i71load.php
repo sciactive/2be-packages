@@ -16,5 +16,3 @@ if (!gatekeeper('com_su/switch'))
 
 $module = new module('com_su', 'load_js', 'head');
 unset ($module);
-
-?>

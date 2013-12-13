@@ -38,5 +38,3 @@ do {
 $module->content("Updated $count entities.");
 if ($errors)
 	$module->content('<br />Could not update the entities: '.implode(', ', $errors));
-
-?>

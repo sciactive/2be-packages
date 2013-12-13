@@ -122,5 +122,3 @@ if ($pines->config->com_content->show_page_menus) {
 	}
 	unset($pages, $cur_page);
 }
-
-?>

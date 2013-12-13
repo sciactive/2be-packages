@@ -25,5 +25,3 @@ return array(
 		'component' => 'com_mysql'
 	),
 );
-
-?>

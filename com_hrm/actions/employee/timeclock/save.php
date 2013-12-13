@@ -101,5 +101,3 @@ if (!$save_error && !$delete_error) {
 }
 
 pines_redirect(pines_url('com_hrm', 'employee/timeclock/list'));
-
-?>

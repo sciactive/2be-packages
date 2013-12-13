@@ -21,5 +21,3 @@ if (!empty($_REQUEST['id'])) {
 
 $entity = com_raffle_raffle::factory((int) $_REQUEST['id']);
 $entity->print_form();
-
-?>

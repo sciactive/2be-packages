@@ -15,5 +15,3 @@ if ( !gatekeeper('com_elfinder/finder') && !gatekeeper('com_elfinder/finderself'
 	punt_user(null, pines_url('com_elfinderupload', 'test'));
 
 $module = new module('com_elfinderupload', 'test', 'content');
-
-?>

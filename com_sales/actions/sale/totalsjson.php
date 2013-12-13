@@ -144,5 +144,3 @@ if (empty($tx_array)) {
 }
 
 $pines->page->override_doc(json_encode($return));
-
-?>

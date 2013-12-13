@@ -30,5 +30,3 @@ if (is_object($_SESSION['user'])) {
 
 // If the user isn't logged in, let them.
 $pines->user_manager->print_login();
-
-?>

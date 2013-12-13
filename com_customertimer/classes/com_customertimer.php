@@ -72,5 +72,3 @@ class com_customertimer extends component {
 	}
 	*/
 }
-
-?>

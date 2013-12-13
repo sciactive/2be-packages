@@ -49,5 +49,3 @@ $pines->com_sales->process_product_image($image, $_REQUEST['type'], $options);
 header('Content-Type: image/png');
 header('Content-Disposition: inline; filename="product-image.png"');
 $pines->page->override_doc("$image");
-
-?>

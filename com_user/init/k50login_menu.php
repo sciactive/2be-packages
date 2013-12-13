@@ -19,5 +19,3 @@ $pines->menu->menu_arrays[] = array(
 	'text' => $pines->config->com_user->login_menu_text,
 	'href' => array('com_user')
 );
-
-?>

@@ -107,5 +107,3 @@ class com_jstree extends component {
 		return $struct;
 	}
 }
-
-?>

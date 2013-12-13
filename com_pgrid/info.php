@@ -28,5 +28,3 @@ return array(
 		array('clearallstates', 'Clear All States', 'Clear all users\' pgrid states.')
 	),
 );
-
-?>

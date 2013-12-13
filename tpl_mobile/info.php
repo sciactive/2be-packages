@@ -45,5 +45,3 @@ return array(
 		'component' => 'com_pnotify&com_uasniffer'
 	),
 );
-
-?>

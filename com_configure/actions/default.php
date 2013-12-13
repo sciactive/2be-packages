@@ -16,5 +16,3 @@ if ( !gatekeeper('com_configure/edit') )
 
 $component = configurator_component::factory('system');
 $component->print_form();
-
-?>

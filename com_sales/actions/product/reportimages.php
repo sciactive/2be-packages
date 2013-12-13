@@ -50,5 +50,3 @@ foreach ($products as $cur_product) {
 			$module->section4[] = $cur_product;
 	}
 }
-
-?>

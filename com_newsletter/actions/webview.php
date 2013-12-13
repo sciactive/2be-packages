@@ -36,5 +36,3 @@ $pines->page->override_doc('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict/
 	'.$mail->message.'
 </body>
 </html>');
-
-?>

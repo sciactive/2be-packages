@@ -47,4 +47,3 @@ if ( $_REQUEST['update'] == 'yes' ) {
 }
 
 $pines->com_newsletter->edit_mail($mail, 'com_newsletter', 'edit');
-?>

@@ -15,5 +15,3 @@ if ( !gatekeeper('com_repository/newpackage') )
 	punt_user(null, pines_url('com_repository', 'listpackages'));
 
 $module = new module('com_repository', 'upload_package', 'content');
-
-?>

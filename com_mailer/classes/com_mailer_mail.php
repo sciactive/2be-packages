@@ -290,5 +290,3 @@ class com_mailer_mail {
 		return mail($to, $subject, $message, $headers, $pines->config->com_mailer->additional_parameters);
 	}
 }
-
-?>

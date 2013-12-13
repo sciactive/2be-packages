@@ -186,5 +186,3 @@ if ($special->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'special/list'));
-
-?>

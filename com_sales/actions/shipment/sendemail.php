@@ -26,5 +26,3 @@ else
 	pines_notice('Email Failed to Send');
 
 pines_redirect(pines_url('com_sales', 'shipment/packinglist', array('id' => $_REQUEST['id'])));
-
-?>

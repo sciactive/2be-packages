@@ -23,5 +23,3 @@ defined('P_RUN') or die('Direct access prohibited');
 //$module = new module('system', 'null', 'top');
 //$module->content(print_r($result, true));
 //unset($module);
-
-?>

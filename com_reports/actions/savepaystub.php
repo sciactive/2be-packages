@@ -70,5 +70,3 @@ if ($pay_stub->save()) {
 }
 
 pines_redirect(pines_url('com_reports', 'listpaystubs'));
-
-?>

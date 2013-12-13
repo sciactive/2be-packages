@@ -40,5 +40,3 @@ foreach ($plans as $plan) {
 	unset($plan->items);
 	$plan->save();
 }
-
-?>

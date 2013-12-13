@@ -104,4 +104,4 @@ if ($products) { ?>
 		</tbody>
 	</table>
 </div>
-<?php } } ?>
+<?php } }

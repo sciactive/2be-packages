@@ -167,5 +167,4 @@ class I25Object extends BarcodeObject {
 		$sPos =  $this->DrawStop($sPos, BCD_DEFAULT_MAR_Y1, $ysize, $xres);
 		return true;
 	}
-}
-?>
+}

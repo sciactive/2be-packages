@@ -31,5 +31,3 @@ class able_object extends entity implements able_object_interface {
 			return true;
 	}
 }
-
-?>

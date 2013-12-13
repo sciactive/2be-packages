@@ -89,5 +89,3 @@ class com_sales_cashcount_audit extends entity {
 		return $module;
 	}
 }
-
-?>

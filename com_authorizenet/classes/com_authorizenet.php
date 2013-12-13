@@ -375,5 +375,3 @@ class com_authorizenet extends component {
 		}
 	}
 }
-
-?>

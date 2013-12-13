@@ -117,5 +117,3 @@ if ($application->save()) {
 }
 
 pines_redirect(pines_url('com_hrm', 'application/list'));
-
-?>

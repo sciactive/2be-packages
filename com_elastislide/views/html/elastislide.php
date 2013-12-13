@@ -23,4 +23,4 @@ defined('P_RUN') or die('Direct access prohibited');
 	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_elastislide/includes/jquerypp.custom.js");
 	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_elastislide/includes/jquery.elastislide.js");
 </script>
-<?php } ?>
+<?php }

@@ -32,5 +32,3 @@ foreach ($list as $cur_package) {
 		'result' => $cur_entity->package($path)
 	);
 }
-
-?>

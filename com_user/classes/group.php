@@ -248,5 +248,3 @@ class group extends able_object implements group_interface {
 		return $module;
 	}
 }
-
-?>

@@ -166,5 +166,3 @@ class com_menueditor_entry extends entity {
 		$pines->page->override_doc($this->cur_module->render());
 	}
 }
-
-?>

@@ -30,5 +30,3 @@ $pines->config->com_sales->processing_types[] = array(
 	'description' => 'Process credit card payment using Authorize.net.',
 	'callback' => 'com_authorizenet__payment_credit'
 );
-
-?>

@@ -39,5 +39,3 @@ if ($esp->save()) {
 }
 
 pines_redirect(pines_url('com_esp', 'list'));
-
-?>

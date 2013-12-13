@@ -131,5 +131,3 @@ class com_hrm_application extends entity {
 		return $module;
 	}
 }
-
-?>

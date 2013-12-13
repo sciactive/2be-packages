@@ -275,5 +275,3 @@ if ($sale->save()) {
 	pines_error('Error saving sale. Do you have permission?');
 	return;
 }
-
-?>

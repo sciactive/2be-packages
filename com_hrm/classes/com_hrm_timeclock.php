@@ -276,5 +276,3 @@ class com_hrm_timeclock extends entity {
 		return $time;
 	}
 }
-
-?>

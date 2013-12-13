@@ -15,4 +15,3 @@ if ( !gatekeeper('com_raffle/listraffles') )
 	punt_user(null, pines_url('com_raffle', 'raffle/list'));
 
 $pines->com_raffle->list_raffles();
-?>

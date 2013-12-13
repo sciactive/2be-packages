@@ -55,5 +55,3 @@ else
 	pines_error('Errors occurred while saving flags. Not all flags could be saved.');
 
 pines_redirect(pines_url('com_sales', 'warehouse/pending'));
-
-?>

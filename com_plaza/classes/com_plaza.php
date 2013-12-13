@@ -995,5 +995,3 @@ class com_plaza extends component {
 		return $return;
 	}
 }
-
-?>

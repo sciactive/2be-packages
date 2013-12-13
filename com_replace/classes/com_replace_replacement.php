@@ -131,5 +131,3 @@ class com_replace_replacement extends entity {
 		return true;
 	}
 }
-
-?>

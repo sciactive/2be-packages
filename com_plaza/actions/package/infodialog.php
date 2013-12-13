@@ -27,5 +27,3 @@ if (isset($package)) {
 
 	$pines->page->override_doc($module->render());
 }
-
-?>

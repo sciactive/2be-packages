@@ -15,4 +15,3 @@ if ( !gatekeeper('com_modules/listmodules') )
 	punt_user(null, pines_url('com_modules', 'module/list'));
 
 $pines->com_modules->list_modules();
-?>

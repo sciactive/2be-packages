@@ -39,5 +39,3 @@ class com_elfinder extends component {
 		}
 	}
 }
-
-?>

@@ -83,4 +83,3 @@ if ( $mailer->send() ) {
 $send->name = $mail->name;
 $send->subject = com_newsletter__clean_header($_REQUEST['subject']);
 $send->message = $message;
-?>

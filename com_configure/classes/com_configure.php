@@ -203,5 +203,3 @@ class com_configure extends component implements configurator_interface {
 		return strtolower($aname) > strtolower($bname);
 	}
 }
-
-?>

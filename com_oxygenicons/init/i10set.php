@@ -12,5 +12,3 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 $pines->icons = 'com_oxygenicons';
-
-?>

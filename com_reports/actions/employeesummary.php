@@ -39,5 +39,3 @@ if (!empty($_REQUEST['location']))
 $descendants = ($_REQUEST['descendants'] == 'true');
 
 $pines->com_reports->employee_summary($start_date, $end_date, $location, $descendants);
-
-?>

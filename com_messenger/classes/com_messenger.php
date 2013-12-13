@@ -70,5 +70,3 @@ class com_messenger extends component {
 		return $_SESSION['xmpp_guest'];
 	}
 }
-
-?>

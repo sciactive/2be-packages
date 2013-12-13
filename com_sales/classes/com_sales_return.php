@@ -916,5 +916,3 @@ class com_sales_return extends entity {
 		return true;
 	}
 }
-
-?>

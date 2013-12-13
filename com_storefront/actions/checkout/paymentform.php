@@ -31,5 +31,3 @@ $pines->com_sales->call_payment_process(array(
 
 if (isset($module))
 	$pines->page->override_doc($module->render());
-
-?>

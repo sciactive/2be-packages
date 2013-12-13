@@ -15,5 +15,3 @@ if ( !gatekeeper() )
 	punt_user(null, pines_url('com_calendar', 'locationselect'));
 
 $pines->com_calendar->location_select_form($_REQUEST['location'], ($_REQUEST['descendants'] == 'true'));
-
-?>

@@ -32,5 +32,3 @@ return array(
 		array('jsentry', 'Edit Entry JavaScript', 'User can edit the onclick JavaScript value of entries.')
 	),
 );
-
-?>

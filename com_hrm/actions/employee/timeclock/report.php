@@ -78,5 +78,3 @@ if (!$module->employees) {
 	$module->detach();
 	return;
 }
-
-?>

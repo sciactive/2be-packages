@@ -28,5 +28,3 @@ if ($entity->final) {
 }
 
 $entity->print_form();
-
-?>

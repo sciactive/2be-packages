@@ -62,5 +62,3 @@ class com_example extends component {
 		$module = new module('com_example', 'content/short', 'bottom');
 	}
 }
-
-?>

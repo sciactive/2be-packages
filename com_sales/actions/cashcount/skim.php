@@ -55,5 +55,3 @@ if ($cashcount->status == 'closed' || $cashcount->status == 'flagged') {
 $skim = com_sales_cashcount_skim::factory();
 $skim->cashcount = $cashcount;
 $skim->print_form();
-
-?>

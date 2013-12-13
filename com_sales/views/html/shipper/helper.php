@@ -101,4 +101,4 @@ if ($this->render == 'body' && gatekeeper('com_sales/listshippers')) { ?>
 	<h3 style="margin:10px 0;">Comments</h3>
 	<pre><?php echo htmlspecialchars($this->entity->comments); ?></pre>
 </div>
-<?php } } ?>
+<?php } }

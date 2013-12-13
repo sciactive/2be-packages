@@ -15,4 +15,3 @@ if ( !gatekeeper('com_notes/listthreads') )
 	punt_user(null, pines_url('com_notes', 'thread/list'));
 
 $pines->com_notes->list_threads();
-?>

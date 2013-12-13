@@ -188,5 +188,3 @@ foreach ($products as $cur_product) {
 		$module->success[] = array($stock, $origin);
 	}
 }
-
-?>

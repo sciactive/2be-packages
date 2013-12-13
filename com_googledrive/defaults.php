@@ -25,5 +25,3 @@ return array(
         'value' => 'https://www.googleapis.com/auth/drive',
     ),
 );
-
-?>

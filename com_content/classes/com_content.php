@@ -432,5 +432,3 @@ class com_content extends component {
 		
 	}
 }
-
-?>

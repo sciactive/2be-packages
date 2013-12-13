@@ -21,5 +21,3 @@ if (!isset($user->guid))
 	$user = null;
 
 $pines->page->override_doc($pines->com_repository->get_index($user, false));
-
-?>

@@ -20,5 +20,3 @@ if (!isset($entity->guid)) {
 	return;
 }
 $entity->print_timer();
-
-?>

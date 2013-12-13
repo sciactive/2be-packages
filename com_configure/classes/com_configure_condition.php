@@ -109,5 +109,3 @@ class com_configure_condition extends entity {
 		return $module;
 	}
 }
-
-?>

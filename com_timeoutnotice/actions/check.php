@@ -20,5 +20,3 @@ if (isset($_SESSION['com_timeoutnotice__last_access'])) {
 } else {
 	$pines->page->override_doc('false');
 }
-
-?>

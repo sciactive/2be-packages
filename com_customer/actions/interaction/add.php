@@ -118,5 +118,3 @@ if ($interaction->save()) {
 }
 
 date_default_timezone_set($cur_timezone);
-
-?>

@@ -53,5 +53,3 @@ $module = new module('com_sales', 'warehouse/flag', 'content');
 $module->id = $_REQUEST['id'];
 $module->items = $items;
 $module->comments = $comments;
-
-?>

@@ -240,5 +240,3 @@ if ($customer->save()) {
 }
 
 pines_redirect(pines_url('com_customer', 'customer/list'));
-
-?>

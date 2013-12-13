@@ -63,5 +63,3 @@ if ($this->entity->content_tags && $pines->config->com_content->tags_position ==
 		$tag_pieces[] = '<a class="page_tag" href="'.htmlspecialchars(pines_url('com_content', 'tag', array('a' => $cur_tag))).'">'.htmlspecialchars($cur_tag).'</a>';
 	echo implode(', ', $tag_pieces).'</div>';
 }
-
-?>

@@ -33,5 +33,3 @@ foreach ($results as &$cur_result){
 unset($cur_result);
 
 $pines->page->override_doc(json_encode($results));
-
-?>

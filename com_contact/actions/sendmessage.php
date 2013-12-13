@@ -36,4 +36,3 @@ if ($mail->send()) {
 	pines_error('Your message was not sent successfuly.');
 	return;
 }
-?>

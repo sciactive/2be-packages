@@ -138,5 +138,3 @@ class com_sales_shipper extends entity {
 		return (isset($this->tracking) && ($this->tracking != 'custom' || ($this->tracking == 'custom' && !empty($this->tracking_url) && strpos($this->tracking_url, '#tracking_number#') !== false)));
 	}
 }
-
-?>

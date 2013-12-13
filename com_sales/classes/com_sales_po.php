@@ -191,5 +191,3 @@ class com_sales_po extends entity {
 		return $module;
 	}
 }
-
-?>

@@ -316,5 +316,4 @@ class C128AObject extends BarcodeObject {
 		$DrawPos =  $this->DrawStop($DrawPos, BCD_DEFAULT_MAR_Y1, $ysize, $xres);
 		return true;
 	}
-}
-?>
+}

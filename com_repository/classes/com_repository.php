@@ -174,5 +174,3 @@ class com_repository extends component {
 		return $return;
 	}
 }
-
-?>

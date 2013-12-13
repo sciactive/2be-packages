@@ -90,5 +90,3 @@ if ($entry->save()) {
 }
 
 pines_redirect(pines_url('com_menueditor', 'entry/list'));
-
-?>

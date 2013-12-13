@@ -85,5 +85,3 @@ if (!$products)
 	$products = null;
 
 $pines->page->override_doc(json_encode($products));
-
-?>

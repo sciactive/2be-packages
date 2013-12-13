@@ -443,5 +443,3 @@ class user extends able_object implements user_interface {
 		return $return_date_time_zone_object ? new DateTimeZone($pines->config->timezone) : $pines->config->timezone;
 	}
 }
-
-?>

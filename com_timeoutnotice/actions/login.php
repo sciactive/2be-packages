@@ -32,5 +32,4 @@ if ( isset($user, $user->guid) && $pines->user_manager->login($user) ) {
 } else {
 	$pines->page->override_doc('false');
 }
-
-?>
+

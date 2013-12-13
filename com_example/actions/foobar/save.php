@@ -65,5 +65,3 @@ if ($foobar->save()) {
 }
 
 pines_redirect(pines_url('com_example', 'foobar/list'));
-
-?>

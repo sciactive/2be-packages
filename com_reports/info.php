@@ -45,5 +45,3 @@ return array(
 		array('editwarboard', 'Edit Warboard', 'User can edit the company warboard.')
 	),
 );
-
-?>

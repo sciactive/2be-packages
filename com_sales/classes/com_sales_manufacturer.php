@@ -125,5 +125,3 @@ class com_sales_manufacturer extends entity {
 		return $module;
 	}
 }
-
-?>

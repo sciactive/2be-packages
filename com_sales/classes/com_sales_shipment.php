@@ -334,5 +334,3 @@ class com_sales_shipment extends entity {
 		return $no_errors && $this->ref->save();
 	}
 }
-
-?>

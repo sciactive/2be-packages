@@ -59,5 +59,3 @@ $descendants = ($_REQUEST['descendants'] == 'true');
 $filter = !empty($_REQUEST['filter']) ? $_REQUEST['filter'] : 'all';
 
 $pines->com_calendar->show_calendar($view_type, $start, $end, $timezone, $location, $employee, $descendants, $filter);
-
-?>

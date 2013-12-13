@@ -134,5 +134,3 @@ class com_reports_paystub extends entity {
 		return 0;
 	}
 }
-
-?>

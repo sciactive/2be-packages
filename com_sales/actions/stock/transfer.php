@@ -40,5 +40,3 @@ if (is_array($list)) {
 	}
 }
 $entity->print_form();
-
-?>

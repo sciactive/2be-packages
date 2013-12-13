@@ -23,5 +23,3 @@ if ($pines->depend->check('browser', 'mobile-real') && $pines->config->com_uasni
 	$module = new module('com_uasniffer', 'switcher', $pines->config->com_uasniffer->switcher_pos);
 	unset($module);
 }
-
-?>

@@ -36,5 +36,3 @@ foreach ($files as &$cur_file) {
 unset($cur_file);
 
 $pines->page->override_doc(json_encode($files));
-
-?>

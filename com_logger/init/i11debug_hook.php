@@ -31,5 +31,3 @@ function com_logger__hook_log($return, $hook) {
  */
 if ($pines->config->com_logger->level == 'debug')
 	$pines->hook->add_callback('all', -1, 'com_logger__hook_log');
-
-?>

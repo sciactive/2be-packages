@@ -25,5 +25,3 @@ return array(
 		'component' => 'com_elfinder&com_jquery&com_bootstrap&com_pform'
 	),
 );
-
-?>

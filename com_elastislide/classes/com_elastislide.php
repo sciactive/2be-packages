@@ -39,5 +39,3 @@ class com_elastislide extends component {
 		}
 	}
 }
-
-?>

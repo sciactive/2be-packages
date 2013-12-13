@@ -16,5 +16,3 @@ if ( !gatekeeper('com_customer/defaultgroups') )
 
 $module = new module('com_customer', 'customer_group_select', 'content');
 $module->groups = $pines->user_manager->get_groups();
-
-?>

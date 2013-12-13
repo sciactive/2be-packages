@@ -40,5 +40,3 @@ class com_pgrid extends component {
 		}
 	}
 }
-
-?>

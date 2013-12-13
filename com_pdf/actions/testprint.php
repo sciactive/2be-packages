@@ -33,5 +33,3 @@ $entity->phone = $_REQUEST['phone'];
 $entity->favfood = $_REQUEST['favfood'];
 
 $displays->render($entity);
-
-?>

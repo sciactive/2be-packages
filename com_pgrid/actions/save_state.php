@@ -27,5 +27,3 @@ if (isset($_SESSION['user'])) {
 	pines_session('close');
 }
 $pines->page->override = true;
-
-?>

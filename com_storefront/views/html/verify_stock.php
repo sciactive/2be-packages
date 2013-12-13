@@ -109,4 +109,4 @@ $pines->com_pgrid->load();
 	</table>
 	<?php } ?>
 </div>
-<?php } ?>
+<?php }

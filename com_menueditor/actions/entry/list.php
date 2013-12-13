@@ -15,4 +15,3 @@ if ( !gatekeeper('com_menueditor/listentries') )
 	punt_user(null, pines_url('com_menueditor', 'entry/list'));
 
 $pines->com_menueditor->list_entries();
-?>

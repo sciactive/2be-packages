@@ -38,5 +38,3 @@ else
 	pines_error('Error duplicating Sales Ranking. Do you have permission?');
 
 pines_redirect(pines_url('com_reports', 'salesrankings'));
-
-?>

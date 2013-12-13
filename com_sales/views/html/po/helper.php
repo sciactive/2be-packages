@@ -175,4 +175,4 @@ if (!empty($this->entity->comments)) { ?>
 <a href="<?php echo htmlspecialchars(pines_url('com_sales', 'stock/receive', array('location' => $this->entity->destination->guid, 'shipments' => $this->entity->guid))); ?>" class="btn">Receive</a>
 <?php } if (gatekeeper('com_sales/listpos')) { ?>
 <a href="<?php echo htmlspecialchars(pines_url('com_sales', 'po/list')); ?>" class="btn">View in List</a>
-<?php } } ?>
+<?php } }

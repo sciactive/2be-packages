@@ -56,4 +56,3 @@ if ($loan->paid[$num]['payment_status'] == 'partial_not_due') {
 
 $loan->save();
 $loan->makepayment_form();
-?>

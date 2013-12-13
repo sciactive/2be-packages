@@ -15,5 +15,3 @@ if ( !gatekeeper('com_user/self') )
 	punt_user(null, pines_url());
 
 $_SESSION['user']->print_form_password();
-
-?>

@@ -45,5 +45,3 @@ if ($issue_type->save()) {
 }
 
 pines_redirect(pines_url('com_hrm', 'issue/list'));
-
-?>

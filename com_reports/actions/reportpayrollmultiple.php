@@ -60,5 +60,3 @@ foreach ($ids as $key => $id) {
 	$module->pages[] = $cur_module->render();
 	unset($cur_module);
 }
-
-?>

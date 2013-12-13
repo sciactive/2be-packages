@@ -76,5 +76,3 @@ if ($company->save()) {
 }
 
 pines_redirect(pines_url('com_customer', 'company/list'));
-
-?>

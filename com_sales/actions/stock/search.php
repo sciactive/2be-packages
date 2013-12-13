@@ -71,5 +71,3 @@ foreach ($stock as &$cur_stock) {
 }
 
 $pines->page->override_doc(json_encode($stock));
-
-?>

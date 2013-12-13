@@ -29,5 +29,3 @@ return array(
 		array('clear', 'Clear Log', 'Let the user clear (delete) the pines log.')
 	),
 );
-
-?>

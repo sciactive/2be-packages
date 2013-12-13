@@ -36,5 +36,3 @@ if ($pines->config->com_logger->log_notices) {
 	}
 	$pines->hook->add_callback('$pines->page->notice', -100, 'com_logger__log_notice');
 }
-
-?>

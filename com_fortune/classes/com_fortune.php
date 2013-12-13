@@ -34,5 +34,3 @@ class com_fortune extends component {
 		$databases = $pines->config->com_fortune->databases;
 	}
 }
-
-?>

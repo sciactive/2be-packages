@@ -15,5 +15,3 @@ if ( !gatekeeper('com_hrm/listadjustments') )
 	punt_user(null, pines_url('com_hrm', 'adjustment/list'));
 
 $pines->com_hrm->list_adjustments();
-
-?>

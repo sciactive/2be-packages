@@ -51,5 +51,3 @@ class com_esp extends component {
 		return $module;
 	}
 }
-
-?>

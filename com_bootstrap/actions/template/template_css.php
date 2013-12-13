@@ -215,4 +215,4 @@ if (!empty($pines->config->tpl_bootstrap->headings_fontface)) { ?>
 /*
 </style>
 */
-<?php exit; ?>
+<?php exit;

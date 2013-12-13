@@ -23,5 +23,3 @@ if ($pines->configurator->enable_component($_REQUEST['component'])) {
 }
 
 pines_redirect(pines_url('com_configure', 'list'));
-
-?>

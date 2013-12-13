@@ -16,5 +16,3 @@ if ( !gatekeeper('com_hrm/listemployees') )
 
 $employed = ($_REQUEST['employed'] == 'false') ? false : true;
 $pines->com_hrm->list_employees($employed);
-
-?>

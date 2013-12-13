@@ -26,5 +26,3 @@ if (!isset($entity->guid)) {
 }
 
 $entity->salesrep_form();
-
-?>

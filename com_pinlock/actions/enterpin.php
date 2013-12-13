@@ -15,5 +15,3 @@ $module = new module('com_pinlock', 'enterpin', 'content');
 $module->orig_component = $pines->com_pinlock->component;
 $module->orig_action = $pines->com_pinlock->action;
 $module->orig_sessionid = $pines->com_pinlock->sessionid;
-
-?>

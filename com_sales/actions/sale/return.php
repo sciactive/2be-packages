@@ -20,5 +20,3 @@ $entity = com_sales_return::factory();
 if (isset($sale->guid))
 	$entity->attach_sale($sale);
 $entity->print_form();
-
-?>

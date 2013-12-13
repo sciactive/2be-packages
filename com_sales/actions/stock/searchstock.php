@@ -73,5 +73,3 @@ $result = array();
 $result['stock_entries'] = $stock_entries;
 
 $pines->page->override_doc(json_encode($result));
-
-?>

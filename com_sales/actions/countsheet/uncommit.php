@@ -33,5 +33,3 @@ if ($countsheet->save())
 	$pines->page->override_doc(json_encode(array(true, 'Countsheet has been uncommitted.')));
 else
 	$pines->page->override_doc(json_encode(array(false, 'Error saving countsheet. Do you have permission?')));
-
-?>

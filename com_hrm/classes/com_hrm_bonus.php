@@ -80,5 +80,3 @@ class com_hrm_bonus extends entity {
 		return true;
 	}
 }
-
-?>

@@ -54,5 +54,3 @@ return array(
 		array('managerto', 'Review Time Off', 'User can review and approve requests for time off.')
 	),
 );
-
-?>

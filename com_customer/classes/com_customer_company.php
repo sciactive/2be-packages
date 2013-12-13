@@ -106,5 +106,3 @@ class com_customer_company extends entity {
 		return $module;
 	}
 }
-
-?>

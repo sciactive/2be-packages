@@ -959,5 +959,3 @@ $test->tests['del'][2] = 'Deleting entity...';
 //$test->tests['del_guid'][2] = 'Deleting entity by GUID...';
 
 $test->time_end = microtime(true);
-
-?>

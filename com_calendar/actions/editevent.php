@@ -55,5 +55,3 @@ if (isset($_REQUEST['location']))
 date_default_timezone_set($cur_timezone);
 
 $event->print_form($location, $timezone);
-
-?>

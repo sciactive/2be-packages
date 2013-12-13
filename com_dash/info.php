@@ -30,5 +30,3 @@ return array(
 		array('manage', 'Manage Dashboards', 'User can manage all dashboards. Including default dashboards.')
 	),
 );
-
-?>

@@ -28,5 +28,3 @@ header('Content-Type: text/plain');
 header('Content-Disposition: inline');
 
 $pines->page->override_doc($cert);
-
-?>

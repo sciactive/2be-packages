@@ -170,5 +170,3 @@ class com_raffle_raffle extends entity {
 		return $module;
 	}
 }
-
-?>

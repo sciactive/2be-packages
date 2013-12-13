@@ -26,5 +26,3 @@ if (!gatekeeper('com_hrm/manageclock') && !gatekeeper('com_hrm/viewclock') && !$
 }
 
 $employee->timeclock->print_timeclock_view();
-
-?>

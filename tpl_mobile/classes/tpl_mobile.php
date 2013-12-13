@@ -76,5 +76,3 @@ class tpl_mobile extends template {
 		return $return;
 	}
 }
-
-?>

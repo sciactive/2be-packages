@@ -255,5 +255,3 @@ class com_sales_stock extends entity {
 		return parent::save();
 	}
 }
-
-?>

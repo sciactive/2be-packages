@@ -53,5 +53,3 @@ if ($cashcount->status == 'closed' || $cashcount->status == 'flagged') {
 }
 
 $cashcount->cash_out();
-
-?>

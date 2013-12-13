@@ -61,4 +61,4 @@ if (!$this->fixes) { ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Make Changes" />
 	</div>
 </form>
-<?php } ?>
+<?php }

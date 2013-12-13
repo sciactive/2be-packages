@@ -47,5 +47,3 @@ if ($cashcount->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'cashcount/list'));
-
-?>

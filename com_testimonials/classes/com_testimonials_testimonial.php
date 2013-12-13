@@ -200,5 +200,3 @@ class com_testimonials_testimonial extends entity {
 		
 	}
 }
-
-?>

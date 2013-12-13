@@ -90,5 +90,3 @@ if ($module->save()) {
 }
 
 pines_redirect(pines_url('com_modules', 'module/list'));
-
-?>

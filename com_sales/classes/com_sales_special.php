@@ -143,5 +143,3 @@ class com_sales_special extends entity {
 		return $module;
 	}
 }
-
-?>

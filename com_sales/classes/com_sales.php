@@ -1590,5 +1590,3 @@ class com_sales extends component {
 		return $floored * $sign;
 	}
 }
-
-?>

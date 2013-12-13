@@ -146,5 +146,3 @@ class com_menueditor extends component {
 		return $module;
 	}
 }
-
-?>

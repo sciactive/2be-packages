@@ -125,4 +125,4 @@ echo $module->render();
 <?php } if (gatekeeper('com_sales/managestock')) { ?>
 <a href="<?php echo htmlspecialchars(pines_url('com_sales', 'stock/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
 <a href="<?php echo htmlspecialchars(pines_url('com_sales', 'stock/transfer', array('id' => $this->entity->guid))); ?>" class="btn">Transfer</a>
-<?php } } ?>
+<?php } }

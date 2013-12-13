@@ -195,5 +195,3 @@ if ($category->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'category/list'));
-
-?>

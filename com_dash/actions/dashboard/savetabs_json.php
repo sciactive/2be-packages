@@ -47,5 +47,3 @@ $new_tab_array = array_merge($new_tab_array, $dashboard->tabs);
 $dashboard->tabs = $new_tab_array;
 
 $pines->page->override_doc(json_encode($dashboard->save()));
-
-?>

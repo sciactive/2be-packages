@@ -34,5 +34,3 @@ if ($_REQUEST['review_option_type'] == 'review') {
 $result = $pines->com_testimonials->get_testimonials($review_data_type, $review_option_reverse, $review_option_limit, $review_option_offset, $review_option_additional_tags, $review_entity_guid, $review_entity_class, $review_option_name, $review_ratings_off);
 
 $pines->page->override_doc(json_encode($result));
-
-?>

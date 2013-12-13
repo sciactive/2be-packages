@@ -196,5 +196,3 @@ EOF;
 }
 
 $pines->depend->checkers['browser'] = 'com_uasniffer__browser_check';
-
-?>

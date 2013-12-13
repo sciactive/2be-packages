@@ -228,6 +228,3 @@ if ($testimonial->type == "form") {
 	
 	$pines->page->override_doc(json_encode($result));
 }
-
-
-?>

@@ -37,5 +37,3 @@ else
 	pines_error('Error saving Sales Ranking. Do you have permission?');
 
 pines_redirect(pines_url('com_reports', 'salesrankings'));
-
-?>

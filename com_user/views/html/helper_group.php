@@ -172,4 +172,4 @@ if ($this->render == 'body' && gatekeeper('com_user/listgroups')) { ?>
 		</tbody>
 	</table>
 </div>
-<?php } } ?>
+<?php } }

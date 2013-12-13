@@ -57,5 +57,3 @@ $view->start_date = $start_date;
 $view->end_date = $end_date;
 $view->location = $location;
 $view->descendants = $descendants;
-
-?>

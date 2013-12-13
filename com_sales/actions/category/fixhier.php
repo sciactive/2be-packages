@@ -66,5 +66,3 @@ foreach ((array) $cats as $cur_cat)
 
 $module = new module('com_sales', 'category/fixhier', 'content');
 $module->fixes = $fixes;
-
-?>

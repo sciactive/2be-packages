@@ -173,5 +173,3 @@ $loan->get_payments_array();
 // Save the payments array.
 $loan->save();
 $loan->print_edit_payments();
-
-?>

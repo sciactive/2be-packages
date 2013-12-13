@@ -15,4 +15,3 @@ if ( !gatekeeper('com_hrm/managerto') )
 	punt_user(null, pines_url('com_hrm', 'timeoff/review'));
 
 $pines->com_hrm->review_timeoff();
-?>

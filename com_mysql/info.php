@@ -26,5 +26,3 @@ return array(
 		'function' => 'mysql_connect'
 	),
 );
-
-?>

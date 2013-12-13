@@ -16,5 +16,3 @@ defined('P_RUN') or die('Direct access prohibited');
  * @global com_ckeditor $pines->editor
  */
 $pines->editor = 'com_ckeditor';
-
-?>

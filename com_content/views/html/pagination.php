@@ -71,4 +71,4 @@ if ($this->type == 'complete') { ?>
 	</li>
 	<?php } ?>
 </ul>
-<?php } ?>
+<?php }

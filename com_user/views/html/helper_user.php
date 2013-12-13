@@ -159,4 +159,4 @@ if ($this->render == 'body' && gatekeeper('com_user/listusers')) { ?>
 		</tbody>
 	</table>
 </div>
-<?php } } ?>
+<?php } }

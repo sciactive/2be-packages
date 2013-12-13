@@ -21,5 +21,3 @@ if (!isset($entity->guid)) {
 }
 
 $entity->print_packing_list();
-
-?>

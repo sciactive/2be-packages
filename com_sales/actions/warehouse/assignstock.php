@@ -47,5 +47,3 @@ if (!$items) {
 
 $module = new module('com_sales', 'warehouse/assign_stock', 'content');
 $module->items = $items;
-
-?>

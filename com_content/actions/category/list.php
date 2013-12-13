@@ -15,4 +15,3 @@ if ( !gatekeeper('com_content/listcategories') )
 	punt_user(null, pines_url('com_content', 'category/list'));
 
 $pines->com_content->list_categories();
-?>

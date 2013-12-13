@@ -16,5 +16,3 @@ $pines->page->override = true;
 $login = new module('com_timeoutnotice', 'login');
 $loginhtml = $login->render('module_head');
 $pines->page->override_doc($loginhtml);
-
-?>

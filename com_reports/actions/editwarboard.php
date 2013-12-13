@@ -22,5 +22,3 @@ if (!isset($warboard->guid)) {
 }
 
 $warboard->print_form();
-
-?>

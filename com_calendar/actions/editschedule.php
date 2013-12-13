@@ -19,5 +19,3 @@ if (!isset($employee->guid))
 	return;
 
 $pines->com_calendar->schedule_form($employee);
-
-?>

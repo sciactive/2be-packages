@@ -22,4 +22,3 @@ $result = $pines->com_content->save_sidemenu($order_array, $tag);
 
 
 $pines->page->override_doc(json_encode($result));
-?>

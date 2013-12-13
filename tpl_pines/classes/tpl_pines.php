@@ -102,5 +102,3 @@ class tpl_pines extends template {
 		return parent::url($component, $action, $params, $full_location);
 	}
 }
-
-?>

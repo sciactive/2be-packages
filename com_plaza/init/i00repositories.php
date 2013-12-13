@@ -46,5 +46,3 @@ function com_plaza__get_repositories() {
 	}
 	return $repos;
 }
-
-?>

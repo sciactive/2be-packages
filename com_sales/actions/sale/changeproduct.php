@@ -64,5 +64,3 @@ if ($sale->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'sale/list'));
-
-?>

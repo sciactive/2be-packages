@@ -22,5 +22,3 @@ if (!isset($entity->guid)) {
 }
 
 $entity->view_application();
-
-?>

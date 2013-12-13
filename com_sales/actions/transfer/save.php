@@ -80,5 +80,3 @@ if ($transfer->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'transfer/list'));
-
-?>

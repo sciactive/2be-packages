@@ -62,5 +62,3 @@ if ($condition->save()) {
 }
 
 pines_redirect(pines_url('com_configure', 'list', array('percondition' => '1', 'id' => $condition->guid)));
-
-?>

@@ -24,5 +24,3 @@ if ($_SESSION['user']->send_email_verification())
 	$pines->page->override_doc('true');
 else
 	$pines->page->override_doc('false');
-
-?>

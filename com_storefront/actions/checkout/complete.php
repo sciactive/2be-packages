@@ -28,5 +28,3 @@ if (!isset($sale->guid) || !$_SESSION['user']->is($sale->customer)) {
 
 $module = new module('com_storefront', 'checkout/complete', 'content');
 $module->entity = $sale;
-
-?>

@@ -48,5 +48,3 @@ $pines->config->com_sales->processing_types[] = array(
 	'description' => 'Approval happens only after a manager verifies the payment. For example, a large cash transaction.',
 	'callback' => 'com_sales__payment_manager'
 );
-
-?>

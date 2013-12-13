@@ -15,5 +15,3 @@ if ( !gatekeeper('com_reports/reportpayroll') )
 	punt_user(null, pines_url('com_reports', 'listpaystubs'));
 
 $pines->com_reports->list_paystubs();
-
-?>

@@ -21,5 +21,4 @@ if (!empty($_REQUEST['id'])) {
 
 $user = user::factory((int) $_REQUEST['id']);
 $user->print_form();
-
-?>
+

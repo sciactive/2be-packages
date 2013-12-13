@@ -57,4 +57,3 @@ while (isset($cur_entity)) {
 $bc = '<ul class="breadcrumb"><li><a href="'.htmlspecialchars(pines_url()).'" class="breadcrumb_item">Home</a> <span class="divider">&gt;</span></li> ' . $bc . '</ul>';
 
 echo $bc;
-?>

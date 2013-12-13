@@ -15,5 +15,3 @@ if ( !gatekeeper('com_hrm/listapplications') )
 	punt_user(null, pines_url('com_hrm', 'application/list'));
 
 $pines->com_hrm->list_applications();
-
-?>

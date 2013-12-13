@@ -51,5 +51,3 @@ if ($entity->save()) {
 	pines_error('Your entry could not be saved. Please try again.');
 	pines_redirect(pines_url('com_raffle', 'enter', array('id' => $entity->guid)));
 }
-
-?>

@@ -125,5 +125,3 @@ class com_mysql extends component {
 		return $this->connected;
 	}
 }
-
-?>

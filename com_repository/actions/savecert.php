@@ -106,5 +106,3 @@ if (!file_put_contents("{$dir}cert.csr", $csrout) || !chmod("{$dir}cert.csr", 07
 pines_notice('Generated certificate successfully.');
 
 pines_redirect(pines_url('com_repository', 'viewcert'));
-
-?>

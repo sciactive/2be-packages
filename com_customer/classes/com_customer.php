@@ -357,5 +357,3 @@ class com_customer extends component {
 		return $module;
 	}
 }
-
-?>

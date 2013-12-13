@@ -34,5 +34,3 @@ return array(
 		array('viewperuser', 'View Per User Configuration', 'Let the user see current per user/group configuration settings.')
 	),
 );
-
-?>

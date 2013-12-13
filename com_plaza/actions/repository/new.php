@@ -15,5 +15,3 @@ if ( !gatekeeper('com_plaza/editrepositories') )
 	punt_user(null, pines_url('com_plaza', 'repository/new'));
 
 $module = new module('com_plaza', 'repository/new', 'content');
-
-?>

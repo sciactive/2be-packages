@@ -35,5 +35,3 @@ header('Content-Disposition: attachment; filename='."{$package}-{$version}.slm")
 header('X-WonderPHP-Slim-Signature: '.base64_encode(file_get_contents($sigfile)));
 
 $pines->page->override_doc(file_get_contents($file));
-
-?>

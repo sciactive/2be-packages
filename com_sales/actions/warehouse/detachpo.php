@@ -47,5 +47,3 @@ if ($success)
 	pines_notice('Detached PO from selected items.');
 
 pines_redirect(pines_url('com_sales', 'warehouse/pending', array('ordered' => ($ordered ? 'true' : 'false'))));
-
-?>

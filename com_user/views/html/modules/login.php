@@ -409,4 +409,4 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 	});
 </script>
 <a href="javascript:void(0);" id="p_muid_compact_link"><?php echo htmlspecialchars($this->compact_text); ?></a>
-<?php } ?>
+<?php }

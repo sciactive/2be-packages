@@ -15,5 +15,3 @@ if ( !gatekeeper('com_packager/listpackages') )
 	punt_user(null, pines_url('com_packager', 'package/list'));
 
 $pines->com_packager->list_packages();
-
-?>

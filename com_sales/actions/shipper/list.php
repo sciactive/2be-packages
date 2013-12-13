@@ -15,4 +15,3 @@ if ( !gatekeeper('com_sales/listshippers') )
 	punt_user(null, pines_url('com_sales', 'shipper/list'));
 
 $pines->com_sales->list_shippers();
-?>

@@ -31,5 +31,3 @@ return array(
 		array('deletereplacement', 'Delete Replacements', 'User can delete current replacements.')
 	),
 );
-
-?>

@@ -28,5 +28,3 @@ $pines->com_storefront->checkout_step('4');
 
 $module = new module('com_storefront', 'checkout/review', 'content');
 $module->entity = $_SESSION['com_storefront_sale'];
-
-?>

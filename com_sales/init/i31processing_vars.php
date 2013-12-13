@@ -109,5 +109,3 @@ $pines->config->com_sales->processing_types = array();
  * @var array $pines->config->com_sales->product_actions
  */
 $pines->config->com_sales->product_actions = array();
-
-?>

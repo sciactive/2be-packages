@@ -95,5 +95,3 @@ EOF;
 }
 
 $pines->depend->checkers['package'] = 'com_package__check_package';
-
-?>

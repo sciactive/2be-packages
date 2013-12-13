@@ -14,5 +14,4 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_newsletter/listmail') && !gatekeeper('com_newsletter/send') )
 	punt_user(null, pines_url('com_newsletter', 'list'));
 
-$pines->com_newsletter->list_mails();
-?>
+$pines->com_newsletter->list_mails();

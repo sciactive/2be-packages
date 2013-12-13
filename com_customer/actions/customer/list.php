@@ -15,4 +15,3 @@ if ( !gatekeeper('com_customer/listcustomers') )
 	punt_user(null, pines_url('com_customer', 'customer/list'));
 
 $pines->com_customer->list_customers();
-?>

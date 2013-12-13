@@ -48,5 +48,3 @@ unset($cur_entity);
 $module->content("Updated $count entities. Found $nochange entities that didn't need to be updated.");
 if ($errors)
 	$module->content('<br />Could not update the entities: '.implode(', ', $errors));
-
-?>

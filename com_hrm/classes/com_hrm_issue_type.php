@@ -88,5 +88,3 @@ class com_hrm_issue_type extends entity {
 		return parent::save();
 	}
 }
-
-?>

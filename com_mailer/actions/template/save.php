@@ -73,5 +73,3 @@ if ($template->save()) {
 }
 
 pines_redirect(pines_url('com_mailer', 'template/list'));
-
-?>

@@ -255,5 +255,3 @@ class com_calendar extends component {
 		return $events;
 	}
 }
-
-?>

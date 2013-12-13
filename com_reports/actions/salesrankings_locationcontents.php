@@ -74,5 +74,3 @@ foreach ($users as $cur_user) {
 }
 
 $pines->page->override_doc(json_encode($json_data));
-
-?>

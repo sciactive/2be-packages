@@ -28,5 +28,3 @@ $pines->page->override = true;
 $module = $dashboard->print_tab($_REQUEST['key'], $editable);
 $module->detach();
 $pines->page->override_doc($module->render());
-
-?>

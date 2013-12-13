@@ -48,5 +48,3 @@ $id = $pines->entity_manager->get_uid($name.'c');
 var_dump($id);
 
 $pines->page->override = true;
-
-?>

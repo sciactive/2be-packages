@@ -38,5 +38,3 @@ foreach ($_REQUEST['fixes'] as $cur_key) {
 
 pines_notice('Finished making changes.');
 pines_redirect(pines_url('com_sales', 'category/list'));
-
-?>

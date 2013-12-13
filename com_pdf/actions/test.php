@@ -33,5 +33,3 @@ $displays->displays['favfood'] = json_decode('[{"page":1,"left":0.393790849673,"
 // This will set up any pform fields with the 'display_edit' class to be
 // editabled displays.
 $displays->load_editors();
-
-?>

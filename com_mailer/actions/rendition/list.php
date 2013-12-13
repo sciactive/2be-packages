@@ -15,4 +15,3 @@ if ( !gatekeeper('com_mailer/listrenditions') )
 	punt_user(null, pines_url('com_mailer', 'rendition/list'));
 
 $pines->com_mailer->list_renditions();
-?>

@@ -261,4 +261,4 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<?php $clock_count++; } ?>
 	</tbody>
 </table>
-<?php } ?>
+<?php }

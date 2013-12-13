@@ -2030,5 +2030,3 @@ class com_sales_sale extends entity {
 		return ($this->save() && $return);
 	}
 }
-
-?>

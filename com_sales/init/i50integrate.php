@@ -25,5 +25,3 @@ if ($pines->config->com_sales->per_item_salesperson && !$pines->config->com_sale
 
 if ($pines->config->com_sales->com_storefront && !$pines->depend->check('component', 'com_storefront&com_content'))
 	$pines->config->com_sales->com_storefront = false;
-
-?>

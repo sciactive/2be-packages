@@ -121,5 +121,3 @@ return array(
 		array('overrideowner', 'Override Owner', 'User can override users/locations for sales/returns.')
 	),
 );
-
-?>

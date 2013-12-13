@@ -21,5 +21,3 @@ if (!empty($_REQUEST['id'])) {
 
 $entity = com_customer_customer::factory((int) $_REQUEST['id']);
 $entity->print_form();
-
-?>

@@ -40,5 +40,3 @@ if (!$entity->guid) {
 }
 
 $entity->print_form();
-
-?>

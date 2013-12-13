@@ -125,5 +125,3 @@ class com_pgsql extends component {
 		return $this->connected;
 	}
 }
-
-?>

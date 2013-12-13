@@ -108,5 +108,3 @@ if ($total_time <= 86400) {
 date_default_timezone_set($cur_timezone);
 
 pines_redirect(pines_url('com_calendar', 'editcalendar', array('view_type' => $view_type, 'start' => format_date($first_date, 'date_sort', '', $timezone), 'end' => format_date($last_date, 'date_sort', '', $timezone), 'location' => $location->guid)));
-
-?>

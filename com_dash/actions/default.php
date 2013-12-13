@@ -87,5 +87,3 @@ if (!isset($dashboard->guid))
 
 if (!$dashboard->print_dashboard($_REQUEST['tab'], $editable))
 	pines_error('Couldn\'t load your dashboard.');
-
-?>

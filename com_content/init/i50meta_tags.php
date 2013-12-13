@@ -16,5 +16,3 @@ if (!$pines->config->com_content->global_meta_tags)
 
 $module = new module('com_content', 'global_meta_tags', 'head');
 unset($module);
-
-?>

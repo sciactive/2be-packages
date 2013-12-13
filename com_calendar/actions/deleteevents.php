@@ -46,5 +46,3 @@ foreach ($list as $cur_id) {
 }
 if (!empty($failed_removes))
 	$pines->page->override_doc(json_encode($failed_removes));
-
-?>

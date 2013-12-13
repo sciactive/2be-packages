@@ -18,5 +18,3 @@ if ($pines->config->com_bootstrap->always_load)
 // Tell any editor to load the CSS in the edit view.
 if ($pines->editor)
 	$pines->editor->add_css($pines->config->location.'components/com_bootstrap/includes/themes/'.clean_filename($pines->config->com_bootstrap->theme).'/css/bootstrap.css');
-
-?>

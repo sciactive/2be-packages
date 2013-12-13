@@ -78,5 +78,3 @@ if ($vendor->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'vendor/list'));
-
-?>

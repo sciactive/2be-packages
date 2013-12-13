@@ -243,5 +243,3 @@ if ($group->has_tag('enabled')) {
 } else {
 	pines_redirect(pines_url('com_user', 'listgroups', array('enabled' => 'false')));
 }
-
-?>

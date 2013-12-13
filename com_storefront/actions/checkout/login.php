@@ -22,5 +22,3 @@ if (!gatekeeper()) {
 	// Logged in.
 	pines_redirect(pines_url('com_storefront', 'checkout/shipping'));
 }
-
-?>

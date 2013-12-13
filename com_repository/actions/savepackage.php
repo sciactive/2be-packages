@@ -170,5 +170,3 @@ foreach ($files as $cur_file) {
 }
 
 pines_redirect(pines_url('com_repository', 'listpackages'));
-
-?>

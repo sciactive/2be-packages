@@ -25,5 +25,3 @@ function com_content__replace_static(&$array) {
 }
 
 $pines->hook->add_callback('$pines->format_content', 10, 'com_content__replace_static');
-
-?>

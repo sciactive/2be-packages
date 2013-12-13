@@ -101,5 +101,3 @@ if (isset($_SESSION['user']) && $pines->config->com_configure->peruser) {
 if ($sys_config || $com_config)
 	$pines->configurator->load_per_user_array($sys_config, $com_config);
 unset($sys_config, $com_config, $key, $cur_config, $tmp_array, $pass, $cur_type, $cur_value);
-
-?>

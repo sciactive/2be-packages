@@ -30,5 +30,3 @@ class com_customertimer_tx extends entity {
 		return $entity;
 	}
 }
-
-?>

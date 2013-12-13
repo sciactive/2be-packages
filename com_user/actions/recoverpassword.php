@@ -51,5 +51,3 @@ if ($user->save()) {
 }
 
 $pines->user_manager->print_login();
-
-?>

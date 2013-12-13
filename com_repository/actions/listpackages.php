@@ -19,5 +19,3 @@ if ($_REQUEST['all'] == 'true' && gatekeeper('com_repository/listallpackages')) 
 } else {
 	$pines->com_repository->list_packages($_SESSION['user']);
 }
-
-?>

@@ -148,5 +148,3 @@ class com_hrm_employee extends user {
 		return $module;
 	}
 }
-
-?>

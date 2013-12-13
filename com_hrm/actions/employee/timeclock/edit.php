@@ -37,5 +37,3 @@ else
 date_default_timezone_set($cur_timezone);
 
 $employee->timeclock->print_timeclock($time_start, $time_end);
-
-?>

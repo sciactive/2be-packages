@@ -82,5 +82,3 @@ foreach ($categories as $cur_category) {
 }
 
 unset($categories, $cur_category, $module);
-
-?>

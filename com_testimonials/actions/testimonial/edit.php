@@ -21,5 +21,3 @@ if (!empty($_REQUEST['id'])) {
 
 $entity = com_testimonials_testimonial::factory((int) $_REQUEST['id']);
 $entity->print_form();
-
-?>

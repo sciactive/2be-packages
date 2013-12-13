@@ -16,5 +16,3 @@ if ($pines->config->com_content->wrap_content)
 echo format_content($this->icontent);
 if ($pines->config->com_content->wrap_content)
 	echo '</div>';
-
-?>

@@ -172,5 +172,3 @@ class com_package extends component {
 		}
 	}
 }
-
-?>

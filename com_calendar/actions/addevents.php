@@ -45,5 +45,3 @@ if (isset($_REQUEST['events'])) {
 		}
 	}
 }
-
-?>

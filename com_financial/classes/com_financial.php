@@ -1508,5 +1508,3 @@ class com_financial extends component {
 		return null;
 	}
 }
-
-?>

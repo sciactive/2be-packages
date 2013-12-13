@@ -74,5 +74,3 @@ $pines->com_storefront->empty_cart();
 
 // Redirect to a different URL, so they can't resubmit.
 pines_redirect($url);
-
-?>

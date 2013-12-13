@@ -33,5 +33,3 @@ foreach ($module->widgets as $cur_component => $cur_widget_set) {
 
 $content = $module->render();
 $pines->page->override_doc($content);
-
-?>

@@ -61,5 +61,3 @@ foreach ($add_buttons as $cur_button) {
 }
 
 $pines->page->override_doc(json_encode($dashboard->save()));
-
-?>

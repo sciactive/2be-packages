@@ -51,5 +51,3 @@ if (empty($failed_disposals)) {
 }
 
 pines_redirect(pines_url('com_hrm', 'employee/list', array('employed' => $_REQUEST['employed'])));
-
-?>

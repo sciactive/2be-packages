@@ -31,5 +31,3 @@ if (isset($_REQUEST['id'], $_REQUEST['floor'], $_REQUEST['station'])) {
 }
 
 $pines->page->override_doc(json_encode($return));
-
-?>

@@ -37,5 +37,3 @@ switch ($_REQUEST['status']) {
 		break;
 }
 $pines->page->override_doc();
-
-?>

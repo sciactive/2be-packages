@@ -23,5 +23,3 @@ if ( isset($_REQUEST['id']) ) {
 }
 
 $testimonial->changestatus_form();
-
-?>

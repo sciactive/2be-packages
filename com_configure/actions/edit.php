@@ -45,5 +45,3 @@ if ($_REQUEST['peruser']) {
 	$component->set_per_user($user);
 }
 $component->print_form();
-
-?>

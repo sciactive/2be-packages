@@ -24,5 +24,3 @@ return array(
 		'component' => 'com_sales&com_jquery&com_bootstrap&com_pform'
 	),
 );
-
-?>

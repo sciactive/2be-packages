@@ -48,4 +48,4 @@ $this->title = 'Shopping Cart';
 <div>
 	There are no items in your cart.
 </div>
-<?php } ?>
+<?php }

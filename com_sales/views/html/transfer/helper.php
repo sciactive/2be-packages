@@ -163,4 +163,4 @@ if ($this->render == 'body' && (gatekeeper('com_sales/managestock') || gatekeepe
 </div>
 <?php } } elseif ($this->render == 'footer' && $this->entity->final && !$this->entity->shipped && gatekeeper('com_sales/shipstock')) { ?>
 <a href="<?php echo htmlspecialchars(pines_url('com_sales', 'transfer/ship', array('id' => $this->entity->guid))); ?>" class="btn">Ship</a>
-<?php } ?>
+<?php }

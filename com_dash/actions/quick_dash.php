@@ -22,5 +22,3 @@ if (!($module = $_SESSION['user']->dashboard->print_dashboard($_REQUEST['tab'], 
 }
 
 $pines->page->override_doc($module->render());
-
-?>

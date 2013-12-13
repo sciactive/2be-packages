@@ -208,5 +208,3 @@ class com_sales_product extends entity {
 		return strtolower($aname) > strtolower($bname);
 	}
 }
-
-?>

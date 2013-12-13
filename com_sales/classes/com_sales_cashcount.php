@@ -180,5 +180,3 @@ class com_sales_cashcount extends entity {
 		}
 	}
 }
-
-?>

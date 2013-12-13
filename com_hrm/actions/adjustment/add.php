@@ -44,5 +44,3 @@ if (empty($failed_adjustment)) {
 }
 
 pines_redirect(pines_url('com_hrm', 'employee/list'));
-
-?>

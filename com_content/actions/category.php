@@ -71,5 +71,3 @@ $page_num = max(array(((int) $_REQUEST['page']) - 1, 0));
 
 if (!$entity->print_category($page_num))
 	throw new HttpClientException(null, 404);
-
-?>

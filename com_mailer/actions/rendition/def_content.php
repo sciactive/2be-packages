@@ -40,5 +40,3 @@ else {
 $content = $module->render();
 
 $pines->page->override_doc(json_encode(array('content' => $content, 'subject' => $module->title)));
-
-?>

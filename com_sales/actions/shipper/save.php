@@ -69,5 +69,3 @@ if ($shipper->save()) {
 }
 
 pines_redirect(pines_url('com_sales', 'shipper/list'));
-
-?>

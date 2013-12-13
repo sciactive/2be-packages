@@ -106,5 +106,3 @@ class com_example_foobar extends entity {
 		return $module;
 	}
 }
-
-?>

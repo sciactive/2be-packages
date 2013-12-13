@@ -108,5 +108,3 @@ $module->database = $database;
 $module->prefix = $prefix;
 $module->setup_user = $setup_user;
 $module->setup_password = $setup_password;
-
-?>

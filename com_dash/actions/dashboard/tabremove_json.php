@@ -39,5 +39,3 @@ if (count($dashboard->tabs) <= 1) {
 unset($dashboard->tabs[$_REQUEST['key']]);
 
 $pines->page->override_doc(json_encode($dashboard->save()));
-
-?>

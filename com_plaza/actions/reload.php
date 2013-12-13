@@ -21,4 +21,3 @@ if ($pines->com_plaza->reload_packages()) {
 }
 
 pines_redirect(pines_url('com_plaza', 'package/repository'));
-?>

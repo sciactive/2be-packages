@@ -60,5 +60,3 @@ if ($widgets) {
 }
 
 $pines->page->override_doc(json_encode($dashboard->save()));
-
-?>

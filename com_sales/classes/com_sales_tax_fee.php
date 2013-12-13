@@ -108,5 +108,3 @@ class com_sales_tax_fee extends entity {
 		return $module;
 	}
 }
-
-?>

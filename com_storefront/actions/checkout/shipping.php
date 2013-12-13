@@ -72,5 +72,3 @@ $module->user_address = (object) array(
 	'address_international' => $_SESSION['user']->address_international
 );
 $module->address = (object) $_SESSION['com_storefront_sale']->shipping_address;
-
-?>

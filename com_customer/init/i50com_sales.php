@@ -70,5 +70,3 @@ foreach($pines->config->com_customer->membervalues as $cur_value) {
 	);
 }
 unset ($cur_value);
-
-?>

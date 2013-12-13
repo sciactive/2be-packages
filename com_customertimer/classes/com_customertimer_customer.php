@@ -201,5 +201,3 @@ class com_customertimer_customer extends com_customer_customer {
 		return true;
 	}
 }
-
-?>

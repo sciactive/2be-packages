@@ -399,5 +399,3 @@ class com_package_package {
 		return 0;
 	}
 }
-
-?>

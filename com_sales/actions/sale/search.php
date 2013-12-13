@@ -94,5 +94,3 @@ if (empty($sales))
 	$sales = null;
 
 $pines->page->override_doc(json_encode($sales));
-
-?>

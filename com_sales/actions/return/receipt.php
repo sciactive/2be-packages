@@ -16,5 +16,3 @@ if ( !gatekeeper('com_sales/editreturn') && !gatekeeper('com_sales/newreturn') &
 
 $entity = com_sales_return::factory((int) $_REQUEST['id']);
 $entity->print_receipt();
-
-?>

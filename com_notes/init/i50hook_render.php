@@ -33,5 +33,3 @@ function com_notes__attach_note_editors() {
 }
 
 $pines->hook->add_callback('$pines->page->render', -10, 'com_notes__attach_note_editors');
-
-?>

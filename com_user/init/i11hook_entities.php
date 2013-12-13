@@ -139,5 +139,3 @@ foreach (array('$pines->entity_manager->delete_entity', '$pines->entity_manager-
 	$pines->hook->add_callback($cur_hook, -99, 'com_user__check_permissions_delete');
 
 unset ($cur_hook);
-
-?>

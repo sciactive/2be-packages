@@ -20,4 +20,3 @@ json_decode($tag);
 $result = $pines->com_content->create_sidemenu($tag);
 
 $pines->page->override_doc(json_encode($result));
-?>

@@ -52,5 +52,3 @@ if ($floor->save()) {
 }
 
 pines_redirect(pines_url('com_customertimer', 'listfloors'));
-
-?>

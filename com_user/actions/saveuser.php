@@ -286,5 +286,3 @@ if (gatekeeper('com_user/listusers')) {
 		pines_redirect(pines_url('com_user', 'listusers', array('enabled' => 'false')));
 } else
 	pines_redirect(pines_url());
-
-?>

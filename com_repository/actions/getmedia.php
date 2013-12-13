@@ -103,5 +103,3 @@ switch ($ext) {
 header('Content-Type: '.$content_type);
 
 $pines->page->override_doc(file_get_contents($file));
-
-?>

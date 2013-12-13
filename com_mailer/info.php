@@ -38,5 +38,3 @@ return array(
 		array('deletetemplate', 'Delete Templates', 'User can delete current templates.'),
 	),
 );
-
-?>

@@ -24,5 +24,3 @@ return array(
 		'pines' => '<3'
 	),
 );
-
-?>

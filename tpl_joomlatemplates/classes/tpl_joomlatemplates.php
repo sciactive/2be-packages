@@ -92,5 +92,3 @@ class tpl_joomlatemplates extends template {
 		return $return;
 	}
 }
-
-?>

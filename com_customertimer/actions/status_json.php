@@ -41,5 +41,3 @@ foreach ($floor->active_stations as $cur_station => $cur_entry) {
 }
 
 $pines->page->override_doc(json_encode($return));
-
-?>

@@ -13,5 +13,3 @@ defined('P_RUN') or die('Direct access prohibited');
 
 if ($pines->config->com_fortune->show)
 	$pines->com_fortune->print_fortune();
-
-?>

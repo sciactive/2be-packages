@@ -90,5 +90,3 @@ class tpl_pinescms extends template {
 		return $return;
 	}
 }
-
-?>

@@ -26,5 +26,3 @@ if ($dashboard->locked && !gatekeeper('com_dash/manage'))
 $pines->page->override = true;
 $module = $dashboard->edit_tab($_REQUEST['key']);
 $pines->page->override_doc($module->render());
-
-?>

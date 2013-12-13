@@ -15,4 +15,3 @@ if ( !gatekeeper('com_mailer/listtemplates') )
 	punt_user(null, pines_url('com_mailer', 'template/list'));
 
 $pines->com_mailer->list_templates();
-?>

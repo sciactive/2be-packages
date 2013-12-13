@@ -70,5 +70,3 @@ if ($raffle->save()) {
 }
 
 pines_redirect(pines_url('com_raffle', 'raffle/list'));
-
-?>

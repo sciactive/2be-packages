@@ -44,5 +44,3 @@ foreach ($module->buttons as $cur_component => $cur_button_set) {
 
 $content = $module->render();
 $pines->page->override_doc($content);
-
-?>

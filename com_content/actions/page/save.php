@@ -168,5 +168,3 @@ if ($page->save()) {
 
 if (!$ajax)
 	pines_redirect(pines_url('com_content', 'page/list'));
-
-?>

@@ -36,5 +36,3 @@ do {
 $module->content("Resaved $count entities.");
 if ($errors)
 	$module->content('<br />Could not save the entities: '.implode(', ', $errors));
-
-?>

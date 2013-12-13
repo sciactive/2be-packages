@@ -63,5 +63,3 @@ $data = openssl_x509_parse($cert_r);
 pines_notice("Added repository \"{$data['subject']['OU']}\" from \"{$data['subject']['O']}\".");
 
 pines_redirect(pines_url('com_plaza', 'repository/list'));
-
-?>

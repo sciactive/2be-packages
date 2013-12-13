@@ -26,5 +26,3 @@ return array(
 		'value' => $pines->config->upload_location.'packages/',
 	),
 );
-
-?>

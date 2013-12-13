@@ -47,5 +47,3 @@ return array(
 		array('resetpoints', 'Reset Points', 'User can reset customer\'s points. (Including peak and total.)')
 	),
 );
-
-?>

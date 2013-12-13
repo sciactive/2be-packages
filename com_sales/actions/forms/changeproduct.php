@@ -22,5 +22,3 @@ if (!isset($sale->guid)) {
 }
 
 $sale->change_product_form();
-
-?>

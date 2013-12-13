@@ -25,5 +25,3 @@ function com_replace__search_replace(&$arguments) {
 }
 
 $pines->hook->add_callback('$pines->format_content', -10, 'com_replace__search_replace');
-
-?>

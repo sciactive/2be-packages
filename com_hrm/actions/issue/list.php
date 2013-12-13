@@ -15,5 +15,3 @@ if ( !gatekeeper('com_hrm/listissuetypes') )
 	punt_user(null, pines_url('com_hrm', 'issue/list'));
 
 $pines->com_hrm->list_issue_types();
-
-?>

@@ -2764,5 +2764,3 @@ class com_loan_loan extends entity {
  * @package Components\loan
  */
 class com_loan_loan_terms_not_possible_exception extends Exception {}
-
-?>

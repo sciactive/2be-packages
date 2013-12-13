@@ -186,5 +186,3 @@ class com_esp_plan extends entity {
 		return $module;
 	}
 }
-
-?>

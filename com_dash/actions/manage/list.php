@@ -15,5 +15,3 @@ if ( !gatekeeper('com_dash/manage') )
 	punt_user(null, pines_url('com_dash', 'manage/list'));
 
 $pines->com_dash->manage();
-
-?>

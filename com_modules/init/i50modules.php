@@ -27,5 +27,3 @@ foreach ($modules as $cur_module) {
 		$cur_module->print_module();
 }
 unset($modules, $cur_module);
-
-?>

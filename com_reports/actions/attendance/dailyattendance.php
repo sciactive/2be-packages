@@ -27,5 +27,3 @@ $location = empty($_REQUEST['location']) ? null : group::factory((int) $_REQUEST
 $descendants = ($_REQUEST['descendants'] == 'true');
 
 $pines->com_reports->daily_attendance($date, $location, $descendants);
-
-?>

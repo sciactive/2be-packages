@@ -61,5 +61,3 @@ if ($success)
 	pines_notice('Assigned stock to selected orders.');
 
 pines_redirect(pines_url('com_sales', 'warehouse/assigned'));
-
-?>

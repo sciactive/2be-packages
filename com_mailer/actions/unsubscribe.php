@@ -44,5 +44,3 @@ if (!($result = $pines->com_mailer->unsubscribe_add($email))) {
 // Report success.
 $module = new module('com_mailer', 'unsubscribe_result', 'content');
 $module->success = true;
-
-?>

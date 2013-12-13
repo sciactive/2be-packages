@@ -37,5 +37,3 @@ foreach ($category->pages as $page) {
 }
 
 $pines->page->override_doc(json_encode($return));
-
-?>

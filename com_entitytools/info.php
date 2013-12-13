@@ -30,5 +30,3 @@ return array(
 		array('import', 'Import', 'User can import entities. Caution! User can also use this to delete all entities!')
 	),
 );
-
-?>

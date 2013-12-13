@@ -69,5 +69,3 @@ if ($replacement->save()) {
 }
 
 pines_redirect(pines_url('com_replace', 'replacement/list'));
-
-?>

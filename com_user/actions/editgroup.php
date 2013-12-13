@@ -21,5 +21,3 @@ if (!empty($_REQUEST['id'])) {
 
 $group = group::factory((int) $_REQUEST['id']);
 $group->print_form();
-
-?>

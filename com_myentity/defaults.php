@@ -31,5 +31,4 @@ return array(
 		'value' => 50,
 	),
 );
-
-?>
+

@@ -35,5 +35,3 @@ if ($entity->swap($new_serial) && $entity->save()) {
 }
 
 pines_redirect(pines_url('com_esp', 'list'));
-
-?>

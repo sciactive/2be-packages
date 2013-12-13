@@ -15,4 +15,3 @@ if ( !gatekeeper('com_example/listfoobars') )
 	punt_user(null, pines_url('com_example', 'foobar/list'));
 
 $pines->com_example->list_foobars();
-?>

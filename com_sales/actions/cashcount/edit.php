@@ -59,5 +59,3 @@ if ($pending_count) {
 }
 
 $entity->print_form();
-
-?>

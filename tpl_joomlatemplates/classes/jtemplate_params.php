@@ -62,5 +62,3 @@ class jtemplate_params {
 		return $this->params;
 	}
 }
-
-?>

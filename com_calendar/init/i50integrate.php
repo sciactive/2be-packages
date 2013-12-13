@@ -13,5 +13,3 @@ defined('P_RUN') or die('Direct access prohibited');
 
 if ($pines->config->com_calendar->com_customer && !$pines->depend->check('component', 'com_customer'))
 	$pines->config->com_calendar->com_customer = false;
-
-?>

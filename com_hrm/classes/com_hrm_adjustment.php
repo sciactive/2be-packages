@@ -80,5 +80,3 @@ class com_hrm_adjustment extends entity {
 		return true;
 	}
 }
-
-?>

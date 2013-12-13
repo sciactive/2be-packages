@@ -24,5 +24,3 @@ if ($_REQUEST['local'] == 'true') {
 }
 if (isset($package))
 	$pines->page->override_doc(json_encode($package));
-
-?>

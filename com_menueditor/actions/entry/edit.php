@@ -21,5 +21,3 @@ if (!empty($_REQUEST['id'])) {
 
 $entity = com_menueditor_entry::factory((int) $_REQUEST['id']);
 $entity->print_form();
-
-?>

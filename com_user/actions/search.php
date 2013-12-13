@@ -66,5 +66,3 @@ if (!$users)
 	$users = null;
 
 $pines->page->override_doc(json_encode($users));
-
-?>

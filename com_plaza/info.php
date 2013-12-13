@@ -32,5 +32,3 @@ return array(
 		array('editrepositories', 'Edit Sources', 'User can change software sources (repositories).')
 	),
 );
-
-?>

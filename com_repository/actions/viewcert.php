@@ -35,5 +35,3 @@ if (!($cert_r = openssl_x509_read($cert))) {
 $module = new module('com_repository', 'view_certificate', 'content');
 $module->cert = $cert;
 $module->data = openssl_x509_parse($cert_r);
-
-?>

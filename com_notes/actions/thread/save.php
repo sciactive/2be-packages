@@ -44,5 +44,3 @@ if ($thread->save()) {
 }
 
 pines_redirect(pines_url('com_notes', 'thread/list'));
-
-?>

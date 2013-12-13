@@ -27,5 +27,3 @@ include('templates/tpl_joomlatemplates/classes/jtemplate_adapter.php');
 
 $jtclass = new jtemplate_adapter($jtemplate, $jtdir);
 $jtclass->render();
-
-?>

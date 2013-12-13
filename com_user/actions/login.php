@@ -98,5 +98,4 @@ if (!empty($_REQUEST['url'])) {
 }
 // Load the default component.
 pines_redirect(pines_url());
-
-?>
+

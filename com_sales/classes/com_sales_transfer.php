@@ -177,5 +177,3 @@ class com_sales_transfer extends entity {
 		return $module;
 	}
 }
-
-?>

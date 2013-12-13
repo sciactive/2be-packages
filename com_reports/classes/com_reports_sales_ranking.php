@@ -600,5 +600,3 @@ class com_reports_sales_ranking extends entity {
 		return 0;
 	}
 }
-
-?>

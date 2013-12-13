@@ -15,4 +15,3 @@ if ( !gatekeeper('com_sales/listreturnchecklists') )
 	punt_user(null, pines_url('com_sales', 'returnchecklist/list'));
 
 $pines->com_sales->list_return_checklists();
-?>

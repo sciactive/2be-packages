@@ -756,4 +756,4 @@ if ($pines->config->com_calendar->com_customer)
 	</div>
 	<br class="pf-clearing" />
 </div>
-<?php } ?>
+<?php }

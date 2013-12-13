@@ -29,5 +29,3 @@ function com_customertimer__check_delete(&$arguments, $name, &$object) {
 }
 
 $pines->hook->add_callback('com_customer_customer->delete', -10, 'com_customertimer__check_delete');
-
-?>

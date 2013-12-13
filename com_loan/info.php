@@ -38,5 +38,3 @@ return array(
 		array('deleteloan', 'Delete Loans', 'User can delete current loans.')
 	),
 );
-
-?>

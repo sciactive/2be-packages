@@ -20,5 +20,3 @@ if ( gatekeeper() ) {
 	}
 	unset($calc_timeout);
 }
-
-?>

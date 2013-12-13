@@ -395,4 +395,4 @@ if ($this->is_widget) {
 	echo $form->render();
 	?>
 </div>
-<?php } ?>
+<?php }

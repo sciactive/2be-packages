@@ -16,5 +16,3 @@ defined('P_RUN') or die('Direct access prohibited');
  * @global com_elfinderupload $pines->uploader
  */
 $pines->uploader = 'com_elfinderupload';
-
-?>

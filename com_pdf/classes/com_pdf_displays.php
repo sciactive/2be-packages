@@ -260,5 +260,3 @@ class com_pdf_displays extends entity {
 		return $output;
 	}
 }
-
-?>

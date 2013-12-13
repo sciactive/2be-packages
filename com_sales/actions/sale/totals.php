@@ -15,4 +15,3 @@ if ( !gatekeeper('com_sales/totalsales') )
 	punt_user(null, pines_url('com_sales', 'sale/totals'));
 
 $pines->com_sales->print_sales_total();
-?>

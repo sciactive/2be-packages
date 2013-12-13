@@ -38,4 +38,4 @@ if ($this->secret) { ?>
 	Please note that you may still receive emails from us of an important
 	nature, such as notifications of an account change.
 </div>
-<?php } ?>
+<?php }

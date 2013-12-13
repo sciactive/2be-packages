@@ -51,5 +51,3 @@ $json_struct = (object) array(
 );
 
 $pines->page->override_doc(json_encode($json_struct));
-
-?>

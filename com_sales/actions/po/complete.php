@@ -28,5 +28,3 @@ if (empty($failed_completes)) {
 }
 
 pines_redirect(pines_url('com_sales', 'po/list'));
-
-?>

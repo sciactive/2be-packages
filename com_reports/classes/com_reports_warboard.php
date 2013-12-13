@@ -135,5 +135,3 @@ class com_reports_warboard extends entity {
 		return $module;
 	}
 }
-
-?>

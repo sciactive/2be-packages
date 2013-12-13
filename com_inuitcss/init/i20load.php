@@ -20,5 +20,3 @@ if ($pines->editor) {
 	$pines->editor->add_css($pines->config->location.'components/com_inuitcss/includes/core/css/inuit.css');
 	$pines->editor->add_css($pines->config->location.'components/com_inuitcss/includes/'.clean_filename($pines->config->com_inuitcss->grid_layout));
 }
-
-?>

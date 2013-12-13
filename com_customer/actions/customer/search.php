@@ -155,5 +155,3 @@ if (!$customers)
 	$customers = null;
 
 $pines->page->override_doc(json_encode($customers));
-
-?>

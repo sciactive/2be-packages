@@ -15,5 +15,3 @@ if ( !gatekeeper('com_repository/gencert') )
 	punt_user(null, pines_url('com_repository', 'gencert'));
 
 $module = new module('com_repository', 'form_certificate', 'content');
-
-?>

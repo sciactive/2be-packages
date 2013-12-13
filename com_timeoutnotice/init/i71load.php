@@ -15,5 +15,3 @@ if ( gatekeeper() ) {
 	$module = new module('com_timeoutnotice', 'load_js', 'head');
 	unset ($module);
 }
-
-?>

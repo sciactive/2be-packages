@@ -73,4 +73,4 @@ echo $module->render();
 	<a href="<?php echo htmlspecialchars(pines_url('com_testimonials', $action, array('show' => 'id:'.$this->entity->id, 'type' => $status))); ?>" class="btn">View in List</a>
 	<?php if (gatekeeper('com_testimonials/edittestimonials')) { ?>
 	<a href="<?php echo htmlspecialchars(pines_url('com_testimonials', 'testimonial/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
-<?php } } ?>
+<?php } }

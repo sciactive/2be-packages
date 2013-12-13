@@ -19,5 +19,3 @@ if (!isset($location->guid))
 	return;
 
 $pines->com_calendar->lineup_form($location);
-
-?>

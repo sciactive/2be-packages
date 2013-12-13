@@ -120,5 +120,3 @@ class com_calendar_event extends entity {
 		$pines->page->override_doc($module->render());
 	}
 }
-
-?>

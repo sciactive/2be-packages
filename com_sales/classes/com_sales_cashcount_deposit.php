@@ -89,5 +89,3 @@ class com_sales_cashcount_deposit extends entity {
 		return $module;
 	}
 }
-
-?>

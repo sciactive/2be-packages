@@ -61,4 +61,4 @@ foreach ($this->entity->winners as $cur_place => $cur_winner) { ?>
 	<p style="margin-top: 2em;"><?php echo htmlspecialchars(format_phone($cur_winner['phone'])); ?></p>
 	<p><a href="mailto:<?php echo htmlspecialchars($cur_winner['email']); ?>"><?php echo htmlspecialchars($cur_winner['email']); ?></a></p>
 </div>
-<?php } ?>
+<?php }

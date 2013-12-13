@@ -52,5 +52,3 @@ class com_ckeditor extends component implements editor_interface {
 		}
 	}
 }
-
-?>
