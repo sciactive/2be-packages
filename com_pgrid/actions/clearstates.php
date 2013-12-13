@@ -1,6 +1,6 @@
 <?php
 /**
- * Clear all Pines Grid states.
+ * Clear all PGrid states.
  *
  * @package Components\pgrid
  * @license http://www.gnu.org/licenses/agpl-3.0.html

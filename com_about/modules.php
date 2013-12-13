@@ -13,8 +13,8 @@ defined('P_RUN') or die('Direct access prohibited');
 
 return array(
 	'pinesfeed' => array(
-		'cname' => 'Pines News Feed',
-		'description' => 'Pines Framework news feed from Twitter.',
+		'cname' => 'WonderPHP News Feed',
+		'description' => 'WonderPHP news feed from Twitter.',
 		'view' => 'modules/pinesfeed',
 		'type' => 'widget',
 		'widget' => array(

@@ -149,7 +149,7 @@ ul.menu li a.expander + a {
 .page-header h2 {
 	line-height: 1;
 }
-/* ----------- Pines Form ----------- */
+/* ----------- PForm ----------- */
 .pf-form div.pf-element.pf-full-width .pf-full-width {
 	padding-right: .2em; /* Keep padded inputs from pushing out of their box. */
 }
@@ -178,7 +178,7 @@ ul.menu li a.expander + a {
 	left: 0 !important;
 	top: 0 !important;
 }
-/* ----------- Pines Grid ----------- */
+/* ----------- PGrid ----------- */
 .ui-pgrid-table-viewport {
 	height: auto !important;
 }

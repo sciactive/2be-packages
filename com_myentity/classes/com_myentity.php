@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 /**
  * com_myentity main class.
  *
- * Provides a MySQL based entity manager for Pines.
+ * Provides a MySQL based entity manager for WonderPHP.
  *
  * @package Components\myentity
  */
@@ -177,12 +177,12 @@ class com_myentity extends component implements entity_manager_interface {
 		$filename = clean_filename((string) $filename);
 		if (!$fhandle = fopen($filename, 'w'))
 			return false;
-		fwrite($fhandle, "# Pines Entity Export\n");
+		fwrite($fhandle, "# WonderPHP Entity Export\n");
 		fwrite($fhandle, "# com_myentity version {$pines->info->com_myentity->version}\n");
 		fwrite($fhandle, "# sciactive.com\n");
 		fwrite($fhandle, "#\n");
 		fwrite($fhandle, "# Generation Time: ".date('r')."\n");
-		fwrite($fhandle, "# Pines Version: {$pines->info->version}\n\n");
+		fwrite($fhandle, "# WonderPHP Version: {$pines->info->version}\n\n");
 
 		fwrite($fhandle, "#\n");
 		fwrite($fhandle, "# UIDs\n");
@@ -249,12 +249,12 @@ class com_myentity extends component implements entity_manager_interface {
 		header('Content-Disposition: attachment; filename=entities.pex;');
 		// End all output buffering.
 		while (@ob_end_clean());
-		echo "# Pines Entity Export\n";
+		echo "# WonderPHP Entity Export\n";
 		echo "# com_myentity version {$pines->info->com_myentity->version}\n";
 		echo "# sciactive.com\n";
 		echo "#\n";
 		echo "# Generation Time: ".date('r')."\n";
-		echo "# Pines Version: {$pines->info->version}\n\n";
+		echo "# WonderPHP Version: {$pines->info->version}\n\n";
 
 		echo "#\n";
 		echo "# UIDs\n";

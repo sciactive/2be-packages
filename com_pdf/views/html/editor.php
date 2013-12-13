@@ -1,6 +1,6 @@
 <?php
 /**
- * Provide display editors for the fields of a Pines Form.
+ * Provide display editors for the fields of a PForm.
  *
  * @package Components\pdf
  * @license http://www.gnu.org/licenses/agpl-3.0.html

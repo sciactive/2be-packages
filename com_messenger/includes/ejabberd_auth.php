@@ -2,11 +2,11 @@
 <?php
 /*
  * I tinkered with this file and made it much more gooder by giving it that same
- * Pines power I give all my code. (Plus some Mrs. Dash.)
+ * WonderPHP power I give all my code. (Plus some Mrs. Dash.)
  *   -Hunter
  * 
  * - Instructions -
- * To use this script for ejabberd authentication, thus giving Pines users
+ * To use this script for ejabberd authentication, thus giving WonderPHP users
  * access to the service, edit the ejabberd.cfg file.
  * In the authentication section, set the method to external authentication
  * and the program to this script, like so:
@@ -15,7 +15,7 @@
  *  {extauth_cache, false}.
  * 
  * Note that the 3rd line turns caching off. This is necessary if you use the
- * web messaging clients in Pines.
+ * web messaging clients in WonderPHP.
  * 
  * - Permissions - (Read if you have errors.)
  * I'm assuming this file is owned by your web server user (probably www-data).
@@ -64,15 +64,15 @@ error_reporting(0);
 if (isset($_SERVER['REQUEST_METHOD']))
 	die('You can\'t request this file.');
 
-// Before we get into Jabber commands, we need to load up Pines.
-// First switch to the Pines dir.
+// Before we get into Jabber commands, we need to load up WonderPHP.
+// First switch to the WonderPHP dir.
 if (preg_match('/components\/com_messenger\/includes\/ejabberd_auth\.php$/', $_SERVER['PHP_SELF']))
 	chdir(preg_replace('/components\/com_messenger\/includes\/ejabberd_auth\.php$/', '', $_SERVER['PHP_SELF']));
 else
 	chdir('../../../');
-// Check that we're in the Pines dir...
+// Check that we're in the WonderPHP dir...
 if (!file_exists('system/classes/pines.php'))
-	die('I have no idea where the Pines dir is, so I\'m cowardly refusing to proceed.');
+	die('I have no idea where the WonderPHP dir is, so I\'m cowardly refusing to proceed.');
 // Set up constants...
 define('P_EXEC_TIME', microtime(true));
 define('P_RUN', true);
@@ -86,7 +86,7 @@ foreach (glob('system/init/i*.php') as $_p_cur_sysinit) {
 		break;
 	require($_p_cur_sysinit);
 }
-// Now Pines is ready to go, so we can authenticate.
+// Now WonderPHP is ready to go, so we can authenticate.
 $auth = new JabberAuth();
 $auth->play(); // We simply start process !
 

@@ -1,5 +1,5 @@
 /*!
- * Pines Framework Google Drive JavaScript
+ * WonderPHP Google Drive JavaScript
  * Component/googledrive
  * http://pinesframework.org
  *

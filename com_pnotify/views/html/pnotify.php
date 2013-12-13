@@ -1,6 +1,6 @@
 <?php
 /**
- * A view to load Pines Notify.
+ * A view to load PNotify.
  *
  * @package Components\pnotify
  * @license http://www.gnu.org/licenses/agpl-3.0.html

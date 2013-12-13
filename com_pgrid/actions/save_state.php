@@ -1,6 +1,6 @@
 <?php
 /**
- * Save the state of a Pines Grid.
+ * Save the state of a PGrid.
  *
  * @package Components\pgrid
  * @license http://www.gnu.org/licenses/agpl-3.0.html

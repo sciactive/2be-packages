@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2010 Angela Murrell
  *
- * Licensed (along with all of Pines) under the GNU Affero GPL:
+ * Licensed (along with all of WonderPHP) under the GNU Affero GPL:
  *	  http://www.gnu.org/licenses/agpl.html
  */
 

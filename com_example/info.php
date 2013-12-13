@@ -18,7 +18,7 @@ return array(
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',
 	'website' => 'http://www.sciactive.com',
 	'short_description' => 'An example component design',
-	'description' => 'This component functions as an example of how to use various features of the Pines framework.',
+	'description' => 'This component functions as an example of how to use various features of WonderPHP.',
 	'depend' => array(
 		'pines' => '<3',
 		'service' => 'entity_manager&editor',

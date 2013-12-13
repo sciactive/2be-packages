@@ -1,6 +1,6 @@
 <?php
 /**
- * A view to load Pines Form.
+ * A view to load PForm.
  *
  * @package Components\pform
  * @license http://www.gnu.org/licenses/agpl-3.0.html

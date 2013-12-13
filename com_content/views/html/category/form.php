@@ -479,13 +479,13 @@ $pines->com_ptags->load();
 				<div class="pf-form">
 					<div class="pf-element">
 						When adding CSS and JavaScript files, you should use the
-						Pines JavaScript object. This allows your code to load
+						WonderPHP JavaScript object. This allows your code to load
 						in Ajax enabled installations.
 					</div>
 					<fieldset class="pf-group">
 						<legend>Adding CSS</legend>
 						<div class="pf-element pf-full-width">
-							Adding a CSS file on this server (relative to this Pines installation).
+							Adding a CSS file on this server (relative to this WonderPHP installation).
 							<div class="code_block ui-corner-all">
 							<?php
 /* pygmentize -l html -f html -o /dev/stdout pygments.html
@@ -525,7 +525,7 @@ $pines->com_ptags->load();
 					<fieldset class="pf-group">
 						<legend>Adding JavaScript</legend>
 						<div class="pf-element pf-full-width">
-							Adding a JavaScript file on this server (relative to this Pines installation).
+							Adding a JavaScript file on this server (relative to this WonderPHP installation).
 							<div class="code_block ui-corner-all">
 							<?php
 /* pygmentize -l html -f html -o /dev/stdout pygments.html

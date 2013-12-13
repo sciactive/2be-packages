@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
- * Pines system groups.
+ * WonderPHP system groups.
  *
  * @package Components\user
  * @property int $guid The GUID of the group.

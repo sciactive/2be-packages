@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
-	'name' => 'Pines CMS Template',
+	'name' => 'WonderPHP CMS Template',
 	'author' => 'SciActive',
 	'version' => '2.0.0',
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',

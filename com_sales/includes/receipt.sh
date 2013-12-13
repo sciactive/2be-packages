@@ -24,7 +24,7 @@
 # sudo cp rastertocbm1k /usr/lib/cups/filter/
 #
 # Install your Citizen CT-S310 using the CTS310.ppd file.
-#   ** Congratulations! You now have a receipt printer for Pines! **
+#   ** Congratulations! You now have a receipt printer for WonderPHP! **
 #
 # Now you can open the file you are given when you print a receipt with this
 # script. You can set Firefox to automatically open these files with receipt.sh.

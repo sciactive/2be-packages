@@ -192,7 +192,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			animate_speed: 0,
 			opacity: 1,
 			icon: false,
-			// Setting stack to false causes Pines Notify to ignore this notice when positioning.
+			// Setting stack to false causes PNotify to ignore this notice when positioning.
 			stack: false,
 			after_init: function(pnotify){
 				// Remove the notice if the user mouses over it.

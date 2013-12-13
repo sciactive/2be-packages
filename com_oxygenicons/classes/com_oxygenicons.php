@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 /**
  * com_oxygenicons main class.
  *
- * A Pines Icon theme using the Oxygen icon library.
+ * A WonderPHP Icon theme using the Oxygen icon library.
  *
  * @package Components\oxygenicons
  */

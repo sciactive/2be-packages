@@ -92,7 +92,7 @@ body.shadows .module_title.ui-widget-header {
 .module_maximize, .module_minimize {
 	display: none !important;
 }
-/* Pines Notify */
+/* PNotify */
 .ui-pnotify-history-container {
 	display: none !important;
 }

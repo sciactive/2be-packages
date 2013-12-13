@@ -1,6 +1,6 @@
 <?php
 /**
- * A view to load Pines Tags.
+ * A view to load PTags.
  *
  * @package Components\ptags
  * @license http://www.gnu.org/licenses/agpl-3.0.html

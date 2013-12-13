@@ -36,7 +36,7 @@ return array(
 		'bottom',
 	),
 	'short_description' => 'Joomla! template adapter',
-	'description' => 'An adapter that allows Joomla! templates to be used in Pines.',
+	'description' => 'An adapter that allows Joomla! templates to be used in WonderPHP.',
 	'depend' => array(
 		'pines' => '<3',
 		'component' => 'com_jquery'

@@ -156,7 +156,7 @@ return array(
 	array(
 		'name' => 'ssn_field',
 		'cname' => 'SSN Field',
-		'description' => 'Allow Pines to store a Social Security Number for customers.',
+		'description' => 'Allow WonderPHP to store a Social Security Number for customers.',
 		'value' => true,
 		'peruser' => true,
 	),

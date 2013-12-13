@@ -1,6 +1,6 @@
 <?php
 /**
- * A view to load Pines Grid.
+ * A view to load PGrid.
  *
  * @package Components\pgrid
  * @license http://www.gnu.org/licenses/agpl-3.0.html

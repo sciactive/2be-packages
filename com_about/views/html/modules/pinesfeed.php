@@ -1,6 +1,6 @@
 <?php
 /**
- * Pines Framework news feed.
+ * WonderPHP news feed.
  *
  * @package Components\about
  * @license http://www.gnu.org/licenses/agpl-3.0.html
@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Pines News Feed';
+$this->title = 'WonderPHP News Feed';
 ?>
 <style type="text/css">
 #p_muid_widget .twtr-ft img {

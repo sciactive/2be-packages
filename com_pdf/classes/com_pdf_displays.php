@@ -45,7 +45,7 @@ class com_pdf_displays extends entity {
 		$this->pdf_pages = 1;
 		$this->pdf_title = 'blank';
 		$this->pdf_author = $pines->config->com_pdf->author;
-		$this->pdf_creator = 'Pines';
+		$this->pdf_creator = 'WonderPHP';
 		$this->pdf_subject = '';
 		$this->pdf_keywords = '';
 	}

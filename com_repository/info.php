@@ -17,8 +17,8 @@ return array(
 	'version' => '1.0.1',
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',
 	'website' => 'http://www.sciactive.com',
-	'short_description' => 'Pines package repository',
-	'description' => 'Host a Pines repository of Slim packages. You can use the repository to distribute your components to other Pines users.',
+	'short_description' => 'WonderPHP package repository',
+	'description' => 'Host a WonderPHP repository of Slim packages. You can use the repository to distribute your components to other WonderPHP users.',
 	'depend' => array(
 		'pines' => '<3',
 		'service' => 'user_manager&uploader',

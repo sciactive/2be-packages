@@ -1,5 +1,5 @@
 /*
- * Pines Framework Testimonials JavaScript
+ * WonderPHP Testimonials JavaScript
  *
  * http://pinesframework.org/
  * Copyright (c) 2013 SciActive

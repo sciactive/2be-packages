@@ -3,7 +3,7 @@
  * Provides a form for the user to edit a sale.
  * 
  * This file contains probably the most unholy and confusing heap of JavaScript
- * in all of Pines. I highly suggest you don't attempt to customize it.
+ * in all of WonderPHP. I highly suggest you don't attempt to customize it.
  * 
  * But if you choose to battle with this JS, I can't stop you. It's dangerous to
  * go alone! Take this.

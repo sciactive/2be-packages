@@ -1,8 +1,8 @@
 /*
- * jQuery Pines Grid (pgrid) Plugin 1.2.0dev
+ * jQuery PGrid (pgrid) Plugin 1.2.0dev
  *
  * http://pinesframework.org/pgrid/
- * Copyright (c) 2009-2012 Hunter Perrin
+ * Copyright (c) 2009-2013 Hunter Perrin
  *
  * Triple license under the GPL, LGPL, and MPL:
  *	  http://www.gnu.org/licenses/gpl.html
@@ -1135,7 +1135,7 @@
 										return window.open(parsed_url, target, val.window_features);
 									return window.open(parsed_url, target);
 								} else {
-									// If Pines is loaded, use its get method instead of setting location.
+									// If WonderPHP is loaded, use its get method instead of setting location.
 									if (typeof pines != "undefined" && pines.get)
 										return pines.get(parsed_url);
 									return (window.location = parsed_url);

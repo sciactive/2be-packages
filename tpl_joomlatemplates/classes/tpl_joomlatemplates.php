@@ -23,7 +23,7 @@ class tpl_joomlatemplates extends template {
 	 */
 	public $format = 'html-desktop-5';
 	/**
-	 * The editor CSS location, relative to Pines' directory.
+	 * The editor CSS location, relative to WonderPHP's directory.
 	 * @var string $editor_css
 	 */
 	public $editor_css = 'templates/tpl_joomlatemplates/css/editor.css';

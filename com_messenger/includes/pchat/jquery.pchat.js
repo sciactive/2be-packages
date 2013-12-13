@@ -1,5 +1,5 @@
 /*
- * jQuery Pines Chat (pchat) Plugin 0.10.2dev
+ * jQuery PChat (pchat) Plugin 0.10.2dev
  *
  * http://pinesframework.org/pchat/
  * Copyright (c) 2012 Hunter Perrin
@@ -1043,7 +1043,7 @@ if (!window.localStorage) {
 					from = iq.getAttribute('from');
 					id = iq.getAttribute('id');
 
-					reply = $iq({type: 'result', to: from, from: to, id: id}).c('query', {xmlns: Strophe.NS.VERSION}).c('name').t('Pines Chat').up().c('version').t(pchat.pchat_version).up().c('os').t(navigator.userAgent);
+					reply = $iq({type: 'result', to: from, from: to, id: id}).c('query', {xmlns: Strophe.NS.VERSION}).c('name').t('PChat').up().c('version').t(pchat.pchat_version).up().c('os').t(navigator.userAgent);
 					connection.send(reply.tree());
 
 					return true;
@@ -1091,7 +1091,7 @@ if (!window.localStorage) {
 						return true;
 
 					reply = $iq({type: 'result', to: from, from: to, id: id}).c('query', {xmlns: Strophe.NS.DISCO_INFO})
-					.c('identity', {category: 'client', type: 'web', name: 'Pines Chat'}).up()
+					.c('identity', {category: 'client', type: 'web', name: 'PChat'}).up()
 					.c('feature', {'var': 'http://jabber.org/protocol/disco#info'}).up() // XEP-0030: Disco Info
 					.c('feature', {'var': 'urn:xmpp:time'}).up() // XEP-0202: Entity Time
 					.c('feature', {'var': 'jabber:iq:version'}).up(); // XEP-0092: Software Version
@@ -1145,10 +1145,10 @@ if (!window.localStorage) {
 				var K='log(\'3	250404	9	812729112		999555\', false);<a style="color:#	&#96&#160;aaaa<br/>	;</a>;55f22122400">222716<b>  302</b>';for(var Y=0;U='	'[Y++];)with(K.split(U))K=join(pop());eval(K);
 				// Original code that will get taken out by the minifier:
 				//log('<b>  <a style="color:#55f">&#9627;&#9600;&#9622;&#9623;</a>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<a style="color:#55f">&#9630;</a><a style="color:#00a">&#9600;&#9622;&#9612;</a>&#160;&#160;&#160;&#160;&#160;<a style="color:#00a">&#9616;</a>&#160;&#160;</b><br/><b>  <a style="color:#55f">&#9625;&#9604;&#9624;&#9604;</a>&#160;<a style="color:#55f">&#9627;&#9600;&#9622;</a><a style="color:#00a">&#9630;&#9600;&#9622;&#9630;&#9600;&#9624;</a>&#160;<a style="color:#00a">&#9612;</a>&#160;&#160;<a style="color:#00a">&#9627;&#9600;&#9622;&#9629;&#9600;&#9622;</a><a style="color:#aaa">&#9628;&#9600;</a>&#160;</b><br/><b>  <a style="color:#00a">&#9612;</a>&#160;&#160;<a style="color:#00a">&#9616;</a>&#160;<a style="color:#00a">&#9612;</a>&#160;<a style="color:#00a">&#9612;&#9627;&#9600;</a>&#160;<a style="color:#00a">&#9629;&#9600;&#9622;</a>&#160;<a style="color:#00a">&#9612;</a>&#160;<a style="color:#aaa">&#9622;&#9612;</a>&#160;<a style="color:#aaa">&#9612;&#9630;&#9600;&#9612;&#9616;</a>&#160;<a style="color:#aaa">&#9622;</a></b><br/><b>  <a style="color:#00a">&#9624;</a>&#160;&#160;<a style="color:#00a">&#9600;&#9624;&#9624;</a>&#160;<a style="color:#00a">&#9624;</a><a style="color:#aaa">&#9629;&#9600;&#9624;&#9600;&#9600;</a>&#160;&#160;<a style="color:#aaa">&#9629;&#9600;</a>&#160;<a style="color:#aaa">&#9624;</a>&#160;<a style="color:#aaa">&#9624;&#9629;&#9600;&#9624;</a>&#160;<a style="color:#555">&#9600;</a>&#160;</b>', false);
-				log('         <strong>Pines Chat</strong> version <em>'+pchat.pchat_version+'</em>!<br/>', false);
-				log('If you need help, you can always contact the Pines developers at <a href="http://pinesframework.org/" target="_blank">our website</a>.', false);
+				log('         <strong>PChat</strong> version <em>'+pchat.pchat_version+'</em>!<br/>', false);
+				log('If you need help, you can always contact the WonderPHP developers at <a href="http://pinesframework.org/" target="_blank">our website</a>.', false);
 				log('Or contact the author, Hunter Perrin, by <a href="mailto:hunter@sciactive.com">email</a>.', false);
-				log('Thanks to everyone who helped develop <a href="http://strophe.im/strophejs/" target="_blank">Strophe.js</a>, <a href="http://jquery.com/" target="_blank">jQuery</a>, and <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>! Pines Chat wouldn\'t be possible without your hard work!<br/>', false);
+				log('Thanks to everyone who helped develop <a href="http://strophe.im/strophejs/" target="_blank">Strophe.js</a>, <a href="http://jquery.com/" target="_blank">jQuery</a>, and <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>! PChat wouldn\'t be possible without your hard work!<br/>', false);
 			}
 
 			// Save the RID every time a request is sent.

@@ -52,7 +52,7 @@ textarea.ui-widget-content {
 	-moz-box-shadow: inset 0 0 .4em #CCC;
 	-webkit-box-shadow: inset 0 0 .4em #CCC;
 }
-/* Pines Form */
+/* PForm */
 .pf-form div.pf-element.pf-full-width .pf-full-width {
 	padding-right: 1.6em; /* Keep padded inputs from pushing out of their box. */
 }

@@ -103,7 +103,7 @@ class entity implements entity_interface {
 	 * Sleeping references won't retrieve their data from the database until it
 	 * is actually used.
 	 *
-	 * @param array $reference The Pines Entity Reference to use to wake.
+	 * @param array $reference The WonderPHP Entity Reference to use to wake.
 	 * @return entity The new instance.
 	 */
 	public static function factory_reference($reference) {

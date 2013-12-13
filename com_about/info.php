@@ -18,7 +18,7 @@ return array(
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',
 	'website' => 'http://www.sciactive.com',
 	'short_description' => 'Configurable about page',
-	'description' => 'Displays configurable information about Pines and your installation.',
+	'description' => 'Displays configurable information about WonderPHP and your installation.',
 	'depend' => array(
 		'pines' => '<3'
 	),
@@ -27,7 +27,7 @@ return array(
 	),
 	'abilities' => array(
 		array('show', 'About Page', 'User can see the about page.'),
-		array('pinesfeed', 'Pines Feed', 'User can see the Pines News Feed widget.')
+		array('pinesfeed', 'WonderPHP Feed', 'User can see the WonderPHP News Feed widget.')
 	),
 );
 

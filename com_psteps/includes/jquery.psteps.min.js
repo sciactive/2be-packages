@@ -1,5 +1,5 @@
 /*
- * jQuery Pines Steps (psteps) Plugin 0.0.1alpha
+ * jQuery PSteps (psteps) Plugin 0.0.1alpha
  *
  * http://pinesframework.org/psteps/
  * Copyright (c) 2012 Angela Murrell

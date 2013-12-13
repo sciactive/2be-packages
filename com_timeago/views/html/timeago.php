@@ -1,6 +1,6 @@
 <?php
 /**
- * A view to load Pines Steps.
+ * A view to load PSteps.
  *
  * @package Components\psteps
  * @license http://www.gnu.org/licenses/agpl-3.0.html

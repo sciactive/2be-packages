@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 /**
  * com_configure main class.
  *
- * Manages Pines configuration.
+ * Manages WonderPHP configuration.
  *
  * @package Components\configure
  */
@@ -51,7 +51,7 @@ class com_configure extends component implements configurator_interface {
 	 * Disables a component.
 	 *
 	 * This function renames the component's directory by adding a dot (.) in
-	 * front of the name. This causes Pines to ignore the component.
+	 * front of the name. This causes WonderPHP to ignore the component.
 	 *
 	 * @param string $component The name of the component.
 	 * @return bool True on success, false on failure.
@@ -76,7 +76,7 @@ class com_configure extends component implements configurator_interface {
 	 * Enables a component.
 	 *
 	 * This function renames the component's directory by removing the dot (.)
-	 * in front of the name. This causes Pines to recognize the component.
+	 * in front of the name. This causes WonderPHP to recognize the component.
 	 *
 	 * @param string $component The name of the component.
 	 * @return bool True on success, false on failure.

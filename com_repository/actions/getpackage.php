@@ -32,7 +32,7 @@ if (!file_exists($file) || !file_exists($sigfile))
 header('Content-Type: application/octet-stream');
 header('Content-Disposition: attachment; filename='."{$package}-{$version}.slm");
 // Provide the signature, so authenticity can be verified.
-header('X-Pines-Slim-Signature: '.base64_encode(file_get_contents($sigfile)));
+header('X-WonderPHP-Slim-Signature: '.base64_encode(file_get_contents($sigfile)));
 
 $pines->page->override_doc(file_get_contents($file));
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * View a newsletter without the Pines interface.
+ * View a newsletter without the WonderPHP interface.
  *
  * @package Components\newsletter
  * @license http://www.gnu.org/licenses/agpl-3.0.html

@@ -221,7 +221,7 @@ body.shadows .module.ui-widget-content {
 		border-left: none 0;
 		border-right: none 0;
 	}
-	/* Pines Form */
+	/* PForm */
 	body .pf-form div.pf-element.pf-full-width .pf-full-width {
 		padding-right: .2em; /* Keep padded inputs from pushing out of their box. */
 	}

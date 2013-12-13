@@ -1,5 +1,5 @@
 /*
- * Pines Framework Bootstrap Template
+ * WonderPHP Bootstrap Template
  *
  * http://pinesframework.org/
  * Copyright (c) 2013 SciActive

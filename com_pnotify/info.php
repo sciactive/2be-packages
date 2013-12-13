@@ -12,12 +12,12 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
-	'name' => 'Pines Notify',
+	'name' => 'PNotify',
 	'author' => 'SciActive',
 	'version' => '1.2.0-1.2.0',
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',
 	'website' => 'http://www.sciactive.com',
-	'short_description' => 'Pines Notify jQuery plugin',
+	'short_description' => 'PNotify jQuery plugin',
 	'description' => 'A JavaScript notification jQuery component. Supports many features, and fully themeable using jQuery UI.',
 	'depend' => array(
 		'pines' => '<3',

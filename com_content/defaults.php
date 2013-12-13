@@ -56,7 +56,7 @@ return array(
 		'name' => 'global_meta_tags',
 		'cname' => 'Global Meta Tags',
 		'description' => 'Meta tags for every page. The format is name:content.',
-		'value' => array('generator:Pines CMS'),
+		'value' => array('generator:WonderPHP'),
 		'peruser' => true,
 	),
 	array(
