@@ -1,5 +1,5 @@
 /*
-  Copyright 2012, Hunter Perrin <hunter@sciactive.com>
+  Copyright 2012, Hunter Perrin <hperrin@gmail.com>
 */
 /**
  * Simple Communications Blocking Plugin

@@ -4,7 +4,7 @@
  *
  * @package Components\financial
  * @license http://www.gnu.org/licenses/gpl.html
- * @author Hunter Perrin <hunter@sciactive.com>
+ * @author Hunter Perrin <hperrin@gmail.com>
  * @author Enrique Garc�a M. <egarcia@egm.as>
  * @copyright SciActive.com
  * @copyright (c) 2003-2004 Enrique Garc�a M.

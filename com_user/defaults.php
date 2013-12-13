@@ -4,7 +4,7 @@
  *
  * @package Components\user
  * @license http://www.gnu.org/licenses/agpl-3.0.html
- * @author Hunter Perrin <hunter@sciactive.com>
+ * @author Hunter Perrin <hperrin@gmail.com>
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
@@ -123,7 +123,7 @@ return array(
 	array(
 		'name' => 'default_domain',
 		'cname' => 'Default Login Domain',
-		'description' => 'When using email address as username, the domain name listed here will be automatically appended to short logins. For example, you could put "sciactive.com" to be able to sign in with "hunter" instead of "hunter@sciactive.com".',
+		'description' => 'When using email address as username, the domain name listed here will be automatically appended to short logins. For example, you could put "sciactive.com" to be able to sign in with "hunter" instead of "hperrin@gmail.com".',
 		'value' => '',
 		'peruser' => true,
 	),
