@@ -120,6 +120,9 @@ hr {
 }
 .module {
 	padding: 0;
+	-webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
 }
 .module.module_maximized {
 	position: fixed;
@@ -132,7 +135,7 @@ hr {
 	overflow: auto;
 }
 .module .module_title {
-	padding: .2em .4em;
+	padding: .5em .9em;
 	border-top-width: 0;
 	border-left-width: 0;
 	border-right-width: 0;
@@ -153,7 +156,7 @@ hr {
 	margin-left: 2px;
 }
 .module .module_content {
-	padding: .4em .8em;
+	padding: .5em .9em;
 	overflow: visible;
 }
 /* Fancy Styling */
@@ -216,6 +219,9 @@ body.shadows .module.ui-widget-content {
 		padding: .4em;
 	}
 	/* Modules */
+	body .module .module_title {
+		padding: .2em;
+	}
 	body .module, body .module .module_content {
 		padding: 0;
 		border-left: none 0;

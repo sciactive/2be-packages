@@ -24,11 +24,11 @@ if ($pines->config->tpl_pines->ajax && ($_REQUEST['tpl_pines_ajax'] == 1 && strp
 		'pos_header_right' => $pines->page->render_modules('header_right', 'module_header_right'),
 		'pos_pre_content' => $pines->page->render_modules('pre_content', 'module_header'),
 		'pos_breadcrumbs' => $pines->page->render_modules('breadcrumbs'),
-		'pos_content_top_left' => $pines->page->render_modules('content_top_left'),
-		'pos_content_top_right' => $pines->page->render_modules('content_top_right'),
+		'pos_content_top_left' => $pines->page->render_modules('content_top_left', 'module_header'),
+		'pos_content_top_right' => $pines->page->render_modules('content_top_right', 'module_header'),
 		'pos_content' => $pines->page->render_modules('content', 'module_content'),
-		'pos_content_bottom_left' => $pines->page->render_modules('content_bottom_left'),
-		'pos_content_bottom_right' => $pines->page->render_modules('content_bottom_right'),
+		'pos_content_bottom_left' => $pines->page->render_modules('content_bottom_left', 'module_header'),
+		'pos_content_bottom_right' => $pines->page->render_modules('content_bottom_right', 'module_header'),
 		'pos_post_content' => $pines->page->render_modules('post_content', 'module_header'),
 		'pos_left' => $pines->page->render_modules('left', 'module_side'),
 		'pos_right' => $pines->page->render_modules('right', 'module_side'),
@@ -135,13 +135,13 @@ header('Content-Type: text/html');
 					<div id="content_container">
 						<div id="breadcrumbs"><?php echo $pines->page->render_modules('breadcrumbs', 'module_header'); ?></div>
 						<div class="row-fluid">
-							<div id="content_top_left" class="span6"><?php echo $pines->page->render_modules('content_top_left'); ?></div>
-							<div id="content_top_right" class="span6"><?php echo $pines->page->render_modules('content_top_right'); ?></div>
+							<div id="content_top_left" class="span6"><?php echo $pines->page->render_modules('content_top_left', 'module_header'); ?></div>
+							<div id="content_top_right" class="span6"><?php echo $pines->page->render_modules('content_top_right', 'module_header'); ?></div>
 						</div>
 						<div id="content"><?php echo $pines->page->render_modules('content', 'module_content'); ?></div>
 						<div class="row-fluid">
-							<div id="content_bottom_left" class="span6"><?php echo $pines->page->render_modules('content_bottom_left'); ?></div>
-							<div id="content_bottom_right" class="span6"><?php echo $pines->page->render_modules('content_bottom_right'); ?></div>
+							<div id="content_bottom_left" class="span6"><?php echo $pines->page->render_modules('content_bottom_left', 'module_header'); ?></div>
+							<div id="content_bottom_right" class="span6"><?php echo $pines->page->render_modules('content_bottom_right', 'module_header'); ?></div>
 						</div>
 					</div>
 				</div>
