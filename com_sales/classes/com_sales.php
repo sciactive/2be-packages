@@ -1491,10 +1491,12 @@ class com_sales extends component {
 			$selector['lt'] = array('p_cdate', (int) $end_date);
 		if (!isset($location))
 			$location = $_SESSION['user']->group;
-		if ($descendants)
-			$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
-		else
-			$or = array('|', 'ref' => array('group', $location));
+		if (isset($location)) {
+			if ($descendants)
+				$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
+			else
+				$or = array('|', 'ref' => array('group', $location));
+		}
 		$module->sales = (array) $pines->entity_manager->get_entities(
 				array('class' => com_sales_sale),
 				$selector,
