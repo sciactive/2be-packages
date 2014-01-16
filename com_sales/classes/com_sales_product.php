@@ -63,6 +63,10 @@ class com_sales_product extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_product';
+	}
+
 	public function info($type) {
 		global $pines;
 		switch ($type) {

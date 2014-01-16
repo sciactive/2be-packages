@@ -51,6 +51,10 @@ class com_calendar_event extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_calendar_event';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

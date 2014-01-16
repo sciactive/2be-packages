@@ -51,6 +51,10 @@ class com_customer_company extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_customer_company';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

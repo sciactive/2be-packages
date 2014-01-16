@@ -53,6 +53,10 @@ class com_customertimer_floor extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_customertimer_floor';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

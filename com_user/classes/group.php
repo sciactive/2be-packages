@@ -68,6 +68,10 @@ class group extends able_object implements group_interface {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'group';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

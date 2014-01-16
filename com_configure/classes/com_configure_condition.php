@@ -54,6 +54,10 @@ class com_configure_condition extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_configure_condition';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

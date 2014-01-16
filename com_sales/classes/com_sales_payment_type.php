@@ -52,6 +52,10 @@ class com_sales_payment_type extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_payment_type';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

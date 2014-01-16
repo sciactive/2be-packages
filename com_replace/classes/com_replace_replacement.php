@@ -53,6 +53,10 @@ class com_replace_replacement extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_replace_replacement';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

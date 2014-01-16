@@ -30,5 +30,11 @@ return array(
 		'description' => 'The number of recently retrieved entities to cache. If you\'re running out of memory, try lowering this value. 0 means unlimited.',
 		'value' => 50,
 	),
+	array(
+		'name' => 'show_failures',
+		'cname' => 'Show Failed Queries',
+		'description' => 'Show the query in the error dialog if a query fails.',
+		'value' => false,
+	),
 );
-
+

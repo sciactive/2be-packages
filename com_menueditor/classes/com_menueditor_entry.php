@@ -52,6 +52,10 @@ class com_menueditor_entry extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_menueditor_entry';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

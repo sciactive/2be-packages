@@ -58,6 +58,10 @@ class com_reports_sales_ranking extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_reports_sales_ranking';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

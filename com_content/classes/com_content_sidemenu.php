@@ -49,6 +49,10 @@ class com_content_sidemenu extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_content_sidemenu';
+	}
+
 	/**
 	 * Save the sidemenu.
 	 * @return bool True on success, false on failure.

@@ -52,6 +52,10 @@ class com_sales_tax_fee extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_tax_fee';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

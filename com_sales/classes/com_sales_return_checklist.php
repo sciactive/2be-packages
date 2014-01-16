@@ -51,6 +51,10 @@ class com_sales_return_checklist extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_return_checklist';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

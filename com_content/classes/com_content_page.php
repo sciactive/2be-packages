@@ -57,6 +57,10 @@ class com_content_page extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_content_page';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

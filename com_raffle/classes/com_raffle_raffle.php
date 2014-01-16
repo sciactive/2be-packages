@@ -55,6 +55,10 @@ class com_raffle_raffle extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_raffle_raffle';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

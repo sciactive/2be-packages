@@ -52,6 +52,10 @@ class com_hrm_rto extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_hrm_rto';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

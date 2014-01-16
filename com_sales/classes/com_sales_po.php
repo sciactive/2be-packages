@@ -54,6 +54,10 @@ class com_sales_po extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_po';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

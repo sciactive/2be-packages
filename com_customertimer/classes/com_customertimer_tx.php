@@ -29,4 +29,8 @@ class com_customertimer_tx extends entity {
 		$pines->hook->hook_object($entity, $class.'->', false);
 		return $entity;
 	}
+
+	public static function etype() {
+		return 'com_customertimer_tx';
+	}
 }

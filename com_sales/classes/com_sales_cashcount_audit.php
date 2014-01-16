@@ -52,6 +52,10 @@ class com_sales_cashcount_audit extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_cashcount_audit';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

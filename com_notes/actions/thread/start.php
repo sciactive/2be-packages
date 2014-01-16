@@ -28,7 +28,7 @@ if (class_exists($_REQUEST['context']) && is_callable(array($_REQUEST['context']
 			)
 		);
 } else {
-	$thread->entities = array($pines->entity_manager->get_entity((int) $_REQUEST['id']));
+	$thread->entities = array($pines->entity_manager->get_entity(array('class' => $_REQUEST['context']), array('&', 'guid' => (int) $_REQUEST['id'])));
 }
 $note_id = uniqid();
 $thread->notes[$note_id] = array(

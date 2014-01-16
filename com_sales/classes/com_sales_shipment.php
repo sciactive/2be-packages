@@ -53,6 +53,10 @@ class com_sales_shipment extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_shipment';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

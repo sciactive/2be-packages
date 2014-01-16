@@ -52,6 +52,10 @@ class com_customer_interaction extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_customer_interaction';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

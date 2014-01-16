@@ -53,6 +53,10 @@ class com_testimonials_testimonial extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_testimonials_testimonial';
+	}
+
 //	public function info($type) {
 //		switch ($type) {
 //			case 'name':

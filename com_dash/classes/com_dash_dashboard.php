@@ -125,6 +125,10 @@ class com_dash_dashboard extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_dash_dashboard';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

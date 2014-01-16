@@ -63,6 +63,10 @@ class com_pdf_displays extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_pdf_displays';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

@@ -56,6 +56,10 @@ class com_sales_transfer extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_transfer';
+	}
+
 	/**
 	 * Return the entity helper module.
 	 * @return module Entity helper module.

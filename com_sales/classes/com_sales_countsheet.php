@@ -55,6 +55,10 @@ class com_sales_countsheet extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_countsheet';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

@@ -53,6 +53,10 @@ class com_hrm_issue extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_hrm_issue';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

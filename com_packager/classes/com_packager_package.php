@@ -54,6 +54,10 @@ class com_packager_package extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_packager_package';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

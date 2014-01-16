@@ -52,6 +52,10 @@ class com_loan_loan extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_loan_loan';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

@@ -51,6 +51,10 @@ class com_hrm_adjustment extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_hrm_adjustment';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

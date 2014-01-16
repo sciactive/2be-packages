@@ -52,6 +52,10 @@ class com_sales_cashcount_deposit extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_cashcount_deposit';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

@@ -85,6 +85,10 @@ class user extends able_object implements user_interface {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'user';
+	}
+
 	/**
 	 * Override the magic method, for email usernames.
 	 *

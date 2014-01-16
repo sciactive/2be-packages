@@ -52,6 +52,10 @@ class com_example_foobar extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_example_foobar';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

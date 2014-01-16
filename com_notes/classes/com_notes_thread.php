@@ -53,6 +53,10 @@ class com_notes_thread extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_notes_thread';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

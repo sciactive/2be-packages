@@ -54,6 +54,10 @@ class com_mailer_rendition extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_mailer_rendition';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

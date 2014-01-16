@@ -53,6 +53,10 @@ class com_esp_plan extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_esp_plan';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

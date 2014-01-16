@@ -103,6 +103,10 @@ EOF;
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_mailer_template';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

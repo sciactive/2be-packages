@@ -85,7 +85,7 @@ $pines->icons->load();
 				url: <?php echo json_encode(pines_url('com_notes', 'thread/get')); ?>,
 				type: "GET",
 				dataType: "json",
-				data: {"id": <?php echo json_encode("{$this->entity->guid}"); ?>},
+				data: {"id": <?php echo json_encode("{$this->entity->guid}"); ?>, "context": <?php echo json_encode(str_replace('hook_override_', '', get_class($this->entity))); ?>},
 				beforeSend: function(){
 					thread_box.addClass("picon picon-throbber");
 				},

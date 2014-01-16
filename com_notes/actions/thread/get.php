@@ -16,7 +16,7 @@ if ( !gatekeeper('com_notes/seethreads') )
 
 $pines->page->override = true;
 
-$entity = $pines->entity_manager->get_entity((int) $_REQUEST['id']);
+$entity = $pines->entity_manager->get_entity(array('class' => $_REQUEST['context']), array('&', 'guid' => (int) $_REQUEST['id']));
 if (!isset($entity->guid)) {
 	$pines->page->override_doc(json_encode(false));
 	return;

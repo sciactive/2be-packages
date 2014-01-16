@@ -54,6 +54,10 @@ class com_modules_module extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_modules_module';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':

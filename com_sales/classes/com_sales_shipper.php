@@ -52,6 +52,10 @@ class com_sales_shipper extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_shipper';
+	}
+
 	/**
 	 * Return the entity helper module.
 	 * @return module Entity helper module.

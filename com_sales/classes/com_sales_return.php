@@ -52,6 +52,10 @@ class com_sales_return extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_sales_return';
+	}
+
 	/**
 	 * Return the entity helper module.
 	 * @return module Entity helper module.

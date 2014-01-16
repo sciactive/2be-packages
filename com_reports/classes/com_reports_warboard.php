@@ -56,6 +56,10 @@ class com_reports_warboard extends entity {
 		return $entity;
 	}
 
+	public static function etype() {
+		return 'com_reports_warboard';
+	}
+
 	public function info($type) {
 		switch ($type) {
 			case 'name':
