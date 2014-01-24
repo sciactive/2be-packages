@@ -33,7 +33,7 @@ return array(
 		'name' => 'color_scheme',
 		'cname' => 'Color Scheme',
 		'description' => 'The color scheme of the template.',
-		'value' => 'green',
+		'value' => 'blue',
 		'options' => array(
 			'Green' => 'green',
 			'Blue' => 'blue',
