@@ -1088,6 +1088,9 @@ class com_myentity extends component implements entity_manager_interface {
 		if ( !isset($entity->guid) ) {
 			while (true) {
 				$new_id = mt_rand(1, 0x7FFFFFFFFFFFFFFF);
+				// That number might be too big on some machines. :(
+				if ($new_id < 1)
+					$new_id = rand(1, 0x7FFFFFFF);
 				$query = sprintf("SELECT `guid` FROM `%scom_myentity_guids` WHERE `guid`=%u;",
 					$pines->config->com_mysql->prefix,
 					$new_id);
