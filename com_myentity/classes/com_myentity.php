@@ -563,6 +563,7 @@ class com_myentity extends component implements entity_manager_interface {
 				$etype,
 				$options['reverse'] ? $sort.' DESC' : $sort);
 		}
+		pines_log("MySQL Query: $query", 'debug');
 		if ( !($result = @mysql_query($query, $pines->com_mysql->link)) ) {
 			// If the tables don't exist yet, create them.
 			if (mysql_errno() == 1146 && $this->create_tables()) {
