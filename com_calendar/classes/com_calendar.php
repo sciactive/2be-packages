@@ -184,6 +184,8 @@ class com_calendar extends component {
 
 		if (!isset($location) || !isset($location->guid)) {
 			$location = $_SESSION['user']->group;
+			if (!isset($location))
+				return array();
 			if (!isset($employee->guid))
 				$employee = $_SESSION['user'];
 		}

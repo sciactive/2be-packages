@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Welcome to '.htmlspecialchars($pines->info->name);
 ?>
 <div class="page-header">
-	<h1>Welcome to <?php echo htmlspecialchars($pines->info->name); ?> <small>version <?php echo htmlspecialchars($pines->info->version); ?></small></h1>
+	<h2>Welcome to <?php echo htmlspecialchars($pines->info->name); ?> <small>version <?php echo htmlspecialchars($pines->info->version); ?></small></h2>
 </div>
 <p>Congratulations on successfully installing <?php echo htmlspecialchars($pines->info->name); ?>
 	on your system. <a href="#p_muid_migrating" data-toggle="modal">Are you migrating from another installation?</a></p>
