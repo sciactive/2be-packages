@@ -17,6 +17,10 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\user
  */
 class able_object extends entity implements able_object_interface {
+	public static function factory($id = 0) {
+		return parent::factory($id);
+	}
+
 	public function grant($ability) {
 		if (!in_array($ability, $this->abilities))
 			return $this->abilities = array_merge(array($ability), $this->abilities);

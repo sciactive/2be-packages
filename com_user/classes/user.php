@@ -36,6 +36,8 @@ defined('P_RUN') or die('Direct access prohibited');
  * @property bool $inherit_abilities Whether the user should inherit the abilities of his groups.
  */
 class user extends able_object implements user_interface {
+	protected $tags = array('com_user', 'user', 'enabled');
+
 	/**
 	 * Used to save the current email to resend verification if it changes.
 	 * @access protected
@@ -44,8 +46,6 @@ class user extends able_object implements user_interface {
 	protected $verify_email = '';
 
 	public function __construct($id = 0) {
-		parent::__construct();
-		$this->add_tag('com_user', 'user', 'enabled');
 		if ($id > 0 || (string) $id === $id) {
 			global $pines;
 			if ((int) $id === $id)
@@ -68,21 +68,6 @@ class user extends able_object implements user_interface {
 		$this->address_type = 'us';
 		$this->addresses = array();
 		$this->attributes = array();
-	}
-
-	/**
-	 * Create a new instance.
-	 *
-	 * @param int|string $id The ID or username of the user to load, 0 for a new user.
-	 * @return user A user instance.
-	 */
-	public static function factory($id = 0) {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {

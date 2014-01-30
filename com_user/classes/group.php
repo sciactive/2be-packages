@@ -30,9 +30,9 @@ defined('P_RUN') or die('Direct access prohibited');
  * @property group $parent The group's parent.
  */
 class group extends able_object implements group_interface {
+	protected $tags = array('com_user', 'group', 'enabled');
+
 	public function __construct($id = 0) {
-		parent::__construct();
-		$this->add_tag('com_user', 'group', 'enabled');
 		if ($id > 0 || (string) $id === $id) {
 			global $pines;
 			if ((int) $id === $id)
@@ -51,21 +51,6 @@ class group extends able_object implements group_interface {
 		$this->conditions = array();
 		$this->address_type = 'us';
 		$this->attributes = array();
-	}
-
-	/**
-	 * Create a new instance.
-	 *
-	 * @param int $id The ID of the group to load, 0 for a new group.
-	 * @return group A group instance.
-	 */
-	public static function factory($id = 0) {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {

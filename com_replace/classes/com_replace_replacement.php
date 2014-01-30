@@ -17,40 +17,15 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\replace
  */
 class com_replace_replacement extends entity {
-	/**
-	 * Load a replacement.
-	 * @param int $id The ID of the replacement to load, 0 for a new replacement.
-	 */
+	protected $tags = array('com_replace', 'replacement');
+
 	public function __construct($id = 0) {
-		parent::__construct();
-		$this->add_tag('com_replace', 'replacement');
-		if ($id > 0) {
-			global $pines;
-			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
-			if (isset($entity)) {
-				$this->guid = $entity->guid;
-				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
-				return;
-			}
-		}
+		if (parent::__construct($id) !== null)
+			return;
 		// Defaults.
 		$this->enabled = true;
 		$this->strings = array();
 		$this->conditions = array();
-	}
-
-	/**
-	 * Create a new instance.
-	 * @return com_replace_replacement The new instance.
-	 */
-	public static function factory() {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {

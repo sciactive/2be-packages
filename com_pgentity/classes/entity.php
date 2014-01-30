@@ -28,9 +28,9 @@ class entity implements entity_interface {
 	 * Array of the entity's tags.
 	 *
 	 * @var array
-	 * @access private
+	 * @access protected
 	 */
-	private $tags = array();
+	protected $tags = array();
 	/**
 	 * The array used to store each variable assigned to an entity.
 	 *
@@ -76,10 +76,22 @@ class entity implements entity_interface {
 	 */
 	public $_p_use_skip_ac = false;
 
-	public function __construct() {
-		$args = func_get_args();
-		if (!empty($args))
-			call_user_func_array(array($this, 'add_tag'), $args);
+	/**
+	 * Load an entity.
+	 * @param int $id The ID of the entity to load, 0 for a new entity.
+	 */
+	public function __construct($id = 0) {
+		if ($id > 0) {
+			global $pines;
+			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
+			if (isset($entity)) {
+				$this->guid = $entity->guid;
+				$this->tags = $entity->tags;
+				$this->put_data($entity->get_data(), $entity->get_sdata());
+				return $this;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -88,12 +100,11 @@ class entity implements entity_interface {
 	 */
 	public static function factory() {
 		global $pines;
-		$class = get_class();
-		$entity = new $class;
-		$pines->hook->hook_object($entity, $class.'->', false);
+		$class = get_called_class();
 		$args = func_get_args();
-		if (!empty($args))
-			call_user_func_array(array($entity, 'add_tag'), $args);
+		$reflector = new ReflectionClass($class);
+		$entity = $reflector->newInstanceArgs($args);
+		$pines->hook->hook_object($entity, $class.'->', false);
 		return $entity;
 	}
 

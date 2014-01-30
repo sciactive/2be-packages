@@ -17,6 +17,12 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\customertimer
  */
 class com_customertimer_tx extends entity {
+	public function __construct() {
+		$args = func_get_args();
+		if (!empty($args))
+			call_user_func_array(array($this, 'add_tag'), $args);
+	}
+
 	/**
 	 * Create a new instance.
 	 * @return com_customertimer_tx The new instance.

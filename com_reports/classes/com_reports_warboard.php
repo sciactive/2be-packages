@@ -17,23 +17,11 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\reports
  */
 class com_reports_warboard extends entity {
-	/**
-	 * Load a warboard.
-	 * @param int $id The ID of the warboard to load, 0 for a new warboard.
-	 */
+	protected $tags = array('com_reports', 'warboard');
+
 	public function __construct($id = 0) {
-		parent::__construct();
-		$this->add_tag('com_reports', 'warboard');
-		if ($id > 0) {
-			global $pines;
-			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
-			if (isset($entity)) {
-				$this->guid = $entity->guid;
-				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
-				return;
-			}
-		}
+		if (parent::__construct($id) !== null)
+			return;
 		// Defaults.
 		$this->company_name = 'Company Name';
 		$this->columns = 5;
@@ -41,19 +29,6 @@ class com_reports_warboard extends entity {
 		$this->locations = array();
 		$this->important = array();
 		$this->hq = $_SESSION['user']->group;
-	}
-
-	/**
-	 * Create a new instance.
-	 * @return com_reports_warboard The new instance.
-	 */
-	public static function factory() {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {

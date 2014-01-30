@@ -17,24 +17,13 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\sales
  */
 class com_sales_cashcount extends entity {
-	/**
-	 * Load a cash count.
-	 * @param int $id The ID of the cashcount to load, 0 for a new cashcount.
-	 */
+	protected $tags = array('com_sales', 'cashcount');
+
 	public function __construct($id = 0) {
-		parent::__construct();
+		if (parent::__construct($id) !== null)
+			return;
+		// Defaults.
 		global $pines;
-		$this->add_tag('com_sales', 'cashcount');
-		if ($id > 0) {
-			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
-			if (isset($entity)) {
-				$this->guid = $entity->guid;
-				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
-				return;
-			}
-		}
-		// Defaults
 		$this->status = 'pending';
 		$this->audits = $this->deposits = $this->skims = $this->count = $this->count_out = array();
 		$this->currency_symbol = $pines->config->com_sales->currency_symbol;
@@ -43,19 +32,6 @@ class com_sales_cashcount extends entity {
 			$key = str_replace('.', '_', $cur_currency);
 			$this->currency[$key] = $cur_currency;
 		}
-	}
-
-	/**
-	 * Create a new instance.
-	 * @return com_sales_cashcount The new instance.
-	 */
-	public static function factory() {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {

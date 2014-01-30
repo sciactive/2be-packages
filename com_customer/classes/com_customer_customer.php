@@ -94,21 +94,6 @@ class com_customer_customer extends user {
 	}
 
 	/**
-	 * Create a new instance.
-	 *
-	 * @param int|string $id The ID or username of the customer to load, 0 for a new customer.
-	 * @return com_customer_customer The new instance.
-	 */
-	public static function factory($id = 0) {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
-	}
-
-	/**
 	 * Return the entity helper module.
 	 * @return module Entity helper module.
 	 */

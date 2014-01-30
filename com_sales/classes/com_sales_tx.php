@@ -17,6 +17,8 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\sales
  */
 class com_sales_tx extends entity {
+	protected $tags = array('com_sales', 'transaction');
+
 	/**
 	 * Create a new instance.
 	 * @return com_sales_tx The new instance.
@@ -24,9 +26,7 @@ class com_sales_tx extends entity {
 	public static function factory() {
 		global $pines;
 		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args);
-		$entity->add_tag('com_sales', 'transaction');
+		$entity = new $class();
 		$entity->ac = (object) array('user' => 2, 'group' => 2, 'other' => 2);
 		$pines->hook->hook_object($entity, $class.'->', false);
 		return $entity;

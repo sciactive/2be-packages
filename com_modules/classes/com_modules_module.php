@@ -17,41 +17,16 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\modules
  */
 class com_modules_module extends entity {
-	/**
-	 * Load a module.
-	 * @param int $id The ID of the module to load, 0 for a new module.
-	 */
+	protected $tags = array('com_modules', 'module');
+
 	public function __construct($id = 0) {
-		parent::__construct();
-		$this->add_tag('com_modules', 'module');
-		if ($id > 0) {
-			global $pines;
-			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
-			if (isset($entity)) {
-				$this->guid = $entity->guid;
-				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
-				return;
-			}
-		}
+		if (parent::__construct($id) !== null)
+			return;
 		// Defaults.
 		$this->enabled = true;
 		$this->show_title = true;
 		$this->options = array();
 		$this->conditions = array();
-	}
-
-	/**
-	 * Create a new instance.
-	 * @return com_modules_module The new instance.
-	 */
-	public static function factory() {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {

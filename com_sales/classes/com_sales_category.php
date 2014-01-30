@@ -17,24 +17,12 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\sales
  */
 class com_sales_category extends entity {
-	/**
-	 * Load a category.
-	 * @param int $id The ID of the category to load, 0 for a new category.
-	 */
+	protected $tags = array('com_sales', 'category');
+
 	public function __construct($id = 0) {
-		parent::__construct();
-		$this->add_tag('com_sales', 'category');
-		if ($id > 0) {
-			global $pines;
-			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
-			if (isset($entity)) {
-				$this->guid = $entity->guid;
-				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
-				return;
-			}
-		}
-		// Defaults
+		if (parent::__construct($id) !== null)
+			return;
+		// Defaults.
 		$this->enabled = true;
 		$this->parent = null;
 		$this->children = array();
@@ -48,19 +36,6 @@ class com_sales_category extends entity {
 		$this->title_use_name = true;
 		$this->title_position = 'prepend';
 		$this->meta_tags = array();
-	}
-
-	/**
-	 * Create a new instance.
-	 * @return com_sales_category The new instance.
-	 */
-	public static function factory() {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {

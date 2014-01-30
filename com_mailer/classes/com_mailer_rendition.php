@@ -17,41 +17,15 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\mailer
  */
 class com_mailer_rendition extends entity {
-	/**
-	 * Load a rendition.
-	 * @param int $id The ID of the rendition to load, 0 for a new rendition.
-	 */
+	protected $tags = array('com_mailer', 'rendition');
+
 	public function __construct($id = 0) {
-		parent::__construct();
-		$this->add_tag('com_mailer', 'rendition');
-		if ($id > 0) {
-			global $pines;
-			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
-			if (isset($entity)) {
-				$this->guid = $entity->guid;
-				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
-				return;
-			}
-		}
+		if (parent::__construct($id) !== null)
+			return;
 		// Defaults.
-		global $pines;
 		$this->enabled = true;
 		$this->conditions = array();
 		$this->ac->other = 1;
-	}
-
-	/**
-	 * Create a new instance.
-	 * @return com_mailer_rendition The new instance.
-	 */
-	public static function factory() {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {

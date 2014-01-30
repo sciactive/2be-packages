@@ -17,40 +17,15 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\sales
  */
 class com_sales_shipment extends entity {
-	/**
-	 * Load a shipment.
-	 * @param int $id The ID of the shipment to load, 0 for a new shipment.
-	 */
+	protected $tags = array('com_sales', 'shipment');
+
 	public function __construct($id = 0) {
-		parent::__construct();
-		$this->add_tag('com_sales', 'shipment');
-		if ($id > 0) {
-			global $pines;
-			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
-			if (isset($entity)) {
-				$this->guid = $entity->guid;
-				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
-				return;
-			}
-		}
+		if (parent::__construct($id) !== null)
+			return;
 		// Defaults.
 		$this->shipped = false;
 		$this->delivered = false;
 		$this->products = array();
-	}
-
-	/**
-	 * Create a new instance.
-	 * @return com_sales_shipment The new instance.
-	 */
-	public static function factory() {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {

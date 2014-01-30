@@ -17,23 +17,13 @@ defined('P_RUN') or die('Direct access prohibited');
  * @package Components\dash
  */
 class com_dash_dashboard extends entity {
-	/**
-	 * Load an dashboard.
-	 * @param int $id The ID of the dashboard to load, 0 for a new dashboard.
-	 */
+	protected $tags = array('com_dash', 'dashboard');
+
 	public function __construct($id = 0) {
-		parent::__construct();
+		if (parent::__construct($id) !== null)
+			return;
+		// Defaults.
 		global $pines;
-		$this->add_tag('com_dash', 'dashboard');
-		if ($id > 0) {
-			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
-			if (isset($entity)) {
-				$this->guid = $entity->guid;
-				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
-				return;
-			}
-		}
 		$button_types = $pines->com_dash->button_types();
 		$default_buttons = array();
 		foreach ($button_types as $cur_component => $cur_button_set) {
@@ -110,19 +100,6 @@ class com_dash_dashboard extends entity {
 				)
 			),
 		);
-	}
-
-	/**
-	 * Create a new instance.
-	 * @return com_dash_dashboard The new instance.
-	 */
-	public static function factory() {
-		global $pines;
-		$class = get_class();
-		$args = func_get_args();
-		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
-		return $entity;
 	}
 
 	public static function etype() {
