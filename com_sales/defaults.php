@@ -41,6 +41,20 @@ return array(
 		'peruser' => true,
 	),
 	array(
+		'name' => 'locale',
+		'cname' => 'Locale',
+		'description' => 'The locale to use when formatting currency.',
+		'value' => 'en_US',
+		'peruser' => true,
+	),
+	array(
+		'name' => 'currency',
+		'cname' => 'Currency',
+		'description' => 'The 3-letter ISO 4217 currency code indicating the currency to use.',
+		'value' => 'USD',
+		'peruser' => true,
+	),
+	array(
 		'name' => 'unique_serials',
 		'cname' => 'Require Unique Serials',
 		'description' => 'Require that all serialized stock entries have unique serial numbers.',
@@ -144,17 +158,18 @@ return array(
 		),
 		'peruser' => true,
 	),
-	array(
+	/*array(
 		'name' => 'currency_symbol',
 		'cname' => 'Currency Symbol',
 		'description' => 'The currency symbol to use. (E.g. $, ¥, €, Rp)',
 		'value' => '$',
-	),
+	),*/
 	array(
 		'name' => 'currency_denominations',
 		'cname' => 'Currency Denominations',
 		'description' => 'The currency denominations to use. (E.g. 0.01, 0.05, 0.10, 0.25, 1, 5, 10, 20, 50, 100)',
 		'value' => array('0.01', '0.05', '0.10', '0.25', '1', '5', '10', '20', '50', '100'),
+		'peruser' => true,
 	),
 	array(
 		'name' => 'dec',

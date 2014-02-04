@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 return array(
 	'name' => 'POS',
 	'author' => 'SciActive',
-	'version' => '1.3.0dev',
+	'version' => '1.4.0dev',
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',
 	'website' => 'http://www.sciactive.com',
 	'short_description' => 'Point of Sales system',
@@ -23,7 +23,7 @@ return array(
 		'pines' => '<3',
 		'service' => 'user_manager&entity_manager&editor&uploader',
 		'component' => 'com_barcode&com_jquery&com_bootstrap&com_pgrid&com_markdown&com_pnotify&com_ptags&com_jstree&com_pform',
-		'class' => 'Imagick'
+		'class' => 'Imagick&NumberFormatter'
 	),
 	'recommend' => array(
 		'component' => 'com_customer&com_hrm'
