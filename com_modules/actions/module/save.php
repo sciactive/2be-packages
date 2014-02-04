@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -80,7 +80,7 @@ if (empty($modules[$modname])) {
 	return;
 }
 
-if ($pines->config->com_modules->global_modules)
+if ($_->config->com_modules->global_modules)
 	$module->ac->other = 1;
 
 if ($module->save()) {

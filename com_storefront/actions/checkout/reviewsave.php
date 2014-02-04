@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper()) {
@@ -16,11 +16,11 @@ if (!gatekeeper()) {
 	return;
 }
 
-if ($pines->config->com_storefront->catalog_mode)
+if ($_->config->com_storefront->catalog_mode)
 	return;
 
 // Load the sale if the review page is separate.
-if (!$pines->config->com_storefront->review_in_payment_page && !$pines->com_storefront->build_sale()) {
+if (!$_->config->com_storefront->review_in_payment_page && !$_->com_storefront->build_sale()) {
 	pines_error('Couldn\'t load sale.');
 	return;
 }
@@ -70,7 +70,7 @@ $url = pines_url('com_storefront', 'checkout/complete', array('id' => $_SESSION[
 
 unset($_SESSION['com_storefront_sale']);
 pines_session('close');
-$pines->com_storefront->empty_cart();
+$_->com_storefront->empty_cart();
 
 // Redirect to a different URL, so they can't resubmit.
 pines_redirect($url);

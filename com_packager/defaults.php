@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -23,6 +23,6 @@ return array(
 		'name' => 'package_path',
 		'cname' => 'Package Maker Path',
 		'description' => 'The relative path of the directory where packages should be made. End this path with a slash!',
-		'value' => $pines->config->upload_location.'packages/',
+		'value' => $_->config->upload_location.'packages/',
 	),
 );

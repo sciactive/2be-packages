@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_calendar/editcalendar') )
 	punt_user(null, pines_url('com_calendar', 'editcalendar'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $list = array_map('intval', (array) $_REQUEST['events']);
@@ -25,7 +25,7 @@ foreach ($list as $cur_id) {
 	if ( !isset($cur_entity->guid) || !$cur_entity->delete() ) {
 		$failed_removes[] = $cur_id;
 	} elseif ($group != 0) {
-		$events = $pines->entity_manager->get_entities(
+		$events = $_->entity_manager->get_entities(
 				array('class' => com_calendar_event),
 				array('&',
 					'tag' => array('com_calendar', 'event'),
@@ -45,4 +45,4 @@ foreach ($list as $cur_id) {
 	}
 }
 if (!empty($failed_removes))
-	$pines->page->override_doc(json_encode($failed_removes));
+	$_->page->override_doc(json_encode($failed_removes));

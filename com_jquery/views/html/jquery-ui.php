@@ -8,17 +8,17 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_jquery/includes/jquery-ui/<?php e($pines->config->com_jquery->theme); ?>/jquery-ui.css");
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_jquery/includes/<?php echo $pines->config->debug_mode ? 'jquery-ui-1.8.21.js' : 'jquery-ui-1.8.21.min.js'; ?>");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_jquery/includes/jquery-ui/<?php e($_->config->com_jquery->theme); ?>/jquery-ui.css");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_jquery/includes/<?php echo $_->config->debug_mode ? 'jquery-ui-1.8.21.js' : 'jquery-ui-1.8.21.min.js'; ?>");
 	pines.load(function(){
 		// This allows to use jquitabs, jquibutton. (In case of name conflict, like Bootstrap.)
 		$.widget.bridge('jquitabs', $.ui.tabs);
 		$.widget.bridge('jquibutton', $.ui.button);
-		<?php if (isset($pines->com_bootstrap)) { ?>
+		<?php if (isset($_->com_bootstrap)) { ?>
 		// And this fixes buttons in dialogs using Bootstrap.
 		var real_dialog = $.fn.dialog;
 		$.fn.dialog = function(){

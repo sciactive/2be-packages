@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_calendar/managecalendar') )
@@ -76,7 +76,7 @@ do {
 	$parent = $parent->parent;
 } while(empty($timezone) && isset($parent->guid));
 if (empty($timezone))
-	$timezone = $pines->config->timezone;
+	$timezone = $_->config->timezone;
 date_default_timezone_set($timezone);
 
 $total_time = $last_date - $first_date;

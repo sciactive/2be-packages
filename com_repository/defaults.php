@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -16,7 +16,7 @@ return array(
 		'name' => 'repository_path',
 		'cname' => 'Repository Path',
 		'description' => 'The relative path of the directory containing the repository. Does not have to be web accessible. End this path with a slash!',
-		'value' => $pines->config->upload_location.'repository/',
+		'value' => $_->config->upload_location.'repository/',
 	),
 	array(
 		'name' => 'public_cert',

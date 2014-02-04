@@ -8,19 +8,19 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/clock') && !gatekeeper('com_hrm/manageclock') )
 	punt_user(null, pines_url('com_hrm', 'employee/timeclock/clock', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if ($_REQUEST['id'] == 'self') {
 	$employee = com_hrm_employee::factory($_SESSION['user']->guid);
-	if ($pines->config->com_hrm->timeclock_verify_pin && !empty($_SESSION['user']->pin) && $_REQUEST['pin'] != $_SESSION['user']->pin) {
-		$pines->page->override_doc(json_encode('pin'));
+	if ($_->config->com_hrm->timeclock_verify_pin && !empty($_SESSION['user']->pin) && $_REQUEST['pin'] != $_SESSION['user']->pin) {
+		$_->page->override_doc(json_encode('pin'));
 		return;
 	}
 } else {
@@ -30,7 +30,7 @@ if ($_REQUEST['id'] == 'self') {
 }
 
 if (!isset($employee->guid)) {
-	$pines->page->override_doc('false');
+	$_->page->override_doc('false');
 	return;
 }
 
@@ -41,9 +41,9 @@ if ($employee->timeclock->clocked_in_time()) {
 }
 
 if (!$success || !$employee->save()) {
-	$pines->page->override_doc('false');
+	$_->page->override_doc('false');
 	return;
 }
 
 
-$pines->page->override_doc(json_encode($employee->timeclock->clocked_in_time()));
+$_->page->override_doc(json_encode($employee->timeclock->clocked_in_time()));

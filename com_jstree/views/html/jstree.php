@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_jstree/includes/<?php echo $pines->config->debug_mode ? 'jquery.jstree.js' : 'jquery.jstree.min.js'; ?>");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_jstree/includes/<?php echo $_->config->debug_mode ? 'jquery.jstree.js' : 'jquery.jstree.min.js'; ?>");
 	pines(function(){
 		$.jstree.defaults.core.animation = 100;
-		$.jstree._themes = "<?php e($pines->config->location); ?>components/com_jstree/includes/themes/";
-		<?php if ($pines->depend->check('component', 'com_uasniffer') && $pines->depend->check('browser', 'mobile')) { ?>
+		$.jstree._themes = "<?php e($_->config->location); ?>components/com_jstree/includes/themes/";
+		<?php if ($_->depend->check('component', 'com_uasniffer') && $_->depend->check('browser', 'mobile')) { ?>
 		$.jstree.defaults.themes.theme = "mobile";
 		<?php } else { ?>
 		$.jstree.defaults.themes.theme = "apple";

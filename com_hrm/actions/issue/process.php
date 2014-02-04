@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/resolveissue') )
 	punt_user(null, pines_url('com_hrm', 'employee/list'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: text/plain');
 
 $issue = com_hrm_issue::factory((int) $_REQUEST['id']);
 if (!isset($issue->guid) || !isset($issue->employee->guid)) {
-	$pines->page->override_doc('Error');
+	$_->page->override_doc('Error');
 	return;
 }
 // Either delete an employee issue or mark it's status.
@@ -36,4 +36,4 @@ switch ($_REQUEST['status']) {
 		}
 		break;
 }
-$pines->page->override_doc();
+$_->page->override_doc();

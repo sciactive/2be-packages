@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -29,20 +29,20 @@ if ( isset($_REQUEST['id']) ) {
 $floor->name = $_REQUEST['name'];
 $floor->enabled = ($_REQUEST['enabled'] == 'ON');
 $floor->description = $_REQUEST['description'];
-if ($pines->uploader->check($_REQUEST['background']))
+if ($_->uploader->check($_REQUEST['background']))
 	$floor->background = $_REQUEST['background'];
 
 // Station Layout
 $floor->stations = json_decode($_REQUEST['stations'], true);
 
-$test = $pines->entity_manager->get_entity(array('class' => com_customertimer_floor, 'skip_ac' => true), array('&', 'data' => array('name', $floor->name), 'tag' => array('com_customertimer', 'floor')));
+$test = $_->entity_manager->get_entity(array('class' => com_customertimer_floor, 'skip_ac' => true), array('&', 'data' => array('name', $floor->name), 'tag' => array('com_customertimer', 'floor')));
 if (isset($test) && !$floor->is($test)) {
 	$floor->print_form();
 	pines_notice('There is already a floor with that name. Please choose a different name.');
 	return;
 }
 
-if ($pines->config->com_customertimer->global_floors)
+if ($_->config->com_customertimer->global_floors)
 	$floor->ac->other = 1;
 
 if ($floor->save()) {

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/editsale') && !gatekeeper('com_sales/newsale') )
@@ -21,5 +21,5 @@ header('Content-Type: application/x-pines-receipt');
 // RFC 2183 -- See bug 331259.
 //header('Content-Disposition: attachment; filename="receipt"');
 header('Content-Transfer-Encoding: binary');
-$pines->page->override = true;
-$pines->page->override_doc($entity->receipt_text(48, 72));
+$_->page->override = true;
+$_->page->override_doc($entity->receipt_text(48, 72));

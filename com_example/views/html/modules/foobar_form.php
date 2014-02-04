@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$foobars = $pines->entity_manager->get_entities(array('class' => com_example_foobar), array('&', 'tag' => array('com_example', 'foobar')));
-$pines->entity_manager->sort($foobars, 'name');
+$foobars = $_->entity_manager->get_entities(array('class' => com_example_foobar), array('&', 'tag' => array('com_example', 'foobar')));
+$_->entity_manager->sort($foobars, 'name');
 ?>
 <div class="pf-form">
 	<div class="pf-element">

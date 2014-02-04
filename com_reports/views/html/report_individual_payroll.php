@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <style type="text/css">
@@ -35,7 +35,7 @@ defined('P_RUN') or die('Direct access prohibited');
 		<h3>Payroll Report</h3>
 	</div>
 	<div class="pf-element" style="float: right; clear: right;">
-		<div><img style="margin: 0;" src="<?php echo is_callable(array($this->employee->group, 'get_logo')) ? h($this->employee->group->get_logo(true)) : ''; ?>" alt="<?php e($pines->config->system_name); ?>" /></div>
+		<div><img style="margin: 0;" src="<?php echo is_callable(array($this->employee->group, 'get_logo')) ? h($this->employee->group->get_logo(true)) : ''; ?>" alt="<?php e($_->config->system_name); ?>" /></div>
 		<div><?php
 		if ($this->employee->pay_type != 'salary') {
 			echo "<strong>Pay Per Hour: $".h(number_format($this->pay_per_hour, 2, '.', ''))."</strong>";

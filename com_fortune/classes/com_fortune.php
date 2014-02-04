@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -21,8 +21,8 @@ class com_fortune extends component {
 	 * Print a fortune.
 	 */
 	public function print_fortune() {
-		global $pines;
-		$module = new module('com_fortune', 'fortune', $pines->config->com_fortune->position);
+		global $_;
+		$module = new module('com_fortune', 'fortune', $_->config->com_fortune->position);
 		$module->fortune = $this->get_fortune();
 	}
 
@@ -30,7 +30,7 @@ class com_fortune extends component {
 	 * Get the fortune database.
 	 */
 	public function get_fortune() {
-		global $pines;
-		$databases = $pines->config->com_fortune->databases;
+		global $_;
+		$databases = $_->config->com_fortune->databases;
 	}
 }

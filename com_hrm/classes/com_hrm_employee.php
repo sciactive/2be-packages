@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -42,11 +42,11 @@ class com_hrm_employee extends user {
 	 * @return com_hrm_employee The new instance.
 	 */
 	public static function factory($id = 0) {
-		global $pines;
+		global $_;
 		$class = get_class();
 		$args = func_get_args();
 		$entity = new $class($args[0]);
-		$pines->hook->hook_object($entity, $class.'->', false);
+		$_->hook->hook_object($entity, $class.'->', false);
 		if (is_array($entity->timeclock) || empty($entity->timeclock)) {
 			// Convert old style timeclocks to new ones.
 			// If we can't save the entity, don't bother.
@@ -124,7 +124,7 @@ class com_hrm_employee extends user {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_hrm', 'employee/form', 'content');
 		$module->entity = $this;
 
@@ -136,14 +136,14 @@ class com_hrm_employee extends user {
 	 * @return module The form's module.
 	 */
 	public function print_history() {
-		global $pines;
+		global $_;
 		$module = new module('com_hrm', 'employee/history', 'content');
 		$module->entity = $this;
-		$module->issues = $pines->entity_manager->get_entities(array('class' => com_hrm_issue, 'skip_ac' => true), array('&', 'tag' => array('com_hrm', 'issue'), 'ref' => array('employee', $this)));
-		$module->sales = $pines->entity_manager->get_entities(array('class' => com_sales_sale, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'sale'), 'ref' => array('user', $this)));
-		$module->returns = $pines->entity_manager->get_entities(array('class' => com_sales_return, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('user', $this)));
-		if ($pines->config->com_hrm->com_reports)
-			$module->paystubs = $pines->entity_manager->get_entities(array('class' => com_reports_paystub, 'skip_ac' => true), array('&', 'tag' => array('com_reports', 'paystub')));
+		$module->issues = $_->entity_manager->get_entities(array('class' => com_hrm_issue, 'skip_ac' => true), array('&', 'tag' => array('com_hrm', 'issue'), 'ref' => array('employee', $this)));
+		$module->sales = $_->entity_manager->get_entities(array('class' => com_sales_sale, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'sale'), 'ref' => array('user', $this)));
+		$module->returns = $_->entity_manager->get_entities(array('class' => com_sales_return, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('user', $this)));
+		if ($_->config->com_hrm->com_reports)
+			$module->paystubs = $_->entity_manager->get_entities(array('class' => com_reports_paystub, 'skip_ac' => true), array('&', 'tag' => array('com_reports', 'paystub')));
 
 		return $module;
 	}

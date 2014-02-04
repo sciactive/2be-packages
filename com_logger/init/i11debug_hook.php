@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -18,9 +18,9 @@ defined('P_RUN') or die('Direct access prohibited');
  * @param string $hook The hook that was called.
  */
 function com_logger__hook_log($return, $hook) {
-	global $pines;
-	if (!in_array($hook, array('$pines->log_manager->log', '$pines->log_manager->write')))
-		$pines->log_manager->log('(microtime='.microtime(true).') '.$hook, 'debug');
+	global $_;
+	if (!in_array($hook, array('$_->log_manager->log', '$_->log_manager->write')))
+		$_->log_manager->log('(microtime='.microtime(true).') '.$hook, 'debug');
 }
 
 /*
@@ -29,5 +29,5 @@ function com_logger__hook_log($return, $hook) {
  * This is done when log level is set to 'debug' in order to help diagnose
  * problems with a component.
  */
-if ($pines->config->com_logger->level == 'debug')
-	$pines->hook->add_callback('all', -1, 'com_logger__hook_log');
+if ($_->config->com_logger->level == 'debug')
+	$_->hook->add_callback('all', -1, 'com_logger__hook_log');

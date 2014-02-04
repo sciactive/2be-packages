@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -79,10 +79,10 @@ class com_sales_tax_fee extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'taxfee/form', 'content');
 		$module->entity = $this;
-		$module->locations = $pines->user_manager->get_groups();
+		$module->locations = $_->user_manager->get_groups();
 
 		return $module;
 	}

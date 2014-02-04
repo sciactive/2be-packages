@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -42,10 +42,10 @@ class com_user extends component implements user_manager_interface {
 	 * @return bool True if SAWASC could be activated, false otherwise.
 	 */
 	public function activate_sawasc() {
-		global $pines;
-		if (!$pines->config->com_user->sawasc)
+		global $_;
+		if (!$_->config->com_user->sawasc)
 			return false;
-		if ($pines->config->com_user->pw_method == 'salt') {
+		if ($_->config->com_user->pw_method == 'salt') {
 			pines_notice('SAWASC is not compatible with the Salt password storage method.');
 			return false;
 		}
@@ -56,7 +56,7 @@ class com_user extends component implements user_manager_interface {
 			$_SESSION['sawasc'] = array(
 				'ServerCB' => uniqid('', true),
 				'timestamp' => time(),
-				'algo' => $pines->config->com_user->sawasc_hash
+				'algo' => $_->config->com_user->sawasc_hash
 			);
 			pines_session('close');
 		}
@@ -99,23 +99,23 @@ class com_user extends component implements user_manager_interface {
 	 * @return array An associative array with a boolean 'result' entry and a 'message' entry.
 	 */
 	public function check_username($username, $id = null) {
-		global $pines;
-		if (!$pines->config->com_user->email_usernames) {
+		global $_;
+		if (!$_->config->com_user->email_usernames) {
 			if (empty($username))
 				return array('result' => false, 'message' => 'Please specify a username.');
-			if ($pines->config->com_user->max_username_length > 0 && strlen($username) > $pines->config->com_user->max_username_length)
-				return array('result' => false, 'message' => "Usernames must not exceed {$pines->config->com_user->max_username_length} characters.");
-			if (array_diff(str_split($username), str_split($pines->config->com_user->valid_chars)))
-				return array('result' => false, 'message' => $pines->config->com_user->valid_chars_notice);
-			if (!preg_match($pines->config->com_user->valid_regex, $username))
-				return array('result' => false, 'message' => $pines->config->com_user->valid_regex_notice);
+			if ($_->config->com_user->max_username_length > 0 && strlen($username) > $_->config->com_user->max_username_length)
+				return array('result' => false, 'message' => "Usernames must not exceed {$_->config->com_user->max_username_length} characters.");
+			if (array_diff(str_split($username), str_split($_->config->com_user->valid_chars)))
+				return array('result' => false, 'message' => $_->config->com_user->valid_chars_notice);
+			if (!preg_match($_->config->com_user->valid_regex, $username))
+				return array('result' => false, 'message' => $_->config->com_user->valid_regex_notice);
 			$selector = array('&',
 					'tag' => array('com_user', 'user'),
 					'match' => array('username', '/^'.preg_quote($username, '/').'$/i')
 				);
 			if (isset($id) && $id > 0)
 				$selector['!guid'] = $id;
-			$test = $pines->entity_manager->get_entity(
+			$test = $_->entity_manager->get_entity(
 					array('class' => user, 'skip_ac' => true),
 					$selector
 				);
@@ -126,8 +126,8 @@ class com_user extends component implements user_manager_interface {
 		} else {
 			if (empty($username))
 				return array('result' => false, 'message' => 'Please specify an email.');
-			if ($pines->config->com_user->max_username_length > 0 && strlen($username) > $pines->config->com_user->max_username_length)
-				return array('result' => false, 'message' => "Emails must not exceed {$pines->config->com_user->max_username_length} characters.");
+			if ($_->config->com_user->max_username_length > 0 && strlen($username) > $_->config->com_user->max_username_length)
+				return array('result' => false, 'message' => "Emails must not exceed {$_->config->com_user->max_username_length} characters.");
 			if (!preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i', $username))
 				return array('result' => false, 'message' => 'Email must be a correctly formatted address.');
 			$selector = array('&',
@@ -136,7 +136,7 @@ class com_user extends component implements user_manager_interface {
 				);
 			if (isset($id) && $id > 0)
 				$selector['!guid'] = $id;
-			$test = $pines->entity_manager->get_entity(
+			$test = $_->entity_manager->get_entity(
 					array('class' => user, 'skip_ac' => true),
 					$selector
 				);
@@ -161,7 +161,7 @@ class com_user extends component implements user_manager_interface {
 	 * @return array An associative array with a boolean 'result' entry and a 'message' entry.
 	 */
 	public function check_email($email, $id = null) {
-		global $pines;
+		global $_;
 		
 		if (empty($email))
 			return array('result' => false, 'message' => 'Please specify an email.');
@@ -173,7 +173,7 @@ class com_user extends component implements user_manager_interface {
 			);
 		if (isset($id) && $id > 0)
 			$selector['!guid'] = $id;
-		$test = $pines->entity_manager->get_entity(
+		$test = $_->entity_manager->get_entity(
 				array('class' => user, 'skip_ac' => true),
 				$selector
 			);
@@ -197,7 +197,7 @@ class com_user extends component implements user_manager_interface {
 	 * @return array An associative array with a boolean 'result' entry and a 'message' entry.
 	 */
 	public function check_phone($phone, $id = null) {
-		global $pines;
+		global $_;
 		
 		if (empty($phone))
 			return array('result' => false, 'message' => 'Please specify a phone number.');
@@ -216,7 +216,7 @@ class com_user extends component implements user_manager_interface {
 			);
 		if (isset($id) && $id > 0)
 			$selector['!guid'] = $id;
-		$test = $pines->entity_manager->get_entity(
+		$test = $_->entity_manager->get_entity(
 				array('class' => user, 'skip_ac' => true),
 				$selector, $or
 			);
@@ -227,10 +227,10 @@ class com_user extends component implements user_manager_interface {
 	}
 
 	public function fill_session() {
-		global $pines;
+		global $_;
 		pines_session('write');
 		if ((object) $_SESSION['user'] === $_SESSION['user']) {
-			$tmp_user = $pines->entity_manager->get_entity(
+			$tmp_user = $_->entity_manager->get_entity(
 					array('class' => user),
 					array('&',
 						'guid' => array($_SESSION['user']->guid),
@@ -256,10 +256,10 @@ class com_user extends component implements user_manager_interface {
 			$_SESSION['inherited_abilities'] = $tmp_user->abilities;
 			foreach ($tmp_user->groups as $cur_group) {
 				// Check that any group conditions are met before adding the abilities.
-				if ($cur_group->conditions && $pines->config->com_user->conditional_groups) {
+				if ($cur_group->conditions && $_->config->com_user->conditional_groups) {
 					$pass = true;
 					foreach ($cur_group->conditions as $cur_type => $cur_value) {
-						if (!$pines->depend->check($cur_type, $cur_value)) {
+						if (!$_->depend->check($cur_type, $cur_value)) {
 							$pass = false;
 							break;
 						}
@@ -273,9 +273,9 @@ class com_user extends component implements user_manager_interface {
 			if (isset($tmp_user->group)) {
 				// Check that any group conditions are met before adding the abilities.
 				$pass = true;
-				if ($tmp_user->group->conditions && $pines->config->com_user->conditional_groups) {
+				if ($tmp_user->group->conditions && $_->config->com_user->conditional_groups) {
 					foreach ($tmp_user->group->conditions as $cur_type => $cur_value) {
-						if (!$pines->depend->check($cur_type, $cur_value)) {
+						if (!$_->depend->check($cur_type, $cur_value)) {
 							$pass = false;
 							break;
 						}
@@ -338,13 +338,13 @@ class com_user extends component implements user_manager_interface {
 	}
 
 	public function get_groups($all = false) {
-		global $pines;
+		global $_;
 
 		$tags = array('com_user', 'group');
 		if (!$all)
 			$tags[] = 'enabled';
 
-		return $pines->entity_manager->get_entities(
+		return $_->entity_manager->get_entities(
 				array('class' => group),
 				array('&',
 					'tag' => $tags
@@ -353,13 +353,13 @@ class com_user extends component implements user_manager_interface {
 	}
 
 	public function get_users($all = false) {
-		global $pines;
+		global $_;
 
 		$tags = array('com_user', 'user');
 		if (!$all)
 			$tags[] = 'enabled';
 
-		return $pines->entity_manager->get_entities(
+		return $_->entity_manager->get_entities(
 				array('class' => user),
 				array('&',
 					'tag' => $tags
@@ -368,8 +368,8 @@ class com_user extends component implements user_manager_interface {
 	}
 
 	public function group_sort(&$array, $property = null, $case_sensitive = false, $reverse = false) {
-		global $pines;
-		$pines->entity_manager->hsort($array, $property, 'parent', $case_sensitive, $reverse);
+		global $_;
+		$_->entity_manager->hsort($array, $property, 'parent', $case_sensitive, $reverse);
 	}
 
 	/**
@@ -379,15 +379,15 @@ class com_user extends component implements user_manager_interface {
 	 * @return module The module.
 	 */
 	public function list_groups($enabled = true) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_user', 'list_groups', 'content');
 
 		$module->enabled = $enabled;
 		if ($enabled)
-			$module->groups = $pines->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group', 'enabled')));
+			$module->groups = $_->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group', 'enabled')));
 		else
-			$module->groups = $pines->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group')), array('!&', 'tag' => 'enabled'));
+			$module->groups = $_->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group')), array('!&', 'tag' => 'enabled'));
 
 		if (empty($module->groups))
 			pines_notice('There are no'.($enabled ? ' enabled' : ' disabled').' groups.');
@@ -402,15 +402,15 @@ class com_user extends component implements user_manager_interface {
 	 * @return module The module.
 	 */
 	public function list_users($enabled = true) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_user', 'list_users', 'content');
 
 		$module->enabled = $enabled;
 		if ($enabled)
-			$module->users = $pines->entity_manager->get_entities(array('class' => user), array('&', 'tag' => array('com_user', 'user', 'enabled')));
+			$module->users = $_->entity_manager->get_entities(array('class' => user), array('&', 'tag' => array('com_user', 'user', 'enabled')));
 		else
-			$module->users = $pines->entity_manager->get_entities(array('class' => user), array('&', 'tag' => array('com_user', 'user')), array('!&', 'tag' => 'enabled'));
+			$module->users = $_->entity_manager->get_entities(array('class' => user), array('&', 'tag' => array('com_user', 'user')), array('!&', 'tag' => 'enabled'));
 
 		if (empty($module->users))
 			pines_notice('There are no'.($enabled ? ' enabled' : ' disabled').' users.');
@@ -449,13 +449,13 @@ class com_user extends component implements user_manager_interface {
 	}
 
 	public function punt_user($message = null, $url = null) {
-		global $pines;
+		global $_;
 		$query_part = array();
 		if (isset($url))
 			$query_part['url'] = $url;
 		if (
-				(empty($pines->request_component) && empty($pines->request_action)) ||
-				($pines->request_component == $pines->config->default_component && $pines->request_action == 'default')
+				(empty($_->request_component) && empty($_->request_action)) ||
+				($_->request_component == $_->config->default_component && $_->request_action == 'default')
 			)
 			$query_part['default'] = '1';
 		if (!isset($message))

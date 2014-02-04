@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_newsletter/listmail') )
 	punt_user(null, pines_url('com_newsletter', 'list'));
 
-$pines->com_newsletter->edit_mail(null, 'com_newsletter', 'edit');
+$_->com_newsletter->edit_mail(null, 'com_newsletter', 'edit');

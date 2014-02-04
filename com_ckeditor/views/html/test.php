@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'CKEditor Standard Editor Test';
-$pines->editor->load();
+$_->editor->load();
 ?>
 <div class="pf-form">
 	<div class="pf-element">

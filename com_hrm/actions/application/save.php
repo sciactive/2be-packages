@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/editapplication') )
@@ -23,7 +23,7 @@ $application->name_last = $_REQUEST['name_last'];
 $application->name = $application->name_first.(!empty($application->name_middle) ? ' '.$application->name_middle : '').(!empty($application->name_last) ? ' '.$application->name_last : '');
 $application->phone = $_REQUEST['phone'];
 $application->email = $_REQUEST['email'];
-if ($pines->config->com_hrm->ssn_field)
+if ($_->config->com_hrm->ssn_field)
 	$application->ssn = preg_replace('/\D/', '', $_REQUEST['ssn']);
 // Location
 $application->address_type = $_REQUEST['address_type'];
@@ -79,7 +79,7 @@ $application->references = array(
 // Resume
 if (!isset($application->resume) || $_REQUEST['update_resume'] == 'ON') {
 	if ($_FILES['uploadedfile']['error'] == 0) {
-		$filename = $pines->config->com_hrm->application_dir.'/'.strtolower($application->name_last).'_'.strtolower($application->name_first).'/';
+		$filename = $_->config->com_hrm->application_dir.'/'.strtolower($application->name_last).'_'.strtolower($application->name_first).'/';
 		if (!is_dir($filename))
 			mkdir($filename, 0700, true);
 		$filename .= $_FILES['uploadedfile']['name'];
@@ -104,7 +104,7 @@ if (!isset($application->resume) || $_REQUEST['update_resume'] == 'ON') {
 	*/
 }
 
-if ($pines->config->com_hrm->ssn_field_require && empty($application->ssn)) {
+if ($_->config->com_hrm->ssn_field_require && empty($application->ssn)) {
 	$application->print_form();
 	pines_notice('Please provide an SSN.');
 	return;

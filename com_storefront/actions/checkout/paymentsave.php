@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper()) {
@@ -16,11 +16,11 @@ if (!gatekeeper()) {
 	return;
 }
 
-if ($pines->config->com_storefront->catalog_mode)
+if ($_->config->com_storefront->catalog_mode)
 	return;
 
 // Load the sale.
-if (!$pines->com_storefront->build_sale()) {
+if (!$_->com_storefront->build_sale()) {
 	pines_error('Couldn\'t load sale.');
 	return;
 }
@@ -43,7 +43,7 @@ $_SESSION['com_storefront_sale']->payments = array(array(
 ));
 
 // Save the comments if the review page is combined.
-if ($pines->config->com_storefront->review_in_payment_page)
+if ($_->config->com_storefront->review_in_payment_page)
 	$_SESSION['com_storefront_sale']->comments = $_REQUEST['comments'];
 
 if (!isset($payment_type->guid)) {
@@ -61,7 +61,7 @@ if (!$_SESSION['com_storefront_sale']->approve_payments()) {
 }
 pines_session('close');
 
-if ($pines->config->com_storefront->review_in_payment_page)
+if ($_->config->com_storefront->review_in_payment_page)
 	pines_action('com_storefront', 'checkout/reviewsave');
 else
 	pines_redirect(pines_url('com_storefront', 'checkout/review'));

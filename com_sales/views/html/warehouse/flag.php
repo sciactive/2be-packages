@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Flag Warehouse Items';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.css");
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.js");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.css");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.js");
 	pines(function(){
 		var bgcolor_picker = $.farbtastic("#p_muid_bgcolor_picker", "#p_muid_bgcolor_input");
 		var textcolor_picker = $.farbtastic("#p_muid_textcolor_picker", "#p_muid_textcolor_input");

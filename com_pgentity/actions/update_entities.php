@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('system/all') )
@@ -21,7 +21,7 @@ $errors = array();
 $offset = $count = 0;
 // Grab all entities, 50 at a time, and resave.
 do {
-	$entities = $pines->entity_manager->get_entities(
+	$entities = $_->entity_manager->get_entities(
 			array('limit' => 50, 'offset' => $offset)
 		);
 

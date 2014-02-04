@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_packager/newpackage') || !gatekeeper('com_packager/editpackage'))
 	punt_user(null, pines_url('com_packager', 'glob'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 switch ($_REQUEST['type']) {
@@ -35,4 +35,4 @@ foreach ($files as &$cur_file) {
 }
 unset($cur_file);
 
-$pines->page->override_doc(json_encode($files));
+$_->page->override_doc(json_encode($files));

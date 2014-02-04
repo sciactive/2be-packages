@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (isset($this->tags)) {
@@ -19,7 +19,7 @@ if (isset($this->tags)) {
 $bc = '<li class="active"><span class="breadcrumb_item">'.h($this->entity->name).'</span></li>';
 
 if ($this->entity->has_tag('page')) {
-	$categories = (array) $pines->entity_manager->get_entities(
+	$categories = (array) $_->entity_manager->get_entities(
 			array('class' => com_content_category),
 			array('&',
 				'tag' => array('com_content', 'category'),

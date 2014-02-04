@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -59,7 +59,7 @@ if (empty($template->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_mailer_template, 'skip_ac' => true), array('&', 'tag' => array('com_mailer', 'template'), 'data' => array('name', $template->name)));
+$test = $_->entity_manager->get_entity(array('class' => com_mailer_template, 'skip_ac' => true), array('&', 'tag' => array('com_mailer', 'template'), 'data' => array('name', $template->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$template->print_form();
 	pines_notice('There is already a template with that name. Please choose a different name.');

@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_testimonials/search') )
 	punt_user(null, pines_url('com_testimonials', 'testimonial/list', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $query = trim($_REQUEST['q']);
@@ -40,7 +40,7 @@ if (empty($query)) {
 				'tag' => array('com_testimonials', 'testimonial')
 			)
 	);
-	$testimonials = (array) call_user_func_array(array($pines->entity_manager, 'get_entities'), $args);
+	$testimonials = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
 } elseif ($query == '*') {
 	if (!gatekeeper('com_testimonials/listalltestimonials'))
 		$testimonials = array();
@@ -57,7 +57,7 @@ if (empty($query)) {
 				$selector
 			);
 		}
-		$testimonials = (array) call_user_func_array(array($pines->entity_manager, 'get_entities'), $args);
+		$testimonials = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
 	}
 } else {
 	$r_query = '/'.str_replace(' ', '.*', preg_quote($query)).'/i';
@@ -87,7 +87,7 @@ if (empty($query)) {
 		$selector,
 		$selector3
 	);
-	$testimonials = (array) call_user_func_array(array($pines->entity_manager, 'get_entities'), $args);
+	$testimonials = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
 }
 
 foreach ($testimonials as $key => &$cur_testimonial) {
@@ -123,4 +123,4 @@ unset($cur_testimonial);
 if (!$testimonials)
 	$testimonials = null;
 
-$pines->page->override_doc(json_encode($testimonials));
+$_->page->override_doc(json_encode($testimonials));

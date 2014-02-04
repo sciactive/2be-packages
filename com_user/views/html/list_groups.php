@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = ($this->enabled ? '' : 'Disabled ').'Groups';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_user/list_groups']);
 
@@ -95,7 +95,7 @@ foreach($this->groups as $cur_group) {
 			<td><a href="mailto:<?php e($group->email); ?>"><?php e($group->email); ?></a></td>
 			<td><?php e($group->timezone); ?></td>
 			<td><?php
-			$user_array = $pines->entity_manager->get_entities(
+			$user_array = $_->entity_manager->get_entities(
 					array('class' => user, 'limit' => 51),
 					array('&',
 						'tag' => array('com_user', 'user', 'enabled')

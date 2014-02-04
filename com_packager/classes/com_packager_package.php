@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -86,12 +86,12 @@ class com_packager_package extends entity {
 		switch ($this->type) {
 			case 'component':
 			case 'template':
-				global $pines;
+				global $_;
 				$component = $this->component;
-				return clean_filename("{$this->name}-{$pines->info->$component->version}");
+				return clean_filename("{$this->name}-{$_->info->$component->version}");
 			case 'system':
-				global $pines;
-				return clean_filename("{$this->name}-{$pines->info->version}");
+				global $_;
+				return clean_filename("{$this->name}-{$_->info->version}");
 			case 'meta':
 				return clean_filename("{$this->name}-{$this->meta['version']}");
 			default:
@@ -106,7 +106,7 @@ class com_packager_package extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function package($filename) {
-		global $pines;
+		global $_;
 		$arc = new slim;
 		$arc->file_integrity = true;
 		$arc->preserve_mode = true;
@@ -132,7 +132,7 @@ class com_packager_package extends entity {
 			case 'component':
 			case 'template':
 				$component = $this->component;
-				$info = $pines->info->$component;
+				$info = $_->info->$component;
 				// Select only needed info from the info object.
 				$arc->ext = array(
 					'package' => $this->name,
@@ -153,7 +153,7 @@ class com_packager_package extends entity {
 				$arc->add_directory($component, true, true, $re_exclude);
 				break;
 			case 'system':
-				$info = $pines->info;
+				$info = $_->info;
 				// Select only needed info from the info object.
 				$arc->ext = array(
 					'package' => $this->name,
@@ -214,7 +214,7 @@ class com_packager_package extends entity {
 			'path' => '_MEDIA'
 		));
 		if (!empty($this->icon)) {
-			$file = $pines->uploader->real($this->icon);
+			$file = $_->uploader->real($this->icon);
 			if (file_exists($file))
 				$data = file_get_contents($file);
 			if (!empty($data)) {
@@ -230,7 +230,7 @@ class com_packager_package extends entity {
 		if (!empty($this->screenshots)) {
 			$arc->ext['screens'] = array();
 			foreach ($this->screenshots as $cur_screen) {
-				$file = $pines->uploader->real($cur_screen['file']);
+				$file = $_->uploader->real($cur_screen['file']);
 				if (file_exists($file))
 					$data = file_get_contents($file);
 				if (!empty($data)) {
@@ -256,10 +256,10 @@ class com_packager_package extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_packager', 'package/form', 'content');
 		$module->entity = $this;
-		$module->components = $pines->all_components;
+		$module->components = $_->all_components;
 
 		return $module;
 	}

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -49,7 +49,7 @@ if ($_REQUEST['save'] == 'commit') {
 	}
 }
 
-if ($pines->config->com_sales->global_cashcounts)
+if ($_->config->com_sales->global_cashcounts)
 	$cashcount->ac->other = 1;
 
 if ($cashcount->save()) {

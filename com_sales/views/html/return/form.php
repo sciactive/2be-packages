@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!isset($this->entity->guid))
@@ -20,13 +20,13 @@ elseif ($this->entity->status == 'processed')
 elseif ($this->entity->status == 'voided')
 	$this->title = 'Voided Return ['.h($this->entity->id).']';
 $this->note = 'Use this form to edit a return.';
-$pines->com_pgrid->load();
-if ($pines->config->com_sales->com_customer)
-	$pines->com_customer->load_customer_select();
-if ($pines->config->com_sales->per_item_salesperson)
-	$pines->com_hrm->load_employee_select();
-if ($pines->config->com_sales->autocomplete_product)
-	$pines->com_sales->load_product_select();
+$_->com_pgrid->load();
+if ($_->config->com_sales->com_customer)
+	$_->com_customer->load_customer_select();
+if ($_->config->com_sales->per_item_salesperson)
+	$_->com_hrm->load_employee_select();
+if ($_->config->com_sales->autocomplete_product)
+	$_->com_sales->load_product_select();
 ?>
 <style type="text/css">
 	<?php if ($this->entity->specials) { ?>
@@ -64,12 +64,12 @@ if ($pines->config->com_sales->autocomplete_product)
 				products_table = $("#p_muid_products_table"),
 				payments_table = $("#p_muid_payments_table"),
 				payments = $("#p_muid_payments");
-			<?php if ($pines->config->com_sales->com_customer) { ?>
+			<?php if ($_->config->com_sales->com_customer) { ?>
 			var require_customer = false;
 			<?php } ?>
 
 			// Number of decimal places to round to.
-			var dec = <?php echo (int) $pines->config->com_sales->dec; ?>;
+			var dec = <?php echo (int) $_->config->com_sales->dec; ?>;
 <?php
 			$taxes_percent = array();
 			$taxes_flat = array();
@@ -132,9 +132,9 @@ if ($pines->config->com_sales->autocomplete_product)
 				return floored * sign;
 			};
 
-			<?php if ($pines->config->com_sales->com_customer && $this->entity->status != 'processed' && $this->entity->status != 'voided' && !isset($this->entity->sale->guid)) { ?>
+			<?php if ($_->config->com_sales->com_customer && $this->entity->status != 'processed' && $this->entity->status != 'voided' && !isset($this->entity->sale->guid)) { ?>
 			$("#p_muid_customer").customerselect();
-			<?php } if ($pines->config->com_sales->per_item_salesperson) { ?>
+			<?php } if ($_->config->com_sales->per_item_salesperson) { ?>
 			$("#p_muid_salesperson").employeeselect();
 			<?php } ?>
 
@@ -206,7 +206,7 @@ if ($pines->config->com_sales->autocomplete_product)
 									}
 								});
 							};
-							<?php if ($pines->config->com_sales->autocomplete_product) { ?>
+							<?php if ($_->config->com_sales->autocomplete_product) { ?>
 							textbox.productselect({
 								open: function(){if (textbox.val() == "") textbox.autocomplete("close");},
 								select: function(event, ui){select(ui.item.value); return false;}
@@ -320,7 +320,7 @@ if ($pines->config->com_sales->autocomplete_product)
 							}
 						}
 					},
-					<?php } if ($pines->config->com_sales->per_item_salesperson) { ?>
+					<?php } if ($_->config->com_sales->per_item_salesperson) { ?>
 					{
 						type: 'button',
 						title: 'Salesperson',
@@ -579,7 +579,7 @@ if ($pines->config->com_sales->autocomplete_product)
 				});
 				checklist_dialog.dialog('open');
 			};
-			<?php if ($pines->config->com_sales->per_item_salesperson) { ?>
+			<?php if ($_->config->com_sales->per_item_salesperson) { ?>
 			// Salesperson Form
 			var salesperson_dialog = $("#p_muid_salesperson_dialog").dialog({
 				bgiframe: true,
@@ -611,7 +611,7 @@ if ($pines->config->com_sales->autocomplete_product)
 			<?php }
 			} ?>
 
-			<?php if (!$pines->config->com_sales->per_item_salesperson) { ?>
+			<?php if (!$_->config->com_sales->per_item_salesperson) { ?>
 			products_table.pgrid_import_state({pgrid_hidden_cols: [4, 11]});
 			<?php } ?>
 
@@ -855,7 +855,7 @@ if ($pines->config->com_sales->autocomplete_product)
 					'key' => $cur_payment['entity']->guid,
 					'values' => array(
 						$cur_payment['entity']->name,
-						$pines->com_sales->round($cur_payment['amount'], true),
+						$_->com_sales->round($cur_payment['amount'], true),
 						$cur_payment['status']
 					)
 				);
@@ -909,7 +909,7 @@ if ($pines->config->com_sales->autocomplete_product)
 				var taxable_subtotal = 0;
 				var row_export = [];
 				var return_fees = 0;
-				<?php if ($pines->config->com_sales->com_customer) { ?>
+				<?php if ($_->config->com_sales->com_customer) { ?>
 				require_customer = false;
 				<?php } ?>
 				rows.each(function(){
@@ -918,7 +918,7 @@ if ($pines->config->com_sales->autocomplete_product)
 					var checklists = cur_row.data("return_checklists");
 					if (!checklists)
 						checklists = {};
-					<?php if ($pines->config->com_sales->com_customer) { ?>
+					<?php if ($_->config->com_sales->com_customer) { ?>
 					if (product.require_customer)
 						require_customer = true;
 					<?php } ?>
@@ -1079,7 +1079,7 @@ if ($pines->config->com_sales->autocomplete_product)
 					pines.com_sales_run_submit();
 			};
 
-			<?php if ($pines->config->com_sales->cash_drawer) { ?>
+			<?php if ($_->config->com_sales->cash_drawer) { ?>
 			pines.com_sales_run_drawer = function(){
 				if (!check_return_total()) return false;
 				var keep_checking = function(status){
@@ -1154,7 +1154,7 @@ if ($pines->config->com_sales->autocomplete_product)
 			update_products();
 		});
 	</script>
-	<?php if ($pines->config->com_sales->com_customer) { ?>
+	<?php if ($_->config->com_sales->com_customer) { ?>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Customer</span>
@@ -1261,7 +1261,7 @@ if ($pines->config->com_sales->autocomplete_product)
 		</div>
 		<br />
 	</div>
-	<?php if ($pines->config->com_sales->per_item_salesperson) { ?>
+	<?php if ($_->config->com_sales->per_item_salesperson) { ?>
 	<div id="p_muid_salesperson_dialog" title="Select Salesperson" style="display: none;">
 		<div class="pf-form">
 			<div class="pf-element">

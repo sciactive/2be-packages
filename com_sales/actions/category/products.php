@@ -8,19 +8,19 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/listproducts') && !gatekeeper('com_sales/newsale') && !gatekeeper('com_sales/editsale'))
 	punt_user(null, pines_url('com_sales', 'category/products', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $category = com_sales_category::factory((int) $_REQUEST['id']);
 
 if (!isset($category->guid)) {
-	$pines->page->override_doc(json_encode(array()));
+	$_->page->override_doc(json_encode(array()));
 	return;
 }
 
@@ -65,4 +65,4 @@ foreach ($category->products as $product) {
 	$return[] = $json_struct;
 }
 
-$pines->page->override_doc(json_encode($return));
+$_->page->override_doc(json_encode($return));

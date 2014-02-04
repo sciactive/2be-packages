@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_repository/signpackage') )
 	punt_user(null, pines_url('com_repository', 'signpackage'));
 
-switch ($pines->com_repository->sign_packages((string) $_REQUEST['password'])) {
+switch ($_->com_repository->sign_packages((string) $_REQUEST['password'])) {
 	case 0:
 		pines_notice('Signed packages successfully.');
 		break;

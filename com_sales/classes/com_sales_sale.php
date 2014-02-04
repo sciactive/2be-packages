@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -70,8 +70,8 @@ class com_sales_sale extends entity {
 	 * Calculate and add commission to the employee(s).
 	 */
 	public function add_commission() {
-		global $pines;
-		if ($this->added_commission || !$pines->config->com_sales->com_hrm)
+		global $_;
+		if ($this->added_commission || !$_->config->com_sales->com_hrm)
 			return;
 		$this->added_commission = true;
 		// Go through each product, adding commission.
@@ -88,15 +88,15 @@ class com_sales_sale extends entity {
 				switch ($cur_commission['type']) {
 					case 'spiff':
 						// Add a spiff per product sold.
-						$cur_product['commission'] += $pines->com_sales->round((float) $cur_commission['amount'] * $cur_product['quantity']);
+						$cur_product['commission'] += $_->com_sales->round((float) $cur_commission['amount'] * $cur_product['quantity']);
 						break;
 					case 'percent_price':
 						// Add a percentage of the amount sold - specials.
-						$cur_product['commission'] += $pines->com_sales->round(($cur_product['line_total'] - (float) $cur_product['specials_total']) * ( ((float) $cur_commission['amount']) / 100 ));
+						$cur_product['commission'] += $_->com_sales->round(($cur_product['line_total'] - (float) $cur_product['specials_total']) * ( ((float) $cur_commission['amount']) / 100 ));
 						break;
 					case 'percent_line_total':
 						// Add a percentage of the amount sold.
-						$cur_product['commission'] += $pines->com_sales->round($cur_product['line_total'] * ( ((float) $cur_commission['amount']) / 100 ));
+						$cur_product['commission'] += $_->com_sales->round($cur_product['line_total'] * ( ((float) $cur_commission['amount']) / 100 ));
 						break;
 				}
 			}
@@ -123,7 +123,7 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function approve_payments() {
-		global $pines;
+		global $_;
 		$return = true;
 		// Go through each payment, and process its approval.
 		foreach ($this->payments as &$cur_payment) {
@@ -142,7 +142,7 @@ class com_sales_sale extends entity {
 				continue;
 			}
 			// Call the payment processing for approval.
-			$pines->com_sales->call_payment_process(array(
+			$_->com_sales->call_payment_process(array(
 				'action' => 'approve',
 				'type' => 'charge',
 				'name' => $cur_payment['entity']->processing_type,
@@ -163,13 +163,13 @@ class com_sales_sale extends entity {
 	 * @return module The form's module.
 	 */
 	public function change_product_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/change_product', 'content');
 		$module->entity = $this;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -185,7 +185,7 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on any failure.
 	 */
 	public function complete() {
-		global $pines;
+		global $_;
 		if ($this->status == 'paid' || $this->status == 'voided')
 			return true;
 		if (empty($this->products)) {
@@ -195,7 +195,7 @@ class com_sales_sale extends entity {
 		// Keep track of the whole process.
 		$return = true;
 		if ($this->status != 'invoiced') {
-			if ($pines->config->com_sales->com_customer && !isset($this->customer)) {
+			if ($_->config->com_sales->com_customer && !isset($this->customer)) {
 				foreach ($this->products as &$cur_product) {
 					if (!$cur_product['entity'] || ($cur_product['entity']->require_customer)) {
 						pines_notice('One of the products on this sale requires a customer. Please select a customer for this sale before invoicing.');
@@ -235,7 +235,7 @@ class com_sales_sale extends entity {
 			return false;
 		}
 		if ($this->change > 0.00) {
-			$change_type = $pines->entity_manager->get_entity(
+			$change_type = $_->entity_manager->get_entity(
 					array('class' => com_sales_payment_type),
 					array('&',
 						'tag' => array('com_sales', 'payment_type'),
@@ -253,7 +253,7 @@ class com_sales_sale extends entity {
 
 		// Process the change.
 		if (!$this->change_given && $this->change > 0.00) {
-			$pines->com_sales->call_payment_process(array(
+			$_->com_sales->call_payment_process(array(
 				'action' => 'change',
 				'name' => $change_type->processing_type,
 				'ticket' => &$this
@@ -351,7 +351,7 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function email_receipt() {
-		global $pines;
+		global $_;
 		if (empty($this->customer->email))
 			return false;
 		$module = new module('com_sales', 'sale/receipt_email');
@@ -362,7 +362,7 @@ class com_sales_sale extends entity {
 			'sale_id' => h($this->id),
 			'sale_total' => h($this->total),
 		);
-		return $pines->com_mailer->send_mail('com_sales/sale_receipt', $macros, $this->customer);
+		return $_->com_mailer->send_mail('com_sales/sale_receipt', $macros, $this->customer);
 	}
 
 	/**
@@ -371,7 +371,7 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function get_stock() {
-		global $pines;
+		global $_;
 		// Go through each product, and find corresponding stock entries.
 		foreach ($this->products as &$cur_product) {
 			// Find the stock entry.
@@ -400,9 +400,9 @@ class com_sales_sale extends entity {
 					if ($cur_product['entity']->serialized)
 						$selector['data'][] = array('serial', $cur_product['serial']);
 					if (!$guids) {
-						$stock_entry = $pines->entity_manager->get_entity(array('class' => com_sales_stock), $selector);
+						$stock_entry = $_->entity_manager->get_entity(array('class' => com_sales_stock), $selector);
 					} else {
-						$stock_entry = $pines->entity_manager->get_entity(
+						$stock_entry = $_->entity_manager->get_entity(
 								array('class' => com_sales_stock),
 								array('!&',
 									'guid' => $guids
@@ -441,7 +441,7 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on any failure.
 	 */
 	public function invoice() {
-		global $pines;
+		global $_;
 		if ($this->status == 'invoiced' || $this->status == 'voided')
 			return true;
 		if (!is_array($this->products)) {
@@ -450,7 +450,7 @@ class com_sales_sale extends entity {
 		}
 		// Keep track of the whole process.
 		$return = true;
-		if ($pines->config->com_sales->com_customer && !isset($this->customer)) {
+		if ($_->config->com_sales->com_customer && !isset($this->customer)) {
 			foreach ($this->products as &$cur_product) {
 				if (!$cur_product['entity'] || ($cur_product['entity']->require_customer)) {
 					pines_notice('One of the products on this sale requires a customer. Please select a customer for this sale before invoicing.');
@@ -465,7 +465,7 @@ class com_sales_sale extends entity {
 			return false;
 		}
 
-		if ($pines->config->com_sales->remove_stock == 'invoice') {
+		if ($_->config->com_sales->remove_stock == 'invoice') {
 			// Look up stock.
 			if (!$this->get_stock())
 				return false;
@@ -475,11 +475,11 @@ class com_sales_sale extends entity {
 			if (!$stock_result)
 				pines_notice('Not all stock could be removed from inventory while invoicing. Please check that all stock was correctly entered.');
 		}
-		if ($pines->config->com_sales->perform_actions == 'invoice') {
+		if ($_->config->com_sales->perform_actions == 'invoice') {
 			// Perform actions.
 			$this->perform_actions();
 		}
-		if ($pines->config->com_sales->add_commission == 'invoice') {
+		if ($_->config->com_sales->add_commission == 'invoice') {
 			// Add commission.
 			$this->add_commission();
 		}
@@ -506,7 +506,7 @@ class com_sales_sale extends entity {
 	 * Run the product actions associated with the products on this sale.
 	 */
 	public function perform_actions() {
-		global $pines;
+		global $_;
 		if ($this->performed_actions)
 			return;
 		$this->performed_actions = true;
@@ -515,7 +515,7 @@ class com_sales_sale extends entity {
 			// Call product actions for all products without stock entries.
 			$i = $cur_product['quantity'] - count($cur_product['stock_entities']);
 			if ($i > 0) {
-				$pines->com_sales->call_product_actions(array(
+				$_->com_sales->call_product_actions(array(
 					'type' => 'sold',
 					'product' => $cur_product['entity'],
 					'ticket' => $this,
@@ -533,7 +533,7 @@ class com_sales_sale extends entity {
 			if (!is_array($cur_product['stock_entities']))
 				continue;
 			foreach ($cur_product['stock_entities'] as &$cur_stock) {
-				$pines->com_sales->call_product_actions(array(
+				$_->com_sales->call_product_actions(array(
 					'type' => 'sold',
 					'product' => $cur_product['entity'],
 					'stock_entry' => $cur_stock,
@@ -559,24 +559,24 @@ class com_sales_sale extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'sale/form', 'content');
 		$module->entity = $this;
-		$module->categories = (array) $pines->entity_manager->get_entities(
+		$module->categories = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_category),
 				array('&',
 					'tag' => array('com_sales', 'category'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->tax_fees = (array) $pines->entity_manager->get_entities(
+		$module->tax_fees = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_tax_fee),
 				array('&',
 					'tag' => array('com_sales', 'tax_fee'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->payment_types = (array) $pines->entity_manager->get_entities(
+		$module->payment_types = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_payment_type),
 				array('&',
 					'tag' => array('com_sales', 'payment_type'),
@@ -585,7 +585,7 @@ class com_sales_sale extends entity {
 			);
 		// Find eligible specials.
 		if (!isset($this->elig_specials)) {
-			$specials = (array) $pines->entity_manager->get_entities(
+			$specials = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_special),
 					array('&',
 						'tag' => array('com_sales', 'special'),
@@ -605,7 +605,7 @@ class com_sales_sale extends entity {
 			$module->specials = $this->elig_specials;
 		}
 		if (isset($this->guid)) {
-			$module->returns = (array) $pines->entity_manager->get_entities(
+			$module->returns = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_return),
 					array('&',
 						'tag' => array('com_sales', 'return'),
@@ -642,7 +642,7 @@ class com_sales_sale extends entity {
 	 * @access private
 	 */
 	private function receipt_format_barcode($text) {
-		global $pines;
+		global $_;
 		// Barcode height.
 		$barcode = chr(hexdec('1D')).'h'.chr(50);
 		// Text below barcode.
@@ -650,9 +650,9 @@ class com_sales_sale extends entity {
 		// First barcode font.
 		$barcode .= chr(hexdec('1D')).'f'.chr(0);
 		// Width.
-		$barcode .= chr(hexdec('1D')).'w'.chr(2 * (int) $pines->config->com_barcode->xres);
+		$barcode .= chr(hexdec('1D')).'w'.chr(2 * (int) $_->config->com_barcode->xres);
 		// Barcode type and data.
-		switch ($pines->config->com_barcode->type) {
+		switch ($_->config->com_barcode->type) {
 			case 'I25':
 				$barcode .= chr(hexdec('1D')).'k'.chr(70).chr(strlen("$text")).$text;
 				break;
@@ -698,34 +698,34 @@ class com_sales_sale extends entity {
 	 * @return string The receipt code.
 	 */
 	public function receipt_text($width, $width2) {
-		global $pines;
+		global $_;
 		$lines = array();
 		// Gather all the receipt data.
 		switch ($this->status) {
 			case 'quoted':
-				$lines = $pines->config->com_sales->quote_receipt_header;
+				$lines = $_->config->com_sales->quote_receipt_header;
 				$name = 'Quote';
 				$date = $this->p_cdate;
 				break;
 			case 'invoiced':
-				$lines = $pines->config->com_sales->invoice_receipt_header;
+				$lines = $_->config->com_sales->invoice_receipt_header;
 				$name = 'Invoice';
 				$date = $this->invoice_date;
 				break;
 			case 'voided':
-				$lines = $pines->config->com_sales->void_receipt_header;
+				$lines = $_->config->com_sales->void_receipt_header;
 				$name = 'Sale';
 				$date = $this->tender_date;
 				break;
 			case 'paid':
 			default:
-				$lines = $pines->config->com_sales->receipt_header;
+				$lines = $_->config->com_sales->receipt_header;
 				$name = 'Sale';
 				$date = $this->tender_date;
 				break;
 		}
 		$lines = explode("\n", $lines);
-		if ($pines->config->com_sales->center_receipt_headers) {
+		if ($_->config->com_sales->center_receipt_headers) {
 			foreach ($lines as &$cur_line) {
 				$cur_line = $this->receipt_format_center($cur_line, $width);
 			}
@@ -748,16 +748,16 @@ class com_sales_sale extends entity {
 		$lines[] = '';
 		$total_items = 0;
 		foreach ($this->products as $cur_product) {
-			$line = sprintf('% -12s', $cur_product['entity']->sku).' x '.sprintf('%4d', $cur_product['quantity']).' @$'.$pines->com_sales->round($cur_product['price'], true);
-			$line_total = '$'.$pines->com_sales->round($cur_product['line_total'], true);
+			$line = sprintf('% -12s', $cur_product['entity']->sku).' x '.sprintf('%4d', $cur_product['quantity']).' @$'.$_->com_sales->round($cur_product['price'], true);
+			$line_total = '$'.$_->com_sales->round($cur_product['line_total'], true);
 			$line .= str_repeat(' ', ($width - strlen($line) - strlen($line_total))).$line_total;
 			$line2 = "   {$cur_product['entity']->name}";
 			if ($cur_product['entity']->tax_exempt)
 				$line2 .= '*';
 			if ($cur_product['discount'])
-				$line2 .= ' -$'.$pines->com_sales->round($cur_product['discount'], true);
+				$line2 .= ' -$'.$_->com_sales->round($cur_product['discount'], true);
 			if ($cur_product['fees'])
-				$line2 .= ' +$'.$pines->com_sales->round($cur_product['fees'], true);
+				$line2 .= ' +$'.$_->com_sales->round($cur_product['fees'], true);
 			$lines[] = $line;
 			$lines[] = $line2;
 			if (!empty($cur_product['serial']))
@@ -779,7 +779,7 @@ class com_sales_sale extends entity {
 			$lines[] = '';
 			foreach ($this->specials as $cur_special) {
 				$line = $cur_special['entity']->hide_code ? '' : $cur_special['code'];
-				$line_total = '($'.$pines->com_sales->round($cur_special['discount'], true).')';
+				$line_total = '($'.$_->com_sales->round($cur_special['discount'], true).')';
 				$line .= str_repeat(' ', ($width - strlen($line) - strlen($line_total))).$line_total;
 				$line2 = "   {$cur_special['name']}";
 				if ($cur_special['before_tax'])
@@ -789,21 +789,21 @@ class com_sales_sale extends entity {
 			}
 			$lines[] = '';
 		}
-		$lines[] = sprintf('%'.($width - 10).'s', 'Subtotal:').sprintf('%10s', '$'.$pines->com_sales->round($this->subtotal, true));
+		$lines[] = sprintf('%'.($width - 10).'s', 'Subtotal:').sprintf('%10s', '$'.$_->com_sales->round($this->subtotal, true));
 		if (!empty($this->total_specials))
-			$lines[] = sprintf('%'.($width - 10).'s', 'Specials:').sprintf('%10s', '($'.$pines->com_sales->round($this->total_specials, true).')');
+			$lines[] = sprintf('%'.($width - 10).'s', 'Specials:').sprintf('%10s', '($'.$_->com_sales->round($this->total_specials, true).')');
 		if (!empty($this->item_fees))
-			$lines[] = sprintf('%'.($width - 10).'s', 'Item Fees:').sprintf('%10s', '$'.$pines->com_sales->round($this->item_fees, true));
-		$lines[] = sprintf('%'.($width - 10).'s', 'Tax:').sprintf('%10s', '$'.$pines->com_sales->round($this->taxes, true));
-		$lines[] = sprintf('%'.($width - 10).'s', 'Total:').sprintf('%10s', '$'.$pines->com_sales->round($this->total, true));
+			$lines[] = sprintf('%'.($width - 10).'s', 'Item Fees:').sprintf('%10s', '$'.$_->com_sales->round($this->item_fees, true));
+		$lines[] = sprintf('%'.($width - 10).'s', 'Tax:').sprintf('%10s', '$'.$_->com_sales->round($this->taxes, true));
+		$lines[] = sprintf('%'.($width - 10).'s', 'Total:').sprintf('%10s', '$'.$_->com_sales->round($this->total, true));
 		if ($this->status != 'invoiced' && $this->status != 'quoted') {
 			$lines[] = '';
-			$lines[] = sprintf('%'.($width - 10).'s', 'Amount Tendered:').sprintf('%10s', '$'.$pines->com_sales->round($this->amount_tendered, true));
-			$lines[] = sprintf('%'.($width - 10).'s', 'Change:').sprintf('%10s', '$'.$pines->com_sales->round($this->change, true));
+			$lines[] = sprintf('%'.($width - 10).'s', 'Amount Tendered:').sprintf('%10s', '$'.$_->com_sales->round($this->amount_tendered, true));
+			$lines[] = sprintf('%'.($width - 10).'s', 'Change:').sprintf('%10s', '$'.$_->com_sales->round($this->change, true));
 			$lines[] = '';
 			$lines[] = 'Payment Via:';
 			foreach ($this->payments as $cur_payment) {
-				$lines[] = sprintf('%'.($width - 10).'s', $cur_payment['label'].':').sprintf('%10s', '$'.$pines->com_sales->round($cur_payment['amount'], true));
+				$lines[] = sprintf('%'.($width - 10).'s', $cur_payment['label'].':').sprintf('%10s', '$'.$_->com_sales->round($cur_payment['amount'], true));
 			}
 		}
 		$lines[] = '';
@@ -820,20 +820,20 @@ class com_sales_sale extends entity {
 		// Print the receipt label.
 		switch ($this->status) {
 			case 'quoted':
-				$label = $pines->config->com_sales->quote_note_label;
-				$text = $pines->config->com_sales->quote_note_text;
+				$label = $_->config->com_sales->quote_note_label;
+				$text = $_->config->com_sales->quote_note_text;
 				break;
 			case 'invoiced':
-				$label = $pines->config->com_sales->invoice_note_label;
-				$text = $pines->config->com_sales->invoice_note_text;
+				$label = $_->config->com_sales->invoice_note_label;
+				$text = $_->config->com_sales->invoice_note_text;
 				break;
 			case 'paid':
-				$label = $pines->config->com_sales->receipt_note_label;
-				$text = $pines->config->com_sales->receipt_note_text;
+				$label = $_->config->com_sales->receipt_note_label;
+				$text = $_->config->com_sales->receipt_note_text;
 				break;
 			case 'processed':
-				$label = $pines->config->com_sales->return_note_label;
-				$text = $pines->config->com_sales->return_note_text;
+				$label = $_->config->com_sales->return_note_label;
+				$text = $_->config->com_sales->return_note_text;
 				break;
 		}
 		if (!empty($text)) {
@@ -866,7 +866,7 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function remove_item($key, &$item) {
-		global $pines;
+		global $_;
 		// Make sure this sale has been invoiced or tendered.
 		if ($this->status != 'invoiced' && $this->status != 'paid') {
 			// Make sure this sale has not been voided.
@@ -879,7 +879,7 @@ class com_sales_sale extends entity {
 			}
 		}
 		// Make sure this item is not attached to any returns.
-		$attached_return = $pines->entity_manager->get_entity(
+		$attached_return = $_->entity_manager->get_entity(
 			array('class' => com_sales_return, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_sales', 'return'),
@@ -925,7 +925,7 @@ class com_sales_sale extends entity {
 
 
 		// Put the old item back into inventory.
-		$last_tx = $pines->entity_manager->get_entity(
+		$last_tx = $_->entity_manager->get_entity(
 				array('reverse' => true, 'class' => com_sales_tx),
 				array('&',
 					'tag' => array('com_sales', 'transaction', 'stock_tx'),
@@ -1023,13 +1023,13 @@ class com_sales_sale extends entity {
 	 * @return module The form's module.
 	 */
 	public function salesrep_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/salesrep', 'content');
 		$module->entity = $this;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -1038,11 +1038,11 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function save() {
-		global $pines;
+		global $_;
 		if (!isset($this->status))
 			$this->status = 'quoted';
 		if (!isset($this->id))
-			$this->id = $pines->entity_manager->new_uid('com_sales_sale');
+			$this->id = $_->entity_manager->new_uid('com_sales_sale');
 
 		// Set special warehouse vars.
 		if ($this->warehouse) {
@@ -1124,7 +1124,7 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function swap($key, &$old_item, &$new_item) {
-		global $pines;
+		global $_;
 		// Make sure this sale has been invoiced or tendered.
 		if ($this->status != 'invoiced' && $this->status != 'paid') {
 			// Make sure this sale has not been voided.
@@ -1137,7 +1137,7 @@ class com_sales_sale extends entity {
 			}
 		}
 		// Make sure this item is not attached to any returns.
-		$attached_return = $pines->entity_manager->get_entity(
+		$attached_return = $_->entity_manager->get_entity(
 			array('class' => com_sales_return, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_sales', 'return'),
@@ -1199,7 +1199,7 @@ class com_sales_sale extends entity {
 		$tx->save();
 
 		// Put the old item back into inventory.
-		$last_tx = $pines->entity_manager->get_entity(
+		$last_tx = $_->entity_manager->get_entity(
 				array('reverse' => true, 'class' => com_sales_tx),
 				array('&',
 					'tag' => array('com_sales', 'transaction', 'stock_tx'),
@@ -1258,13 +1258,13 @@ class com_sales_sale extends entity {
 	 * @return module The form's module.
 	 */
 	public function swap_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/swap', 'content');
 		$module->entity = $this;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -1276,7 +1276,7 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function swap_salesrep($key, $new_salesrep = null) {
-		//global $pines;
+		//global $_;
 		// Make sure this sale has been invoiced or tendered.
 		if ($this->status != 'invoiced' && $this->status != 'paid') {
 			// Make sure this sale has not been voided.
@@ -1290,7 +1290,7 @@ class com_sales_sale extends entity {
 		}
 		/* Not included because only one item may have been returned...
 		// Make sure this sale is not attached to any returns.
-		$attached_return = $pines->entity_manager->get_entity(
+		$attached_return = $_->entity_manager->get_entity(
 			array('class' => com_sales_return, 'skip_ac' => true),
 			array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('sale', $this))
 		);
@@ -1368,7 +1368,7 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function tender_payments() {
-		global $pines;
+		global $_;
 		if (!is_array($this->payments))
 			$this->payments = array();
 		if (!is_numeric($this->total))
@@ -1389,7 +1389,7 @@ class com_sales_sale extends entity {
 				continue;
 			}
 			// Call the payment processing.
-			$pines->com_sales->call_payment_process(array(
+			$_->com_sales->call_payment_process(array(
 				'action' => 'tender',
 				'name' => $cur_payment['entity']->processing_type,
 				'payment' => &$cur_payment,
@@ -1422,9 +1422,9 @@ class com_sales_sale extends entity {
 			$change = abs($amount_due);
 			$amount_due = 0.00;
 		}
-		$this->amount_tendered = (float) $pines->com_sales->round($amount_tendered);
-		$this->amount_due = (float) $pines->com_sales->round($amount_due);
-		$this->change = (float) $pines->com_sales->round($change);
+		$this->amount_tendered = (float) $_->com_sales->round($amount_tendered);
+		$this->amount_due = (float) $_->com_sales->round($amount_due);
+		$this->change = (float) $_->com_sales->round($change);
 		return ($this->save() && $return);
 	}
 
@@ -1458,7 +1458,7 @@ class com_sales_sale extends entity {
 	 * @return float The total specials added to products.
 	 */
 	private function product_special($id, $discount, $product = null, $only_one_item = false) {
-		global $pines;
+		global $_;
 		$total = 0;
 		if (isset($product)) {
 			if (is_object($product))
@@ -1477,7 +1477,7 @@ class com_sales_sale extends entity {
 				$cur_price = $this->discount_price($cur_price, $cur_discount);
 			// Calculate the special price for an individual item.
 			// This will calculate the percentage value for a percentage or just the amount for a flat discount.
-			$cur_special = (float) $pines->com_sales->round($cur_price - $this->discount_price($cur_price, $discount));
+			$cur_special = (float) $_->com_sales->round($cur_price - $this->discount_price($cur_price, $discount));
 			if ($cur_special <= 0)
 				continue;
 			// Now calculate the total special for this line.
@@ -1544,11 +1544,11 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function total() {
-		global $pines;
+		global $_;
 		if (!is_array($this->products) || in_array($this->status, array('invoiced', 'paid', 'voided')))
 			return false;
 		// We need a list of enabled taxes and fees.
-		$tax_fees = (array) $pines->entity_manager->get_entities(
+		$tax_fees = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_tax_fee),
 				array('&',
 					'tag' => array('com_sales', 'tax_fee'),
@@ -1567,7 +1567,7 @@ class com_sales_sale extends entity {
 		// Once we get eligible specials, don't get them again.
 		if (!isset($this->elig_specials)) {
 			// Find eligible specials.
-			$specials = (array) $pines->entity_manager->get_entities(
+			$specials = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_special),
 					array('&',
 						'tag' => array('com_sales', 'special'),
@@ -1602,7 +1602,7 @@ class com_sales_sale extends entity {
 			if ($cur_product['entity']->discountable && $discount != "") {
 				$discount_price = $this->discount_price($price, $discount);
 				// Check that the discount doesn't lower the item's price below the floor.
-				if ($cur_product['entity']->floor && $pines->com_sales->round($discount_price) < $pines->com_sales->round($cur_product['entity']->floor)) {
+				if ($cur_product['entity']->floor && $_->com_sales->round($discount_price) < $_->com_sales->round($cur_product['entity']->floor)) {
 					pines_notice("The discount on {$cur_product['entity']->name} lowers the product's price below the limit. The discount was removed.");
 					$discount = $cur_product['discount'] = '';
 				} else {
@@ -1622,7 +1622,7 @@ class com_sales_sale extends entity {
 			$line_total = $price * $qty;
 			$cur_item_fees = 0.00;
 			if (!$cur_product['entity']->tax_exempt) {
-				$taxable_subtotal += (float) $pines->com_sales->round($line_total);
+				$taxable_subtotal += (float) $_->com_sales->round($line_total);
 				$tax_qty += $qty;
 			}
 			if (is_array($cur_product['entity']->additional_tax_fees)) {
@@ -1635,13 +1635,13 @@ class com_sales_sale extends entity {
 					}
 				}
 			}
-			$cur_product['line_total'] = (float) $pines->com_sales->round($line_total);
-			$cur_product['fees'] = (float) $pines->com_sales->round($cur_item_fees);
+			$cur_product['line_total'] = (float) $_->com_sales->round($line_total);
+			$cur_product['fees'] = (float) $_->com_sales->round($cur_item_fees);
 			$item_fees += $cur_product['fees'];
 			$subtotal += $cur_product['line_total'];
 		}
 		unset($cur_product);
-		$this->subtotal = (float) $pines->com_sales->round($subtotal);
+		$this->subtotal = (float) $_->com_sales->round($subtotal);
 
 		// Now that we know the subtotal, we can use it for specials.
 		$total_before_tax_specials = 0.00;
@@ -1654,15 +1654,15 @@ class com_sales_sale extends entity {
 					continue;
 				switch ($cur_req['type']) {
 					case "subtotal_eq":
-						if ($pines->com_sales->round($this->subtotal, true) != $pines->com_sales->round($cur_req['value'], true))
+						if ($_->com_sales->round($this->subtotal, true) != $_->com_sales->round($cur_req['value'], true))
 							$apply_special = false;
 						break;
 					case "subtotal_lt":
-						if ($pines->com_sales->round($this->subtotal) >= $pines->com_sales->round($cur_req['value']))
+						if ($_->com_sales->round($this->subtotal) >= $_->com_sales->round($cur_req['value']))
 							$apply_special = false;
 						break;
 					case "subtotal_gt":
-						if ($pines->com_sales->round($this->subtotal) <= $pines->com_sales->round($cur_req['value']))
+						if ($_->com_sales->round($this->subtotal) <= $_->com_sales->round($cur_req['value']))
 							$apply_special = false;
 						break;
 					case "has_product":
@@ -1734,7 +1734,7 @@ class com_sales_sale extends entity {
 						break;
 				}
 			}
-			$discount = (float) $pines->com_sales->round($discount);
+			$discount = (float) $_->com_sales->round($discount);
 			if ($discount <= 0) {
 				// Remove the special amounts saved on products.
 				$this->product_special_remove($id);
@@ -1824,9 +1824,9 @@ class com_sales_sale extends entity {
 			elseif ($cur_tax_fee->type == 'flat_rate')
 				$taxes += $cur_tax_fee->rate * $tax_qty;
 		}
-		$this->total_specials = (float) $pines->com_sales->round($total_specials);
-		$this->item_fees = (float) $pines->com_sales->round($item_fees);
-		$this->taxes = (float) $pines->com_sales->round($taxes);
+		$this->total_specials = (float) $_->com_sales->round($total_specials);
+		$this->item_fees = (float) $_->com_sales->round($item_fees);
+		$this->taxes = (float) $_->com_sales->round($taxes);
 		// The total can now be calculated.
 		$total = ($this->subtotal - $this->total_specials) + $this->item_fees + $this->taxes;
 		$this->total = (float) $total;
@@ -1843,11 +1843,11 @@ class com_sales_sale extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function void($force = false) {
-		global $pines;
+		global $_;
 		if ($this->status == 'voided')
 			return true;
 		// Check if this sale is attached to any returns. If so, it cannot be voided.
-		$attached_return = $pines->entity_manager->get_entity(
+		$attached_return = $_->entity_manager->get_entity(
 				array('class' => com_sales_return, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'return'),
@@ -1871,7 +1871,7 @@ class com_sales_sale extends entity {
 				foreach ($stock_entities as &$cur_stock) {
 					if (!isset($cur_stock->guid))
 						continue;
-					$last_tx = $pines->entity_manager->get_entity(
+					$last_tx = $_->entity_manager->get_entity(
 							array('reverse' => true, 'class' => com_sales_tx),
 							array('&',
 								'tag' => array('com_sales', 'transaction', 'stock_tx'),
@@ -1898,7 +1898,7 @@ class com_sales_sale extends entity {
 				// Call product actions for all products without stock entries.
 				$i = $cur_product['quantity'] - count($cur_product['stock_entities']);
 				if ($i > 0) {
-					$pines->com_sales->call_product_actions(array(
+					$_->com_sales->call_product_actions(array(
 						'type' => 'voided',
 						'product' => $cur_product['entity'],
 						'ticket' => $this,
@@ -1915,7 +1915,7 @@ class com_sales_sale extends entity {
 				if (!is_array($cur_product['stock_entities']))
 					continue;
 				foreach ($cur_product['stock_entities'] as &$cur_stock) {
-					$pines->com_sales->call_product_actions(array(
+					$_->com_sales->call_product_actions(array(
 						'type' => 'voided',
 						'product' => $cur_product['entity'],
 						'stock_entry' => $cur_stock,
@@ -1939,7 +1939,7 @@ class com_sales_sale extends entity {
 				if ($cur_payment['status'] != 'tendered')
 					continue;
 				// Call the payment processing.
-				$pines->com_sales->call_payment_process(array(
+				$_->com_sales->call_payment_process(array(
 					'action' => 'void',
 					'name' => $cur_payment['entity']->processing_type,
 					'payment' => &$cur_payment,

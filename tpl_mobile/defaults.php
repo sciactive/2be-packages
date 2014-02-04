@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -36,7 +36,7 @@ return array(
 		'name' => 'header_image',
 		'cname' => 'Header Image',
 		'description' => 'The header image to use. Should be 40 pixels tall.',
-		'value' => $pines->config->rela_location.'templates/tpl_mobile/images/default_logo.png',
+		'value' => $_->config->rela_location.'templates/tpl_mobile/images/default_logo.png',
 		'peruser' => true,
 	),
 );

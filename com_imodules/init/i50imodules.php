@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_imodules->parse_imodules)
+if (!$_->config->com_imodules->parse_imodules)
 	return;
 
 /**
@@ -20,8 +20,8 @@ if (!$pines->config->com_imodules->parse_imodules)
  * @param array &$arguments Arguments.
  */
 function com_imodules__parse_imodules(&$arguments) {
-	global $pines;
-	$pines->com_imodules->parse_imodules($arguments[0]);
+	global $_;
+	$_->com_imodules->parse_imodules($arguments[0]);
 }
 
-$pines->hook->add_callback('$pines->format_content', -10, 'com_imodules__parse_imodules');
+$_->hook->add_callback('$_->format_content', -10, 'com_imodules__parse_imodules');

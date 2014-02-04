@@ -11,14 +11,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_user->confirm_email)
+if (!$_->config->com_user->confirm_email)
 	return;
 
 // Check to see if they're not verified.
-if (gatekeeper() && isset($_SESSION['user']->secret) && !$pines->depend->check('request', 'com_user/registeruser')) {
+if (gatekeeper() && isset($_SESSION['user']->secret) && !$_->depend->check('request', 'com_user/registeruser')) {
 	// Provide a notice that they're not verified.
 	$module = new module('com_user', 'resend_verification', 'bottom');
 	unset($module);

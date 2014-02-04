@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -35,11 +35,11 @@ if (gatekeeper('com_user/enabling')) {
 		$group->remove_tag('enabled');
 }
 $group->email = $_REQUEST['email'];
-if ($group->email && $_REQUEST['mailing_list'] != 'ON' && !$pines->com_mailer->unsubscribe_query($group->email)) {
-	if (!$pines->com_mailer->unsubscribe_add($group->email))
+if ($group->email && $_REQUEST['mailing_list'] != 'ON' && !$_->com_mailer->unsubscribe_query($group->email)) {
+	if (!$_->com_mailer->unsubscribe_add($group->email))
 		pines_error('Your email could not be removed from the mailing list. Please try again, and if the problem persists, contact an administrator.');
-} elseif ($group->email && $_REQUEST['mailing_list'] == 'ON' && $pines->com_mailer->unsubscribe_query($group->email)) {
-	if (!$pines->com_mailer->unsubscribe_remove($group->email))
+} elseif ($group->email && $_REQUEST['mailing_list'] == 'ON' && $_->com_mailer->unsubscribe_query($group->email)) {
+	if (!$_->com_mailer->unsubscribe_remove($group->email))
 		pines_error('Your email could not be added to the mailing list. Please try again, and if the problem persists, contact an administrator.');
 }
 $group->phone = preg_replace('/\D/', '', $_REQUEST['phone']);
@@ -94,14 +94,14 @@ if ( $_REQUEST['parent'] == 'none' ) {
 
 if ( gatekeeper('com_user/abilities') ) {
 	$sections = array('system');
-	foreach ($pines->components as $cur_component) {
+	foreach ($_->components as $cur_component) {
 		$sections[] = $cur_component;
 	}
 	foreach ($sections as $cur_section) {
 		if ($cur_section == 'system') {
-			$section_abilities = (array) $pines->info->abilities;
+			$section_abilities = (array) $_->info->abilities;
 		} else {
-			$section_abilities = (array) $pines->info->$cur_section->abilities;
+			$section_abilities = (array) $_->info->$cur_section->abilities;
 		}
 		foreach ($section_abilities as $cur_ability) {
 			if ( isset($_REQUEST[$cur_section]) && (array_search($cur_ability[0], $_REQUEST[$cur_section]) !== false) ) {
@@ -118,12 +118,12 @@ if (empty($group->groupname)) {
 	pines_notice('Please specify a groupname.');
 	return;
 }
-if ($pines->config->com_user->max_groupname_length > 0 && strlen($group->groupname) > $pines->config->com_user->max_groupname_length) {
+if ($_->config->com_user->max_groupname_length > 0 && strlen($group->groupname) > $_->config->com_user->max_groupname_length) {
 	$group->print_form();
-	pines_notice("Groupnames must not exceed {$pines->config->com_user->max_groupname_length} characters.");
+	pines_notice("Groupnames must not exceed {$_->config->com_user->max_groupname_length} characters.");
 	return;
 }
-$test = $pines->entity_manager->get_entity(
+$test = $_->entity_manager->get_entity(
 		array('class' => group, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_user', 'group'),
@@ -135,18 +135,18 @@ if (isset($test->guid) && !$group->is($test)) {
 	pines_notice('There is already a group with that groupname. Please choose a different groupname.');
 	return;
 }
-if (array_diff(str_split($group->groupname), str_split($pines->config->com_user->valid_chars))) {
+if (array_diff(str_split($group->groupname), str_split($_->config->com_user->valid_chars))) {
 	$group->print_form();
-	pines_notice($pines->config->com_user->valid_chars_notice);
+	pines_notice($_->config->com_user->valid_chars_notice);
 	return;
 }
-if (!preg_match($pines->config->com_user->valid_regex, $group->groupname)) {
+if (!preg_match($_->config->com_user->valid_regex, $group->groupname)) {
 	$group->print_form();
-	pines_notice($pines->config->com_user->valid_regex_notice);
+	pines_notice($_->config->com_user->valid_regex_notice);
 	return;
 }
 if (!empty($group->email)) {
-	$test = $pines->entity_manager->get_entity(
+	$test = $_->entity_manager->get_entity(
 			array('class' => group, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_user', 'group'),
@@ -165,7 +165,7 @@ if (isset($group->parent) && !isset($group->parent->guid)) {
 	return;
 }
 if (gatekeeper('com_user/defaultgroups') && $group->default_primary) {
-	$current_primary = $pines->entity_manager->get_entity(array('class' => group), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_primary', true)));
+	$current_primary = $_->entity_manager->get_entity(array('class' => group), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_primary', true)));
 	if (isset($current_primary) && !$group->is($current_primary)) {
 		unset($current_primary->default_primary);
 		if ($current_primary->save()) {
@@ -182,17 +182,17 @@ if ($_REQUEST['remove_logo'] == 'ON' && isset($group->logo))
 	unset($group->logo);
 
 // Logo image upload and resizing.
-if (!empty($_REQUEST['image']) && $pines->uploader->check($_REQUEST['image'])) {
+if (!empty($_REQUEST['image']) && $_->uploader->check($_REQUEST['image'])) {
 	$group->logo = $_REQUEST['image'];
 	/* How to resize images without overwriting them?
-	if ($pines->config->com_user->resize_logos) {
+	if ($_->config->com_user->resize_logos) {
 		// if jpeg
 		case 'image/jpeg':
 			$img_raw = imagecreatefromjpeg($group->logo);
 			$currwidth = imagesx($img_raw);
 			$currheight = imagesy($img_raw);
-			$img_resized = imagecreate($pines->config->com_user->logo_width, $pines->config->com_user->logo_height);
-			imagecopyresized($img_resized, $img_raw, 0, 0, 0, 0, $pines->config->com_user->logo_width, $pines->config->com_user->logo_height, $currwidth, $currheight);
+			$img_resized = imagecreate($_->config->com_user->logo_width, $_->config->com_user->logo_height);
+			imagecopyresized($img_resized, $img_raw, 0, 0, 0, 0, $_->config->com_user->logo_width, $_->config->com_user->logo_height, $currwidth, $currheight);
 			imagejpeg($img_resized, $group->logo);
 			imagedestroy($img_raw);
 			imagedestroy($img_resized);
@@ -202,8 +202,8 @@ if (!empty($_REQUEST['image']) && $pines->uploader->check($_REQUEST['image'])) {
 			$img_raw = imagecreatefrompng($group->logo);
 			$currwidth = imagesx($img_raw);
 			$currheight = imagesy($img_raw);
-			$img_resized = imagecreate($pines->config->com_user->logo_width, $pines->config->com_user->logo_height);
-			imagecopyresized($img_resized, $img_raw, 0, 0, 0, 0, $pines->config->com_user->logo_width, $pines->config->com_user->logo_height, $currwidth, $currheight);
+			$img_resized = imagecreate($_->config->com_user->logo_width, $_->config->com_user->logo_height);
+			imagecopyresized($img_resized, $img_raw, 0, 0, 0, 0, $_->config->com_user->logo_width, $_->config->com_user->logo_height, $currwidth, $currheight);
 			imagepng($img_resized, $group->logo);
 			imagedestroy($img_raw);
 			imagedestroy($img_resized);
@@ -213,7 +213,7 @@ if (!empty($_REQUEST['image']) && $pines->uploader->check($_REQUEST['image'])) {
 			$img_raw = imagecreatefromgif($group->logo);
 			$currwidth = imagesx($img_raw);
 			$currheight = imagesy($img_raw);
-			$img_resized = imagecreatetruecolor($pines->config->com_user->logo_width, $pines->config->com_user->logo_height);
+			$img_resized = imagecreatetruecolor($_->config->com_user->logo_width, $_->config->com_user->logo_height);
 			$blank = imagecolortransparent($img_raw);
 			// If the image has alpha values (transparency) fill our resized image with blank space.
 			if( $blank >= 0 && $blank < imagecolorstotal($img_raw) ) {
@@ -222,7 +222,7 @@ if (!empty($_REQUEST['image']) && $pines->uploader->check($_REQUEST['image'])) {
 				imagefill( $img_resized, 0, 0, $trans_color );
 				imagecolortransparent( $img_resized, $trans_color );
 			}
-			imagecopyresized($img_resized, $img_raw, 0, 0, 0, 0, $pines->config->com_user->logo_width, $pines->config->com_user->logo_height, $currwidth, $currheight);
+			imagecopyresized($img_resized, $img_raw, 0, 0, 0, 0, $_->config->com_user->logo_width, $_->config->com_user->logo_height, $currwidth, $currheight);
 			imagegif($img_resized, $group->logo);
 			imagedestroy($img_raw);
 			imagedestroy($img_resized);

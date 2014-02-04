@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_content->global_meta_tags)
+if (!$_->config->com_content->global_meta_tags)
 	return;
 
 $module = new module('com_content', 'global_meta_tags', 'head');

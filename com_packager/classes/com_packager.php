@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -22,11 +22,11 @@ class com_packager extends component {
 	 * @return module The module.
 	 */
 	public function list_packages() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_packager', 'package/list', 'content');
 
-		$module->packages = $pines->entity_manager->get_entities(array('class' => com_packager_package), array('&', 'tag' => array('com_packager', 'package')));
+		$module->packages = $_->entity_manager->get_entities(array('class' => com_packager_package), array('&', 'tag' => array('com_packager', 'package')));
 
 		if ( empty($module->packages) )
 			pines_notice('There are no packages.');
@@ -38,15 +38,15 @@ class com_packager extends component {
 	 * Creates a package wizard.
 	 */
 	public function package_wizard() {
-		global $pines;
+		global $_;
 		$module = new module('com_packager', 'package/wizard', 'content');
 		$module->components = array();
-		foreach ($pines->all_components as $cur_component) {
+		foreach ($_->all_components as $cur_component) {
 			$conf = configurator_component::factory($cur_component);
 			$info = clone $conf->info;
 			$info->type = substr($cur_component, 0, 4) == 'tpl_' ? 'template' : 'component';
 			$info->disabled = $conf->is_disabled();
-			if (!is_null($pines->entity_manager->get_entity(
+			if (!is_null($_->entity_manager->get_entity(
 					array('class' => com_packager_package),
 					array('&',
 						'tag' => array('com_packager', 'package'),

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('system/all') )
@@ -20,7 +20,7 @@ $module->title = 'Entity Update';
 $errors = array();
 $count = $nochange = 0;
 // Grab entities and update.
-$entities = $pines->entity_manager->get_entities(
+$entities = $_->entity_manager->get_entities(
 		array('class' => entity),
 		array('&',
 			'tag' => array('com_sales')

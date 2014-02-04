@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Attach a PO';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <form class="pf-form" method="post" action="<?php e(pines_url('com_sales', 'warehouse/attachposave')); ?>">
 	<script type="text/javascript">

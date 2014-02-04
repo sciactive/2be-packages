@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->com_pgrid->load();
-$pines->com_ptags->load();
+$_->com_pgrid->load();
+$_->com_ptags->load();
 
 // This is all done so I can use the page form view. ;)
 $this->entity = com_content_page::factory();
@@ -41,7 +41,7 @@ if (isset($this->meta_tags) && gatekeeper('com_content/editmeta')) {
 		$this->entity->meta_tags[] = array('name' => $cur_meta_tag->values[0], 'content' => $cur_meta_tag->values[1]);
 	}
 }
-if ($pines->config->com_content->custom_head && gatekeeper('com_content/edithead')) {
+if ($_->config->com_content->custom_head && gatekeeper('com_content/edithead')) {
 	if (isset($this->enable_custom_head))
 		$this->entity->enable_custom_head = ($this->enable_custom_head == 'ON');
 	if (isset($this->custom_head))

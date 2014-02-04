@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Loan Overview';
 ?>
@@ -18,7 +18,7 @@ $this->title = 'Loan Overview';
 	</div>
 	<div class="pf-element pf-full-width">
 		<div class="pf-label" style="width:280px;margin-right:60px;">
-			<span style="font-weight:bold;">Principal Amount: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->principal, true)); ?></span></span><br/>
+			<span style="font-weight:bold;">Principal Amount: <span style="float:right;"><?php echo '$'.h($_->com_sales->round($this->entity->principal, true)); ?></span></span><br/>
 			<span style="font-weight:bold;">APR: <span style="float:right;"><?php e($this->entity->apr).'%'; ?></span></span><br/>
 			<span style="font-weight:bold;">Term: <span style="float:right;"><?php e($this->entity->term); echo " ".h($this->entity->term_type); ?></span></span><br/>
 			<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
@@ -111,9 +111,9 @@ $this->title = 'Loan Overview';
 			<span>Payments Scheduled: <span style="float:right;"><?php e($this->entity->number_payments); ?></span></span><br/>
 			<span>Total Payments: <span style="float:right;"><?php echo '$'.h($this->entity->total_payment_sum); ?></span></span><br/>
 			<span>Total Interest: <span style="float:right;"><?php echo '$'.h($this->entity->total_interest_sum); ?></span></span><br/>
-			<span>Est. Interest Savings: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->est_interest_savings, true)); ?></span></span><br/><br/>
+			<span>Est. Interest Savings: <span style="float:right;"><?php echo '$'.h($_->com_sales->round($this->entity->est_interest_savings, true)); ?></span></span><br/><br/>
 
-			<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;"><?php echo $payment_frequency;?> Payment: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->frequency_payment, true)); ?></span></span></div><br/>
+			<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;"><?php echo $payment_frequency;?> Payment: <span style="float:right;"><?php echo '$'.h($_->com_sales->round($this->entity->frequency_payment, true)); ?></span></span></div><br/>
 		</div>
 	</div>
 	<div class="pf-element pf-heading">
@@ -133,15 +133,15 @@ $this->title = 'Loan Overview';
 			<tbody>
 				<tr>
 					<td colspan="4">Principal Balance</td>
-					<td>$<?php e($pines->com_sales->round($this->entity->principal, true)); ?></td>
+					<td>$<?php e($_->com_sales->round($this->entity->principal, true)); ?></td>
 				</tr>
 				<?php foreach ($this->entity->schedule as $schedule) { ?>
 				<tr>
 					<td><?php e(format_date($schedule['scheduled_date_expected'], "date_short")); ?></td>
-					<td><?php echo '$'.h($pines->com_sales->round($schedule['payment_amount_expected'], true)); ?></td>
-					<td><?php echo '$'.h($pines->com_sales->round($schedule['payment_interest_expected'], true)); ?></td>
-					<td><?php echo '$'.h($pines->com_sales->round($schedule['payment_principal_expected'], true)); ?></td>
-					<td><?php echo '$'.h($pines->com_sales->round($schedule['scheduled_balance'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($schedule['payment_amount_expected'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($schedule['payment_interest_expected'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($schedule['payment_principal_expected'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($schedule['scheduled_balance'], true)); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>

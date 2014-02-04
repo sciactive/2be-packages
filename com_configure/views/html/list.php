@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Component Configuration';
 ?>
@@ -89,7 +89,7 @@ $this->title = 'Component Configuration';
 			</select>
 			<button class="btn" type="button" onclick="pines.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
 		</div>
-		<?php if (!$pines->config->com_configure->peruser) { ?>
+		<?php if (!$_->config->com_configure->peruser) { ?>
 		<p>
 			Per user/group configuration is not enabled, so these settings will have
 			no effect. You can enable per user/group configuration
@@ -119,7 +119,7 @@ $this->title = 'Component Configuration';
 				<button class="btn btn-danger" type="button" onclick="pines.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'condition/delete'))); ?>)">Delete</button>
 			</div>
 		</div>
-		<?php if (!$pines->config->com_configure->percondition) { ?>
+		<?php if (!$_->config->com_configure->percondition) { ?>
 		<p>
 			Per condition configuration is not enabled, so these settings will have
 			no effect. You can enable per condition configuration

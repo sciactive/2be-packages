@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -111,7 +111,7 @@ class com_menueditor_entry extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form($override_page = false) {
-		global $pines;
+		global $_;
 		$module = new module('com_menueditor', 'entry/form', 'content');
 		$module->entity = $this;
 		// Set up a hook to capture the menu entries before they get destroyed.
@@ -119,7 +119,7 @@ class com_menueditor_entry extends entity {
 			$callback = array($this, 'capture_menu_override');
 		else
 			$callback = array($this, 'capture_menu');
-		$pines->hook->add_callback('$pines->menu->render', -1, $callback);
+		$_->hook->add_callback('$_->menu->render', -1, $callback);
 		$this->cur_module = $module;
 
 		return $module;
@@ -129,8 +129,8 @@ class com_menueditor_entry extends entity {
 	 * Capture the menu entries before they are destroyed.
 	 */
 	public function capture_menu() {
-		global $pines;
-		$this->cur_module->captured_menu_arrays = $pines->menu->menu_arrays;
+		global $_;
+		$this->cur_module->captured_menu_arrays = $_->menu->menu_arrays;
 	}
 
 	/**
@@ -139,9 +139,9 @@ class com_menueditor_entry extends entity {
 	 * Then override the page.
 	 */
 	public function capture_menu_override() {
-		global $pines;
-		$this->cur_module->captured_menu_arrays = $pines->menu->menu_arrays;
-		$pines->page->override = true;
-		$pines->page->override_doc($this->cur_module->render());
+		global $_;
+		$this->cur_module->captured_menu_arrays = $_->menu->menu_arrays;
+		$_->page->override = true;
+		$_->page->override_doc($this->cur_module->render());
 	}
 }

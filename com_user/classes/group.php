@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -34,11 +34,11 @@ class group extends able_object implements group_interface {
 
 	public function __construct($id = 0) {
 		if ($id > 0 || (string) $id === $id) {
-			global $pines;
+			global $_;
 			if ((int) $id === $id)
-				$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'group')));
+				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'group')));
 			else
-				$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'group'), 'data' => array('groupname', $id)));
+				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'group'), 'data' => array('groupname', $id)));
 			if (isset($entity)) {
 				$this->guid = $entity->guid;
 				$this->tags = $entity->tags;
@@ -109,8 +109,8 @@ class group extends able_object implements group_interface {
 	}
 
 	public function delete() {
-		global $pines;
-		$entities = $pines->entity_manager->get_entities(
+		global $_;
+		$entities = $_->entity_manager->get_entities(
 				array('class' => group),
 				array('&',
 					'tag' => array('com_user', 'group'),
@@ -142,8 +142,8 @@ class group extends able_object implements group_interface {
 	}
 
 	public function get_children() {
-		global $pines;
-		$return = (array) $pines->entity_manager->get_entities(
+		global $_;
+		$return = (array) $_->entity_manager->get_entities(
 				array('class' => group),
 				array('&',
 					'tag' => array('com_user', 'group', 'enabled'),
@@ -154,9 +154,9 @@ class group extends able_object implements group_interface {
 	}
 
 	public function get_descendants($and_self = false) {
-		global $pines;
+		global $_;
 		$return = array();
-		$entities = $pines->entity_manager->get_entities(
+		$entities = $_->entity_manager->get_entities(
 				array('class' => group),
 				array('&',
 					'tag' => array('com_user', 'group', 'enabled'),
@@ -169,7 +169,7 @@ class group extends able_object implements group_interface {
 		}
 		$hooked = $this;
 		$class = get_class();
-		$pines->hook->hook_object($hooked, $class.'->', false);
+		$_->hook->hook_object($hooked, $class.'->', false);
 		if ($and_self)
 			$return[] = $hooked;
 		return $return;
@@ -190,22 +190,22 @@ class group extends able_object implements group_interface {
 	}
 
 	public function get_logo($full = false) {
-		global $pines;
+		global $_;
 		if (isset($this->logo))
-			return $full ? $pines->uploader->url($pines->uploader->real($this->logo), true) : $this->logo;
+			return $full ? $_->uploader->url($_->uploader->real($this->logo), true) : $this->logo;
 		if (isset($this->parent) && $this->parent->has_tag('enabled'))
 			return $this->parent->get_logo($full);
-		return ($full ? $pines->config->full_location : $pines->config->location)."{$pines->config->upload_location}logos/default_logo.png";
+		return ($full ? $_->config->full_location : $_->config->location)."{$_->config->upload_location}logos/default_logo.png";
 	}
 
 	public function get_users($descendants = false) {
-		global $pines;
+		global $_;
 		if ($descendants)
 			$groups = $this->get_descendants();
 		else
 			$groups = array();
 		$groups[] = $this;
-		$return = $pines->entity_manager->get_entities(
+		$return = $_->entity_manager->get_entities(
 				array('class' => user),
 				array('&',
 					'tag' => array('com_user', 'user', 'enabled')
@@ -221,7 +221,7 @@ class group extends able_object implements group_interface {
 	}
 
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_user', 'form_group', 'content');
 		$module->entity = $this;
 		$module->display_username = gatekeeper('com_user/usernames');
@@ -230,8 +230,8 @@ class group extends able_object implements group_interface {
 		$module->display_abilities = gatekeeper('com_user/abilities');
 		$module->display_conditions = gatekeeper('com_user/conditions');
 		$module->sections = array('system');
-		$module->group_array = $pines->user_manager->get_groups();
-		foreach ($pines->components as $cur_component)
+		$module->group_array = $_->user_manager->get_groups();
+		foreach ($_->components as $cur_component)
 			$module->sections[] = $cur_component;
 
 		return $module;

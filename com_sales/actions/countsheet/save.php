@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -48,7 +48,7 @@ if (empty($countsheet->entries)) {
 	return;
 }
 
-if ($pines->config->com_sales->global_countsheets)
+if ($_->config->com_sales->global_countsheets)
 	$countsheet->ac->other = 1;
 
 if ($_REQUEST['save'] == 'commit') {
@@ -64,7 +64,7 @@ if ($_REQUEST['save'] == 'commit') {
 		pines_session('close');
 	}
 	// Automatically decline the countsheet if it's missing items.
-	if ($pines->config->com_sales->decline_countsheets && !empty($countsheet->missing))
+	if ($_->config->com_sales->decline_countsheets && !empty($countsheet->missing))
 		$countsheet->status = 'declined';
 }
 

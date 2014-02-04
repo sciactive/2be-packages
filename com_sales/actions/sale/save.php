@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -25,7 +25,7 @@ if ( isset($_REQUEST['id']) ) {
 	$sale = com_sales_sale::factory();
 }
 
-if ($pines->config->com_sales->com_customer && $sale->status != 'invoiced' && $sale->status != 'paid' && $sale->status != 'voided') {
+if ($_->config->com_sales->com_customer && $sale->status != 'invoiced' && $sale->status != 'paid' && $sale->status != 'voided') {
 	$sale->customer = null;
 	if (preg_match('/^\d+/', $_REQUEST['customer'])) {
 		$sale->customer = com_customer_customer::factory((int) $_REQUEST['customer']);
@@ -56,7 +56,7 @@ if ($sale->status != 'invoiced' && $sale->status != 'paid' && $sale->status != '
 			$cur_discount = $cur_product->values[6];
 			$cur_esp = $cur_product->values[9];
 			$cur_salesperson = null;
-			if ($pines->config->com_sales->per_item_salesperson)
+			if ($_->config->com_sales->per_item_salesperson)
 				$cur_salesperson = user::factory(intval($cur_product->values[10]));
 			// Default to the sale's user.
 			if (!isset($cur_salesperson->guid))
@@ -87,7 +87,7 @@ if ($sale->status != 'invoiced' && $sale->status != 'paid' && $sale->status != '
 				'discount' => $cur_discount,
 				'salesperson' => $cur_salesperson
 			);
-			if ($pines->config->com_sales->com_esp)
+			if ($_->config->com_sales->com_esp)
 				$cur_product['esp'] = $cur_esp;
 			if ($cur_product_entity->serialized && empty($cur_serial) && $cur_delivery != 'warehouse') {
 				pines_notice("Product with SKU [$cur_sku] requires a serial.");
@@ -206,7 +206,7 @@ if ($sale->status != 'paid' && $sale->status != 'voided') {
 		}
 	}
 }
-if ($pines->config->com_sales->com_customer && $_REQUEST['shipping_use_customer'] == 'ON') {
+if ($_->config->com_sales->com_customer && $_REQUEST['shipping_use_customer'] == 'ON') {
 	$sale->shipping_use_customer = true;
 	$sale->shipping_address = (object) array(
 		'name' => $sale->customer->name,
@@ -238,10 +238,10 @@ if ($product_error || $payment_error) {
 	return;
 }
 
-if ($pines->config->com_sales->global_sales)
+if ($_->config->com_sales->global_sales)
 	$sale->ac->other = 1;
 
-if ($_REQUEST['process'] == 'invoice' && $sale->status != 'invoiced' && $sale->status != 'paid' && $sale->status != 'voided' && $pines->config->com_sales->allow_invoicing) {
+if ($_REQUEST['process'] == 'invoice' && $sale->status != 'invoiced' && $sale->status != 'paid' && $sale->status != 'voided' && $_->config->com_sales->allow_invoicing) {
 	if (!$sale->invoice()) {
 		$sale->print_form();
 		pines_error('There was a problem while invoicing the sale. Please check that all information is correct and resubmit.');
@@ -258,7 +258,7 @@ if ($_REQUEST['process'] == 'tender' && $sale->status != 'paid' && $sale->status
 }
 
 if (!isset($sale->status) || $sale->status == 'quoted') {
-	if ($sale->status == 'quoted' && !$pines->config->com_sales->allow_quoting) {
+	if ($sale->status == 'quoted' && !$_->config->com_sales->allow_quoting) {
 		$sale->print_form();
 		pines_notice('Quoting sales is not allowed.');
 		return;

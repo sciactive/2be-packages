@@ -8,23 +8,23 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_user->pw_recovery)
+if (!$_->config->com_user->pw_recovery)
 	throw new HttpClientException(null, 404);
 
 $user = user::factory((int) $_REQUEST['id']);
 
 if (!isset($user->guid)) {
 	pines_notice('The specified user id is not available.');
-	$pines->user_manager->print_login();
+	$_->user_manager->print_login();
 	return;
 }
 
-if (!isset($user->secret) || $_REQUEST['secret'] != $user->secret || strtotime("+{$pines->config->com_user->pw_recovery_minutes} minutes", $user->secret_time) < time() ) {
+if (!isset($user->secret) || $_REQUEST['secret'] != $user->secret || strtotime("+{$_->config->com_user->pw_recovery_minutes} minutes", $user->secret_time) < time() ) {
 	pines_notice('The secret code given does not match this user.');
-	$pines->user_manager->print_login();
+	$_->user_manager->print_login();
 	return;
 }
 
@@ -35,9 +35,9 @@ if ($_REQUEST['form'] != 'true') {
 	return;
 }
 
-if (empty($_REQUEST['password']) && !$pines->config->com_user->pw_empty) {
+if (empty($_REQUEST['password']) && !$_->config->com_user->pw_empty) {
 	pines_notice('Password cannot be empty');
-	$pines->user_manager->print_login();
+	$_->user_manager->print_login();
 	return;
 }
 
@@ -50,4 +50,4 @@ if ($user->save()) {
 	pines_error('Error saving new password.');
 }
 
-$pines->user_manager->print_login();
+$_->user_manager->print_login();

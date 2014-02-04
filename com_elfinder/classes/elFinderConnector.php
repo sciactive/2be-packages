@@ -5,7 +5,7 @@
  * @package Components\elfinder
  * @author Dmitry (dio) Levashov
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**

@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_modules/listmodules') )
 	punt_user(null, pines_url('com_modules', 'module/list'));
 
-$pines->com_modules->list_modules();
+$_->com_modules->list_modules();

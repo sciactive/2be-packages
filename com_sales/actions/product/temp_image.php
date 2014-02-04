@@ -8,16 +8,16 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/editproduct') && !gatekeeper('com_sales/newproduct') )
 	punt_user(null, pines_url('com_sales', 'product/edit', array('image' => $_REQUEST['image'], 'type' => $_REQUEST['type'])));
 
-$pines->page->override = true;
+$_->page->override = true;
 
 if ($_REQUEST['source'] == 'temp')
-	$file = $pines->uploader->temp($_REQUEST['image']);
+	$file = $_->uploader->temp($_REQUEST['image']);
 else
 	$file = $_REQUEST['image'];
 if (!$file || !file_exists($file))
@@ -44,8 +44,8 @@ if ($_REQUEST['options']) {
 		$options['y'] = $tmp_options['y'];
 }
 
-$pines->com_sales->process_product_image($image, $_REQUEST['type'], $options);
+$_->com_sales->process_product_image($image, $_REQUEST['type'], $options);
 
 header('Content-Type: image/png');
 header('Content-Disposition: inline; filename="product-image.png"');
-$pines->page->override_doc("$image");
+$_->page->override_doc("$image");

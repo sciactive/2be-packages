@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Reviewing Cash Count ['.h($this->entity->guid).']';
 if (isset($this->entity->guid))
 	$this->note = 'Created by ' . h($this->entity->user->name) . ' on ' . h(format_date($this->entity->p_cdate, 'date_short')) . ' - Last Modified on ' . h(format_date($this->entity->p_mdate, 'date_short'));
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/cashcount/formreview']);
 ?>

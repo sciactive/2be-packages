@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Entry' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide entry details in this form.';
-$pines->com_jstree->load();
+$_->com_jstree->load();
 
 // Make a JSON structure of the current entire menu.
 $menus = array();
 foreach ($this->captured_menu_arrays as $cur_entry) {
 	// Transform URL arrays into actual URLs.
 	if (isset($cur_entry['href']) && (array) $cur_entry['href'] === $cur_entry['href'])
-		$cur_entry['href'] = call_user_func_array(array($pines->template, 'url'), $cur_entry['href']);
+		$cur_entry['href'] = call_user_func_array(array($_->template, 'url'), $cur_entry['href']);
 	$tmp_path = explode('/', $cur_entry['path']);
 	$cur_menus =& $menus;
 	foreach ($tmp_path as $cur_path) {
@@ -237,7 +237,7 @@ unset($cur_child);
 			<input class="pf-field" type="text" name="position" size="24" value="<?php e($this->entity->position); ?>" />
 			<a href="javascript:void(0);" class="ui-icon ui-icon-triangle-1-s"></a>
 			<select style="display: none;">
-				<?php foreach ($pines->info->template->positions as $cur_position) {
+				<?php foreach ($_->info->template->positions as $cur_position) {
 					?><option value="<?php e($cur_position); ?>"><?php e($cur_position); ?></option><?php
 				} ?>
 			</select>

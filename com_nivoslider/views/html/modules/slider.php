@@ -8,17 +8,17 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ($pines->config->com_nivoslider->check_files && !$pines->uploader->check($this->file)) {
+if ($_->config->com_nivoslider->check_files && !$_->uploader->check($this->file)) {
 	echo 'Unsafe file detected.';
 	return;
 }
-$pines->com_nivoslider->load();
+$_->com_nivoslider->load();
 
-$images = trim(file_get_contents($pines->uploader->real($this->file)));
-$dir = ($this->absolute_path == 'true') ? $pines->config->location : rtrim(dirname($this->file), '/') . '/';
+$images = trim(file_get_contents($_->uploader->real($this->file)));
+$dir = ($this->absolute_path == 'true') ? $_->config->location : rtrim(dirname($this->file), '/') . '/';
 $images = explode("\n", $images);
 
 $options = (object) array();
@@ -63,7 +63,7 @@ if (empty($this->theme))
 <div class="slider-wrapper theme-<?php e($this->theme); ?>">
 	<div class="ribbon"></div>
 	<script type="text/javascript">
-		pines.loadcss("<?php e($pines->config->location); ?>components/com_nivoslider/includes/themes/<?php e(clean_filename($this->theme)); ?>/<?php e(clean_filename($this->theme)); ?>.css");
+		pines.loadcss("<?php e($_->config->location); ?>components/com_nivoslider/includes/themes/<?php e(clean_filename($this->theme)); ?>/<?php e(clean_filename($this->theme)); ?>.css");
 		pines(function(){
 			$('#p_muid_slider').nivoSlider(<?php echo json_encode($options); ?>);
 		});
@@ -78,7 +78,7 @@ if (empty($this->theme))
 			$parts = explode('|', $cur_image, 4);
 			$image_html .= '<img alt="" src="'.h($dir.$parts[0]);
 			if (!empty($parts[1])) {
-				if (!$pines->config->com_nivoslider->allow_html_captions || strpos($parts[1], '<') === false)
+				if (!$_->config->com_nivoslider->allow_html_captions || strpos($parts[1], '<') === false)
 					$image_html .= '" title="'.h($parts[1]);
 				else {
 					$unique = uniqid('p_muid_');

@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Group' : 'Editing ['.h($this->entity->groupname).']';
 $this->note = 'Provide group details in this form.';
-$pines->com_pgrid->load();
-//$pines->com_jstree->load();
-$pines->uploader->load();
+$_->com_pgrid->load();
+//$_->com_jstree->load();
+$_->uploader->load();
 ?>
 <script type="text/javascript">
 	pines(function(){
@@ -95,7 +95,7 @@ $pines->uploader->load();
 		<li><a href="#p_muid_tab_location" data-toggle="tab">Address</a></li>
 		<?php if ($this->display_abilities) { ?>
 		<li><a href="#p_muid_tab_abilities" data-toggle="tab">Abilities</a></li>
-		<?php } if ($pines->config->com_user->conditional_groups && $this->display_conditions) { ?>
+		<?php } if ($_->config->com_user->conditional_groups && $this->display_conditions) { ?>
 		<li><a href="#p_muid_tab_conditions" data-toggle="tab">Conditions</a></li>
 		<?php } ?>
 		<li><a href="#p_muid_tab_attributes" data-toggle="tab">Attributes</a></li>
@@ -128,10 +128,10 @@ $pines->uploader->load();
 				<label><span class="pf-label">Email</span>
 					<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
 			</div>
-			<?php if (isset($pines->com_mailer)) { ?>
+			<?php if (isset($_->com_mailer)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Mailing List</span>
-					<input class="pf-field" type="checkbox" name="mailing_list" value="ON"<?php echo $pines->com_mailer->unsubscribe_query($this->entity->email) ? '' : ' checked="checked"'; ?> /> Subscribe to the mailing list.</label>
+					<input class="pf-field" type="checkbox" name="mailing_list" value="ON"<?php echo $_->com_mailer->unsubscribe_query($this->entity->email) ? '' : ' checked="checked"'; ?> /> Subscribe to the mailing list.</label>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
@@ -167,7 +167,7 @@ $pines->uploader->load();
 					<select class="pf-field" name="parent" size="1">
 						<option value="none">--No Parent--</option>
 						<?php
-						$pines->user_manager->group_sort($this->group_array, 'name');
+						$_->user_manager->group_sort($this->group_array, 'name');
 						foreach ($this->group_array as $cur_group) {
 							?><option value="<?php e($cur_group->guid); ?>"<?php echo $cur_group->is($this->entity->parent) ? ' selected="selected"' : ''; ?>><?php e(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
 						} ?>
@@ -353,14 +353,14 @@ $pines->uploader->load();
 			<br class="pf-clearing" />
 			<?php foreach ($this->sections as $cur_section) {
 				if ($cur_section == 'system')
-					$section_abilities = (array) $pines->info->abilities;
+					$section_abilities = (array) $_->info->abilities;
 				else
-					$section_abilities = (array) $pines->info->$cur_section->abilities;
+					$section_abilities = (array) $_->info->$cur_section->abilities;
 				if (!$section_abilities) continue; ?>
 			<div class="abilities_accordion accordion">
 				<div class="accordion-group">
 					<a class="accordion-heading ui-helper-clearfix" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-						<big class="accordion-toggle"><?php echo ($cur_section == 'system') ? h($pines->info->name) : h($pines->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
+						<big class="accordion-toggle"><?php echo ($cur_section == 'system') ? h($_->info->name) : h($_->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
 					</a>
 					<div class="accordion-body collapse">
 						<div class="accordion-inner clearfix">
@@ -380,7 +380,7 @@ $pines->uploader->load();
 			<?php } ?>
 			<br class="pf-clearing" />
 		</div>
-		<?php } if ($pines->config->com_user->conditional_groups && $this->display_conditions) { ?>
+		<?php } if ($_->config->com_user->conditional_groups && $this->display_conditions) { ?>
 		<div class="tab-pane" id="p_muid_tab_conditions">
 			<div class="pf-element pf-heading">
 				<h3>Ability Conditions</h3>

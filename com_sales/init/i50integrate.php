@@ -8,20 +8,20 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ($pines->config->com_sales->com_customer && !$pines->depend->check('component', 'com_customer'))
-	$pines->config->com_sales->com_customer = false;
+if ($_->config->com_sales->com_customer && !$_->depend->check('component', 'com_customer'))
+	$_->config->com_sales->com_customer = false;
 
-if ($pines->config->com_sales->com_esp && !$pines->depend->check('component', 'com_esp'))
-	$pines->config->com_sales->com_esp = false;
+if ($_->config->com_sales->com_esp && !$_->depend->check('component', 'com_esp'))
+	$_->config->com_sales->com_esp = false;
 
-if ($pines->config->com_sales->com_hrm && !$pines->depend->check('component', 'com_hrm'))
-	$pines->config->com_sales->com_hrm = false;
+if ($_->config->com_sales->com_hrm && !$_->depend->check('component', 'com_hrm'))
+	$_->config->com_sales->com_hrm = false;
 
-if ($pines->config->com_sales->per_item_salesperson && !$pines->config->com_sales->com_hrm)
-	$pines->config->com_sales->per_item_salesperson = false;
+if ($_->config->com_sales->per_item_salesperson && !$_->config->com_sales->com_hrm)
+	$_->config->com_sales->per_item_salesperson = false;
 
-if ($pines->config->com_sales->com_storefront && !$pines->depend->check('component', 'com_storefront&com_content'))
-	$pines->config->com_sales->com_storefront = false;
+if ($_->config->com_sales->com_storefront && !$_->depend->check('component', 'com_storefront&com_content'))
+	$_->config->com_sales->com_storefront = false;

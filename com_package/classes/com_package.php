@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -84,13 +84,13 @@ class com_package extends component {
 	 * Check all the installed packages and build a database.
 	 */
 	public function rebuild_db() {
-		global $pines;
+		global $_;
 		$db = array(
 			'services' => array(),
 			'packages' => array()
 		);
 		// Add the component packages.
-		foreach ($pines->all_components as $cur_component) {
+		foreach ($_->all_components as $cur_component) {
 			if (substr($cur_component, 0, 4) === 'com_') {
 				$dir = is_dir("components/{$cur_component}/") ? "components/{$cur_component}/" : "components/.{$cur_component}/";
 			} else {
@@ -146,7 +146,7 @@ class com_package extends component {
 			// Check dependencies and log any warnings.
 			if ($cur_entry['depend']) {
 				foreach ($cur_entry['depend'] as $cur_type => $cur_value) {
-					if (!$pines->depend->check($cur_type, $cur_value)) {
+					if (!$_->depend->check($cur_type, $cur_value)) {
 						pines_notice("The dependency \"{$cur_type}\" of the package \"{$cur_package}\" is not met. The package is probably broken because of this.");
 						pines_log("The dependency \"{$cur_type}\" of the package \"{$cur_package}\" is not met. The package is probably broken because of this.", 'warning');
 					}
@@ -155,7 +155,7 @@ class com_package extends component {
 			// Check conflicts and log any warnings.
 			if ($cur_entry['conflict']) {
 				foreach ($cur_entry['conflict'] as $cur_type => $cur_value) {
-					if ($pines->depend->check($cur_type, $cur_value)) {
+					if ($_->depend->check($cur_type, $cur_value)) {
 						pines_notice("The conflict check \"{$cur_type}\" of the package \"{$cur_package}\" is not met. The package is probably broken because of this.");
 						pines_log("The conflict check \"{$cur_type}\" of the package \"{$cur_package}\" is not met. The package is probably broken because of this.", 'warning');
 					}

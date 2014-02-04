@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/editcategory') || !gatekeeper('com_sales/editproduct') )
@@ -52,7 +52,7 @@ function com_sales__category_fix_check($cat, &$fixes) {
 
 $fixes = array();
 // Start with top level categories.
-$cats = $pines->entity_manager->get_entities(
+$cats = $_->entity_manager->get_entities(
 		array('class' => com_sales_category),
 		array('&',
 			'tag' => array('com_sales', 'category')

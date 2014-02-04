@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (empty($this->widget_title))
@@ -16,8 +16,8 @@ if (empty($this->widget_title))
 else
 	$this->title = $this->widget_title;
 
-$pines->editor->load();
-$pines->com_ptags->load();
+$_->editor->load();
+$_->com_ptags->load();
 
 ?>
 <style type="text/css">

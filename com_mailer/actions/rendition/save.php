@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -50,14 +50,14 @@ if (empty($rendition->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_mailer_rendition, 'skip_ac' => true), array('&', 'tag' => array('com_mailer', 'rendition'), 'data' => array('name', $rendition->name)));
+$test = $_->entity_manager->get_entity(array('class' => com_mailer_rendition, 'skip_ac' => true), array('&', 'tag' => array('com_mailer', 'rendition'), 'data' => array('name', $rendition->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$rendition->print_form();
 	pines_notice('There is already a rendition with that name. Please choose a different name.');
 	return;
 }
 list($component, $defname) = explode('/', $rendition->type, 2);
-if (!$pines->com_mailer->get_mail_def(array('component' => $component, 'mail' => $defname))) {
+if (!$_->com_mailer->get_mail_def(array('component' => $component, 'mail' => $defname))) {
 	$rendition->print_form();
 	pines_notice('The specified mail definition doesn\'t exist.');
 	return;

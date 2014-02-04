@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -41,7 +41,7 @@ if ($_REQUEST['remove_logo'] == 'ON' && isset($manufacturer->logo))
 	unset($manufacturer->logo);
 
 // Logo image.
-if (!empty($_REQUEST['logo']) && $pines->uploader->check($_REQUEST['logo']))
+if (!empty($_REQUEST['logo']) && $_->uploader->check($_REQUEST['logo']))
 	$manufacturer->logo = $_REQUEST['logo'];
 
 if (empty($manufacturer->name)) {
@@ -49,14 +49,14 @@ if (empty($manufacturer->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_sales_manufacturer, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'manufacturer'), 'data' => array('name', $manufacturer->name)));
+$test = $_->entity_manager->get_entity(array('class' => com_sales_manufacturer, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'manufacturer'), 'data' => array('name', $manufacturer->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$manufacturer->print_form();
 	pines_notice('There is already a manufacturer with that name. Please choose a different name.');
 	return;
 }
 
-if ($pines->config->com_sales->global_manufacturers)
+if ($_->config->com_sales->global_manufacturers)
 	$manufacturer->ac->other = 1;
 
 if ($manufacturer->save()) {

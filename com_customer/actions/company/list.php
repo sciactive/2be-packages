@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_customer/listcompanies') )
 	punt_user(null, pines_url('com_customer', 'company/list'));
 
-$pines->com_customer->list_companies();
+$_->com_customer->list_companies();

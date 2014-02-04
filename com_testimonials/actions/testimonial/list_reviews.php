@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_testimonials/listtestimonials') )
@@ -24,6 +24,6 @@ switch ($_REQUEST['type']) {
 }
 
 if (!$default)
-	$pines->com_testimonials->list_reviews($_REQUEST['type']);
+	$_->com_testimonials->list_reviews($_REQUEST['type']);
 else
-	$pines->com_testimonials->list_reviews();
+	$_->com_testimonials->list_reviews();

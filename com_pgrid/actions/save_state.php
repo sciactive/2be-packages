@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper())
@@ -26,4 +26,4 @@ if (isset($_SESSION['user'])) {
 	$_SESSION['user']->save();
 	pines_session('close');
 }
-$pines->page->override = true;
+$_->page->override = true;

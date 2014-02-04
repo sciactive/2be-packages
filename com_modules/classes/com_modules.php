@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -25,11 +25,11 @@ class com_modules extends component {
 	 * @return module The module.
 	 */
 	public function list_modules() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_modules', 'module/list', 'content');
 
-		$module->modules = $pines->entity_manager->get_entities(array('class' => com_modules_module), array('&', 'tag' => array('com_modules', 'module')));
+		$module->modules = $_->entity_manager->get_entities(array('class' => com_modules_module), array('&', 'tag' => array('com_modules', 'module')));
 
 		if ( empty($module->modules) )
 			pines_notice('There are no modules.');
@@ -45,9 +45,9 @@ class com_modules extends component {
 	 * @return array Module types.
 	 */
 	public function module_types() {
-		global $pines;
+		global $_;
 		$return = array();
-		foreach ($pines->components as $cur_component) {
+		foreach ($_->components as $cur_component) {
 			if (strpos($cur_component, 'tpl_') === 0)
 				continue;
 			if (!file_exists("components/$cur_component/modules.php"))

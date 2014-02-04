@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -104,9 +104,9 @@ class com_testimonials_testimonial extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function save() {
-		global $pines;
+		global $_;
 		if (!isset($this->id))
-			$this->id = $pines->entity_manager->new_uid('com_testimonials_testimonial');
+			$this->id = $_->entity_manager->new_uid('com_testimonials_testimonial');
 		return parent::save();
 	}
 
@@ -129,13 +129,13 @@ class com_testimonials_testimonial extends entity {
 	 * @return module The form's module.
 	 */
 	public function changestatus_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_testimonials', 'forms/changestatus', 'content');
 		$module->entity = $this;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 	

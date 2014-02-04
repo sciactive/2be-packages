@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -82,11 +82,11 @@ class com_customer extends component {
 	 * @param array &$array The details array.
 	 */
 	function product_action_add_member_days(&$array) {
-		global $pines;
+		global $_;
 		$array['ticket']->customer->make_member();
 		$days = 0;
 		// Search through the membership day values.
-		foreach($pines->config->com_customer->membervalues as $cur_value) {
+		foreach($_->config->com_customer->membervalues as $cur_value) {
 			if (!is_numeric($cur_value))
 				continue;
 			$cur_value = (int) $cur_value;
@@ -113,12 +113,12 @@ class com_customer extends component {
 	 * @param array &$array The details array.
 	 */
 	function product_action_add_points(&$array) {
-		global $pines;
+		global $_;
 		$type = $array['ticket']->customer->valid_member() ? 'member' : 'guest';
 		$points = 0;
 		if ($array['name'] == 'com_customer/add_points') {
 			// Search through the right lookup table to find the divisor.
-			$table = $array['ticket']->customer->valid_member() ? $pines->config->com_customer->member_point_lookup : $pines->config->com_customer->guest_point_lookup;
+			$table = $array['ticket']->customer->valid_member() ? $_->config->com_customer->member_point_lookup : $_->config->com_customer->guest_point_lookup;
 			foreach ($table as $cur_price) {
 				if ((float) preg_replace('/:.*$/', '', $cur_price) <= $array['price'])
 					$high_price = $cur_price;
@@ -129,7 +129,7 @@ class com_customer extends component {
 			$points = (int) round($array['price'] / $divisor);
 		} else {
 			// Search through the static point values.
-			foreach($pines->config->com_customer->pointvalues as $cur_value) {
+			foreach($_->config->com_customer->pointvalues as $cur_value) {
 				if (!is_numeric($cur_value))
 					continue;
 				$cur_value = (int) $cur_value;
@@ -165,7 +165,7 @@ class com_customer extends component {
 	 * @return array An associative array with a boolean 'result' entry and a 'message' entry.
 	 */
 	public function check_ssn($ssn, $id = null) {
-		global $pines;
+		global $_;
 		
 		if (empty($ssn))
 			return array('result' => false, 'message' => 'Please specify an SSN.');
@@ -181,7 +181,7 @@ class com_customer extends component {
 			);
 		if (isset($id) && $id > 0)
 			$selector['!guid'] = $id;
-		$test = $pines->entity_manager->get_entity(
+		$test = $_->entity_manager->get_entity(
 				array('class' => com_customer_customer, 'skip_ac' => true),
 				$selector
 			);
@@ -200,13 +200,13 @@ class com_customer extends component {
 	 * @param object &$object The user being saved.
 	 */
 	function save_user(&$array, $name, &$object) {
-		global $pines;
+		global $_;
 		if ($object->has_tag('com_customer', 'customer')) {
 			// If the secret is unset, it means they verified their email address.
 			if (!isset($object->secret)) {
 				if ($object->com_customer__unconfirmed_groups) {
 					// We should put them in the default customer groups.
-					$object->groups = (array) $pines->entity_manager->get_entities(
+					$object->groups = (array) $_->entity_manager->get_entities(
 							array('class' => group, 'skip_ac' => true),
 							array('&',
 								'tag' => array('com_user', 'group'),
@@ -220,11 +220,11 @@ class com_customer extends component {
 			return;
 		}
 		if (
-				$pines->config->com_customer->new_users ||
+				$_->config->com_customer->new_users ||
 				(
-						$pines->config->com_customer->reg_users &&
-						$pines->depend->check('option', 'com_user') &&
-						$pines->depend->check('action', 'registeruser')
+						$_->config->com_customer->reg_users &&
+						$_->depend->check('option', 'com_user') &&
+						$_->depend->check('action', 'registeruser')
 				)
 			) {
 			$object->add_tag('com_customer', 'customer');
@@ -243,15 +243,15 @@ class com_customer extends component {
 	 * @return module The form's module.
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_customer', 'forms/date_selector', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -263,8 +263,8 @@ class com_customer extends component {
 	 * @return module The form's module.
 	 */
 	public function location_select_form($location = null, $descendants = false) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_customer', 'forms/location_selector', 'content');
 		if (!isset($location)) {
@@ -274,7 +274,7 @@ class com_customer extends component {
 		}
 		$module->descendants = $descendants;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 	
@@ -330,12 +330,12 @@ class com_customer extends component {
 	 * @return module The form's module.
 	 */
 	public function user_select_form($all = false) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_customer', 'forms/users');
 		if (!$all) {
-			$module->users = $pines->entity_manager->get_entities(
+			$module->users = $_->entity_manager->get_entities(
 				array('class' => user),
 				array('&',
 					'tag' => array('com_user', 'user')
@@ -345,7 +345,7 @@ class com_customer extends component {
 				)
 			);
 		} else {
-			$module->users = $pines->entity_manager->get_entities(
+			$module->users = $_->entity_manager->get_entities(
 				array('class' => user),
 				array('&',
 					'tag' => array('com_user', 'user')
@@ -353,7 +353,7 @@ class com_customer extends component {
 			);
 		}
 		usort($module->users, array($this, 'sort_users'));
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 }

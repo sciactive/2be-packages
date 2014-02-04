@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper())
@@ -18,7 +18,7 @@ if ($_REQUEST['all_users'] == 'true') {
 	// Get all the system users.
 	if (!gatekeeper('com_pgrid/clearallstates'))
 		punt_user(null, pines_url('com_pgrid', 'clear_states', array('all_users' => 'true')));
-	$users = $pines->user_manager->get_users(true);
+	$users = $_->user_manager->get_users(true);
 } else {
 	// Just an array of the current user.
 	$users = array($_SESSION['user']);

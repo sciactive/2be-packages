@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_calendar/managecalendar') )
@@ -56,7 +56,7 @@ if (isset($_REQUEST['employee'])) {
 
 		if ($event->all_day) {
 			$days = ceil(($event->end - $event->start) / 86400);
-			$event->scheduled = isset($event->employee->workday_length) ? $event->employee->workday_length : $pines->config->com_calendar->workday_length;
+			$event->scheduled = isset($event->employee->workday_length) ? $event->employee->workday_length : $_->config->com_calendar->workday_length;
 			$event->scheduled *= 3600 * $days;
 		} else {
 			$event->scheduled = $event->end - $event->start;

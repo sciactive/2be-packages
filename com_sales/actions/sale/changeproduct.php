@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/changeproduct') )
@@ -22,7 +22,7 @@ if (!isset($sale->guid)) {
 }
 
 $key = (int) $_REQUEST['product'];
-$new_product = $pines->entity_manager->get_entity(
+$new_product = $_->entity_manager->get_entity(
 		array('class' => com_sales_product),
 		array('&',
 			'tag' => array('com_sales', 'product'),

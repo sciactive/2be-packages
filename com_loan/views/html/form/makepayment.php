@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 switch ($this->entity->payment_frequency) {
@@ -64,12 +64,12 @@ switch ($this->entity->payment_frequency) {
 <form class="pf-form" id="p_muid_form" action="">
 	<div class="pf-element pf-full-width">
 		<div class="pf-label" style="width:100%;">
-			<span><?php echo (!empty($this->entity->past_due)) ? 'Past Due: <span style="float:right;"><span style="color:#B30909;">$'.h($pines->com_sales->round($this->entity->past_due, true)).'</span></span><br/>' : ''; ?></span>
-			<span><?php echo $payment_frequency; ?> Payment: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true)); ?></span></span><br/>
+			<span><?php echo (!empty($this->entity->past_due)) ? 'Past Due: <span style="float:right;"><span style="color:#B30909;">$'.h($_->com_sales->round($this->entity->past_due, true)).'</span></span><br/>' : ''; ?></span>
+			<span><?php echo $payment_frequency; ?> Payment: <span style="float:right;"><?php echo '$'.h($_->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true)); ?></span></span><br/>
 			<span>Fees: <span style="float:right;"><?php echo ($this->entity->payment_fees) ? h($this->entity->payment_fees) : '$0.00'; ?></span></span><br/>
 			<span>Adjustments: <span style="float:right;"><?php echo ($this->entity->payment_adjustments) ? h($this->entity->payment_adjustments) : '$0.00'; ?></span></span><br/>
 			<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
-			<span style="font-size:1.5em;">Payment Due: <?php echo ($this->entity->past_due > 0) ? '<span class="btn-danger pull-right btn payment-button">$'.h($pines->com_sales->round($this->entity->balance, true)).'</span>' : '<span class="btn-success pull-right btn payment-button">$'.h($pines->com_sales->round($this->entity->balance, true)).'</span>'; ?></span><br/>
+			<span style="font-size:1.5em;">Payment Due: <?php echo ($this->entity->past_due > 0) ? '<span class="btn-danger pull-right btn payment-button">$'.h($_->com_sales->round($this->entity->balance, true)).'</span>' : '<span class="btn-success pull-right btn payment-button">$'.h($_->com_sales->round($this->entity->balance, true)).'</span>'; ?></span><br/>
 		</div>
 	</div>
 	<div class="pf-element pf-full-width">

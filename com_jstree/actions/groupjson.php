@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if ($_REQUEST['all'] == 'true') {
-	$locations = $pines->user_manager->get_groups();
+	$locations = $_->user_manager->get_groups();
 } elseif ($_REQUEST['primaries'] == 'true') {
-	$my_group = group::factory((int) $pines->config->com_user->highest_primary);
+	$my_group = group::factory((int) $_->config->com_user->highest_primary);
 	if (!isset($my_group->guid))
-		$locations = $pines->user_manager->get_groups();
+		$locations = $_->user_manager->get_groups();
 	else {
 		$locations = $my_group->get_children();
 		$descendants = array();
@@ -40,10 +40,10 @@ if ($_REQUEST['all'] == 'true') {
 	$my_group->parent = null;
 	$locations[] = $my_group;
 } else {
-	$locations = $pines->user_manager->get_groups();
+	$locations = $_->user_manager->get_groups();
 }
 
-$pines->user_manager->group_sort($locations, 'name');
+$_->user_manager->group_sort($locations, 'name');
 
-$groups_json_struct = $pines->com_jstree->entity_json_struct($locations);
-$pines->page->override_doc(json_encode($groups_json_struct));
+$groups_json_struct = $_->com_jstree->entity_json_struct($locations);
+$_->page->override_doc(json_encode($groups_json_struct));

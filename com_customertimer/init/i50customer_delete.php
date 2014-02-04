@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -28,4 +28,4 @@ function com_customertimer__check_delete(&$arguments, $name, &$object) {
 	}
 }
 
-$pines->hook->add_callback('com_customer_customer->delete', -10, 'com_customertimer__check_delete');
+$_->hook->add_callback('com_customer_customer->delete', -10, 'com_customertimer__check_delete');

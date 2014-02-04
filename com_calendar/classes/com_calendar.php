@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -32,8 +32,8 @@ class com_calendar extends component {
 	 * Places the result in $this->com_customer.
 	 */
 	public function __construct() {
-		global $pines;
-		$this->com_customer = $pines->depend->check('component', 'com_customer');
+		global $_;
+		$this->com_customer = $_->depend->check('component', 'com_customer');
 	}
 
 	/**
@@ -56,8 +56,8 @@ class com_calendar extends component {
 	 * Clears all events from the calendar.
 	 */
 	public function clear_calendar() {
-		global $pines;
-		$calendar_events = $pines->entity_manager->get_entities(array('class' => com_calendar_event), array('&', 'tag' => array('com_calendar', 'event')));
+		global $_;
+		$calendar_events = $_->entity_manager->get_entities(array('class' => com_calendar_event), array('&', 'tag' => array('com_calendar', 'event')));
 		foreach ($calendar_events as $cur_event)
 			$cur_event->delete();
 	}
@@ -68,17 +68,17 @@ class com_calendar extends component {
 	 * @return module The form's module.
 	 */
 	public function lineup_form($location = null) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		if (!isset($location->guid))
 			$location = $_SESSION['user']->group;
 
 		$module = new module('com_calendar', 'form_lineup', 'content');
 		$module->location = $location;
-		$module->employees = $pines->com_hrm->get_employees();
+		$module->employees = $_->com_hrm->get_employees();
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 	}
 
 	/**
@@ -89,8 +89,8 @@ class com_calendar extends component {
 	 * @return module The form's module.
 	 */
 	public function location_select_form($location = null, $descendants = false) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		if (!isset($location))
 			$location = $_SESSION['user']->group->guid;
@@ -98,7 +98,7 @@ class com_calendar extends component {
 		$module->location = $location;
 		$module->descendants = $descendants;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -107,11 +107,11 @@ class com_calendar extends component {
 	 * @param com_hrm_employee $employee The employee to schedule.
 	 */
 	public function schedule_form($employee) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 		$module = new module('com_calendar', 'form_schedule', 'content');
 		$module->entity = $employee;
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 	}
 
 	/**
@@ -126,7 +126,7 @@ class com_calendar extends component {
 	 * @param string $filter Which type of events to show.
 	 */
 	public function show_calendar($view_type, $start, $end, $timezone, $location = null, $employee = null, $descendants = false, $filter = 'all') {
-		global $pines;
+		global $_;
 
 		// Make all calculations in the correct timezone.
 		$cur_timezone = date_default_timezone_get();
@@ -152,7 +152,7 @@ class com_calendar extends component {
 		if (isset($employee->guid))
 			$form->employee = $calendar->employee = $employee;
 
-		$form->employees = $pines->com_hrm->get_employees();
+		$form->employees = $_->com_hrm->get_employees();
 		$calendar->location = $form->location = $location;
 		$calendar->descendants = $form->descendants = $descendants;
 		$calendar->filter = $form->filter = $filter;
@@ -176,7 +176,7 @@ class com_calendar extends component {
 	 * @return array An array of calendar events.
 	 */
 	public function get_events($start, $end, $timezone, $location = null, $employee = null, $descendants = false, $filter = 'all') {
-		global $pines;
+		global $_;
 
 		// Make all calculations in the correct timezone.
 		$cur_timezone = date_default_timezone_get();
@@ -213,7 +213,7 @@ class com_calendar extends component {
 
 		//Retrieve all private events
 		if ($filter == 'events') {
-			$events = $pines->entity_manager->get_entities(
+			$events = $_->entity_manager->get_entities(
 					array('class' => com_calendar_event),
 					$selector,
 					$or,
@@ -222,7 +222,7 @@ class com_calendar extends component {
 					)
 				);
 		} else {
-			$events = $pines->entity_manager->get_entities(
+			$events = $_->entity_manager->get_entities(
 					array('class' => com_calendar_event),
 					$selector,
 					$or
@@ -236,7 +236,7 @@ class com_calendar extends component {
 		if (!empty($ancestors)) {
 			unset($selector['ref']);
 			$selector['data'] = array('private', false);
-			$more_events = $pines->entity_manager->get_entities(
+			$more_events = $_->entity_manager->get_entities(
 					array('class' => com_calendar_event),
 					$selector,
 					array('!&',

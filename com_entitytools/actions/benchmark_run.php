@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_entitytools/test') )
 	punt_user(null, pines_url('com_entitytools', 'benchmark'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 set_time_limit(3600);
@@ -38,7 +38,7 @@ $benchmark->create[0] = $pass;
 $benchmark->create[1] = microtime(true);
 
 // Retrieving entities...
-$entities = $pines->entity_manager->get_entities(array('limit' => 1000), array('&', 'tag' => array('com_entitytools', 'benchmark')));
+$entities = $_->entity_manager->get_entities(array('limit' => 1000), array('&', 'tag' => array('com_entitytools', 'benchmark')));
 $benchmark->retrieve[0] = count($entities) == 1000;
 $benchmark->retrieve[1] = microtime(true);
 
@@ -52,4 +52,4 @@ $benchmark->delete[1] = microtime(true);
 
 $benchmark->time_end = microtime(true);
 
-$pines->page->override_doc(json_encode($benchmark));
+$_->page->override_doc(json_encode($benchmark));

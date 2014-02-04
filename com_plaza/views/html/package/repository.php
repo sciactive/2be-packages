@@ -8,16 +8,16 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Available Software';
 if (isset($this->service))
 	$this->title .= ' that Provides Service \''.h($this->service).'\'';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_plaza/package/repository']);
-if (isset($pines->com_fancybox))
-	$pines->com_fancybox->load();
+if (isset($_->com_fancybox))
+	$_->com_fancybox->load();
 ?>
 <style type="text/css">
 	#p_muid_info {

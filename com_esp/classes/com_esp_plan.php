@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -92,9 +92,9 @@ class com_esp_plan extends entity {
 	public function save() {
 		if (!isset($this->customer->guid))
 			return false;
-		global $pines;
+		global $_;
 		if (!isset($this->id))
-			$this->id = $pines->entity_manager->new_uid('com_esp_plan_id');
+			$this->id = $_->entity_manager->new_uid('com_esp_plan_id');
 		return parent::save();
 	}
 
@@ -105,7 +105,7 @@ class com_esp_plan extends entity {
 	 * TODO: Make sure that it handles the stock entity swapping correctly.
 	 */
 	public function swap($new_serial = null) {
-		global $pines;
+		global $_;
 
 		// Return the old stock item to inventory.
 		if ($this->item['serial'] == $old_serial && $cur_product['sku'] == $sku) {
@@ -128,7 +128,7 @@ class com_esp_plan extends entity {
 					array('location', $this->group)
 				)
 			);
-			$new_stock = $pines->entity_manager->get_entity(array('class' => com_sales_stock), $selector);
+			$new_stock = $_->entity_manager->get_entity(array('class' => com_sales_stock), $selector);
 			if (isset($new_stock)) {
 				// Remove the item from inventory.
 				$new_product = $this->item;
@@ -155,13 +155,13 @@ class com_esp_plan extends entity {
 	 * @return module The form's module.
 	 */
 	public function swap_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_esp', 'form_swap', 'content');
 		$module->entity = $this;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 }

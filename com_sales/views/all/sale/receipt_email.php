@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $sale = $this->entity->has_tag('sale');
@@ -46,7 +46,7 @@ switch ($this->entity->status) {
 	<table width="100%" cellspacing="0" cellpadding="0">
 		<tr>
 			<td valign="top" align="left">
-				<span><img src="<?php e($group_logo); ?>" alt="<?php e($pines->config->system_name); ?>" /></span>
+				<span><img src="<?php e($group_logo); ?>" alt="<?php e($_->config->system_name); ?>" /></span>
 			</td>
 			<td valign="top" align="right">
 				<span><?php e($this->doc_title); ?></span><br />
@@ -149,7 +149,7 @@ switch ($this->entity->status) {
 				<pre><?php e($this->entity->shipping_address->address_international); ?></pre>
 				<?php } ?>
 			</td>
-			<?php } if ($pines->config->com_sales->com_customer && isset($this->entity->customer)) { ?>
+			<?php } if ($_->config->com_sales->com_customer && isset($this->entity->customer)) { ?>
 			<td width="50%" valign="top" align="left">
 				<h3>Bill To:</h3>
 				<table>
@@ -230,11 +230,11 @@ switch ($this->entity->status) {
 			e(implode(' ', $text));
 			?>&nbsp;</td>
 			<td valign="top" style="text-align: right;"><?php e($cur_product['quantity']); ?></td>
-			<td valign="top" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
+			<td valign="top" style="text-align: right;">$<?php echo $_->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
 			<?php if (!$sale) { ?>
-			<td valign="top" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['return_fee'], true); ?></td>
+			<td valign="top" style="text-align: right;">$<?php echo $_->com_sales->round($cur_product['return_fee'], true); ?></td>
 			<?php } ?>
-			<td valign="top" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['line_total'] - (float) $cur_product['return_fee'], true); ?></td>
+			<td valign="top" style="text-align: right;">$<?php echo $_->com_sales->round($cur_product['line_total'] - (float) $cur_product['return_fee'], true); ?></td>
 		</tr>
 		<?php } } ?>
 	</table>
@@ -250,7 +250,7 @@ switch ($this->entity->status) {
 		<tr>
 			<td valign="top" style="text-align: left; width: 80%;"><?php e(($cur_special['entity']->hide_code ? '' : "{$cur_special['code']} - ").$cur_special['name']); ?></td>
 			<td valign="top" style="text-align: left; white-space: pre;"><?php echo $cur_special['before_tax'] ? 'Before Tax' : 'After Tax'; ?></td>
-			<td valign="top" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_special['discount'], true); ?></td>
+			<td valign="top" style="text-align: right;">$<?php echo $_->com_sales->round($cur_special['discount'], true); ?></td>
 		</tr>
 		<?php } ?>
 	</table>
@@ -262,32 +262,32 @@ switch ($this->entity->status) {
 				<table cellpadding="4" cellspacing="0">
 					<tr>
 						<td>Subtotal:</td>
-						<td align="right" style="text-align: right;">$<?php echo $pines->com_sales->round($this->entity->subtotal, true); ?></td>
+						<td align="right" style="text-align: right;">$<?php echo $_->com_sales->round($this->entity->subtotal, true); ?></td>
 					</tr>
 					<?php if ($this->entity->total_specials > 0) { ?>
 					<tr>
 						<td>Specials:</td>
-						<td align="right" style="text-align: right;">($<?php echo $pines->com_sales->round($this->entity->total_specials, true); ?>)</td>
+						<td align="right" style="text-align: right;">($<?php echo $_->com_sales->round($this->entity->total_specials, true); ?>)</td>
 					</tr>
 					<?php } if ($this->entity->item_fees > 0) { ?>
 					<tr>
 						<td>Item Fees:</td>
-						<td align="right" style="text-align: right;">$<?php echo $pines->com_sales->round($this->entity->item_fees, true); ?></td>
+						<td align="right" style="text-align: right;">$<?php echo $_->com_sales->round($this->entity->item_fees, true); ?></td>
 					</tr>
 					<?php } ?>
 					<tr>
 						<td>Tax:</td>
-						<td align="right" style="text-align: right;">$<?php echo $pines->com_sales->round($this->entity->taxes, true); ?></td>
+						<td align="right" style="text-align: right;">$<?php echo $_->com_sales->round($this->entity->taxes, true); ?></td>
 					</tr>
 					<?php if ($this->entity->return_fees > 0) { ?>
 					<tr>
 						<td>Return Fees:</td>
-						<td align="right" style="text-align: right;">($<?php echo $pines->com_sales->round($this->entity->return_fees, true); ?>)</td>
+						<td align="right" style="text-align: right;">($<?php echo $_->com_sales->round($this->entity->return_fees, true); ?>)</td>
 					</tr>
 					<?php } ?>
 					<tr>
 						<td style="border-top: 1px solid #333;"><strong>Total:</strong></td>
-						<td align="right" style="border-top: 1px solid #333; text-align: right;"><strong>$<?php echo $pines->com_sales->round($this->entity->total, true); ?></strong></td>
+						<td align="right" style="border-top: 1px solid #333; text-align: right;"><strong>$<?php echo $_->com_sales->round($this->entity->total, true); ?></strong></td>
 					</tr>
 				</table>
 			</td>
@@ -300,17 +300,17 @@ switch ($this->entity->status) {
 		<?php foreach ($this->entity->payments as $cur_payment) { ?>
 		<tr>
 			<td><?php e($cur_payment['label']); ?>:</td>
-			<td align="right" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_payment['amount'], true); ?></td>
+			<td align="right" style="text-align: right;">$<?php echo $_->com_sales->round($cur_payment['amount'], true); ?></td>
 		</tr>
 		<?php } ?>
 		<tr>
 			<td style="border-top: 1px solid #333;">Amount <?php echo $sale ? 'Tendered' : 'Refunded'; ?>:</td>
-			<td align="right" style="border-top: 1px solid #333; text-align: right;">$<?php echo $pines->com_sales->round($this->entity->amount_tendered, true); ?></td>
+			<td align="right" style="border-top: 1px solid #333; text-align: right;">$<?php echo $_->com_sales->round($this->entity->amount_tendered, true); ?></td>
 		</tr>
 		<?php if ($sale && $this->entity->change) { ?>
 		<tr>
 			<td>Change:</td>
-			<td align="right" style="text-align: right;">$<?php echo $pines->com_sales->round($this->entity->change, true); ?></td>
+			<td align="right" style="text-align: right;">$<?php echo $_->com_sales->round($this->entity->change, true); ?></td>
 		</tr>
 		<?php } ?>
 	</table>
@@ -320,20 +320,20 @@ switch ($this->entity->status) {
 	<?php }
 	switch ($this->entity->status) {
 		case 'quoted':
-			$label = (string) $pines->config->com_sales->quote_note_label;
-			$text = (string) $pines->config->com_sales->quote_note_text;
+			$label = (string) $_->config->com_sales->quote_note_label;
+			$text = (string) $_->config->com_sales->quote_note_text;
 			break;
 		case 'invoiced':
-			$label = (string) $pines->config->com_sales->invoice_note_label;
-			$text = (string) $pines->config->com_sales->invoice_note_text;
+			$label = (string) $_->config->com_sales->invoice_note_label;
+			$text = (string) $_->config->com_sales->invoice_note_text;
 			break;
 		case 'paid':
-			$label = (string) $pines->config->com_sales->receipt_note_label;
-			$text = (string) $pines->config->com_sales->receipt_note_text;
+			$label = (string) $_->config->com_sales->receipt_note_label;
+			$text = (string) $_->config->com_sales->receipt_note_text;
 			break;
 		case 'processed':
-			$label = (string) $pines->config->com_sales->return_note_label;
-			$text = (string) $pines->config->com_sales->return_note_text;
+			$label = (string) $_->config->com_sales->return_note_label;
+			$text = (string) $_->config->com_sales->return_note_text;
 			break;
 		default:
 			$label = null;

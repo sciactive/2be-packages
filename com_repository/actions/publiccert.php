@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 
-if ( !$pines->config->com_repository->public_cert )
+if ( !$_->config->com_repository->public_cert )
 	return;
 
-$cert = "{$pines->config->com_repository->repository_path}private/cert.pem";
+$cert = "{$_->config->com_repository->repository_path}private/cert.pem";
 if (!file_exists($cert))
 	return;
 $cert = file_get_contents($cert);
@@ -27,4 +27,4 @@ if (!$cert)
 header('Content-Type: text/plain');
 header('Content-Disposition: inline');
 
-$pines->page->override_doc($cert);
+$_->page->override_doc($cert);

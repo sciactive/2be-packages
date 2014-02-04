@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = h($this->entity->name);
 //$this->note = '';
@@ -17,7 +17,7 @@ $this->title = h($this->entity->name);
 //$this->note .= '<strong>SKU:</strong> '.format_content(h($this->entity->sku));
 
 if ($this->entity->images)
-	$pines->com_popeye->load();
+	$_->com_popeye->load();
 
 // Build a list of specs.
 $specs = array();
@@ -28,7 +28,7 @@ foreach ($categories as &$cur_category) {
 	$specs = array_merge($specs, $cur_category->get_specs_all());
 }
 unset($categories, $cur_category);
-$pines->com_sales->sort_specs($specs);
+$_->com_sales->sort_specs($specs);
 ?>
 <style type="text/css">
 	#p_muid_product .ppy-placeholder {
@@ -38,8 +38,8 @@ $pines->com_sales->sort_specs($specs);
 		float: left;
 	}
 	#p_muid_product .ppy .ppy-stage {
-		height: <?php echo (int)$pines->config->com_sales->product_images_tmb_height; ?>px;
-		width: <?php echo (int)$pines->config->com_sales->product_images_tmb_width; ?>px;
+		height: <?php echo (int)$_->config->com_sales->product_images_tmb_height; ?>px;
+		width: <?php echo (int)$_->config->com_sales->product_images_tmb_width; ?>px;
 	}
 	#p_muid_product .ppy .ppy-caption {
 		position: absolute;
@@ -71,7 +71,7 @@ $pines->com_sales->sort_specs($specs);
 </style>
 <script type="text/javascript">
 	pines(function(){
-		<?php if (!$pines->config->com_storefront->catalog_mode) { ?>
+		<?php if (!$_->config->com_storefront->catalog_mode) { ?>
 		$("button.add_cart", "#p_muid_product").click(function(){
 			pines.com_storefront_add_to_cart(<?php echo json_encode($this->entity->guid); ?>, <?php echo json_encode($this->entity->name); ?>, <?php echo (float) $this->entity->unit_price; ?>, $("#p_muid_product"));
 		});
@@ -86,7 +86,7 @@ $pines->com_sales->sort_specs($specs);
 		<ul class="ppy-imglist">
 			<?php $first = true; foreach ($this->entity->images as $cur_image) { ?>
 			<li style="<?php if (!$first) { ?>display: none;<?php } $first = false; ?>">
-				<a href="<?php e($pines->config->location.$cur_image['file']); ?>"><img src="<?php e($pines->config->location.$cur_image['thumbnail']); ?>" alt="" /></a>
+				<a href="<?php e($_->config->location.$cur_image['file']); ?>"><img src="<?php e($_->config->location.$cur_image['thumbnail']); ?>" alt="" /></a>
 				<span class="ppy-extcaption"><span style="white-space: pre-wrap;"><?php echo str_replace("\n", '<br />', h($cur_image['alt'])); ?></span></span>
 			</li>
 			<?php } ?>
@@ -112,16 +112,16 @@ $pines->com_sales->sort_specs($specs);
 		</div>
 	</div>
 	<?php } ?>
-	<div class="main_section" style="<?php if ($this->entity->images) { ?>margin-left: <?php echo (int)$pines->config->com_sales->product_images_tmb_width + 40; ?>px;<?php } ?>">
+	<div class="main_section" style="<?php if ($this->entity->images) { ?>margin-left: <?php echo (int)$_->config->com_sales->product_images_tmb_width + 40; ?>px;<?php } ?>">
 		<div class="info_container alert alert-info">
-			<div class="price"><?php echo $pines->com_storefront->format_price($this->entity->unit_price); ?></div>
+			<div class="price"><?php echo $_->com_storefront->format_price($this->entity->unit_price); ?></div>
 			<div class="info">
 				<?php if (!empty($this->entity->manufacturer_sku)) { ?>
 				<strong>Model:</strong> <?php echo format_content(h($this->entity->manufacturer_sku)); ?><br />
 				<?php } ?>
 				<strong>SKU:</strong> <?php echo format_content(h($this->entity->sku)); ?>
 			</div>
-			<?php if (!$pines->config->com_storefront->catalog_mode) { ?>
+			<?php if (!$_->config->com_storefront->catalog_mode) { ?>
 			<div><button class="add_cart btn btn-large btn-primary"><i class="icon-shopping-cart icon-white"></i> Add to Cart</button></div>
 			<?php } ?>
 		</div>

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'New User Registration';
 $this->note = 'Please fill in your account details.';
@@ -16,14 +16,14 @@ $this->note = 'Please fill in your account details.';
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_user', 'registeruser')); ?>">
 	<ul class="nav nav-tabs" style="clear: both;">
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
-		<?php if (in_array('address', $pines->config->com_user->reg_fields)) { ?>
+		<?php if (in_array('address', $_->config->com_user->reg_fields)) { ?>
 		<li><a href="#p_muid_tab_location" data-toggle="tab">Address</a></li>
 		<?php } ?>
 	</ul>
 	<div id="p_muid_tabs" class="tab-content">
 		<div class="tab-pane active" id="p_muid_tab_general">
 			<div class="pf-element" style="float: right;"><span class="pf-required">*</span> Required Field</div>
-			<?php if (in_array('name', $pines->config->com_user->reg_fields)) { ?>
+			<?php if (in_array('name', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">First Name <span class="pf-required">*</span></span>
 					<input class="pf-field" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
@@ -36,22 +36,22 @@ $this->note = 'Please fill in your account details.';
 				<label><span class="pf-label">Last Name</span>
 					<input class="pf-field" type="text" name="name_last" size="24" value="<?php e($this->entity->name_last); ?>" /></label>
 			</div>
-			<?php } if (!$pines->config->com_user->email_usernames && in_array('email', $pines->config->com_user->reg_fields)) { ?>
+			<?php } if (!$_->config->com_user->email_usernames && in_array('email', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Email <span class="pf-required">*</span></span>
 					<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
 			</div>
-			<?php } if (in_array('phone', $pines->config->com_user->reg_fields)) { ?>
+			<?php } if (in_array('phone', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone</span>
 					<input class="pf-field" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
-			<?php } if (in_array('fax', $pines->config->com_user->reg_fields)) { ?>
+			<?php } if (in_array('fax', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Fax</span>
 					<input class="pf-field" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
-			<?php } if (in_array('timezone', $pines->config->com_user->reg_fields)) { ?>
+			<?php } if (in_array('timezone', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Timezone</span>
 					<span class="pf-note">This overrides the primary group's timezone.</span>
@@ -67,7 +67,7 @@ $this->note = 'Please fill in your account details.';
 			<?php } ?>
 			<br class="pf-clearing" />
 		</div>
-		<?php if (in_array('address', $pines->config->com_user->reg_fields)) { ?>
+		<?php if (in_array('address', $_->config->com_user->reg_fields)) { ?>
 		<div class="tab-pane" id="p_muid_tab_location">
 			<div class="pf-element">
 				<script type="text/javascript">

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Generate a Certificate';
 $this->note = 'All packages will be signed against this new certificate. Any current signatures will become invalid.';
@@ -42,7 +42,7 @@ $this->note = 'All packages will be signed against this new certificate. Any cur
 	<div class="pf-element">
 		<label><span class="pf-label">Common Name</span>
 			<span class="pf-note">Eg, The Repository (Ex: http://pines.example.com/repo/)</span>
-			<input class="pf-field" type="text" name="commonName" size="24" value="<?php e($pines->config->full_location); ?>" /></label>
+			<input class="pf-field" type="text" name="commonName" size="24" value="<?php e($_->config->full_location); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Email Address</span>

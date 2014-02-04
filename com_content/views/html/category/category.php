@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->classes[] = 'content_category';
@@ -22,7 +22,7 @@ if (!isset($this->entity->guid)) {
 }
 
 // Custom head code.
-if ($this->entity->enable_custom_head && $pines->config->com_content->custom_head) {
+if ($this->entity->enable_custom_head && $_->config->com_content->custom_head) {
 	$head = new module('system', 'null', 'head');
 	$head->content($this->entity->custom_head);
 }
@@ -33,10 +33,10 @@ if ($this->entity->get_option('show_title'))
 $this->show_title = $this->entity->get_option('show_title');
 
 if (!empty($this->entity->intro)) {
-	if ($pines->config->com_content->wrap_pages)
+	if ($_->config->com_content->wrap_pages)
 		echo '<div style="position: relative;">';
 	echo format_content($this->entity->intro);
-	if ($pines->config->com_content->wrap_pages)
+	if ($_->config->com_content->wrap_pages)
 		echo '</div>';
 }
 

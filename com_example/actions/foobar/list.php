@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_example/listfoobars') )
 	punt_user(null, pines_url('com_example', 'foobar/list'));
 
-$pines->com_example->list_foobars();
+$_->com_example->list_foobars();

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -29,14 +29,14 @@ class com_logger extends component implements log_manager_interface {
 
 	/**
 	 * Used to store the log file location, since it may not be available as
-	 * the system is destroying $pines.
+	 * the system is destroying $_.
 	 * @var string
 	 */
 	var $log_file = '';
 
 	public function __construct() {
-		global $pines;
-		$this->log_file = $pines->config->com_logger->path;
+		global $_;
+		$this->log_file = $_->config->com_logger->path;
 	}
 
 	/**
@@ -47,27 +47,27 @@ class com_logger extends component implements log_manager_interface {
 	}
 
 	public function log($message, $level = 'info') {
-		global $pines;
+		global $_;
 		$date = date('c');
 		$user = is_object($_SESSION['user']) ? $_SESSION['user']->username.' ('.$_SESSION['user_id'].')' : $_SERVER['REMOTE_ADDR'];
-		$location = $pines->component.', '.$pines->action;
+		$location = $_->component.', '.$_->action;
 		switch ($level) {
 			case 'info':
-				if (!in_array($pines->config->com_logger->level, array('debug', 'info'))) break;
+				if (!in_array($_->config->com_logger->level, array('debug', 'info'))) break;
 			case 'notice':
-				if (!in_array($pines->config->com_logger->level, array('debug', 'info', 'notice'))) break;
+				if (!in_array($_->config->com_logger->level, array('debug', 'info', 'notice'))) break;
 				if (strlen($this->tmp_log)) $this->tmp_log .= "\n";
 				$this->tmp_log .= "$date: $level: $location: $user: $message";
 				break;
 			case 'debug':
 				// Debug logs should be written immediately, since the system may halt at any time. ;)
-				if (!in_array($pines->config->com_logger->level, array('debug'))) break;
+				if (!in_array($_->config->com_logger->level, array('debug'))) break;
 			case 'warning':
-				if (!in_array($pines->config->com_logger->level, array('debug', 'info', 'notice', 'warning'))) break;
+				if (!in_array($_->config->com_logger->level, array('debug', 'info', 'notice', 'warning'))) break;
 			case 'error':
-				if (!in_array($pines->config->com_logger->level, array('debug', 'info', 'notice', 'warning', 'error'))) break;
+				if (!in_array($_->config->com_logger->level, array('debug', 'info', 'notice', 'warning', 'error'))) break;
 			case 'fatal':
-				if (!in_array($pines->config->com_logger->level, array('debug', 'info', 'notice', 'warning', 'error', 'fatal'))) break;
+				if (!in_array($_->config->com_logger->level, array('debug', 'info', 'notice', 'warning', 'error', 'fatal'))) break;
 				if (strlen($this->tmp_log)) $this->tmp_log .= "\n";
 				$message = $this->tmp_log . "$date: $level: $location: $user: $message";
 				$this->tmp_log = '';
@@ -82,15 +82,15 @@ class com_logger extends component implements log_manager_interface {
 	 * @return string The concatenated text from all log files.
 	 */
 	public function cat_logs() {
-		global $pines;
+		global $_;
 
 		// Get all log files' paths.
-		$files = glob($pines->config->com_logger->read_pattern, GLOB_MARK);
+		$files = glob($_->config->com_logger->read_pattern, GLOB_MARK);
 
 		// Now go through and concatenate each file.
 		$log_data = '';
-		if ($pines->config->com_logger->read_include_path && !in_array($pines->config->com_logger->path, $files)) {
-			$log_data .= file_get_contents($pines->config->com_logger->path);
+		if ($_->config->com_logger->read_include_path && !in_array($_->config->com_logger->path, $files)) {
+			$log_data .= file_get_contents($_->config->com_logger->path);
 			if (substr($log_data, -1) != "\n")
 				$log_data .= "\n";
 		}
@@ -137,15 +137,15 @@ class com_logger extends component implements log_manager_interface {
 	 * @return module The form's module.
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_logger', 'date_selector', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -157,8 +157,8 @@ class com_logger extends component implements log_manager_interface {
 	 * @return module The form's module.
 	 */
 	public function location_select_form($location = null, $descendants = false) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_logger', 'location_selector', 'content');
 		if (!isset($location)) {
@@ -168,7 +168,7 @@ class com_logger extends component implements log_manager_interface {
 		}
 		$module->descendants = $descendants;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 }

@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = ($this->enabled ? '' : 'Disabled ').'Users';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_user/list_users']);
 ?>
@@ -64,18 +64,18 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	<thead>
 		<tr>
 			<th>GUID</th>
-			<th><?php echo $pines->config->com_user->email_usernames ? 'Email' : 'Username'; ?></th>
-			<?php if (in_array('name', $pines->config->com_user->user_fields)) { ?>
+			<th><?php echo $_->config->com_user->email_usernames ? 'Email' : 'Username'; ?></th>
+			<?php if (in_array('name', $_->config->com_user->user_fields)) { ?>
 			<th>Real Name</th>
-			<?php } if (!$pines->config->com_user->email_usernames && in_array('email', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (!$_->config->com_user->email_usernames && in_array('email', $_->config->com_user->user_fields)) { ?>
 			<th>Email</th>
-			<?php } if (in_array('timezone', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (in_array('timezone', $_->config->com_user->user_fields)) { ?>
 			<th>Timezone</th>
 			<?php } ?>
 			<th>Primary Group</th>
 			<th>Groups</th>
 			<th>Inherit Abilities</th>
-			<?php if ($pines->config->com_user->referral_codes) { ?>
+			<?php if ($_->config->com_user->referral_codes) { ?>
 			<th>Referral Code</th>
 			<?php } ?>
 		</tr>
@@ -85,11 +85,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<tr title="<?php e($user->guid); ?>">
 			<td><?php e($user->guid); ?></td>
 			<td><a data-entity="<?php e($user->guid); ?>" data-entity-context="user"><?php e($user->username); ?></a></td>
-			<?php if (in_array('name', $pines->config->com_user->user_fields)) { ?>
+			<?php if (in_array('name', $_->config->com_user->user_fields)) { ?>
 			<td><?php e($user->name); ?></td>
-			<?php } if (!$pines->config->com_user->email_usernames && in_array('email', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (!$_->config->com_user->email_usernames && in_array('email', $_->config->com_user->user_fields)) { ?>
 			<td><a href="mailto:<?php e($user->email); ?>"><?php e($user->email); ?></a></td>
-			<?php } if (in_array('timezone', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (in_array('timezone', $_->config->com_user->user_fields)) { ?>
 			<td><?php e($user->get_timezone()).(empty($user->timezone) ? ' (I)' : ' (A)'); ?></td>
 			<?php } ?>
 			<td><a data-entity="<?php e($user->group->guid); ?>" data-entity-context="group"><?php e($user->group->groupname); ?></a></td>
@@ -105,13 +105,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			}
 			?></td>
 			<td><?php echo $user->inherit_abilities ? 'Yes' : 'No'; ?></td>
-			<?php if ($pines->config->com_user->referral_codes) { ?>
+			<?php if ($_->config->com_user->referral_codes) { ?>
 			<td><?php e($user->referral_code); ?></td>
 			<?php } ?>
 		</tr>
 	<?php } ?>
 	</tbody>
 </table>
-<?php if (in_array('timezone', $pines->config->com_user->user_fields)) { ?>
+<?php if (in_array('timezone', $_->config->com_user->user_fields)) { ?>
 <small>Note: Under timezones (I) means inherited and (A) means assigned.</small>
 <?php }

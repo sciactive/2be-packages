@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -54,7 +54,7 @@ class jtemplate_adapter {
 	 * @param string $template_dir The template's directory.
 	 */
 	public function __construct($template, $template_dir) {
-		global $pines;
+		global $_;
 		/**
 		 * Joomla! template parameters class.
 		 */
@@ -71,15 +71,15 @@ class jtemplate_adapter {
 		// Set up the fake environment.
 		$this->template = h($template);
 		$this->template_dir = $template_dir;
-		$this->language = h($pines->config->tpl_joomlatemplates->language);
-		$this->direction = h($pines->config->tpl_joomlatemplates->direction);
-		$this->baseurl = h($pines->config->location.'templates/tpl_joomlatemplates');
+		$this->language = h($_->config->tpl_joomlatemplates->language);
+		$this->direction = h($_->config->tpl_joomlatemplates->direction);
+		$this->baseurl = h($_->config->location.'templates/tpl_joomlatemplates');
 		$this->params = new jtemplate_params($template, $template_dir);
 	}
 	
 	public function translate_position($position) {
-		global $pines;
-		if ($position == $pines->config->tpl_joomlatemplates->main_menu_position)
+		global $_;
+		if ($position == $_->config->tpl_joomlatemplates->main_menu_position)
 			return 'main_menu';
 		if ($position == 'breadcrumb')
 			return 'breadcrumbs';
@@ -92,17 +92,17 @@ class jtemplate_adapter {
 	 * @return int The number of modules in that position.
 	 */
 	public function countModules($position) {
-		global $pines;
+		global $_;
 		$parts = explode(' ', $position);
 		$cur_pos = $this->translate_position(current($parts));
-		if (!$pines->page->modules[$cur_pos])
+		if (!$_->page->modules[$cur_pos])
 			$result = 0;
-		$result = count($pines->page->modules[$cur_pos]);
+		$result = count($_->page->modules[$cur_pos]);
 		while (($cur_op = next($parts)) !== false) {
 			$cur_pos = $this->translate_position(next($parts));
-			if (!$pines->page->modules[$cur_pos])
+			if (!$_->page->modules[$cur_pos])
 				$cur_result = 0;
-			$cur_result = count($pines->page->modules[$cur_pos]);
+			$cur_result = count($_->page->modules[$cur_pos]);
 			switch ($cur_op) {
 				 case '+':
 					 $result = $result + $cur_result;
@@ -217,29 +217,29 @@ class jtemplate_adapter {
 	 * @return string The rendered content.
 	 */
 	public function render_modules($options) {
-		global $pines;
-		$pines->template->cur_module_options = $options;
+		global $_;
+		$_->template->cur_module_options = $options;
 		switch ($options['type']) {
 			case 'head':
-				$content = "\n<title>".h($pines->page->get_title())."</title>\n".
-				'<link href="'.h($pines->config->location).'templates/'.h($pines->current_template).'/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />'."\n".
-				'<link href="'.h($pines->config->location).'templates/'.h($pines->current_template).'/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />'."\n".
-				'<link href="'.h($pines->config->location).'templates/'.h($pines->current_template).'/css/dropdown/themes/jqueryui/jqueryui.css" media="all" rel="stylesheet" type="text/css" />'."\n".
-				'<link href="'.h($pines->config->location).'templates/'.h($pines->current_template).'/css/dropdown_fix.css" media="all" rel="stylesheet" type="text/css" />'."\n".
-				'<script type="text/javascript" src="'.h($pines->config->rela_location).'system/includes/js.php"></script>'."\n".
-//				'<script type="text/javascript" src="'.h($pines->config->location).'templates/'.h($pines->current_template).'/js/template.js"></script>'."\n".
+				$content = "\n<title>".h($_->page->get_title())."</title>\n".
+				'<link href="'.h($_->config->location).'templates/'.h($_->current_template).'/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />'."\n".
+				'<link href="'.h($_->config->location).'templates/'.h($_->current_template).'/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />'."\n".
+				'<link href="'.h($_->config->location).'templates/'.h($_->current_template).'/css/dropdown/themes/jqueryui/jqueryui.css" media="all" rel="stylesheet" type="text/css" />'."\n".
+				'<link href="'.h($_->config->location).'templates/'.h($_->current_template).'/css/dropdown_fix.css" media="all" rel="stylesheet" type="text/css" />'."\n".
+				'<script type="text/javascript" src="'.h($_->config->rela_location).'system/includes/js.php"></script>'."\n".
+//				'<script type="text/javascript" src="'.h($_->config->location).'templates/'.h($_->current_template).'/js/template.js"></script>'."\n".
 				'<!--[if lt IE 7]>'."\n".
-				'<script type="text/javascript" src="'.h($pines->config->location).'templates/'.h($pines->current_template).'/js/jquery/jquery.dropdown.js"></script>'."\n".
+				'<script type="text/javascript" src="'.h($_->config->location).'templates/'.h($_->current_template).'/js/jquery/jquery.dropdown.js"></script>'."\n".
 				'<![endif]-->'."\n".
-				$pines->page->render_modules('head', 'module_head')."\n";
+				$_->page->render_modules('head', 'module_head')."\n";
 				break;
 			case 'modules':
 				$position = $this->translate_position($options['name']);
-				$content = $pines->page->render_modules($position, $position == 'main_menu' ? 'module_head' : 'module');
+				$content = $_->page->render_modules($position, $position == 'main_menu' ? 'module_head' : 'module');
 				break;
 			case 'component':
-				$pines->template->cur_module_options['style'] = $pines->config->tpl_joomlatemplates->content_style;
-				$content = $pines->page->render_modules('content', 'module');
+				$_->template->cur_module_options['style'] = $_->config->tpl_joomlatemplates->content_style;
+				$content = $_->page->render_modules('content', 'module');
 				break;
 			default:
 				return '';

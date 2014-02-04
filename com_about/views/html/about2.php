@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = h("About {$pines->info->name}");
-$this->note = h("Version {$pines->info->version}");
+$this->title = h("About {$_->info->name}");
+$this->note = h("Version {$_->info->version}");
 ?>
 <p>
-<?php e($pines->info->name); ?> is a PHP application
+<?php e($_->info->name); ?> is a PHP application
 framework from
 <a href="http://sciactive.com/" target="_blank">SciActive</a>,
 designed to be extensible and easy to use. It allows rapid development, highly
@@ -23,12 +23,12 @@ customizable implementation, easy maintenance, and unmatched flexibility.
 <p>
 New features can be added by downloading new components, and the look and feel
 can be customized by downloading new templates.
-<?php e($pines->info->name); ?> uses a package manager
+<?php e($_->info->name); ?> uses a package manager
 called WonderPHP Plaza, which automatically installs any dependencies a component
-needs. <?php e($pines->info->name); ?> is designed to allow
+needs. <?php e($_->info->name); ?> is designed to allow
 maximum flexibility for the developer, and provide more than enough tools and
 libraries to make development of even very complex systems easy.
-<?php e($pines->info->name); ?> supports different databases
+<?php e($_->info->name); ?> supports different databases
 by using a database abstraction system called an Entity Manager. Choosing the
 right database is as simple as installing a new component.
 </p>

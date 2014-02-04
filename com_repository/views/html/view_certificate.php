@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Repository Certificate';
 $this->note = 'All new packages are signed against this certificate.';
@@ -18,7 +18,7 @@ $this->note = 'All new packages are signed against this certificate.';
 		pines(function(){
 			$.ajax({
 				type: "GET",
-				url: <?php echo json_encode("{$pines->config->location}{$pines->config->com_repository->repository_path}private/cert.key"); ?>,
+				url: <?php echo json_encode("{$_->config->location}{$_->config->com_repository->repository_path}private/cert.key"); ?>,
 				complete: function(){
 					$("#p_muid_key_loading").hide();
 				},
@@ -53,7 +53,7 @@ $this->note = 'All new packages are signed against this certificate.';
 	<div id="p_muid_key_unsure" style="display: none;">
 		Your private key could not be verified as not readable. Please manually
 		check the address at
-		<?php e("{$pines->config->location}{$pines->config->com_repository->repository_path}private/cert.key"); ?>.
+		<?php e("{$_->config->location}{$_->config->com_repository->repository_path}private/cert.key"); ?>.
 		If it is readable, you should block access to it by setting
 		"AllowOverride" to "All" in your Apache configuration. (Or something
 		similar if you're not using Apache.) After the key is verified to not be
@@ -63,7 +63,7 @@ $this->note = 'All new packages are signed against this certificate.';
 	<div id="p_muid_key_unsafe" style="display: none;">
 		<div style="float: left; height: 16px; width: 16px; margin: .5em;" class="ui-icon ui-icon-alert">&nbsp;</div>
 		Your private key is readable at the address,
-		<?php e("{$pines->config->location}{$pines->config->com_repository->repository_path}private/cert.key"); ?>.
+		<?php e("{$_->config->location}{$_->config->com_repository->repository_path}private/cert.key"); ?>.
 		This is a serious security risk. This private key is used to sign
 		packages and should never be accessible to anyone but yourself. You
 		should block access to it by setting "AllowOverride" to "All" in your
@@ -71,7 +71,7 @@ $this->note = 'All new packages are signed against this certificate.';
 		After the key is verified to not be readable, you should regenerate your
 		certificate in case it was compromised in transit during the check.
 	</div>
-	<?php if ($pines->config->com_repository->public_cert) { ?>
+	<?php if ($_->config->com_repository->public_cert) { ?>
 	<div class="pf-element pf-heading">
 		<h3>Public URL</h3>
 	</div>

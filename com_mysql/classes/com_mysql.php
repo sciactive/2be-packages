@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -67,21 +67,21 @@ class com_mysql extends component {
 	 * @return bool Whether this instance is connected to a MySQL database after the method has run.
 	 */
 	public function connect($host = null, $user = null, $password = null, $database = null) {
-		global $pines;
+		global $_;
 		// Check that the MySQL extension is installed.
 		if (!is_callable('mysql_connect')) {
 			pines_error('MySQL PHP extension is not available. It probably has not been installed. Please install and configure it in order to use MySQL.');
 			return false;
 		}
 		// If we're setting up the DB, don't try to connect.
-		if ($pines->request_component == 'com_mysql' && $pines->request_action == 'setup')
+		if ($_->request_component == 'com_mysql' && $_->request_action == 'setup')
 			return false;
 		// If something changes the host, it could reveal the user and password.
 		if (!isset($host)) {
-			$host = $pines->config->com_mysql->host;
-			if (!isset($user)) $user = $pines->config->com_mysql->user;
-			if (!isset($password)) $password = $pines->config->com_mysql->password;
-			if (!isset($database)) $database = $pines->config->com_mysql->database;
+			$host = $_->config->com_mysql->host;
+			if (!isset($user)) $user = $_->config->com_mysql->user;
+			if (!isset($password)) $password = $_->config->com_mysql->password;
+			if (!isset($database)) $database = $_->config->com_mysql->database;
 		}
 		// Connecting, selecting database
 		if (!$this->connected) {
@@ -91,7 +91,7 @@ class com_mysql extends component {
 				} else {
 					$this->connected = false;
 					if (!isset($_SESSION['user']) && $host == 'localhost' && $user == 'pines' && $password == 'password' && $database == 'pines') {
-						if ($pines->request_component != 'com_mysql')
+						if ($_->request_component != 'com_mysql')
 							pines_redirect(pines_url('com_mysql', 'setup'));
 					} else {
 						if (function_exists('pines_error'))
@@ -101,7 +101,7 @@ class com_mysql extends component {
 			} else {
 				$this->connected = false;
 				if (!isset($_SESSION['user']) && $host == 'localhost' && $user == 'pines' && $password == 'password' && $database == 'pines') {
-					if ($pines->request_component != 'com_mysql')
+					if ($_->request_component != 'com_mysql')
 						pines_redirect(pines_url('com_mysql', 'setup'));
 				} else {
 					if (function_exists('pines_error'))

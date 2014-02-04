@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!empty($_REQUEST['id'])) {
 	$entity = com_sales_product::factory((int) $_REQUEST['id']);
 } else {
-	$entity = $pines->entity_manager->get_entity(
+	$entity = $_->entity_manager->get_entity(
 			array('class' => com_sales_product),
 			array('&',
 				'tag' => array('com_sales', 'product'),
@@ -37,13 +37,13 @@ else
 switch ($entity->title_position) {
 	case 'prepend':
 	default:
-		$pines->page->title_pre("$title - ");
+		$_->page->title_pre("$title - ");
 		break;
 	case 'append':
-		$pines->page->title(" - $title");
+		$_->page->title(" - $title");
 		break;
 	case 'replace':
-		$pines->page->title_set($title);
+		$_->page->title_set($title);
 		break;
 }
 

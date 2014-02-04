@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -71,9 +71,9 @@ if (!$po->final) {
 		$po->po_number = 'PO';
 		if (isset($po->destination))
 			$po->po_number .= strtoupper($po->destination->name);
-		$po->po_number .= '-'.$pines->entity_manager->new_uid('com_sales_po');
+		$po->po_number .= '-'.$_->entity_manager->new_uid('com_sales_po');
 	}
-	$test = $pines->entity_manager->get_entity(array('class' => com_sales_po, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'po'), 'data' => array('po_number', $po->po_number)));
+	$test = $_->entity_manager->get_entity(array('class' => com_sales_po, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'po'), 'data' => array('po_number', $po->po_number)));
 	if (isset($test) && $test->guid != $_REQUEST['id']) {
 		$module = $po->print_form();
 		pines_notice('There is already a PO with that number. Please enter a different number.');

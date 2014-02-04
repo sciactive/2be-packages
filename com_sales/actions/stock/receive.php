@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/receive') )
 	punt_user(null, pines_url('com_sales', 'stock/receive'));
 
 if (!isset($_REQUEST['products'])) {
-	$module = $pines->com_sales->print_receive_form();
+	$module = $_->com_sales->print_receive_form();
 	if ((int) $_REQUEST['location'])
 		$module->location = (int) $_REQUEST['location'];
 	if ($_REQUEST['shipments'])
@@ -30,7 +30,7 @@ else {
 	// These are the shipments (POs and transfers) selected to be received on
 	// the form. The GUIDs can be either a PO or transfer.
 	$shipments_json = array_map('intval', $shipments_json);
-	$shipments_transfers = $pines->entity_manager->get_entities(
+	$shipments_transfers = $_->entity_manager->get_entities(
 			array('class' => com_sales_transfer),
 			array('&',
 				'tag' => array('com_sales', 'transfer')
@@ -39,7 +39,7 @@ else {
 				'guid' => $shipments_json
 			)
 		);
-	$shipments_pos = $pines->entity_manager->get_entities(
+	$shipments_pos = $_->entity_manager->get_entities(
 			array('class' => com_sales_po),
 			array('&',
 				'tag' => array('com_sales', 'po')
@@ -53,7 +53,7 @@ else {
 $products_json = (array) json_decode($_REQUEST['products']);
 if (!$products_json) {
 	pines_notice('Invalid product list!');
-	$pines->com_sales->print_receive_form();
+	$_->com_sales->print_receive_form();
 	return;
 }
 $products = array();
@@ -83,7 +83,7 @@ $module = new module('com_sales', 'stock/showreceived', 'content');
 $module->location = $location;
 
 foreach ($products as $cur_product) {
-	$cur_product_entity = $pines->com_sales->get_product_by_code($cur_product['product_code']);
+	$cur_product_entity = $_->com_sales->get_product_by_code($cur_product['product_code']);
 	if (!isset($cur_product_entity)) {
 		pines_notice("Product with code {$cur_product['product_code']} not found! Skipping...");
 		continue;
@@ -96,20 +96,20 @@ foreach ($products as $cur_product) {
 		$origin = $stock = null;
 		$serial = empty($cur_product['serial']) ? null : trim($cur_product['serial']);
 		// Search for the product on a transfer.
-		$origin = $pines->com_sales->get_origin_transfer($cur_product_entity, $serial, $location, $shipments_transfers);
+		$origin = $_->com_sales->get_origin_transfer($cur_product_entity, $serial, $location, $shipments_transfers);
 		if (isset($origin) && isset($origin[0])) {
 			$stock = $origin[1];
 			$origin = $origin[0];
 			$status = 'received_transfer';
 		} else {
 			// Search for the product on a PO.
-			$origin = $pines->com_sales->get_origin_po($cur_product_entity, $location, $shipments_pos);
+			$origin = $_->com_sales->get_origin_po($cur_product_entity, $location, $shipments_pos);
 			$stock = com_sales_stock::factory();
 			$stock->product = $cur_product_entity;
 			if ($cur_product_entity->serialized) {
 				$stock->serial = $serial;
-				if ($pines->config->com_sales->unique_serials) {
-					$test = $pines->entity_manager->get_entity(array('class' => com_sales_stock, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'stock'), 'strict' => array('serial', $stock->serial)));
+				if ($_->config->com_sales->unique_serials) {
+					$test = $_->entity_manager->get_entity(array('class' => com_sales_stock, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'stock'), 'strict' => array('serial', $stock->serial)));
 					if (isset($test)) {
 						pines_notice("There is already a stock entry with the serial {$stock->serial}. Serials must be unique.");
 						continue;
@@ -133,7 +133,7 @@ foreach ($products as $cur_product) {
 
 		if ($status == 'received_po') {
 			// Check for warehouse items being assigned the incoming stock.
-			$wh_sales = $pines->entity_manager->get_entities(
+			$wh_sales = $_->entity_manager->get_entities(
 					array('class' => com_sales_sale, 'skip_ac' => true),
 					array('&',
 						'tag' => array('com_sales', 'sale'),

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!isset($this->mobile_text))
@@ -18,7 +18,7 @@ if (!isset($this->desktop_text))
 if (!isset($this->center))
 	$this->center = true;
 
-$is_mobile = $pines->depend->check('browser', 'mobile-real');
+$is_mobile = $_->depend->check('browser', 'mobile-real');
 
 $switched = ($_COOKIE['com_uasniffer_switch'] == 'true');
 
@@ -41,7 +41,7 @@ $switched = ($_COOKIE['com_uasniffer_switch'] == 'true');
 			}
 			$("#p_muid_links").delegate("a", "click", function(){
 				var cookie = values();
-				document.cookie = 'com_uasniffer_switch='+cookie[0]+'; expires='+cookie[1]+'; path=<?php e($pines->config->rela_location); ?>';
+				document.cookie = 'com_uasniffer_switch='+cookie[0]+'; expires='+cookie[1]+'; path=<?php e($_->config->rela_location); ?>';
 				location.reload(true);
 			});
 		});

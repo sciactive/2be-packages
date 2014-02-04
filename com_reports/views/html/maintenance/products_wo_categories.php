@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = 'Products Without Categories';
 $this->note = 'That is, <em>enabled</em> products without <em>enabled</em> categories.';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <script type="text/javascript">
 	pines(function(){
@@ -68,13 +68,13 @@ $pines->com_pgrid->load();
 		$costs = $vendors = array();
 		foreach($product->vendors as $cur_vendor) {
 			$vendors[] = '<a data-entity="'.h($cur_vendor['entity']->guid).'" data-entity-context="com_sales_vendor">'.h($cur_vendor['entity']->name).'</a>';
-			$costs[] = '$'.$pines->com_sales->round($cur_vendor['cost'], true);
+			$costs[] = '$'.$_->com_sales->round($cur_vendor['cost'], true);
 		}
 	?>
 		<tr title="<?php e($product->guid); ?>">
 			<td><?php e($product->sku); ?></td>
 			<td><a data-entity="<?php e($product->guid); ?>" data-entity-context="com_sales_product"><?php e($product->name); ?></a></td>
-			<td style="text-align: right;">$<?php e($pines->com_sales->round($product->unit_price, true)); ?></td>
+			<td style="text-align: right;">$<?php e($_->com_sales->round($product->unit_price, true)); ?></td>
 			<td style="text-align: right;"><?php e(implode(', ', $costs)); ?></td>
 			<td><?php echo implode(', ', $vendors); ?></td>
 			<td><a data-entity="<?php e($product->manufacturer->guid); ?>" data-entity-context="com_sales_manufacturer"><?php e($product->manufacturer->name); ?></a></td>

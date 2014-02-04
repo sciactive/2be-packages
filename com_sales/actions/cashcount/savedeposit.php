@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 
@@ -33,7 +33,7 @@ foreach ($cashcount->currency as $key => $cur_currency) {
 	$deposit->total += ((float) $cur_currency) * $deposit->count[$key];
 }
 
-if ($pines->config->com_sales->global_cashcounts)
+if ($_->config->com_sales->global_cashcounts)
 	$deposit->ac->other = 1;
 
 if ($deposit->save()) {

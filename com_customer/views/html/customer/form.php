@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Customer' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide customer profile details in this form.';
-$pines->editor->load();
-$pines->com_pgrid->load();
-$pines->com_customer->load_company_select();
+$_->editor->load();
+$_->com_pgrid->load();
+$_->com_customer->load_company_select();
 ?>
 <style type="text/css">
 	#p_muid_interactions a, #p_muid_sales a {
@@ -55,7 +55,7 @@ $pines->com_customer->load_company_select();
 </style>
 <script type="text/javascript">
 	pines(function(){
-		<?php if (in_array('address', $pines->config->com_customer->shown_fields_customer)) { ?>
+		<?php if (in_array('address', $_->config->com_customer->shown_fields_customer)) { ?>
 		var addresses = $("#p_muid_addresses");
 		var addresses_table = $("#p_muid_addresses_table");
 		var address_dialog = $("#p_muid_address_dialog");
@@ -130,7 +130,7 @@ $pines->com_customer->load_company_select();
 
 		update_addresses();
 
-		<?php } if (in_array('attributes', $pines->config->com_customer->shown_fields_customer)) { ?>
+		<?php } if (in_array('attributes', $_->config->com_customer->shown_fields_customer)) { ?>
 		// Attributes
 		var attributes = $("#p_muid_tab_attributes input[name=attributes]");
 		var attributes_table = $("#p_muid_tab_attributes .attributes_table");
@@ -421,9 +421,9 @@ $pines->com_customer->load_company_select();
 	<ul class="nav nav-tabs" style="clear: both;">
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
 		<li><a href="#p_muid_tab_account" data-toggle="tab">Account</a></li>
-		<?php if (in_array('address', $pines->config->com_customer->shown_fields_customer)) { ?>
+		<?php if (in_array('address', $_->config->com_customer->shown_fields_customer)) { ?>
 		<li><a href="#p_muid_tab_addresses" data-toggle="tab">Addresses</a></li>
-		<?php } if (in_array('attributes', $pines->config->com_customer->shown_fields_customer)) { ?>
+		<?php } if (in_array('attributes', $_->config->com_customer->shown_fields_customer)) { ?>
 		<li><a href="#p_muid_tab_attributes" data-toggle="tab">Attributes</a></li>
 		<?php } if (isset($this->entity->guid) && gatekeeper('com_customer/viewhistory')) { ?>
 		<li><a href="#p_muid_tab_history" data-toggle="tab">History</a></li>
@@ -441,7 +441,7 @@ $pines->com_customer->load_company_select();
 				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
-			<?php if (in_array('name', $pines->config->com_customer->shown_fields_customer) && (!in_array('name', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->name))) { ?>
+			<?php if (in_array('name', $_->config->com_customer->shown_fields_customer) && (!in_array('name', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->name))) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">First Name</span>
 					<input class="pf-field" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
@@ -454,13 +454,13 @@ $pines->com_customer->load_company_select();
 				<label><span class="pf-label">Last Name</span>
 					<input class="pf-field" type="text" name="name_last" size="24" value="<?php e($this->entity->name_last); ?>" /></label>
 			</div>
-			<?php } if (in_array('ssn', $pines->config->com_customer->shown_fields_customer) && (!in_array('ssn', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->ssn))) { ?>
+			<?php } if (in_array('ssn', $_->config->com_customer->shown_fields_customer) && (!in_array('ssn', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->ssn))) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">SSN</span>
 					<span class="pf-note">Without dashes.</span>
 					<input class="pf-field" type="text" name="ssn" size="24" value="<?php e($this->entity->ssn); ?>" /></label>
 			</div>
-			<?php } if (in_array('dob', $pines->config->com_customer->shown_fields_customer) && (!in_array('dob', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->dob))) { ?>
+			<?php } if (in_array('dob', $_->config->com_customer->shown_fields_customer) && (!in_array('dob', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->dob))) { ?>
 			<div class="pf-element">
 				<script type="text/javascript">
 					pines(function(){
@@ -477,12 +477,12 @@ $pines->com_customer->load_company_select();
 				<label><span class="pf-label">Date of Birth</span>
 					<input class="pf-field" type="text" name="dob" size="24" value="<?php echo $this->entity->dob ? h(format_date($this->entity->dob, 'date_sort')) : ''; ?>" /></label>
 			</div>
-			<?php } if (in_array('email', $pines->config->com_customer->shown_fields_customer) && (!in_array('email', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->email))) { ?>
+			<?php } if (in_array('email', $_->config->com_customer->shown_fields_customer) && (!in_array('email', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->email))) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Email</span>
 					<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
 			</div>
-			<?php } if (in_array('company', $pines->config->com_customer->shown_fields_customer) && (!in_array('company', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->company))) { ?>
+			<?php } if (in_array('company', $_->config->com_customer->shown_fields_customer) && (!in_array('company', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->company))) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Company</span>
 					<span class="pf-note">Enter part of a company name, email, or phone # to search.</span>
@@ -493,7 +493,7 @@ $pines->com_customer->load_company_select();
 				<label><span class="pf-label">Job Title</span>
 					<input class="pf-field" type="text" name="job_title" size="24" value="<?php e($this->entity->job_title); ?>" /></label>
 			</div>
-			<?php } if (in_array('phone', $pines->config->com_customer->shown_fields_customer)) { ?>
+			<?php } if (in_array('phone', $_->config->com_customer->shown_fields_customer)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Cell Phone</span>
 					<input class="pf-field" type="tel" name="phone_cell" size="24" value="<?php e(format_phone($this->entity->phone_cell)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
@@ -526,18 +526,18 @@ $pines->com_customer->load_company_select();
 					</select>
 				</label>
 			</div>
-			<?php if (in_array('referrer', $pines->config->com_customer->shown_fields_customer)) { ?>
+			<?php if (in_array('referrer', $_->config->com_customer->shown_fields_customer)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Referrer</span>
 					<span class="pf-note">Where did you hear about us?</span>
 					<select class="pf-field" name="referrer">
 						<option value="">-- Please Select --</option>
-						<?php foreach ($pines->config->com_customer->referrer_values as $cur_value) { ?>
+						<?php foreach ($_->config->com_customer->referrer_values as $cur_value) { ?>
 						<option value="<?php e($cur_value); ?>"<?php echo ($this->entity->referrer == $cur_value) ? ' selected="selected"' : ''; ?>><?php e($cur_value); ?></option>
 						<?php } ?>
 					</select></label>
 			</div>
-			<?php } if (in_array('description', $pines->config->com_customer->shown_fields_customer) && (!in_array('description', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->description))) { ?>
+			<?php } if (in_array('description', $_->config->com_customer->shown_fields_customer) && (!in_array('description', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->description))) { ?>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Description</span><br />
 				<textarea rows="3" cols="35" class="pf-field peditor" style="width: 100%;" name="description"><?php e($this->entity->description); ?></textarea>
@@ -546,8 +546,8 @@ $pines->com_customer->load_company_select();
 			<br class="pf-clearing" />
 		</div>
 		<div class="tab-pane" id="p_muid_tab_account">
-			<?php if (!in_array('account', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->username)) {
-				if (!$pines->config->com_user->email_usernames) { ?>
+			<?php if (!in_array('account', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->username)) {
+				if (!$_->config->com_user->email_usernames) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Username</span>
 					<input class="pf-field" type="text" name="username" size="24" value="<?php e($this->entity->username); ?>" /></label>
@@ -557,17 +557,17 @@ $pines->com_customer->load_company_select();
 				<label><span class="pf-label">Login Enabled</span>
 					<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->has_tag('enabled') ? ' checked="checked"' : ''; ?> /></label>
 			</div>
-			<?php if (in_array('password', $pines->config->com_customer->shown_fields_customer)) { ?>
+			<?php if (in_array('password', $_->config->com_customer->shown_fields_customer)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label"><?php if (isset($this->entity->password)) echo 'Update '; ?>Password</span>
 					<?php if (!isset($this->entity->password)) {
-						echo ($pines->config->com_user->pw_empty ? '<span class="pf-note">May be blank.</span>' : '');
+						echo ($_->config->com_user->pw_empty ? '<span class="pf-note">May be blank.</span>' : '');
 					} else {
 						echo '<span class="pf-note">Leave blank, if not changing.</span>';
 					} ?>
 					<input class="pf-field" type="text" name="password" size="24" /></label>
 			</div>
-			<?php } } if (in_array('points', $pines->config->com_customer->shown_fields_customer) && (!in_array('points', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical'))) { ?>
+			<?php } } if (in_array('points', $_->config->com_customer->shown_fields_customer) && (!in_array('points', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical'))) { ?>
 			<div class="pf-element pf-heading">
 				<h3>Points</h3>
 			</div>
@@ -585,13 +585,13 @@ $pines->com_customer->load_company_select();
 				<span class="pf-note">The total amount of points the customer has ever had.</span>
 				<span class="pf-field"><?php e($this->entity->total_points); ?></span>
 			</div>
-			<?php if ($pines->config->com_customer->adjustpoints && gatekeeper('com_customer/adjustpoints')) { ?>
+			<?php if ($_->config->com_customer->adjustpoints && gatekeeper('com_customer/adjustpoints')) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Adjust Points</span>
 					<span class="pf-note">Use a negative value to subtract points.</span>
 					<input class="pf-field" type="text" name="adjust_points" size="24" value="0" /></label>
 			</div>
-			<?php } } if (in_array('membership', $pines->config->com_customer->shown_fields_customer) && (!in_array('membership', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical'))) { ?>
+			<?php } } if (in_array('membership', $_->config->com_customer->shown_fields_customer) && (!in_array('membership', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical'))) { ?>
 			<div class="pf-element pf-heading">
 				<h3>Membership</h3>
 			</div>
@@ -623,7 +623,7 @@ $pines->com_customer->load_company_select();
 			<?php } ?>
 			<br class="pf-clearing" />
 		</div>
-		<?php if (in_array('address', $pines->config->com_customer->shown_fields_customer)) { ?>
+		<?php if (in_array('address', $_->config->com_customer->shown_fields_customer)) { ?>
 		<div class="tab-pane" id="p_muid_tab_addresses">
 			<div class="pf-element pf-heading">
 				<h3>Main Address</h3>
@@ -799,7 +799,7 @@ $pines->com_customer->load_company_select();
 			</div>
 			<br class="pf-clearing" />
 		</div>
-		<?php } if (in_array('attributes', $pines->config->com_customer->shown_fields_customer)) { ?>
+		<?php } if (in_array('attributes', $_->config->com_customer->shown_fields_customer)) { ?>
 		<div class="tab-pane" id="p_muid_tab_attributes">
 			<div class="pf-element pf-full-width">
 				<table class="attributes_table">
@@ -944,11 +944,11 @@ $pines->com_customer->load_company_select();
 			<br class="pf-clearing" />
 			<div id="p_muid_new_interaction" title="Log Customer Interaction" style="display: none;">
 				<div class="pf-form">
-					<?php if (gatekeeper('com_customer/manageinteractions') && $pines->config->com_customer->com_calendar) { ?>
+					<?php if (gatekeeper('com_customer/manageinteractions') && $_->config->com_customer->com_calendar) { ?>
 					<div class="pf-element">
 						<label><span class="pf-label">Employee</span>
 							<select style="max-width: 150px;" name="employee">
-								<?php foreach ($pines->com_hrm->get_employees() as $cur_employee) {
+								<?php foreach ($_->com_hrm->get_employees() as $cur_employee) {
 									$selected = $_SESSION['user']->is($cur_employee) ? ' selected="selected"' : '';
 									echo '<option value="'.h($cur_employee->guid).'"'.$selected.'>'.h($cur_employee->name).'</option>"';
 								} ?>
@@ -964,7 +964,7 @@ $pines->com_customer->load_company_select();
 					<div class="pf-element">
 						<label><span class="pf-label">Interaction Type</span>
 							<select name="interaction_type">
-								<?php foreach ($pines->config->com_customer->interaction_types as $cur_type) {
+								<?php foreach ($_->config->com_customer->interaction_types as $cur_type) {
 									$cur_type = explode(':', $cur_type);
 									echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
 								} ?>

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -115,7 +115,7 @@ class com_sales_po extends entity {
 	 * @return bool True on success, false on failure. 
 	 */
 	public function email() {
-		global $pines;
+		global $_;
 		if (empty($this->destination->email))
 			return false;
 		$module = new module('com_sales', 'po/products_email');
@@ -152,7 +152,7 @@ class com_sales_po extends entity {
 			'address' => $address,
 			'comments' => h($this->comments),
 		);
-		return $pines->com_mailer->send_mail('com_sales/po_committed', $macros, $this->destination);
+		return $_->com_mailer->send_mail('com_sales/po_committed', $macros, $this->destination);
 	}
 
 	/**
@@ -160,12 +160,12 @@ class com_sales_po extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'po/form', 'content');
 		$module->entity = $this;
-		$module->locations = (array) $pines->user_manager->get_groups();
-		$module->shippers = (array) $pines->entity_manager->get_entities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
-		$module->vendors = (array) $pines->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
+		$module->locations = (array) $_->user_manager->get_groups();
+		$module->shippers = (array) $_->entity_manager->get_entities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
+		$module->vendors = (array) $_->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
 
 		return $module;
 	}

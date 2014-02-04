@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/managestock') )
@@ -20,7 +20,7 @@ if (empty($list)) {
 	return;
 }
 
-$entities = (array) $pines->entity_manager->get_entities(
+$entities = (array) $_->entity_manager->get_entities(
 		array('class' => com_sales_stock),
 		array('&',
 			'tag' => array('com_sales', 'stock')

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -28,9 +28,9 @@ if ( isset($_REQUEST['id']) ) {
 	$user->password($_REQUEST['password']);
 }
 
-if (!$pines->config->com_user->email_usernames && gatekeeper('com_user/usernames'))
+if (!$_->config->com_user->email_usernames && gatekeeper('com_user/usernames'))
 	$user->username = $_REQUEST['username'];
-if (in_array('name', $pines->config->com_user->user_fields)) {
+if (in_array('name', $_->config->com_user->user_fields)) {
 	$user->name_first = $_REQUEST['name_first'];
 	$user->name_middle = $_REQUEST['name_middle'];
 	$user->name_last = $_REQUEST['name_last'];
@@ -42,9 +42,9 @@ if (gatekeeper('com_user/enabling')) {
 	else
 		$user->remove_tag('enabled');
 }
-if ($pines->config->com_user->email_usernames || in_array('email', $pines->config->com_user->user_fields)) {
+if ($_->config->com_user->email_usernames || in_array('email', $_->config->com_user->user_fields)) {
 	// Only send an email if they don't have the ability to edit all users.
-	if ($pines->config->com_user->confirm_email && !gatekeeper('com_user/edituser')) {
+	if ($_->config->com_user->confirm_email && !gatekeeper('com_user/edituser')) {
 		if (isset($user->guid) && $user->email != $_REQUEST['email']) {
 			if (isset($user->email_change_date) && $user->email_change_date > strtotime('-1 week'))
 				pines_notice('You already changed your email address recently. Please wait until '.format_date(strtotime('+1 week', $user->email_change_date), 'full_short').' to change your email address again.');
@@ -70,30 +70,30 @@ if ($pines->config->com_user->email_usernames || in_array('email', $pines->confi
 	} else
 		$user->email = $_REQUEST['email'];
 	if (isset($user->secret) && gatekeeper('com_user/edituser') && $_REQUEST['email_verified'] == 'ON') {
-		if ($pines->config->com_user->unconfirmed_access)
-			$user->groups = (array) $pines->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
+		if ($_->config->com_user->unconfirmed_access)
+			$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
 		$user->enable();
 		unset($user->secret);
 	}
-	if ($user->email && $_REQUEST['mailing_list'] != 'ON' && !$pines->com_mailer->unsubscribe_query($user->email)) {
-		if (!$pines->com_mailer->unsubscribe_add($user->email))
+	if ($user->email && $_REQUEST['mailing_list'] != 'ON' && !$_->com_mailer->unsubscribe_query($user->email)) {
+		if (!$_->com_mailer->unsubscribe_add($user->email))
 			pines_error('Your email could not be removed from the mailing list. Please try again, and if the problem persists, contact an administrator.');
-	} elseif ($user->email && $_REQUEST['mailing_list'] == 'ON' && $pines->com_mailer->unsubscribe_query($user->email)) {
-		if (!$pines->com_mailer->unsubscribe_remove($user->email))
+	} elseif ($user->email && $_REQUEST['mailing_list'] == 'ON' && $_->com_mailer->unsubscribe_query($user->email)) {
+		if (!$_->com_mailer->unsubscribe_remove($user->email))
 			pines_error('Your email could not be added to the mailing list. Please try again, and if the problem persists, contact an administrator.');
 	}
 }
-if (in_array('phone', $pines->config->com_user->user_fields))
+if (in_array('phone', $_->config->com_user->user_fields))
 	$user->phone = preg_replace('/\D/', '', $_REQUEST['phone']);
-if (in_array('fax', $pines->config->com_user->user_fields))
+if (in_array('fax', $_->config->com_user->user_fields))
 	$user->fax = preg_replace('/\D/', '', $_REQUEST['fax']);
-if ($pines->config->com_user->referral_codes)
+if ($_->config->com_user->referral_codes)
 	$user->referral_code = $_REQUEST['referral_code'];
-if (in_array('timezone', $pines->config->com_user->user_fields))
+if (in_array('timezone', $_->config->com_user->user_fields))
 	$user->timezone = $_REQUEST['timezone'];
 
 // Location
-if (in_array('address', $pines->config->com_user->user_fields)) {
+if (in_array('address', $_->config->com_user->user_fields)) {
 	$user->address_type = $_REQUEST['address_type'];
 	$user->address_1 = $_REQUEST['address_1'];
 	$user->address_2 = $_REQUEST['address_2'];
@@ -102,7 +102,7 @@ if (in_array('address', $pines->config->com_user->user_fields)) {
 	$user->zip = $_REQUEST['zip'];
 	$user->address_international = $_REQUEST['address_international'];
 }
-if (in_array('additional_addresses', $pines->config->com_user->user_fields)) {
+if (in_array('additional_addresses', $_->config->com_user->user_fields)) {
 	$user->addresses = (array) json_decode($_REQUEST['addresses']);
 	foreach ($user->addresses as &$cur_address) {
 		$array = array(
@@ -118,11 +118,11 @@ if (in_array('additional_addresses', $pines->config->com_user->user_fields)) {
 	unset($cur_address);
 }
 
-if (in_array('pin', $pines->config->com_user->user_fields) && gatekeeper('com_user/assignpin'))
+if (in_array('pin', $_->config->com_user->user_fields) && gatekeeper('com_user/assignpin'))
 	$user->pin = $_REQUEST['pin'];
 
 // Attributes
-if (in_array('attributes', $pines->config->com_user->user_fields)) {
+if (in_array('attributes', $_->config->com_user->user_fields)) {
 	$user->attributes = (array) json_decode($_REQUEST['attributes']);
 	foreach ($user->attributes as &$cur_attribute) {
 		$array = array(
@@ -139,10 +139,10 @@ if (in_array('attributes', $pines->config->com_user->user_fields)) {
 // entity manager after com_user filters the result, and thus will not be
 // assigned.
 if ( gatekeeper('com_user/assigngroup') ) {
-	$highest_primary_parent = $pines->config->com_user->highest_primary;
+	$highest_primary_parent = $_->config->com_user->highest_primary;
 	$primary_groups = array();
 	if ($highest_primary_parent == 0) {
-		$primary_groups = $pines->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group')));
+		$primary_groups = $_->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group')));
 	} else {
 		if ($highest_primary_parent > 0) {
 			$highest_primary_parent = group::factory($highest_primary_parent);
@@ -162,11 +162,11 @@ if ( gatekeeper('com_user/assigngroup') ) {
 	if ($_REQUEST['group'] == 'null')
 		unset($user->group);
 
-	if (!(gatekeeper('com_user/edituser') && $_REQUEST['email_verified'] == 'ON' && $pines->config->com_user->unconfirmed_access)) {
-		$highest_secondary_parent = $pines->config->com_user->highest_secondary;
+	if (!(gatekeeper('com_user/edituser') && $_REQUEST['email_verified'] == 'ON' && $_->config->com_user->unconfirmed_access)) {
+		$highest_secondary_parent = $_->config->com_user->highest_secondary;
 		$secondary_groups = array();
 		if ($highest_secondary_parent == 0) {
-			$secondary_groups = $pines->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group')));
+			$secondary_groups = $_->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group')));
 		} else {
 			if ($highest_secondary_parent > 0) {
 				$highest_secondary_parent = group::factory($highest_secondary_parent);
@@ -187,13 +187,13 @@ if ( gatekeeper('com_user/assigngroup') ) {
 if ( gatekeeper('com_user/abilities') ) {
 	$user->inherit_abilities = ($_REQUEST['inherit_abilities'] == 'ON');
 	$sections = array('system');
-	foreach ($pines->components as $cur_component)
+	foreach ($_->components as $cur_component)
 		$sections[] = $cur_component;
 	foreach ($sections as $cur_section) {
 		if ($cur_section == 'system')
-			$section_abilities = (array) $pines->info->abilities;
+			$section_abilities = (array) $_->info->abilities;
 		else
-			$section_abilities = (array) $pines->info->$cur_section->abilities;
+			$section_abilities = (array) $_->info->$cur_section->abilities;
 		foreach ($section_abilities as $cur_ability) {
 			if ( isset($_REQUEST[$cur_section]) && (array_search($cur_ability[0], $_REQUEST[$cur_section]) !== false) )
 				$user->grant($cur_section.'/'.$cur_ability[0]);
@@ -204,14 +204,14 @@ if ( gatekeeper('com_user/abilities') ) {
 }
 
 
-$un_check = $pines->user_manager->check_username($user->username, $user->guid);
+$un_check = $_->user_manager->check_username($user->username, $user->guid);
 if (!$un_check['result']) {
 	$user->print_form();
 	pines_notice($un_check['message']);
 	return;
 }
-if (in_array('email', $pines->config->com_user->user_fields)) {
-	$test = $pines->entity_manager->get_entity(
+if (in_array('email', $_->config->com_user->user_fields)) {
+	$test = $_->entity_manager->get_entity(
 			array('class' => user, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_user', 'user'),
@@ -225,29 +225,29 @@ if (in_array('email', $pines->config->com_user->user_fields)) {
 		return;
 	}
 }
-if (empty($user->password) && !$pines->config->com_user->pw_empty) {
+if (empty($user->password) && !$_->config->com_user->pw_empty) {
 	$user->print_form();
 	pines_notice('Please specify a password.');
 	return;
 }
-if (in_array('pin', $pines->config->com_user->user_fields) && gatekeeper('com_user/assignpin') && !empty($user->pin)) {
-	$test = $pines->entity_manager->get_entity(array('class' => user), array('&', 'tag' => array('com_user', 'user'), 'data' => array('pin', $user->pin)));
+if (in_array('pin', $_->config->com_user->user_fields) && gatekeeper('com_user/assignpin') && !empty($user->pin)) {
+	$test = $_->entity_manager->get_entity(array('class' => user), array('&', 'tag' => array('com_user', 'user'), 'data' => array('pin', $user->pin)));
 	if (isset($test) && !$user->is($test)) {
 		$user->print_form();
 		pines_notice('This PIN is already in use.');
 		return;
 	}
 
-	if ($pines->config->com_user->min_pin_length > 0 && strlen($user->pin) < $pines->config->com_user->min_pin_length) {
+	if ($_->config->com_user->min_pin_length > 0 && strlen($user->pin) < $_->config->com_user->min_pin_length) {
 		$user->print_form();
-		pines_notice("User PINs must be at least {$pines->config->com_user->min_pin_length} characters.");
+		pines_notice("User PINs must be at least {$_->config->com_user->min_pin_length} characters.");
 		return;
 	}
 }
 if ($user->save()) {
 	pines_notice('Saved user ['.$user->username.']');
 	pines_log('Saved user ['.$user->username.']');
-	if ($pines->config->com_user->confirm_email && $confirm_email) {
+	if ($_->config->com_user->confirm_email && $confirm_email) {
 		// Send the verification email.
 		$link = h(pines_url('com_user', 'verifyuser', array('id' => $user->guid, 'type' => 'change', 'secret' => $user->new_email_secret), true));
 		$link2 = h(pines_url('com_user', 'verifyuser', array('id' => $user->guid, 'type' => 'cancelchange', 'secret' => $user->cancel_email_secret), true));
@@ -271,7 +271,7 @@ if ($user->save()) {
 			'name_first' => $user->name_first,
 			'name_last' => $user->name_last,
 		);
-		if ($pines->com_mailer->send_mail('com_user/verify_email_change', $macros, $recipient) && $pines->com_mailer->send_mail('com_user/cancel_email_change', $macros2, $user))
+		if ($_->com_mailer->send_mail('com_user/verify_email_change', $macros, $recipient) && $_->com_mailer->send_mail('com_user/cancel_email_change', $macros2, $user))
 			pines_notice('A confirmation has been sent to your new email address. Please click the link provided to verify your address.');
 		else
 			pines_error('Couldn\'t send confirmation email.');

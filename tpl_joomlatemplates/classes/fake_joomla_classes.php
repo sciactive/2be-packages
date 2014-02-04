@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -50,8 +50,8 @@ class JRequest {
 	 * @return mixed
 	 */
 	function getURI() {
-		global $pines;
-		return rtrim($pines->config->full_location, '/').$_SERVER['REQUEST_URI'];
+		global $_;
+		return rtrim($_->config->full_location, '/').$_SERVER['REQUEST_URI'];
 	}
 
 	/**
@@ -1057,15 +1057,15 @@ class JFilterInput {
 class JConfig {
 	var $sitename;
 	public function __construct() {
-		global $pines;
-		$this->sitename = $pines->config->page_title;
+		global $_;
+		$this->sitename = $_->config->page_title;
 	}
 }
 
 class JURI {
 	function base() {
-		global $pines;
-		return $pines->config->location.'templates/tpl_joomlatemplates/';
+		global $_;
+		return $_->config->location.'templates/tpl_joomlatemplates/';
 	}
 }
 

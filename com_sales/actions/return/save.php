@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -38,7 +38,7 @@ if ( isset($_REQUEST['id']) ) {
 	$return = com_sales_return::factory();
 }
 
-if ($pines->config->com_sales->com_customer && $return->status != 'processed' && $return->status != 'voided' && !isset($return->sale->guid)) {
+if ($_->config->com_sales->com_customer && $return->status != 'processed' && $return->status != 'voided' && !isset($return->sale->guid)) {
 	$return->customer = null;
 	if (preg_match('/^\d+/', $_REQUEST['customer'])) {
 		$return->customer = com_customer_customer::factory((int) $_REQUEST['customer']);
@@ -72,7 +72,7 @@ if ($return->status != 'processed' && $return->status != 'voided' && !$return->s
 			}
 			unset($cur_checklist);
 			$cur_salesperson = null;
-			if ($pines->config->com_sales->per_item_salesperson)
+			if ($_->config->com_sales->per_item_salesperson)
 				$cur_salesperson = user::factory(intval($cur_product->values[10]));
 			// Default to the return's user.
 			if (!isset($cur_salesperson->guid))
@@ -243,7 +243,7 @@ if ($product_error || $payment_error) {
 	return;
 }
 
-if ($pines->config->com_sales->global_returns)
+if ($_->config->com_sales->global_returns)
 	$return->ac->other = 1;
 
 if ($_REQUEST['process'] == 'process' && $return->status != 'processed' && $return->status != 'voided') {

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -65,9 +65,9 @@ class com_hrm_timeclock extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function add($time_in, $time_out, $comment = '', $extras = array()) {
-		global $pines;
+		global $_;
 		// Check that this time doesn't conflict with any other times.
-		$check = $pines->entity_manager->get_entity(
+		$check = $_->entity_manager->get_entity(
 				array('class' => com_hrm_timeclock_entry),
 				array('&',
 					'tag' => array('com_hrm', 'timeclock_entry'),
@@ -157,13 +157,13 @@ class com_hrm_timeclock extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_timeclock($time_start, $time_end) {
-		global $pines;
+		global $_;
 		$module = new module('com_hrm', 'employee/timeclock/form', 'content');
 		$module->entity = $this;
 		$module->time_start = (int) $time_start;
 		$module->time_end = (int) $time_end;
 		// Get the matching entries.
-		$module->entries = $pines->entity_manager->get_entities(
+		$module->entries = $_->entity_manager->get_entities(
 				array('class' => com_hrm_timeclock_entry),
 				array('&',
 					'tag' => array('com_hrm', 'timeclock_entry'),
@@ -184,7 +184,7 @@ class com_hrm_timeclock extends entity {
 	 * @return module The module.
 	 */
 	public function print_timeclock_view($time_start = null, $time_end = null) {
-		global $pines;
+		global $_;
 		$module = new module('com_hrm', 'employee/timeclock/view', 'content');
 		$module->entity = $this;
 		$module->time_start = $time_start;
@@ -198,7 +198,7 @@ class com_hrm_timeclock extends entity {
 			$selector['lt'] = array('in', $time_end);
 			$selector['gt'] = array('out', $time_start);
 		}
-		$module->entries = $pines->entity_manager->get_entities(
+		$module->entries = $_->entity_manager->get_entities(
 				array('class' => com_hrm_timeclock_entry),
 				$selector
 			);
@@ -217,7 +217,7 @@ class com_hrm_timeclock extends entity {
 	 * @return int Number of seconds worked.
 	 */
 	public function sum($time_start = null, $time_end = null, $include_new = true) {
-		global $pines;
+		global $_;
 		$selector = array('&',
 				'tag' => array('com_hrm', 'timeclock_entry'),
 				'ref' => array('user', $this->user)
@@ -226,7 +226,7 @@ class com_hrm_timeclock extends entity {
 			$selector['lt'] = array('in', $time_end);
 			$selector['gt'] = array('out', $time_start);
 		}
-		$entries = $pines->entity_manager->get_entities(
+		$entries = $_->entity_manager->get_entities(
 				array('class' => com_hrm_timeclock_entry),
 				$selector
 			);

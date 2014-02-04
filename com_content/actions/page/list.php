@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_content/listpages') )
@@ -20,4 +20,4 @@ if (isset($_REQUEST['category'])) {
 		$category = null;
 }
 
-$pines->com_content->list_pages($category);
+$_->com_content->list_pages($category);

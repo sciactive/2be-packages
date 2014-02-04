@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Testimonial' : 'Editing Testimonial ['.h($this->entity->id).'] for '.h($this->entity->customer->name);
 $this->note = 'Provide testimonial details in this form.';
-$pines->com_customer->load_customer_select();
-$pines->com_ptags->load();
+$_->com_customer->load_customer_select();
+$_->com_ptags->load();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_testimonials', 'testimonial/save')); ?>">
 	<script type="text/javascript">
@@ -63,7 +63,7 @@ $pines->com_ptags->load();
 			margin-left: 10px;
 		}
 		#rating-container .star {
-			color: <?php echo (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_hr_bottom)) ? $pines->config->com_testimonials->feedback_hr_bottom : '#5cb4f2'; ?>;
+			color: <?php echo (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_hr_bottom)) ? $_->config->com_testimonials->feedback_hr_bottom : '#5cb4f2'; ?>;
 			cursor: pointer;
 			float: right;
 			padding-right: 2px;
@@ -83,7 +83,7 @@ $pines->com_ptags->load();
 			font-size: 10px;
 		}
 		#rating-container .star:hover, #rating-container .star:hover ~ .star, #rating-container .star.rated  {
-			color: <?php echo (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_hr_top)) ? $pines->config->com_testimonials->feedback_hr_top : '#005c9e'; ?>;
+			color: <?php echo (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_hr_top)) ? $_->config->com_testimonials->feedback_hr_top : '#005c9e'; ?>;
 		}
 	</style>
 	<?php if (isset($this->entity->guid)) { ?>

@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_dash/dash') )
 	punt_user(null, pines_url('com_dash'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage'))
@@ -30,7 +30,7 @@ if (!$widget_entry)
 	throw new HttpClientException(null, 400);
 
 // Get the view and make a module.
-$def = $pines->com_dash->get_widget_def($widget_entry);
+$def = $_->com_dash->get_widget_def($widget_entry);
 $view = $def['view'];
 $view_callback = $def['view_callback'];
 if (!isset($view) && !isset($view_callback))
@@ -73,14 +73,14 @@ foreach ((array) $widget_entry['options'] as $cur_option) {
 	}
 }
 
-$pines->page->modules['head'] = array();
+$_->page->modules['head'] = array();
 $content = $module->render();
 // Render any modules placed into the head. (In case they add more.)
-foreach ($pines->page->modules['head'] as $cur_module)
+foreach ($_->page->modules['head'] as $cur_module)
 	$cur_module->render();
 // Now get their content.
 $head = '';
-foreach ($pines->page->modules['head'] as $cur_module)
+foreach ($_->page->modules['head'] as $cur_module)
 	$head .= $cur_module->render();
 
-$pines->page->override_doc(json_encode(array('title' => $module->title, 'content' => $content, 'head' => $head)));
+$_->page->override_doc(json_encode(array('title' => $module->title, 'content' => $content, 'head' => $head)));

@@ -32,7 +32,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!isset($this->entity->guid))
@@ -46,16 +46,16 @@ elseif ($this->entity->status == 'paid')
 elseif ($this->entity->status == 'voided')
 	$this->title = 'Voided Sale ['.h($this->entity->id).']';
 $this->note = 'Use this form to edit a sale.';
-$pines->com_pgrid->load();
-if ($pines->config->com_sales->com_customer)
-	$pines->com_customer->load_customer_select();
-if ($pines->config->com_sales->per_item_salesperson)
-	$pines->com_hrm->load_employee_select();
-if ($pines->config->com_sales->autocomplete_product)
-	$pines->com_sales->load_product_select();
+$_->com_pgrid->load();
+if ($_->config->com_sales->com_customer)
+	$_->com_customer->load_customer_select();
+if ($_->config->com_sales->per_item_salesperson)
+	$_->com_hrm->load_employee_select();
+if ($_->config->com_sales->autocomplete_product)
+	$_->com_sales->load_product_select();
 // TODO: After a sale is invoiced, don't calculate totals, just show what's saved.
-if ($pines->config->com_sales->com_esp) {
-	$esp_product = com_sales_product::factory((int) $pines->config->com_esp->esp_product);
+if ($_->config->com_sales->com_esp) {
+	$esp_product = com_sales_product::factory((int) $_->config->com_esp->esp_product);
 	if (!isset($esp_product->guid))
 		$esp_product = null;
 }
@@ -94,14 +94,14 @@ if ($pines->config->com_sales->com_esp) {
 				products_table = $("#p_muid_products_table"),
 				payments_table = $("#p_muid_payments_table"),
 				payments = $("#p_muid_payments");
-			<?php if ($pines->config->com_sales->com_esp) { ?>
-			var esp_rate = <?php echo (float) $pines->config->com_esp->esp_rate; ?>;
-			<?php } if ($pines->config->com_sales->com_customer) { ?>
+			<?php if ($_->config->com_sales->com_esp) { ?>
+			var esp_rate = <?php echo (float) $_->config->com_esp->esp_rate; ?>;
+			<?php } if ($_->config->com_sales->com_customer) { ?>
 			var require_customer = false;
 			<?php } ?>
 
 			// Number of decimal places to round to.
-			var dec = <?php echo (int) $pines->config->com_sales->dec; ?>;
+			var dec = <?php echo (int) $_->config->com_sales->dec; ?>;
 <?php
 			$taxes_percent = array();
 			$taxes_flat = array();
@@ -220,9 +220,9 @@ if ($pines->config->com_sales->com_esp) {
 				return floored * sign;
 			};
 
-			<?php if ($pines->config->com_sales->com_customer && $this->entity->status != 'invoiced' && $this->entity->status != 'paid' && $this->entity->status != 'voided') { ?>
+			<?php if ($_->config->com_sales->com_customer && $this->entity->status != 'invoiced' && $this->entity->status != 'paid' && $this->entity->status != 'voided') { ?>
 			$("#p_muid_customer").customerselect();
-			<?php } if ($pines->config->com_sales->per_item_salesperson) { ?>
+			<?php } if ($_->config->com_sales->per_item_salesperson) { ?>
 			$("#p_muid_salesperson").employeeselect();
 			<?php } ?>
 
@@ -293,7 +293,7 @@ if ($pines->config->com_sales->com_esp) {
 									}
 								});
 							};
-							<?php if ($pines->config->com_sales->autocomplete_product) { ?>
+							<?php if ($_->config->com_sales->autocomplete_product) { ?>
 							textbox.productselect({
 								open: function(){if (textbox.val() == "") textbox.autocomplete("close");},
 								select: function(event, ui){select(ui.item.value); return false;}
@@ -434,7 +434,7 @@ if ($pines->config->com_sales->com_esp) {
 							}
 						}
 					},
-					<?php } if ($pines->config->com_sales->per_item_salesperson) { ?>
+					<?php } if ($_->config->com_sales->per_item_salesperson) { ?>
 					{
 						type: 'button',
 						title: 'Salesperson',
@@ -446,7 +446,7 @@ if ($pines->config->com_sales->com_esp) {
 					},
 					<?php } ?>
 					{type: 'separator'},
-					<?php if ($pines->config->com_sales->com_esp) { ?>
+					<?php if ($_->config->com_sales->com_esp) { ?>
 					{
 						type: 'button',
 						text: 'ESP',
@@ -471,8 +471,8 @@ if ($pines->config->com_sales->com_esp) {
 									return;
 								} 
 								
-								<?php if (!empty($pines->config->com_esp->product_min_price)) { ?>
-									var product_min = pines.safe(<?php echo $pines->config->com_esp->product_min_price; ?>);
+								<?php if (!empty($_->config->com_esp->product_min_price)) { ?>
+									var product_min = pines.safe(<?php echo $_->config->com_esp->product_min_price; ?>);
 									var insured_item_price = insured_item.pgrid_get_value(6);
 									if (parseInt(insured_item_price) < parseInt(product_min)) {
 										alert('An ESP can only be applied to a product price of $'+product_min+' or more.');
@@ -480,13 +480,13 @@ if ($pines->config->com_sales->com_esp) {
 									}
 								<?php } ?>
 
-								<?php if ($pines->config->com_esp->round_up) { ?>
+								<?php if ($_->config->com_esp->round_up) { ?>
 								var esp_price = (insured_item.pgrid_get_value(6) * esp_rate).toFixed(2).replace(/\d\.\d{2}/, '9.99');
 								<?php } else { ?>
 								var esp_price = (insured_item.pgrid_get_value(6) * esp_rate).toFixed(2);
-								<?php } if ($pines->config->com_esp->esp_max > 0) { ?>
+								<?php } if ($_->config->com_esp->esp_max > 0) { ?>
 								esp_price = parseFloat(esp_price);
-								esp_price = Math.min(esp_price, <?php echo json_encode((float) $pines->config->com_esp->esp_max); ?>).toFixed(2);
+								esp_price = Math.min(esp_price, <?php echo json_encode((float) $_->config->com_esp->esp_max); ?>).toFixed(2);
 								<?php }
 								$fees_percent = array();
 								$fees_flat = array();
@@ -529,7 +529,7 @@ if ($pines->config->com_sales->com_esp) {
 								}
 
 								// Look up serials in the user's current location to allow them to choose.
-								if ($esp_product->serialized && $pines->config->com_sales->add_product_show_serials) {
+								if ($esp_product->serialized && $_->config->com_sales->add_product_show_serials) {
 									$selector = array('&',
 											'tag' => array('com_sales', 'stock'),
 											'data' => array('available', true),
@@ -539,8 +539,8 @@ if ($pines->config->com_sales->com_esp) {
 										);
 									if (isset($_SESSION['user']->group->guid))
 										$selector['ref'][] = array('location', $_SESSION['user']->group);
-									$stock_entries = $pines->entity_manager->get_entities(
-											array('class' => com_sales_stock, 'limit' => $pines->config->com_sales->add_product_show_serials),
+									$stock_entries = $_->entity_manager->get_entities(
+											array('class' => com_sales_stock, 'limit' => $_->config->com_sales->add_product_show_serials),
 											$selector
 										);
 									foreach ($stock_entries as $cur_stock) {
@@ -570,7 +570,7 @@ if ($pines->config->com_sales->com_esp) {
 						extra_class: 'picon picon-edit-delete',
 						multi_select: true,
 						click: function(e, rows){
-							<?php if ($pines->config->com_sales->com_esp) { ?>
+							<?php if ($_->config->com_sales->com_esp) { ?>
 							// Find any deserted ESP/ESP IDs
 							var deserted = [];
 							$.each(rows, function(){
@@ -603,7 +603,7 @@ if ($pines->config->com_sales->com_esp) {
 				]
 			});
 			var add_product = function(data, success){
-				var cur_row, del_dia = <?php echo json_encode($pines->config->com_sales->delivery_dialog); ?>;
+				var cur_row, del_dia = <?php echo json_encode($_->config->com_sales->delivery_dialog); ?>;
 				if (data.one_per_ticket) {
 					var cur_products = products_table.pgrid_get_all_rows().pgrid_export_rows();
 					var pass = true;
@@ -849,7 +849,7 @@ if ($pines->config->com_sales->com_esp) {
 					}
 				}
 			});
-			<?php if ($pines->config->com_sales->per_item_salesperson) { ?>
+			<?php if ($_->config->com_sales->per_item_salesperson) { ?>
 			// Salesperson Form
 			var salesperson_dialog = $("#p_muid_salesperson_dialog").dialog({
 				bgiframe: true,
@@ -937,7 +937,7 @@ if ($pines->config->com_sales->com_esp) {
 			});
 			<?php } ?>
 
-			<?php if (!$pines->config->com_sales->per_item_salesperson) { ?>
+			<?php if (!$_->config->com_sales->per_item_salesperson) { ?>
 			products_table.pgrid_import_state({pgrid_hidden_cols: [10, 11]});
 			<?php } ?>
 
@@ -1176,7 +1176,7 @@ if ($pines->config->com_sales->com_esp) {
 					'key' => $cur_payment['entity']->guid,
 					'values' => array(
 						$cur_payment['entity']->name,
-						$pines->com_sales->round($cur_payment['amount'], true),
+						$_->com_sales->round($cur_payment['amount'], true),
 						$cur_payment['status']
 					)
 				);
@@ -1247,13 +1247,13 @@ if ($pines->config->com_sales->com_esp) {
 				// How many times to apply a flat tax.
 				var tax_qty = 0;
 				var taxable_subtotal = 0;
-				<?php if ($pines->config->com_sales->com_customer) { ?>
+				<?php if ($_->config->com_sales->com_customer) { ?>
 				require_customer = false;
 				<?php } ?>
 				rows.each(function(){
 					var cur_row = $(this);
 					var product = cur_row.data("product");
-					<?php if ($pines->config->com_sales->com_customer) { ?>
+					<?php if ($_->config->com_sales->com_customer) { ?>
 					if (product.require_customer)
 						require_customer = true;
 					<?php } ?>
@@ -1599,7 +1599,7 @@ if ($pines->config->com_sales->com_esp) {
 				<?php } ?>
 			};
 
-			<?php if ($pines->config->com_sales->cash_drawer) { ?>
+			<?php if ($_->config->com_sales->cash_drawer) { ?>
 			pines.com_sales_run_drawer = function(){
 				var keep_checking = function(status){
 					switch (status) {
@@ -1668,7 +1668,7 @@ if ($pines->config->com_sales->com_esp) {
 			update_products();
 		});
 	</script>
-	<?php if ($pines->config->com_sales->com_customer) { ?>
+	<?php if ($_->config->com_sales->com_customer) { ?>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Customer</span>
@@ -1729,7 +1729,7 @@ if ($pines->config->com_sales->com_esp) {
 					<th>Discount</th>
 					<th>Line Total</th>
 					<th>Fees</th>
-					<?php if ($pines->config->com_sales->com_esp) { ?>
+					<?php if ($_->config->com_sales->com_esp) { ?>
 					<th>ESP</th>
 					<?php } else { ?>
 					<th>Unused</th>
@@ -1752,7 +1752,7 @@ if ($pines->config->com_sales->com_esp) {
 					<td><?php e($cur_product['discount']); ?></td>
 					<td><?php e($cur_product['line_total']); ?></td>
 					<td><?php e($cur_product['fees']); ?></td>
-					<?php if ($pines->config->com_sales->com_esp) { ?>
+					<?php if ($_->config->com_sales->com_esp) { ?>
 					<td><?php e($cur_product['esp']); ?></td>
 					<?php } else { ?>
 					<td>NA</td>
@@ -1797,7 +1797,7 @@ if ($pines->config->com_sales->com_esp) {
 		</div>
 		<br />
 	</div>
-	<?php if ($pines->config->com_sales->per_item_salesperson) { ?>
+	<?php if ($_->config->com_sales->per_item_salesperson) { ?>
 	<div id="p_muid_salesperson_dialog" title="Select Salesperson" style="display: none;">
 		<div class="pf-form">
 			<div class="pf-element">
@@ -1892,7 +1892,7 @@ if ($pines->config->com_sales->com_esp) {
 	</div>
 	<div id="p_muid_shipping_dialog" title="Shipping Address" style="display: none;">
 		<div class="pf-form">
-			<?php if ($pines->config->com_sales->com_customer) { ?>
+			<?php if ($_->config->com_sales->com_customer) { ?>
 			<script type="text/javascript">
 				pines(function(){
 					$("#p_muid_ship_use_cust").change(function(){
@@ -2056,11 +2056,11 @@ if ($pines->config->com_sales->com_esp) {
 		<input class="pf-button btn btn-primary" type="button" value="Tender" onclick="$('#p_muid_sale_process_type').val('tender'); pines.com_sales_run_check(true);" />
 		<?php } ?>
 
-		<?php if ( $pines->config->com_sales->allow_invoicing && ($this->entity->status != 'voided' && $this->entity->status != 'paid' && $this->entity->status != 'invoiced') ) { ?>
+		<?php if ( $_->config->com_sales->allow_invoicing && ($this->entity->status != 'voided' && $this->entity->status != 'paid' && $this->entity->status != 'invoiced') ) { ?>
 		<input class="pf-button btn btn-primary" type="button" value="Invoice" onclick="$('#p_muid_sale_process_type').val('invoice'); pines.com_sales_run_check();" />
 		<?php } ?>
 
-		<?php if ($this->entity->status != 'voided' && $this->entity->status != 'paid' && $this->entity->status != 'invoiced' && $this->entity->status != 'quoted') { if ($pines->config->com_sales->allow_quoting) { ?>
+		<?php if ($this->entity->status != 'voided' && $this->entity->status != 'paid' && $this->entity->status != 'invoiced' && $this->entity->status != 'quoted') { if ($_->config->com_sales->allow_quoting) { ?>
 		<input class="pf-button btn btn-primary" type="button" value="Quote" onclick="$('#p_muid_sale_process_type').val('quote'); pines.com_sales_run_check();" />
 		<?php } } else { ?>
 		<input class="pf-button btn btn-primary" type="button" value="Save" onclick="$('#p_muid_sale_process_type').val('save'); pines.com_sales_run_check();" />

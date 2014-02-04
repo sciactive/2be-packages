@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $module = new module('com_entityhelper', 'default_helper');
@@ -29,12 +29,12 @@ if ($this->render == 'body' && gatekeeper('com_user/listusers')) { ?>
 				<td style="font-weight:bold;">GUID</td>
 				<td><?php e($this->entity->guid); ?></td>
 			</tr>
-			<?php if (!$pines->config->com_user->email_usernames) { ?>
+			<?php if (!$_->config->com_user->email_usernames) { ?>
 			<tr>
 				<td style="font-weight:bold;">Username</td>
 				<td><?php e($this->entity->username); ?></td>
 			</tr>
-			<?php } if (in_array('name', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (in_array('name', $_->config->com_user->user_fields)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Real Name</td>
 				<td><?php e($this->entity->name); ?></td>
@@ -44,22 +44,22 @@ if ($this->render == 'body' && gatekeeper('com_user/listusers')) { ?>
 				<td style="font-weight:bold;">Enabled</td>
 				<td><?php echo $this->entity->has_tag('enabled') ? 'Yes' : 'No'; ?></td>
 			</tr>
-			<?php if ($pines->config->com_user->email_usernames || (!empty($this->entity->email) && in_array('email', $pines->config->com_user->user_fields))) { ?>
+			<?php if ($_->config->com_user->email_usernames || (!empty($this->entity->email) && in_array('email', $_->config->com_user->user_fields))) { ?>
 			<tr>
 				<td style="font-weight:bold;">Email</td>
 				<td><a href="mailto:<?php e($this->entity->email); ?>"><?php e($this->entity->email); ?></a><?php echo isset($this->entity->secret) ? ' (Unverified)' : ''; ?></td>
 			</tr>
-			<?php } if (!empty($this->entity->phone) && in_array('phone', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (!empty($this->entity->phone) && in_array('phone', $_->config->com_user->user_fields)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Phone</td>
 				<td><a href="tel:<?php e($this->entity->phone); ?>"><?php e(format_phone($this->entity->phone)); ?></a></td>
 			</tr>
-			<?php } if (!empty($this->entity->fax) && in_array('fax', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (!empty($this->entity->fax) && in_array('fax', $_->config->com_user->user_fields)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Fax</td>
 				<td><a href="tel:<?php e($this->entity->fax); ?>"><?php e(format_phone($this->entity->fax)); ?></a></td>
 			</tr>
-			<?php } if (in_array('timezone', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (in_array('timezone', $_->config->com_user->user_fields)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Timezone</td>
 				<td><?php e($this->entity->get_timezone()).(empty($this->entity->timezone) ? ' (Inherited)' : ' (Assigned)'); ?></td>
@@ -91,7 +91,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listusers')) { ?>
 				<td style="font-weight:bold;">Inherit Abilities</td>
 				<td><?php echo $this->entity->inherit_abilities ? 'Yes' : 'No'; ?></td>
 			</tr>
-			<?php if (!empty($this->entity->referral_code) && $pines->config->com_user->referral_codes) { ?>
+			<?php if (!empty($this->entity->referral_code) && $_->config->com_user->referral_codes) { ?>
 			<tr>
 				<td style="font-weight:bold;">Referral Code</td>
 				<td><?php e($this->entity->referral_code); ?></td>
@@ -100,7 +100,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listusers')) { ?>
 		</tbody>
 	</table>
 </div>
-<?php if (in_array('address', $pines->config->com_user->user_fields)) { ?>
+<?php if (in_array('address', $_->config->com_user->user_fields)) { ?>
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Address</h3>
@@ -116,7 +116,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listusers')) { ?>
 			echo '<pre>'.h($this->entity->address_international).'</pre>';
 		} ?>
 	</address>
-	<?php if (in_array('additional_addresses', $pines->config->com_user->user_fields) && $this->entity->addresses) { ?>
+	<?php if (in_array('additional_addresses', $_->config->com_user->user_fields) && $this->entity->addresses) { ?>
 	<h3 style="margin:10px 0;">Additional Addresses</h3>
 	<table class="table table-bordered" style="clear:both;">
 		<thead>
@@ -144,7 +144,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listusers')) { ?>
 	</table>
 	<?php } ?>
 </div>
-<?php } if (in_array('attributes', $pines->config->com_user->user_fields) && $this->entity->attributes) { ?>
+<?php } if (in_array('attributes', $_->config->com_user->user_fields) && $this->entity->attributes) { ?>
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Attributes</h3>

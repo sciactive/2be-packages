@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_reports/reportpayroll') )
@@ -55,7 +55,7 @@ foreach ($ids as $key => $id) {
 	$commission = $commission_array[$key];
 	$commission = str_replace('$', '', $commission);
 	$salary = $salary_array[$key];
-	$cur_module = $pines->com_reports->report_payroll_individual($start_date, $end_date, $emp, $payperhour, $hours, $total, $salary, $commission);
+	$cur_module = $_->com_reports->report_payroll_individual($start_date, $end_date, $emp, $payperhour, $hours, $total, $salary, $commission);
 	$cur_module->detach();
 	$module->pages[] = $cur_module->render();
 	unset($cur_module);

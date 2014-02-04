@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -58,7 +58,7 @@ return array(
 		'name' => 'header_image',
 		'cname' => 'Header Image',
 		'description' => 'The header image to use.',
-		'value' => $pines->config->rela_location.'templates/tpl_pinescms/images/default_logo.png',
+		'value' => $_->config->rela_location.'templates/tpl_pinescms/images/default_logo.png',
 		'peruser' => true,
 	),
 	array(
@@ -90,7 +90,7 @@ return array(
 		'name' => 'nav_logo_image',
 		'cname' => 'Nav Logo Image',
 		'description' => 'The navigation logo image to use.',
-		'value' => $pines->config->rela_location.'templates/tpl_pinescms/images/default_nav_logo.png',
+		'value' => $_->config->rela_location.'templates/tpl_pinescms/images/default_nav_logo.png',
 		'peruser' => true,
 	),
 	array(

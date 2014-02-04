@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <style type="text/css">
@@ -48,7 +48,7 @@ pines(function(){$(".puploader").each(function(){
 		pfile.elfdlg.dialog("widget").css("overflow", "visible");
 		pfile.elf = pfile.elfdlg.elfinder({
 			url: url,
-			height: <?php echo (int) $pines->config->com_elfinder->default_height; ?>,
+			height: <?php echo (int) $_->config->com_elfinder->default_height; ?>,
 			resizable : false,
 			commandsOptions: {
 				getfile: {

@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_inuitcss/includes/core/css/inuit.css");
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_inuitcss/includes/<?php e(clean_filename($pines->config->com_inuitcss->grid_layout)); ?>");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_inuitcss/includes/core/css/inuit.css");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_inuitcss/includes/<?php e(clean_filename($_->config->com_inuitcss->grid_layout)); ?>");
 	// Get the current number of columns in the CSS grid.
 	pines.com_inuitcss_get_columns = function(){
 		var cur_grid = 0, cur_test;

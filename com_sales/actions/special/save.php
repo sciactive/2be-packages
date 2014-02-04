@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -53,7 +53,7 @@ foreach ($discounts as $cur_discount) {
 		case 'product_percent':
 		case 'item_amount':
 		case 'item_percent':
-			$product = $pines->com_sales->get_product_by_code($qualifier);
+			$product = $_->com_sales->get_product_by_code($qualifier);
 			if (!isset($product->guid)) {
 				pines_notice("Couldn't find product with code $qualifier.");
 				break;
@@ -108,7 +108,7 @@ foreach ($requirements as $cur_requirement) {
 			break;
 		case 'has_product':
 		case 'has_not_product':
-			$product = $pines->com_sales->get_product_by_code($value);
+			$product = $_->com_sales->get_product_by_code($value);
 			if (!isset($product->guid)) {
 				pines_notice("Couldn't find product with code $value.");
 				break;
@@ -169,14 +169,14 @@ if (empty($special->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_sales_special, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'special'), 'data' => array('code', $special->code)));
+$test = $_->entity_manager->get_entity(array('class' => com_sales_special, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'special'), 'data' => array('code', $special->code)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$special->print_form();
 	pines_notice('There is already a special with that code. Please choose a different code.');
 	return;
 }
 
-if ($pines->config->com_sales->global_specials)
+if ($_->config->com_sales->global_specials)
 	$special->ac->other = 1;
 
 if ($special->save()) {

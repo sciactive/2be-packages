@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -24,7 +24,7 @@ class com_esp extends component {
 	 * @return module The esp list module.
 	 */
 	function list_plans($show = null) {
-		global $pines;
+		global $_;
 		if (!isset($show)) {
 			$show = json_decode($_SESSION['user']->pgrid_saved_states['com_esp/list'])->disposition;
 			if (!isset($show))
@@ -34,14 +34,14 @@ class com_esp extends component {
 		$module = new module('com_esp', 'list', 'content');
 
 		if ($show == 'all') {
-			$module->plans = $pines->entity_manager->get_entities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp')));
+			$module->plans = $_->entity_manager->get_entities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp')));
 			$module->show = 'all';
 		} else {
 			$dispositions = array_map('preg_quote', explode(',', $show));
 			$regex = '/'.implode('|', $dispositions).'/';
 			
 			// Only grab the returns that have a particular disposition.
-			$module->plans = $pines->entity_manager->get_entities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp'), 'match' => array('status', $regex)));
+			$module->plans = $_->entity_manager->get_entities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp'), 'match' => array('status', $regex)));
 			$module->show = $show;
 		}
 

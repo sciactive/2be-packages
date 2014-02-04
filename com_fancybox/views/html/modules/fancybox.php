@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->com_fancybox->load();
+$_->com_fancybox->load();
 
 $options = (object) array();
 
@@ -131,9 +131,9 @@ if (isset($this->helpers))
 pines(function(){
 	<?php foreach (array_keys((array) $options->helpers) as $cur_helper) {
 		if (file_exists($file = 'components/com_fancybox/includes/helpers/jquery.fancybox-'.clean_filename($cur_helper).'.css')) { ?>
-	pines.loadcss(<?php echo json_encode($pines->config->location.$file); ?>);
+	pines.loadcss(<?php echo json_encode($_->config->location.$file); ?>);
 	<?php } if (file_exists($file = 'components/com_fancybox/includes/helpers/jquery.fancybox-'.clean_filename($cur_helper).'.js')) { ?>
-	pines.loadjs(<?php echo json_encode($pines->config->location.$file); ?>);
+	pines.loadjs(<?php echo json_encode($_->config->location.$file); ?>);
 	<?php } } ?>
 	$('.fancybox-elem', '#p_muid_fancybox').fancybox(<?php echo json_encode($options); ?>);
 });</script>

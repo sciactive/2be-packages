@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -65,9 +65,9 @@ class com_content_page extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function delete() {
-		global $pines;
+		global $_;
 		// Remove page from categories.
-		$cats = $pines->entity_manager->get_entities(
+		$cats = $_->entity_manager->get_entities(
 				array('class' => com_content_category, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_content', 'category'),
@@ -110,8 +110,8 @@ class com_content_page extends entity {
 	 * @return array An array of categories.
 	 */
 	public function get_categories() {
-		global $pines;
-		$categories = (array) $pines->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'ref' => array('pages', $this)));
+		global $_;
+		$categories = (array) $_->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'ref' => array('pages', $this)));
 		return $categories;
 	}
 
@@ -123,9 +123,9 @@ class com_content_page extends entity {
 	public function get_option($name) {
 		if (isset($this->$name))
 			return $this->$name;
-		global $pines;
+		global $_;
 		$config_name = "def_page_$name";
-		return $pines->config->com_content->$config_name;
+		return $_->config->com_content->$config_name;
 	}
 
 	/**
@@ -145,8 +145,8 @@ class com_content_page extends entity {
 	public function print_intro() {
 		if (!$this->ready())
 			return null;
-		global $pines;
-		$pines->com_content->load_custom_css();
+		global $_;
+		$_->com_content->load_custom_css();
 		$module = new module('com_content', 'page/intro', 'content');
 		$module->entity = $this;
 
@@ -158,19 +158,19 @@ class com_content_page extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_content', 'page/form', 'content');
 		$module->entity = $this;
-		$module->categories = (array) $pines->entity_manager->get_entities(
+		$module->categories = (array) $_->entity_manager->get_entities(
 				array('class' => com_content_category),
 				array('&',
 					'tag' => array('com_content', 'category'),
 					'data' => array('enabled', true)
 				)
 			);
-		if (isset($pines->editor)) {
-			foreach ($pines->com_content->get_custom_css() as $cur_file)
-				$pines->editor->add_css($cur_file);
+		if (isset($_->editor)) {
+			foreach ($_->com_content->get_custom_css() as $cur_file)
+				$_->editor->add_css($cur_file);
 		}
 
 		return $module;
@@ -183,8 +183,8 @@ class com_content_page extends entity {
 	public function print_page() {
 		if (!$this->ready())
 			return null;
-		global $pines;
-		$pines->com_content->load_custom_css();
+		global $_;
+		$_->com_content->load_custom_css();
 		$module = new module('com_content', 'page/page', 'content');
 		$module->entity = $this;
 
@@ -212,10 +212,10 @@ class com_content_page extends entity {
 			return false;
 		if (!$this->conditions)
 			return true;
-		global $pines;
+		global $_;
 		// Check that all conditions are met.
 		foreach ($this->conditions as $cur_type => $cur_value) {
-			if (!$pines->depend->check($cur_type, $cur_value))
+			if (!$_->depend->check($cur_type, $cur_value))
 				return false;
 		}
 		return true;

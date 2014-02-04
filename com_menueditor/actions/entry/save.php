@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -80,7 +80,7 @@ if (isset($entry->top_menu)) {
 	}
 }
 
-if ($pines->config->com_menueditor->global_entries)
+if ($_->config->com_menueditor->global_entries)
 	$entry->ac->other = 1;
 
 if ($entry->save()) {

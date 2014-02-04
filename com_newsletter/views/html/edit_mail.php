@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Mail' : 'Editing ['.h($this->entity->name).']';
-$pines->editor->load();
-$pines->uploader->load();
+$_->editor->load();
+$_->uploader->load();
 ?>
 <form class="pf-form" method="post" action="<?php e(pines_url($this->new_option, $this->new_action)); ?>">
 	<?php if (isset($this->entity->guid)) { ?>

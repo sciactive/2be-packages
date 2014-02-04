@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/seestock') )
 	punt_user(null, pines_url('com_sales', 'stock/list', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 // The query.
@@ -26,7 +26,7 @@ if (preg_match('/^\s*$/', $query)) {
 	$stock_entries = array();
 } elseif ($query == '*') {
 	// The user wants to see all stock entries.
-	$stock_entries = (array) $pines->entity_manager->get_entities(
+	$stock_entries = (array) $_->entity_manager->get_entities(
 			array('class' => com_sales_stock, 'reverse' => true),
 			array('&',
 				'tag' => array('com_sales', 'stock'),
@@ -35,7 +35,7 @@ if (preg_match('/^\s*$/', $query)) {
 		);
 } else {
 	// Select by query.
-	$stock_entries = (array) $pines->entity_manager->get_entities(
+	$stock_entries = (array) $_->entity_manager->get_entities(
 			array('class' => com_sales_stock, 'reverse' => true),
 			array('&',
 				'tag' => array('com_sales', 'stock'),
@@ -72,4 +72,4 @@ if (!$stock_entries)
 $result = array();
 $result['stock_entries'] = $stock_entries;
 
-$pines->page->override_doc(json_encode($result));
+$_->page->override_doc(json_encode($result));

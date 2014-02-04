@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -35,7 +35,7 @@ return array(
 		'name' => 'redirect_url',
 		'cname' => 'Redirect URL',
 		'description' => 'The URL to redirect the user to when they time out and the action is "Redirect to URL".',
-		'value' => $pines->config->rela_location,
+		'value' => $_->config->rela_location,
 		'peruser' => true,
 	),
 );

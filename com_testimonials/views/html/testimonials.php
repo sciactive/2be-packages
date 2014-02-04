@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 $save_testimonial = pines_url('com_testimonials', 'testimonial/save');
@@ -30,4 +30,4 @@ $customer_guid = ($logged_in && $customer) ? $_SESSION['user']->guid : '';
 	var customer = <?php echo json_encode($customer); ?>;
 	var customer_guid = <?php echo json_encode($customer_guid); ?>;
 </script>
-<script type="text/javascript" src="<?php e($pines->config->location); ?>components/com_testimonials/includes/<?php echo ($pines->config->debug_mode) ? 'testimonial' : 'testimonial.min'; ?>.js"></script>
+<script type="text/javascript" src="<?php e($_->config->location); ?>components/com_testimonials/includes/<?php echo ($_->config->debug_mode) ? 'testimonial' : 'testimonial.min'; ?>.js"></script>

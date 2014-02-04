@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Edit Buttons';
 ?>
@@ -128,10 +128,10 @@ $this->title = 'Edit Buttons';
 				<?php } elseif ($cur_button == 'line_break') { ?>
 			<a class="line_break btn disabled"><span>&nbsp;</span></a>
 				<?php } else {
-					$cur_def = $pines->com_dash->get_button_def($cur_button);
+					$cur_def = $_->com_dash->get_button_def($cur_button);
 					// Check its conditions.
 					foreach ((array) $cur_def['depends'] as $cur_type => $cur_value) {
-						if (!$pines->depend->check($cur_type, $cur_value))
+						if (!$_->depend->check($cur_type, $cur_value))
 							continue 2;
 					} ?>
 			<a class="button btn" title="<?php e($cur_def['description']); ?>">
@@ -160,7 +160,7 @@ $this->title = 'Edit Buttons';
 		</div>
 		<?php foreach ((array) $this->buttons as $cur_component => $cur_button_list) { ?>
 		<div class="pf-element pf-heading">
-			<h3><?php e($pines->info->$cur_component->name); ?></h3>
+			<h3><?php e($_->info->$cur_component->name); ?></h3>
 		</div>
 		<div class="pf-element pf-full-width">
 			<div class="button_well <?php e($this->buttons_size); ?>">

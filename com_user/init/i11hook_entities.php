@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -31,16 +31,16 @@ function com_user__get_entities(&$array, $name, &$object, &$function, &$data) {
  * @param array &$array An array of an entity or guid.
  */
 function com_user__check_permissions_delete(&$array) {
-	global $pines;
+	global $_;
 	$entity = $array[0];
 	if ((int) $entity === $entity)
-		$entity = $pines->entity_manager->get_entity($array[0]);
+		$entity = $_->entity_manager->get_entity($array[0]);
 	if ((object) $entity !== $entity) {
 		$array = false;
 		return;
 	}
 	// Test for permissions.
-	if (!$pines->user_manager->check_permissions($entity, 3))
+	if (!$_->user_manager->check_permissions($entity, 3))
 		$array = false;
 }
 
@@ -54,7 +54,7 @@ function com_user__check_permissions_delete(&$array) {
  * @param array &$data The callback data array.
  */
 function com_user__check_permissions_return(&$array, $name, &$object, &$function, &$data) {
-	global $pines;
+	global $_;
 	if ($data['com_user_skip_ac'])
 		return;
 	if ((array) $array[0] === $array[0]) {
@@ -66,7 +66,7 @@ function com_user__check_permissions_return(&$array, $name, &$object, &$function
 	}
 	foreach ($entities as $key => &$cur_entity) {
 		// Test for permissions.
-		if (!$pines->user_manager->check_permissions($cur_entity, 1))
+		if (!$_->user_manager->check_permissions($cur_entity, 1))
 			unset($entities[$key]);
 	}
 	unset($cur_entity);
@@ -78,14 +78,14 @@ function com_user__check_permissions_return(&$array, $name, &$object, &$function
  * @param array &$array An array of an entity.
  */
 function com_user__check_permissions_save(&$array) {
-	global $pines;
+	global $_;
 	$entity = $array[0];
 	if ((object) $entity !== $entity) {
 		$array = false;
 		return;
 	}
 	// Test for permissions.
-	if (!$pines->user_manager->check_permissions($entity, 2))
+	if (!$_->user_manager->check_permissions($entity, 2))
 		$array = false;
 }
 
@@ -126,16 +126,16 @@ function com_user__add_access(&$array) {
 	}
 }
 
-foreach (array('$pines->entity_manager->get_entity', '$pines->entity_manager->get_entities') as $cur_hook) {
-	$pines->hook->add_callback($cur_hook, -10, 'com_user__get_entities');
-	$pines->hook->add_callback($cur_hook, 10, 'com_user__check_permissions_return');
+foreach (array('$_->entity_manager->get_entity', '$_->entity_manager->get_entities') as $cur_hook) {
+	$_->hook->add_callback($cur_hook, -10, 'com_user__get_entities');
+	$_->hook->add_callback($cur_hook, 10, 'com_user__check_permissions_return');
 }
 unset ($cur_hook);
 
-$pines->hook->add_callback('$pines->entity_manager->save_entity', -100, 'com_user__add_access');
-$pines->hook->add_callback('$pines->entity_manager->save_entity', -99, 'com_user__check_permissions_save');
+$_->hook->add_callback('$_->entity_manager->save_entity', -100, 'com_user__add_access');
+$_->hook->add_callback('$_->entity_manager->save_entity', -99, 'com_user__check_permissions_save');
 
-foreach (array('$pines->entity_manager->delete_entity', '$pines->entity_manager->delete_entity_by_id') as $cur_hook)
-	$pines->hook->add_callback($cur_hook, -99, 'com_user__check_permissions_delete');
+foreach (array('$_->entity_manager->delete_entity', '$_->entity_manager->delete_entity_by_id') as $cur_hook)
+	$_->hook->add_callback($cur_hook, -99, 'com_user__check_permissions_delete');
 
 unset ($cur_hook);

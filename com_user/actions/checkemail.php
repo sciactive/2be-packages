@@ -8,16 +8,16 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_user->check_email)
+if (!$_->config->com_user->check_email)
 	throw new HttpClientException(null, 404);
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if (!empty($_REQUEST['id']))
 	$id = intval($_REQUEST['id']);
 
-$pines->page->override_doc(json_encode($pines->user_manager->check_email($_REQUEST['email'], $id)));
+$_->page->override_doc(json_encode($_->user_manager->check_email($_REQUEST['email'], $id)));

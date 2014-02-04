@@ -8,31 +8,31 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Sales Rankings: '.h($this->entity->name).' ('.h(format_date($this->entity->start_date, 'date_sort')).' - '.h(format_date($this->entity->end_date - 1, 'date_sort')).')';
 if ($this->entity->final)
 	$this->note = 'Finalized on '.h(format_date($this->entity->final_date, 'full_long'));
 else
 	$this->note = 'Current as of '.h(format_date(time(), 'full_long'));
-$pines->com_jstree->load();
+$_->com_jstree->load();
 $google_drive = false;
-if (isset($pines->com_googledrive)) {
-    $pines->com_googledrive->export_to_drive('csv');
+if (isset($_->com_googledrive)) {
+    $_->com_googledrive->export_to_drive('csv');
     $google_drive = true;
 } else {
     pines_log("Google Drive is not installed", 'notice');
 }
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_reports/rank_sales']);
 
 // Status levels for in the green, yellow and red classifications.
-$green_status = $pines->config->com_reports->rank_level_green;
-$yellow_status = $pines->config->com_reports->rank_level_yellow;
+$green_status = $_->config->com_reports->rank_level_green;
+$yellow_status = $_->config->com_reports->rank_level_yellow;
 
-$prefix = $pines->config->com_reports->use_points ? '' : '$';
-$multiplier = $pines->config->com_reports->use_points ? $pines->config->com_reports->point_multiplier : 1;
+$prefix = $_->config->com_reports->use_points ? '' : '$';
+$multiplier = $_->config->com_reports->use_points ? $_->config->com_reports->point_multiplier : 1;
 
 ?>
 <style type="text/css" >
@@ -90,14 +90,14 @@ $multiplier = $pines->config->com_reports->use_points ? $pines->config->com_repo
 						});
 					}},
                                         <?php // Need to check if Google Drive is installed
-                                            if ($google_drive && !empty($pines->config->com_googledrive->client_id)) { ?>
+                                            if ($google_drive && !empty($_->config->com_googledrive->client_id)) { ?>
                                         {type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
                                             // First need to set the rows to which we want to export
                                             setRows(rows);
                                             // Then we have to check if we have permission to post to user's google drive
                                             checkAuth();
                                         }},
-                                        <?php } elseif ($google_drive && empty($pines->config->com_googledrive->client_id)) { ?>
+                                        <?php } elseif ($google_drive && empty($_->config->com_googledrive->client_id)) { ?>
                                         {type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
                                             // They have com_googledrive installed but didn't set the client id, so alert them on click
                                             alert('You need to set the CLIENT ID before you can export to Google Drive');

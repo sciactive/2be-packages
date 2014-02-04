@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -52,14 +52,14 @@ if (empty($shipper->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_sales_shipper, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'shipper'), 'data' => array('name', $shipper->name)));
+$test = $_->entity_manager->get_entity(array('class' => com_sales_shipper, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'shipper'), 'data' => array('name', $shipper->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$shipper->print_form();
 	pines_notice('There is already a shipper with that name. Please choose a different name.');
 	return;
 }
 
-if ($pines->config->com_sales->global_shippers)
+if ($_->config->com_sales->global_shippers)
 	$shipper->ac->other = 1;
 
 if ($shipper->save()) {

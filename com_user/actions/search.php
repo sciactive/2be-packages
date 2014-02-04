@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_customer/listusers') )
 	punt_user(null, pines_url('com_user', 'search', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $query = trim($_REQUEST['q']);
@@ -42,11 +42,11 @@ if (empty($query)) {
 		$selector2['match'][] = array('fax', $r_num_query);
 	}
 	$args = array(
-			array('class' => user, 'limit' => $pines->config->com_user->user_search_limit),
+			array('class' => user, 'limit' => $_->config->com_user->user_search_limit),
 			$selector,
 			$selector2
 		);
-	$users = (array) call_user_func_array(array($pines->entity_manager, 'get_entities'), $args);
+	$users = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
 }
 
 foreach ($users as $key => &$cur_user) {
@@ -65,4 +65,4 @@ unset($cur_user);
 if (!$users)
 	$users = null;
 
-$pines->page->override_doc(json_encode($users));
+$_->page->override_doc(json_encode($users));

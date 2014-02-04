@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
  * Attach a note editor for any modules put in 'content' with an entity.
  */
 function com_notes__attach_note_editors() {
-	global $pines;
-	foreach ((array) $pines->page->modules['content'] as $cur_module) {
+	global $_;
+	foreach ((array) $_->page->modules['content'] as $cur_module) {
 		// It can't be a module from this component.
 		if ($cur_module->component == 'com_notes')
 			return;
@@ -27,9 +27,9 @@ function com_notes__attach_note_editors() {
 		if (!gatekeeper('com_notes/seethreads'))
 			return;
 		// Now load the thread editor module.
-		$module = new module('com_notes', 'thread/editor', $pines->config->com_notes->editor_position);
+		$module = new module('com_notes', 'thread/editor', $_->config->com_notes->editor_position);
 		$module->entity = $cur_module->entity;
 	}
 }
 
-$pines->hook->add_callback('$pines->page->render', -10, 'com_notes__attach_note_editors');
+$_->hook->add_callback('$_->page->render', -10, 'com_notes__attach_note_editors');

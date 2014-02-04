@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/searchspecials'))
 	punt_user(null, pines_url('com_sales', 'special/search', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $code = strtoupper($_REQUEST['code']);
@@ -22,7 +22,7 @@ $code = strtoupper($_REQUEST['code']);
 if (empty($code)) {
 	$special = null;
 } else {
-	$special = $pines->entity_manager->get_entity(
+	$special = $_->entity_manager->get_entity(
 			array('class' => com_sales_special),
 			array('&',
 				'tag' => array('com_sales', 'special'),
@@ -69,4 +69,4 @@ if (isset($special)) {
 	$special = $json_struct;
 }
 
-$pines->page->override_doc(json_encode($special));
+$_->page->override_doc(json_encode($special));

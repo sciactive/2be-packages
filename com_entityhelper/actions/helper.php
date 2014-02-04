@@ -8,22 +8,22 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 // TODO: Provide a method to define a context. (So non-entities would still work.)
 
-$entity = $pines->entity_manager->get_entity(
+$entity = $_->entity_manager->get_entity(
 		array('class' => $_REQUEST['context']),
 		array('&',
 			'guid' => (int) $_REQUEST['id']
 		)
 	);
 if (!$entity->guid) {
-	$pines->page->override_doc(json_encode(false));
+	$_->page->override_doc(json_encode(false));
 	return;
 }
 
@@ -41,10 +41,10 @@ if (is_callable(array($entity, 'helper'))) {
 		$response->render = 'footer';
 		$response->entity = $entity;
 		$result['footer'] = $response->render();
-		$pines->page->override_doc(json_encode($result));
+		$_->page->override_doc(json_encode($result));
 		return;
 	} elseif ((array) $response === $response && isset($response['title']) && isset($response['body']) && isset($response['footer'])) {
-		$pines->page->override_doc(json_encode($response));
+		$_->page->override_doc(json_encode($response));
 		return;
 	}
 }
@@ -60,4 +60,4 @@ $module = new module('com_entityhelper', 'default_helper');
 $module->render = 'footer';
 $module->entity = $entity;
 $result['footer'] = $module->render();
-$pines->page->override_doc(json_encode($result));
+$_->page->override_doc(json_encode($result));

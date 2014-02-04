@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 header('Content-Type: text/html');
 
 // Get the current Joomla! template.
-$jtemplate = $pines->config->tpl_joomlatemplates->template;
+$jtemplate = $_->config->tpl_joomlatemplates->template;
 
 // Get the directory for the template.
 $jtdir = "templates/tpl_joomlatemplates/templates/$jtemplate/";

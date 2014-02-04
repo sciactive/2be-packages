@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 
@@ -34,7 +34,7 @@ foreach ($cashcount->currency as $key => $cur_currency) {
 	$skim->total += ((float) $cur_currency) * $skim->count[$key];
 }
 
-if ($pines->config->com_sales->global_cashcounts)
+if ($_->config->com_sales->global_cashcounts)
 	$skim->ac->other = 1;
 
 if ($skim->save()) {

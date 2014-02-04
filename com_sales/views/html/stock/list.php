@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 if ($this->removed) {
 	$this->title = 'Removed Stock';
@@ -23,10 +23,10 @@ if ($this->removed) {
 	}
 }
 
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/stock/list']);
-$pines->com_jstree->load();
+$_->com_jstree->load();
 ?>
 <script type="text/javascript">
 	pines(function(){

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
-<script type="text/javascript" src="<?php e($pines->config->location); ?>components/com_jqueryuitouch/includes/<?php echo $pines->config->debug_mode ? 'jquery.ui.touch-punch.js' : 'jquery.ui.touch-punch.min.js'; ?>"></script>
+<script type="text/javascript" src="<?php e($_->config->location); ?>components/com_jqueryuitouch/includes/<?php echo $_->config->debug_mode ? 'jquery.ui.touch-punch.js' : 'jquery.ui.touch-punch.min.js'; ?>"></script>

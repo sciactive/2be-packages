@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_calendar/viewcalendar') && !gatekeeper('com_calendar/editcalendar') )
 	punt_user(null, pines_url('com_calendar', 'events_json', $_GET));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $location = group::factory((int) $_REQUEST['location']);
@@ -38,7 +38,7 @@ else {
 	} while(empty($timezone) && isset($parent->guid));
 }
 if (empty($timezone))
-	$timezone = $pines->config->timezone;
+	$timezone = $_->config->timezone;
 
 // Calculate using correct timezone.
 $cur_timezone = date_default_timezone_get();
@@ -56,7 +56,7 @@ $descendants = ($_REQUEST['descendants'] == 'true');
 $filter = !empty($_REQUEST['filter']) ? $_REQUEST['filter'] : 'all';
 
 // Get the events.
-$events = $pines->com_calendar->get_events($start, $end, $timezone, $location, $employee, $descendants, $filter);
+$events = $_->com_calendar->get_events($start, $end, $timezone, $location, $employee, $descendants, $filter);
 
 // Build a JSON structure to return.
 $struct = array();
@@ -114,4 +114,4 @@ foreach ($events as $cur_event) {
 }
 
 // Return the JSON structure.
-$pines->page->override_doc(json_encode($struct));
+$_->page->override_doc(json_encode($struct));

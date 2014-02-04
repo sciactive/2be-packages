@@ -8,26 +8,26 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Special' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide special details in this form.';
-$pines->uploader->load();
-$pines->com_pgrid->load();
-if ($pines->config->com_sales->com_customer)
-	$pines->com_customer->load_customer_select();
-$pines->com_sales->load_product_select();
+$_->uploader->load();
+$_->com_pgrid->load();
+if ($_->config->com_sales->com_customer)
+	$_->com_customer->load_customer_select();
+$_->com_sales->load_product_select();
 
-//$categories = $pines->entity_manager->get_entities(
+//$categories = $_->entity_manager->get_entities(
 //		array('class' => com_sales_category),
 //		array('&',
 //			'tag' => array('com_sales', 'category'),
 //			'strict' => array('enabled', true)
 //		)
 //	);
-//$pines->entity_manager->hsort($categories, 'name', 'parent');
+//$_->entity_manager->hsort($categories, 'name', 'parent');
 
-$specials = $pines->entity_manager->get_entities(
+$specials = $_->entity_manager->get_entities(
 		array('class' => com_sales_special),
 		array('&',
 			'tag' => array('com_sales', 'special')
@@ -36,7 +36,7 @@ $specials = $pines->entity_manager->get_entities(
 			'guid' => array($this->entity->guid)
 		)
 	);
-$pines->entity_manager->sort($specials, 'name');
+$_->entity_manager->sort($specials, 'name');
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'special/save')); ?>">
 	<script type="text/javascript">

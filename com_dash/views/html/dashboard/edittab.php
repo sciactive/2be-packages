@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Edit Tab';
-$pines->com_bootstrap->load();
-$max_columns = $pines->config->com_bootstrap->grid_columns;
+$_->com_bootstrap->load();
+$max_columns = $_->config->com_bootstrap->grid_columns;
 $default_column = h(floor($max_columns / 3));
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_dash', 'dashboard/tabsave', array('id' => (string) $this->entity->guid))); ?>">

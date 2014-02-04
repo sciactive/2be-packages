@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = h($this->entity->name);
 if ($this->entity->places > 1)
 	$this->note = 'And the winners are...';
 else
 	$this->note = 'And the winner is...';
-$pines->icons->load();
+$_->icons->load();
 
 /**
  * Adds the English ordinal suffix to a number.

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -33,7 +33,7 @@ class com_pgrid extends component {
 	 */
 	function load() {
 		if (!$this->js_loaded) {
-			global $pines;
+			global $_;
 			$module = new module('com_pgrid', 'pgrid', 'head');
 			$module->render();
 			$this->js_loaded = true;

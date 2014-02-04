@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/listpos') )
 	punt_user(null, pines_url('com_sales', 'po/list', array('finished' => $_REQUEST['finished'])));
 
-$pines->com_sales->list_pos($_REQUEST['finished'] == 'true');
+$_->com_sales->list_pos($_REQUEST['finished'] == 'true');

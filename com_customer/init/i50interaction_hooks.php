@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_customer->com_calendar)
+if (!$_->config->com_customer->com_calendar)
 	return;
 
 /**
@@ -20,10 +20,10 @@ if (!$pines->config->com_customer->com_calendar)
  * @param object &$object The sale/return being saved.
  */
 function com_customer__cancel_appointments(&$object) {
-	global $pines;
+	global $_;
 
 	// Cancel any open customer follow-ups for this sale.
-	$follow_ups = $pines->entity_manager->get_entities(
+	$follow_ups = $_->entity_manager->get_entities(
 			array('class' => com_customer_interaction),
 			array('&',
 				'data' => array('status', 'open'),
@@ -33,7 +33,7 @@ function com_customer__cancel_appointments(&$object) {
 	foreach ($follow_ups as $cur_appt) {
 		$cur_appt->status = 'canceled';
 		$cur_appt->review_comments[] = format_date(time(), 'custom', 'n/j/y g:iA').': Returned ('.ucwords($cur_appt->status).')';
-		if ($pines->config->com_customer->com_calendar) {
+		if ($_->config->com_customer->com_calendar) {
 			$cur_appt->event->color = 'gainsboro';
 			$cur_appt->event->information = $cur_appt->employee->name." (".ucwords($cur_appt->status).") \n";
 			$cur_appt->event->information .= $cur_appt->comments."\n".implode("\n",$cur_appt->review_comments);
@@ -51,9 +51,9 @@ function com_customer__cancel_appointments(&$object) {
  * @param object &$object The sale being saved.
  */
 function com_customer__check_sale(&$arguments, $name, &$object) {
-	global $pines;
+	global $_;
 
-	if (!is_object($object) || !$pines->config->com_customer->follow_up)
+	if (!is_object($object) || !$_->config->com_customer->follow_up)
 		return;
 	$websale = isset($object->user->guid) ? $object->user->is($object->customer) : (isset($_SESSION['user']->guid) ? $_SESSION['user']->is($object->customer) : true);
 	if (!$object->followed_up && isset($object->customer->guid) && !$websale && $object->status == 'paid') {
@@ -91,7 +91,7 @@ function com_customer__check_sale(&$arguments, $name, &$object) {
 		com_customer__cancel_appointments($object);
 }
 
-$pines->hook->add_callback('com_sales_sale->save', -10, 'com_customer__check_sale');
+$_->hook->add_callback('com_sales_sale->save', -10, 'com_customer__check_sale');
 
 /**
  * Cancel customer follow-ups for any returned sale.
@@ -101,9 +101,9 @@ $pines->hook->add_callback('com_sales_sale->save', -10, 'com_customer__check_sal
  * @param object &$object The sale being saved.
  */
 function com_customer__check_return(&$arguments, $name, &$object) {
-	global $pines;
+	global $_;
 
-	if (!is_object($object) || !$pines->config->com_customer->follow_up)
+	if (!is_object($object) || !$_->config->com_customer->follow_up)
 		return;
 	// Add a check here for return->products == return->sale->products ???
 	if ( $object->status == 'processed' && isset($object->sale->guid) &&
@@ -111,4 +111,4 @@ function com_customer__check_return(&$arguments, $name, &$object) {
 		com_customer__cancel_appointments($object->sale);
 }
 
-$pines->hook->add_callback('com_sales_return->save', -10, 'com_customer__check_return');
+$_->hook->add_callback('com_sales_return->save', -10, 'com_customer__check_return');

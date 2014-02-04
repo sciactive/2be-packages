@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -91,7 +91,7 @@ class com_hrm_application extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_hrm', 'application/form', 'content');
 		$module->entity = $this;
 
@@ -103,7 +103,7 @@ class com_hrm_application extends entity {
 	 * @return module The form's module.
 	 */
 	public function view_application() {
-		global $pines;
+		global $_;
 		$module = new module('com_hrm', 'application/view', 'content');
 		$module->entity = $this;
 

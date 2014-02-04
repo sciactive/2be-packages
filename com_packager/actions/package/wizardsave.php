@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_packager/newpackage') )
@@ -20,9 +20,9 @@ if (!$_REQUEST['packages']) {
 	pines_redirect(pines_url('com_packager', 'package/list'));
 }
 foreach ((array) $_REQUEST['packages'] as $cur_component) {
-	if (!in_array($cur_component, $pines->components))
+	if (!in_array($cur_component, $_->components))
 		continue;
-	if (!is_null($pines->entity_manager->get_entity(
+	if (!is_null($_->entity_manager->get_entity(
 			array('class' => com_packager_package),
 			array('&',
 				'tag' => array('com_packager', 'package'),
@@ -39,7 +39,7 @@ foreach ((array) $_REQUEST['packages'] as $cur_component) {
 	$package->exclude_files = array();
 	$package->screenshots = array();
 	$package->icon = null;
-	if ($pines->config->com_packager->global_packages)
+	if ($_->config->com_packager->global_packages)
 		$package->ac->other = 1;
 	if (!$package->save())
 		$errors[] = $cur_component;

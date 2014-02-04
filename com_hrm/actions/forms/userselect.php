@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/listemployees') )
 	punt_user(null, pines_url('com_hrm', 'forms/userselect'));
 
-$pines->com_hrm->user_select_form($REQUEST['all'] == 'true');
+$_->com_hrm->user_select_form($REQUEST['all'] == 'true');

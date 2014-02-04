@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('system/all') )
@@ -17,7 +17,7 @@ if ( !gatekeeper('system/all') )
 $module = new module('system', 'null', 'content');
 $module->title = 'ESP Entity Update';
 
-$plans = $pines->entity_manager->get_entities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp')));
+$plans = $_->entity_manager->get_entities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp')));
 
 foreach ($plans as $plan) {
 	// Only update the item for ESPs with a stock entity.

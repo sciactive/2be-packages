@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/listsales') )
 	punt_user(null, pines_url('com_sales', 'sales/search', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $sales = array();
@@ -25,12 +25,12 @@ $sales_query = array('&',
 // Add a status clause to select upon.
 if (isset($_REQUEST['status']))
 	$sales_query['data'] = array('status', $_REQUEST['status']);
-if ($pines->config->com_sales->com_customer) {
+if ($_->config->com_sales->com_customer) {
 	if (isset($_REQUEST['customer'])) {
 		// Looking for sales made to a specific customer.
 		$customer = com_customer_customer::factory((int) $_REQUEST['customer']);
 		$sales_query['ref'] = array('customer', $customer);
-		$sales = (array) $pines->entity_manager->get_entities(array('class' => com_sales_sale), $sales_query);
+		$sales = (array) $_->entity_manager->get_entities(array('class' => com_sales_sale), $sales_query);
 	} else {
 		// Looking for sales made to any customers matching the query.
 		$query = strtolower($_REQUEST['q']);
@@ -50,18 +50,18 @@ if ($pines->config->com_sales->com_customer) {
 			$selector['match'][] = array('phone_cell', $r_num_query);
 			$selector['match'][] = array('fax', $r_num_query);
 		}
-		$customers = (array) $pines->entity_manager->get_entities(
+		$customers = (array) $_->entity_manager->get_entities(
 				array('class' => com_customer_customer),
 				array('&', 'tag' => array('com_customer', 'customer')),
 				$selector
 			);
 		foreach ($customers as $cur_customer) {
 			$sales_query['ref'] = array('customer', $cur_customer);
-			$sales = array_merge($sales, $pines->entity_manager->get_entities(array('class' => com_sales_sale), $sales_query));
+			$sales = array_merge($sales, $_->entity_manager->get_entities(array('class' => com_sales_sale), $sales_query));
 		}
 	}
 } else {
-	$sales = (array) $pines->entity_manager->get_entities(array('class' => com_sales_sale), $sales_query);
+	$sales = (array) $_->entity_manager->get_entities(array('class' => com_sales_sale), $sales_query);
 }
 
 foreach ($sales as $key => &$cur_sale) {
@@ -82,7 +82,7 @@ foreach ($sales as $key => &$cur_sale) {
 		'products'		=> implode(', ', $product_names),
 		'location'		=> $cur_sale->group->name
 	);
-	if ($pines->config->com_sales->com_customer) {
+	if ($_->config->com_sales->com_customer) {
 		$json_struct->customer = $cur_sale->customer->guid;
 		$json_struct->customer_name = $cur_sale->customer->name;
 	}
@@ -93,4 +93,4 @@ unset($cur_sale);
 if (empty($sales))
 	$sales = null;
 
-$pines->page->override_doc(json_encode($sales));
+$_->page->override_doc(json_encode($sales));

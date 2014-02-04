@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -22,11 +22,11 @@ class com_replace extends component {
 	 * @return module The module.
 	 */
 	public function list_replacements() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_replace', 'replacement/list', 'content');
 
-		$module->replacements = $pines->entity_manager->get_entities(array('class' => com_replace_replacement), array('&', 'tag' => array('com_replace', 'replacement')));
+		$module->replacements = $_->entity_manager->get_entities(array('class' => com_replace_replacement), array('&', 'tag' => array('com_replace', 'replacement')));
 
 		if ( empty($module->replacements) )
 			pines_notice('There are no replacements.');
@@ -40,10 +40,10 @@ class com_replace extends component {
 	 * @param string &$content The content to search.
 	 */
 	public function search_replace(&$content) {
-		global $pines;
+		global $_;
 
 		// Gather enabled replacements.
-		$replacements = (array) $pines->entity_manager->get_entities(
+		$replacements = (array) $_->entity_manager->get_entities(
 				array('class' => com_replace_replacement),
 				array('&',
 					'tag' => array('com_replace', 'replacement'),
@@ -105,15 +105,15 @@ class com_replace extends component {
 					}
 					if (strpos($cur_string['replace'], '#system_name#') !== false) {
 						$search[] = '#system_name#';
-						$replace[] = h($pines->config->system_name);
+						$replace[] = h($_->config->system_name);
 					}
 					if (strpos($cur_string['replace'], '#page_title#') !== false) {
 						$search[] = '#page_title#';
-						$replace[] = h($pines->config->page_title);
+						$replace[] = h($_->config->page_title);
 					}
 					if (strpos($cur_string['replace'], '#full_page_title#') !== false) {
 						$search[] = '#full_page_title#';
-						$replace[] = h($pines->page->get_title());
+						$replace[] = h($_->page->get_title());
 					}
 					$cur_string['replace'] = str_replace($search, $replace, $cur_string['replace']);
 				}

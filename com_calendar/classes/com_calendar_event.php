@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -77,8 +77,8 @@ class com_calendar_event extends entity {
 	 * @param string $timezone The timezone to edit the event in.
 	 */
 	public function print_form($location = null, $timezone = null) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		if (empty($timezone)) {
 			if (isset($this->user->guid))
@@ -91,11 +91,11 @@ class com_calendar_event extends entity {
 		$module->entity = $this;
 		$module->timezone = $timezone;
 		// Should work like this, we need to have the employee's group update upon saving it to a user.
-		$module->employees = $pines->com_hrm->get_employees();
+		$module->employees = $_->com_hrm->get_employees();
 		$event_location = $this->group->guid;
 		if (empty($event_location))
 			$event_location = $location->guid;
 		$module->location = $event_location;
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 	}
 }

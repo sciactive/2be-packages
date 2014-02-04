@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 
 $publisher = $_REQUEST['pub'];
 $package = $_REQUEST['p'];
@@ -25,7 +25,7 @@ $user = user::factory($publisher);
 if (!isset($user->guid))
 	throw new HttpClientException(null, 404);
 
-$file = clean_filename("{$pines->config->com_repository->repository_path}{$user->guid}/{$package}/{$version}/_MEDIA/{$media}");
+$file = clean_filename("{$_->config->com_repository->repository_path}{$user->guid}/{$package}/{$version}/_MEDIA/{$media}");
 if (!file_exists($file))
 	throw new HttpClientException(null, 404);
 
@@ -102,4 +102,4 @@ switch ($ext) {
 
 header('Content-Type: '.$content_type);
 
-$pines->page->override_doc(file_get_contents($file));
+$_->page->override_doc(file_get_contents($file));

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_dash/manage') )
@@ -40,8 +40,8 @@ $dashboard->ac->other = (abs((int) $_REQUEST['other_access']) % 4);
 
 // Advanced
 // First get all users and groups.
-$user_array = $pines->user_manager->get_users();
-$group_array = $pines->user_manager->get_groups();
+$user_array = $_->user_manager->get_users();
+$group_array = $_->user_manager->get_groups();
 
 // Go through the users to see if this should be their dashboard.
 foreach ($user_array as &$cur_user) {

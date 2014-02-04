@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -101,7 +101,7 @@ class com_storefront extends component {
 		}
 		$sale = $_SESSION['com_storefront_sale'];
 		if (!isset($sale)) {
-			global $pines;
+			global $_;
 			$sale = com_sales_sale::factory();
 			$sale->add_tag('com_storefront');
 			$sale->status = 'quoted';
@@ -110,7 +110,7 @@ class com_storefront extends component {
 				pines_error('Error while loading your customer account. Please try again in a minute or two.');
 				return false;
 			}
-			if ($pines->config->com_sales->global_sales)
+			if ($_->config->com_sales->global_sales)
 				$sale->ac->other = 1;
 		}
 
@@ -226,8 +226,8 @@ class com_storefront extends component {
 	 * @return array The array of products.
 	 */
 	public function get_cat_products($category, $page, $products_per_page, &$offset, &$count, &$pages, $sort_var = null, $sort_reverse = false) {
-		global $pines;
-		if ($pines->config->com_storefront->products_from_children)
+		global $_;
+		if ($_->config->com_storefront->products_from_children)
 			$products = $this->get_child_products($category);
 		else
 			$products = (array) $category->products;
@@ -239,7 +239,7 @@ class com_storefront extends component {
 		}
 
 		if (isset($sort_var))
-			$pines->entity_manager->sort($products, $sort_var, false, $sort_reverse);
+			$_->entity_manager->sort($products, $sort_var, false, $sort_reverse);
 
 		// How many products/pages are there?
 		$count = count($products);
@@ -300,7 +300,7 @@ class com_storefront extends component {
 	 * Save the cart in the cookie.
 	 */
 	public function save_cart() {
-		global $pines;
+		global $_;
 		$cookie = array();
 		foreach ($this->cart as $cur_item) {
 			$cookie[] = array(
@@ -310,19 +310,19 @@ class com_storefront extends component {
 		}
 		$json = json_encode($cookie);
 		$this->cart_cookie = $json;
-		setcookie('com_storefront_cart', $json, 0, $pines->config->rela_location);
+		setcookie('com_storefront_cart', $json, 0, $_->config->rela_location);
 	}
 
 	/**
 	 * List all storefront products that are problematic/incomplete.
 	 */
 	public function verify_stock() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_storefront', 'verify_stock', 'content');
 		$module->images = $module->image_descs = array();
 
-		$entities = $pines->entity_manager->get_entities(
+		$entities = $_->entity_manager->get_entities(
 					array('limit' => 50, 'offset' => $offset, 'class' => com_sales_product),
 					array('&',
 						'tag' => array('com_sales', 'product'),

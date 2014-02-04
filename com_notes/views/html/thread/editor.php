@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Attached Notes';
 if (isset($this->entity->guid))
 	$this->note = h($this->entity->info('name'));
-$pines->icons->load();
+$_->icons->load();
 ?>
 <div id="p_muid_notes">
 	<?php if (!isset($this->entity->guid)) { ?>
@@ -74,7 +74,7 @@ $pines->icons->load();
 		function p_muid_load_threads() {
 			var thread_box = $("#p_muid_current_threads");
 			thread_box.add_item = function(item){
-				<?php if ($pines->config->com_notes->editor_sort_order == 'asc') { ?>
+				<?php if ($_->config->com_notes->editor_sort_order == 'asc') { ?>
 				return thread_box.append(item);
 				<?php } else { ?>
 				return thread_box.prepend(item);

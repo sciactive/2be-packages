@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = h($this->entity->company_name).' Warboard';
 ?>
@@ -61,7 +61,7 @@ $this->title = h($this->entity->company_name).' Warboard';
 	foreach ($this->entity->locations as $cur_location) {
 		$location_count[$cur_location->guid] = 0;
 		$employees = $cur_location->get_users();
-		$pines->entity_manager->sort($employees, 'hire_date');
+		$_->entity_manager->sort($employees, 'hire_date');
 		if ($count > 0 && ($count / $this->entity->columns) == floor($count / $this->entity->columns)) { ?>
 		</tr>
 		<tr>
@@ -72,15 +72,15 @@ $this->title = h($this->entity->company_name).' Warboard';
 						<td colspan="2">
 							<strong><?php
 							e($cur_location->name);
-							if ($pines->config->com_reports->warboard_states)
+							if ($_->config->com_reports->warboard_states)
 								echo ', ' . h($cur_location->state);
 							?></strong>
 						</td>
 						<td><?php e(format_phone($cur_location->phone)); ?></td>
 					</tr>
-					<?php if ($pines->config->com_reports->warboard_phone2_show) { ?>
+					<?php if ($_->config->com_reports->warboard_phone2_show) { ?>
 					<tr class="wb_label">
-						<td colspan="2" style="text-align: right;"><?php e($pines->config->com_reports->warboard_phone2_label); ?>&nbsp;</td>
+						<td colspan="2" style="text-align: right;"><?php e($_->config->com_reports->warboard_phone2_label); ?>&nbsp;</td>
 						<td><?php e(format_phone($cur_location->phone2)); ?></td>
 					</tr>
 					<?php } ?>
@@ -139,9 +139,9 @@ $this->title = h($this->entity->company_name).' Warboard';
 				<tr>
 					<td><?php e(format_phone($this->entity->hq->phone)); ?></td>
 				</tr>
-				<?php if ($pines->config->com_reports->warboard_phone2_show) { ?>
+				<?php if ($_->config->com_reports->warboard_phone2_show) { ?>
 				<tr>
-					<td><?php e(rtrim($pines->config->com_reports->warboard_phone2_label, ': ')); ?>: <?php e(format_phone($this->entity->hq->phone2)); ?></td>
+					<td><?php e(rtrim($_->config->com_reports->warboard_phone2_label, ': ')); ?>: <?php e(format_phone($this->entity->hq->phone2)); ?></td>
 				</tr>
 				<?php } ?>
 				<tr>
@@ -157,9 +157,9 @@ $this->title = h($this->entity->company_name).' Warboard';
 		</td>
 		<?php
 		
-		if ($pines->config->com_reports->use_extension && $pines->config->com_reports->use_other_phone)
+		if ($_->config->com_reports->use_extension && $_->config->com_reports->use_other_phone)
 			$columns = 5;
-		elseif (!$pines->config->com_reports->use_extension && !$pines->config->com_reports->use_other_phone)
+		elseif (!$_->config->com_reports->use_extension && !$_->config->com_reports->use_other_phone)
 			$columns = 3;
 		else 
 			$columns = 4;
@@ -167,7 +167,7 @@ $this->title = h($this->entity->company_name).' Warboard';
 		foreach ($this->entity->important as $cur_important) {
 			$imortant_count[$cur_important->guid] = 0;
 			$employees = $cur_important->get_users();
-			$pines->entity_manager->sort($employees, 'job_title');
+			$_->entity_manager->sort($employees, 'job_title');
 		?>
 		<td colspan="<?php echo floor(($this->entity->columns - 1)/count($this->entity->important)); ?>">
 			<table class="important" id="p_muid_important_<?php e($cur_important->guid); ?>">
@@ -184,10 +184,10 @@ $this->title = h($this->entity->company_name).' Warboard';
 					<td><?php e($cur_employee->name); ?></td>
 					<td><?php e($cur_employee->job_title); ?></td>
 					<td><?php e(format_phone($cur_employee->phone)); ?></td>
-					<?php if ($pines->config->com_reports->use_extension) { ?>
+					<?php if ($_->config->com_reports->use_extension) { ?>
 					<td><?php echo !empty($cur_employee->phone_ext) ? 'ext '.h($cur_employee->phone_ext) : ''; ?></td>
-					<?php } if ($pines->config->com_reports->use_other_phone) { ?>
-					<td><?php echo !empty($cur_employee->other_phone) ? $pines->config->com_reports->other_phone_label.' '.h(format_phone($cur_employee->other_phone)) : ''; ?></td>
+					<?php } if ($_->config->com_reports->use_other_phone) { ?>
+					<td><?php echo !empty($cur_employee->other_phone) ? $_->config->com_reports->other_phone_label.' '.h(format_phone($cur_employee->other_phone)) : ''; ?></td>
 					<?php } ?>
 				</tr>
 				<?php } ?>

@@ -8,19 +8,19 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_plaza/editpackages') )
 	punt_user(null, pines_url('com_plaza', 'package/list'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 if ($_REQUEST['local'] == 'true') {
-	$package = $pines->com_package->db['packages'][$_REQUEST['name']];
+	$package = $_->com_package->db['packages'][$_REQUEST['name']];
 	$package['package'] = $_REQUEST['name'];
 } else {
-	$index = $pines->com_plaza->get_index(null, $_REQUEST['publisher']);
+	$index = $_->com_plaza->get_index(null, $_REQUEST['publisher']);
 	$package = $index['packages'][$_REQUEST['name']];
 }
 
@@ -28,4 +28,4 @@ $do = $_REQUEST['do'];
 if (!isset($package) || !in_array($do, array('install', 'upgrade', 'remove')))
 	return;
 
-$pines->page->override_doc(json_encode($pines->com_plaza->calculate_changes_full($package, $do)));
+$_->page->override_doc(json_encode($_->com_plaza->calculate_changes_full($package, $do)));

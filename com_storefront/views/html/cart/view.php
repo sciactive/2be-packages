@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Shopping Cart';
 ?>
-<?php if ($pines->com_storefront->cart()) { ?>
+<?php if ($_->com_storefront->cart()) { ?>
 <div>
 	<table style="width: 100%;">
 		<thead>
@@ -25,21 +25,21 @@ $this->title = 'Shopping Cart';
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($pines->com_storefront->cart() as $cur_item) {
+			<?php foreach ($_->com_storefront->cart() as $cur_item) {
 				$subtotal += $cur_item['product']->unit_price * $cur_item['quantity'];
 				?>
 			<tr>
 				<td><?php e($cur_item['product']->sku); ?></td>
 				<td><?php e($cur_item['product']->name); ?></td>
 				<td style="text-align: right;"><?php e($cur_item['quantity']); ?></td>
-				<td style="text-align: right;">$<?php e($pines->com_sales->round($cur_item['product']->unit_price, true)); ?></td>
-				<td style="text-align: right;">$<?php e($pines->com_sales->round($cur_item['product']->unit_price * $cur_item['quantity'], true)); ?></td>
+				<td style="text-align: right;">$<?php e($_->com_sales->round($cur_item['product']->unit_price, true)); ?></td>
+				<td style="text-align: right;">$<?php e($_->com_sales->round($cur_item['product']->unit_price * $cur_item['quantity'], true)); ?></td>
 			</tr>
 			<?php } ?>
 		</tbody>
 	</table>
 	<br />
-	<div style="padding: .5em;">Subtotal <small>(before tax/fees)</small><div style="float: right; text-align: right;"><?php echo $pines->com_storefront->format_price($subtotal, 'long'); ?></div></div>
+	<div style="padding: .5em;">Subtotal <small>(before tax/fees)</small><div style="float: right; text-align: right;"><?php echo $_->com_storefront->format_price($subtotal, 'long'); ?></div></div>
 	<br style="clear: both;" /><br />
 	<button type="button" class="checkout btn btn-primary" style="float: right; clear: right;" onclick="pines.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);">Check-Out</button>
 	<br style="height: 0; clear: both;" />

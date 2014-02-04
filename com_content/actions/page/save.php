@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -27,7 +27,7 @@ if ( isset($_REQUEST['id']) ) {
 
 if ($_REQUEST['ajax'] == 'true') {
 	$ajax = true;
-	$pines->page->override = true;
+	$_->page->override = true;
 	header('Content-Type: application/json');
 }
 
@@ -60,7 +60,7 @@ if (gatekeeper('com_content/editmeta')) {
 		$page->meta_tags[] = array('name' => $cur_meta_tag->values[0], 'content' => $cur_meta_tag->values[1]);
 	}
 }
-if ($pines->config->com_content->custom_head && gatekeeper('com_content/edithead')) {
+if ($_->config->com_content->custom_head && gatekeeper('com_content/edithead')) {
 	$page->enable_custom_head = ($_REQUEST['enable_custom_head'] == 'ON');
 	$page->custom_head = $_REQUEST['custom_head'];
 }
@@ -95,7 +95,7 @@ $page->show_breadcrumbs = ($_REQUEST['show_breadcrumbs'] == 'null' ? null : ($_R
 $page->variants = array();
 foreach ((array) $_REQUEST['variants'] as $cur_variant_entry) {
 	list ($cur_template, $cur_variant) = explode('::', $cur_variant_entry, 2);
-	if (!$pines->com_content->is_variant_valid($cur_variant, $cur_template)) {
+	if (!$_->com_content->is_variant_valid($cur_variant, $cur_template)) {
 		pines_notice("The variant \"$cur_variant\" is not a valid variant of the template \"$cur_template\". It is being skipped.");
 		continue;
 	}
@@ -106,45 +106,45 @@ if (empty($page->name)) {
 	$page->print_form();
 	pines_notice('Please specify a name.');
 	if ($ajax)
-		$pines->page->override_doc(json_encode(array('result' => false, 'notice' => $pines->page->get_notice(), 'error' => $pines->page->get_error())));
+		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 	return;
 }
 if (empty($page->alias)) {
 	$page->print_form();
 	pines_notice('Please specify an alias.');
 	if ($ajax)
-		$pines->page->override_doc(json_encode(array('result' => false, 'notice' => $pines->page->get_notice(), 'error' => $pines->page->get_error())));
+		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 	return;
 }
 
-$test = $pines->entity_manager->get_entity(array('class' => com_content_page, 'skip_ac' => true), array('&', 'tag' => array('com_content', 'page'), 'data' => array('alias', $page->alias)));
+$test = $_->entity_manager->get_entity(array('class' => com_content_page, 'skip_ac' => true), array('&', 'tag' => array('com_content', 'page'), 'data' => array('alias', $page->alias)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$page->print_form();
 	pines_notice('There is already an page with that alias. Please choose a different alias.');
 	if ($ajax)
-		$pines->page->override_doc(json_encode(array('result' => false, 'notice' => $pines->page->get_notice(), 'error' => $pines->page->get_error())));
+		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 	return;
 }
 
-if (!$pines->com_menueditor->check_entries($page->com_menueditor_entries)) {
+if (!$_->com_menueditor->check_entries($page->com_menueditor_entries)) {
 	$page->print_form();
 	if ($ajax)
-		$pines->page->override_doc(json_encode(array('result' => false, 'notice' => $pines->page->get_notice(), 'error' => $pines->page->get_error())));
+		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 	return;
 }
 
-$page->ac->group = $pines->config->com_content->ac_page_group;
-$page->ac->other = $pines->config->com_content->ac_page_other;
+$page->ac->group = $_->config->com_content->ac_page_group;
+$page->ac->other = $_->config->com_content->ac_page_other;
 
 if ($page->save()) {
 	pines_notice('Saved page ['.$page->name.']');
 	// Assign the page to the selected categories.
 	// We have to do this here, because new pages won't have a GUID until now.
 	$categories = array_map('intval', (array) $_REQUEST['categories']);
-	$all_categories = $pines->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'data' => array('enabled', true)));
+	$all_categories = $_->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'data' => array('enabled', true)));
 	foreach($all_categories as &$cur_cat) {
 		if (in_array($cur_cat->guid, $categories) && !$page->in_array($cur_cat->pages)) {
-			if ($pines->config->com_content->new_pages_first)
+			if ($_->config->com_content->new_pages_first)
 				$cur_cat->pages = array_merge(array($page), $cur_cat->pages);
 			else
 				$cur_cat->pages[] = $page;
@@ -159,11 +159,11 @@ if ($page->save()) {
 	}
 	unset($cur_cat);
 	if ($ajax)
-		$pines->page->override_doc(json_encode(array('result' => true, 'notice' => $pines->page->get_notice(), 'error' => $pines->page->get_error())));
+		$_->page->override_doc(json_encode(array('result' => true, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 } else {
 	pines_error('Error saving page. Do you have permission?');
 	if ($ajax)
-		$pines->page->override_doc(json_encode(array('result' => false, 'notice' => $pines->page->get_notice(), 'error' => $pines->page->get_error())));
+		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 }
 
 if (!$ajax)

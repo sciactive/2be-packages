@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ( !$pines->config->com_customer->resetpoints && !gatekeeper('com_customer/resetpoints') )
+if ( !$_->config->com_customer->resetpoints && !gatekeeper('com_customer/resetpoints') )
 	punt_user(null, pines_url('com_customer', 'customer/list'));
 
 $list = explode(',', $_REQUEST['id']);

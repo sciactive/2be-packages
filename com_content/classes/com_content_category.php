@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -97,9 +97,9 @@ class com_content_category extends entity {
 	public function get_option($name) {
 		if (isset($this->$name))
 			return $this->$name;
-		global $pines;
+		global $_;
 		$config_name = "def_cat_$name";
-		return $pines->config->com_content->$config_name;
+		return $_->config->com_content->$config_name;
 	}
 
 	/**
@@ -107,7 +107,7 @@ class com_content_category extends entity {
 	 * @return array An array of pages.
 	 */
 	public function get_ready_pages($offset = null, $limit = null) {
-		global $pines;
+		global $_;
 		/* This method isn't possible yet. :(
 		// First get all the GUIDs of the pages.
 		$data = $this->get_data();
@@ -145,7 +145,7 @@ class com_content_category extends entity {
 	public function print_category($page_num = 0) {
 		if (!$this->ready())
 			return null;
-		global $pines;
+		global $_;
 
 		// Show the pages.
 		$pages = $this->get_ready_pages();
@@ -196,10 +196,10 @@ class com_content_category extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_content', 'category/form', 'content');
 		$module->entity = $this;
-		$module->categories = $pines->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'data' => array('parent', null)));
+		$module->categories = $_->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'data' => array('parent', null)));
 
 		return $module;
 	}
@@ -217,10 +217,10 @@ class com_content_category extends entity {
 			return false;
 		if (!$this->conditions)
 			return true;
-		global $pines;
+		global $_;
 		// Check that all conditions are met.
 		foreach ($this->conditions as $cur_type => $cur_value) {
-			if (!$pines->depend->check($cur_type, $cur_value))
+			if (!$_->depend->check($cur_type, $cur_value))
 				return false;
 		}
 		return true;

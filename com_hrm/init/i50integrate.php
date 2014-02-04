@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ($pines->config->com_hrm->com_sales && !$pines->depend->check('component', 'com_sales'))
-	$pines->config->com_hrm->com_sales = false;
+if ($_->config->com_hrm->com_sales && !$_->depend->check('component', 'com_sales'))
+	$_->config->com_hrm->com_sales = false;
 
-if ($pines->config->com_hrm->com_calendar && !$pines->depend->check('component', 'com_calendar'))
-	$pines->config->com_hrm->com_calendar = false;
+if ($_->config->com_hrm->com_calendar && !$_->depend->check('component', 'com_calendar'))
+	$_->config->com_hrm->com_calendar = false;
 
-if ($pines->config->com_hrm->com_reports && !$pines->depend->check('component', 'com_reports'))
-	$pines->config->com_hrm->com_reports = false;
+if ($_->config->com_hrm->com_reports && !$_->depend->check('component', 'com_reports'))
+	$_->config->com_hrm->com_reports = false;

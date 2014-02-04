@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_customer/newinteraction') )
 		punt_user(null, pines_url('com_loan', 'loan/list'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $loan_ids = $_REQUEST['loan_ids'];
@@ -28,7 +28,7 @@ if (empty($comments))
 elseif (!empty($loan_ids)) {
 	if (count($loan_ids) > 1) {
 		foreach ($loan_ids as $loan_id) {
-			$add_interaction = $pines->com_loan->add_interaction($loan_id, $employee, $type, $status, $comments);
+			$add_interaction = $_->com_loan->add_interaction($loan_id, $employee, $type, $status, $comments);
 			if ($add_interaction)
 				$success = true;
 			else
@@ -36,7 +36,7 @@ elseif (!empty($loan_ids)) {
 		}
 	} else {
 		$loan_id = $loan_ids; // To avoid confusion..
-		$add_interaction = $pines->com_loan->add_interaction($loan_id, $employee, $type, $status, $comments);
+		$add_interaction = $_->com_loan->add_interaction($loan_id, $employee, $type, $status, $comments);
 		if ($add_interaction)
 			$success = true;
 		else
@@ -47,8 +47,8 @@ elseif (!empty($loan_ids)) {
 }
 
 if ($success)
-	$pines->page->override_doc('true');
+	$_->page->override_doc('true');
 else
-	$pines->page->override_doc('false');
+	$_->page->override_doc('false');
 return;
 

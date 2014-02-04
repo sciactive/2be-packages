@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -38,7 +38,7 @@ defined('P_RUN') or die('Direct access prohibited');
  * @return bool|array The result of the check, or the help array.
  */
 function com_package__check_package($value, $help = false) {
-	global $pines;
+	global $_;
 	if ($help) {
 		$return = array();
 		$return['cname'] = 'Package Checker';
@@ -81,7 +81,7 @@ EOF;
 			strpos($value, '(') !== false ||
 			strpos($value, ')') !== false
 		)
-		return $pines->depend->simple_parse($value, 'com_package__check_package');
+		return $_->depend->simple_parse($value, 'com_package__check_package');
 	$package_name = preg_replace('/([a-z0-9_-]+)([<>=]{1,2})(.+)/S', '$1', $value);
 	$package = com_package_package::factory($package_name);
 	if (!isset($package) || !$package->is_installed())
@@ -94,4 +94,4 @@ EOF;
 	return true;
 }
 
-$pines->depend->checkers['package'] = 'com_package__check_package';
+$_->depend->checkers['package'] = 'com_package__check_package';

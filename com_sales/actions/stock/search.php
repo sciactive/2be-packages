@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/seestock'))
 	punt_user(null, pines_url('com_sales', 'stock/search', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $product = com_sales_product::factory((int) $_REQUEST['product']);
@@ -24,7 +24,7 @@ $quantity = (int) $_REQUEST['quantity'];
 $not_guids = (array) json_decode($_REQUEST['not_guids']);
 
 if (!isset($product->guid) || (empty($serial) && (empty($location) || !isset($location->guid))) || $quantity < 1) {
-	$pines->page->override_doc('false');
+	$_->page->override_doc('false');
 	return;
 }
 
@@ -46,7 +46,7 @@ if (!empty($location) && isset($location->guid))
 
 if ($not_guids) {
 	$not_guids = array_map('intval', $not_guids);
-	$stock = (array) $pines->entity_manager->get_entities(
+	$stock = (array) $_->entity_manager->get_entities(
 			array('class' => com_sales_stock, 'limit' => $quantity),
 			$selector,
 			array('!&',
@@ -54,7 +54,7 @@ if ($not_guids) {
 			)
 		);
 } else {
-	$stock = (array) $pines->entity_manager->get_entities(
+	$stock = (array) $_->entity_manager->get_entities(
 			array('class' => com_sales_stock, 'limit' => $quantity),
 			$selector
 		);
@@ -70,4 +70,4 @@ foreach ($stock as &$cur_stock) {
 	);
 }
 
-$pines->page->override_doc(json_encode($stock));
+$_->page->override_doc(json_encode($stock));

@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->user_manager->logout();
+$_->user_manager->logout();
 pines_notice('You have been logged out.');
 pines_redirect(pines_url());
 

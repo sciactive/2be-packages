@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($this->id == 'random' || empty($this->id)) {
-	$products = $pines->entity_manager->get_entities(
+	$products = $_->entity_manager->get_entities(
 			array('class' => com_sales_product),
 			array('&',
 				'tag' => array('com_sales', 'product'),
@@ -64,10 +64,10 @@ if (empty($this->title))
 		<?php } if ($this->show_thumbnail) { ?>
 		<span class="thumbnail"><img class="thumb" alt="<?php echo !empty($this->alt_text) ? h($this->alt_text) : h($this->entity->name); ?>" src="<?php echo !empty($this->entity->featured_image) ? h($this->entity->featured_image) : h($this->entity->thumbnail); ?>" /></span>
 		<?php } if ($this->show_price) { ?>
-		<span class="price"><?php echo isset($this->entity->unit_price) ? $pines->com_storefront->format_price($this->entity->unit_price) : ''; ?></span>
+		<span class="price"><?php echo isset($this->entity->unit_price) ? $_->com_storefront->format_price($this->entity->unit_price) : ''; ?></span>
 		<?php } ?>
 	</a>
-	<?php if ($this->show_button && !$pines->config->com_storefront->catalog_mode) { ?>
+	<?php if ($this->show_button && !$_->config->com_storefront->catalog_mode) { ?>
 	<span class="button"><button class="add_cart btn btn-primary">Add to Cart</button></span>
 	<?php } ?>
 </span>

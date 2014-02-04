@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/searchproducts'))
 	punt_user(null, pines_url('com_sales', 'product/search', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $query = trim($_REQUEST['q']);
@@ -22,7 +22,7 @@ $r_query = '/'.str_replace(' ', '.*', preg_quote($query)).'/i';
 
 // Get Product Entities.
 if ($query == '*') {
-	$products = $pines->entity_manager->get_entities(
+	$products = $_->entity_manager->get_entities(
 			array('class' => com_sales_product),
 			array('&',
 				'tag' => array('com_sales', 'product'),
@@ -30,7 +30,7 @@ if ($query == '*') {
 			)
 		);
 } else {
-	$products = $pines->entity_manager->get_entities(
+	$products = $_->entity_manager->get_entities(
 			array('class' => com_sales_product),
 			array('&',
 				'tag' => array('com_sales', 'product'),
@@ -45,7 +45,7 @@ if ($query == '*') {
 		);
 
 	// Also check categories
-	$categories = $pines->entity_manager->get_entities(
+	$categories = $_->entity_manager->get_entities(
 			array('class' => com_sales_category),
 			array('&',
 				'tag' => array('com_sales', 'category'),
@@ -68,7 +68,7 @@ foreach ($products as $key => &$product) {
 			'guid' => $cur_vendor['entity']->guid,
 			'name' => (string) $cur_vendor['entity']->name,
 			'sku' => $cur_vendor['sku'],
-			'cost' => '$'.$pines->com_sales->round($cur_vendor['cost'], true),
+			'cost' => '$'.$_->com_sales->round($cur_vendor['cost'], true),
 			'link' => $cur_vendor['link']
 		);
 	}
@@ -96,7 +96,7 @@ foreach ($products as $key => &$product) {
 	
 	$images = array();
 	if (isset($product->thumbnail)) {
-		if (file_exists($pines->uploader->real($product->thumbnail)))
+		if (file_exists($_->uploader->real($product->thumbnail)))
 			$images[] = 'Thumbnail';
 		else
 			$images[] = 'Thumbnail - Broken';
@@ -106,7 +106,7 @@ foreach ($products as $key => &$product) {
 		$image_desc[0] = 'Images';
 		if (empty($cur_image['alt']))
 			$image_desc[1] = 'Missing Desc';
-		if (!file_exists($pines->uploader->real($cur_image['file'])))
+		if (!file_exists($_->uploader->real($cur_image['file'])))
 			$image_desc[2] = 'Broken';
 	}
 	if ($image_desc)
@@ -124,7 +124,7 @@ foreach ($products as $key => &$product) {
 		'guid' => $product->guid,
 		'sku' => $product->sku,
 		'name' => $product->name,
-		'price' => $pines->com_sales->round($product->unit_price, true),
+		'price' => $_->com_sales->round($product->unit_price, true),
 		'vendors' => $vendors,
 		'manufacturer_guid' => $product->manufacturer->guid,
 		'manufacturer_name' => $product->manufacturer->name,
@@ -149,4 +149,4 @@ unset($product);
 if (!$products)
 	$products = null;
 
-$pines->page->override_doc(json_encode($products));
+$_->page->override_doc(json_encode($products));

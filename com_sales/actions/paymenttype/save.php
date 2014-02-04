@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -27,7 +27,7 @@ if ( isset($_REQUEST['id']) ) {
 
 $payment_type->name = $_REQUEST['name'];
 $payment_type->enabled = ($_REQUEST['enabled'] == 'ON');
-if ($pines->config->com_sales->com_storefront)
+if ($_->config->com_sales->com_storefront)
 	$payment_type->storefront = ($_REQUEST['storefront'] == 'ON');
 $payment_type->kick_drawer = ($_REQUEST['kick_drawer'] == 'ON');
 $payment_type->change_type = ($_REQUEST['change_type'] == 'ON');
@@ -41,7 +41,7 @@ if (empty($payment_type->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_sales_payment_type, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'payment_type'), 'data' => array('name', $payment_type->name)));
+$test = $_->entity_manager->get_entity(array('class' => com_sales_payment_type, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'payment_type'), 'data' => array('name', $payment_type->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$payment_type->print_form();
 	pines_notice('There is already a payment type with that name. Please choose a different name.');
@@ -57,11 +57,11 @@ if (empty($payment_type->minimum))
 if (empty($payment_type->maximum))
 	$payment_type->maximum = null;
 
-if ($pines->config->com_sales->global_payment_types)
+if ($_->config->com_sales->global_payment_types)
 	$payment_type->ac->other = 1;
 
 if ($payment_type->change_type) {
-	$change_type = $pines->entity_manager->get_entity(
+	$change_type = $_->entity_manager->get_entity(
 			array('class' => com_sales_payment_type),
 			array('&',
 				'tag' => array('com_sales', 'payment_type'),

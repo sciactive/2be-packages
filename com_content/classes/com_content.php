@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -32,8 +32,8 @@ class com_content extends component {
 	 */
 	public function get_custom_css() {
 		if (!isset($this->custom_css)) {
-			global $pines;
-			foreach ((array) $pines->config->com_content->custom_css as $cur_glob) {
+			global $_;
+			foreach ((array) $_->config->com_content->custom_css as $cur_glob) {
 				if (strtolower(substr($cur_glob, -4)) != '.css')
 					$cur_glob .= '.css';
 				$this->custom_css = array_merge((array) $this->custom_css, glob($cur_glob));
@@ -51,13 +51,13 @@ class com_content extends component {
 	 * @return bool Whether the variant is valid for the specified template.
 	 */
 	public function is_variant_valid($variant, $template = null) {
-		global $pines;
+		global $_;
 		if (isset($template))
 			$cur_template = clean_filename($template);
 		else
-			$cur_template = clean_filename($pines->current_template);
+			$cur_template = clean_filename($_->current_template);
 		// Is there even a variant option?
-		if (!isset($pines->config->$cur_template->variant))
+		if (!isset($_->config->$cur_template->variant))
 			return false;
 		// Find the defaults file.
 		if (file_exists("templates/$cur_template/defaults.php"))
@@ -85,11 +85,11 @@ class com_content extends component {
 	 * @return module The module.
 	 */
 	public function list_categories() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_content', 'category/list', 'content');
 
-		$module->categories = $pines->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category')));
+		$module->categories = $_->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category')));
 
 		if ( empty($module->categories) )
 			pines_notice('No categories found.');
@@ -104,7 +104,7 @@ class com_content extends component {
 	 * @return module The module.
 	 */
 	public function list_pages($category = null) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_content', 'page/list', 'content');
 
@@ -112,7 +112,7 @@ class com_content extends component {
 			$module->pages = $category->pages;
 			$module->category = $category;
 		} else {
-			$module->pages = $pines->entity_manager->get_entities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
+			$module->pages = $_->entity_manager->get_entities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
 		}
 
 		if ( empty($module->pages) )
@@ -140,7 +140,7 @@ class com_content extends component {
 	 * return object menu item
 	 */
 	public function get_menu_children($children) {
-		global $pines;
+		global $_;
 		$menu_children = array();
 		foreach ($children as $cur_child) {
 			if (!$cur_child->enabled)
@@ -156,7 +156,7 @@ class com_content extends component {
 			$child_item->menu_item_alias = $cur_child->alias;
 			// Set up Children
 			if (!empty($cur_child->children))
-				$child_item->menu_item_children = $pines->com_content->get_menu_children($cur_child->children);
+				$child_item->menu_item_children = $_->com_content->get_menu_children($cur_child->children);
 
 			// The non empty children array could have contained all disabled children, so..
 			if (empty($child_item->menu_item_children))
@@ -194,7 +194,7 @@ class com_content extends component {
 	 * return array of natural menu objects that starts with top level and gets deeper.
 	 */
 	public function create_sidemenu($tag) {
-		global $pines;
+		global $_;
 		// This function is what will determine how sub categories and pages are laid out
 		// within the entire menu. Save Sidemenu only saves an order later, based on the information
 		// generated from THIS function. Get Sidemenu just choose which menu to get - basically if there
@@ -212,7 +212,7 @@ class com_content extends component {
 		// This function will create the entity if it doesn't exist, and then it will create the natural_menu array.
 		
 		// Get sidemenu entity or create one
-		$sidemenu = $pines->entity_manager->get_entity(
+		$sidemenu = $_->entity_manager->get_entity(
 			array('class' => entity),
 			array('&',
 				'tag' => array('com_content', 'sidemenu')
@@ -225,7 +225,7 @@ class com_content extends component {
 		
 		// Begin natural_menu creation.
 		// Get all the categories and pages where the tag array contains the tag.
-		$menu_entities = $pines->entity_manager->get_entities(
+		$menu_entities = $_->entity_manager->get_entities(
 			array('class' => entity),
 			array('&',
 				'tag' => array('com_content'),
@@ -267,7 +267,7 @@ class com_content extends component {
 				
 				// Get Children
 				if (!empty($cur_entity->children)) {
-					$menu_item->menu_item_children = $pines->com_content->get_menu_children($cur_entity->children);
+					$menu_item->menu_item_children = $_->com_content->get_menu_children($cur_entity->children);
 					// The non empty children array could have contained all disabled children, so..
 					if (empty($menu_item->menu_item_children))
 						unset($menu_item->menu_item_children);
@@ -300,7 +300,7 @@ class com_content extends component {
 			
 			// Find out if a PAGE has a category (we dont want it..top level only)
 			if ($menu_item->menu_item_type == 'page') {
-				$all_categories = $pines->entity_manager->get_entities(
+				$all_categories = $_->entity_manager->get_entities(
 					array('class' => entity),
 					array('&',
 						'tag' => array('com_content'),
@@ -352,12 +352,12 @@ class com_content extends component {
 	 * return
 	 */
 	public function save_sidemenu($guid_order, $tag) {
-		global $pines;
+		global $_;
 		// We are going to need to re create the natural menu, because the old
 		// one might not contain new pages/categories in the children.
 		
 		// Get the newly saved entity
-		$sidemenu = $pines->entity_manager->get_entity(
+		$sidemenu = $_->entity_manager->get_entity(
 			array('class' => entity),
 			array('&',
 				'tag' => array('com_content', 'sidemenu')
@@ -365,7 +365,7 @@ class com_content extends component {
 		);
 		
 		// This will save into the entity sidemenu, so we can pull the natural menu
-		$sidemenu->natural_menu = $pines->com_content->create_sidemenu($tag);
+		$sidemenu->natural_menu = $_->com_content->create_sidemenu($tag);
 		
 		$sorted_menu = array();
 		// count the guid order [guid, guid, etc]
@@ -411,9 +411,9 @@ class com_content extends component {
 	 * 
 	 */
 	public function get_sidemenu($type = 'sorted') {
-		global $pines;
+		global $_;
 		// Get the saved sidemenu entity if it exists
-		$sidemenu = $pines->entity_manager->get_entity(
+		$sidemenu = $_->entity_manager->get_entity(
 			array('class' => entity),
 			array('&',
 				'tag' => array('com_content', 'sidemenu')

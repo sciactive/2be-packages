@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Employee Bonuses';
-$pines->com_pgrid->load();
-$pines->com_hrm->load_employee_select();
+$_->com_pgrid->load();
+$_->com_hrm->load_employee_select();
 ?>
 <script type="text/javascript">
 

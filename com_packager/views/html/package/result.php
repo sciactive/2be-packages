@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Packaging Results';
 ?>
@@ -24,7 +24,7 @@ $this->title = 'Packaging Results';
 	<div class="pf-element">
 		<span class="pf-label"><?php e($cur_result['entity']->name); ?></span>
 		<span class="pf-note">Now you can download the package.</span>
-		<span class="pf-field"><a href="<?php e("{$pines->config->location}{$cur_result['path']}"); ?>"><?php e($cur_result['filename']); ?></a></span>
+		<span class="pf-field"><a href="<?php e("{$_->config->location}{$cur_result['path']}"); ?>"><?php e($cur_result['filename']); ?></a></span>
 	</div>
 	<?php } if (!$successes) { ?>
 	<div class="pf-element">

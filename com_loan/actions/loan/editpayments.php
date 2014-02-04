@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_loan/editpayments') )
@@ -73,8 +73,8 @@ if ($_REQUEST['editpayments']) {
 		$payment_amount = str_replace('$', '', $payment_amount);
 
 		// Round payment and past due amounts.
-		$payment_amount = $pines->com_sales->round((float)$payment_amount);
-		$loan->past_due = $pines->com_sales->round($loan->past_due );
+		$payment_amount = $_->com_sales->round((float)$payment_amount);
+		$loan->past_due = $_->com_sales->round($loan->past_due );
 
 		// Check if deleting the payment
 		$delete_this_payment = false;
@@ -102,9 +102,9 @@ if ($_REQUEST['editpayments']) {
 		if ($parent) {
 			$date_receive_old = $use_paid_array[$num]['payment_date_received'];
 			$date_record_old = $use_paid_array[$num]['payment_date_recorded'];
-			$payment_interest = $pines->com_sales->round($use_paid_array[$num]['payment_interest_paid']);
-			$payment_principal = $pines->com_sales->round($use_paid_array[$num]['payment_principal_paid']);
-			$payment_additional = $pines->com_sales->round($use_paid_array[$num]['payment_additional']);
+			$payment_interest = $_->com_sales->round($use_paid_array[$num]['payment_interest_paid']);
+			$payment_principal = $_->com_sales->round($use_paid_array[$num]['payment_principal_paid']);
+			$payment_additional = $_->com_sales->round($use_paid_array[$num]['payment_additional']);
 			if ($payment_additional < .01)
 				$payment_additional = 0;
 		} else {
@@ -112,9 +112,9 @@ if ($_REQUEST['editpayments']) {
 				if ($extra_payment['payment_id'] == $payment_id) {
 					$date_receive_old = $extra_payment['payment_date_received'];
 					$date_record_old = $extra_payment['payment_date_recorded'];
-					$payment_interest = $pines->com_sales->round($extra_payment['payment_interest_paid']);
-					$payment_principal = $pines->com_sales->round($extra_payment['payment_principal_paid']);
-					$payment_additional = $pines->com_sales->round($extra_payment['payment_additional']);
+					$payment_interest = $_->com_sales->round($extra_payment['payment_interest_paid']);
+					$payment_principal = $_->com_sales->round($extra_payment['payment_principal_paid']);
+					$payment_additional = $_->com_sales->round($extra_payment['payment_additional']);
 					if ($payment_additional < .01)
 						$payment_additional = 0;
 					break;

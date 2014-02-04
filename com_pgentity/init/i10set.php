@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
  * The entity manager.
- * @global com_pgentity $pines->entity_manager
+ * @global com_pgentity $_->entity_manager
  */
-$pines->entity_manager = 'com_pgentity';
+$_->entity_manager = 'com_pgentity';
 

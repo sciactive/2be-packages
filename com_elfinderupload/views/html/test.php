@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'elFinder Uploader';
-$pines->uploader->load();
+$_->uploader->load();
 ?>
 <form class="pf-form" method="post" action="<?php e(pines_url('com_elfinderupload', 'result')); ?>">
 	<div class="pf-element pf-heading">

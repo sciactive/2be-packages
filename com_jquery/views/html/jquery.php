@@ -8,9 +8,9 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_jquery/includes/<?php echo $pines->config->debug_mode ? 'jquery-1.7.2.js' : 'jquery-1.7.2.min.js'; ?>");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_jquery/includes/<?php echo $_->config->debug_mode ? 'jquery-1.7.2.js' : 'jquery-1.7.2.min.js'; ?>");
 </script>

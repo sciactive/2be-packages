@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/manageclock') )
@@ -30,7 +30,7 @@ if (empty($time_start) || empty($time_end) || $time_end <= $time_start) {
 }
 
 // And gather the current entries in that time range.
-$unsorted_entries = $pines->entity_manager->get_entities(
+$unsorted_entries = $_->entity_manager->get_entities(
 		array('class' => com_hrm_timeclock_entry),
 		array('&',
 			'tag' => array('com_hrm', 'timeclock_entry'),

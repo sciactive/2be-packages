@@ -8,8 +8,8 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = h("About {$pines->config->system_name}");
+$this->title = h("About {$_->config->system_name}");
 ?>
-<p><?php e($pines->config->com_about->description, ENT_COMPAT, '', false); ?></p>
+<p><?php e($_->config->com_about->description, ENT_COMPAT, '', false); ?></p>

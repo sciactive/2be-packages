@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-if (!$pines->com_content->get_custom_css()) {
+if (!$_->com_content->get_custom_css()) {
 	$this->detach();
 	return;
 }
 ?>
 <script type="text/javascript">
-	<?php foreach ($pines->com_content->get_custom_css() as $cur_file) { ?>
-	pines.loadcss(<?php echo json_encode($pines->config->location.$cur_file); ?>);
+	<?php foreach ($_->com_content->get_custom_css() as $cur_file) { ?>
+	pines.loadcss(<?php echo json_encode($_->config->location.$cur_file); ?>);
 	<?php } ?>
 </script>

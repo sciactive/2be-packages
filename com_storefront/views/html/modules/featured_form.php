@@ -8,16 +8,16 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$products = $pines->entity_manager->get_entities(
+$products = $_->entity_manager->get_entities(
 		array('class' => com_sales_product),
 		array('&',
 			'tag' => array('com_sales', 'product'),
 			'data' => array('featured', true)
 		)
 	);
-$pines->entity_manager->sort($products, 'name');
+$_->entity_manager->sort($products, 'name');
 ?>
 <div class="pf-form">
 	<div class="pf-element">

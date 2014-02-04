@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -124,18 +124,18 @@ class com_sales_transfer extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'transfer/form', 'content');
 		$module->entity = $this;
-		$module->categories = (array) $pines->entity_manager->get_entities(
+		$module->categories = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_category),
 				array('&',
 					'tag' => array('com_sales', 'category'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->locations = (array) $pines->user_manager->get_groups();
-		$module->shippers = (array) $pines->entity_manager->get_entities(
+		$module->locations = (array) $_->user_manager->get_groups();
+		$module->shippers = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_shipper),
 				array('&',
 					'tag' => array('com_sales', 'shipper')

@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$bg_lightest = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->review_background)) ? $pines->config->com_testimonials->review_background : '#eeeeee';
-$bg_medium = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->list_item_border)) ? $pines->config->com_testimonials->list_item_border : '#dddddd';
-$bg_darkest = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->average_background)) ? $pines->config->com_testimonials->average_background : '#cccccc';
+$bg_lightest = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->review_background)) ? $_->config->com_testimonials->review_background : '#eeeeee';
+$bg_medium = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->list_item_border)) ? $_->config->com_testimonials->list_item_border : '#dddddd';
+$bg_darkest = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->average_background)) ? $_->config->com_testimonials->average_background : '#cccccc';
 
-$accent_medium = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_background_opened)) ? $pines->config->com_testimonials->feedback_background_opened : '#0088cc';
-$accent_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_hr_bottom)) ? $pines->config->com_testimonials->feedback_hr_bottom : '#5cb4f2';
+$accent_medium = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_background_opened)) ? $_->config->com_testimonials->feedback_background_opened : '#0088cc';
+$accent_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_hr_bottom)) ? $_->config->com_testimonials->feedback_hr_bottom : '#5cb4f2';
 
-$font_lightest = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_color_opened)) ? $pines->config->com_testimonials->feedback_color_opened : '#ffffff';
-$font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->author_text)) ? $pines->config->com_testimonials->author_text : '#999999';
+$font_lightest = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_color_opened)) ? $_->config->com_testimonials->feedback_color_opened : '#ffffff';
+$font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->author_text)) ? $_->config->com_testimonials->author_text : '#999999';
 
 ?>
 <style type="text/css">

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Package Info for '.h($this->package['package']);
 ?>
@@ -76,12 +76,12 @@ $this->title = 'Package Info for '.h($this->package['package']);
 			<?php } ?>
 		</div>
 		<div class="pf-element description"><?php echo str_replace("\n", '<br />', h($this->package['description'])); ?></div>
-		<?php if ($this->package['screens']) { if (isset($pines->com_fancybox)) { ?>
+		<?php if ($this->package['screens']) { if (isset($_->com_fancybox)) { ?>
 		<div class="pf-element pf-full-width screenshots">
 			<div id="p_muid_fancybox" class="ui-widget-content ui-corner-all">
 				<?php foreach ($this->package['screens'] as $cur_screen) { ?>
-				<a rel="p_muid_ss" title="<?php e($cur_screen['alt']); ?>" href="<?php e($pines->com_plaza->package_get_media($this->package, $cur_screen['file'], true)); ?>">
-					<img class="screen_small" alt="<?php e($cur_screen['alt']); ?>" src="<?php e($pines->com_plaza->package_get_media($this->package, $cur_screen['file'], true)); ?>" />
+				<a rel="p_muid_ss" title="<?php e($cur_screen['alt']); ?>" href="<?php e($_->com_plaza->package_get_media($this->package, $cur_screen['file'], true)); ?>">
+					<img class="screen_small" alt="<?php e($cur_screen['alt']); ?>" src="<?php e($_->com_plaza->package_get_media($this->package, $cur_screen['file'], true)); ?>" />
 				</a>
 				<?php } ?>
 			</div>

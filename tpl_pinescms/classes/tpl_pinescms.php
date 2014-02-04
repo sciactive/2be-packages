@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -37,7 +37,7 @@ class tpl_pinescms extends template {
 	 * @return string The menu's HTML.
 	 */
 	public function menu($menu) {
-		global $pines;
+		global $_;
 		if (count($menu) == 1)
 			return '';
 		switch ($menu[0]['position']) {

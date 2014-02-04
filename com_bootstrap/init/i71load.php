@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 // Load the scripts on the currently in construction page.
-if ($pines->config->com_bootstrap->always_load)
-	$pines->com_bootstrap->load();
+if ($_->config->com_bootstrap->always_load)
+	$_->com_bootstrap->load();
 
 // Tell any editor to load the CSS in the edit view.
-if ($pines->editor)
-	$pines->editor->add_css($pines->config->location.'components/com_bootstrap/includes/themes/'.clean_filename($pines->config->com_bootstrap->theme).'/css/bootstrap.css');
+if ($_->editor)
+	$_->editor->add_css($_->config->location.'components/com_bootstrap/includes/themes/'.clean_filename($_->config->com_bootstrap->theme).'/css/bootstrap.css');

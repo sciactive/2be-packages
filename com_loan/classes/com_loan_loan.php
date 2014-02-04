@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -110,9 +110,9 @@ class com_loan_loan extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function save() {
-		global $pines;
+		global $_;
 		if (!isset($this->id))
-			$this->id = $pines->entity_manager->new_uid('com_loan_loan');
+			$this->id = $_->entity_manager->new_uid('com_loan_loan');
 		return parent::save();
 	}
 	
@@ -168,13 +168,13 @@ class com_loan_loan extends entity {
 	 * @return module The form's module.
 	 */
 	public function collection_code_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/collection_code', 'content');
 		$module->entity = $this;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 	
@@ -186,13 +186,13 @@ class com_loan_loan extends entity {
 	 * @return module The form's module.
 	 */
 	public function makepayment_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/makepayment', 'content');
 		$module->entity = $this;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -204,13 +204,13 @@ class com_loan_loan extends entity {
 	 * @return module The form's module.
 	 */
 	public function payoff_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/payoff', 'content');
 		$module->entity = $this;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -219,7 +219,7 @@ class com_loan_loan extends entity {
 	 * @throws com_loan_loan_terms_not_possible_exception If the loan terms are not possible.
 	 */
 	public function calculate_loan() {
-		global $pines;
+		global $_;
 		// Calculate rate per period.
 		$base = (1 + ($this->apr / $this->compound_frequency));
 		$pow = ($this->compound_frequency / $this->payment_frequency);
@@ -233,7 +233,7 @@ class com_loan_loan extends entity {
 			$nper = $this->payment_frequency * (($this->term) / 12);
 
 		// Calculate the Frequency Payment
-		$frequency_payment = -1*($pines->com_financial->PMT(($this->apr / 100) / $this->payment_frequency, $nper, $this->principal, 0.0, $this->payment_type));
+		$frequency_payment = -1*($_->com_financial->PMT(($this->apr / 100) / $this->payment_frequency, $nper, $this->principal, 0.0, $this->payment_type));
 		$frequency_payment = round($frequency_payment, 2);
 		$this->frequency_payment = $frequency_payment;
 
@@ -248,7 +248,7 @@ class com_loan_loan extends entity {
 			if ($i == 0) {
 				$schedule[$i]['scheduled_date_expected'] = $this->first_payment_date;
 				$schedule[$i]['scheduled_current_balance'] = $this->principal;
-				$schedule[$i]['payment_interest_expected'] = $pines->com_sales->round(($schedule[$i]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
+				$schedule[$i]['payment_interest_expected'] = $_->com_sales->round(($schedule[$i]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
 				$schedule[$i]['payment_principal_expected'] = $frequency_payment - $schedule[$i]['payment_interest_expected'];
 				$schedule[$i]['payment_interest_paid'] = 0.00; // no payments made at time of loan creation.
 				$schedule[$i]['payment_principal_paid'] = 0.00; // no payments made at time of loan creation.
@@ -259,7 +259,7 @@ class com_loan_loan extends entity {
 			} else {
 				$schedule[$i]['scheduled_date_expected'] = strtotime('+1 month',$schedule[$i-1]['scheduled_date_expected']);
 				$schedule[$i]['scheduled_current_balance'] = $schedule[$i - 1]['scheduled_balance'];
-				$schedule[$i]['payment_interest_expected'] = $pines->com_sales->round(($schedule[$i]['scheduled_current_balance'] * $this->rate_per_period) / 100 , true);
+				$schedule[$i]['payment_interest_expected'] = $_->com_sales->round(($schedule[$i]['scheduled_current_balance'] * $this->rate_per_period) / 100 , true);
 				if ($schedule[$i]['scheduled_current_balance'] < $frequency_payment || ($schedule[$i]['scheduled_current_balance'] - $frequency_payment) <= 1) {
 					$schedule[$i]['payment_principal_expected'] = $schedule[$i]['scheduled_current_balance'];
 				} else {
@@ -379,7 +379,7 @@ class com_loan_loan extends entity {
 	 * @return array Payments array.
 	 */
 	public function get_payments_array() {
-		global $pines;
+		global $_;
 
 		// Create array of scheduled payments.
 		$scheduled_payment_dates = array();
@@ -459,7 +459,7 @@ class com_loan_loan extends entity {
 					} else {
 						$temp_payments[$c]['scheduled_current_balance'] = $temp_payments[$c-1]['scheduled_balance'];
 					}
-					$temp_payments[$c]['payment_interest_expected'] = $pines->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
+					$temp_payments[$c]['payment_interest_expected'] = $_->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
 					$temp_payments[$c]['payment_principal_expected'] = $this->frequency_payment - $temp_payments[$c]['payment_interest_expected'];
 					$temp_payments[$c]['payment_interest_paid'] = 0.00; // Because it is missed and no payments have ever bee made.
 					$temp_payments[$c]['payment_principal_paid'] = 0.00; // Because it is missed and no payments have ever bee made.
@@ -480,7 +480,7 @@ class com_loan_loan extends entity {
 					$temp_payments[$c]['payment_status'] = 'not due yet';
 					$temp_payments[$c]['scheduled_date_expected'] = $due_date;
 					$temp_payments[$c]['scheduled_current_balance'] = $temp_payments[$c-1]['scheduled_balance'];
-					$temp_payments[$c]['payment_interest_expected'] = $pines->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
+					$temp_payments[$c]['payment_interest_expected'] = $_->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
 					// For scheduled balances, check if paying off last payment.
 					if ($temp_payments[$c]['scheduled_current_balance'] < $this->frequency_payment) {
 						$temp_payments[$c]['payment_principal_expected'] = $temp_payments[$c]['scheduled_current_balance'];
@@ -521,10 +521,10 @@ class com_loan_loan extends entity {
 			//$this->past_due = $past_due['interest'] + $past_due['principal'];
 			// Get pastdue
 			$past_due = $this->get_pastdue($temp_payments, $this->paid);
-			$this->past_due = $temp_payments[0]['past_due'] = $pines->com_sales->round($past_due['interest'] + $past_due['principal']);
-			$temp_payments[0]['unpaid_balance'] = $pines->com_sales->round($past_due['short_principal']);
-			$temp_payments[0]['unpaid_interest'] = $pines->com_sales->round($past_due['short_interest']);
-			$temp_payments[0]['sum_payment_short'] = $pines->com_sales->round($past_due['short_interest'] + $past_due['short_principal']);
+			$this->past_due = $temp_payments[0]['past_due'] = $_->com_sales->round($past_due['interest'] + $past_due['principal']);
+			$temp_payments[0]['unpaid_balance'] = $_->com_sales->round($past_due['short_principal']);
+			$temp_payments[0]['unpaid_interest'] = $_->com_sales->round($past_due['short_interest']);
+			$temp_payments[0]['sum_payment_short'] = $_->com_sales->round($past_due['short_interest'] + $past_due['short_principal']);
 			return $this->payments;
 		}
 
@@ -590,20 +590,20 @@ class com_loan_loan extends entity {
 								if (!$temp_payments[0]['first_payment_made']) {
 									$temp_payments[0]['first_payment_made'] = $temp_payments[$c]['payment_date_received'];
 									if($c == 1) {
-										$temp_payments[$c]['scheduled_current_balance'] = $pines->com_sales->round((float) $this->principal);
-										$temp_payments[$c]['current_balance'] = $pines->com_sales->round((float) $this->principal);
+										$temp_payments[$c]['scheduled_current_balance'] = $_->com_sales->round((float) $this->principal);
+										$temp_payments[$c]['current_balance'] = $_->com_sales->round((float) $this->principal);
 									} else {
 										$temp_payments[$c]['scheduled_current_balance'] = $temp_payments[$c-1]['scheduled_balance'];
 										$temp_payments[$c]['current_balance'] = $temp_payments[$c-1]['remaining_balance'];
 									}
-//									$temp_payments[0]['inflated_expected_interest'] += (float) $pines->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
+//									$temp_payments[0]['inflated_expected_interest'] += (float) $_->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
 								} else {
 									$temp_payments[$c]['scheduled_current_balance'] = $temp_payments[$c-1]['scheduled_balance'];
 									$temp_payments[$c]['current_balance'] = $temp_payments[$c-1]['remaining_balance'];
 									// Establish expected interest and principal based off of unpaid balance & interest.
 									
-									//$temp_payments[0]['inflated_expected_interest'] += (float) $pines->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
-//									$temp_payments[$c]['payment_interest_unpaid'] = ($temp_payments[$c-1]['payment_interest_unpaid'] - $temp_payments[$c]['payment_interest_paid']) + (float) $pines->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
+									//$temp_payments[0]['inflated_expected_interest'] += (float) $_->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
+//									$temp_payments[$c]['payment_interest_unpaid'] = ($temp_payments[$c-1]['payment_interest_unpaid'] - $temp_payments[$c]['payment_interest_paid']) + (float) $_->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
 								}
 								// Get Expected values
 								$temp_payments[$c]['payment_interest_expected'] = $paid['payment_interest_expected'];
@@ -645,9 +645,9 @@ class com_loan_loan extends entity {
 									}
 								}
 								if (!isset($temp_payments[$c]['payment_interest_unpaid']))
-									$temp_payments[$c]['payment_interest_unpaid'] -= $pines->com_sales->round((float)$sum_int_paid);
+									$temp_payments[$c]['payment_interest_unpaid'] -= $_->com_sales->round((float)$sum_int_paid);
 								if (!isset($temp_payments[$c]['payment_balance_unpaid']))
-									$temp_payments[$c]['payment_balance_unpaid'] -= $pines->com_sales->round((float)$sum_bal_paid);
+									$temp_payments[$c]['payment_balance_unpaid'] -= $_->com_sales->round((float)$sum_bal_paid);
 								$temp_payments[$c]['payment_amount_paid'] = $temp_payments[$c]['payment_interest_paid'] + $temp_payments[$c]['payment_principal_paid'] + $temp_payments[$c]['payment_additional'];
 								if ($c == 1)
 									$temp_payments[$c]['scheduled_balance'] = $temp_payments[$c]['scheduled_current_balance'] - ($this->schedule[0]['payment_principal_expected']);
@@ -665,7 +665,7 @@ class com_loan_loan extends entity {
 //									// Don't count short amount.
 //									$temp_payments[$c]['payment_short'] = 0.00;
 //								} else
-									$temp_payments[$c]['payment_short'] = $pines->com_sales->round(($temp_payments[$c]['payment_interest_expected'] + $temp_payments[$c]['payment_principal_expected']) - $temp_payments[$c]['payment_amount_paid']);
+									$temp_payments[$c]['payment_short'] = $_->com_sales->round(($temp_payments[$c]['payment_interest_expected'] + $temp_payments[$c]['payment_principal_expected']) - $temp_payments[$c]['payment_amount_paid']);
 
 								// This is the amount of interest unpaid that has been paid, and needs to be removed from unpaid_interest.
 								$temp_payments[0]['subtract_unpaid_interest_paid'] = $temp_payments[$c]['payment_interest_paid'];
@@ -705,7 +705,7 @@ class com_loan_loan extends entity {
 									$temp_payments[$c]['scheduled_current_balance'] = (float) $temp_payments[$c-1]['scheduled_balance'];
 									$temp_payments[$c]['current_balance'] = (float) $temp_payments[$c-1]['remaining_balance'];
 								}
-								$temp_payments[$c]['payment_interest_expected'] = (float) $pines->com_sales->round(($temp_payments[$c]['current_balance'] * $this->rate_per_period) / 100, true);
+								$temp_payments[$c]['payment_interest_expected'] = (float) $_->com_sales->round(($temp_payments[$c]['current_balance'] * $this->rate_per_period) / 100, true);
 								$temp_payments[$c]['payment_principal_expected'] = $this->frequency_payment - $temp_payments[$c]['payment_interest_expected'];
 
 								// We keep these numbers even for partial not due, and we'll add extra payments if necessary to these amounts.
@@ -733,15 +733,15 @@ class com_loan_loan extends entity {
 								$temp_payments[$c]['payment_amount_paid'] = $temp_payments[$c]['payment_interest_paid'] + $temp_payments[$c]['payment_principal_paid'] + $temp_payments[$c]['payment_additional'];
 								$temp_payments[$c]['scheduled_balance'] = $temp_payments[$c]['scheduled_current_balance'] - ($temp_payments[$c]['payment_principal_expected']);
 								$temp_payments[$c]['remaining_balance'] = $temp_payments[$c]['current_balance'] - ($temp_payments[$c]['payment_principal_paid'] + $temp_payments[$c]['payment_additional']);
-								$temp_payments[$c]['payment_balance_unpaid'] = $pines->com_sales->round(-1*($temp_payments[$c]['scheduled_balance'] - $temp_payments[$c]['remaining_balance']));
-								$temp_payments[$c]['payment_interest_unpaid'] = $pines->com_sales->round($temp_payments[$c]['payment_interest_expected'] - $temp_payments[$c]['payment_interest_paid']);
+								$temp_payments[$c]['payment_balance_unpaid'] = $_->com_sales->round(-1*($temp_payments[$c]['scheduled_balance'] - $temp_payments[$c]['remaining_balance']));
+								$temp_payments[$c]['payment_interest_unpaid'] = $_->com_sales->round($temp_payments[$c]['payment_interest_expected'] - $temp_payments[$c]['payment_interest_paid']);
 
 								// Don't count short amount if the balance has been paid since, even partially.
 								if (is_int($this->payments[0]['last_payment_made']) && $due_date < $this->payments[0]['last_payment_made']) {
 									// Don't count short amount.
 									$temp_payments[$c]['payment_short'] = 0.00;
 								} else
-									$temp_payments[$c]['payment_short'] = $pines->com_sales->round(($temp_payments[$c]['payment_interest_expected'] + $temp_payments[$c]['payment_principal_expected']) - $temp_payments[$c]['payment_amount_paid']);
+									$temp_payments[$c]['payment_short'] = $_->com_sales->round(($temp_payments[$c]['payment_interest_expected'] + $temp_payments[$c]['payment_principal_expected']) - $temp_payments[$c]['payment_amount_paid']);
 
 								if (isset($temp_payments[$c]['remaining_balance'])) {
 									$temp_payments[0]['remaining_balance'] = $temp_payments[$c]['remaining_balance'];
@@ -790,9 +790,9 @@ class com_loan_loan extends entity {
 							$temp_payments[$c]['current_balance'] = $temp_payments[$c-1]['remaining_balance'];
 						}
 						if ($temp_payments[$c-1]['payment_additional'] >= .01)
-							$temp_payments[$c]['payment_interest_expected'] = (float) $pines->com_sales->round(($temp_payments[$c]['missed_current_balance'] * $this->rate_per_period) / 100, true);
+							$temp_payments[$c]['payment_interest_expected'] = (float) $_->com_sales->round(($temp_payments[$c]['missed_current_balance'] * $this->rate_per_period) / 100, true);
 						else
-							$temp_payments[$c]['payment_interest_expected'] = (float) $pines->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
+							$temp_payments[$c]['payment_interest_expected'] = (float) $_->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
 						$temp_payments[$c]['payment_principal_expected'] = $this->frequency_payment - $temp_payments[$c]['payment_interest_expected'];
 						$temp_payments[$c]['payment_interest_paid'] = 0.00; // Because it is missed and no payments have ever bee made.
 						$temp_payments[$c]['payment_principal_paid'] = 0.00; // Because it is missed and no payments have ever bee made.
@@ -812,7 +812,7 @@ class com_loan_loan extends entity {
 //							// Don't count short amount.
 //							$temp_payments[$c]['payment_short'] = 0.00;
 //						} else
-							$temp_payments[$c]['payment_short'] = $pines->com_sales->round(($temp_payments[$c]['payment_interest_expected'] + $temp_payments[$c]['payment_principal_expected']) - $temp_payments[$c]['payment_amount_paid']);
+							$temp_payments[$c]['payment_short'] = $_->com_sales->round(($temp_payments[$c]['payment_interest_expected'] + $temp_payments[$c]['payment_principal_expected']) - $temp_payments[$c]['payment_amount_paid']);
 
 						if (isset($temp_payments[$c]['remaining_balance'])) {
 							$temp_payments[0]['remaining_balance'] = $temp_payments[$c]['remaining_balance'];
@@ -852,7 +852,7 @@ class com_loan_loan extends entity {
 								$temp_payments[$c]['scheduled_current_balance'] = $temp_payments[$c-1]['scheduled_balance'];
 								$temp_payments[$c]['current_balance'] = $temp_payments[$c-1]['remaining_balance'];
 							}
-							$temp_payments[$c]['payment_interest_expected'] = $pines->com_sales->round(($temp_payments[$c]['current_balance'] * $this->rate_per_period) / 100, true);
+							$temp_payments[$c]['payment_interest_expected'] = $_->com_sales->round(($temp_payments[$c]['current_balance'] * $this->rate_per_period) / 100, true);
 							$temp_payments[$c]['payment_principal_expected'] = $this->frequency_payment - $temp_payments[$c]['payment_interest_expected'];
 
 							// We keep these numbers even for partial not due, and we'll add extra payments if necessary to these amounts.
@@ -933,7 +933,7 @@ class com_loan_loan extends entity {
 							$temp_payments[$c]['scheduled_current_balance'] = $temp_payments[$c-1]['remaining_balance'];
 						else
 							$temp_payments[$c]['scheduled_current_balance'] = $temp_payments[$c-1]['scheduled_balance'];
-						$temp_payments[$c]['payment_interest_expected'] = (float) $pines->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
+						$temp_payments[$c]['payment_interest_expected'] = (float) $_->com_sales->round(($temp_payments[$c]['scheduled_current_balance'] * $this->rate_per_period) / 100, true);
 						if ($temp_payments[$c]['scheduled_current_balance'] < $this->frequency_payment) {
 							$temp_payments[$c]['payment_principal_expected'] = $temp_payments[$c]['scheduled_current_balance'];
 						} else {
@@ -1040,10 +1040,10 @@ class com_loan_loan extends entity {
 			
 			// Get pastdue
 			$past_due = $this->get_pastdue($temp_payments, $this->paid);
-			$temp_payments[0]['past_due'] = $pines->com_sales->round($past_due['interest'] + $past_due['principal']);
-			$temp_payments[0]['unpaid_balance'] = $pines->com_sales->round($past_due['short_principal']);
-			$temp_payments[0]['unpaid_interest'] = $pines->com_sales->round($past_due['short_interest']);
-			$temp_payments[0]['sum_payment_short'] = $pines->com_sales->round($past_due['short_interest'] + $past_due['short_principal']);
+			$temp_payments[0]['past_due'] = $_->com_sales->round($past_due['interest'] + $past_due['principal']);
+			$temp_payments[0]['unpaid_balance'] = $_->com_sales->round($past_due['short_principal']);
+			$temp_payments[0]['unpaid_interest'] = $_->com_sales->round($past_due['short_interest']);
+			$temp_payments[0]['sum_payment_short'] = $_->com_sales->round($past_due['short_interest'] + $past_due['short_principal']);
 			
 			$sub_int = $temp_payments[0]['subtract_unpaid_interest_paid'];
 			$inflated_expected_interest = $temp_payments[0]['inflated_expected_interest'];
@@ -1265,7 +1265,7 @@ class com_loan_loan extends entity {
 	 * @return array Payment edit history.
 	 */
 	public function get_edit_results($get_edit_results) {
-		global $pines;
+		global $_;
 
 		foreach ($get_edit_results as $result) {
 			$n = $result['n'];
@@ -1285,26 +1285,26 @@ class com_loan_loan extends entity {
 
 				// Get values for amount of interest, principal, and additional payment.
 				if ($parent) {
-					$payment_interest = $pines->com_sales->round($this->paid[$num]['payment_interest_paid']);
-					$payment_principal = $pines->com_sales->round($this->paid[$num]['payment_principal_paid']);
-					$payment_additional = $pines->com_sales->round($this->paid[$num]['payment_additional']);
+					$payment_interest = $_->com_sales->round($this->paid[$num]['payment_interest_paid']);
+					$payment_principal = $_->com_sales->round($this->paid[$num]['payment_principal_paid']);
+					$payment_additional = $_->com_sales->round($this->paid[$num]['payment_additional']);
 					if ($payment_additional < .01)
 						$payment_additional = 0;
 				} else {
 					foreach ($this->paid[$num]['extra_payments'] as $extra_payment) {
 						if ($extra_payment['payment_id'] == $payment_id) {
-							$payment_interest = $pines->com_sales->round($extra_payment['payment_interest_paid']);
-							$payment_principal = $pines->com_sales->round($extra_payment['payment_principal_paid']);
-							$payment_additional = $pines->com_sales->round($extra_payment['payment_additional']);
+							$payment_interest = $_->com_sales->round($extra_payment['payment_interest_paid']);
+							$payment_principal = $_->com_sales->round($extra_payment['payment_principal_paid']);
+							$payment_additional = $_->com_sales->round($extra_payment['payment_additional']);
 							if ($payment_additional < .01)
 								$payment_additional = 0;
 							break;
 						}
 					}
 				}
-				$this->history->edit_payments[$n]['edit_info']['edit_interest'] = $pines->com_sales->round($payment_interest);
-				$this->history->edit_payments[$n]['edit_info']['edit_principal'] = $pines->com_sales->round($payment_principal);
-				$this->history->edit_payments[$n]['edit_info']['edit_additional'] = $pines->com_sales->round($payment_additional);
+				$this->history->edit_payments[$n]['edit_info']['edit_interest'] = $_->com_sales->round($payment_interest);
+				$this->history->edit_payments[$n]['edit_info']['edit_principal'] = $_->com_sales->round($payment_principal);
+				$this->history->edit_payments[$n]['edit_info']['edit_additional'] = $_->com_sales->round($payment_additional);
 
 				$this->history->edit_payments[$n]['edit_results']['new_paid'] = $this->paid[$num];
 				$this->match_payment_id($parent, $payment_id);
@@ -1366,13 +1366,13 @@ class com_loan_loan extends entity {
 	 * @param float $payment_additional The additional payment of the edit payment.
 	 */
 	public function edit_payment($date_received, $date_expected_orig, $date_receive_old, $date_record_old, $date_recorded, $payment_id, $payment_amount, $error_type, $payment_interest, $payment_principal, $payment_additional) {
-		global $pines;
+		global $_;
 
 		// Check if anything about this payment has changed, because we don't want to clutter
 		// the edit payment logs if it's not necessary.
 		$skip_logging = false;
-		$sum_old_amount = $pines->com_sales->round($payment_interest + $payment_principal + $payment_additional);
-		if ($pines->com_sales->round($payment_amount) == $sum_old_amount && $date_receive_old == $date_received) {
+		$sum_old_amount = $_->com_sales->round($payment_interest + $payment_principal + $payment_additional);
+		if ($_->com_sales->round($payment_amount) == $sum_old_amount && $date_receive_old == $date_received) {
 			// No change made. We can avoid making logs and use the original record date.
 			$date_recorded = $date_record_old;
 			// Remember to delete store_payment and store_paid;
@@ -1400,7 +1400,7 @@ class com_loan_loan extends entity {
 				'date_received' => (int) $date_received,
 				'date_recorded' => (int) $date_recorded,
 				'date_created' => (int) $date_created,
-				'payment_amount' => $pines->com_sales->round($payment_amount),
+				'payment_amount' => $_->com_sales->round($payment_amount),
 				'payment_id' => $payment_id,
 			);
 		} elseif (!$unset) {
@@ -1443,7 +1443,7 @@ class com_loan_loan extends entity {
 					'date_received' => (int) $date_received,
 					'date_recorded' => (int) $date_recorded,
 					'date_created' => (int) $date_created,
-					'payment_amount' => $pines->com_sales->round($payment_amount),
+					'payment_amount' => $_->com_sales->round($payment_amount),
 					'payment_id' => $payment_id,
 				);
 
@@ -1458,7 +1458,7 @@ class com_loan_loan extends entity {
 					'date_received' => (int) $date_received,
 					'date_recorded' => (int) $date_recorded,
 					'date_created' => (int) $date_created,
-					'payment_amount' => $pines->com_sales->round($payment_amount),
+					'payment_amount' => $_->com_sales->round($payment_amount),
 					'payment_id' => $payment_id,
 				);
 			}
@@ -1482,7 +1482,7 @@ class com_loan_loan extends entity {
 			'edit_user' => $_SESSION['user']->username,
 			'edit_user_guid' => $_SESSION['user_id'],
 			'edit_reason' => $error_type,
-			'edit_payment' => $pines->com_sales->round($edit_payment_amount),
+			'edit_payment' => $_->com_sales->round($edit_payment_amount),
 		);
 		
 		$n = count($this->history->edit_payments) - 1;
@@ -1519,7 +1519,7 @@ class com_loan_loan extends entity {
 	 * @param float $payment_additional The additional payment of the deleted payment.
 	 */
 	public function delete_payment($date_received, $date_expected_orig, $date_recorded, $payment_id, $payment_amount, $error_type, $payment_interest, $payment_principal, $payment_additional) {
-		global $pines;
+		global $_;
 
 		// When we run make payments the payment amount will change to the last one in the PBD, so save original value.
 		$delete_payment_amount = $payment_amount;
@@ -1543,10 +1543,10 @@ class com_loan_loan extends entity {
 			'delete_user' => $this->user->name,
 			'delete_user_guid' => $this->user->guid,
 			'delete_reason' => $error_type,
-			'delete_payment' => $pines->com_sales->round($delete_payment_amount),
-			'delete_interest' => $pines->com_sales->round($payment_interest),
-			'delete_principal' => $pines->com_sales->round($payment_principal),
-			'delete_additional' => $pines->com_sales->round($payment_additional),
+			'delete_payment' => $_->com_sales->round($delete_payment_amount),
+			'delete_interest' => $_->com_sales->round($payment_interest),
+			'delete_principal' => $_->com_sales->round($payment_principal),
+			'delete_additional' => $_->com_sales->round($payment_additional),
 		);
 		$n = count($this->history->edit_payments) - 1;
 		$this->history->edit_payments[$n]['delete_info'] = $delete_payment;
@@ -1585,7 +1585,7 @@ class com_loan_loan extends entity {
 	 * @return array pay_by_date array.
 	 */
 	public function cleanup_pbds() {
-		global $pines;
+		global $_;
 
 		if (empty($this->paid))
 			return;
@@ -1621,7 +1621,7 @@ class com_loan_loan extends entity {
 					'date_received' => $missing['payment_date_received'],
 					'date_recorded' => $missing['payment_date_recorded'],
 					'date_created' => $missing['payment_date_recorded'],
-					'payment_amount' => $pines->com_sales->round($missing['payment_interest_paid'] + $missing['payment_principal_paid'] + $missing['payment_additional']),
+					'payment_amount' => $_->com_sales->round($missing['payment_interest_paid'] + $missing['payment_principal_paid'] + $missing['payment_additional']),
 					'payment_id' => $missing['payment_id'],
 				);
 				$this->insert_pbd($insert_pbd);
@@ -1641,7 +1641,7 @@ class com_loan_loan extends entity {
 					if ($pbd['payment_id'] == $subtract['parent_payment_id']) {
 						// found the parent!
 						// now subtract!
-						$pbd['payment_amount'] = $pines->com_sales->round($pbd['payment_amount'] - $subtract['payment_amount']);
+						$pbd['payment_amount'] = $_->com_sales->round($pbd['payment_amount'] - $subtract['payment_amount']);
 						break;
 					}
 				}
@@ -1780,7 +1780,7 @@ class com_loan_loan extends entity {
 	 * @param string $payment_id The payment id of the payment to be made.
 	 */
 	public function make_payment($payment_amount, $date_expected, $date_received, $date_recorded, $payment_id) {
-		global $pines;
+		global $_;
 
 		if (!empty($this->paid)) {
 			foreach ($this->paid as $paid) {
@@ -1870,8 +1870,8 @@ class com_loan_loan extends entity {
 				$this->paid[$num]['payment_principal_unpaid_remainder'] -= $extra['payment_principal_paid'];
 				
 				// Round remainders.
-				$this->paid[$num]['payment_interest_unpaid_remainder'] = $pines->com_sales->round($this->paid[$num]['payment_interest_unpaid_remainder']);
-				$this->paid[$num]['payment_principal_unpaid_remainder'] = $pines->com_sales->round($this->paid[$num]['payment_principal_unpaid_remainder']);
+				$this->paid[$num]['payment_interest_unpaid_remainder'] = $_->com_sales->round($this->paid[$num]['payment_interest_unpaid_remainder']);
+				$this->paid[$num]['payment_principal_unpaid_remainder'] = $_->com_sales->round($this->paid[$num]['payment_principal_unpaid_remainder']);
 				
 				// Create/Update total paid
 				if ($this->paid[$num]['extra_payments']) {
@@ -1973,7 +1973,7 @@ class com_loan_loan extends entity {
 								$new_rollover_payment['payment_interest_paid'] = $new_interest_unpaid_expected;
 								$new_rollover_payment['payment_principal_paid'] = $new_payment_amount - $new_interest_unpaid_expected;
 								$new_rollover_payment['payment_interest_unpaid_remainder'] = 0.00;
-								$new_rollover_payment['payment_principal_unpaid_remainder'] = $pines->com_sales->round($new_principal_unpaid_expected - $new_rollover_payment['payment_principal_paid']);
+								$new_rollover_payment['payment_principal_unpaid_remainder'] = $_->com_sales->round($new_principal_unpaid_expected - $new_rollover_payment['payment_principal_paid']);
 								if ($new_rollover_payment['payment_principal_unpaid_remainder'] >= 0.01) {
 									$new_rollover_payment['payment_status'] = 'partial';
 								} else 
@@ -2019,7 +2019,7 @@ class com_loan_loan extends entity {
 										$partial = true;
 									} else {
 										// interest is covered at least with possibly more.
-										$next_due_payment['payment_interest_paid'] = $pines->com_sales->round((float) $payment['payment_interest_expected']);
+										$next_due_payment['payment_interest_paid'] = $_->com_sales->round((float) $payment['payment_interest_expected']);
 										if (($payment_amount - $next_due_payment['payment_interest_paid']) < $payment['payment_principal_expected']) {
 											// does not fully cover principal.
 											$next_due_payment['payment_principal_paid'] = $payment_amount - $next_due_payment['payment_interest_paid'];
@@ -2031,7 +2031,7 @@ class com_loan_loan extends entity {
 										} else {
 											// principal is covered with possibly more.
 											$next_due_payment['payment_principal_paid'] = $payment['payment_principal_expected'];
-											$next_due_payment['payment_additional'] =  $pines->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
+											$next_due_payment['payment_additional'] =  $_->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
 										}
 									}
 									break;
@@ -2049,7 +2049,7 @@ class com_loan_loan extends entity {
 										$partial = true;
 									} else {
 										// interest is covered at least with possibly more.
-										$next_due_payment['payment_interest_paid'] = $pines->com_sales->round((float) $payment['payment_interest_expected']);
+										$next_due_payment['payment_interest_paid'] = $_->com_sales->round((float) $payment['payment_interest_expected']);
 										if (($payment_amount - $next_due_payment['payment_interest_paid']) < $payment['payment_principal_expected']) {
 											// does not fully cover principal.
 											$next_due_payment['payment_principal_paid'] = $payment_amount - $next_due_payment['payment_interest_paid'];
@@ -2061,7 +2061,7 @@ class com_loan_loan extends entity {
 										} else {
 											// principal is covered with possibly more.
 											$next_due_payment['payment_principal_paid'] = $payment['payment_principal_expected'];
-											$next_due_payment['payment_additional'] =  $pines->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
+											$next_due_payment['payment_additional'] =  $_->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
 										}
 									}
 									break;
@@ -2107,7 +2107,7 @@ class com_loan_loan extends entity {
 										$partial = true;
 									} else {
 										// interest is covered at least with possibly more.
-										$next_due_payment['payment_interest_paid'] = $pines->com_sales->round((float) $payment['payment_interest_expected']);
+										$next_due_payment['payment_interest_paid'] = $_->com_sales->round((float) $payment['payment_interest_expected']);
 										if (($payment_amount - $next_due_payment['payment_interest_paid']) < $payment['payment_principal_expected']) {
 											// does not fully cover principal.
 											$next_due_payment['payment_principal_paid'] = $payment_amount - $next_due_payment['payment_interest_paid'];
@@ -2119,7 +2119,7 @@ class com_loan_loan extends entity {
 										} else {
 											// principal is covered with possibly more.
 											$next_due_payment['payment_principal_paid'] = $payment['payment_principal_expected'];
-											$next_due_payment['payment_additional'] =  $pines->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
+											$next_due_payment['payment_additional'] =  $_->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
 										}
 									}
 									break;
@@ -2137,7 +2137,7 @@ class com_loan_loan extends entity {
 										$partial = true;
 									} else {
 										// interest is covered at least with possibly more.
-										$next_due_payment['payment_interest_paid'] = $pines->com_sales->round((float) $payment['payment_interest_expected']);
+										$next_due_payment['payment_interest_paid'] = $_->com_sales->round((float) $payment['payment_interest_expected']);
 										if (($payment_amount - $next_due_payment['payment_interest_paid']) < $payment['payment_principal_expected']) {
 											// does not fully cover principal.
 											$next_due_payment['payment_principal_paid'] = $payment_amount - $next_due_payment['payment_interest_paid'];
@@ -2149,7 +2149,7 @@ class com_loan_loan extends entity {
 										} else {
 											// principal is covered with possibly more.
 											$next_due_payment['payment_principal_paid'] = $payment['payment_principal_expected'];
-											$next_due_payment['payment_additional'] =  $pines->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
+											$next_due_payment['payment_additional'] =  $_->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
 										}
 									}
 									break;
@@ -2226,14 +2226,14 @@ class com_loan_loan extends entity {
 			// The extra payment can contain an ADDITIONAL amount since nothing was past due.
 			
 			if ($this->paid[$num]['extra_payments']) {
-				$unpaid_interest = $pines->com_sales->round($this->paid[$num]['payment_interest_expected'] - $this->paid[$num]['payment_interest_paid_total']);
-				$unpaid_principal = $pines->com_sales->round($this->paid[$num]['payment_principal_expected'] - $this->paid[$num]['payment_principal_paid_total']);
+				$unpaid_interest = $_->com_sales->round($this->paid[$num]['payment_interest_expected'] - $this->paid[$num]['payment_interest_paid_total']);
+				$unpaid_principal = $_->com_sales->round($this->paid[$num]['payment_principal_expected'] - $this->paid[$num]['payment_principal_paid_total']);
 			} else {
-				$unpaid_interest = $pines->com_sales->round($this->paid[$num]['payment_interest_expected'] - $this->paid[$num]['payment_interest_paid']);
-				$unpaid_principal = $pines->com_sales->round($this->paid[$num]['payment_principal_expected'] - $this->paid[$num]['payment_principal_paid']);
+				$unpaid_interest = $_->com_sales->round($this->paid[$num]['payment_interest_expected'] - $this->paid[$num]['payment_interest_paid']);
+				$unpaid_principal = $_->com_sales->round($this->paid[$num]['payment_principal_expected'] - $this->paid[$num]['payment_principal_paid']);
 			}
 			
-			$total_unpaid = $pines->com_sales->round($unpaid_interest + $unpaid_principal);
+			$total_unpaid = $_->com_sales->round($unpaid_interest + $unpaid_principal);
 			// If the extra payment is still partial for this payment.
 			if ($total_unpaid > $payment_amount) {
 				$extra = array();
@@ -2264,7 +2264,7 @@ class com_loan_loan extends entity {
 				$extra['payment_status'] = 'paid';
 				$extra['payment_interest_paid'] = $unpaid_interest;
 				$extra['payment_principal_paid'] = $unpaid_principal;
-				$possible_additional = $pines->com_sales->round($payment_amount - $total_unpaid);
+				$possible_additional = $_->com_sales->round($payment_amount - $total_unpaid);
 				if ($possible_additional >= .01)
 					$extra['payment_additional'] = $possible_additional;
 				else
@@ -2304,7 +2304,7 @@ class com_loan_loan extends entity {
 						$temp_payment_paid['payment_interest_unpaid_expected'] = $past_due['interest'];
 						$temp_payment_paid['payment_principal_unpaid_expected'] = $past_due['principal'];
 						
-						$total_expected = $pines->com_sales->round($payment['payment_interest_expected'] + $payment['payment_principal_expected']);
+						$total_expected = $_->com_sales->round($payment['payment_interest_expected'] + $payment['payment_principal_expected']);
 						// So with past due amounts, we want to pay the interest first.
 						// But we want to look at the overview and see the frequency payment amount for each
 						// date or time that they make payments. In other words, it should CAP off at the amount.
@@ -2319,7 +2319,7 @@ class com_loan_loan extends entity {
 							$temp_payment_paid['payment_principal_unpaid_remainder'] = $temp_payment_paid['payment_principal_unpaid_expected'];
 							// past due amounts remain.
 							
-							if (($pines->com_sales->round($temp_payment_paid['payment_interest_unpaid_expected'] + $temp_payment_paid['payment_principal_unpaid_expected'])) == $pines->com_sales->round($temp_past_due_paid['payment_total_expected'])) {
+							if (($_->com_sales->round($temp_payment_paid['payment_interest_unpaid_expected'] + $temp_payment_paid['payment_principal_unpaid_expected'])) == $_->com_sales->round($temp_past_due_paid['payment_total_expected'])) {
 								// They missed one payment.
 								// Now adjust payment down to frequency payment.
 								$temp_payment_paid['payment_interest_paid'] = $payment_amount;
@@ -2351,7 +2351,7 @@ class com_loan_loan extends entity {
 							if ($temp_payment_paid['payment_interest_unpaid_expected'] < $temp_payment_paid['payment_total_expected']) {
 								// the unpaid interest is LESS than the normal frequency payment.
 								// this could happen from just missing one payment.
-								if (($pines->com_sales->round($temp_payment_paid['payment_interest_unpaid_expected'] + $temp_payment_paid['payment_principal_unpaid_expected'])) == $pines->com_sales->round($temp_payment_paid['payment_total_expected'])) {
+								if (($_->com_sales->round($temp_payment_paid['payment_interest_unpaid_expected'] + $temp_payment_paid['payment_principal_unpaid_expected'])) == $_->com_sales->round($temp_payment_paid['payment_total_expected'])) {
 									// They missed one payment.
 									// Now adjust payment down to frequency payment.
 									$temp_payment_paid['payment_interest_paid'] = $temp_payment_paid['payment_interest_unpaid_expected'];
@@ -2408,7 +2408,7 @@ class com_loan_loan extends entity {
 						$partial = true;
 					} else {
 						// interest is covered at least with possibly more.
-						$temp_payment_paid['payment_interest_paid'] = $pines->com_sales->round((float) $payment['payment_interest_expected']);
+						$temp_payment_paid['payment_interest_paid'] = $_->com_sales->round((float) $payment['payment_interest_expected']);
 						if (($payment_amount - $temp_payment_paid['payment_interest_paid']) < $payment['payment_principal_expected']) {
 							// does not fully cover principal.
 							$temp_payment_paid['payment_principal_paid'] = $payment_amount - $temp_payment_paid['payment_interest_paid'];
@@ -2442,7 +2442,7 @@ class com_loan_loan extends entity {
 					$new_date_recorded = $date_recorded;
 
 					// Find out what is expected this period, and determine if rollover amount covers it.
-					$total_expected = $pines->com_sales->round($payment['payment_interest_expected'] + $payment['payment_principal_expected']);
+					$total_expected = $_->com_sales->round($payment['payment_interest_expected'] + $payment['payment_principal_expected']);
 
 					$new_rollover_payment['payment_type'] = 'past_due';
 					$new_rollover_payment['payment_date_expected'] = $new_date_expected;
@@ -2515,7 +2515,7 @@ class com_loan_loan extends entity {
 							$new_rollover_payment['payment_interest_paid'] = $new_interest_unpaid_expected;
 							$new_rollover_payment['payment_principal_paid'] = $new_payment_amount - $new_interest_unpaid_expected;
 							$new_rollover_payment['payment_interest_unpaid_remainder'] = 0.00;
-							$new_rollover_payment['payment_principal_unpaid_remainder'] = $pines->com_sales->round($new_principal_unpaid_expected - $new_rollover_payment['payment_principal_paid']);
+							$new_rollover_payment['payment_principal_unpaid_remainder'] = $_->com_sales->round($new_principal_unpaid_expected - $new_rollover_payment['payment_principal_paid']);
 							if ($new_rollover_payment['payment_principal_unpaid_remainder'] >= 0.01) {
 								$new_rollover_payment['payment_status'] = 'partial';
 							} else 
@@ -2573,8 +2573,8 @@ class com_loan_loan extends entity {
 							$partial = true;
 						} else {
 							// interest is covered at least with possibly more.
-							$next_due_payment['payment_interest_paid'] = $pines->com_sales->round((float) $payment['payment_interest_expected']);
-							if ($pines->com_sales->round($payment_amount - $next_due_payment['payment_interest_paid']) < $pines->com_sales->round($payment['payment_principal_expected'])) {
+							$next_due_payment['payment_interest_paid'] = $_->com_sales->round((float) $payment['payment_interest_expected']);
+							if ($_->com_sales->round($payment_amount - $next_due_payment['payment_interest_paid']) < $_->com_sales->round($payment['payment_principal_expected'])) {
 								// does not fully cover principal.
 								$next_due_payment['payment_principal_paid'] = $payment_amount - $next_due_payment['payment_interest_paid'];
 								if ($next_due_payment['payment_principal_paid'] < $payment['payment_principal_expected']) {
@@ -2585,7 +2585,7 @@ class com_loan_loan extends entity {
 							} else {
 								// principal is covered with possibly more.
 								$next_due_payment['payment_principal_paid'] = $payment['payment_principal_expected'];
-								$next_due_payment['payment_additional'] =  $pines->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
+								$next_due_payment['payment_additional'] =  $_->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
 							}
 						}
 						break;
@@ -2603,7 +2603,7 @@ class com_loan_loan extends entity {
 							$partial = true;
 						} else {
 							// interest is covered at least with possibly more.
-							$next_due_payment['payment_interest_paid'] = $pines->com_sales->round((float) $payment['payment_interest_expected']);
+							$next_due_payment['payment_interest_paid'] = $_->com_sales->round((float) $payment['payment_interest_expected']);
 							if (($payment_amount - $next_due_payment['payment_interest_paid']) < $payment['payment_principal_expected']) {
 								// does not fully cover principal.
 								$next_due_payment['payment_principal_paid'] = $payment_amount - $next_due_payment['payment_interest_paid'];
@@ -2615,7 +2615,7 @@ class com_loan_loan extends entity {
 							} else {
 								// principal is covered with possibly more.
 								$next_due_payment['payment_principal_paid'] = $payment['payment_principal_expected'];
-								$next_due_payment['payment_additional'] =  $pines->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
+								$next_due_payment['payment_additional'] =  $_->com_sales->round($payment_amount - ($next_due_payment['payment_interest_paid'] + $next_due_payment['payment_principal_paid']));
 							}
 						}
 						break;
@@ -2715,7 +2715,7 @@ class com_loan_loan extends entity {
 	 * @return array The pastdue amount.
 	 */
 	public function get_pastdue($payments_array, $paid_array, $date_received = null) {
-		global $pines;
+		global $_;
 		$pastdue = array();
 		
 		// Find PAID amount
@@ -2760,8 +2760,8 @@ class com_loan_loan extends entity {
 		}
 		
 		// Figure out PAST DUE
-		$pastdue_interest = $pines->com_sales->round($interest_expected - $interest_paid);
-		$pastdue_principal = $pines->com_sales->round($principal_expected - $principal_paid);
+		$pastdue_interest = $_->com_sales->round($interest_expected - $interest_paid);
+		$pastdue_principal = $_->com_sales->round($principal_expected - $principal_paid);
 		
 		// Consider that I need a short amount.
 		// This works because it DOES not REMOVE partial not due shortness.

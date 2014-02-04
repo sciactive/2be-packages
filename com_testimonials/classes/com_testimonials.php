@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -44,7 +44,7 @@ class com_testimonials extends component {
 	 * @return module The module.
 	 */
 	public function list_testimonials($type = 'pending') {
-		global $pines;
+		global $_;
 
 		$module = new module('com_testimonials', 'testimonial/list', 'content');
 		$module->testimonial_type = $type; 
@@ -58,7 +58,7 @@ class com_testimonials extends component {
 	 * @return module The module.
 	 */
 	public function list_reviews($type = 'pending') {
-		global $pines;
+		global $_;
 
 		$module = new module('com_testimonials', 'testimonial/list_reviews', 'content');
 		$module->testimonial_type = $type; 
@@ -70,7 +70,7 @@ class com_testimonials extends component {
 	 * @return module The module.
 	 */
 	public function print_help() {
-		global $pines;
+		global $_;
 		$module = new module('com_testimonials', 'help/help', 'content');
 		return $module;
 	}
@@ -108,7 +108,7 @@ class com_testimonials extends component {
 	 * @return module The module.
 	 */
 	public function get_testimonials($type = 'individual', $reverse = true, $limit = 20, $offset = 0, $tags = array('approved', 'share'), $entity_guid = null, $entity_class = null, $name = null, $rated_off = false, $random = false) {
-		global $pines;
+		global $_;
 
 		$tag_args = array('com_testimonials', 'testimonial', 'rated'); // I always want rated ones.
 		if ($rated_off)
@@ -144,7 +144,7 @@ class com_testimonials extends component {
 		
 		// Get the entities based on all the tags and settings
 		if ($type != 'aggregate') {
-			$testimonials = $pines->entity_manager->get_entities(
+			$testimonials = $_->entity_manager->get_entities(
 				array('class' => com_testimonials_testimonial, 'reverse' => $reverse, 'limit' => $limit, 'offset' => $offset),
 				array('&',
 					'tag' => array_unique($tag_args)
@@ -163,7 +163,7 @@ class com_testimonials extends component {
 			// - from all these, get just the rating
 			//		(going to use the rating to get average rating)
 			// - do maths - divide by number of raters, and there is the average.
-			$testimonials = $pines->entity_manager->get_entities(
+			$testimonials = $_->entity_manager->get_entities(
 					array('class' => com_testimonials_testimonial),
 					array('&',
 						'tag' => array_unique($tag_args)

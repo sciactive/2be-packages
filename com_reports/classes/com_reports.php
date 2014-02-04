@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -26,15 +26,15 @@ class com_reports extends component {
 	 * @return module The form's module.
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_reports', 'date_selector', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -44,10 +44,10 @@ class com_reports extends component {
 	 * @return module The module.
 	 */
 	function list_paystubs() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'list_paystubs', 'content');
-		$module->paystubs = $pines->entity_manager->get_entities(array('class' => com_reports_paystub), array('&', 'tag' => array('com_reports', 'paystub')));
+		$module->paystubs = $_->entity_manager->get_entities(array('class' => com_reports_paystub), array('&', 'tag' => array('com_reports', 'paystub')));
 
 		if ( empty($module->paystubs) )
 			pines_notice('There are no completed paystubs to view.');
@@ -61,10 +61,10 @@ class com_reports extends component {
 	 * @return module The module.
 	 */
 	function list_sales_rankings() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'list_sales_rankings', 'content');
-		$module->rankings = $pines->entity_manager->get_entities(array('class' => com_reports_sales_ranking), array('&', 'tag' => array('com_reports', 'sales_ranking')));
+		$module->rankings = $_->entity_manager->get_entities(array('class' => com_reports_sales_ranking), array('&', 'tag' => array('com_reports', 'sales_ranking')));
 
 		return $module;
 	}
@@ -77,8 +77,8 @@ class com_reports extends component {
 	 * @return module The form's module.
 	 */
 	public function location_select_form($location = null, $descendants = false) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_reports', 'location_selector', 'content');
 		if (!isset($location)) {
@@ -88,7 +88,7 @@ class com_reports extends component {
 		}
 		$module->descendants = $descendants;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -102,7 +102,7 @@ class com_reports extends component {
 	 * @return module The employee summary module.
 	 */
 	function employee_summary($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'employee_summary', 'content');
 
@@ -126,10 +126,10 @@ class com_reports extends component {
 		$module->descendants = $descendants;
 		$selector['tag'] = array('com_sales', 'sale');
 		$selector['strict'] = array('status', 'paid');
-		$sales = $pines->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
 		$selector['tag'] = array('com_sales', 'return');
 		$selector['strict'] = array('status', 'processed');
-		$returns = $pines->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
 		$module->invoices = array_merge($sales, $returns);
 
 		return $module;
@@ -145,7 +145,7 @@ class com_reports extends component {
 	 * @return module The invoice summary module.
 	 */
 	function invoice_summary($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'invoice_summary', 'content');
 
@@ -168,9 +168,9 @@ class com_reports extends component {
 		$module->location = $location;
 		$module->descendants = $descendants;
 		$selector['tag'] = array('com_sales', 'sale');
-		$sales = $pines->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
 		$selector['tag'] = array('com_sales', 'return');
-		$returns = $pines->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
 		$module->invoices = array_merge($sales, $returns);
 
 		return $module;
@@ -186,7 +186,7 @@ class com_reports extends component {
 	 * @return module The location summary module.
 	 */
 	function location_summary($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'location_summary', 'content');
 
@@ -210,10 +210,10 @@ class com_reports extends component {
 		$module->descendants = $descendants;
 		$selector['tag'] = array('com_sales', 'sale');
 		$selector['strict'] = array('status', 'paid');
-		$sales = $pines->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
 		$selector['tag'] = array('com_sales', 'return');
 		$selector['strict'] = array('status', 'processed');
-		$returns = $pines->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
 		$module->invoices = array_merge($sales, $returns);
 
 		return $module;
@@ -228,7 +228,7 @@ class com_reports extends component {
 	 * @return module The attendance report module.
 	 */
 	function daily_attendance($date, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		// Location of the report.
 		if (!isset($location->guid))
@@ -242,7 +242,7 @@ class com_reports extends component {
 		// Only one day is in the date range, and it's in the current timezone.
 		$start_date = strtotime('00:00:00', $date);
 		$end_date = strtotime('23:59:59', $date) + 1;
-		$employees = $pines->com_hrm->get_employees(true);
+		$employees = $_->com_hrm->get_employees(true);
 		foreach ($employees as &$cur_employee) {
 			if (!($cur_employee->in_group($location) || ($descendants && $cur_employee->is_descendant($location))))
 				continue;
@@ -257,7 +257,7 @@ class com_reports extends component {
 				'scheduled_total' => 0,
 			);
 			// Get all the employee clock-ins in our time range.
-			$entries = $pines->entity_manager->get_entities(
+			$entries = $_->entity_manager->get_entities(
 					array('class' => com_hrm_timeclock_entry),
 					array('&',
 						'tag' => array('com_hrm', 'timeclock_entry'),
@@ -287,7 +287,7 @@ class com_reports extends component {
 					$cur_array['clocked_ips'][] = $entry->extras['ip_out'];
 			}
 			// Get their scheduled time.
-			$schedule = $pines->entity_manager->get_entities(
+			$schedule = $_->entity_manager->get_entities(
 					array('class' => com_calendar_event),
 					array('&',
 						'tag' => array('com_calendar', 'event'),
@@ -338,7 +338,7 @@ class com_reports extends component {
 	 * @return module The attendance report module.
 	 */
 	function hours_clocked($start_date = null, $end_date = null, $location = null, $employee = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		// Location of the report.
 		if (!isset($location->guid))
@@ -351,7 +351,7 @@ class com_reports extends component {
 		$module->location = $location;
 		$module->descendants = $descendants;
 		if (!isset($employee)) {
-			$employees = $pines->com_hrm->get_employees(true);
+			$employees = $_->com_hrm->get_employees(true);
 			$module->employees = array();
 			$totals = array();
 			$total_group['scheduled'] = $total_group['clocked'] = $time_punch = $total_count = 0;
@@ -359,7 +359,7 @@ class com_reports extends component {
 				if (!($cur_employee->in_group($location) || ($descendants && $cur_employee->is_descendant($location))))
 					continue;
 				$totals[$total_count]['scheduled'] = $totals[$total_count]['clocked'] = 0;
-				$schedule = $pines->entity_manager->get_entities(
+				$schedule = $_->entity_manager->get_entities(
 						array('class' => com_calendar_event),
 						array('&',
 							'tag' => array('com_calendar', 'event'),
@@ -409,7 +409,7 @@ class com_reports extends component {
 				}
 			}
 			foreach ($module->dates as &$cur_date) {
-				$scheduled = $pines->entity_manager->get_entities(
+				$scheduled = $_->entity_manager->get_entities(
 						array('class' => com_calendar_event),
 						array('&',
 							'tag' => array('com_calendar', 'event'),
@@ -447,7 +447,7 @@ class com_reports extends component {
 	 * @return module The calendar report module.
 	 */
 	function report_calendar($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'report_calendar', 'content');
 
@@ -469,7 +469,7 @@ class com_reports extends component {
 			$or = array('|', 'ref' => array('group', $location));
 		$module->location = $location;
 		$module->descendants = $descendants;
-		$module->events = $pines->entity_manager->get_entities(array('class' => com_calendar_event), $selector, $or);
+		$module->events = $_->entity_manager->get_entities(array('class' => com_calendar_event), $selector, $or);
 
 		return $module;
 	}
@@ -492,7 +492,7 @@ class com_reports extends component {
 	 * @return module The payroll summary module.
 	 */
 	function report_payroll_individual($start_date = null, $end_date = null,  $employee = null, $payperhour = null, $totalhours =null, $totalpay = null, $salary = null, $commission = null, $hourreport = false, $adjust = null, $reghourpay = null, $overtimehourpay = null) {
-		global $pines;
+		global $_;
 		$module = new module('com_reports', 'report_individual_payroll', 'content');
 		$module->employee = $employee;
 		$module->pay_per_hour = $payperhour;
@@ -521,7 +521,7 @@ class com_reports extends component {
 			$module->overtime = $overtimehourpay / ($module->employee->pay_rate * 1.5);
 		}
 		// Get bonuses.
-		$module->bonuses = $pines->entity_manager->get_entities(
+		$module->bonuses = $_->entity_manager->get_entities(
 				array('class' => com_hrm_bonus),
 				array('&',
 					'tag' => array('com_hrm', 'bonus'),
@@ -544,7 +544,7 @@ class com_reports extends component {
 			$time = $end_date - 604800;
 
 		// Get adjustments.
-		$module->adjustments = $pines->entity_manager->get_entities(
+		$module->adjustments = $_->entity_manager->get_entities(
 				array('class' => com_hrm_adjustment),
 				array('&',
 					'tag' => array('com_hrm', 'adjustment'),
@@ -569,13 +569,13 @@ class com_reports extends component {
 		$module->all_time = (!isset($start_date) && !isset($end_date));
 		$selector['ref'] = array('user', $module->employee);
 		$selector['tag'] = array('com_sales', 'sale');
-		$module->sales = $pines->entity_manager->get_entities(
+		$module->sales = $_->entity_manager->get_entities(
 				array('class' => com_sales_sale),
 				$selector
 			);
 		// Make sure this sale is not attached to any returns.
 		foreach ($module->sales as $key => &$cur_sale) {
-			$return = $pines->entity_manager->get_entity(
+			$return = $_->entity_manager->get_entity(
 					array('class' => com_sales_return, 'skip_ac' => true),
 					array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('sale', $cur_sale))
 				);
@@ -622,7 +622,7 @@ class com_reports extends component {
 	 * @return module The issues report module.
 	 */
 	function report_issues($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'report_issues', 'content');
 
@@ -644,7 +644,7 @@ class com_reports extends component {
 			$or = array('|', 'ref' => array('group', $location));
 		$module->location = $location;
 		$module->descendants = $descendants;
-		$module->issues = $pines->entity_manager->get_entities(array('class' => com_hrm_issue), $selector, $or);
+		$module->issues = $_->entity_manager->get_entities(array('class' => com_hrm_issue), $selector, $or);
 
 		return $module;
 	}
@@ -658,10 +658,10 @@ class com_reports extends component {
 	 * @return module The employee payroll module.
 	 */
 	function report_payroll($entire_company = true, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
-		$pay_start = strtotime($pines->config->com_hrm->pay_start);
-		$pay_period = $pines->config->com_hrm->pay_period;
+		$pay_start = strtotime($_->config->com_hrm->pay_start);
+		$pay_period = $_->config->com_hrm->pay_period;
 		$total_time = (strtotime('0:00:00') - $pay_start)/$pay_period;
 		// Start date is 1 day after the last pay period.
 		$start_date = $pay_start + (floor($total_time) * $pay_period) + 86400;
@@ -670,7 +670,7 @@ class com_reports extends component {
 		// End date is at the end of the last day of the pay period.
 		$end_date = $pay_start + (ceil($total_time) * $pay_period) + 86399;
 
-		$paystub = $pines->entity_manager->get_entity(array('class' => com_reports_paystub),
+		$paystub = $_->entity_manager->get_entity(array('class' => com_reports_paystub),
 				array('&',
 					'tag' => array('com_reports', 'paystub'),
 					'gte' => array('end', (int) $start_date)
@@ -683,7 +683,7 @@ class com_reports extends component {
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->entire_company = $entire_company;
-		$module->employees = $pines->com_hrm->get_employees(true);
+		$module->employees = $_->com_hrm->get_employees(true);
 		$or = array();
 		if (!$module->entire_company) {
 			// Location of the report.
@@ -709,7 +709,7 @@ class com_reports extends component {
 			);
 		if (!empty($or))
 			$selector = array_merge($selector, $or);
-		$sales = $pines->entity_manager->get_entities(array('class' => com_sales_sale), $selector);
+		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector);
 		// Returns
 		$selector = array('&',
 				'tag' => array('com_sales', 'return'),
@@ -719,7 +719,7 @@ class com_reports extends component {
 			);
 		if (!empty($or))
 			$selector = array_merge($selector, $or);
-		$returns = $pines->entity_manager->get_entities(array('class' => com_sales_return), $selector);
+		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector);
 		$module->invoices = array_merge($sales, $returns);
 
 		return $module;
@@ -742,7 +742,7 @@ class com_reports extends component {
 	 * @return module The invoice summary module.
 	 */
 	function report_payroll_hourly($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'report_payroll_hourly', 'content');
 
@@ -769,14 +769,14 @@ class com_reports extends component {
 		$module->location = $location;
 		$module->descendants = $descendants;
 
-		$module->sales = $pines->entity_manager->get_entities(
+		$module->sales = $_->entity_manager->get_entities(
 				array('class' => com_sales_sale),
 				$selector,
 				$or
 			);
 		// Make sure sales are not attached to any returns.
 		foreach ($module->sales as $key => &$cur_sale) {
-			$return = $pines->entity_manager->get_entity(
+			$return = $_->entity_manager->get_entity(
 					array('class' => com_sales_return, 'skip_ac' => true),
 					array('&',
 						'tag' => array('com_sales', 'return'),
@@ -789,7 +789,7 @@ class com_reports extends component {
 		unset($cur_sale);
 
 		// Find employees in the location or its descendants.
-		$employees = $pines->com_hrm->get_employees(true);
+		$employees = $_->com_hrm->get_employees(true);
 		$module->employees = array();
 		foreach ($employees as &$cur_employee) {
 			if (!($cur_employee->in_group($location) || ($descendants && $cur_employee->is_descendant($location))))
@@ -804,7 +804,7 @@ class com_reports extends component {
 		foreach ($module->employees as &$cur_employee) {
 			$cur_employee['bonus'] = 0;
 			$totals[$total_count]['scheduled'] = $totals[$total_count]['clocked'] = 0;
-			$schedule = $pines->entity_manager->get_entities(
+			$schedule = $_->entity_manager->get_entities(
 					array('class' => com_calendar_event),
 					array('&',
 						'tag' => array('com_calendar', 'event'),
@@ -816,7 +816,7 @@ class com_reports extends component {
 				);
 
 			// Get adjustments for employee as well.
-			$adjustments = (array) $pines->entity_manager->get_entities(
+			$adjustments = (array) $_->entity_manager->get_entities(
 					array('class' => com_hrm_bonus),
 					array('&',
 						'tag' => array('com_hrm', 'adjustment'),
@@ -993,7 +993,7 @@ class com_reports extends component {
 	 * @return module The payroll summary module.
 	 */
 	function report_payroll_summary($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'report_payroll_summary', 'content');
 
@@ -1020,10 +1020,10 @@ class com_reports extends component {
 		$module->location = $location;
 		$module->descendants = $descendants;
 
-		$module->sales = $pines->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$module->sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
 		// Make sure this sale is not attached to any returns.
 		foreach ($module->sales as $key => &$cur_sale) {
-			$return = $pines->entity_manager->get_entity(
+			$return = $_->entity_manager->get_entity(
 					array('class' => com_sales_return, 'skip_ac' => true),
 					array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('sale', $cur_sale))
 				);
@@ -1033,7 +1033,7 @@ class com_reports extends component {
 		unset($cur_sale);
 
 		// Find employees in the location or its descendants.
-		$employees = $pines->com_hrm->get_employees(true);
+		$employees = $_->com_hrm->get_employees(true);
 		$module->employees = array();
 		foreach ($employees as $key => &$cur_employee) {
 			if (!($cur_employee->in_group($location) || ($descendants && $cur_employee->is_descendant($location))))
@@ -1048,7 +1048,7 @@ class com_reports extends component {
 		foreach ($module->employees as &$cur_employee) {
 			$cur_employee['bonus'] = 0;
 			$totals[$total_count]['scheduled'] = $totals[$total_count]['clocked'] = 0;
-			$schedule = $pines->entity_manager->get_entities(
+			$schedule = $_->entity_manager->get_entities(
 					array('class' => com_calendar_event),
 					array('&',
 						'tag' => array('com_calendar', 'event'),
@@ -1060,7 +1060,7 @@ class com_reports extends component {
 				);
 
 			// Get bonuses for employee too.
-			$bonuses = (array) $pines->entity_manager->get_entities(
+			$bonuses = (array) $_->entity_manager->get_entities(
 					array('class' => com_hrm_bonus),
 					array('&',
 						'tag' => array('com_hrm', 'bonus'),
@@ -1076,7 +1076,7 @@ class com_reports extends component {
 			// Get adjustments for employee as well.
 			// Only add adjustments for this week since the other ones would
 			// have been added on the weekly hourly.
-			$adjustments = (array) $pines->entity_manager->get_entities(
+			$adjustments = (array) $_->entity_manager->get_entities(
 					array('class' => com_hrm_bonus),
 					array('&',
 						'tag' => array('com_hrm', 'adjustment'),
@@ -1341,7 +1341,7 @@ class com_reports extends component {
 	 * @return module The product details report module.
 	 */
 	function report_product_details($start_date = null, $end_date = null, $location = null, $descendants = false, $types = null) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'report_product_details', 'content');
 		if (isset($types)) {
@@ -1374,12 +1374,12 @@ class com_reports extends component {
 			$or = array('|', 'ref' => array('group', $location));
 		$module->location = $location;
 		$module->descendants = $descendants;
-		$module->transactions = $pines->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$module->transactions = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
 
 		if ($module->types['return']) {
 			$selector['tag'] = array('com_sales', 'return');
 			$selector['strict'] = array('status', 'processed');
-			$module->transactions = array_merge($module->transactions, $pines->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or));
+			$module->transactions = array_merge($module->transactions, $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or));
 		}
 
 		return $module;
@@ -1396,7 +1396,7 @@ class com_reports extends component {
 	 * @return module The sales report module.
 	 */
 	function report_sales($start, $end, $location = null, $employee = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$form = new module('com_reports', 'form_sales', 'right');
 		$head = new module('com_reports', 'show_calendar_head', 'head');
@@ -1428,14 +1428,14 @@ class com_reports extends component {
 		else
 			$or = array('|', 'ref' => array('group', $location));
 		$module->location = $form->location = $location->guid;
-		$form->employees = $pines->com_hrm->get_employees();
+		$form->employees = $_->com_hrm->get_employees();
 		$module->descendants = $form->descendants = $descendants;
 		$selector['tag'] = array('com_sales', 'sale');
 		$selector['strict'] = array('status', 'paid');
-		$sales = $pines->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
 		$selector['tag'] = array('com_sales', 'return');
 		$selector['strict'] = array('status', 'processed');
-		$returns = $pines->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
 		$invoices = array_merge($sales, $returns);
 
 		// Convert the timespan into the number of days that it covers.
@@ -1458,7 +1458,7 @@ class com_reports extends component {
 				$module->total[$date_str][3] = 0;
 			}
 			// NOTE: Sales made outside of the specified timespans will be excluded!
-			foreach ($pines->config->com_reports->timespans as $timespan) {
+			foreach ($_->config->com_reports->timespans as $timespan) {
 				$span = explode('-', $timespan);
 				if (!$module->date_array[$date_str][$timespan]) {
 					$module->date_array[$date_str][$timespan][0] = $cur_invoice->p_cdate;
@@ -1472,8 +1472,8 @@ class com_reports extends component {
 							foreach ($cur_invoice->products as $cur_product) {
 								if (!$cur_product['salesperson']->is($module->employee))
 									continue;
-								$module->date_array[$date_str][$timespan][3] += $pines->com_sales->round((float) $cur_product['line_total'] - (float) $cur_product['specials_total']);
-								$module->total[$date_str][3] += $pines->com_sales->round((float) $cur_product['line_total'] - (float) $cur_product['specials_total']);
+								$module->date_array[$date_str][$timespan][3] += $_->com_sales->round((float) $cur_product['line_total'] - (float) $cur_product['specials_total']);
+								$module->total[$date_str][3] += $_->com_sales->round((float) $cur_product['line_total'] - (float) $cur_product['specials_total']);
 							}
 						} else {
 							$module->date_array[$date_str][$timespan][3] += ($cur_invoice->subtotal - $cur_invoice->total_specials);
@@ -1484,8 +1484,8 @@ class com_reports extends component {
 							foreach ($cur_invoice->products as $cur_product) {
 								if (!$cur_product['salesperson']->is($module->employee))
 									continue;
-								$module->date_array[$date_str][$timespan][3] -= $pines->com_sales->round((float) $cur_product['line_total'] - (float) $cur_product['specials_total']);
-								$module->total[$date_str][3] -= $pines->com_sales->round((float) $cur_product['line_total'] - (float) $cur_product['specials_total']);
+								$module->date_array[$date_str][$timespan][3] -= $_->com_sales->round((float) $cur_product['line_total'] - (float) $cur_product['specials_total']);
+								$module->total[$date_str][3] -= $_->com_sales->round((float) $cur_product['line_total'] - (float) $cur_product['specials_total']);
 							}
 						} else {
 							$module->date_array[$date_str][$timespan][3] -= ($cur_invoice->subtotal - $cur_invoice->total_specials);
@@ -1510,7 +1510,7 @@ class com_reports extends component {
 	 * @return module The product details report module.
 	 */
 	function report_warehouse($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'report_warehouse', 'content');
 
@@ -1532,7 +1532,7 @@ class com_reports extends component {
 			$or = array('|', 'ref' => array('group', $location));
 		$module->location = $location;
 		$module->descendants = $descendants;
-		$module->transactions = $pines->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$module->transactions = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
 
 		return $module;
 	}
@@ -1542,14 +1542,14 @@ class com_reports extends component {
 	 * @return module The report module.
 	 */
 	function products_wo_categories() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'maintenance/products_wo_categories', 'content');
 		// Count of the erroneous entity references that were fixed on categories.
 		$module->fix_cat_count = 0;
 
 		// Get all categories.
-		$cats = $pines->entity_manager->get_entities(
+		$cats = $_->entity_manager->get_entities(
 				array('class' => com_sales_category, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'category'),
@@ -1557,7 +1557,7 @@ class com_reports extends component {
 				)
 			);
 		// Get all products.
-		$products = $pines->entity_manager->get_entities(
+		$products = $_->entity_manager->get_entities(
 				array('class' => com_sales_product),
 				array('&',
 					'tag' => array('com_sales', 'product'),

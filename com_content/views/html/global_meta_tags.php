@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-foreach ((array) $pines->config->com_content->global_meta_tags as $cur_meta_tag) {
+foreach ((array) $_->config->com_content->global_meta_tags as $cur_meta_tag) {
 	list ($name, $content) = explode(':', $cur_meta_tag, 2);
 	if (empty($name) || empty($content))
 		continue;

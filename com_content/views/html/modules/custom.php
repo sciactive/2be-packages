@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ($pines->config->com_content->wrap_content)
+if ($_->config->com_content->wrap_content)
 	echo '<div style="position: relative;">';
 echo format_content($this->icontent);
-if ($pines->config->com_content->wrap_content)
+if ($_->config->com_content->wrap_content)
 	echo '</div>';

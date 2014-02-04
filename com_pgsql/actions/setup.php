@@ -8,19 +8,19 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (isset($_SESSION['user']) || $pines->config->com_pgsql->host != 'localhost' || $pines->config->com_pgsql->user != 'pines' || $pines->config->com_pgsql->password != 'password' || $pines->config->com_pgsql->database != 'pines' || $pines->config->com_pgsql->prefix != 'pin_')
+if (isset($_SESSION['user']) || $_->config->com_pgsql->host != 'localhost' || $_->config->com_pgsql->user != 'pines' || $_->config->com_pgsql->password != 'password' || $_->config->com_pgsql->database != 'pines' || $_->config->com_pgsql->prefix != 'pin_')
 	return;
 
 // Get the provided or default info.
-$connection_type = isset($_REQUEST['connection_type']) ? $_REQUEST['connection_type'] : $pines->config->com_pgsql->connection_type;
-$host = isset($_REQUEST['host']) ? $_REQUEST['host'] : $pines->config->com_pgsql->host;
-$user = isset($_REQUEST['user']) ? $_REQUEST['user'] : $pines->config->com_pgsql->user;
+$connection_type = isset($_REQUEST['connection_type']) ? $_REQUEST['connection_type'] : $_->config->com_pgsql->connection_type;
+$host = isset($_REQUEST['host']) ? $_REQUEST['host'] : $_->config->com_pgsql->host;
+$user = isset($_REQUEST['user']) ? $_REQUEST['user'] : $_->config->com_pgsql->user;
 $password = $_REQUEST['password'];
-$database = isset($_REQUEST['database']) ? $_REQUEST['database'] : $pines->config->com_pgsql->database;
-$prefix = isset($_REQUEST['prefix']) ? $_REQUEST['prefix'] : $pines->config->com_pgsql->prefix;
+$database = isset($_REQUEST['database']) ? $_REQUEST['database'] : $_->config->com_pgsql->database;
+$prefix = isset($_REQUEST['prefix']) ? $_REQUEST['prefix'] : $_->config->com_pgsql->prefix;
 $setup_user = $_REQUEST['setup_user'];
 $setup_password = $_REQUEST['setup_password'];
 

@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_plaza/listpackages') )
 	punt_user(null, pines_url('com_plaza', 'package/list'));
 
-$pines->com_plaza->list_packages();
+$_->com_plaza->list_packages();

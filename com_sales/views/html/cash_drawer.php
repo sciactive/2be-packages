@@ -8,9 +8,9 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_sales/includes/cash_drawer.js");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_sales/includes/cash_drawer.js");
 </script>

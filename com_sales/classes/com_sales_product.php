@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -43,7 +43,7 @@ class com_sales_product extends entity {
 	}
 
 	public function info($type) {
-		global $pines;
+		global $_;
 		switch ($type) {
 			case 'name':
 				return $this->name;
@@ -52,7 +52,7 @@ class com_sales_product extends entity {
 			case 'types':
 				return 'products';
 			case 'url_view':
-				if ($pines->config->com_sales->com_storefront && $this->show_in_storefront)
+				if ($_->config->com_sales->com_storefront && $this->show_in_storefront)
 					return pines_url('com_storefront', 'product', array('a' => $this->alias));
 				break;
 			case 'url_edit':
@@ -74,9 +74,9 @@ class com_sales_product extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function delete() {
-		global $pines;
+		global $_;
 		// Remove product from categories.
-		$cats = $pines->entity_manager->get_entities(
+		$cats = $_->entity_manager->get_entities(
 				array('class' => com_sales_category, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'category'),
@@ -119,8 +119,8 @@ class com_sales_product extends entity {
 	 * @return array An array of categories.
 	 */
 	public function get_categories() {
-		global $pines;
-		$categories = (array) $pines->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'ref' => array('products', $this)));
+		global $_;
+		$categories = (array) $_->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'ref' => array('products', $this)));
 		return $categories;
 	}
 
@@ -139,36 +139,36 @@ class com_sales_product extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'product/form', 'content');
 		$module->entity = $this;
-		$module->categories = (array) $pines->entity_manager->get_entities(
+		$module->categories = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_category),
 				array('&',
 					'tag' => array('com_sales', 'category'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->manufacturers = (array) $pines->entity_manager->get_entities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
-		$pines->entity_manager->sort($module->manufacturers, 'name');
-		$module->vendors = (array) $pines->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
-		$module->tax_fees = (array) $pines->entity_manager->get_entities(
+		$module->manufacturers = (array) $_->entity_manager->get_entities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
+		$_->entity_manager->sort($module->manufacturers, 'name');
+		$module->vendors = (array) $_->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
+		$module->tax_fees = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_tax_fee),
 				array('&',
 					'tag' => array('com_sales', 'tax_fee'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->return_checklists = (array) $pines->entity_manager->get_entities(
+		$module->return_checklists = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_return_checklist),
 				array('&',
 					'tag' => array('com_sales', 'return_checklist'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->actions = (array) $pines->config->com_sales->product_actions;
-		if ($pines->config->com_sales->com_hrm) {
-			$module->groups = (array) $pines->user_manager->get_groups();
+		$module->actions = (array) $_->config->com_sales->product_actions;
+		if ($_->config->com_sales->com_hrm) {
+			$module->groups = (array) $_->user_manager->get_groups();
 			usort($module->groups, array($this, 'sort_groups'));
 		}
 		

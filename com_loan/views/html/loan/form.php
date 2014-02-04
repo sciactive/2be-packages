@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Loan' : 'Editing Loan ['.h($this->entity->id).'] for '.h($this->entity->customer->name);
 $this->note = 'Provide loan details in this form.';
-$pines->com_customer->load_customer_select();
+$_->com_customer->load_customer_select();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_loan', 'loan/save')); ?>">
 	<script type="text/javascript">

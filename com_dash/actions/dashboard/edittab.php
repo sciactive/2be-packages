@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
@@ -23,6 +23,6 @@ if (!isset($dashboard->guid))
 if ($dashboard->locked && !gatekeeper('com_dash/manage'))
 	throw new HttpClientException(null, 403);
 
-$pines->page->override = true;
+$_->page->override = true;
 $module = $dashboard->edit_tab($_REQUEST['key']);
-$pines->page->override_doc($module->render());
+$_->page->override_doc($module->render());

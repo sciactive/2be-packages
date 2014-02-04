@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -37,7 +37,7 @@ class tpl_pines extends template {
 	 * @return string The menu's HTML.
 	 */
 	public function menu($menu) {
-		global $pines;
+		global $_;
 		if (count($menu) == 1)
 			return '';
 		switch ($menu[0]['position']) {
@@ -51,7 +51,7 @@ class tpl_pines extends template {
 				$return = '<ul class="dropdown dropdown-vertical">';
 				break;
 			case 'main_menu':
-				if (!$pines->config->tpl_pines->buttonized_menu)
+				if (!$_->config->tpl_pines->buttonized_menu)
 					$header_style = true;
 			default:
 				$return = '<ul class="dropdown dropdown-horizontal">';

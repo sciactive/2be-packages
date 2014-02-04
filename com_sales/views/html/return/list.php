@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Returns';
-$pines->com_pgrid->load();
-$pines->com_jstree->load();
+$_->com_pgrid->load();
+$_->com_jstree->load();
 if (gatekeeper('com_sales/swapsalesrep'))
-	$pines->com_hrm->load_employee_select();
+	$_->com_hrm->load_employee_select();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/return/list']);
 ?>
@@ -303,7 +303,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<th>Date</th>
 			<th>Status</th>
 			<th>User</th>
-			<?php if ($pines->config->com_sales->com_customer) { ?>
+			<?php if ($_->config->com_sales->com_customer) { ?>
 			<th>Customer</th>
 			<?php } ?>
 			<th>Products</th>
@@ -322,7 +322,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<td><?php e(format_date($return->p_cdate)); ?></td>
 			<td><?php e(ucwords($return->status)); ?></td>
 			<td><?php if (isset($return->user->guid)) { ?><a data-entity="<?php e($return->user->guid); ?>" data-entity-context="user"><?php e("{$return->user->name} [{$return->user->username}]"); ?></a><?php } ?></td>
-			<?php if ($pines->config->com_sales->com_customer) { ?>
+			<?php if ($_->config->com_sales->com_customer) { ?>
 			<td><a data-entity="<?php e($return->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo $return->customer->guid ? h($return->customer->name) : ''; ?></a></td>
 			<?php } ?>
 			<td><?php

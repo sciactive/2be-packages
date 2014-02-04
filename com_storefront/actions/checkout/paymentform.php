@@ -8,26 +8,26 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 
 if (!gatekeeper())
 	return;
 
-if ($pines->config->com_storefront->catalog_mode)
+if ($_->config->com_storefront->catalog_mode)
 	return;
 
 // Load the sale.
-if (!$pines->com_storefront->build_sale())
+if (!$_->com_storefront->build_sale())
 	return;
 
-$pines->com_sales->call_payment_process(array(
+$_->com_sales->call_payment_process(array(
 	'action' => 'request_cust',
 	'name' => $_REQUEST['name'],
 	'ticket' => $_SESSION['com_storefront_sale']
 ), $module);
 
 if (isset($module))
-	$pines->page->override_doc($module->render());
+	$_->page->override_doc($module->render());

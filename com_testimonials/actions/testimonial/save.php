@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($_REQUEST['type'] == 'module') {
 	// if we need to use and return json
-	$pines->page->override = true;
+	$_->page->override = true;
 	header('Content-Type: application/json');
 	
 	if ( isset($_REQUEST['id']) ) {
@@ -30,7 +30,7 @@ if ($_REQUEST['type'] == 'module') {
 			$testimonial = com_testimonials_testimonial::factory();
 		else {
 			$result = array('result' => false, 'message' => 'Lack of Permissions or Unavailable Testimonial ID.');
-			$pines->page->override_doc(json_encode($result));
+			$_->page->override_doc(json_encode($result));
 			return;
 		}
 	}
@@ -226,5 +226,5 @@ if ($testimonial->type == "form") {
 		$result = true;
 	}
 	
-	$pines->page->override_doc(json_encode($result));
+	$_->page->override_doc(json_encode($result));
 }

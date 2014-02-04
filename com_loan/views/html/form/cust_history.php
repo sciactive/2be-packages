@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'View Customer History';
-$pines->icons->load();
+$_->icons->load();
 
 $loan_ids = $this->loan_ids;
 
@@ -76,7 +76,7 @@ $loan_ids = $this->loan_ids;
 			<?php continue;
 		} 
 		
-		$interactions = $pines->entity_manager->get_entities(
+		$interactions = $_->entity_manager->get_entities(
 				array('class' => com_customer_interaction),
 				array('&',
 					'ref' => array('customer', $customer->guid),
@@ -135,7 +135,7 @@ $loan_ids = $this->loan_ids;
 			<div class="alert-error accordion-heading" style="margin-bottom: 10px; border: 1px solid #fff;"><big class="accordion-toggle"><i class="icon-exclamation-sign"></i> Error Finding Customer.</big></div>
 			<?php
 		} else { 
-			$interactions = $pines->entity_manager->get_entities(
+			$interactions = $_->entity_manager->get_entities(
 				array('class' => com_customer_interaction),
 				array('&',
 					'ref' => array('customer', $customer->guid),

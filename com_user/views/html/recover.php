@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Account Recovery';
 $this->note = 'If you\'ve forgotten your username or password, you can use this form to recover your account.';
-if ($pines->config->com_user->email_usernames)
+if ($_->config->com_user->email_usernames)
 	$this->note = 'If you\'ve forgotten your password, you can use this form to recover your account.';
 ?>
 <script type="text/javascript">
@@ -26,7 +26,7 @@ if ($pines->config->com_user->email_usernames)
 	});
 </script>
 <form class="pf-form" id="p_muid_form" method="post" action="<?php e(pines_url('com_user', 'recover')); ?>">
-	<?php if ($pines->config->com_user->email_usernames) { ?>
+	<?php if ($_->config->com_user->email_usernames) { ?>
 	<input class="pf-field" type="hidden" name="type" value="password" />
 	<?php } else { ?>
 	<div class="pf-element">
@@ -36,12 +36,12 @@ if ($pines->config->com_user->email_usernames)
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-heading">
-		<p class="toggle password">To reset your password, type your <?php echo $pines->config->com_user->email_usernames ? 'email' : 'username'; ?> you use to sign in below.</p>
+		<p class="toggle password">To reset your password, type your <?php echo $_->config->com_user->email_usernames ? 'email' : 'username'; ?> you use to sign in below.</p>
 		<p class="toggle username" style="display: none;">To retrieve your username, type your full email address exactly as you entered it when creating your account below.</p>
 	</div>
 	<div class="pf-element">
 		<label>
-			<span class="pf-label toggle password"><?php echo $pines->config->com_user->email_usernames ? 'Email Address' : 'Username'; ?></span>
+			<span class="pf-label toggle password"><?php echo $_->config->com_user->email_usernames ? 'Email Address' : 'Username'; ?></span>
 			<span class="pf-label toggle username" style="display: none;">Email Address</span>
 			<input class="pf-field" type="text" name="account" size="24" value="" />
 		</label>

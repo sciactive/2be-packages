@@ -14,13 +14,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 if ($this->is_widget) {
 	$this->title = 'Agenda';
 	if (!isset($this->view_type))
 		$this->view_type = 'basicDay';
-	$pines->icons->load();
+	$_->icons->load();
 	$this->timezone = $_SESSION['user']->get_timezone();
 } else {
 	$this->title = 'Company Schedule [' . h(isset($this->employee) ? $this->employee->name  : $this->location->name) . ']';
@@ -54,9 +54,9 @@ if ($this->is_widget) {
 <script type='text/javascript'>
 	<?php if ($this->is_widget) { ?>
 	// Calendar
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_calendar/includes/fullcalendar.css");
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_calendar/includes/customcolors.css");
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_calendar/includes/<?php echo $pines->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/fullcalendar.css");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/customcolors.css");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_calendar/includes/<?php echo $_->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
 	<?php } ?>
 	pines(function(){
 		pines.selected_event = '';
@@ -369,7 +369,7 @@ if ($this->is_widget) {
 	echo $jstree->render();
 	$ptags = new module('com_ptags', 'ptags');
 	echo $ptags->render();
-	if ($pines->config->com_calendar->com_customer) {
+	if ($_->config->com_calendar->com_customer) {
 		$cust_select = new module('com_customer', 'customer/select');
 		echo $cust_select->render();
 	}
@@ -385,7 +385,7 @@ if ($this->is_widget) {
 	$form->date[0] = $date_start;
 	$form->date[1] = $date_end;
 	$form->employee = $_SESSION['user'];
-	$form->employees = $pines->com_hrm->get_employees();
+	$form->employees = $_->com_hrm->get_employees();
 	$form->location = $_SESSION['user']->group;
 	$form->descendants = false;
 	$form->filter = 'all';

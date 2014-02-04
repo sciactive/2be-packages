@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -25,7 +25,7 @@ class com_customertimer_customer extends com_customer_customer {
 	 * @return array An array of point and minute values the customer has used.
 	 */
 	public function com_customertimer_get_session_info(&$floor, $station) {
-		global $pines;
+		global $_;
 		// Make sure the customer is actually logged in.
 		if (!$this->com_customertimer_is_logged_in($floor, $station)) {
 			pines_notice('This customer is not logged in here.');
@@ -36,7 +36,7 @@ class com_customertimer_customer extends com_customer_customer {
 		$minutes = (int) round((time() - $floor->active_stations[$station]['time_in']) / 60);
 
 		// And how many points that costs.
-		$ppm = (int) $pines->config->com_customertimer->ppm;
+		$ppm = (int) $_->config->com_customertimer->ppm;
 		$points = $minutes * $ppm;
 
 		// Get any additional minutes the customer is using.
@@ -53,7 +53,7 @@ class com_customertimer_customer extends com_customer_customer {
 		// Check how many points the customer has left in their account.
 		$points_remain = $this->points - ($points + $other_points);
 		// If negatives aren't allowed, change it to 0.
-		if ($points_remain < 0 && !$pines->config->com_customer->negpoints)
+		if ($points_remain < 0 && !$_->config->com_customer->negpoints)
 			$points_remain = 0;
 
 		return array('minutes' => $minutes, 'points' => $points, 'other_minutes' => $other_minutes, 'other_points' => $other_points, 'points_remain' => $points_remain);
@@ -79,8 +79,8 @@ class com_customertimer_customer extends com_customer_customer {
 			// The customer is not logged in on this floor.
 			return false;
 		} else {
-			global $pines;
-			$get_floor = $pines->entity_manager->get_entity(
+			global $_;
+			$get_floor = $_->entity_manager->get_entity(
 					array('class' => com_customertimer_floor, 'skip_ac' => true),
 					array('&',
 						'tag' => array('com_customertimer', 'floor'),

@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 $user = user::factory((int) $_REQUEST['id']);
 
 if (!isset($user->guid)) {
 	pines_notice('The specified user id is not available.');
-	$pines->user_manager->print_login();
+	$_->user_manager->print_login();
 	return;
 }
 
@@ -28,8 +28,8 @@ switch ($_REQUEST['type']) {
 			return;
 		}
 
-		if ($pines->config->com_user->unconfirmed_access)
-			$user->groups = (array) $pines->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
+		if ($_->config->com_user->unconfirmed_access)
+			$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
 		$user->enable();
 		unset($user->secret);
 		break;
@@ -38,15 +38,15 @@ switch ($_REQUEST['type']) {
 		if (!isset($user->new_email_secret) || $_REQUEST['secret'] != $user->new_email_secret)
 			punt_user('The secret code given does not match this user.');
 
-		if ($pines->config->com_user->email_usernames) {
-			$un_check = $pines->user_manager->check_username($user->new_email_address, $user->guid);
+		if ($_->config->com_user->email_usernames) {
+			$un_check = $_->user_manager->check_username($user->new_email_address, $user->guid);
 			if (!$un_check['result']) {
 				$user->print_form();
 				pines_notice($un_check['message']);
 				return;
 			}
 		}
-		$test = $pines->entity_manager->get_entity(
+		$test = $_->entity_manager->get_entity(
 				array('class' => user, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_user', 'user'),
@@ -78,7 +78,7 @@ if ($user->save()) {
 		case 'register':
 		default:
 			pines_log('Validated user ['.$user->username.']');
-			$pines->user_manager->login($user);
+			$_->user_manager->login($user);
 			$notice = new module('com_user', 'note_welcome', 'content');
 			if ( !empty($_REQUEST['url']) ) {
 				pines_notice('Thank you. Your account has been verified.');

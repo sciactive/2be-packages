@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Welcome to '.h($pines->config->system_name);
+$this->title = 'Welcome to '.h($_->config->system_name);
 $this->note = 'You are now registered and logged in.';
 ?>
 <div>
-	<?php e($pines->config->com_user->reg_message_welcome); ?>
+	<?php e($_->config->com_user->reg_message_welcome); ?>
 </div>

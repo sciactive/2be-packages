@@ -8,17 +8,17 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <div>
 <?php 
-	if (!empty($pines->config->com_contact->thankyou_page)) {
-		$page = (int) $pines->config->com_contact->thankyou_page;
+	if (!empty($_->config->com_contact->thankyou_page)) {
+		$page = (int) $_->config->com_contact->thankyou_page;
 		pines_redirect(pines_url('com_content', 'page', array('id' => $page)));
 	} else {
-		$this->title = h($pines->config->com_contact->thankyou_title);
-		e($pines->config->com_contact->thankyou_message);
+		$this->title = h($_->config->com_contact->thankyou_title);
+		e($_->config->com_contact->thankyou_message);
 	}
 ?>
 </div>

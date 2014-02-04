@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
@@ -17,8 +17,8 @@ defined('P_RUN') or die('Direct access prohibited');
 		"login_url": <?php echo json_encode(pines_url('com_timeoutnotice', 'login')); ?>,
 		"loginpage_url": <?php echo json_encode(pines_url('com_timeoutnotice', 'loginpage')); ?>,
 		"extend_url": <?php echo json_encode(pines_url('com_timeoutnotice', 'extend')); ?>,
-		"action": <?php echo json_encode($pines->config->com_timeoutnotice->action); ?>,
-		"redirect_url": <?php echo json_encode($pines->config->com_timeoutnotice->redirect_url); ?>
+		"action": <?php echo json_encode($_->config->com_timeoutnotice->action); ?>,
+		"redirect_url": <?php echo json_encode($_->config->com_timeoutnotice->redirect_url); ?>
 	};
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_timeoutnotice/includes/timeout_notice.js", true);
+	pines.loadjs("<?php e($_->config->location); ?>components/com_timeoutnotice/includes/timeout_notice.js", true);
 </script>

@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if ( !gatekeeper('com_loan/changestatus') )
@@ -47,4 +47,4 @@ if (!is_array($result) && $loan->save())
 else
 	$result = array('failed' => false);
 
-$pines->page->override_doc(json_encode($result));
+$_->page->override_doc(json_encode($result));

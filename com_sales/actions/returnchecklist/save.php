@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -45,14 +45,14 @@ if (empty($return_checklist->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_sales_return_checklist, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'return_checklist'), 'data' => array('name', $return_checklist->name)));
+$test = $_->entity_manager->get_entity(array('class' => com_sales_return_checklist, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'return_checklist'), 'data' => array('name', $return_checklist->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$return_checklist->print_form();
 	pines_notice('There is already a return checklist with that name. Please choose a different name.');
 	return;
 }
 
-if ($pines->config->com_sales->global_return_checklists)
+if ($_->config->com_sales->global_return_checklists)
 	$return_checklist->ac->other = 1;
 
 if ($return_checklist->save()) {

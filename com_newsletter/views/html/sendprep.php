@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Sending '.h($this->mail->name);
-$pines->com_jstree->load();
+$_->com_jstree->load();
 ?>
 <script type='text/javascript'>
 	pines(function(){
@@ -48,11 +48,11 @@ $pines->com_jstree->load();
 <form class="pf-form" id="p_muid_form" method="post" action="<?php e(pines_url('com_newsletter', 'send')); ?>">
 	<div class="pf-element">
 		<label><span class="pf-label">From Address</span>
-		<input class="pf-field" type="text" name="from" size="24" value="<?php e($pines->config->com_newsletter->default_from); ?>" /></label>
+		<input class="pf-field" type="text" name="from" size="24" value="<?php e($_->config->com_newsletter->default_from); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Reply to Address</span>
-		<input class="pf-field" type="text" name="replyto" size="24" value="<?php e($pines->config->com_newsletter->default_reply_to); ?>" /></label>
+		<input class="pf-field" type="text" name="replyto" size="24" value="<?php e($_->config->com_newsletter->default_reply_to); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Subject</span>

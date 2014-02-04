@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -61,13 +61,13 @@ class com_modules_module extends entity {
 	 * @return bool True if conditions are met, false otherwise.
 	 */
 	public function check_conditions() {
-		global $pines;
+		global $_;
 		if (!$this->conditions)
 			return true;
 		// Check that all conditions are met.
 		$pass = true;
 		foreach ($this->conditions as $cur_type => $cur_value) {
-			if (!$pines->depend->check($cur_type, $cur_value)) {
+			if (!$_->depend->check($cur_type, $cur_value)) {
 				$pass = false;
 				break;
 			}
@@ -101,10 +101,10 @@ class com_modules_module extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_modules', 'module/form', 'content');
 		$module->entity = $this;
-		$module->modules = $pines->com_modules->module_types();
+		$module->modules = $_->com_modules->module_types();
 
 		return $module;
 	}

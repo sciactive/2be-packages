@@ -8,22 +8,22 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_su/switch') )
 	punt_user(null, pines_url());
 
 if ( empty($_REQUEST['username']) && empty($_REQUEST['pin']) ) {
-	$pines->user_manager->print_login();
+	$_->user_manager->print_login();
 	return;
 }
 if ( gatekeeper() && $_REQUEST['username'] == $_SESSION['user']->username ) {
 	pines_notice('Already logged in!');
 	return;
 }
-if (!empty($_REQUEST['pin']) && $pines->config->com_su->allow_pins) {
-	$users = $pines->user_manager->get_users();
+if (!empty($_REQUEST['pin']) && $_->config->com_su->allow_pins) {
+	$users = $_->user_manager->get_users();
 	foreach ($users as $cur_user) {
 		if (empty($cur_user->pin))
 			continue;
@@ -41,7 +41,7 @@ if (!empty($_REQUEST['pin']) && $pines->config->com_su->allow_pins) {
 if ( isset($user, $user->guid) ) {
 	pines_log("Switching user from {$_SESSION['user']->username} to {$user->username}.", 'notice');
 	pines_notice("Switching user from {$_SESSION['user']->username} to {$user->username}.");
-	if ($pines->user_manager->login($user)) {
+	if ($_->user_manager->login($user)) {
 		pines_redirect(pines_url());
 	} else {
 		pines_error('Could not switch users.');
@@ -50,6 +50,6 @@ if ( isset($user, $user->guid) ) {
 	}
 } else {
 	pines_notice('Username and password not correct!');
-	$pines->user_manager->print_login();
+	$_->user_manager->print_login();
 }
 

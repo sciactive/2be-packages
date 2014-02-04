@@ -12,11 +12,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_calendar/includes/fullcalendar.css");
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_calendar/includes/customcolors.css");
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_calendar/includes/<?php echo $pines->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/fullcalendar.css");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/customcolors.css");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_calendar/includes/<?php echo $_->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
 </script>

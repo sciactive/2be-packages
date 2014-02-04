@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -19,7 +19,7 @@ defined('P_RUN') or die('Direct access prohibited');
  * @param object &$object The sale being saved.
  */
 function com_esp__check_sale(&$arguments, $name, &$object) {
-	global $pines;
+	global $_;
 
 	if ($object->status == 'quoted')
 		return;
@@ -40,7 +40,7 @@ function com_esp__check_sale(&$arguments, $name, &$object) {
 			continue;
 		}
 		// Find an existing ESP for the current item.
-		$exisiting_esp = $pines->entity_manager->get_entity(
+		$exisiting_esp = $_->entity_manager->get_entity(
 				array('class' => com_esp_plan),
 				array('&',
 					'tag' => array('com_esp', 'esp'),
@@ -63,9 +63,9 @@ function com_esp__check_sale(&$arguments, $name, &$object) {
 				if ($exisiting_esp->status == 'registered')
 					continue;
 				// Add the card/item and register the ESP.
-				if (!isset($exisiting_esp->card->guid) && $cur_product['entity']->guid == $pines->config->com_esp->esp_product) {
+				if (!isset($exisiting_esp->card->guid) && $cur_product['entity']->guid == $_->config->com_esp->esp_product) {
 					$exisiting_esp->card = $stock;
-				} elseif (!isset($exisiting_esp->item->guid) && $cur_product['entity']->guid != $pines->config->com_esp->esp_product) {
+				} elseif (!isset($exisiting_esp->item->guid) && $cur_product['entity']->guid != $_->config->com_esp->esp_product) {
 					$exisiting_esp->item = $stock;
 				}
 				$exisiting_esp->status = 'registered';
@@ -81,9 +81,9 @@ function com_esp__check_sale(&$arguments, $name, &$object) {
 			$new_esp->sale = $object;
 			$new_esp->customer = $object->customer;
 			$new_esp->unique_id = $cur_esp;
-			$new_esp->expiration_date = strtotime('+'.$pines->config->com_esp->esp_term.' years', time());
+			$new_esp->expiration_date = strtotime('+'.$_->config->com_esp->esp_term.' years', time());
 			// Add the card or item to the ESP
-			if ($cur_product['entity']->guid == $pines->config->com_esp->esp_product)
+			if ($cur_product['entity']->guid == $_->config->com_esp->esp_product)
 				$new_esp->card = $stock;
 			else
 				$new_esp->item = $stock;
@@ -97,4 +97,4 @@ function com_esp__check_sale(&$arguments, $name, &$object) {
 	}
 }
 
-$pines->hook->add_callback('com_sales_sale->save', 10, 'com_esp__check_sale');
+$_->hook->add_callback('com_sales_sale->save', 10, 'com_esp__check_sale');

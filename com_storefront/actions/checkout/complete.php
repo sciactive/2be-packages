@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper()) {
@@ -16,7 +16,7 @@ if (!gatekeeper()) {
 	return;
 }
 
-if ($pines->config->com_storefront->catalog_mode)
+if ($_->config->com_storefront->catalog_mode)
 	return;
 
 // Load the sale.

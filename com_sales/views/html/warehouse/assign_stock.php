@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Assign Stock';
 $this->note = 'Provide stock selection in this form.';
-$pines->com_jstree->load();
-$warehouse = group::factory($pines->config->com_sales->warehouse_group);
+$_->com_jstree->load();
+$warehouse = group::factory($_->config->com_sales->warehouse_group);
 ?>
 <form class="pf-form" id="p_muid_form" method="post" action="<?php e(pines_url('com_sales', 'warehouse/assignstocksave')); ?>">
 	<style type="text/css">

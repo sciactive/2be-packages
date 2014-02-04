@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper()) {
@@ -16,15 +16,15 @@ if (!gatekeeper()) {
 	return;
 }
 
-if ($pines->config->com_storefront->catalog_mode)
+if ($_->config->com_storefront->catalog_mode)
 	return;
 
 // Load the sale.
-if (!$pines->com_storefront->build_sale())
+if (!$_->com_storefront->build_sale())
 	return;
 
 if (
-		$pines->config->com_storefront->skip_shipping &&
+		$_->config->com_storefront->skip_shipping &&
 		$_REQUEST['noskip'] != 'true' &&
 		!(
 			empty($_SESSION['user']->name) ||
@@ -58,7 +58,7 @@ if (
 }
 
 // Load the steps module.
-$pines->com_storefront->checkout_step('2');
+$_->com_storefront->checkout_step('2');
 
 $module = new module('com_storefront', 'checkout/shipping', 'content');
 $module->user_address = (object) array(

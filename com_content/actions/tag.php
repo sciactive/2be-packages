@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 // Get all the pages that have the requested tags.
@@ -23,7 +23,7 @@ $selector = array('&',
 foreach ($tags as $cur_tag)
 	$selector['array'][] = array('content_tags', $cur_tag);
 
-$pages = $pines->entity_manager->get_entities(
+$pages = $_->entity_manager->get_entities(
 		array('class' => com_content_page),
 		$selector
 	);
@@ -38,13 +38,13 @@ if (!$pages)
 	throw new HttpClientException(null, 404);
 
 // Set the default variant for categories.
-if ($pines->config->com_content->cat_variant && $pines->com_content->is_variant_valid($pines->config->com_content->cat_variant)) {
-	$cur_template = $pines->current_template;
-	$pines->config->$cur_template->variant = $pines->config->com_content->cat_variant;
+if ($_->config->com_content->cat_variant && $_->com_content->is_variant_valid($_->config->com_content->cat_variant)) {
+	$cur_template = $_->current_template;
+	$_->config->$cur_template->variant = $_->config->com_content->cat_variant;
 }
 
 // Page title.
-$pines->page->title_pre('Pages Tagged '.implode(', ', $tags).' - ');
+$_->page->title_pre('Pages Tagged '.implode(', ', $tags).' - ');
 
 $module = new module('com_content', 'breadcrumb', 'breadcrumbs');
 $module->tags = $tags;

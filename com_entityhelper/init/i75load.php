@@ -8,9 +8,9 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 $module = new module('com_entityhelper', 'link_helper', 'head');
 unset ($module);
-$pines->icons->load();
+$_->icons->load();

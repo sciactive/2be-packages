@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_mailer/editrendition') && !gatekeeper('com_mailer/newrendition') )
 	punt_user(null, pines_url('com_mailer', 'rendition/edit', array('id' => $_REQUEST['id'])));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 list($component, $defname) = explode('/', $_REQUEST['type'], 2);
@@ -39,4 +39,4 @@ else {
 
 $content = $module->render();
 
-$pines->page->override_doc(json_encode(array('content' => $content, 'subject' => $module->title)));
+$_->page->override_doc(json_encode(array('content' => $content, 'subject' => $module->title)));

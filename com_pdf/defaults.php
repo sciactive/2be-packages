@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -23,6 +23,6 @@ return array(
 		'name' => 'pdf_path',
 		'cname' => 'PDF Library Path',
 		'description' => 'The relative path of the directory containing the PDFs. End this path with a slash!',
-		'value' => $pines->config->upload_location.'pdf/',
+		'value' => $_->config->upload_location.'pdf/',
 	),
 );

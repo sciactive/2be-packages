@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_entitytools/import') )
 	punt_user(null, pines_url('com_entitytools', 'import'));
 
-if (!is_callable(array($pines->entity_manager, 'import'))) {
+if (!is_callable(array($_->entity_manager, 'import'))) {
 	pines_notice('The currently installed entity manager doesn\'t support importing.');
 	return;
 }
@@ -23,23 +23,23 @@ if (!empty($_FILES['entity_import']['tmp_name'])) {
 	set_time_limit(28800);
 	if ($_REQUEST['reset_entities'] == 'ON') {
 		// First log the user out.
-		$pines->user_manager->logout();
+		$_->user_manager->logout();
 		// Delete all current entities.
-		$last_entity = $pines->entity_manager->get_entity(array('reverse' => true, 'sort' => 'guid'));
+		$last_entity = $_->entity_manager->get_entity(array('reverse' => true, 'sort' => 'guid'));
 		if (!$last_entity->guid) {
 			pines_error('Couldn\'t find last entity.');
 			return;
 		}
 		for ($i = 1; $i <= $last_entity->guid; $i++)
-			$pines->entity_manager->delete_entity_by_id($i);
+			$_->entity_manager->delete_entity_by_id($i);
 	}
-	if ($pines->entity_manager->import($_FILES['entity_import']['tmp_name']))
+	if ($_->entity_manager->import($_FILES['entity_import']['tmp_name']))
 		pines_notice('Import complete.');
 	else
 		pines_notice('Import failed.');
 }
 
 if ($_REQUEST['reset_entities'] == 'ON')
-	$pines->user_manager->punt_user('You have been logged out.');
+	$_->user_manager->punt_user('You have been logged out.');
 else
 	$module = new module('com_entitytools', 'import', 'content');

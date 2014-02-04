@@ -8,16 +8,16 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_customer->check_ssn)
+if (!$_->config->com_customer->check_ssn)
 	throw new HttpClientException(null, 404);
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if (!empty($_REQUEST['id']))
 	$id = intval($_REQUEST['id']);
 
-$pines->page->override_doc(json_encode($pines->com_customer->check_ssn($_REQUEST['ssn'], $id)));
+$_->page->override_doc(json_encode($_->com_customer->check_ssn($_REQUEST['ssn'], $id)));

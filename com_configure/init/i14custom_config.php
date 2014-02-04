@@ -8,19 +8,19 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 $sys_config = array();
 $com_config = array();
 
-if (isset($pines->entity_manager) && $pines->config->com_configure->percondition) {
-	$conditions = (array) $pines->entity_manager->get_entities(array('class' => com_configure_condition), array('&', 'tag' => array('com_configure', 'condition')));
+if (isset($_->entity_manager) && $_->config->com_configure->percondition) {
+	$conditions = (array) $_->entity_manager->get_entities(array('class' => com_configure_condition), array('&', 'tag' => array('com_configure', 'condition')));
 	foreach ($conditions as &$cur_condition) {
 		// Check that all conditions are met.
 		$pass = true;
 		foreach ($cur_condition->conditions as $cur_type => $cur_value) {
-			if (!$pines->depend->check($cur_type, $cur_value)) {
+			if (!$_->depend->check($cur_type, $cur_value)) {
 				$pass = false;
 				break;
 			}
@@ -38,14 +38,14 @@ if (isset($pines->entity_manager) && $pines->config->com_configure->percondition
 	unset($cur_condition, $conditions);
 }
 
-if (isset($_SESSION['user']) && $pines->config->com_configure->peruser) {
+if (isset($_SESSION['user']) && $_->config->com_configure->peruser) {
 	if ((array) $_SESSION['user']->groups === $_SESSION['user']->groups) {
 		foreach ($_SESSION['user']->groups as &$cur_group) {
-			if ($pines->config->com_configure->conditional_groups && (array) $cur_group->conditions === $cur_group->conditions) {
+			if ($_->config->com_configure->conditional_groups && (array) $cur_group->conditions === $cur_group->conditions) {
 				// Check that any group conditions are met.
 				$pass = true;
 				foreach ($cur_group->conditions as $cur_type => $cur_value) {
-					if (!$pines->depend->check($cur_type, $cur_value)) {
+					if (!$_->depend->check($cur_type, $cur_value)) {
 						$pass = false;
 						break;
 					}
@@ -65,11 +65,11 @@ if (isset($_SESSION['user']) && $pines->config->com_configure->peruser) {
 	}
 	if (isset($_SESSION['user']->group)) {
 		$tmp_array = $_SESSION['user']->group->conditions;
-		if ($pines->config->com_configure->conditional_groups && (array) $tmp_array === $tmp_array) {
+		if ($_->config->com_configure->conditional_groups && (array) $tmp_array === $tmp_array) {
 			// Check that any group conditions are met.
 			$pass = true;
 			foreach ($tmp_array as $cur_type => $cur_value) {
-				if (!$pines->depend->check($cur_type, $cur_value)) {
+				if (!$_->depend->check($cur_type, $cur_value)) {
 					$pass = false;
 					break;
 				}
@@ -99,5 +99,5 @@ if (isset($_SESSION['user']) && $pines->config->com_configure->peruser) {
 }
 
 if ($sys_config || $com_config)
-	$pines->configurator->load_per_user_array($sys_config, $com_config);
+	$_->configurator->load_per_user_array($sys_config, $com_config);
 unset($sys_config, $com_config, $key, $cur_config, $tmp_array, $pass, $cur_type, $cur_value);

@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Sales Total Report';
-$pines->com_jstree->load();
+$_->com_jstree->load();
 ?>
 <div id="p_muid_form" class="pf-form">
 	<div class="pf-element pf-heading">

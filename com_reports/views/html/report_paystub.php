@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = 'Company Paystub';
@@ -18,9 +18,9 @@ $this->title .= ' ('.h(format_date($this->entity->start, 'date_short')).' - '.h(
 
 if ($this->descendants)
 	$this->note = 'Including locations beneath '.h($this->location->name);
-$pines->icons->load();
-$pines->com_jstree->load();
-$pines->com_pgrid->load();
+$_->icons->load();
+$_->com_jstree->load();
+$_->com_pgrid->load();
 ?>
 <style type="text/css">
 	#p_muid_grid .amount {

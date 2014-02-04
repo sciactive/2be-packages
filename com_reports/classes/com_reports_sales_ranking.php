@@ -9,7 +9,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -91,14 +91,14 @@ class com_reports_sales_ranking extends entity {
 	 * @return module The sales ranking report module.
 	 */
 	public function rank() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'view_sales_rankings', 'content');
 		$module->entity = $this;
 		if ($this->final)
 			return $module;
 
-		$exclude_pending = $this->exclude_pending_contracts && $pines->depend->check('component', 'com_mifi');
+		$exclude_pending = $this->exclude_pending_contracts && $_->depend->check('component', 'com_mifi');
 
 		// Get employees and locations.
 		$group = $this->top_location;
@@ -141,11 +141,11 @@ class com_reports_sales_ranking extends entity {
 
 		// Build an array to hold total data.
 		$ranking_employee = array();
-		$module->mifi_checks = $pines->depend->check('component', 'com_mifi');
+		$module->mifi_checks = $_->depend->check('component', 'com_mifi');
 		foreach ($employees as $cur_employee) {
 			// Get all apps for the employee.
 			if ($module->mifi_checks) {
-				$current_apps = $pines->entity_manager->get_entities(
+				$current_apps = $_->entity_manager->get_entities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
@@ -160,7 +160,7 @@ class com_reports_sales_ranking extends entity {
 							'ref' => array('user', $cur_employee),
 						)
 					);
-				$last_apps = $pines->entity_manager->get_entities(
+				$last_apps = $_->entity_manager->get_entities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
@@ -175,7 +175,7 @@ class com_reports_sales_ranking extends entity {
 							'ref' => array('user', $cur_employee)
 						)
 					);
-				$mtd_apps = $pines->entity_manager->get_entities(
+				$mtd_apps = $_->entity_manager->get_entities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
@@ -209,7 +209,7 @@ class com_reports_sales_ranking extends entity {
 			// Get all apps for the location.
 			if ($module->mifi_checks) {
 				$groups = $cur_location->get_descendants(true);
-				$current_apps = $pines->entity_manager->get_entities(
+				$current_apps = $_->entity_manager->get_entities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
@@ -226,7 +226,7 @@ class com_reports_sales_ranking extends entity {
 							'ref' => array('group', $groups)
 						)
 					);
-				$last_apps = $pines->entity_manager->get_entities(
+				$last_apps = $_->entity_manager->get_entities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
@@ -243,7 +243,7 @@ class com_reports_sales_ranking extends entity {
 							'ref' => array('group', $groups)
 						)
 					);
-				$mtd_apps = $pines->entity_manager->get_entities(
+				$mtd_apps = $_->entity_manager->get_entities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
@@ -309,7 +309,7 @@ class com_reports_sales_ranking extends entity {
 		}
 
 		// Get all the sales and returns in the given time period.
-		$sales = $pines->entity_manager->get_entities(
+		$sales = $_->entity_manager->get_entities(
 				array('class' => com_sales_sale, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'sale'),
@@ -318,7 +318,7 @@ class com_reports_sales_ranking extends entity {
 					'lt' => array('tender_date', $this->end_date)
 				)
 			);
-		$returns = $pines->entity_manager->get_entities(
+		$returns = $_->entity_manager->get_entities(
 				array('class' => com_sales_return, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'return'),
@@ -332,7 +332,7 @@ class com_reports_sales_ranking extends entity {
 		$skipped = array();
 		foreach ($sales as $cur_sale) {
 			if ($exclude_pending) {
-				$test = $pines->entity_manager->get_entity(
+				$test = $_->entity_manager->get_entity(
 						array('class' => com_mifi_contract, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'contract', 'pending'),

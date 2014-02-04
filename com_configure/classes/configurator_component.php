@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -78,14 +78,14 @@ class configurator_component implements configurator_component_interface {
 	 * @param string $component The component to load.
 	 */
 	public function __construct($component) {
-		global $pines;
-		if (!key_exists($component, $pines->configurator->component_files))
+		global $_;
+		if (!key_exists($component, $_->configurator->component_files))
 			return;
 		$this->component = $component;
 		$this->name = $component;
-		$this->defaults_file = $pines->configurator->component_files[$component]['defaults'];
-		$this->config_file = $pines->configurator->component_files[$component]['config'];
-		$this->info_file = $pines->configurator->component_files[$component]['info'];
+		$this->defaults_file = $_->configurator->component_files[$component]['defaults'];
+		$this->config_file = $_->configurator->component_files[$component]['config'];
+		$this->info_file = $_->configurator->component_files[$component]['info'];
 		if (file_exists($this->defaults_file))
 			$this->defaults = include($this->defaults_file);
 		if (file_exists($this->config_file)) {
@@ -104,11 +104,11 @@ class configurator_component implements configurator_component_interface {
 	 * @return configurator_component The new instance.
 	 */
 	public static function factory($component) {
-		global $pines;
+		global $_;
 		$class = get_class();
 		$args = func_get_args();
 		$object = new $class($args[0]);
-		$pines->hook->hook_object($object, $class.'->', false);
+		$_->hook->hook_object($object, $class.'->', false);
 		return $object;
 	}
 
@@ -138,8 +138,8 @@ class configurator_component implements configurator_component_interface {
 	 * @return bool True or false.
 	 */
 	public function is_disabled() {
-		global $pines;
-		return ($this->component != 'system' && in_array($this->component, array_diff($pines->all_components, $pines->components)));
+		global $_;
+		return ($this->component != 'system' && in_array($this->component, array_diff($_->all_components, $_->components)));
 	}
 
 	/**

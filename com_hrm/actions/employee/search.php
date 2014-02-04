@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/listemployees') )
 	punt_user(null, pines_url('com_hrm', 'employee/search', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $query = strtolower($_REQUEST['q']);
@@ -22,7 +22,7 @@ $query = strtolower($_REQUEST['q']);
 if (empty($query)) {
 	$employees = array();
 } else {
-	$employees = (array) $pines->com_hrm->get_employees();
+	$employees = (array) $_->com_hrm->get_employees();
 }
 
 foreach ($employees as $key => &$cur_employee) {
@@ -57,4 +57,4 @@ $employees = array_values($employees);
 if (empty($employees))
 	$employees = null;
 
-$pines->page->override_doc(json_encode($employees));
+$_->page->override_doc(json_encode($employees));

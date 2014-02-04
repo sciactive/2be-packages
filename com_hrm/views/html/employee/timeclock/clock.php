@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 if (empty($this->title))
 	$this->title = 'Timeclock';
@@ -31,7 +31,7 @@ if (!isset($this->entity->user->guid) || !isset($this->entity)) {
 	return;
 }
 
-$pines->icons->load();
+$_->icons->load();
 ?>
 <style type="text/css" >
 	#p_muid_timeclock button span {
@@ -96,7 +96,7 @@ $pines->icons->load();
 			};
 
 			$("#p_muid_button").click(function(){
-				<?php if ($pines->config->com_hrm->timeclock_verify_pin && !empty($_SESSION['user']->pin)) { ?>
+				<?php if ($_->config->com_hrm->timeclock_verify_pin && !empty($_SESSION['user']->pin)) { ?>
 				var dialog = $("<div></div>", {
 					"title": "Please Verify Your PIN",
 					"html": '<div class="pf-form"><div class="pf-element"><label><span class="pf-label">PIN</span><input type="password" class="pf-field" /></label></div></div><br />'

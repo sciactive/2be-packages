@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/managestock') )
@@ -19,6 +19,6 @@ if (!isset($stock->guid)) {
 	return;
 }
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: text/plain');
-$pines->page->override_doc($stock->last_reason());
+$_->page->override_doc($stock->last_reason());

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -95,7 +95,7 @@ class com_customertimer_floor extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_timer() {
-		global $pines;
+		global $_;
 		$module = new module('com_customertimer', 'form_floor_timer', 'content');
 		$module->entity = $this;
 

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -69,22 +69,22 @@ class com_pgsql extends component {
 	 * @return bool Whether this instance is connected to a PostgreSQL database after the method has run.
 	 */
 	public function connect($host = null, $user = null, $password = null, $database = null, $connection_type = null) {
-		global $pines;
+		global $_;
 		// Check that the PostgreSQL extension is installed.
 		if (!is_callable('pg_connect')) {
 			pines_error('PostgreSQL PHP extension is not available. It probably has not been installed. Please install and configure it in order to use PostgreSQL.');
 			return false;
 		}
 		// If we're setting up the DB, don't try to connect.
-		if ($pines->request_component == 'com_pgsql' && $pines->request_action == 'setup')
+		if ($_->request_component == 'com_pgsql' && $_->request_action == 'setup')
 			return false;
 		// If something changes the host, it could reveal the user and password.
 		if (!isset($host)) {
-			$host = $pines->config->com_pgsql->host;
-			$connection_type = $pines->config->com_pgsql->connection_type;
-			if (!isset($user)) $user = $pines->config->com_pgsql->user;
-			if (!isset($password)) $password = $pines->config->com_pgsql->password;
-			if (!isset($database)) $database = $pines->config->com_pgsql->database;
+			$host = $_->config->com_pgsql->host;
+			$connection_type = $_->config->com_pgsql->connection_type;
+			if (!isset($user)) $user = $_->config->com_pgsql->user;
+			if (!isset($password)) $password = $_->config->com_pgsql->password;
+			if (!isset($database)) $database = $_->config->com_pgsql->database;
 		}
 		// Connecting, selecting database
 		if (!$this->connected) {
@@ -92,7 +92,7 @@ class com_pgsql extends component {
 				$connect_string = 'host=\''.addslashes($host).'\' dbname=\''.addslashes($database).'\' user=\''.addslashes($user).'\' password=\''.addslashes($password).'\' connect_timeout=5';
 			else
 				$connect_string = 'dbname=\''.addslashes($database).'\' user=\''.addslashes($user).'\' password=\''.addslashes($password).'\' connect_timeout=5';
-			if ($pines->config->com_pgsql->allow_persistent)
+			if ($_->config->com_pgsql->allow_persistent)
 				$this->link = @pg_connect($connect_string.' options=\'-c enable_hashjoin=off -c enable_mergejoin=off\'');
 			else
 				$this->link = @pg_connect($connect_string.' options=\'-c enable_hashjoin=off -c enable_mergejoin=off\'', PGSQL_CONNECT_FORCE_NEW); // Don't think this is necessary, but if put in options, will guarantee connection is new. " -c timezone='.round(rand(10001000, 10009999)).'"
@@ -101,7 +101,7 @@ class com_pgsql extends component {
 			} else {
 				$this->connected = false;
 				if (!isset($_SESSION['user']) && $host == 'localhost' && $user == 'pines' && $password == 'password' && $database == 'pines' && $connection_type == 'host') {
-					if ($pines->request_component != 'com_pgsql')
+					if ($_->request_component != 'com_pgsql')
 						pines_redirect(pines_url('com_pgsql', 'setup'));
 				} else {
 					if (function_exists('pines_error'))

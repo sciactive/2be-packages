@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
  * The configurator.
- * @global com_configure $pines->configurator
+ * @global com_configure $_->configurator
  */
-$pines->configurator = 'com_configure';
+$_->configurator = 'com_configure';

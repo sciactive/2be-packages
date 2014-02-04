@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($this->render == 'body' && gatekeeper('com_sales/seestock')) {
@@ -86,7 +86,7 @@ echo $module->render();
 		</thead>
 		<tbody>
 			<?php
-			$txs = (array) $pines->entity_manager->get_entities(
+			$txs = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_tx),
 					array('&',
 						'tag' => array('com_sales', 'transaction', 'stock_tx'),

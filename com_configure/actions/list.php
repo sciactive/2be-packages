@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($_REQUEST['peruser']) {
@@ -30,10 +30,10 @@ if ($_REQUEST['peruser']) {
 		if (!isset($user->guid))
 			$user = null;
 	}
-	$pines->configurator->list_components_peruser($user);
+	$_->configurator->list_components_peruser($user);
 } elseif ($_REQUEST['percondition']) {
 	$condition = com_configure_condition::factory((int) $_REQUEST['id']);
-	$pines->configurator->list_components_peruser($condition);
+	$_->configurator->list_components_peruser($condition);
 } else {
-	$pines->configurator->list_components();
+	$_->configurator->list_components();
 }

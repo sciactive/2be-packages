@@ -7,7 +7,7 @@
  * @author Troex Nevelin
  * @author Alexey Sukhotin
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**

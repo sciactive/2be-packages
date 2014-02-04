@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_uasniffer->mobile_site)
+if (!$_->config->com_uasniffer->mobile_site)
 	return;
 
-if ($pines->depend->check('browser', 'mobile-real') xor ($_COOKIE['com_uasniffer_switch'] == 'true')) {
-	$pines->config->default_template = $pines->config->com_uasniffer->mobile_template;
-	$pines->config->admin_template = $pines->config->com_uasniffer->mobile_template;
+if ($_->depend->check('browser', 'mobile-real') xor ($_COOKIE['com_uasniffer_switch'] == 'true')) {
+	$_->config->default_template = $_->config->com_uasniffer->mobile_template;
+	$_->config->admin_template = $_->config->com_uasniffer->mobile_template;
 }
 
-if ($pines->depend->check('browser', 'mobile-real') && $pines->config->com_uasniffer->switcher) {
-	$module = new module('com_uasniffer', 'switcher', $pines->config->com_uasniffer->switcher_pos);
+if ($_->depend->check('browser', 'mobile-real') && $_->config->com_uasniffer->switcher) {
+	$module = new module('com_uasniffer', 'switcher', $_->config->com_uasniffer->switcher_pos);
 	unset($module);
 }

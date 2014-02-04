@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-if (isset($pines->com_elfinder))
-	$pines->com_elfinder->load();
-$content_css = array_merge($pines->editor->get_css(), array(h($pines->config->location . $pines->template->editor_css)));
+if (isset($_->com_elfinder))
+	$_->com_elfinder->load();
+$content_css = array_merge($_->editor->get_css(), array(h($_->config->location . $_->template->editor_css)));
 ?>
 <script type="text/javascript">
-pines.loadjs("<?php e($pines->config->location); ?>components/com_ckeditor/includes/ckeditor/ckeditor.js");
+pines.loadjs("<?php e($_->config->location); ?>components/com_ckeditor/includes/ckeditor/ckeditor.js");
 pines.load(function(){
 	CKEDITOR.config.jqueryOverrideVal = true;
 });
-pines.loadjs("<?php e($pines->config->location); ?>components/com_ckeditor/includes/ckeditor/adapters/jquery.js");
+pines.loadjs("<?php e($_->config->location); ?>components/com_ckeditor/includes/ckeditor/adapters/jquery.js");
 
 pines(function(){
 // Stop CKEditor from adding new lines and indents to HTML source.
@@ -47,16 +47,16 @@ $("textarea.peditor").ckeditor(function(){}, {
 	coreStyles_bold: {element: 'strong'},
 	coreStyles_italic: {element: 'em'},
 	pasteFromWordPromptCleanup: true,
-	uiColor: <?php echo json_encode($pines->config->com_ckeditor->ui_color); ?>,
-	startupMode: <?php echo json_encode($pines->config->com_ckeditor->default_mode); ?>,
-	startupOutlineBlocks: <?php echo json_encode($pines->config->com_ckeditor->show_blocks); ?>,
-	<?php if (isset($pines->com_elfinder)) { ?>
+	uiColor: <?php echo json_encode($_->config->com_ckeditor->ui_color); ?>,
+	startupMode: <?php echo json_encode($_->config->com_ckeditor->default_mode); ?>,
+	startupOutlineBlocks: <?php echo json_encode($_->config->com_ckeditor->show_blocks); ?>,
+	<?php if (isset($_->com_elfinder)) { ?>
 	filebrowserBrowseUrl: <?php echo json_encode(pines_url('com_elfinder', 'finder', array('ckeditor' => 'true', 'template' => 'tpl_print'))); ?>,
-	<?php } if ($pines->config->com_ckeditor->auto_scayt) { ?>
+	<?php } if ($_->config->com_ckeditor->auto_scayt) { ?>
 	scayt_autoStartup: true,
 	<?php } else { ?>
 	disableNativeSpellChecker: false,
-	<?php } if ($pines->config->com_ckeditor->toolbar == 'Full') { ?>
+	<?php } if ($_->config->com_ckeditor->toolbar == 'Full') { ?>
 	toolbar: [
 		{name: 'document', items: ['Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates']},
 		{name: 'clipboard', items: ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo']},
@@ -72,7 +72,7 @@ $("textarea.peditor").ckeditor(function(){}, {
 		{name: 'links', items: ['Link','Unlink','Anchor']},
 		{name: 'tools', items: ['Maximize','ShowBlocks','-','About']}
 	],
-	<?php } elseif ($pines->config->com_ckeditor->toolbar == 'Basic') { ?>
+	<?php } elseif ($_->config->com_ckeditor->toolbar == 'Basic') { ?>
 	toolbar: 'Basic',
 	<?php } ?>
 	extraPlugins: 'autogrow,stylesheetparser,MediaEmbed',
@@ -87,11 +87,11 @@ $("textarea.peditor-simple").ckeditor(function(){}, {
 	coreStyles_bold: {element: 'strong'},
 	coreStyles_italic: {element: 'em'},
 	pasteFromWordPromptCleanup: true,
-	uiColor: <?php echo json_encode($pines->config->com_ckeditor->ui_color); ?>,
-	startupOutlineBlocks: <?php echo json_encode($pines->config->com_ckeditor->show_blocks); ?>,
-	<?php if (isset($pines->com_elfinder)) { ?>
+	uiColor: <?php echo json_encode($_->config->com_ckeditor->ui_color); ?>,
+	startupOutlineBlocks: <?php echo json_encode($_->config->com_ckeditor->show_blocks); ?>,
+	<?php if (isset($_->com_elfinder)) { ?>
 	filebrowserBrowseUrl: <?php echo json_encode(pines_url('com_elfinder', 'finder', array('ckeditor' => 'true', 'template' => 'tpl_print'))); ?>,
-	<?php } if ($pines->config->com_ckeditor->auto_scayt) { ?>
+	<?php } if ($_->config->com_ckeditor->auto_scayt) { ?>
 	scayt_autoStartup: true,
 	<?php } else { ?>
 	disableNativeSpellChecker: false,
@@ -103,12 +103,12 @@ $("textarea.peditor-simple").ckeditor(function(){}, {
 });
 $("textarea.peditor-email").ckeditor(function(){}, {
 	pasteFromWordPromptCleanup: true,
-	uiColor: <?php echo json_encode($pines->config->com_ckeditor->ui_color); ?>,
-	startupMode: <?php echo json_encode($pines->config->com_ckeditor->default_mode); ?>,
-	startupOutlineBlocks: <?php echo json_encode($pines->config->com_ckeditor->show_blocks); ?>,
-	<?php if (isset($pines->com_elfinder)) { ?>
+	uiColor: <?php echo json_encode($_->config->com_ckeditor->ui_color); ?>,
+	startupMode: <?php echo json_encode($_->config->com_ckeditor->default_mode); ?>,
+	startupOutlineBlocks: <?php echo json_encode($_->config->com_ckeditor->show_blocks); ?>,
+	<?php if (isset($_->com_elfinder)) { ?>
 	filebrowserBrowseUrl: <?php echo json_encode(pines_url('com_elfinder', 'finder', array('ckeditor' => 'true', 'template' => 'tpl_print', 'absolute' => 'true'))); ?>,
-	<?php } if ($pines->config->com_ckeditor->auto_scayt) { ?>
+	<?php } if ($_->config->com_ckeditor->auto_scayt) { ?>
 	scayt_autoStartup: true,
 	<?php } else { ?>
 	disableNativeSpellChecker: false,
@@ -119,7 +119,7 @@ $("textarea.peditor-email").ckeditor(function(){}, {
 	autoGrow_maxHeight: 600,
 	autoGrow_onStartup: true,
 	autoParagraph: false,
-	baseHref: <?php echo json_encode($pines->config->full_location); ?>,
+	baseHref: <?php echo json_encode($_->config->full_location); ?>,
 	docType: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
 	enterMode: CKEDITOR.ENTER_BR,
 	fillEmptyBlocks: false,

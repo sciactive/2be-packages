@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/searchproducts'))
 	punt_user(null, pines_url('com_sales', 'product/codesearch', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $code = $_REQUEST['code'];
@@ -22,7 +22,7 @@ $code = $_REQUEST['code'];
 if (empty($code)) {
 	$product = null;
 } elseif(!$_REQUEST['useguid']) {
-	$product = $pines->com_sales->get_product_by_code($code);
+	$product = $_->com_sales->get_product_by_code($code);
 	if (!$product->enabled)
 		$product = null;
 } else {
@@ -73,7 +73,7 @@ if (isset($product)) {
 	}
 
 	// Look up serials in the user's current location to allow them to choose.
-	if ($product->serialized && $pines->config->com_sales->add_product_show_serials) {
+	if ($product->serialized && $_->config->com_sales->add_product_show_serials) {
 		$selector = array('&',
 				'tag' => array('com_sales', 'stock'),
 				'data' => array('available', true),
@@ -83,8 +83,8 @@ if (isset($product)) {
 			);
 		if (isset($_SESSION['user']->group->guid))
 			$selector['ref'][] = array('location', $_SESSION['user']->group);
-		$stock_entries = $pines->entity_manager->get_entities(
-				array('class' => com_sales_stock, 'limit' => $pines->config->com_sales->add_product_show_serials),
+		$stock_entries = $_->entity_manager->get_entities(
+				array('class' => com_sales_stock, 'limit' => $_->config->com_sales->add_product_show_serials),
 				$selector
 			);
 		foreach ($stock_entries as $cur_stock) {
@@ -95,4 +95,4 @@ if (isset($product)) {
 	$product = $json_struct;
 }
 
-$pines->page->override_doc(json_encode($product));
+$_->page->override_doc(json_encode($product));

@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_user->login_menu || gatekeeper())
+if (!$_->config->com_user->login_menu || gatekeeper())
 	return;
 
-$pines->menu->menu_arrays[] = array(
-	'path' => $pines->config->com_user->login_menu_path,
-	'text' => $pines->config->com_user->login_menu_text,
+$_->menu->menu_arrays[] = array(
+	'path' => $_->config->com_user->login_menu_path,
+	'text' => $_->config->com_user->login_menu_text,
 	'href' => array('com_user')
 );

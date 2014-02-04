@@ -13,7 +13,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->note = 'Totals are reported without taxes, item fees, or return fees.';
@@ -69,7 +69,7 @@ if (isset($this->employee->guid))
 					echo '{';
 					echo 'id: 0,';
 					echo '_id: 0,';
-					echo 'title: '. json_encode('$'.$pines->com_sales->round($cur_total[3], true)).',';
+					echo 'title: '. json_encode('$'.$_->com_sales->round($cur_total[3], true)).',';
 					echo 'start: '. json_encode($cur_total[1]) .',';
 					echo 'end: '. json_encode($cur_total[2]) .',';
 					echo 'className: \'mint_total\',';
@@ -85,7 +85,7 @@ if (isset($this->employee->guid))
 						echo '{';
 						echo 'id: 0,';
 						echo '_id: 0,';
-						echo 'title: '.json_encode('$'.$pines->com_sales->round($cur_item[3], true)).',';
+						echo 'title: '.json_encode('$'.$_->com_sales->round($cur_item[3], true)).',';
 						echo 'start: '. json_encode($cur_item[1]) .',';
 						echo 'end: '. json_encode($cur_item[2]) .',';
 						echo 'className: '.json_encode($class).',';

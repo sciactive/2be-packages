@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -70,9 +70,9 @@ class com_sales_shipment extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function save() {
-		global $pines;
+		global $_;
 		if (!isset($this->id))
-			$this->id = $pines->entity_manager->new_uid('com_sales_shipment');
+			$this->id = $_->entity_manager->new_uid('com_sales_shipment');
 		return parent::save();
 	}
 
@@ -82,7 +82,7 @@ class com_sales_shipment extends entity {
 	 * @return bool True on success, false on failure. 
 	 */
 	public function email() {
-		global $pines;
+		global $_;
 		if (empty($this->ref->customer->email))
 			return false;
 		$module = new module('com_sales', 'shipment/packing_list_email');
@@ -117,7 +117,7 @@ class com_sales_shipment extends entity {
 			'address' => $address,
 			'notes' => h($this->notes),
 		);
-		return $pines->com_mailer->send_mail($this->tracking_numbers ? 'com_sales/sale_shipped_tracking' : 'com_sales/sale_shipped', $macros, $this->ref->customer);
+		return $_->com_mailer->send_mail($this->tracking_numbers ? 'com_sales/sale_shipped_tracking' : 'com_sales/sale_shipped', $macros, $this->ref->customer);
 	}
 
 	/**
@@ -252,10 +252,10 @@ class com_sales_shipment extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		//$module = new module('com_sales', 'shipment/form', 'content');
 		$module = new module('com_sales', 'shipment/ship', 'content');
-		$module->shippers = (array) $pines->entity_manager->get_entities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
+		$module->shippers = (array) $_->entity_manager->get_entities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
 		$module->entity = $this;
 
 		return $module;

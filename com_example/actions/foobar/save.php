@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -47,19 +47,19 @@ if (empty($foobar->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_example_foobar, 'skip_ac' => true), array('&', 'tag' => array('com_example', 'foobar'), 'data' => array('name', $foobar->name)));
+$test = $_->entity_manager->get_entity(array('class' => com_example_foobar, 'skip_ac' => true), array('&', 'tag' => array('com_example', 'foobar'), 'data' => array('name', $foobar->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$foobar->print_form();
 	pines_notice('There is already a foobar with that name. Please choose a different name.');
 	return;
 }
 
-if ($pines->config->com_example->global_foobars)
+if ($_->config->com_example->global_foobars)
 	$foobar->ac->other = 1;
 
 if ($foobar->save()) {
 	pines_notice('Saved foobar ['.$foobar->name.']');
-	$pines->com_mailer->send_mail('com_example/save_foobar', array('foobar_name' => h($foobar->name)));
+	$_->com_mailer->send_mail('com_example/save_foobar', array('foobar_name' => h($foobar->name)));
 } else {
 	pines_error('Error saving foobar. Do you have permission?');
 }

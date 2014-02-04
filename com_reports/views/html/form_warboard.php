@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = 'Edit the Company Warboard';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <style type="text/css" >
 	#p_muid_form .location_label {
@@ -51,7 +51,7 @@ $pines->com_pgrid->load();
 		<span class="pf-label">Employee Positions</span>
 		<span class="pf-note">Show all employees with these Job Titles</span>
 		<div class="pf-group">
-			<?php foreach ($pines->config->com_hrm->employee_departments as $cur_dept) { $cur_dept = explode(':', $cur_dept); ?>
+			<?php foreach ($_->config->com_hrm->employee_departments as $cur_dept) { $cur_dept = explode(':', $cur_dept); ?>
 			<label class="pf-field"><input type="checkbox" name="titles[]" value="<?php e($cur_dept[0]); ?>" <?php echo in_array($cur_dept[0], $this->entity->positions) ? 'checked="checked" ' : ''; ?>/> <?php e($cur_dept[0]); ?></label>
 			<?php } ?>
 		</div>

@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_content/listcategories') )
 	punt_user(null, pines_url('com_content', 'category/list'));
 
-$pines->com_content->list_categories();
+$_->com_content->list_categories();

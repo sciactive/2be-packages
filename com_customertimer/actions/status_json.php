@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_customertimer/timefloor') )
 	punt_user(null, pines_url('com_customertimer', 'status'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $floor = com_customertimer_floor::factory((int) $_REQUEST['floor']);
@@ -40,4 +40,4 @@ foreach ($floor->active_stations as $cur_station => $cur_entry) {
 	);
 }
 
-$pines->page->override_doc(json_encode($return));
+$_->page->override_doc(json_encode($return));

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/listcashcounts') )
@@ -26,4 +26,4 @@ if (!empty($_REQUEST['location'])) {
 $descendants = ($_REQUEST['descendants'] == 'true');
 $finished = ($_REQUEST['finished'] == 'true');
 
-$pines->com_sales->list_cashcounts($start_date, $end_date, $location, $descendants, $finished);
+$_->com_sales->list_cashcounts($start_date, $end_date, $location, $descendants, $finished);

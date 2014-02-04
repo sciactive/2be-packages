@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_repository/newpackage') )
@@ -23,7 +23,7 @@ if (!$files) {
 }
 
 foreach ($files as $cur_file) {
-	$package_filename = $pines->uploader->temp($cur_file);
+	$package_filename = $_->uploader->temp($cur_file);
 	if (!$package_filename) {
 		pines_error('Error getting package '.$cur_file);
 		continue;
@@ -62,7 +62,7 @@ foreach ($files as $cur_file) {
 	}
 
 	// Check the existing packages for name collisions.
-	$cur_index = $pines->com_repository->get_index();
+	$cur_index = $_->com_repository->get_index();
 	if (array_key_exists($package->ext['package'], $cur_index) && $cur_index[$package->ext['package']]['publisher'] != $_SESSION['user']->username) {
 		pines_notice('A component by that name already exists in the repository.');
 		continue;
@@ -103,7 +103,7 @@ foreach ($files as $cur_file) {
 	}
 
 	// Move package into repository.
-	$dir = clean_filename($pines->config->com_repository->repository_path.$_SESSION['user']->guid.'/'.$package->ext['package'].'/'.$package->ext['version'].'/');
+	$dir = clean_filename($_->config->com_repository->repository_path.$_SESSION['user']->guid.'/'.$package->ext['package'].'/'.$package->ext['version'].'/');
 	$filename = $dir.clean_filename("{$package->ext['package']}-{$package->ext['version']}.slm");
 	$sig_filename = $dir.clean_filename("{$package->ext['package']}-{$package->ext['version']}.sig");
 	$md5_filename = $dir.clean_filename("{$package->ext['package']}-{$package->ext['version']}.md5");

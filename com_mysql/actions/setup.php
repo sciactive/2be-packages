@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (isset($_SESSION['user']) || $pines->config->com_mysql->host != 'localhost' || $pines->config->com_mysql->user != 'pines' || $pines->config->com_mysql->password != 'password' || $pines->config->com_mysql->database != 'pines' || $pines->config->com_mysql->prefix != 'pin_')
+if (isset($_SESSION['user']) || $_->config->com_mysql->host != 'localhost' || $_->config->com_mysql->user != 'pines' || $_->config->com_mysql->password != 'password' || $_->config->com_mysql->database != 'pines' || $_->config->com_mysql->prefix != 'pin_')
 	return;
 
 // Get the provided or default info.
-$host = isset($_REQUEST['host']) ? $_REQUEST['host'] : $pines->config->com_mysql->host;
-$user = isset($_REQUEST['user']) ? $_REQUEST['user'] : $pines->config->com_mysql->user;
+$host = isset($_REQUEST['host']) ? $_REQUEST['host'] : $_->config->com_mysql->host;
+$user = isset($_REQUEST['user']) ? $_REQUEST['user'] : $_->config->com_mysql->user;
 $password = $_REQUEST['password'];
-$database = isset($_REQUEST['database']) ? $_REQUEST['database'] : $pines->config->com_mysql->database;
-$prefix = isset($_REQUEST['prefix']) ? $_REQUEST['prefix'] : $pines->config->com_mysql->prefix;
+$database = isset($_REQUEST['database']) ? $_REQUEST['database'] : $_->config->com_mysql->database;
+$prefix = isset($_REQUEST['prefix']) ? $_REQUEST['prefix'] : $_->config->com_mysql->prefix;
 $setup_user = $_REQUEST['setup_user'];
 $setup_password = $_REQUEST['setup_password'];
 

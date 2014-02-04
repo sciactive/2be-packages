@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_reports/editpayroll') )
@@ -17,7 +17,7 @@ if ( !gatekeeper('com_reports/editpayroll') )
 $start = strtotime($_REQUEST['start']);
 $end = strtotime($_REQUEST['end']);
 
-$pay_stub = $pines->entity_manager->get_entity(array('class' => com_reports_paystub),
+$pay_stub = $_->entity_manager->get_entity(array('class' => com_reports_paystub),
 		array('&',
 			'tag' => array('com_reports', 'paystub'),
 			'gte' => array('end', (int) $start)

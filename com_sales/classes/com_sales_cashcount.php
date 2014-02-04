@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -23,12 +23,12 @@ class com_sales_cashcount extends entity {
 		if (parent::__construct($id) !== null)
 			return;
 		// Defaults.
-		global $pines;
+		global $_;
 		$this->status = 'pending';
 		$this->audits = $this->deposits = $this->skims = $this->count = $this->count_out = array();
-		$this->currency_symbol = $pines->config->com_sales->currency_symbol;
+		$this->currency_symbol = $_->config->com_sales->currency_symbol;
 		// Create a currency array.
-		foreach ($pines->config->com_sales->currency_denominations as $cur_currency) {
+		foreach ($_->config->com_sales->currency_denominations as $cur_currency) {
 			$key = str_replace('.', '_', $cur_currency);
 			$this->currency[$key] = $cur_currency;
 		}
@@ -65,7 +65,7 @@ class com_sales_cashcount extends entity {
 	 * @return module The form's module.
 	 */
 	public function cash_out() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'cashcount/formcashout', 'content');
 		$module->entity = $this;
 		return $module;
@@ -95,7 +95,7 @@ class com_sales_cashcount extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'cashcount/form', 'content');
 		$module->entity = $this;
 		return $module;
@@ -106,7 +106,7 @@ class com_sales_cashcount extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_review() {
-		global $pines;
+		global $_;
 		$this->update_total();
 		$module = new module('com_sales', 'cashcount/formreview', 'content');
 		$module->entity = $this;
@@ -127,11 +127,11 @@ class com_sales_cashcount extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function update_total() {
-		global $pines;
+		global $_;
 		$this->total = $this->float;
 		// Update the total in the drawer for each skim, deposit or sale made.
 		if (isset($this->guid)) {
-			$new_txs = (array) $pines->entity_manager->get_entities(
+			$new_txs = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_tx),
 					array('&',
 						'tag' => array('com_sales', 'transaction', 'payment_tx'),

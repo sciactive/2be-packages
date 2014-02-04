@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Auditing Cash Count ['.h($this->entity->cashcount->guid).'] for '.h($this->entity->cashcount->group->name);
 $this->note = 'Count all of the cash currently present in the drawer.';

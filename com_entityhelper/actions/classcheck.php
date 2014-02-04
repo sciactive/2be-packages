@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('system/all') )
@@ -16,7 +16,7 @@ if ( !gatekeeper('system/all') )
 
 $entity_classes = array();
 // Look at each class.
-foreach ($pines->class_files as $cur_class_file) {
+foreach ($_->class_files as $cur_class_file) {
 	$cur_class = basename($cur_class_file, '.php');
 	if ($cur_class != 'entity' && is_subclass_of($cur_class, 'entity'))
 		$entity_classes[] = $cur_class;

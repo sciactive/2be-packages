@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Log Files View';
 $this->note = $this->all_time ? 'Showing all time.' : 'Showing '.h(format_date($this->start_date, 'date_short')).' - '.h(format_date($this->end_date - 1, 'date_short')).'.';
 // This regex breaks apart the log entries into each part.
 preg_match_all('/^(\d{4}-\d{2}-\d{2}T[\d:-]+): ([a-z]+): (com_\w+)?, ([^:]+)?: ([\d.]+)?(.*?)? ?\(?(\d+)?\)?: (.*)$/mi', $this->log, $matches, PREG_SET_ORDER);
-$pines->icons->load();
-$pines->com_jstree->load();
-$pines->com_pgrid->load();
+$_->icons->load();
+$_->com_jstree->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_logger/view']);
 

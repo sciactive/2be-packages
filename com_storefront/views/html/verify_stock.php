@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Problematic/Incomplete Storefront Products';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <?php if (empty($this->items) && empty($this->image_descs)) { ?>
 <p>All storefront products appear to be valid.</p>

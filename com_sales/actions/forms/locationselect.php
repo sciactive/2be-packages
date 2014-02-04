@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper() )
 	punt_user(null, pines_url('com_sales', 'forms/locationselect'));
 
-$pines->com_sales->location_select_form($_REQUEST['location'], ($_REQUEST['descendants'] == 'true'));
+$_->com_sales->location_select_form($_REQUEST['location'], ($_REQUEST['descendants'] == 'true'));

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_reports/newsalesranking') )
@@ -17,7 +17,7 @@ if ( !gatekeeper('com_reports/newsalesranking') )
 $entity = com_reports_sales_ranking::factory((int) $_REQUEST['id']);
 if (!isset($entity->guid)) {
 	pines_error('Requested Sales Rankings id is not accessible.');
-	$pines->com_reports->list_sales_rankings();
+	$_->com_reports->list_sales_rankings();
 	return;
 }
 // Create the Duplicate Sales Ranking.

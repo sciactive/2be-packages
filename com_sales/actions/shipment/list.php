@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/managestock') )
@@ -19,4 +19,4 @@ if (!empty($_REQUEST['location']))
 
 $descendants = ($_REQUEST['descendants'] == 'true');
 
-$pines->com_sales->list_shipments($_REQUEST['removed'] == 'true', $location, $descendants);
+$_->com_sales->list_shipments($_REQUEST['removed'] == 'true', $location, $descendants);

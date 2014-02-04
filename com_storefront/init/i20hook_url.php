@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_storefront->storefront_location)
+if (!$_->config->com_storefront->storefront_location)
 	return;
 
 /**
@@ -24,8 +24,8 @@ if (!$pines->config->com_storefront->storefront_location)
  * @param array &$data The callback data array.
  */
 function com_storefront__url(&$array, $name, &$object, &$function, &$data) {
-	global $pines;
-	if (!$pines->config->com_storefront->storefront_location)
+	global $_;
+	if (!$_->config->com_storefront->storefront_location)
 		return;
 	if ($array[0] == 'com_storefront') {
 		if (!$array[1])
@@ -33,8 +33,8 @@ function com_storefront__url(&$array, $name, &$object, &$function, &$data) {
 		if (!$array[2])
 			$array[2] = array();
 		$array[3] = true;
-		$data['com_storefront__location'] = $pines->config->full_location;
-		$pines->config->full_location = $pines->config->com_storefront->storefront_location;
+		$data['com_storefront__location'] = $_->config->full_location;
+		$_->config->full_location = $_->config->com_storefront->storefront_location;
 	}
 }
 
@@ -48,10 +48,10 @@ function com_storefront__url(&$array, $name, &$object, &$function, &$data) {
  * @param array &$data The callback data array.
  */
 function com_storefront__url_after(&$array, $name, &$object, &$function, &$data) {
-	global $pines;
+	global $_;
 	if ($data['com_storefront__location'])
-		$pines->config->full_location = $data['com_storefront__location'];
+		$_->config->full_location = $data['com_storefront__location'];
 }
 
-$pines->hook->add_callback('$pines->template->url', -10, 'com_storefront__url');
-$pines->hook->add_callback('$pines->template->url', 10, 'com_storefront__url_after');
+$_->hook->add_callback('$_->template->url', -10, 'com_storefront__url');
+$_->hook->add_callback('$_->template->url', 10, 'com_storefront__url_after');

@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = ($this->enabled ? '' : 'Disabled ').'Products';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/product/list']);
 ?>
@@ -89,7 +89,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								pines.safe(this.modified),
 								pines.safe(this.expiration),
 								links.join(', ')
-								<?php if ($pines->config->com_sales->com_storefront) { ?>,
+								<?php if ($_->config->com_sales->com_storefront) { ?>,
 								this.storefront ? 'Yes' : 'No',
 								this.featured ? 'Yes' : 'No'
 								<?php } ?>
@@ -184,7 +184,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<th>Modified</th>
 			<th>Expiration</th>
 			<th>Link</th>
-			<?php if ($pines->config->com_sales->com_storefront) { ?>
+			<?php if ($_->config->com_sales->com_storefront) { ?>
 			<th>Shown in Storefront</th>
 			<th>Featured</th>
 			<?php } ?>
@@ -210,7 +210,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<td>-</td>
 			<td>-</td>
 			<td>-</td>
-			<?php if ($pines->config->com_sales->com_storefront) { ?>
+			<?php if ($_->config->com_sales->com_storefront) { ?>
 			<td>-</td>
 			<td>-</td>
 			<?php } ?>

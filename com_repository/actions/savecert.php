@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_repository/gencert') )
@@ -59,7 +59,7 @@ if (empty($csrout) || empty($certout) || empty($pkeyout)) {
 }
 
 // Make sure private dir exists.
-$dir = "{$pines->config->com_repository->repository_path}private/";
+$dir = "{$_->config->com_repository->repository_path}private/";
 if (!file_exists($dir) && !mkdir($dir, 0700)) {
 	pines_error('Could not create private path in repository.');
 	pines_action('com_repository', 'gencert');

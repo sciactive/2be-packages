@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Review Your Order';
 ?>
@@ -88,8 +88,8 @@ $this->title = 'Review Your Order';
 					<td><?php e($cur_product['entity']->name); ?></td>
 					<td><?php echo !empty($cur_product['entity']->receipt_description) ? $cur_product['entity']->receipt_description : $cur_product['entity']->short_description; ?></td>
 					<td class="right_text"><?php e($cur_product['quantity']); ?></td>
-					<td class="right_text">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
-					<td class="right_text">$<?php echo $pines->com_sales->round($cur_product['line_total'], true); ?></td>
+					<td class="right_text">$<?php echo $_->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
+					<td class="right_text">$<?php echo $_->com_sales->round($cur_product['line_total'], true); ?></td>
 				</tr>
 				<?php } } ?>
 			</tbody>
@@ -99,21 +99,21 @@ $this->title = 'Review Your Order';
 	<div class="pf-element pf-full-width" style="text-align: right;">
 		<div>
 			<span class="pf-label" style="width: 80%;">Subtotal</span>
-			<span class="pf-field">$<?php echo $pines->com_sales->round($this->entity->subtotal, true); ?></span>
+			<span class="pf-field">$<?php echo $_->com_sales->round($this->entity->subtotal, true); ?></span>
 		</div>
 		<?php if ($this->entity->item_fees > 0) { ?>
 		<div>
 			<span class="pf-label" style="width: 80%;">Item Fees</span>
-			<span class="pf-field">$<?php echo $pines->com_sales->round($this->entity->item_fees, true); ?></span>
+			<span class="pf-field">$<?php echo $_->com_sales->round($this->entity->item_fees, true); ?></span>
 		</div>
 		<?php } ?>
 		<div>
 			<span class="pf-label" style="width: 80%;">Tax</span>
-			<span class="pf-field">$<?php echo $pines->com_sales->round($this->entity->taxes, true); ?></span>
+			<span class="pf-field">$<?php echo $_->com_sales->round($this->entity->taxes, true); ?></span>
 		</div>
 		<div>
 			<strong class="pf-label" style="width: 80%;">Total</strong>
-			<strong class="pf-field">$<?php echo $pines->com_sales->round($this->entity->total, true); ?></strong>
+			<strong class="pf-field">$<?php echo $_->com_sales->round($this->entity->total, true); ?></strong>
 		</div>
 	</div>
 	<?php if (!$this->no_form) { ?>
@@ -123,7 +123,7 @@ $this->title = 'Review Your Order';
 	<?php if (is_array($this->entity->payments)) { foreach ($this->entity->payments as $cur_payment) { ?>
 	<div class="pf-element">
 		<span class="pf-label"><?php e($cur_payment['type']); ?></span>
-		<span class="pf-field">$<?php echo $pines->com_sales->round($cur_payment['amount'], true); ?></span>
+		<span class="pf-field">$<?php echo $_->com_sales->round($cur_payment['amount'], true); ?></span>
 	</div>
 	<?php } } ?>
 	<div class="pf-element pf-full-width">
@@ -138,7 +138,7 @@ $this->title = 'Review Your Order';
 				});
 			});
 		</script>
-		<input class="pf-button btn btn-primary" type="submit" value="<?php e($pines->config->com_storefront->complete_order_text); ?>" />
+		<input class="pf-button btn btn-primary" type="submit" value="<?php e($_->config->com_storefront->complete_order_text); ?>" />
 	</div>
 	<?php } ?>
 </form>

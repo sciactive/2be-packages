@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_reports/reportpayroll') )
@@ -24,5 +24,5 @@ $paystub = com_reports_paystub::factory((int) $_REQUEST['id']);
 if (isset($paystub->guid)) {
 	$paystub->show($entire_company, $location, $descendants);
 } else {
-	$pines->com_reports->report_payroll($entire_company, $location, $descendants);
+	$_->com_reports->report_payroll($entire_company, $location, $descendants);
 }

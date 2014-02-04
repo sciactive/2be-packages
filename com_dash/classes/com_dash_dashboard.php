@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -23,8 +23,8 @@ class com_dash_dashboard extends entity {
 		if (parent::__construct($id) !== null)
 			return;
 		// Defaults.
-		global $pines;
-		$button_types = $pines->com_dash->button_types();
+		global $_;
+		$button_types = $_->com_dash->button_types();
 		$default_buttons = array();
 		foreach ($button_types as $cur_component => $cur_button_set) {
 			$added_this_component = false;
@@ -33,7 +33,7 @@ class com_dash_dashboard extends entity {
 					continue;
 				// Check its conditions.
 				foreach ((array) $cur_button['depends'] as $cur_type => $cur_value) {
-					if (!$pines->depend->check($cur_type, $cur_value))
+					if (!$_->depend->check($cur_type, $cur_value))
 						continue 2;
 				}
 				// Add a separator for this component's buttons.
@@ -51,7 +51,7 @@ class com_dash_dashboard extends entity {
 		if ($default_buttons)
 			$default_buttons = array_slice($default_buttons, 1);
 		// Defaults.
-		$widget_types = $pines->com_dash->widget_types();
+		$widget_types = $_->com_dash->widget_types();
 		$default_widgets = array(
 			0 => array(),
 			1 => array(),
@@ -65,7 +65,7 @@ class com_dash_dashboard extends entity {
 					continue;
 				// Check its conditions.
 				foreach ((array) $cur_widget['widget']['depends'] as $cur_type => $cur_value) {
-					if (!$pines->depend->check($cur_type, $cur_value))
+					if (!$_->depend->check($cur_type, $cur_value))
 						continue 2;
 				}
 				// Add it to one of the 3 columns.
@@ -139,13 +139,13 @@ class com_dash_dashboard extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_dash', 'manage/form', 'content');
 		$module->entity = $this;
-		$module->user_array = $pines->user_manager->get_users();
+		$module->user_array = $_->user_manager->get_users();
 		usort($module->user_array, array($this, 'sort_users'));
-		$module->group_array = $pines->user_manager->get_groups();
-		$pines->user_manager->group_sort($this->group_array, 'name');
+		$module->group_array = $_->user_manager->get_groups();
+		$_->user_manager->group_sort($this->group_array, 'name');
 
 		return $module;
 	}

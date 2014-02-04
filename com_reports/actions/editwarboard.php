@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_reports/editwarboard'))
 	punt_user(null, pines_url('com_reports', 'editwarboard'));
 
-$warboard = $pines->entity_manager->get_entity(array('class' => com_reports_warboard), array('&', 'tag' => array('com_reports', 'warboard')));
+$warboard = $_->entity_manager->get_entity(array('class' => com_reports_warboard), array('&', 'tag' => array('com_reports', 'warboard')));
 
 if (!isset($warboard->guid)) {
 	$warboard = com_reports_warboard::factory();

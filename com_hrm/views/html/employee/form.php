@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Employee' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide employee account details in this form.';
-$pines->editor->load();
-$pines->com_pgrid->load();
+$_->editor->load();
+$_->com_pgrid->load();
 ?>
 <style type="text/css">
 	#p_muid_rate {
@@ -127,7 +127,7 @@ $pines->com_pgrid->load();
 	<ul class="nav nav-tabs" style="clear: both;">
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
 		<li><a href="#p_muid_tab_attributes" data-toggle="tab">Attributes</a></li>
-		<?php if ($pines->config->com_hrm->com_sales) { ?>
+		<?php if ($_->config->com_hrm->com_sales) { ?>
 		<li><a href="#p_muid_tab_commissions" data-toggle="tab">Commissions</a></li>
 		<?php } ?>
 	</ul>
@@ -151,7 +151,7 @@ $pines->com_pgrid->load();
 				<label><span class="pf-label">Nickname</span>
 					<input class="pf-field" type="text" size="24" name="nickname" value="<?php echo $this->entity->nickname; ?>" /></label>
 			</div>
-			<?php if ($pines->config->com_hrm->ssn_field && gatekeeper('com_hrm/showssn')) { ?>
+			<?php if ($_->config->com_hrm->ssn_field && gatekeeper('com_hrm/showssn')) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">SSN</span>
 					<span class="pf-note">Without dashes.</span>
@@ -169,7 +169,7 @@ $pines->com_pgrid->load();
 			<div class="pf-element">
 				<label><span class="pf-label">Job Title</span>
 					<select class="pf-field" name="job_title">
-						<?php foreach ($pines->config->com_hrm->employee_departments as $cur_dept) { $cur_dept = explode(':', $cur_dept); ?>
+						<?php foreach ($_->config->com_hrm->employee_departments as $cur_dept) { $cur_dept = explode(':', $cur_dept); ?>
 						<option value="<?php e($cur_dept[0]); ?>" <?php echo ($this->entity->job_title == $cur_dept[0]) ? 'selected="selected"' : ''; ?>><?php e($cur_dept[0]); ?></option>
 						<?php } ?>
 					</select></label>
@@ -178,7 +178,7 @@ $pines->com_pgrid->load();
 				<label><span class="pf-label">Training Completion Date</span>
 					<input class="pf-field" type="text" size="24" name="training_completion_date" value="<?php echo empty($this->entity->training_completion_date) ? '' : h(format_date($this->entity->training_completion_date, 'date_sort')); ?>" /></label>
 			</div>
-			<?php if ($pines->config->com_hrm->com_calendar) { ?>
+			<?php if ($_->config->com_hrm->com_calendar) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Schedule Color</span>
 					<select class="pf-field" name="color">
@@ -275,7 +275,7 @@ $pines->com_pgrid->load();
 			</div>
 			<br class="pf-clearing" />
 		</div>
-		<?php if ($pines->config->com_hrm->com_sales) { ?>
+		<?php if ($_->config->com_hrm->com_sales) { ?>
 		<script type="text/javascript">
 			pines(function(){
 				// Commissions

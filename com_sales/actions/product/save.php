@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -53,12 +53,12 @@ if (file_exists($product->thumbnail))
 $product->images = (array) json_decode($_REQUEST['images'], true);
 if (!isset($product->images_dir))
 	$product->images_dir = uniqid();
-$dir = $pines->config->upload_location.$pines->config->com_sales->product_images_directory.$product->images_dir.'/';
+$dir = $_->config->upload_location.$_->config->com_sales->product_images_directory.$product->images_dir.'/';
 foreach ($product->images as $key => &$cur_image) {
 	if ($cur_image['source'] == 'temp') {
 		$tmp_filename = uniqid();
 		// Save the main image.
-		$file = $pines->uploader->temp($cur_image['file']);
+		$file = $_->uploader->temp($cur_image['file']);
 		if ($file) {
 			if (!file_exists($file)) {
 				unset($product->images[$key]);
@@ -73,7 +73,7 @@ foreach ($product->images as $key => &$cur_image) {
 				continue;
 			}
 
-			$pines->com_sales->process_product_image($image, 'prod_img', $cur_image['options']);
+			$_->com_sales->process_product_image($image, 'prod_img', $cur_image['options']);
 
 			if (!file_exists($dir)) {
 				if (!mkdir($dir, 0755, true)) {
@@ -91,7 +91,7 @@ foreach ($product->images as $key => &$cur_image) {
 			$cur_image['file'] = "{$dir}{$tmp_filename}.png";
 		}
 		// Now save the thumbnail copy.
-		$file = $pines->uploader->temp($cur_image['thumbnail']);
+		$file = $_->uploader->temp($cur_image['thumbnail']);
 		if ($file) {
 			if (!file_exists($file)) {
 				unset($product->images[$key]);
@@ -106,7 +106,7 @@ foreach ($product->images as $key => &$cur_image) {
 				continue;
 			}
 
-			$pines->com_sales->process_product_image($image, 'prod_tmb', $cur_image['options']);
+			$_->com_sales->process_product_image($image, 'prod_tmb', $cur_image['options']);
 
 			if (!file_exists($dir)) {
 				if (!mkdir($dir, 0755, true)) {
@@ -136,7 +136,7 @@ foreach ($product->images as $key => &$cur_image) {
 				continue;
 			}
 
-			$pines->com_sales->process_product_image($image, 'prod_tmb', $cur_image['options']);
+			$_->com_sales->process_product_image($image, 'prod_tmb', $cur_image['options']);
 			if (!$image->writeImage($cur_image['thumbnail']))
 				pines_error("Error saving thumbnail: {$cur_image['thumbnail']}");
 
@@ -147,7 +147,7 @@ foreach ($product->images as $key => &$cur_image) {
 				continue;
 			}
 
-			$pines->com_sales->process_product_image($image, 'prod_img', $cur_image['options']);
+			$_->com_sales->process_product_image($image, 'prod_img', $cur_image['options']);
 			if (!$image->writeImage($cur_image['file'])) {
 				pines_error("Error saving image: {$cur_image['file']}");
 				continue;
@@ -163,7 +163,7 @@ foreach ($product->images as $key => &$cur_image) {
 				continue;
 			}
 
-			$pines->com_sales->process_product_image($image, 'prod_tmb', $cur_image['options']);
+			$_->com_sales->process_product_image($image, 'prod_tmb', $cur_image['options']);
 			if (!$image->writeImage($cur_image['thumbnail'])) {
 				pines_error("Error saving thumbnail: {$cur_image['thumbnail']}");
 				continue;
@@ -176,7 +176,7 @@ foreach ($product->images as $key => &$cur_image) {
 unset($cur_image);
 $product->images = array_values($product->images);
 $product->thumbnail = $_REQUEST['thumbnail'];
-$file = $pines->uploader->temp($product->thumbnail);
+$file = $_->uploader->temp($product->thumbnail);
 while (true) {
 	if ($file) {
 		if (!file_exists($file)) {
@@ -192,7 +192,7 @@ while (true) {
 			break;
 		}
 
-		$pines->com_sales->process_product_image($image, 'thumbnail');
+		$_->com_sales->process_product_image($image, 'thumbnail');
 
 		if (!file_exists($dir)) {
 			if (!mkdir($dir, 0755, true)) {
@@ -267,7 +267,7 @@ $product->additional_barcodes = explode(',', $_REQUEST['additional_barcodes']);
 $product->actions = (array) $_REQUEST['actions'];
 
 // Commission
-if ($pines->config->com_sales->com_hrm) {
+if ($_->config->com_sales->com_hrm) {
 	$product->commissions = (array) json_decode($_REQUEST['commissions']);
 	foreach ($product->commissions as $key => &$cur_commission) {
 		$cur_commission = array(
@@ -281,19 +281,19 @@ if ($pines->config->com_sales->com_hrm) {
 	unset($cur_commission);
 }
 
-if ($pines->config->com_sales->com_storefront) {
+if ($_->config->com_sales->com_storefront) {
 	// Storefront
 	$product->alias = preg_replace('/[^\w\d-.]/', '', $_REQUEST['alias']);
 	$product->show_in_storefront = ($_REQUEST['show_in_storefront'] == 'ON');
 	$product->featured = ($_REQUEST['featured'] == 'ON');
 	$product->featured_image = $_REQUEST['featured_image'];
-	if (!$pines->uploader->check($product->featured_image))
+	if (!$_->uploader->check($product->featured_image))
 		$product->featured_image = null;
 	// Build a list of categories.
 	$categories = array();
 	if (is_array($_REQUEST['categories']))
 		$categories = array_map('intval', $_REQUEST['categories']);
-	$categories = (array) $pines->entity_manager->get_entities(
+	$categories = (array) $_->entity_manager->get_entities(
 			array('class' => com_sales_category),
 			array('&',
 				'tag' => array('com_sales', 'category'),
@@ -357,13 +357,13 @@ if ($product->stock_type == 'non_stocked' && $product->pricing_method == 'margin
 	pines_notice('Margin pricing is not available for non stocked items.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_sales_product, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'product'), 'strict' => array('name', $product->name), '!guid' => $product->guid));
+$test = $_->entity_manager->get_entity(array('class' => com_sales_product, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'product'), 'strict' => array('name', $product->name), '!guid' => $product->guid));
 if (isset($test)) {
 	$product->print_form();
 	pines_notice('There is already a product with that name. Please choose a different name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_sales_product, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'product'), 'strict' => array('sku', $product->sku), '!guid' => $product->guid));
+$test = $_->entity_manager->get_entity(array('class' => com_sales_product, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'product'), 'strict' => array('sku', $product->sku), '!guid' => $product->guid));
 if (isset($test)) {
 	$product->print_form();
 	pines_notice('There is already a product with that SKU. Please choose a different SKU.');
@@ -376,13 +376,13 @@ if ($product->show_in_storefront && $product->custom_item) {
 	return;
 }
 
-if ($pines->config->com_sales->require_expiration && empty($product->product_exp)) {
+if ($_->config->com_sales->require_expiration && empty($product->product_exp)) {
 	$product->print_form();
 	pines_notice('You must provide a Product Expiration Date.');
 	return;
 }
 
-if ($pines->config->com_sales->global_products)
+if ($_->config->com_sales->global_products)
 	$product->ac->other = 1;
 
 if ($product->save()) {
@@ -392,7 +392,7 @@ if ($product->save()) {
 	$categories = array();
 	if (is_array($_REQUEST['categories']))
 		$categories = array_map('intval', $_REQUEST['categories']);
-	$all_categories = $pines->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'data' => array('enabled', true)));
+	$all_categories = $_->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'data' => array('enabled', true)));
 	foreach($all_categories as &$cur_cat) {
 		if (in_array($cur_cat->guid, $categories) && !$product->in_array($cur_cat->products)) {
 			$cur_cat->products[] = $product;

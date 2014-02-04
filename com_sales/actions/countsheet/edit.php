@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!empty($_REQUEST['id'])) {
@@ -24,12 +24,12 @@ $entity = com_sales_countsheet::factory((int) $_REQUEST['id']);
 if ($_SESSION['user']->group->com_sales_task_countsheet) {
 	if ( isset($entity->group->guid) && !$entity->group->is($_SESSION['user']->group) ) {
 		pines_notice('This countsheet belongs to a different location.');
-		$pines->com_sales->list_countsheets();
+		$_->com_sales->list_countsheets();
 		return;
 	}
 	if (!isset($entity->guid) && isset($_SESSION['user']->group)) {
 		// Look for any countsheets that are waiting to be committed.
-		$existing_sheets = $pines->entity_manager->get_entities(
+		$existing_sheets = $_->entity_manager->get_entities(
 				array('class' => com_sales_countsheet),
 				array('&',
 					'tag' => array('com_sales', 'countsheet'),

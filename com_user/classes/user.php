@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -47,11 +47,11 @@ class user extends able_object implements user_interface {
 
 	public function __construct($id = 0) {
 		if ($id > 0 || (string) $id === $id) {
-			global $pines;
+			global $_;
 			if ((int) $id === $id)
-				$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'user')));
+				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'user')));
 			else
-				$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'user'), 'strict' => array(($pines->config->com_user->email_usernames ? 'email' : 'username'), (string) $id)));
+				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'user'), 'strict' => array(($_->config->com_user->email_usernames ? 'email' : 'username'), (string) $id)));
 			if (isset($entity)) {
 				$this->guid = $entity->guid;
 				$this->tags = $entity->tags;
@@ -81,8 +81,8 @@ class user extends able_object implements user_interface {
 	 * @return mixed The value of the variable or nothing if it doesn't exist.
 	 */
 	public function &__get($name) {
-		global $pines;
-		if ($pines->config->com_user->email_usernames && $name == 'username') {
+		global $_;
+		if ($_->config->com_user->email_usernames && $name == 'username') {
 			if (parent::__get('email'))
 				return parent::__get('email');
 			else
@@ -98,8 +98,8 @@ class user extends able_object implements user_interface {
 	 * @return bool
 	 */
 	public function __isset($name) {
-		global $pines;
-		if ($pines->config->com_user->email_usernames && $name == 'username')
+		global $_;
+		if ($_->config->com_user->email_usernames && $name == 'username')
 			return (parent::__isset('email') || parent::__isset('username'));
 		else
 			return parent::__isset($name);
@@ -113,8 +113,8 @@ class user extends able_object implements user_interface {
 	 * @return mixed The value of the variable.
 	 */
 	public function __set($name, $value) {
-		global $pines;
-		if ($pines->config->com_user->email_usernames && ($name == 'username' || $name == 'email')) {
+		global $_;
+		if ($_->config->com_user->email_usernames && ($name == 'username' || $name == 'email')) {
 			parent::__set('username', $value);
 			return parent::__set('email', $value);
 		} else
@@ -127,8 +127,8 @@ class user extends able_object implements user_interface {
 	 * @param string $name The name of the variable.
 	 */
 	public function __unset($name) {
-		global $pines;
-		if ($pines->config->com_user->email_usernames && ($name == 'username' || $name == 'email')) {
+		global $_;
+		if ($_->config->com_user->email_usernames && ($name == 'username' || $name == 'email')) {
 			parent::__unset('username');
 			return parent::__unset('email');
 		} else
@@ -212,7 +212,7 @@ class user extends able_object implements user_interface {
 	 * @return bool True on success, false on failure.
 	 */
 	public function send_email_verification($url = '') {
-		global $pines;
+		global $_;
 		if (!isset($this->guid) || !isset($this->secret))
 			return false;
 		$params = array('id' => $this->guid, 'type' => 'register', 'secret' => $this->secret);
@@ -226,11 +226,11 @@ class user extends able_object implements user_interface {
 			'to_timezone' => h($this->timezone),
 			'to_address' => $this->address_type == 'us' ? h("{$this->address_1} {$this->address_2}").'<br />'.h("{$this->city}, {$this->state} {$this->zip}") : '<pre>'.h($this->address_international).'</pre>'
 		);
-		return $pines->com_mailer->send_mail('com_user/verify_email', $macros, $this);
+		return $_->com_mailer->send_mail('com_user/verify_email', $macros, $this);
 	}
 
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_user', 'form_user', 'content');
 		$module->entity = $this;
 		$module->display_username = gatekeeper('com_user/usernames');
@@ -241,9 +241,9 @@ class user extends able_object implements user_interface {
 		$module->display_groups = gatekeeper('com_user/assigngroup');
 		$module->display_abilities = gatekeeper('com_user/abilities');
 		$module->sections = array('system');
-		$highest_parent = $pines->config->com_user->highest_primary;
+		$highest_parent = $_->config->com_user->highest_primary;
 		if ($highest_parent == 0)
-			$module->group_array_primary = $pines->user_manager->get_groups();
+			$module->group_array_primary = $_->user_manager->get_groups();
 		elseif ($highest_parent < 0)
 			$module->group_array_primary = array();
 		else {
@@ -253,9 +253,9 @@ class user extends able_object implements user_interface {
 			else
 				$module->group_array_primary = $highest_parent->get_descendants();
 		}
-		$highest_parent = $pines->config->com_user->highest_secondary;
+		$highest_parent = $_->config->com_user->highest_secondary;
 		if ($highest_parent == 0)
-			$module->group_array_secondary = $pines->user_manager->get_groups();
+			$module->group_array_secondary = $_->user_manager->get_groups();
 		elseif ($highest_parent < 0)
 			$module->group_array_secondary = array();
 		else {
@@ -265,7 +265,7 @@ class user extends able_object implements user_interface {
 			else
 				$module->group_array_secondary = $highest_parent->get_descendants();
 		}
-		foreach ($pines->components as $cur_component)
+		foreach ($_->components as $cur_component)
 			$module->sections[] = $cur_component;
 
 		return $module;
@@ -289,10 +289,10 @@ class user extends able_object implements user_interface {
 	 * @return module The form's module.
 	 */
 	public function print_register() {
-		global $pines;
+		global $_;
 		$module = new module('com_user', 'form_register', 'content');
 		$module->entity = $this;
-		foreach ($pines->components as $cur_component)
+		foreach ($_->components as $cur_component)
 			$module->sections[] = $cur_component;
 
 		return $module;
@@ -307,7 +307,7 @@ class user extends able_object implements user_interface {
 	}
 
 	public function check_password($password) {
-		global $pines;
+		global $_;
 		if (!isset($this->salt)) {
 			$pass = ($this->password == $password);
 			$cur_type = 'salt';
@@ -318,8 +318,8 @@ class user extends able_object implements user_interface {
 			$pass = ($this->password == md5($password.$this->salt));
 			$cur_type = 'salt';
 		}
-		if ($pass && $cur_type != $pines->config->com_user->pw_method) {
-			switch ($pines->config->com_user->pw_method) {
+		if ($pass && $cur_type != $_->config->com_user->pw_method) {
+			switch ($_->config->com_user->pw_method) {
 				case 'plain':
 					unset($this->salt);
 					$this->password = $password;
@@ -396,8 +396,8 @@ class user extends able_object implements user_interface {
 	}
 
 	public function password($password) {
-		global $pines;
-		switch ($pines->config->com_user->pw_method) {
+		global $_;
+		switch ($_->config->com_user->pw_method) {
 			case 'plain':
 				unset($this->salt);
 				return $this->password = $password;
@@ -420,7 +420,7 @@ class user extends able_object implements user_interface {
 	 * is returned.
 	 */
 	public function get_timezone($return_date_time_zone_object = false) {
-		global $pines;
+		global $_;
 		if (!empty($this->timezone))
 			return $return_date_time_zone_object ? new DateTimeZone($this->timezone) : $this->timezone;
 		if (isset($this->group->guid) && !empty($this->group->timezone))
@@ -429,6 +429,6 @@ class user extends able_object implements user_interface {
 			if (!empty($cur_group->timezone))
 				return $return_date_time_zone_object ? new DateTimeZone($cur_group->timezone) : $cur_group->timezone;
 		}
-		return $return_date_time_zone_object ? new DateTimeZone($pines->config->timezone) : $pines->config->timezone;
+		return $return_date_time_zone_object ? new DateTimeZone($_->config->timezone) : $_->config->timezone;
 	}
 }

@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
  * The user manager.
- * @global com_user $pines->user_manager
+ * @global com_user $_->user_manager
  */
-$pines->user_manager = 'com_user';
+$_->user_manager = 'com_user';

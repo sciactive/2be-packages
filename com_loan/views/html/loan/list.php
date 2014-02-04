@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Loans';
-$pines->com_pgrid->load();
-$pines->com_jstree->load();
-$pines->com_timeago->load();
+$_->com_pgrid->load();
+$_->com_jstree->load();
+$_->com_timeago->load();
 $google_drive = false;
-if (isset($pines->com_googledrive)) {
-    $pines->com_googledrive->export_to_drive('csv');
+if (isset($_->com_googledrive)) {
+    $_->com_googledrive->export_to_drive('csv');
     $google_drive = true;
 } else {
     pines_log("Google Drive is not installed", 'notice');
@@ -205,7 +205,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						content: rows
 					});
 				}},
-				<?php if ($google_drive && !empty($pines->config->com_googledrive->client_id)) { 
+				<?php if ($google_drive && !empty($_->config->com_googledrive->client_id)) { 
 						// Need to check if Google Drive is installed ?>
 				{type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
 					// First need to set the rows to which we want to export
@@ -213,7 +213,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					// Then we have to check if we have permission to post to user's google drive
 					checkAuth();
 				}},
-				<?php } elseif ($google_drive && empty($pines->config->com_googledrive->client_id)) { ?>
+				<?php } elseif ($google_drive && empty($_->config->com_googledrive->client_id)) { ?>
 				{type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
 					// They have com_googledrive installed but didn't set the client id, so alert them on click
 					alert('You need to set the CLIENT ID before you can export to Google Drive');
@@ -362,7 +362,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			} else {
 				var row_ids = rows.attr("title");
 			}
-			var payments_limit = <?php echo $pines->config->com_loan->payments_limit; ?>;
+			var payments_limit = <?php echo $_->config->com_loan->payments_limit; ?>;
 			if (rows.length > payments_limit) {
 				alert('You do not have permission to make more than '+pines.safe(payments_limit)+' different customer payments, therefore you cannot make payments for the selected '+rows.length+' customers.');
 			} else {
@@ -442,7 +442,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			} else {
 				var row_ids = rows.attr("title");
 			}
-			var status_limit = <?php echo $pines->config->com_loan->status_limit; ?>;
+			var status_limit = <?php echo $_->config->com_loan->status_limit; ?>;
 			if (rows.length > status_limit) {
 				alert('You do not have permission to change loan status on more than '+pines.safe(status_limit)+' different customers, therefore you cannot change the status for the selected '+rows.length+' customers.');
 			} else {
@@ -489,7 +489,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			} else {
 				var row_ids = rows.attr("title");
 			}
-			var hist_limit = <?php echo $pines->config->com_loan->cust_hist_limit; ?>;
+			var hist_limit = <?php echo $_->config->com_loan->cust_hist_limit; ?>;
 			if (rows.length > hist_limit) {
 				alert('You do not have permission to view more than '+pines.safe(hist_limit)+' different customer histories, therefore you cannot view the history for the selected '+rows.length+' customers.');
 			} else {
@@ -540,7 +540,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				var row_ids = rows.attr("title");
 			}
 			
-			var limit = <?php echo $pines->config->com_loan->add_interaction_limit; ?>;
+			var limit = <?php echo $_->config->com_loan->add_interaction_limit; ?>;
 			if (rows.length > limit) {
 				alert('You do not have permission to add more than '+pines.safe(limit)+' interactions, therefore you cannot add interactions to the selected '+rows.length+' customers.');
 			} else {

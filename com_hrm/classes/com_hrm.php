@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -38,8 +38,8 @@ class com_hrm extends component {
 	 * Places the result in $this->com_sales.
 	 */
 	public function __construct() {
-		global $pines;
-		$this->com_sales = $pines->depend->check('component', 'com_sales');
+		global $_;
+		$this->com_sales = $_->depend->check('component', 'com_sales');
 	}
 
 	/**
@@ -50,7 +50,7 @@ class com_hrm extends component {
 	 * @todo Optimize this function.
 	 */
 	public function get_employees($employed = true) {
-		global $pines;
+		global $_;
 
 		$selector = array('&',
 				'tag' => array('com_user', 'user'),
@@ -62,7 +62,7 @@ class com_hrm extends component {
 			$selector2 = array('&', 'data' => array('terminated', true));
 
 
-		$employees = (array) $pines->entity_manager->get_entities(
+		$employees = (array) $_->entity_manager->get_entities(
 				array('class' => com_hrm_employee),
 				$selector,
 				$selector2
@@ -77,8 +77,8 @@ class com_hrm extends component {
 	 * @return array An array of issue types.
 	 */
 	public function get_issue_types() {
-		global $pines;
-		return $pines->entity_manager->get_entities(array('class' => com_hrm_issue_type), array('&', 'tag' => array('com_hrm', 'issue_type')));
+		global $_;
+		return $_->entity_manager->get_entities(array('class' => com_hrm_issue_type), array('&', 'tag' => array('com_hrm', 'issue_type')));
 	}
 	/**
 	 * Creates and attaches a module which lists employee payroll adjustments.
@@ -86,10 +86,10 @@ class com_hrm extends component {
 	 * @return module The list module.
 	 */
 	public function list_adjustments() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_hrm', 'adjustment/list', 'content');
-		$module->adjustments = $pines->entity_manager->get_entities(array('class' => com_hrm_bonus), array('&', 'tag' => array('com_hrm', 'adjustment')));
+		$module->adjustments = $_->entity_manager->get_entities(array('class' => com_hrm_bonus), array('&', 'tag' => array('com_hrm', 'adjustment')));
 
 		if ( empty($module->adjustments) )
 			pines_notice('There are no employee adjustments.');
@@ -102,10 +102,10 @@ class com_hrm extends component {
 	 * @return module The module.
 	 */
 	public function list_applications() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_hrm', 'application/list', 'content');
-		$module->applications = $pines->entity_manager->get_entities(array('class' => com_hrm_application), array('&', 'tag' => array('com_hrm', 'application')));
+		$module->applications = $_->entity_manager->get_entities(array('class' => com_hrm_application), array('&', 'tag' => array('com_hrm', 'application')));
 
 		if ( empty($module->applications) )
 			pines_notice('There are no matching applications.');
@@ -119,10 +119,10 @@ class com_hrm extends component {
 	 * @return module The list module.
 	 */
 	public function list_bonuses() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_hrm', 'bonus/list', 'content');
-		$module->bonuses = $pines->entity_manager->get_entities(array('class' => com_hrm_bonus), array('&', 'tag' => array('com_hrm', 'bonus')));
+		$module->bonuses = $_->entity_manager->get_entities(array('class' => com_hrm_bonus), array('&', 'tag' => array('com_hrm', 'bonus')));
 
 		if ( empty($module->bonuses) )
 			pines_notice('There are no employee bonuses.');
@@ -153,10 +153,10 @@ class com_hrm extends component {
 	 * @return module The module.
 	 */
 	public function list_issue_types() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_hrm', 'issue/list', 'content');
-		$module->types = $pines->entity_manager->get_entities(array('class' => com_hrm_issue_type), array('&', 'tag' => array('com_hrm', 'issue_type')));
+		$module->types = $_->entity_manager->get_entities(array('class' => com_hrm_issue_type), array('&', 'tag' => array('com_hrm', 'issue_type')));
 
 		if ( empty($module->types) )
 			pines_notice('There are no issue types.');
@@ -197,11 +197,11 @@ class com_hrm extends component {
 	 * @return module The module.
 	 */
 	public function review_timeoff() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 		$module = new module('com_hrm', 'timeoff/review', 'content');
-		$module->requests = $pines->entity_manager->get_entities(array('class' => com_hrm_rto), array('&', 'tag' => array('com_hrm', 'rto'), 'data' => array('status', 'pending')));
-		$pines->page->override_doc($module->render());
+		$module->requests = $_->entity_manager->get_entities(array('class' => com_hrm_rto), array('&', 'tag' => array('com_hrm', 'rto'), 'data' => array('status', 'pending')));
+		$_->page->override_doc($module->render());
 
 		return $module;
 	}
@@ -225,11 +225,11 @@ class com_hrm extends component {
 	 * @return module The form's module.
 	 */
 	public function user_select_form($all = false) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_hrm', 'forms/users');
-		$module->users = (array) $pines->user_manager->get_users();
+		$module->users = (array) $_->user_manager->get_users();
 		if (!$all) {
 			// Filter out users who are already employees.
 			foreach ($module->users as $key => &$cur_user) {
@@ -240,7 +240,7 @@ class com_hrm extends component {
 		}
 		usort($module->users, array($this, 'sort_users'));
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 }

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <div class="pf-form">
@@ -47,7 +47,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Guest</span>
-		<?php if ($pines->config->com_messenger->guest_access) { ?>
+		<?php if ($_->config->com_messenger->guest_access) { ?>
 		<label class="pf-field"><input type="checkbox" name="guest" value="true"<?php echo $this->guest == 'true' ? ' checked="checked"' : ''; ?>> Login to chat as a guest.</label>
 		<?php } else { ?>
 		<span class="pf-field">Guest access is disabled.</span>

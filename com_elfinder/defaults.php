@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -16,21 +16,21 @@ return array(
 		'name' => 'root',
 		'cname' => 'Root Path',
 		'description' => 'The path of the root directory for the file manager. End this path with a slash!',
-		'value' => $pines->config->upload_location,
+		'value' => $_->config->upload_location,
 		'peruser' => true,
 	),
 	array(
 		'name' => 'root_url',
 		'cname' => 'Root URL',
 		'description' => 'The URL of the root directory for the file manager. End this path with a slash!',
-		'value' => $pines->config->rela_location.$pines->config->upload_location,
+		'value' => $_->config->rela_location.$_->config->upload_location,
 		'peruser' => true,
 	),
 	array(
 		'name' => 'full_root_url',
 		'cname' => 'Full Root URL',
 		'description' => 'The full URL of the root directory for the file manager. End this path with a slash!',
-		'value' => $pines->config->full_location.$pines->config->upload_location,
+		'value' => $_->config->full_location.$_->config->upload_location,
 		'peruser' => true,
 	),
 	array(

@@ -8,16 +8,16 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Product' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide product details in this form.';
-$pines->editor->load();
-$pines->icons->load();
-$pines->uploader->load();
-$pines->com_pgrid->load();
-$pines->com_ptags->load();
-$pines->com_sales->load_jcrop();
+$_->editor->load();
+$_->icons->load();
+$_->uploader->load();
+$_->com_pgrid->load();
+$_->com_ptags->load();
+$_->com_sales->load_jcrop();
 ?>
 <style type="text/css">
 	#p_muid_sku_loading {
@@ -194,14 +194,14 @@ $pines->com_sales->load_jcrop();
 		<li><a href="#p_muid_tab_purchasing" data-toggle="tab">Purchasing</a></li>
 		<li><a href="#p_muid_tab_pricing" data-toggle="tab">Pricing</a></li>
 		<li><a href="#p_muid_tab_attributes" data-toggle="tab">Attributes</a></li>
-		<?php if ($pines->config->com_sales->com_hrm) { ?>
+		<?php if ($_->config->com_sales->com_hrm) { ?>
 		<li><a href="#p_muid_tab_commission" data-toggle="tab">Commission</a></li>
 		<?php } ?>
 		<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Appearance <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li><a href="#p_muid_tab_images" data-toggle="tab">Images</a></li>
-				<?php if ($pines->config->com_sales->com_storefront) { ?>
+				<?php if ($_->config->com_sales->com_storefront) { ?>
 				<li class="divider"></li>
 				<li><a href="#p_muid_tab_storefront" data-toggle="tab">Storefront</a></li>
 				<li><a href="#p_muid_tab_head" data-toggle="tab">Page Head</a></li>
@@ -507,7 +507,7 @@ $pines->com_sales->load_jcrop();
 					});
 				</script>
 				<label><span class="pf-label">Product Expiration Date
-						<?php if ($pines->config->com_sales->require_expiration) { ?>
+						<?php if ($_->config->com_sales->require_expiration) { ?>
 						<span class="pf-required">*</span>
 						<?php } ?>
 					</span>
@@ -581,7 +581,7 @@ $pines->com_sales->load_jcrop();
 				<label><span class="pf-label">Discountable</span>
 					<input class="pf-field" type="checkbox" name="discountable" value="ON"<?php echo $this->entity->discountable ? ' checked="checked"' : ''; ?> /></label>
 			</div>
-			<?php if ($pines->config->com_sales->com_customer) { ?>
+			<?php if ($_->config->com_sales->com_customer) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Require Customer</span>
 					<span class="pf-note">This means a customer must be selected when selling this item.</span>
@@ -634,7 +634,7 @@ $pines->com_sales->load_jcrop();
 			</div>
 			<br class="pf-clearing" />
 		</div>
-		<?php if ($pines->config->com_sales->com_hrm) { ?>
+		<?php if ($_->config->com_sales->com_hrm) { ?>
 		<script type="text/javascript">
 			pines(function(){
 				// Commissions
@@ -941,9 +941,9 @@ $pines->com_sales->load_jcrop();
 
 						var thumbnails = $('<div>You can choose the best thumbnail:<ul class="thumbnails"><li>'+
 						'<a href="javascript:void(0);" class="thumbnail" data-method="crop"><img src="" alt="Crop method." />'+
-						'<span style="display: block; width: <?php echo (int) $pines->config->com_sales->product_images_tmb_width; ?>px; text-align: center;" class="caption">Crop the scaled image to fit.</span></a></li>'+
+						'<span style="display: block; width: <?php echo (int) $_->config->com_sales->product_images_tmb_width; ?>px; text-align: center;" class="caption">Crop the scaled image to fit.</span></a></li>'+
 						'<li><a href="javascript:void(0);" class="thumbnail" data-method="fit"><img src="" alt="Fit method." />'+
-						'<span style="display: block; width: <?php echo (int) $pines->config->com_sales->product_images_tmb_width; ?>px; text-align: center;" class="caption">Pad the image to fit it all.</span></a></li></ul></div>')
+						'<span style="display: block; width: <?php echo (int) $_->config->com_sales->product_images_tmb_width; ?>px; text-align: center;" class="caption">Pad the image to fit it all.</span></a></li></ul></div>')
 						.find("a[data-method=crop] img").attr("src", tmp_url.replace('__image__', escape(cur_img)).replace('__type__', 'prod_tmb').replace('__source__', cur_source).replace('__options__', escape('{"tmb_method":"crop"}'))).end()
 						.find("a[data-method=fit] img").attr("src", tmp_url.replace('__image__', escape(cur_img)).replace('__type__', 'prod_tmb').replace('__source__', cur_source).replace('__options__', escape('{"tmb_method":"fit"}'))).end()
 						.on("click", "a", function(){
@@ -1004,7 +1004,7 @@ $pines->com_sales->load_jcrop();
 						<?php if ($this->entity->images) { foreach ($this->entity->images as $cur_image) { ?>
 						<li data-source="file" data-image="<?php e($cur_image['file']); ?>" data-thumbnail="<?php e($cur_image['thumbnail']); ?>" class="thumbnail">
 							<button type="button" style="display: none;" class="remove btn btn-mini btn-danger"><i class="icon-remove"></i></button>
-							<a href="<?php e($pines->config->location.$cur_image['file']); ?>" target="_blank"><img alt="<?php e(basename($cur_image['file'])); ?>" src="<?php e($pines->config->location.$cur_image['thumbnail']); ?>" /></a>
+							<a href="<?php e($_->config->location.$cur_image['file']); ?>" target="_blank"><img alt="<?php e(basename($cur_image['file'])); ?>" src="<?php e($_->config->location.$cur_image['thumbnail']); ?>" /></a>
 							<p><?php echo empty($cur_image['alt']) ? 'Click to add description...' : h(basename($cur_image['alt'])); ?></p>
 						</li>
 						<?php } } ?>
@@ -1021,7 +1021,7 @@ $pines->com_sales->load_jcrop();
 				<div class="pf-group">
 					<div class="pf-field">
 						<div class="thumbnail">
-							<img alt="Thumbnail Preview" id="p_muid_thumbnail_preview" src="<?php e($pines->config->location.$this->entity->thumbnail); ?>" />
+							<img alt="Thumbnail Preview" id="p_muid_thumbnail_preview" src="<?php e($_->config->location.$this->entity->thumbnail); ?>" />
 						</div>
 					</div>
 				</div>
@@ -1029,7 +1029,7 @@ $pines->com_sales->load_jcrop();
 			<input type="hidden" name="images" />
 			<br class="pf-clearing" />
 		</div>
-		<?php if ($pines->config->com_sales->com_storefront) { ?>
+		<?php if ($_->config->com_sales->com_storefront) { ?>
 		<style type="text/css">
 			#p_muid_tab_storefront .combobox {
 				position: relative;

@@ -8,16 +8,16 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New User' : 'Editing ['.h($this->entity->username).']';
 $this->note = 'Provide user details in this form.';
-$pines->com_pgrid->load();
-//$pines->com_jstree->load();
-if ($pines->config->com_user->check_username)
-	$pines->icons->load();
+$_->com_pgrid->load();
+//$_->com_jstree->load();
+if ($_->config->com_user->check_username)
+	$_->icons->load();
 
-if ($pines->config->com_user->check_username) { ?>
+if ($_->config->com_user->check_username) { ?>
 <style type="text/css">
 	#p_muid_username_loading {
 		background-position: left;
@@ -35,9 +35,9 @@ if ($pines->config->com_user->check_username) { ?>
 <?php } ?>
 <script type="text/javascript">
 	pines(function(){
-		<?php if (($pines->config->com_user->email_usernames || $this->display_username) && $pines->config->com_user->check_username) { ?>
+		<?php if (($_->config->com_user->email_usernames || $this->display_username) && $_->config->com_user->check_username) { ?>
 		// Check usernames.
-		$("[name=<?php echo $pines->config->com_user->email_usernames ? 'email' : 'username'; ?>]", "#p_muid_form").change(function(){
+		$("[name=<?php echo $_->config->com_user->email_usernames ? 'email' : 'username'; ?>]", "#p_muid_form").change(function(){
 			var username = $(this),
 				id = <?php echo json_encode("{$this->entity->guid}"); ?>;
 			$.ajax({
@@ -93,11 +93,11 @@ if ($pines->config->com_user->check_username) { ?>
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
 		<?php if ($this->display_groups) { ?>
 		<li><a href="#p_muid_tab_groups" data-toggle="tab">Groups</a></li>
-		<?php } if (in_array('address', $pines->config->com_user->user_fields) || in_array('additional_addresses', $pines->config->com_user->user_fields)) { ?>
+		<?php } if (in_array('address', $_->config->com_user->user_fields) || in_array('additional_addresses', $_->config->com_user->user_fields)) { ?>
 		<li><a href="#p_muid_tab_location" data-toggle="tab">Address</a></li>
 		<?php } if ($this->display_abilities) { ?>
 		<li><a href="#p_muid_tab_abilities" data-toggle="tab">Abilities</a></li>
-		<?php } if (in_array('attributes', $pines->config->com_user->user_fields)) { ?>
+		<?php } if (in_array('attributes', $_->config->com_user->user_fields)) { ?>
 		<li><a href="#p_muid_tab_attributes" data-toggle="tab">Attributes</a></li>
 		<?php } ?>
 	</ul>
@@ -114,19 +114,19 @@ if ($pines->config->com_user->check_username) { ?>
 					<img src="<?php e($this->entity->info('avatar')); ?>" alt="Avatar" title="Avatar by Gravatar" />
 				</div>
 			</div>
-			<?php if (!$pines->config->com_user->email_usernames && $this->display_username) { ?>
+			<?php if (!$_->config->com_user->email_usernames && $this->display_username) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Username</span>
 					<span class="pf-group" style="display: block;">
 						<input class="pf-field" type="text" name="username" size="24" value="<?php e($this->entity->username); ?>" />
-						<?php if ($pines->config->com_user->check_username) { ?>
+						<?php if ($_->config->com_user->check_username) { ?>
 						<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 						<span class="pf-field picon" id="p_muid_username_message"></span>
 						<?php } ?>
 					</span>
 				</label>
 			</div>
-			<?php } if (in_array('name', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (in_array('name', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">First Name</span>
 					<input class="pf-field" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
@@ -144,50 +144,50 @@ if ($pines->config->com_user->check_username) { ?>
 				<label><span class="pf-label">Enabled</span>
 					<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->has_tag('enabled') ? ' checked="checked"' : ''; ?> /></label>
 			</div>
-			<?php } if ($pines->config->com_user->email_usernames || in_array('email', $pines->config->com_user->user_fields)) { ?>
+			<?php } if ($_->config->com_user->email_usernames || in_array('email', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<?php if ($this->display_email_verified && isset($this->entity->secret)) { ?>
 				<label for="p_muid_email"><span class="pf-label">Email</span></label>
 				<div class="pf-group">
 					<input class="pf-field" type="email" name="email" id="p_muid_email" size="24" value="<?php e($this->entity->email); ?>" />
-					<?php if ($pines->config->com_user->email_usernames && $pines->config->com_user->check_username) { ?>
+					<?php if ($_->config->com_user->email_usernames && $_->config->com_user->check_username) { ?>
 					<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 					<span class="pf-field picon" id="p_muid_username_message"></span>
 					<?php } ?>
-					<label<?php if ($pines->config->com_user->unconfirmed_access) { ?> title="Disregards changes to the user's secondary groups, and defaults will be used."<?php } ?>><input class="pf-field" type="checkbox" name="email_verified" value="ON" /> Mark this address as verified.</label>
+					<label<?php if ($_->config->com_user->unconfirmed_access) { ?> title="Disregards changes to the user's secondary groups, and defaults will be used."<?php } ?>><input class="pf-field" type="checkbox" name="email_verified" value="ON" /> Mark this address as verified.</label>
 				</div>
 				<?php } else { ?>
 				<label>
 					<span class="pf-label">Email</span>
 					<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" />
-					<?php if ($pines->config->com_user->email_usernames && $pines->config->com_user->check_username) { ?>
+					<?php if ($_->config->com_user->email_usernames && $_->config->com_user->check_username) { ?>
 					<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 					<span class="pf-field picon" id="p_muid_username_message"></span>
 					<?php } ?>
 				</label>
 				<?php } ?>
 			</div>
-			<?php if (isset($pines->com_mailer)) { ?>
+			<?php if (isset($_->com_mailer)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Mailing List</span>
-					<input class="pf-field" type="checkbox" name="mailing_list" value="ON"<?php echo $pines->com_mailer->unsubscribe_query($this->entity->email) ? '' : ' checked="checked"'; ?> /> Subscribe to the mailing list.</label>
+					<input class="pf-field" type="checkbox" name="mailing_list" value="ON"<?php echo $_->com_mailer->unsubscribe_query($this->entity->email) ? '' : ' checked="checked"'; ?> /> Subscribe to the mailing list.</label>
 			</div>
-			<?php } } if (in_array('phone', $pines->config->com_user->user_fields)) { ?>
+			<?php } } if (in_array('phone', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone</span>
 					<input class="pf-field" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
-			<?php } if (in_array('fax', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (in_array('fax', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Fax</span>
 					<input class="pf-field" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
-			<?php } if ($pines->config->com_user->referral_codes) { ?>
+			<?php } if ($_->config->com_user->referral_codes) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Referral Code</span>
 					<input class="pf-field" type="text" name="referral_code" size="24" value="<?php e($this->entity->referral_code); ?>" /></label>
 			</div>
-			<?php } if (in_array('timezone', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (in_array('timezone', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label>
 					<span class="pf-label">Timezone</span>
@@ -208,7 +208,7 @@ if ($pines->config->com_user->check_username) { ?>
 				<label><span class="pf-label"><?php if (isset($this->entity->guid)) echo 'Update '; ?>Password</span>
 					<?php
 					if (!isset($this->entity->guid))
-						echo ($pines->config->com_user->pw_empty ? '<span class="pf-note">May be blank.</span>' : '');
+						echo ($_->config->com_user->pw_empty ? '<span class="pf-note">May be blank.</span>' : '');
 					else
 						echo '<span class="pf-note">Leave blank, if not changing.</span>';
 					?>
@@ -223,10 +223,10 @@ if ($pines->config->com_user->check_username) { ?>
 				<span class="pf-label">Password</span>
 				<span class="pf-field"><a href="<?php e(pines_url('com_user', 'updatepassword')); ?>" onclick="return confirm('If you have made changes and you don\'t submit them before leaving this page, they will be lost.');">Update your password.</a></span>
 			</div>
-			<?php } if ($this->display_pin && in_array('pin', $pines->config->com_user->user_fields)) { ?>
+			<?php } if ($this->display_pin && in_array('pin', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">PIN code</span>
-					<input class="pf-field" type="password" name="pin" size="5" value="<?php e($this->entity->pin); ?>" <?php echo $pines->config->com_user->max_pin_length > 0 ? "maxlength=\"{$pines->config->com_user->max_pin_length}\"" : ''; ?>/></label>
+					<input class="pf-field" type="password" name="pin" size="5" value="<?php e($this->entity->pin); ?>" <?php echo $_->config->com_user->max_pin_length > 0 ? "maxlength=\"{$_->config->com_user->max_pin_length}\"" : ''; ?>/></label>
 			</div>
 			<?php } ?>
 			<br class="pf-clearing" />
@@ -244,7 +244,7 @@ if ($pines->config->com_user->check_username) { ?>
 						<select class="pf-field" name="group" size="1">
 							<option value="null">-- No Primary Group --</option>
 							<?php
-							$pines->user_manager->group_sort($this->group_array_primary, 'name');
+							$_->user_manager->group_sort($this->group_array_primary, 'name');
 							foreach ($this->group_array_primary as $cur_group) {
 								?><option value="<?php e($cur_group->guid); ?>"<?php echo $cur_group->is($this->entity->group) ? ' selected="selected"' : ''; ?>><?php e(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
 							} ?>
@@ -312,10 +312,10 @@ if ($pines->config->com_user->check_username) { ?>
 				<?php } ?>
 			<br class="pf-clearing" />
 		</div>
-		<?php } if (in_array('address', $pines->config->com_user->user_fields) || in_array('additional_addresses', $pines->config->com_user->user_fields)) { ?>
+		<?php } if (in_array('address', $_->config->com_user->user_fields) || in_array('additional_addresses', $_->config->com_user->user_fields)) { ?>
 		<div class="tab-pane" id="p_muid_tab_location">
-			<?php if (in_array('address', $pines->config->com_user->user_fields)) {
-				if (in_array('additional_addresses', $pines->config->com_user->user_fields)) { ?>
+			<?php if (in_array('address', $_->config->com_user->user_fields)) {
+				if (in_array('additional_addresses', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element pf-heading">
 				<h3>Main Address</h3>
 			</div>
@@ -430,8 +430,8 @@ if ($pines->config->com_user->check_username) { ?>
 						</span></label>
 				</div>
 			</div>
-			<?php } if (in_array('additional_addresses', $pines->config->com_user->user_fields)) {
-				if (in_array('address', $pines->config->com_user->user_fields)) { ?>
+			<?php } if (in_array('additional_addresses', $_->config->com_user->user_fields)) {
+				if (in_array('address', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element pf-heading">
 				<h3>Additional Addresses</h3>
 			</div>
@@ -603,14 +603,14 @@ if ($pines->config->com_user->check_username) { ?>
 			<br class="pf-clearing" />
 			<?php foreach ($this->sections as $cur_section) {
 				if ($cur_section == 'system')
-					$section_abilities = (array) $pines->info->abilities;
+					$section_abilities = (array) $_->info->abilities;
 				else
-					$section_abilities = (array) $pines->info->$cur_section->abilities;
+					$section_abilities = (array) $_->info->$cur_section->abilities;
 				if (!$section_abilities) continue; ?>
 			<div class="abilities_accordion accordion">
 				<div class="accordion-group">
 					<a class="accordion-heading ui-helper-clearfix" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-						<big class="accordion-toggle"><?php ($cur_section == 'system') ? e($pines->info->name) : e($pines->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
+						<big class="accordion-toggle"><?php ($cur_section == 'system') ? e($_->info->name) : e($_->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
 					</a>
 					<div class="accordion-body collapse">
 						<div class="accordion-inner clearfix">
@@ -630,7 +630,7 @@ if ($pines->config->com_user->check_username) { ?>
 			<?php } ?>
 			<br class="pf-clearing" />
 		</div>
-		<?php } if (in_array('attributes', $pines->config->com_user->user_fields)) { ?>
+		<?php } if (in_array('attributes', $_->config->com_user->user_fields)) { ?>
 		<div class="tab-pane" id="p_muid_tab_attributes">
 			<script type="text/javascript">
 				pines(function(){

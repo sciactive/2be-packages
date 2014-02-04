@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -103,9 +103,9 @@ class com_raffle_raffle extends entity {
 	public function save() {
 		if (!isset($this->name))
 			return false;
-		global $pines;
+		global $_;
 		if (!isset($this->id))
-			$this->id = $pines->entity_manager->new_uid('com_raffle_raffle');
+			$this->id = $_->entity_manager->new_uid('com_raffle_raffle');
 		return parent::save();
 	}
 
@@ -116,7 +116,7 @@ class com_raffle_raffle extends entity {
 	public function print_complete() {
 		if (!$this->complete)
 			return null;
-		global $pines;
+		global $_;
 		$module = new module('com_raffle', 'raffle/complete', 'content');
 		$module->entity = $this;
 
@@ -128,7 +128,7 @@ class com_raffle_raffle extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_raffle', 'raffle/form', 'content');
 		$module->entity = $this;
 
@@ -142,7 +142,7 @@ class com_raffle_raffle extends entity {
 	public function print_public() {
 		if (!$this->public || $this->complete)
 			return null;
-		global $pines;
+		global $_;
 		$module = new module('com_raffle', 'enter', 'content');
 		$module->entity = $this;
 

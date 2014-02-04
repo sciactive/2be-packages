@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = 'New Report';
-$pines->com_jstree->load();
+$_->com_jstree->load();
 ?>
 <style type="text/css" >
 	.form_date {

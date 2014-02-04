@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/viewwarehouse') && !gatekeeper('com_sales/warehouse') )
@@ -39,4 +39,4 @@ if (!empty($_REQUEST['location']))
 
 $descendants = ($_REQUEST['descendants'] != 'false');
 
-$pines->com_sales->warehouse_pending($_REQUEST['ordered'] == 'true', $start_date, $end_date, $location, $descendants);
+$_->com_sales->warehouse_pending($_REQUEST['ordered'] == 'true', $start_date, $end_date, $location, $descendants);

@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Category' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide category details in this form.';
-$pines->editor->load();
-$pines->com_pgrid->load();
-$pines->com_menueditor->load_editor();
-$pines->com_ptags->load();
+$_->editor->load();
+$_->com_pgrid->load();
+$_->com_menueditor->load_editor();
+$_->com_ptags->load();
 
 ?>
 <style type="text/css">
@@ -68,7 +68,7 @@ $pines->com_ptags->load();
 	</script>
 	<ul class="nav nav-tabs" style="clear: both;">
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
-		<?php if (($pines->config->com_content->custom_head && gatekeeper('com_content/edithead')) || gatekeeper('com_content/editmeta')) { ?>
+		<?php if (($_->config->com_content->custom_head && gatekeeper('com_content/edithead')) || gatekeeper('com_content/editmeta')) { ?>
 		<li><a href="#p_muid_tab_head" data-toggle="tab">Page Head</a></li>
 		<?php } ?>
 		<li><a href="#p_muid_tab_menu" data-toggle="tab">Menu</a></li>
@@ -231,7 +231,7 @@ $pines->com_ptags->load();
 			</div>
 			<br class="pf-clearing" />
 		</div>
-		<?php if (($pines->config->com_content->custom_head && gatekeeper('com_content/edithead')) || gatekeeper('com_content/editmeta')) { ?>
+		<?php if (($_->config->com_content->custom_head && gatekeeper('com_content/edithead')) || gatekeeper('com_content/editmeta')) { ?>
 		<div class="tab-pane" id="p_muid_tab_head">
 			<?php if (gatekeeper('com_content/editmeta')) { ?>
 			<div class="pf-element pf-heading">
@@ -379,7 +379,7 @@ $pines->com_ptags->load();
 				</div>
 				<br style="clear: both; height: 1px;" />
 			</div>
-			<?php } if ($pines->config->com_content->custom_head && gatekeeper('com_content/edithead')) { ?>
+			<?php } if ($_->config->com_content->custom_head && gatekeeper('com_content/edithead')) { ?>
 			<div class="pf-element pf-heading">
 				<h3>Custom Head Code</h3>
 			</div>
@@ -722,12 +722,12 @@ $pines->com_ptags->load();
 				<span class="pf-label">Add a Variant</span>
 				<?php
 				$variants = array();
-				foreach ($pines->components as $cur_template) {
+				foreach ($_->components as $cur_template) {
 					if (strpos($cur_template, 'tpl_') !== 0)
 						continue;
 					$cur_template = clean_filename($cur_template);
 					// Is there even a variant option?
-					if (!isset($pines->config->$cur_template->variant))
+					if (!isset($_->config->$cur_template->variant))
 						continue;
 					// Find the defaults file.
 					if (!file_exists("templates/$cur_template/defaults.php"))
@@ -749,7 +749,7 @@ $pines->com_ptags->load();
 				<?php } else { ?>
 				<select class="pf-field" id="p_muid_variant_template" style="max-width: 200px;">
 					<?php foreach ($variants as $cur_template => $cur_variants) { ?>
-					<option value="<?php e($cur_template); ?>"<?php echo $cur_template == $pines->current_template ? ' selected="selected"' : ''; ?>><?php e("{$pines->info->$cur_template->name} ($cur_template)"); ?></option>
+					<option value="<?php e($cur_template); ?>"<?php echo $cur_template == $_->current_template ? ' selected="selected"' : ''; ?>><?php e("{$_->info->$cur_template->name} ($cur_template)"); ?></option>
 					<?php } ?>
 				</select>
 				<select class="pf-field" id="p_muid_variant_variant" style="max-width: 200px;">
@@ -765,7 +765,7 @@ $pines->com_ptags->load();
 				<?php foreach ((array) $this->entity->variants as $cur_template => $cur_variant) { ?>
 				<div class="pf-element pf-full-width <?php e($cur_template); ?>">
 					<button class="pf-field btn btn-danger remove" style="float: right;" type="button">Remove</button>
-					<span class="pf-label"><?php e("{$pines->info->$cur_template->name} ($cur_template)"); ?></span>
+					<span class="pf-label"><?php e("{$_->info->$cur_template->name} ($cur_template)"); ?></span>
 					<span class="pf-field"><?php e($cur_variant); ?></span>
 					<input type="hidden" name="variants[]" value="<?php e("{$cur_template}::{$cur_variant}"); ?>" />
 				</div>

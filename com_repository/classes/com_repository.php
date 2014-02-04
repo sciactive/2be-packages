@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -25,8 +25,8 @@ class com_repository extends component {
 	 * @return array|string The index.
 	 */
 	public function get_index($user = null, $decode = true) {
-		global $pines;
-		$file = $pines->config->com_repository->repository_path;
+		global $_;
+		$file = $_->config->com_repository->repository_path;
 		if (isset($user))
 			$file .= $user->guid . '/';
 		$file .= 'index.json';
@@ -63,13 +63,13 @@ class com_repository extends component {
 	 * @param user $user Generate the index for this user.
 	 */
 	public function make_index($user) {
-		global $pines;
+		global $_;
 		$guids = array($user->guid);
 		$slim = new slim;
 		if (!isset($user->guid))
 			return;
 		// Build an index for the directory.
-		$dir = $pines->config->com_repository->repository_path.$user->guid.'/';
+		$dir = $_->config->com_repository->repository_path.$user->guid.'/';
 		$index = array();
 		$packages = glob($dir.'*/*/*.slm');
 		foreach ($packages as $cur_package) {
@@ -112,8 +112,8 @@ class com_repository extends component {
 	 * Compile user indices into a main repository index.
 	 */
 	public function make_index_main() {
-		global $pines;
-		$dir = $pines->config->com_repository->repository_path;
+		global $_;
+		$dir = $_->config->com_repository->repository_path;
 		$index_files = glob($dir.'*/index.json');
 		$index = array();
 		foreach ($index_files as $cur_index_file) {
@@ -134,8 +134,8 @@ class com_repository extends component {
 	 * @return int 0 on success, 1 if the key file doesn't exist, 2 if the key can't be retrieved, 3 if errors occur while signing packages.
 	 */
 	public function sign_packages($key_password = null) {
-		global $pines;
-		$dir = $pines->config->com_repository->repository_path;
+		global $_;
+		$dir = $_->config->com_repository->repository_path;
 
 		// Get the key.
 		$key_file = "{$dir}private/cert.key";

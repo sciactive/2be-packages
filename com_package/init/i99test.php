@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-//$pines->com_package->rebuild_db();
+//$_->com_package->rebuild_db();
 
-//var_dump($pines->com_package->db);
+//var_dump($_->com_package->db);
 
 //$package = com_package_package::factory('media/packages/com_about-1.0.0.slm', true);
 //if (!$package)

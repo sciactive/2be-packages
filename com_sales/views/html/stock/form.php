@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 if (is_array($this->entities)) {
 	$this->title = 'Editing Multiple Stock Entries';
@@ -23,7 +23,7 @@ if (is_array($this->entities)) {
 	}
 }
 $this->note = 'Provide stock entry details in this form.';
-$pines->com_jstree->load();
+$_->com_jstree->load();
 ?>
 <form class="pf-form" id="p_muid_form" method="post" action="<?php e(pines_url('com_sales', 'stock/save')); ?>">
 	<?php if (isset($this->entity->guid)) { ?>
@@ -272,7 +272,7 @@ $pines->com_jstree->load();
 							<select class="pf-field" name="vendor">
 								<option value="null">-- None --</option>
 								<?php
-								$pines->entity_manager->sort($this->vendors, 'name');
+								$_->entity_manager->sort($this->vendors, 'name');
 								foreach ($this->vendors as $cur_vendor) { ?>
 								<option value="<?php e($cur_vendor->guid); ?>"<?php echo $this->entity->vendor->guid == $cur_vendor->guid ? ' selected="selected"' : ''; ?>><?php e($cur_vendor->name); ?></option>
 								<?php } ?>

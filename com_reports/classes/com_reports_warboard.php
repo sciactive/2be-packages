@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -73,12 +73,12 @@ class com_reports_warboard extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 
 		$form = new module('com_reports', 'form_warboard', 'content');
 		$form->entity = $this;
-		$form->groups = $pines->com_user->get_groups();
-		$employees = $pines->com_hrm->get_employees();
+		$form->groups = $_->com_user->get_groups();
+		$employees = $_->com_hrm->get_employees();
 		$form->job_titles = array();
 		foreach ($employees as $cur_employee) {
 			if ($cur_employee->job_title != '' && !in_array($cur_employee->job_title, $form->job_titles))
@@ -91,25 +91,25 @@ class com_reports_warboard extends entity {
 	 * @return module The module.
 	 */
 	public function show() {
-		global $pines;
+		global $_;
 
 		$head = new module('com_reports', 'warboard_head', 'head');
 		$module = new module('com_reports', 'warboard', 'content');
 		$module->entity = $this;
 		/*
-		//$pines->com_user->group_sort($this->locations, 'name');
+		//$_->com_user->group_sort($this->locations, 'name');
 		foreach ($this->locations as $cur_l) {
 			echo "{$cur_l->parent->name} : {$cur_l->name}<br />";
 		}
 		echo "<br /><br /><br />";
 		*/
-		$pines->entity_manager->psort($this->locations, 'name', 'parent');
+		$_->entity_manager->psort($this->locations, 'name', 'parent');
 		/*
 		foreach ($this->locations as $cur_l) {
 			echo "{$cur_l->parent->name} : {$cur_l->name}<br />";
 		}
 		*/
-		$pines->entity_manager->sort($this->important, 'name');
+		$_->entity_manager->sort($this->important, 'name');
 
 		return $module;
 	}

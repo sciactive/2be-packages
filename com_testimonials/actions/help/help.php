@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_testimonials/help')) {
 	punt_user(null, pines_url('', ''));
 }
 
-$pines->com_testimonials->print_help();
+$_->com_testimonials->print_help();

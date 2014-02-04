@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -66,7 +66,7 @@ if ($company->address_type == 'international' && empty($company->address_interna
 	pines_notice('Please specify an address.');
 	return;
 }
-if ($pines->config->com_customer->global_customers)
+if ($_->config->com_customer->global_customers)
 	$company->ac->other = 1;
 
 if ($company->save()) {

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -26,11 +26,11 @@ class com_customer_customer extends user {
 		$this->add_tag('com_user', 'user', 'com_customer', 'customer');
 		$this->remove_tag('enabled');
 		if ($id > 0 || (string) $id === $id) {
-			global $pines;
+			global $_;
 			if ((int) $id === $id)
-				$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'user', 'com_customer', 'customer')));
+				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'user', 'com_customer', 'customer')));
 			else
-				$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'user', 'com_customer', 'customer'), 'data' => array('username', $id)));
+				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'user', 'com_customer', 'customer'), 'data' => array('username', $id)));
 			if (isset($entity)) {
 				$this->guid = $entity->guid;
 				$this->tags = $entity->tags;
@@ -51,8 +51,8 @@ class com_customer_customer extends user {
 		$this->addresses = array();
 		$this->attributes = array();
 		// Load default groups.
-		global $pines;
-		$group = $pines->entity_manager->get_entity(
+		global $_;
+		$group = $_->entity_manager->get_entity(
 				array('class' => group, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_user', 'group'),
@@ -61,10 +61,10 @@ class com_customer_customer extends user {
 			);
 		if (isset($group->guid))
 			$this->group = $group;
-		if ($pines->config->com_customer->follow_um_rules && $pines->config->com_user->confirm_email) {
-			if ($pines->config->com_user->unconfirmed_access) {
+		if ($_->config->com_customer->follow_um_rules && $_->config->com_user->confirm_email) {
+			if ($_->config->com_user->unconfirmed_access) {
 				// Use unconfirmed user groups.
-				$groups = $pines->entity_manager->get_entities(
+				$groups = $_->entity_manager->get_entities(
 						array('class' => group, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_user', 'group'),
@@ -82,7 +82,7 @@ class com_customer_customer extends user {
 			$this->remove_tag('enabled');
 		} else
 			$this->add_tag('enabled');
-		$groups = $pines->entity_manager->get_entities(
+		$groups = $_->entity_manager->get_entities(
 				array('class' => group, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_user', 'group'),
@@ -149,7 +149,7 @@ class com_customer_customer extends user {
 	 * @param int $point_adjust The positive or negative point value to add.
 	 */
 	public function adjust_points($point_adjust) {
-		global $pines;
+		global $_;
 		$point_adjust = (int) $point_adjust;
 		// Check that there is a point value.
 		if (!is_int($this->points))
@@ -169,7 +169,7 @@ class com_customer_customer extends user {
 				$this->peak_points = $this->points;
 		}
 		// Did their points go negative?
-		if ($this->points < 0 && !$pines->config->com_customer->negpoints)
+		if ($this->points < 0 && !$_->config->com_customer->negpoints)
 			$this->points = 0;
 	}
 
@@ -189,12 +189,12 @@ class com_customer_customer extends user {
 	 * @return module The report's module.
 	 */
 	public function print_history() {
-		global $pines;
+		global $_;
 		$module = new module('com_customer', 'customer/history', 'content');
 		$module->entity = $this;
-		$module->com_sales = $pines->depend->check('component', 'com_sales');
+		$module->com_sales = $_->depend->check('component', 'com_sales');
 
-		$module->interactions = $pines->entity_manager->get_entities(
+		$module->interactions = $_->entity_manager->get_entities(
 				array('class' => com_customer_interaction),
 				array('&',
 					'ref' => array('customer', $this),
@@ -202,14 +202,14 @@ class com_customer_customer extends user {
 				)
 			);
 		if ($module->com_sales) {
-			$module->sales = $pines->entity_manager->get_entities(
+			$module->sales = $_->entity_manager->get_entities(
 					array('class' => com_sales_sale),
 					array('&',
 						'ref' => array('customer', $this),
 						'tag' => array('com_sales', 'sale')
 					)
 				);
-			$module->returns = $pines->entity_manager->get_entities(
+			$module->returns = $_->entity_manager->get_entities(
 					array('class' => com_sales_return),
 					array('&',
 						'ref' => array('customer', $this),
@@ -240,7 +240,7 @@ class com_customer_customer extends user {
 	 * @return bool True on success, false on failure.
 	 */
 	public function save() {
-		global $pines;
+		global $_;
 		if (!isset($this->name))
 			return false;
 		if (!isset($this->guid) && $this->com_customer__unconfirmed) {
@@ -264,11 +264,11 @@ class com_customer_customer extends user {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_customer', 'customer/form', 'content');
 		$module->entity = $this;
-		$module->com_sales = $pines->depend->check('component', 'com_sales');
-		$module->interactions = $pines->entity_manager->get_entities(
+		$module->com_sales = $_->depend->check('component', 'com_sales');
+		$module->interactions = $_->entity_manager->get_entities(
 				array('class' => com_customer_interaction),
 				array('&',
 					'ref' => array('customer', $this),
@@ -276,14 +276,14 @@ class com_customer_customer extends user {
 				)
 			);
 		if ($module->com_sales) {
-			$module->sales = $pines->entity_manager->get_entities(
+			$module->sales = $_->entity_manager->get_entities(
 					array('class' => com_sales_sale),
 					array('&',
 						'ref' => array('customer', $this),
 						'tag' => array('com_sales', 'sale')
 					)
 				);
-			$module->returns = $pines->entity_manager->get_entities(
+			$module->returns = $_->entity_manager->get_entities(
 					array('class' => com_sales_return),
 					array('&',
 						'ref' => array('customer', $this),
@@ -304,14 +304,14 @@ class com_customer_customer extends user {
 	 * @return bool Whether or not the follow-ups were scheduled.
 	 */
 	public function schedule_follow_up($employee = null, $sale = null, $warehouse = false) {
-		global $pines;
+		global $_;
 
-		if (!$pines->config->com_customer->com_calendar || !isset($employee->guid))
+		if (!$_->config->com_customer->com_calendar || !isset($employee->guid))
 			return false;
 		// Change the timezone to enter the event with the user's timezone.
 		date_default_timezone_set($employee->get_timezone());
 		if ($warehouse) {
-			$wh_follow_up = explode('|', $pines->config->com_customer->wh_follow_up);
+			$wh_follow_up = explode('|', $_->config->com_customer->wh_follow_up);
 			$interaction = com_customer_interaction::factory();
 			$interaction->customer = $this;
 			$interaction->employee = $employee;
@@ -321,7 +321,7 @@ class com_customer_customer extends user {
 			$interaction->type = 'Follow-Up '.$wh_follow_up[0];
 			$interaction->status = 'open';
 			$interaction->comments = $wh_follow_up[2];
-			if ($pines->config->com_customer->com_calendar) {
+			if ($_->config->com_customer->com_calendar) {
 				// Create the interaction calendar event.
 				$event = com_calendar_event::factory();
 				$event->employee = $employee;
@@ -348,7 +348,7 @@ class com_customer_customer extends user {
 			$event->group = $employee->group;
 			$event->save();
 		} else {
-			foreach ($pines->config->com_customer->follow_ups as $cur_follow_up) {
+			foreach ($_->config->com_customer->follow_ups as $cur_follow_up) {
 				$cur_follow_up = explode('|', $cur_follow_up);
 				$interaction = com_customer_interaction::factory();
 				$interaction->customer = $this;
@@ -359,7 +359,7 @@ class com_customer_customer extends user {
 				$interaction->type = 'Follow-Up '.$cur_follow_up[0];
 				$interaction->status = 'open';
 				$interaction->comments = $cur_follow_up[2];
-				if ($pines->config->com_customer->com_calendar) {
+				if ($_->config->com_customer->com_calendar) {
 					// Create the interaction calendar event.
 					$event = com_calendar_event::factory();
 					$event->employee = $employee;

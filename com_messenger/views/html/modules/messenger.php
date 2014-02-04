@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!isset($this->widget_title))
@@ -28,15 +28,15 @@ if ($this->guest != 'true' && !isset($_SESSION['user']->guid)) {
 	return;
 }
 
-$pines->com_messenger->load();
+$_->com_messenger->load();
 
 if ($this->guest == 'true') {
-	$guest = $pines->com_messenger->get_guest();
+	$guest = $_->com_messenger->get_guest();
 	$xmpp_user = $guest->username;
 	$xmpp_pass = $guest->password;
 } else {
 	$xmpp_user = $_SESSION['user']->username;
-	$xmpp_pass = $pines->com_messenger->get_temp_secret();
+	$xmpp_pass = $_->com_messenger->get_temp_secret();
 }
 
 if ($this->interface == 'floating') {
@@ -53,17 +53,17 @@ if ($this->interface == 'floating') {
 		localStorage.setItem("pchat-presence-status", status);
 		<?php } ?>
 		var pchat = $("#p_muid_main").pchat({
-			bosh_url: <?php echo json_encode($pines->config->com_messenger->use_proxy ? pines_url('com_messenger', 'xmpp_proxy') : $pines->config->com_messenger->xmpp_bosh_url); ?>,
-			domain: <?php echo json_encode($pines->config->com_messenger->xmpp_server); ?>,
-			jid: <?php echo json_encode($xmpp_user); ?>+"@"+<?php echo json_encode($pines->config->com_messenger->xmpp_server); ?>,
+			bosh_url: <?php echo json_encode($_->config->com_messenger->use_proxy ? pines_url('com_messenger', 'xmpp_proxy') : $_->config->com_messenger->xmpp_bosh_url); ?>,
+			domain: <?php echo json_encode($_->config->com_messenger->xmpp_server); ?>,
+			jid: <?php echo json_encode($xmpp_user); ?>+"@"+<?php echo json_encode($_->config->com_messenger->xmpp_server); ?>,
 			password: <?php echo json_encode($xmpp_pass); ?>,
 			sound: <?php echo json_encode($this->sounds == 'true'); ?>,
 			sounds: {
 				<?php if ($this->presence_sounds == 'true') { ?>
-				offline: ["<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/offline.ogg", "<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/offline.mp3"],
-				online: ["<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/online.ogg", "<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/online.mp3"],
+				offline: ["<?php e($_->config->location); ?>components/com_messenger/includes/pchat/sounds/offline.ogg", "<?php e($_->config->location); ?>components/com_messenger/includes/pchat/sounds/offline.mp3"],
+				online: ["<?php e($_->config->location); ?>components/com_messenger/includes/pchat/sounds/online.ogg", "<?php e($_->config->location); ?>components/com_messenger/includes/pchat/sounds/online.mp3"],
 				<?php } ?>
-				received: ["<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/received.ogg", "<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/received.mp3"]
+				received: ["<?php e($_->config->location); ?>components/com_messenger/includes/pchat/sounds/received.ogg", "<?php e($_->config->location); ?>components/com_messenger/includes/pchat/sounds/received.mp3"]
 			},
 			<?php if ($this->status_url == 'true') { ?>
 			onconnect: function(){

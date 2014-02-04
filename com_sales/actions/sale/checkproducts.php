@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/editsale') && !gatekeeper('com_sales/newsale') )
 	punt_user(null, pines_url('com_sales', 'sale/checkproducts', $_GET));
 
-$pines->page->override = true;
+$_->page->override = true;
 
 // This is all the common parts of the selector.
 $selector = array('&',
@@ -73,7 +73,7 @@ foreach ($products as $key => $cur_product) {
 	$cur_selector['ref'][] = array('product', $product);
 	if ($product->serialized)
 		$cur_selector['strict'] = array('serial', $serial);
-	$stock = $pines->entity_manager->get_entities(
+	$stock = $_->entity_manager->get_entities(
 			array('class' => com_sales_stock, 'limit' => $qty),
 			$cur_selector,
 			array('!&',
@@ -89,4 +89,4 @@ foreach ($products as $key => $cur_product) {
 		$guids[] = $cur_stock->guid;
 }
 
-$pines->page->override_doc(json_encode(array('result' => $success, 'messages' => $messages)));
+$_->page->override_doc(json_encode(array('result' => $success, 'messages' => $messages)));

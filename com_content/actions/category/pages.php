@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 // TODO: Gatekeeper checks?
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $category = com_content_category::factory((int) $_REQUEST['id']);
 
 if (!isset($category->guid)) {
-	$pines->page->override_doc(json_encode(array()));
+	$_->page->override_doc(json_encode(array()));
 	return;
 }
 
@@ -36,4 +36,4 @@ foreach ($category->pages as $page) {
 	$return[] = $json_struct;
 }
 
-$pines->page->override_doc(json_encode($return));
+$_->page->override_doc(json_encode($return));

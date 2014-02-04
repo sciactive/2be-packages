@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -30,7 +30,7 @@ class com_newsletter extends component {
 	 * @return bool True on success, false on failure.
 	 */
 	function edit_mail($mail = null, $new_option = '', $new_action = '', $close_option = 'com_newsletter', $close_action = "list") {
-		global $pines;
+		global $_;
 
 		if ( isset($mail) ) {
 			if ( !$mail->has_tag('com_newsletter', 'mail') ) {
@@ -55,10 +55,10 @@ class com_newsletter extends component {
 	 * @return module The module.
 	 */
 	function list_mails() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_newsletter', 'list_mails', 'content');
-		$module->mails = $pines->entity_manager->get_entities(array(), array('&', 'tag' => array('com_newsletter', 'mail')));
+		$module->mails = $_->entity_manager->get_entities(array(), array('&', 'tag' => array('com_newsletter', 'mail')));
 
 		if ( empty($module->mails) ) {
 			//$module->detach();

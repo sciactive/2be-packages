@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Employee Issue Types';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <script type="text/javascript">
 	pines(function(){

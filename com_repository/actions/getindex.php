@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $publisher = $_REQUEST['pub'];
@@ -20,4 +20,4 @@ $user = user::factory($publisher);
 if (!isset($user->guid))
 	$user = null;
 
-$pines->page->override_doc($pines->com_repository->get_index($user, false));
+$_->page->override_doc($_->com_repository->get_index($user, false));

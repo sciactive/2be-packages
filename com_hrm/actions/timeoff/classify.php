@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/managerto') )
@@ -21,7 +21,7 @@ foreach ($list as $cur_request) {
 
 	if ( !isset($cur_entity->guid) || !$cur_entity->save() ) {
 		$failed_updates .= (empty($failed_updates) ? '' : ', ').$cur_requests;
-	} elseif ($_REQUEST['status'] == 'approved' && $pines->config->com_hrm->com_calendar) {
+	} elseif ($_REQUEST['status'] == 'approved' && $_->config->com_hrm->com_calendar) {
 		$new_event = com_calendar_event::factory();
 		$new_event->time_off = true;
 		$new_event->employee = $cur_entity->employee;

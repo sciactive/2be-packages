@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Dashboard';
 if (!$this->entity->is($_SESSION['user']->dashboard)) {
 	$this->title .= h(" for {$this->entity->user->name}");
 	$this->note = 'Some widgets will show your user info, which is normal because you\'re the logged in user.';
 }
-$pines->com_bootstrap->load();
+$_->com_bootstrap->load();
 ?>
 <div id="p_muid_dashboard">
 	<style type="text/css" scoped="scoped">

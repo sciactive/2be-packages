@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Module' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide module details in this form.';
 
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <style type="text/css" >
 	#p_muid_form .combobox {
@@ -223,7 +223,7 @@ $pines->com_pgrid->load();
 					<input class="pf-field" type="text" name="position" size="24" value="<?php e($this->entity->position); ?>" />
 					<a href="javascript:void(0);" class="ui-icon ui-icon-triangle-1-s"></a>
 					<select style="display: none;">
-						<?php foreach ($pines->info->template->positions as $cur_position) {
+						<?php foreach ($_->info->template->positions as $cur_position) {
 							?><option value="<?php e($cur_position); ?>"><?php e($cur_position); ?></option><?php
 						} ?>
 					</select>
@@ -240,7 +240,7 @@ $pines->com_pgrid->load();
 			<?php $i=0; foreach ($this->modules as $cur_component => $cur_modules) { $i++; ?>
 			<div class="pf-element pf-full-width component_modules">
 				<div style="padding: .5em;" class="ui-helper-clearfix<?php echo ($i % 2) ? '' : ' alert-info'; ?>">
-					<strong class="pf-label" style="font-size: 1.1em;"><?php e($pines->info->$cur_component->name); ?></strong>
+					<strong class="pf-label" style="font-size: 1.1em;"><?php e($_->info->$cur_component->name); ?></strong>
 					<div class="pf-group">
 						<?php foreach ($cur_modules as $cur_modname => $cur_module) { ?>
 						<div class="pf-field">

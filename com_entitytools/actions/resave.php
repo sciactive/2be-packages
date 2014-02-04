@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_entitytools/test') )
@@ -21,7 +21,7 @@ $errors = array();
 $offset = $count = $nochange = 0;
 // Grab all entities, 50 at a time, and resave them.
 do {
-	$entities = $pines->entity_manager->get_entities(array('limit' => 50, 'offset' => $offset));
+	$entities = $_->entity_manager->get_entities(array('limit' => 50, 'offset' => $offset));
 	// If we have run through all entities, we are done updating.
 	foreach ($entities as &$cur_entity) {
 		if ($cur_entity->save())

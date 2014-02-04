@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $module = new module('com_entityhelper', 'default_helper');
@@ -38,12 +38,12 @@ if ($this->render == 'body' && gatekeeper('com_customer/listcustomers')) { ?>
 				<td style="font-weight:bold;">Enabled</td>
 				<td><?php echo $this->entity->has_tag('enabled') ? 'Yes' : 'No'; ?></td>
 			</tr>
-			<?php if (!empty($this->entity->email) && in_array('email', $pines->config->com_customer->shown_fields_customer)) { ?>
+			<?php if (!empty($this->entity->email) && in_array('email', $_->config->com_customer->shown_fields_customer)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Email</td>
 				<td><a href="mailto:<?php e($this->entity->email); ?>"><?php e($this->entity->email); ?></a></td>
 			</tr>
-			<?php } if (isset($this->entity->company->guid) && in_array('company', $pines->config->com_customer->shown_fields_customer)) { ?>
+			<?php } if (isset($this->entity->company->guid) && in_array('company', $_->config->com_customer->shown_fields_customer)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Company</td>
 				<td><a data-entity="<?php e($this->entity->company->guid); ?>" data-entity-context="com_customer_company"><?php e($this->entity->company->name); ?></a></td>
@@ -53,7 +53,7 @@ if ($this->render == 'body' && gatekeeper('com_customer/listcustomers')) { ?>
 				<td style="font-weight:bold;">Job Title</td>
 				<td><?php e($this->entity->job_title); ?></td>
 			</tr>
-			<?php } } if (in_array('phone', $pines->config->com_customer->shown_fields_customer)) {
+			<?php } } if (in_array('phone', $_->config->com_customer->shown_fields_customer)) {
 				if (!empty($this->entity->phone_cell)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Cell Phone</td>
@@ -79,10 +79,10 @@ if ($this->render == 'body' && gatekeeper('com_customer/listcustomers')) { ?>
 				<td style="font-weight:bold;">Timezone</td>
 				<td><?php e($this->entity->get_timezone()).(empty($this->entity->timezone) ? ' (Inherited)' : ' (Assigned)'); ?></td>
 			</tr>
-			<?php if (in_array('referrer', $pines->config->com_customer->shown_fields_customer)) { ?>
+			<?php if (in_array('referrer', $_->config->com_customer->shown_fields_customer)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Referrer</td>
-				<td><?php foreach ($pines->config->com_customer->referrer_values as $cur_value) {
+				<td><?php foreach ($_->config->com_customer->referrer_values as $cur_value) {
 						if ($this->entity->referrer == $cur_value)
 							e($cur_value);
 					} ?></td>
@@ -91,7 +91,7 @@ if ($this->render == 'body' && gatekeeper('com_customer/listcustomers')) { ?>
 		</tbody>
 	</table>
 </div>
-<?php if (in_array('address', $pines->config->com_customer->shown_fields_customer)) { ?>
+<?php if (in_array('address', $_->config->com_customer->shown_fields_customer)) { ?>
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Address</h3>
@@ -135,7 +135,7 @@ if ($this->render == 'body' && gatekeeper('com_customer/listcustomers')) { ?>
 	</table>
 	<?php } ?>
 </div>
-<?php } if (in_array('points', $pines->config->com_customer->shown_fields_customer)) { ?>
+<?php } if (in_array('points', $_->config->com_customer->shown_fields_customer)) { ?>
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Points</h3>
@@ -156,7 +156,7 @@ if ($this->render == 'body' && gatekeeper('com_customer/listcustomers')) { ?>
 		</tbody>
 	</table>
 </div>
-<?php } if (in_array('membership', $pines->config->com_customer->shown_fields_customer)) { ?>
+<?php } if (in_array('membership', $_->config->com_customer->shown_fields_customer)) { ?>
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Membership</h3>
@@ -180,7 +180,7 @@ if ($this->render == 'body' && gatekeeper('com_customer/listcustomers')) { ?>
 		</tbody>
 	</table>
 </div>
-<?php } if ($this->entity->attributes && in_array('attributes', $pines->config->com_customer->shown_fields_customer) && $this->entity->attributes) { ?>
+<?php } if ($this->entity->attributes && in_array('attributes', $_->config->com_customer->shown_fields_customer) && $this->entity->attributes) { ?>
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Attributes</h3>

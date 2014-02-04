@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 // Show some info if the user is still logged in.
@@ -29,4 +29,4 @@ if (is_object($_SESSION['user'])) {
 }
 
 // If the user isn't logged in, let them.
-$pines->user_manager->print_login();
+$_->user_manager->print_login();

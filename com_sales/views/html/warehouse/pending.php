@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = ($this->ordered ? 'Ordered' : 'New').' Pending Warehouse Orders';
 if (isset($this->location)) {
@@ -28,8 +28,8 @@ if ($this->all_time) {
 	else
 		$this->note .= ' and beyond.';
 }
-$pines->com_pgrid->load();
-$pines->com_jstree->load();
+$_->com_pgrid->load();
+$_->com_jstree->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/warehouse/pending']);
 ?>

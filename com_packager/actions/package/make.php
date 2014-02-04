@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_packager/makepackage') )
@@ -24,7 +24,7 @@ foreach ($list as $cur_package) {
 		continue;
 	$name = $cur_entity->get_filename();
 	$filename = "{$name}.slm";
-	$path = "{$pines->config->com_packager->package_path}{$filename}";
+	$path = "{$_->config->com_packager->package_path}{$filename}";
 	$module->results[] = array(
 		'entity' => $cur_entity,
 		'filename' => $filename,

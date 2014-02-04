@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -43,7 +43,7 @@ class com_sales_category extends entity {
 	}
 
 	public function info($type) {
-		global $pines;
+		global $_;
 		switch ($type) {
 			case 'name':
 				return $this->name;
@@ -52,7 +52,7 @@ class com_sales_category extends entity {
 			case 'types':
 				return 'product categories';
 			case 'url_view':
-				if ($pines->config->com_sales->com_storefront)
+				if ($_->config->com_sales->com_storefront)
 					return pines_url('com_storefront', 'category/browse', array('a' => $this->alias));
 				break;
 			case 'url_edit':
@@ -153,10 +153,10 @@ class com_sales_category extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'category/form', 'content');
 		$module->entity = $this;
-		$module->categories = $pines->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'data' => array('parent', null)));
+		$module->categories = $_->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'data' => array('parent', null)));
 
 		return $module;
 	}

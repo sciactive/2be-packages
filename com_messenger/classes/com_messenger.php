@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -57,13 +57,13 @@ class com_messenger extends component {
 	 * @return string The secret password.
 	 */
 	function get_guest() {
-		global $pines;
+		global $_;
 		if ((object) $_SESSION['xmpp_guest'] !== $_SESSION['xmpp_guest']) {
 			pines_session('write');
 			$un = uniqid('guest_');
 			$_SESSION['xmpp_guest'] = (object) array(
 				'username' => $un,
-				'password' => md5($un.format_date(time(), 'date_short', '', 'UTC').$pines->config->com_messenger->guest_key)
+				'password' => md5($un.format_date(time(), 'date_short', '', 'UTC').$_->config->com_messenger->guest_key)
 			);
 			pines_session('close');
 		}

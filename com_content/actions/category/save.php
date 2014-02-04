@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -66,7 +66,7 @@ if (gatekeeper('com_content/editmeta')) {
 		$category->meta_tags[] = array('name' => $cur_meta_tag->values[0], 'content' => $cur_meta_tag->values[1]);
 	}
 }
-if ($pines->config->com_content->custom_head && gatekeeper('com_content/edithead')) {
+if ($_->config->com_content->custom_head && gatekeeper('com_content/edithead')) {
 	$category->enable_custom_head = ($_REQUEST['enable_custom_head'] == 'ON');
 	$category->custom_head = $_REQUEST['custom_head'];
 }
@@ -84,7 +84,7 @@ $category->variants = array();
 if (is_array($_REQUEST['variants'])) {
 	foreach ($_REQUEST['variants'] as $cur_variant_entry) {
 		list ($cur_template, $cur_variant) = explode('::', $cur_variant_entry, 2);
-		if (!$pines->com_content->is_variant_valid($cur_variant, $cur_template)) {
+		if (!$_->com_content->is_variant_valid($cur_variant, $cur_template)) {
 			pines_notice("The variant \"$cur_variant\" is not a valid variant of the template \"$cur_template\". It is being skipped.");
 			continue;
 		}
@@ -114,14 +114,14 @@ if (empty($category->name)) {
 	return;
 }
 
-$test = $pines->entity_manager->get_entity(array('class' => com_content_category, 'skip_ac' => true), array('&', 'tag' => array('com_content', 'category'), 'data' => array('alias', $category->alias)));
+$test = $_->entity_manager->get_entity(array('class' => com_content_category, 'skip_ac' => true), array('&', 'tag' => array('com_content', 'category'), 'data' => array('alias', $category->alias)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$category->print_form();
 	pines_notice('There is already an category with that alias. Please choose a different alias.');
 	return;
 }
 
-if (!$pines->com_menueditor->check_entries($category->com_menueditor_entries)) {
+if (!$_->com_menueditor->check_entries($category->com_menueditor_entries)) {
 	$category->print_form();
 	return;
 }

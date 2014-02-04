@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/managerto') )
 	punt_user(null, pines_url('com_hrm', 'timeoff/review'));
 
-$pines->com_hrm->review_timeoff();
+$_->com_hrm->review_timeoff();

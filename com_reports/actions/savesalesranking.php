@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -48,7 +48,7 @@ foreach ($sales_goals as $key => $cur_goal_rank) {
 	);
 }
 
-if ($pines->config->com_reports->global_sales_rankings)
+if ($_->config->com_reports->global_sales_rankings)
 	$ranking->ac->other = 1;
 
 if ($ranking->save()) {

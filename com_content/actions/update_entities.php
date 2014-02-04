@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('system/all') )
 	punt_user(null, pines_url('com_content', 'update_entities'));
 
-$entities = $pines->entity_manager->get_entities(
+$entities = $_->entity_manager->get_entities(
 		array('class' => entity),
 		array('&',
 			'tag' => array('com_content'), 

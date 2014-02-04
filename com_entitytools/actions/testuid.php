@@ -8,43 +8,43 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_entitytools/test') )
 	punt_user(null, pines_url('com_entitytools', 'testuid'));
 
 $name = 'com_entitytools/uid_test_'.time();
-$id = $pines->entity_manager->new_uid($name);
+$id = $_->entity_manager->new_uid($name);
 var_dump($id);
-$id = $pines->entity_manager->get_uid($name);
+$id = $_->entity_manager->get_uid($name);
 var_dump($id);
-$pines->entity_manager->set_uid($name, 12);
-$id = $pines->entity_manager->get_uid($name);
+$_->entity_manager->set_uid($name, 12);
+$id = $_->entity_manager->get_uid($name);
 var_dump($id);
-$id = $pines->entity_manager->new_uid($name);
+$id = $_->entity_manager->new_uid($name);
 var_dump($id);
-$id = $pines->entity_manager->new_uid($name.'a');
+$id = $_->entity_manager->new_uid($name.'a');
 var_dump($id);
-$id = $pines->entity_manager->new_uid($name.'b');
+$id = $_->entity_manager->new_uid($name.'b');
 var_dump($id);
-$pines->entity_manager->rename_uid($name, $name.'c');
-$id = $pines->entity_manager->get_uid($name);
+$_->entity_manager->rename_uid($name, $name.'c');
+$id = $_->entity_manager->get_uid($name);
 var_dump($id);
-$id = $pines->entity_manager->get_uid($name.'c');
-var_dump($id);
-
-$pines->entity_manager->delete_uid($name.'a');
-$pines->entity_manager->delete_uid($name.'b');
-$pines->entity_manager->delete_uid($name.'c');
-
-$id = $pines->entity_manager->get_uid($name);
-var_dump($id);
-$id = $pines->entity_manager->get_uid($name.'a');
-var_dump($id);
-$id = $pines->entity_manager->get_uid($name.'b');
-var_dump($id);
-$id = $pines->entity_manager->get_uid($name.'c');
+$id = $_->entity_manager->get_uid($name.'c');
 var_dump($id);
 
-$pines->page->override = true;
+$_->entity_manager->delete_uid($name.'a');
+$_->entity_manager->delete_uid($name.'b');
+$_->entity_manager->delete_uid($name.'c');
+
+$id = $_->entity_manager->get_uid($name);
+var_dump($id);
+$id = $_->entity_manager->get_uid($name.'a');
+var_dump($id);
+$id = $_->entity_manager->get_uid($name.'b');
+var_dump($id);
+$id = $_->entity_manager->get_uid($name.'c');
+var_dump($id);
+
+$_->page->override = true;

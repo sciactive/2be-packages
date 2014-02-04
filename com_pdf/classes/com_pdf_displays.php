@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -31,7 +31,7 @@ class com_pdf_displays extends entity {
 		$this->pdf_dl_filename = 'blank.pdf';
 		$this->pdf_pages = 1;
 		$this->pdf_title = 'blank';
-		$this->pdf_author = $pines->config->com_pdf->author;
+		$this->pdf_author = $_->config->com_pdf->author;
 		$this->pdf_creator = 'WonderPHP';
 		$this->pdf_subject = '';
 		$this->pdf_keywords = '';
@@ -75,11 +75,11 @@ class com_pdf_displays extends entity {
 	 * @return int The page count of the current PDF.
 	 */
 	public function page_count() {
-		global $pines;
+		global $_;
 		require_once('components/com_pdf/includes/tcpdf/tcpdf.php');
 		require_once('components/com_pdf/includes/fpdi/fpdi.php');
 		$pdf = new FPDI();
-		$this->pdf_pages = $pdf->setSourceFile($pines->config->com_pdf->pdf_path.clean_filename($this->pdf_file));
+		$this->pdf_pages = $pdf->setSourceFile($_->config->com_pdf->pdf_path.clean_filename($this->pdf_file));
 		return $this->pdf_pages;
 	}
 
@@ -111,7 +111,7 @@ class com_pdf_displays extends entity {
 	 * @return string The generated PDF contents.
 	 */
 	public function render($entity, $print = true) {
-		global $pines;
+		global $_;
 		require_once('components/com_pdf/includes/tcpdf/tcpdf.php');
 		require_once('components/com_pdf/includes/fpdi/fpdi.php');
 
@@ -149,7 +149,7 @@ class com_pdf_displays extends entity {
 			}
 		}
 
-		$pagecount = $pdf->setSourceFile($pines->config->com_pdf->pdf_path.clean_filename($this->pdf_file));
+		$pagecount = $pdf->setSourceFile($_->config->com_pdf->pdf_path.clean_filename($this->pdf_file));
 		// Go through each display.
 		for ($i = 1; $i <= $pagecount; $i++) {
 			$tplidx = $pdf->importPage($i);
@@ -229,11 +229,11 @@ class com_pdf_displays extends entity {
 		$output = $pdf->Output($this->pdf_title, 'S');
 		if ($print) {
 			// Print it out to the user.
-			global $pines;
-			$pines->page->override = true;
+			global $_;
+			$_->page->override = true;
 			header('Content-type: application/pdf');
 			header('Content-Disposition: attachment; filename="'.$this->pdf_dl_filename.'" size='.strlen($output));
-			$pines->page->override_doc($output);
+			$_->page->override_doc($output);
 		}
 		return $output;
 	}

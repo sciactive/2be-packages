@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -78,10 +78,10 @@ class com_sales_special extends entity {
 	public function eligible() {
 		if (!$this->enabled)
 			return false;
-		global $pines;
+		global $_;
 		// Check that all conditions are met.
 		foreach ((array) $this->conditions as $cur_type => $cur_value) {
-			if (!$pines->depend->check($cur_type, $cur_value))
+			if (!$_->depend->check($cur_type, $cur_value))
 				return false;
 		}
 		foreach ((array) $this->requirements as $cur_requirement) {

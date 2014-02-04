@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -119,8 +119,8 @@ class com_plaza extends component {
 	 * Set the fetch value.
 	 */
 	public function __construct() {
-		global $pines;
-		switch ($pines->config->com_plaza->fetch_method) {
+		global $_;
+		switch ($_->config->com_plaza->fetch_method) {
 			case 'auto':
 				if (class_exists('HttpRequest')) {
 					$this->fetch = 'pecl';
@@ -175,21 +175,21 @@ class com_plaza extends component {
 	 * @return array The result.
 	 */
 	public function calculate_changes($package, $do, $clear_local_first = true) {
-		global $pines;
+		global $_;
 
 		// Override the default checkers.
-		$old_checkers = $pines->depend->checkers;
-		$pines->depend->checkers['package'] = array($this, 'check_package');
-		$pines->depend->checkers['component'] = array($this, 'check_component');
-		$pines->depend->checkers['service'] = array($this, 'check_service');
+		$old_checkers = $_->depend->checkers;
+		$_->depend->checkers['package'] = array($this, 'check_package');
+		$_->depend->checkers['component'] = array($this, 'check_component');
+		$_->depend->checkers['service'] = array($this, 'check_service');
 
 		if ($clear_local_first) {
 			// Set up local objects, so we can change things.
 			$this->add_package = $this->add_service = $this->rem_package = array();
-			$this->pines_components = $pines->all_components;
-			$this->pines_info = clone $pines->info;
-			$this->pines_services = $pines->services;
-			$this->pines_com_package_db = $pines->com_package->db;
+			$this->pines_components = $_->all_components;
+			$this->pines_info = clone $_->info;
+			$this->pines_services = $_->services;
+			$this->pines_com_package_db = $_->com_package->db;
 		}
 
 		$possible = true;
@@ -208,7 +208,7 @@ class com_plaza extends component {
 					if (isset($package['depend'])) {
 						foreach ($package['depend'] as $cur_type => $cur_value) {
 							do {
-								if (!($pass = $pines->depend->check($cur_type, $cur_value))) {
+								if (!($pass = $_->depend->check($cur_type, $cur_value))) {
 									switch ($cur_type) {
 										case 'pines':
 											// TODO: Look for system package.
@@ -264,7 +264,7 @@ class com_plaza extends component {
 					if (isset($package['conflict'])) {
 						foreach ($package['conflict'] as $cur_type => $cur_value) {
 							do {
-								if (!($pass = !$pines->depend->check($cur_type, $cur_value))) {
+								if (!($pass = !$_->depend->check($cur_type, $cur_value))) {
 									switch ($cur_type) {
 										case 'pines':
 											// TODO: Look for system package.
@@ -303,7 +303,7 @@ class com_plaza extends component {
 							continue;
 						if (isset($cur_package['depend'])) {
 							foreach ($cur_package['depend'] as $cur_type => $cur_value) {
-								if (!$pines->depend->check($cur_type, $cur_value)) {
+								if (!$_->depend->check($cur_type, $cur_value)) {
 									$this->rem_package[] = $cur_package['package'];
 									$this->calculate_remove($cur_package['package']);
 									$changed = true;
@@ -313,7 +313,7 @@ class com_plaza extends component {
 						}
 						if (isset($cur_package['conflict'])) {
 							foreach ($cur_package['conflict'] as $cur_type => $cur_value) {
-								if ($pines->depend->check($cur_type, $cur_value)) {
+								if ($_->depend->check($cur_type, $cur_value)) {
 									$this->rem_package[] = $cur_package['package'];
 									$this->calculate_remove($cur_package['package']);
 									$changed = true;
@@ -332,7 +332,7 @@ class com_plaza extends component {
 					foreach ($this->pines_com_package_db['packages'] as $cur_package) {
 						if (isset($cur_package['depend'])) {
 							foreach ($cur_package['depend'] as $cur_type => $cur_value) {
-								if (!$pines->depend->check($cur_type, $cur_value)) {
+								if (!$_->depend->check($cur_type, $cur_value)) {
 									$this->rem_package[] = $cur_package['package'];
 									$this->calculate_remove($cur_package['package']);
 									$changed = true;
@@ -342,7 +342,7 @@ class com_plaza extends component {
 						}
 						if (isset($cur_package['conflict'])) {
 							foreach ($cur_package['conflict'] as $cur_type => $cur_value) {
-								if ($pines->depend->check($cur_type, $cur_value)) {
+								if ($_->depend->check($cur_type, $cur_value)) {
 									$this->rem_package[] = $cur_package['package'];
 									$this->calculate_remove($cur_package['package']);
 									$changed = true;
@@ -356,7 +356,7 @@ class com_plaza extends component {
 		}
 
 		// Restore the default checkers.
-		$pines->depend->checkers = $old_checkers;
+		$_->depend->checkers = $old_checkers;
 
 		// Filter duplicates.
 		$this->add_package = array_unique($this->add_package);
@@ -378,7 +378,7 @@ class com_plaza extends component {
 	 * @return array The result.
 	 */
 	public function calculate_changes_full($package, $do) {
-		global $pines;
+		global $_;
 		// Calculate immediate changes.
 		$return = $this->calculate_changes($package, $do);
 
@@ -403,7 +403,7 @@ class com_plaza extends component {
 									$cur_package = $index['packages'][$cur_package_name];
 									break;
 								case 'remove':
-									$cur_package = $pines->com_package->db['packages'][$cur_package_name];
+									$cur_package = $_->com_package->db['packages'][$cur_package_name];
 									break;
 							}
 							if (!isset($cur_package)) {
@@ -486,7 +486,7 @@ class com_plaza extends component {
 	 * @return bool The result of the component check.
 	 */
 	public function check_component($value) {
-		global $pines;
+		global $_;
 		if (
 				strpos($value, '&') !== false ||
 				strpos($value, '|') !== false ||
@@ -494,7 +494,7 @@ class com_plaza extends component {
 				strpos($value, '(') !== false ||
 				strpos($value, ')') !== false
 			)
-			return $pines->depend->simple_parse($value, array($this, 'check_component'));
+			return $_->depend->simple_parse($value, array($this, 'check_component'));
 
 		// Set the last value.
 		$this->last_component = $component = preg_replace('/([a-z0-9_]+)([<>=]{1,2})(.+)/S', '$1', $value);
@@ -518,7 +518,7 @@ class com_plaza extends component {
 	 * @return bool The result of the package check.
 	 */
 	public function check_package($value) {
-		global $pines;
+		global $_;
 		if (
 				strpos($value, '&') !== false ||
 				strpos($value, '|') !== false ||
@@ -552,7 +552,7 @@ class com_plaza extends component {
 	 * @return bool The result of the service check.
 	 */
 	public function check_service($value) {
-		global $pines;
+		global $_;
 		if (
 				strpos($value, '&') !== false ||
 				strpos($value, '|') !== false ||
@@ -560,7 +560,7 @@ class com_plaza extends component {
 				strpos($value, '(') !== false ||
 				strpos($value, ')') !== false
 			)
-			return $pines->depend->simple_parse($value, array($this, 'check_service'));
+			return $_->depend->simple_parse($value, array($this, 'check_service'));
 
 		// Set the last value.
 		$this->last_service = $value;
@@ -590,7 +590,7 @@ class com_plaza extends component {
 	 * @return array An array of packages.
 	 */
 	public function get_index($repository = null, $publisher = null) {
-		global $pines;
+		global $_;
 		if (isset($repository)) {
 			$files = array('components/com_plaza/includes/cache/indices/'.md5($repository).'.index');
 		} else {
@@ -633,12 +633,12 @@ class com_plaza extends component {
 	 * @return module The module.
 	 */
 	public function list_packages() {
-		global $pines;
+		global $_;
 
 		$head = new module('com_plaza', 'package/head', 'head');
 		$module = new module('com_plaza', 'package/list', 'content');
 
-		$module->db = $pines->com_package->db;
+		$module->db = $_->com_package->db;
 
 		return $module;
 	}
@@ -661,13 +661,13 @@ class com_plaza extends component {
 	 * @return module The module.
 	 */
 	public function list_repository($service = null) {
-		global $pines;
+		global $_;
 
 		$head = new module('com_plaza', 'package/head', 'head');
 		$module = new module('com_plaza', 'package/repository', 'content');
 		$module->service = $service;
 
-		$module->db = $pines->com_package->db;
+		$module->db = $_->com_package->db;
 		$module->index = $this->get_index();
 		if (empty($module->index['packages'])) {
 			$this->reload_packages();
@@ -684,7 +684,7 @@ class com_plaza extends component {
 	 * @return bool True on success, false on failure.
 	 */
 	public function package_download($package) {
-		global $pines;
+		global $_;
 		// Figure out which repository it's in.
 		foreach (com_plaza__get_repositories() as $cur_repository) {
 			$index = $this->get_index($cur_repository['url'], $package['publisher']);
@@ -801,7 +801,7 @@ class com_plaza extends component {
 	 * @return array|string An array of the content type and the file contents, or the URL, or null on error.
 	 */
 	public function package_get_media($package, $media, $return_url = false) {
-		global $pines;
+		global $_;
 		// Figure out which repository it's in.
 		foreach (com_plaza__get_repositories() as $cur_repository) {
 			$index = $this->get_index($cur_repository['url'], $package['publisher']);
@@ -946,7 +946,7 @@ class com_plaza extends component {
 	 * @todo Remove old indices after the repository is removed.
 	 */
 	public function reload_packages() {
-		global $pines;
+		global $_;
 		$return = true;
 		foreach (com_plaza__get_repositories() as $cur_repository) {
 			$cache_file = 'components/com_plaza/includes/cache/indices/'.md5($cur_repository['url']);

@@ -8,22 +8,22 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Category' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide category details in this form.';
-if ($pines->config->com_sales->com_storefront) {
-	$pines->com_pgrid->load();
-	$pines->com_ptags->load();
-	$pines->editor->load();
-	$pages = $pines->entity_manager->get_entities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
-	$pines->entity_manager->sort($pages, 'name');
+if ($_->config->com_sales->com_storefront) {
+	$_->com_pgrid->load();
+	$_->com_ptags->load();
+	$_->editor->load();
+	$pages = $_->entity_manager->get_entities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
+	$_->entity_manager->sort($pages, 'name');
 }
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'category/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
-			<?php if ($pines->config->com_sales->com_storefront) { ?>
+			<?php if ($_->config->com_sales->com_storefront) { ?>
 			$("#p_muid_spec_options").ptags({ptags_delimiter: ';;', ptags_sortable: null});
 			$("#p_muid_spec_do_sort").click(function(){
 				var tags_elem = $("#p_muid_spec_options");
@@ -178,7 +178,7 @@ if ($pines->config->com_sales->com_storefront) {
 			update_specs();
 
 			$("#p_muid_menu_position").autocomplete({
-				source: <?php echo json_encode($pines->info->template->positions); ?>
+				source: <?php echo json_encode($_->info->template->positions); ?>
 			});
 			
 			$("#p_muid_google_category").autocomplete({
@@ -197,7 +197,7 @@ if ($pines->config->com_sales->com_storefront) {
 	</script>
 	<ul class="nav nav-tabs" style="clear: both;">
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
-		<?php if ($pines->config->com_sales->com_storefront) { ?>
+		<?php if ($_->config->com_sales->com_storefront) { ?>
 		<li><a href="#p_muid_tab_storefront" data-toggle="tab">Storefront</a></li>
 		<li><a href="#p_muid_tab_head" data-toggle="tab">Page Head</a></li>
 		<?php } ?>
@@ -263,7 +263,7 @@ if ($pines->config->com_sales->com_storefront) {
 					</select>
 				</label>
 			</div>
-			<?php if ($pines->config->com_sales->google_categories) { ?>
+			<?php if ($_->config->com_sales->google_categories) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Google Category</span>
 					<span class="pf-note">Corresponding category for Google Shopping.</span>
@@ -286,7 +286,7 @@ if ($pines->config->com_sales->com_storefront) {
 			</div>
 			<br class="pf-clearing" />
 		</div>
-		<?php if ($pines->config->com_sales->com_storefront) { ?>
+		<?php if ($_->config->com_sales->com_storefront) { ?>
 		<div class="tab-pane" id="p_muid_tab_storefront">
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">

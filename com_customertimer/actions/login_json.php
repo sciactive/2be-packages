@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_customertimer/login') ||  !gatekeeper('com_customertimer/loginpwless') )
 	punt_user(null, pines_url('com_customertimer', 'status'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $return = false;
@@ -30,4 +30,4 @@ if (isset($_REQUEST['id'], $_REQUEST['floor'], $_REQUEST['station'])) {
 	}
 }
 
-$pines->page->override_doc(json_encode($return));
+$_->page->override_doc(json_encode($return));

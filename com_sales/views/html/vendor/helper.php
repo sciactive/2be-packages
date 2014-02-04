@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $module = new module('com_entityhelper', 'default_helper');
@@ -143,7 +143,7 @@ if ($this->render == 'body' && gatekeeper('com_sales/listvendors')) { ?>
 	<pre><?php e($this->entity->comments); ?></pre>
 </div>
 <?php }
-$products = (array) $pines->entity_manager->get_entities(
+$products = (array) $_->entity_manager->get_entities(
 		array('class' => com_sales_product),
 		array('&',
 			'tag' => array('com_sales', 'product'),
@@ -177,7 +177,7 @@ if ($products) { ?>
 						$entry = $cur_vendor;
 				}
 				?>
-				<td>$<?php e($pines->com_sales->round($entry['cost'], true)); ?></td>
+				<td>$<?php e($_->com_sales->round($entry['cost'], true)); ?></td>
 				<td><a href="<?php e($entry['link']); ?>" target="_blank"><?php e($entry['link']); ?></a></td>
 			</tr>
 			<?php } ?>

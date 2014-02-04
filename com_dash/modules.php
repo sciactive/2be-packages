@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-global $pines;
+global $_;
 return array(
 	'quick_dash' => array(
 		'cname' => 'Quick Dash',
 		'description' => 'Show the quick dash.',
-		'view_callback' => array($pines->com_dash, 'quick_dash_module'),
+		'view_callback' => array($_->com_dash, 'quick_dash_module'),
 		'type' => 'module',
 	),
 );

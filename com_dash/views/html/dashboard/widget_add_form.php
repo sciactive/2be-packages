@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Add Widget(s)';
-$grid_thirds = floor($pines->config->com_bootstrap->grid_columns / 3);
+$grid_thirds = floor($_->config->com_bootstrap->grid_columns / 3);
 ?>
 <div class="pf-form" id="p_muid_form">
 	<style type="text/css">
@@ -47,7 +47,7 @@ $grid_thirds = floor($pines->config->com_bootstrap->grid_columns / 3);
 	<div class="ui-helper-clearfix" style="max-height: 600px; overflow-y: auto; clear: both; padding-bottom: 30px;">
 		<?php foreach ((array) $this->widgets as $cur_component => $cur_widget_list) { ?>
 		<div class="pf-element pf-heading">
-			<h3><?php e($pines->info->$cur_component->name); ?></h3>
+			<h3><?php e($_->info->$cur_component->name); ?></h3>
 		</div>
 		<div class="pf-element pf-full-width">
 			<div style="padding-right: .5em;">
@@ -67,7 +67,7 @@ $grid_thirds = floor($pines->config->com_bootstrap->grid_columns / 3);
 							<p style="margin-bottom: 0;"><?php e($cur_widget['description']); ?></p>
 							<?php if (isset($cur_widget['image'])) { ?>
 							<div style="text-align: left; margin-top: .5em;">
-								<img class="ui-widget-content ui-corner-all" style="padding: 0;" alt="<?php e($cur_widget['cname']); ?>" src="<?php e($pines->config->rela_location); ?>components/<?php e($cur_component); ?>/<?php e(clean_filename($cur_widget['image'])); ?>" />
+								<img class="ui-widget-content ui-corner-all" style="padding: 0;" alt="<?php e($cur_widget['cname']); ?>" src="<?php e($_->config->rela_location); ?>components/<?php e($cur_component); ?>/<?php e(clean_filename($cur_widget['image'])); ?>" />
 							</div>
 							<?php } ?>
 						</div>

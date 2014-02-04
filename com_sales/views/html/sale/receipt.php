@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $sale = $this->entity->has_tag('sale');
@@ -100,7 +100,7 @@ switch ($this->entity->status) {
 	$doc_id = ($sale ? 'SA' : 'RE') . $this->entity->id;
 	?>
 	<div class="left_side">
-		<span><img src="<?php e($group_logo); ?>" alt="<?php e($pines->config->system_name); ?>" /></span>
+		<span><img src="<?php e($group_logo); ?>" alt="<?php e($_->config->system_name); ?>" /></span>
 	</div>
 	<div class="right_side barcode">
 		<h1><?php e($this->doc_title); ?></h1>
@@ -177,7 +177,7 @@ switch ($this->entity->status) {
 			<?php } ?>
 		</div>
 	</div>
-	<?php } if ($pines->config->com_sales->com_customer && isset($this->entity->customer)) { ?>
+	<?php } if ($_->config->com_sales->com_customer && isset($this->entity->customer)) { ?>
 	<div class="left_side customer">
 		<div class="aligner">
 			<span>Bill To:</span>
@@ -261,11 +261,11 @@ switch ($this->entity->status) {
 					e(implode(' ', $text));
 					?></td>
 					<td class="right_text"><?php e($cur_product['quantity']); ?></td>
-					<td class="right_text">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
+					<td class="right_text">$<?php echo $_->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
 					<?php if (!$sale) { ?>
-					<td class="right_text">$<?php echo $pines->com_sales->round($cur_product['return_fee'], true); ?></td>
+					<td class="right_text">$<?php echo $_->com_sales->round($cur_product['return_fee'], true); ?></td>
 					<?php } ?>
-					<td class="right_text">$<?php echo $pines->com_sales->round($cur_product['line_total'] - (float) $cur_product['return_fee'], true); ?></td>
+					<td class="right_text">$<?php echo $_->com_sales->round($cur_product['line_total'] - (float) $cur_product['return_fee'], true); ?></td>
 				</tr>
 				<?php } } ?>
 			</tbody>
@@ -286,7 +286,7 @@ switch ($this->entity->status) {
 				<tr>
 					<td style="width: 80%;"><?php e(($cur_special['entity']->hide_code ? '' : "{$cur_special['code']} - ").$cur_special['name']); ?></td>
 					<td style="white-space: pre;"><?php echo $cur_special['before_tax'] ? 'Before Tax' : 'After Tax'; ?></td>
-					<td class="right_text">$<?php echo $pines->com_sales->round($cur_special['discount'], true); ?></td>
+					<td class="right_text">$<?php echo $_->com_sales->round($cur_special['discount'], true); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>
@@ -308,11 +308,11 @@ switch ($this->entity->status) {
 			</div>
 			<div class="data_col right_text">
 				<?php foreach ($this->entity->payments as $cur_payment) { ?>
-				<span>$<?php echo $pines->com_sales->round($cur_payment['amount'], true); ?></span>
+				<span>$<?php echo $_->com_sales->round($cur_payment['amount'], true); ?></span>
 				<?php } ?>
 				<hr />
-				<span>$<?php echo $pines->com_sales->round($this->entity->amount_tendered, true); ?></span>
-				<?php if ($sale && $this->entity->change) { ?><span>$<?php echo $pines->com_sales->round($this->entity->change, true); ?></span><?php } ?>
+				<span>$<?php echo $_->com_sales->round($this->entity->amount_tendered, true); ?></span>
+				<?php if ($sale && $this->entity->change) { ?><span>$<?php echo $_->com_sales->round($this->entity->change, true); ?></span><?php } ?>
 			</div>
 		</div>
 		<?php } ?>
@@ -329,13 +329,13 @@ switch ($this->entity->status) {
 				<span><strong>Total: </strong></span>
 			</div>
 			<div class="data_col right_text">
-				<span>$<?php echo $pines->com_sales->round($this->entity->subtotal, true); ?></span>
-				<?php if ($this->entity->total_specials > 0) { ?><span>($<?php echo $pines->com_sales->round($this->entity->total_specials, true); ?>)</span><?php } ?>
-				<?php if ($this->entity->item_fees > 0) { ?><span>$<?php echo $pines->com_sales->round($this->entity->item_fees, true); ?></span><?php } ?>
-				<span>$<?php echo $pines->com_sales->round($this->entity->taxes, true); ?></span>
-				<?php if ($this->entity->return_fees > 0) { ?><span>($<?php echo $pines->com_sales->round($this->entity->return_fees, true); ?>)</span><?php } ?>
+				<span>$<?php echo $_->com_sales->round($this->entity->subtotal, true); ?></span>
+				<?php if ($this->entity->total_specials > 0) { ?><span>($<?php echo $_->com_sales->round($this->entity->total_specials, true); ?>)</span><?php } ?>
+				<?php if ($this->entity->item_fees > 0) { ?><span>$<?php echo $_->com_sales->round($this->entity->item_fees, true); ?></span><?php } ?>
+				<span>$<?php echo $_->com_sales->round($this->entity->taxes, true); ?></span>
+				<?php if ($this->entity->return_fees > 0) { ?><span>($<?php echo $_->com_sales->round($this->entity->return_fees, true); ?>)</span><?php } ?>
 				<hr />
-				<span><strong>$<?php echo $pines->com_sales->round($this->entity->total, true); ?></strong></span>
+				<span><strong>$<?php echo $_->com_sales->round($this->entity->total, true); ?></strong></span>
 			</div>
 		</div>
 	</div>
@@ -350,20 +350,20 @@ switch ($this->entity->status) {
 	<?php }
 	switch ($this->entity->status) {
 		case 'quoted':
-			$label = (string) $pines->config->com_sales->quote_note_label;
-			$text = (string) $pines->config->com_sales->quote_note_text;
+			$label = (string) $_->config->com_sales->quote_note_label;
+			$text = (string) $_->config->com_sales->quote_note_text;
 			break;
 		case 'invoiced':
-			$label = (string) $pines->config->com_sales->invoice_note_label;
-			$text = (string) $pines->config->com_sales->invoice_note_text;
+			$label = (string) $_->config->com_sales->invoice_note_label;
+			$text = (string) $_->config->com_sales->invoice_note_text;
 			break;
 		case 'paid':
-			$label = (string) $pines->config->com_sales->receipt_note_label;
-			$text = (string) $pines->config->com_sales->receipt_note_text;
+			$label = (string) $_->config->com_sales->receipt_note_label;
+			$text = (string) $_->config->com_sales->receipt_note_text;
 			break;
 		case 'processed':
-			$label = (string) $pines->config->com_sales->return_note_label;
-			$text = (string) $pines->config->com_sales->return_note_text;
+			$label = (string) $_->config->com_sales->return_note_label;
+			$text = (string) $_->config->com_sales->return_note_text;
 			break;
 		default:
 			$label = null;

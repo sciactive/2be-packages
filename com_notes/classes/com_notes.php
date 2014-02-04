@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -22,11 +22,11 @@ class com_notes extends component {
 	 * @return module The module.
 	 */
 	public function list_threads() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_notes', 'thread/list', 'content');
 
-		$module->threads = $pines->entity_manager->get_entities(
+		$module->threads = $_->entity_manager->get_entities(
 				array('class' => com_notes_thread),
 				array('&',
 					'tag' => array('com_notes', 'thread')

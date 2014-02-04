@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <style type="text/css" >
@@ -48,7 +48,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	</div>
 	<div class="pf-element pf-full-width">
 		<select class="form_select" name="shift">
-			<?php foreach ($pines->config->com_calendar->lineup_shifts as $cur_shift) {
+			<?php foreach ($_->config->com_calendar->lineup_shifts as $cur_shift) {
 				$shift = explode('-', $cur_shift);
 				$shift_start = format_date(strtotime($shift[0]), 'time_short');
 				$shift_end = format_date(strtotime($shift[1]), 'time_short'); ?>

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -68,11 +68,11 @@ class com_reports_paystub extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'form_paystub', 'content');
 		$module->entity = $this;
-		$module->employees = $pines->com_hrm->get_employees();
+		$module->employees = $_->com_hrm->get_employees();
 
 		return $module;
 	}
@@ -86,7 +86,7 @@ class com_reports_paystub extends entity {
 	 * @return module The paystub report module.
 	 */
 	function show($entire_company = true, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_reports', 'report_paystub', 'content');
 		$module->entity = $this;

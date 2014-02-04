@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -67,47 +67,47 @@ class com_myentity extends component implements entity_manager_interface {
 	 * @return bool True on success, false on failure.
 	 */
 	private function create_tables($etype = null) {
-		global $pines;
+		global $_;
 		if (isset($etype))
-			$etype =  '_'.mysql_real_escape_string($etype, $pines->com_mysql->link);
-		if ( !(mysql_query('SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";', $pines->com_mysql->link)) ) {
+			$etype =  '_'.mysql_real_escape_string($etype, $_->com_mysql->link);
+		if ( !(mysql_query('SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";', $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
 				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error());
 			return false;
 		}
 		// Create the entity table.
 		$query = sprintf("CREATE TABLE IF NOT EXISTS `%scom_myentity_entities%s` (`guid` bigint(20) unsigned NOT NULL, `tags` text, `varlist` text, `cdate` decimal(18,6) NOT NULL, `mdate` decimal(18,6) NOT NULL, PRIMARY KEY (`guid`), KEY `id_tags` (`tags`(1000)), KEY `id_varlist` (`varlist`(1000))) DEFAULT CHARSET=utf8;",
-			$pines->config->com_mysql->prefix,
+			$_->config->com_mysql->prefix,
 			$etype);
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		// Create the data table.
 		$query = sprintf("CREATE TABLE IF NOT EXISTS `%scom_myentity_data%s` (`guid` bigint(20) unsigned NOT NULL, `name` text NOT NULL, `value` longtext NOT NULL, PRIMARY KEY (`guid`,`name`(255))) DEFAULT CHARSET=utf8;",
-			$pines->config->com_mysql->prefix,
+			$_->config->com_mysql->prefix,
 			$etype);
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		if (!isset($etype)) {
 			// Create the GUID table.
 			$query = sprintf("CREATE TABLE IF NOT EXISTS `%scom_myentity_guids` (`guid` bigint(20) unsigned NOT NULL, PRIMARY KEY (`guid`)) DEFAULT CHARSET=utf8;",
-				$pines->config->com_mysql->prefix);
-			if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+				$_->config->com_mysql->prefix);
+			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 				if (function_exists('pines_error'))
-					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
 			// Create the UID table.
 			$query = sprintf("CREATE TABLE IF NOT EXISTS `%scom_myentity_uids` (`name` text NOT NULL, `cur_uid` bigint(20) unsigned NOT NULL, PRIMARY KEY (`name`(100))) DEFAULT CHARSET=utf8;",
-				$pines->config->com_mysql->prefix);
-			if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+				$_->config->com_mysql->prefix);
+			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 				if (function_exists('pines_error'))
-					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
 		}
@@ -123,29 +123,29 @@ class com_myentity extends component implements entity_manager_interface {
 	}
 
 	public function delete_entity_by_id($guid, $etype = null) {
-		global $pines;
-		$etype = isset($etype) ? '_'.mysql_real_escape_string($etype, $pines->com_mysql->link) : '';
+		global $_;
+		$etype = isset($etype) ? '_'.mysql_real_escape_string($etype, $_->com_mysql->link) : '';
 		$query = sprintf("DELETE e, d FROM `%scom_myentity_entities%s` e LEFT JOIN `%scom_myentity_data%s` d ON e.`guid`=d.`guid` WHERE e.`guid`=%u;",
-			$pines->config->com_mysql->prefix,
+			$_->config->com_mysql->prefix,
 			$etype,
-			$pines->config->com_mysql->prefix,
+			$_->config->com_mysql->prefix,
 			$etype,
 			(int) $guid);
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		$query = sprintf("DELETE FROM `%scom_myentity_guids` g WHERE g.`guid`=%u;",
-			$pines->config->com_mysql->prefix,
+			$_->config->com_mysql->prefix,
 			(int) $guid);
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		// Removed any cached versions of this entity.
-		if ($pines->config->com_myentity->cache)
+		if ($_->config->com_myentity->cache)
 			$this->clean_cache($guid);
 		return true;
 	}
@@ -153,13 +153,13 @@ class com_myentity extends component implements entity_manager_interface {
 	public function delete_uid($name) {
 		if (!$name)
 			return false;
-		global $pines;
+		global $_;
 		$query = sprintf("DELETE FROM `%scom_myentity_uids` WHERE `name`='%s';",
-			$pines->config->com_mysql->prefix,
-			mysql_real_escape_string($name, $pines->com_mysql->link));
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix,
+			mysql_real_escape_string($name, $_->com_mysql->link));
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		return true;
@@ -200,16 +200,16 @@ class com_myentity extends component implements entity_manager_interface {
 	}
 
 	public function export($filename) {
-		global $pines;
+		global $_;
 		$filename = clean_filename((string) $filename);
 		if (!$fhandle = fopen($filename, 'w'))
 			return false;
 		fwrite($fhandle, "# WonderPHP Entity Export\n");
-		fwrite($fhandle, "# com_myentity version {$pines->info->com_myentity->version}\n");
+		fwrite($fhandle, "# com_myentity version {$_->info->com_myentity->version}\n");
 		fwrite($fhandle, "# sciactive.com\n");
 		fwrite($fhandle, "#\n");
 		fwrite($fhandle, "# Generation Time: ".date('r')."\n");
-		fwrite($fhandle, "# WonderPHP Version: {$pines->info->version}\n\n");
+		fwrite($fhandle, "# WonderPHP Version: {$_->info->version}\n\n");
 
 		fwrite($fhandle, "#\n");
 		fwrite($fhandle, "# UIDs\n");
@@ -217,10 +217,10 @@ class com_myentity extends component implements entity_manager_interface {
 
 		// Export UIDs.
 		$query = sprintf("SELECT * FROM `%scom_myentity_uids`;",
-			$pines->config->com_mysql->prefix);
-		if ( !($result = mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix);
+		if ( !($result = mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		$row = mysql_fetch_assoc($result);
@@ -238,11 +238,11 @@ class com_myentity extends component implements entity_manager_interface {
 
 		// Export entities.
 		$query = sprintf("SELECT e.*, d.`name` AS `dname`, d.`value` AS `dvalue` FROM `%scom_myentity_entities` e LEFT JOIN `%scom_myentity_data` d ON e.`guid`=d.`guid` ORDER BY e.`guid`;",
-			$pines->config->com_mysql->prefix,
-			$pines->config->com_mysql->prefix);
-		if ( !($result = mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix,
+			$_->config->com_mysql->prefix);
+		if ( !($result = mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		$row = mysql_fetch_assoc($result);
@@ -270,18 +270,18 @@ class com_myentity extends component implements entity_manager_interface {
 	}
 
 	public function export_print() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 		header('Content-Type: application/octet-stream');
 		header('Content-Disposition: attachment; filename=entities.pex;');
 		// End all output buffering.
 		while (@ob_end_clean());
 		echo "# WonderPHP Entity Export\n";
-		echo "# com_myentity version {$pines->info->com_myentity->version}\n";
+		echo "# com_myentity version {$_->info->com_myentity->version}\n";
 		echo "# sciactive.com\n";
 		echo "#\n";
 		echo "# Generation Time: ".date('r')."\n";
-		echo "# WonderPHP Version: {$pines->info->version}\n\n";
+		echo "# WonderPHP Version: {$_->info->version}\n\n";
 
 		echo "#\n";
 		echo "# UIDs\n";
@@ -289,10 +289,10 @@ class com_myentity extends component implements entity_manager_interface {
 
 		// Export UIDs.
 		$query = sprintf("SELECT * FROM `%scom_myentity_uids`;",
-			$pines->config->com_mysql->prefix);
-		if ( !($result = mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix);
+		if ( !($result = mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		$row = mysql_fetch_assoc($result);
@@ -310,11 +310,11 @@ class com_myentity extends component implements entity_manager_interface {
 
 		// Export entities.
 		$query = sprintf("SELECT e.*, d.`name` AS `dname`, d.`value` AS `dvalue` FROM `%scom_myentity_entities` e LEFT JOIN `%scom_myentity_data` d ON e.`guid`=d.`guid` ORDER BY e.`guid`;",
-			$pines->config->com_mysql->prefix,
-			$pines->config->com_mysql->prefix);
-		if ( !($result = mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix,
+			$_->config->com_mysql->prefix);
+		if ( !($result = mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		$row = mysql_fetch_assoc($result);
@@ -342,8 +342,8 @@ class com_myentity extends component implements entity_manager_interface {
 	}
 
 	public function get_entities() {
-		global $pines;
-		if (!$pines->com_mysql->connected)
+		global $_;
+		if (!$_->com_mysql->connected)
 			return null;
 		// Set up options and selectors.
 		$selectors = func_get_args();
@@ -362,11 +362,11 @@ class com_myentity extends component implements entity_manager_interface {
 		$class = isset($options['class']) ? $options['class'] : entity;
 		if (isset($options['etype'])) {
 			$etype_dirty = $options['etype'];
-			$etype = '_'.mysql_real_escape_string($etype_dirty, $pines->com_mysql->link);
+			$etype = '_'.mysql_real_escape_string($etype_dirty, $_->com_mysql->link);
 		} else {
 			if (method_exists($class, 'etype')) {
 				$etype_dirty = $class::etype();
-				$etype = '_'.mysql_real_escape_string($etype_dirty, $pines->com_mysql->link);
+				$etype = '_'.mysql_real_escape_string($etype_dirty, $_->com_mysql->link);
 			} else {
 				$etype_dirty = null;
 				$etype = '';
@@ -376,7 +376,7 @@ class com_myentity extends component implements entity_manager_interface {
 		$count = $ocount = 0;
 
 		// Check if the requested entity is cached.
-		if ($pines->config->com_myentity->cache && is_int($selectors[1]['guid'])) {
+		if ($_->config->com_myentity->cache && is_int($selectors[1]['guid'])) {
 			// Only safe to use the cache option with no other selectors than a GUID and tags.
 			if (
 					count($selectors) == 1 &&
@@ -427,7 +427,7 @@ class com_myentity extends component implements entity_manager_interface {
 							foreach ($cur_value as $cur_tag) {
 								if ( $cur_query )
 									$cur_query .= $type_is_or ? ' OR ' : ' AND ';
-								$cur_query .= (($type_is_not xor $clause_not) ? 'NOT ' : '' ).'LOCATE(\','.mysql_real_escape_string($cur_tag, $pines->com_mysql->link).',\', e.`tags`)';
+								$cur_query .= (($type_is_not xor $clause_not) ? 'NOT ' : '' ).'LOCATE(\','.mysql_real_escape_string($cur_tag, $_->com_mysql->link).',\', e.`tags`)';
 							}
 							break;
 						case 'isset':
@@ -436,7 +436,7 @@ class com_myentity extends component implements entity_manager_interface {
 								foreach ($cur_value as $cur_var) {
 									if ( $cur_query )
 										$cur_query .= $type_is_or ? ' OR ' : ' AND ';
-									$cur_query .= 'LOCATE(\','.mysql_real_escape_string($cur_var, $pines->com_mysql->link).',\', e.`varlist`)';
+									$cur_query .= 'LOCATE(\','.mysql_real_escape_string($cur_var, $_->com_mysql->link).',\', e.`varlist`)';
 								}
 							}
 							break;
@@ -516,7 +516,7 @@ class com_myentity extends component implements entity_manager_interface {
 							if (!($type_is_not xor $clause_not)) {
 								if ( $cur_query )
 									$cur_query .= $type_is_or ? ' OR ' : ' AND ';
-								$cur_query .= 'LOCATE(\','.mysql_real_escape_string($cur_value[0], $pines->com_mysql->link).',\', e.`varlist`)';
+								$cur_query .= 'LOCATE(\','.mysql_real_escape_string($cur_value[0], $_->com_mysql->link).',\', e.`varlist`)';
 							}
 							break;
 					}
@@ -549,32 +549,32 @@ class com_myentity extends component implements entity_manager_interface {
 		}
 		if ($query_parts) {
 			$query = sprintf("SELECT e.`guid`, e.`tags`, e.`cdate`, e.`mdate`, d.`name`, d.`value`, e.`varlist` FROM `%scom_myentity_entities%s` e LEFT JOIN `%scom_myentity_data%s` d ON e.`guid`=d.`guid` HAVING %s ORDER BY %s;",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$etype,
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$etype,
 				'('.implode(') AND (', $query_parts).')',
 				$options['reverse'] ? $sort.' DESC' : $sort);
 		} else {
 			$query = sprintf("SELECT e.`guid`, e.`tags`, e.`cdate`, e.`mdate`, d.`name`, d.`value` FROM `%scom_myentity_entities%s` e LEFT JOIN `%scom_myentity_data%s` d ON e.`guid`=d.`guid` ORDER BY %s;",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$etype,
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$etype,
 				$options['reverse'] ? $sort.' DESC' : $sort);
 		}
 		pines_log("MySQL Query: $query", 'debug');
-		if ( !($result = @mysql_query($query, $pines->com_mysql->link)) ) {
+		if ( !($result = @mysql_query($query, $_->com_mysql->link)) ) {
 			// If the tables don't exist yet, create them.
 			if (mysql_errno() == 1146 && $this->create_tables()) {
 				if (isset($etype_dirty))
 					$this->create_tables($etype_dirty);
-				if ( !($result = @mysql_query($query, $pines->com_mysql->link)) ) {
-					if (function_exists('pines_error')) pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				if ( !($result = @mysql_query($query, $_->com_mysql->link)) ) {
+					if (function_exists('pines_error')) pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 					return null;
 				}
 			} else {
-				if (function_exists('pines_error')) pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				if (function_exists('pines_error')) pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return null;
 			}
 		}
@@ -705,7 +705,7 @@ class com_myentity extends component implements entity_manager_interface {
 					$ocount++;
 					continue;
 				}
-				if ($pines->config->com_myentity->cache)
+				if ($_->config->com_myentity->cache)
 					$entity = $this->pull_cache($guid, $class);
 				else
 					$entity = null;
@@ -714,7 +714,7 @@ class com_myentity extends component implements entity_manager_interface {
 					$entity->guid = $guid;
 					$entity->tags = explode(',', substr($tags, 1, -1));
 					$entity->put_data($data, $sdata);
-					if ($pines->config->com_myentity->cache)
+					if ($_->config->com_myentity->cache)
 						$this->push_cache($entity, $class);
 				}
 				$entity->_p_use_skip_ac = (bool) $options['skip_ac'];
@@ -747,13 +747,13 @@ class com_myentity extends component implements entity_manager_interface {
 	public function get_uid($name) {
 		if (!$name)
 			return null;
-		global $pines;
+		global $_;
 		$query = sprintf("SELECT `cur_uid` FROM `%scom_myentity_uids` WHERE `name`='%s';",
-			$pines->config->com_mysql->prefix,
-			mysql_real_escape_string($name, $pines->com_mysql->link));
-		if ( !($result = mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix,
+			mysql_real_escape_string($name, $_->com_mysql->link));
+		if ( !($result = mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return null;
 		}
 		$row = mysql_fetch_row($result);
@@ -820,7 +820,7 @@ class com_myentity extends component implements entity_manager_interface {
 	}
 
 	public function import($filename) {
-		global $pines;
+		global $_;
 		$filename = clean_filename((string) $filename);
 		if (!$fhandle = fopen($filename, 'r'))
 			return false;
@@ -839,38 +839,38 @@ class com_myentity extends component implements entity_manager_interface {
 				// Save the current entity.
 				if ($guid) {
 					$query = sprintf("REPLACE INTO `%scom_myentity_entities` (`guid`, `tags`, `varlist`, `cdate`, `mdate`) VALUES (%u, '%s', '%s', %F, %F);",
-						$pines->config->com_mysql->prefix,
+						$_->config->com_mysql->prefix,
 						$guid,
-						mysql_real_escape_string(','.$tags.',', $pines->com_mysql->link),
-						mysql_real_escape_string(','.implode(',', array_keys($data)).',', $pines->com_mysql->link),
+						mysql_real_escape_string(','.$tags.',', $_->com_mysql->link),
+						mysql_real_escape_string(','.implode(',', array_keys($data)).',', $_->com_mysql->link),
 						unserialize($data['p_cdate']),
 						unserialize($data['p_mdate']));
-					if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+					if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 						if (function_exists('pines_error'))
-							pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+							pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 						return false;
 					}
 					$query = sprintf("DELETE FROM `%scom_myentity_data` WHERE `guid`=%u;",
-						$pines->config->com_mysql->prefix,
+						$_->config->com_mysql->prefix,
 						$guid);
-					if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+					if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 						if (function_exists('pines_error'))
-							pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+							pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 						return false;
 					}
 					unset($data['p_cdate'], $data['p_mdate']);
 					if ($data) {
-						$query = "INSERT INTO `{$pines->config->com_mysql->prefix}com_myentity_data` (`guid`, `name`, `value`) VALUES ";
+						$query = "INSERT INTO `{$_->config->com_mysql->prefix}com_myentity_data` (`guid`, `name`, `value`) VALUES ";
 						foreach ($data as $name => $value) {
 							$query .= sprintf("(%u, '%s', '%s'),",
 								$guid,
-								mysql_real_escape_string($name, $pines->com_mysql->link),
-								mysql_real_escape_string($value, $pines->com_mysql->link));
+								mysql_real_escape_string($name, $_->com_mysql->link),
+								mysql_real_escape_string($value, $_->com_mysql->link));
 						}
 						$query = substr($query, 0, -1).';';
-						if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+						if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 							if (function_exists('pines_error'))
-								pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+								pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 							return false;
 						}
 					}
@@ -888,13 +888,13 @@ class com_myentity extends component implements entity_manager_interface {
 			} elseif (preg_match('/^\s*<([^>]+)>\[(\d+)\]\s*$/S', $line, $matches)) {
 				// Add the UID.
 				$query = sprintf("INSERT INTO `%scom_myentity_uids` (`name`, `cur_uid`) VALUES ('%s', %u) ON DUPLICATE KEY UPDATE `cur_uid`=%u;",
-					$pines->config->com_mysql->prefix,
-					mysql_real_escape_string($matches[1], $pines->com_mysql->link),
+					$_->config->com_mysql->prefix,
+					mysql_real_escape_string($matches[1], $_->com_mysql->link),
 					(int) $matches[2],
 					(int) $matches[2]);
-				if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+				if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 					if (function_exists('pines_error'))
-						pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+						pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 					return false;
 				}
 			}
@@ -905,38 +905,38 @@ class com_myentity extends component implements entity_manager_interface {
 		// Save the last entity.
 		if ($guid) {
 			$query = sprintf("REPLACE INTO `%scom_myentity_entities` (`guid`, `tags`, `varlist`, `cdate`, `mdate`) VALUES (%u, '%s', '%s', %F, %F);",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$guid,
-				mysql_real_escape_string(','.$tags.',', $pines->com_mysql->link),
-				mysql_real_escape_string(','.implode(',', array_keys($data)).',', $pines->com_mysql->link),
+				mysql_real_escape_string(','.$tags.',', $_->com_mysql->link),
+				mysql_real_escape_string(','.implode(',', array_keys($data)).',', $_->com_mysql->link),
 				unserialize($data['p_cdate']),
 				unserialize($data['p_mdate']));
-			if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 				if (function_exists('pines_error'))
-					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
 			$query = sprintf("DELETE FROM `%scom_myentity_data` WHERE `guid`=%u;",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$guid);
-			if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 				if (function_exists('pines_error'))
-					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
 			if ($data) {
-				$query = "INSERT INTO `{$pines->config->com_mysql->prefix}com_myentity_data` (`guid`, `name`, `value`) VALUES ";
+				$query = "INSERT INTO `{$_->config->com_mysql->prefix}com_myentity_data` (`guid`, `name`, `value`) VALUES ";
 				unset($data['p_cdate'], $data['p_mdate']);
 				foreach ($data as $name => $value) {
 					$query .= sprintf("(%u, '%s', '%s'),",
 						$guid,
-						mysql_real_escape_string($name, $pines->com_mysql->link),
-						mysql_real_escape_string($value, $pines->com_mysql->link));
+						mysql_real_escape_string($name, $_->com_mysql->link),
+						mysql_real_escape_string($value, $_->com_mysql->link));
 				}
 				$query = substr($query, 0, -1).';';
-				if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+				if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 					if (function_exists('pines_error'))
-						pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+						pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 					return false;
 				}
 			}
@@ -947,39 +947,39 @@ class com_myentity extends component implements entity_manager_interface {
 	public function new_uid($name) {
 		if (!$name)
 			return null;
-		global $pines;
+		global $_;
 		$query = sprintf("SELECT GET_LOCK('%scom_myentity_uids_%s', 10);",
-			$pines->config->com_mysql->prefix,
-			mysql_real_escape_string($name, $pines->com_mysql->link));
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix,
+			mysql_real_escape_string($name, $_->com_mysql->link));
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return null;
 		}
 		$query = sprintf("INSERT INTO `%scom_myentity_uids` (`name`, `cur_uid`) VALUES ('%s', 1) ON DUPLICATE KEY UPDATE `cur_uid`=`cur_uid`+1;",
-			$pines->config->com_mysql->prefix,
-			mysql_real_escape_string($name, $pines->com_mysql->link));
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix,
+			mysql_real_escape_string($name, $_->com_mysql->link));
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return null;
 		}
 		$query = sprintf("SELECT `cur_uid` FROM `%scom_myentity_uids` WHERE `name`='%s';",
-			$pines->config->com_mysql->prefix,
-			mysql_real_escape_string($name, $pines->com_mysql->link));
-		if ( !($result = mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix,
+			mysql_real_escape_string($name, $_->com_mysql->link));
+		if ( !($result = mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return null;
 		}
 		$row = mysql_fetch_row($result);
 		mysql_free_result($result);
 		$query = sprintf("SELECT RELEASE_LOCK('%scom_myentity_uids_%s');",
-			$pines->config->com_mysql->prefix,
-			mysql_real_escape_string($name, $pines->com_mysql->link));
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix,
+			mysql_real_escape_string($name, $_->com_mysql->link));
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return null;
 		}
 		return isset($row[0]) ? (int) $row[0] : null;
@@ -1023,7 +1023,7 @@ class com_myentity extends component implements entity_manager_interface {
 	 * @access private
 	 */
 	private function push_cache(&$entity, $class) {
-		global $pines;
+		global $_;
 		if (!isset($entity->guid))
 			return;
 		// Increment the entity access count.
@@ -1031,13 +1031,13 @@ class com_myentity extends component implements entity_manager_interface {
 			$this->entity_count[$entity->guid] = 0;
 		$this->entity_count[$entity->guid]++;
 		// Check the threshold.
-		if ($this->entity_count[$entity->guid] < $pines->config->com_myentity->cache_threshold)
+		if ($this->entity_count[$entity->guid] < $_->config->com_myentity->cache_threshold)
 			return;
 		// Cache the entity.
 		if ((array) $this->entity_cache[$entity->guid] === $this->entity_cache[$entity->guid]) {
 			$this->entity_cache[$entity->guid][$class] = clone $entity;
 		} else {
-			while ($pines->config->com_myentity->cache_limit && count($this->entity_cache) >= $pines->config->com_myentity->cache_limit) {
+			while ($_->config->com_myentity->cache_limit && count($this->entity_cache) >= $_->config->com_myentity->cache_limit) {
 				// Find which entity has been accessed the least.
 				asort($this->entity_count);
 				foreach ($this->entity_count as $key => $val) {
@@ -1056,14 +1056,14 @@ class com_myentity extends component implements entity_manager_interface {
 	public function rename_uid($old_name, $new_name) {
 		if (!$old_name || !$new_name)
 			return false;
-		global $pines;
+		global $_;
 		$query = sprintf("UPDATE `%scom_myentity_uids` SET `name`='%s' WHERE `name`='%s';",
-			$pines->config->com_mysql->prefix,
-			mysql_real_escape_string($new_name, $pines->com_mysql->link),
-			mysql_real_escape_string($old_name, $pines->com_mysql->link));
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			$_->config->com_mysql->prefix,
+			mysql_real_escape_string($new_name, $_->com_mysql->link),
+			mysql_real_escape_string($old_name, $_->com_mysql->link));
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		return true;
@@ -1073,7 +1073,7 @@ class com_myentity extends component implements entity_manager_interface {
 	 * @todo Check that the big insert query doesn't fail.
 	 */
 	public function save_entity(&$entity) {
-		global $pines;
+		global $_;
 		// Save the created date.
 		if ( !isset($entity->guid) )
 			$entity->p_cdate = microtime(true);
@@ -1084,7 +1084,7 @@ class com_myentity extends component implements entity_manager_interface {
 		$varlist = array_merge(array_keys($data), array_keys($sdata));
 		$class = get_class($entity);
 		$etype_dirty = $class::etype();
-		$etype = '_'.mysql_real_escape_string($etype_dirty, $pines->com_mysql->link);
+		$etype = '_'.mysql_real_escape_string($etype_dirty, $_->com_mysql->link);
 		if ( !isset($entity->guid) ) {
 			while (true) {
 				$new_id = @mt_rand(1, 0x7FFFFFFFFFFFFFFF);
@@ -1092,11 +1092,11 @@ class com_myentity extends component implements entity_manager_interface {
 				if ($new_id < 1)
 					$new_id = rand(1, 0x7FFFFFFF);
 				$query = sprintf("SELECT `guid` FROM `%scom_myentity_guids` WHERE `guid`=%u;",
-					$pines->config->com_mysql->prefix,
+					$_->config->com_mysql->prefix,
 					$new_id);
-				if ( !($result = mysql_query($query, $pines->com_mysql->link)) ) {
+				if ( !($result = mysql_query($query, $_->com_mysql->link)) ) {
 					if (function_exists('pines_error'))
-						pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+						pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 					return null;
 				}
 				$row = mysql_fetch_row($result);
@@ -1106,32 +1106,32 @@ class com_myentity extends component implements entity_manager_interface {
 			}
 			$entity->guid = $new_id;
 			$query = sprintf("INSERT INTO `%scom_myentity_guids` (`guid`) VALUES (%u);",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$entity->guid);
-			if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 				if (function_exists('pines_error'))
-					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
 			$query = sprintf("INSERT INTO `%scom_myentity_entities%s` (`guid`, `tags`, `varlist`, `cdate`, `mdate`) VALUES (%u, '%s', '%s', %F, %F);",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$etype,
 				$entity->guid,
-				mysql_real_escape_string(','.implode(',', array_diff($entity->tags, array(''))).',', $pines->com_mysql->link),
-				mysql_real_escape_string(','.implode(',', $varlist).',', $pines->com_mysql->link),
+				mysql_real_escape_string(','.implode(',', array_diff($entity->tags, array(''))).',', $_->com_mysql->link),
+				mysql_real_escape_string(','.implode(',', $varlist).',', $_->com_mysql->link),
 				(float) $data['p_cdate'],
 				(float) $data['p_mdate']);
-			if ( !(mysql_query($query, $pines->com_mysql->link))  ) {
+			if ( !(mysql_query($query, $_->com_mysql->link))  ) {
 				// If the tables don't exist yet, create them.
 				if (mysql_errno() == 1146 && $this->create_tables()) {
 					if (isset($etype_dirty))
 						$this->create_tables($etype_dirty);
-					if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
-						if (function_exists('pines_error')) pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					if ( !(mysql_query($query, $_->com_mysql->link)) ) {
+						if (function_exists('pines_error')) pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 						return false;
 					}
 				} else {
-					if (function_exists('pines_error')) pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					if (function_exists('pines_error')) pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 					return false;
 				}
 			}
@@ -1140,48 +1140,48 @@ class com_myentity extends component implements entity_manager_interface {
 			foreach ($data as $name => $value) {
 				$values[] = sprintf('(%u, \'%s\', \'%s\')',
 					$entity->guid,
-					mysql_real_escape_string($name, $pines->com_mysql->link),
-					mysql_real_escape_string(serialize($value), $pines->com_mysql->link));
+					mysql_real_escape_string($name, $_->com_mysql->link),
+					mysql_real_escape_string(serialize($value), $_->com_mysql->link));
 			}
 			foreach ($sdata as $name => $value) {
 				$values[] = sprintf('(%u, \'%s\', \'%s\')',
 					$entity->guid,
-					mysql_real_escape_string($name, $pines->com_mysql->link),
-					mysql_real_escape_string($value, $pines->com_mysql->link));
+					mysql_real_escape_string($name, $_->com_mysql->link),
+					mysql_real_escape_string($value, $_->com_mysql->link));
 			}
 			$query = sprintf("INSERT INTO `%scom_myentity_data%s` (`guid`, `name`, `value`) VALUES %s;",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$etype,
 				implode(',', $values));
-			if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 				if (function_exists('pines_error'))
-					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
 		} else {
 			// Removed any cached versions of this entity.
-			if ($pines->config->com_myentity->cache)
+			if ($_->config->com_myentity->cache)
 				$this->clean_cache($entity->guid);
 			$query = sprintf("UPDATE `%scom_myentity_entities%s` SET `tags`='%s', `varlist`='%s', `cdate`=%F, `mdate`=%F WHERE `guid`=%u;",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$etype,
-				mysql_real_escape_string(','.implode(',', array_diff($entity->tags, array(''))).',', $pines->com_mysql->link),
-				mysql_real_escape_string(','.implode(',', $varlist).',', $pines->com_mysql->link),
+				mysql_real_escape_string(','.implode(',', array_diff($entity->tags, array(''))).',', $_->com_mysql->link),
+				mysql_real_escape_string(','.implode(',', $varlist).',', $_->com_mysql->link),
 				(float) $data['p_cdate'],
 				(float) $data['p_mdate'],
 				(int) $entity->guid);
-			if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 				if (function_exists('pines_error'))
-					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
 			$query = sprintf("DELETE FROM `%scom_myentity_data%s` WHERE `guid`=%u;",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$etype,
 				(int) $entity->guid);
-			if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 				if (function_exists('pines_error'))
-					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
 			unset($data['p_cdate'], $data['p_mdate']);
@@ -1189,27 +1189,27 @@ class com_myentity extends component implements entity_manager_interface {
 			foreach ($data as $name => $value) {
 				$values[] = sprintf('(%u, \'%s\', \'%s\')',
 					(int) $entity->guid,
-					mysql_real_escape_string($name, $pines->com_mysql->link),
-					mysql_real_escape_string(serialize($value), $pines->com_mysql->link));
+					mysql_real_escape_string($name, $_->com_mysql->link),
+					mysql_real_escape_string(serialize($value), $_->com_mysql->link));
 			}
 			foreach ($sdata as $name => $value) {
 				$values[] = sprintf('(%u, \'%s\', \'%s\')',
 					(int) $entity->guid,
-					mysql_real_escape_string($name, $pines->com_mysql->link),
-					mysql_real_escape_string($value, $pines->com_mysql->link));
+					mysql_real_escape_string($name, $_->com_mysql->link),
+					mysql_real_escape_string($value, $_->com_mysql->link));
 			}
 			$query = sprintf("INSERT INTO `%scom_myentity_data%s` (`guid`, `name`, `value`) VALUES %s;",
-				$pines->config->com_mysql->prefix,
+				$_->config->com_mysql->prefix,
 				$etype,
 				implode(',', $values));
-			if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 				if (function_exists('pines_error'))
-					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
 		}
 		// Cache the entity.
-		if ($pines->config->com_myentity->cache) {
+		if ($_->config->com_myentity->cache) {
 			$class = get_class($entity);
 			// Replace hook override in the class name.
 			if (strpos($class, 'hook_override_') === 0)
@@ -1222,15 +1222,15 @@ class com_myentity extends component implements entity_manager_interface {
 	public function set_uid($name, $value) {
 		if (!$name)
 			return false;
-		global $pines;
+		global $_;
 		$query = sprintf("INSERT INTO `%scom_myentity_uids` (`name`, `cur_uid`) VALUES ('%s', %u) ON DUPLICATE KEY UPDATE `cur_uid`=%u;",
-			$pines->config->com_mysql->prefix,
-			mysql_real_escape_string($name, $pines->com_mysql->link),
+			$_->config->com_mysql->prefix,
+			mysql_real_escape_string($name, $_->com_mysql->link),
 			(int) $value,
 			(int) $value);
-		if ( !(mysql_query($query, $pines->com_mysql->link)) ) {
+		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
 			if (function_exists('pines_error'))
-				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($pines->config->com_myentity->show_failures ? ' --- '.$query : ''));
+				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
 		return true;

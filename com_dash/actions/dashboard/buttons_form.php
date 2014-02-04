@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
 	punt_user(null, pines_url('com_dash'));
 
-$pines->page->override = true;
+$_->page->override = true;
 
 if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage'))
 	$dashboard = com_dash_dashboard::factory((int) $_REQUEST['id']);
@@ -28,12 +28,12 @@ if ($dashboard->locked && !gatekeeper('com_dash/manage'))
 $module = new module('com_dash', 'dashboard/buttons_form');
 $module->current_buttons = $dashboard->tabs[$_REQUEST['key']]['buttons'];
 $module->buttons_size = $dashboard->tabs[$_REQUEST['key']]['buttons_size'];
-$module->buttons = $pines->com_dash->button_types();
+$module->buttons = $_->com_dash->button_types();
 foreach ($module->buttons as $cur_component => $cur_button_set) {
 	foreach ($cur_button_set as $cur_button_name => $cur_button) {
 		// Check its conditions.
 		foreach ((array) $cur_button['depends'] as $cur_type => $cur_value) {
-			if (!$pines->depend->check($cur_type, $cur_value)) {
+			if (!$_->depend->check($cur_type, $cur_value)) {
 				unset($module->buttons[$cur_component][$cur_button_name]);
 				if (!$module->buttons[$cur_component])
 					unset($module->buttons[$cur_component]);
@@ -43,4 +43,4 @@ foreach ($module->buttons as $cur_component => $cur_button_set) {
 }
 
 $content = $module->render();
-$pines->page->override_doc($content);
+$_->page->override_doc($content);

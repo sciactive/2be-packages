@@ -8,19 +8,19 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
-<?php if ($pines->config->com_elastislide->combine_js) { ?>
+<?php if ($_->config->com_elastislide->combine_js) { ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_elastislide/includes/jquery.elastislide.css");
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_elastislide/includes/jquery.complete.elastislide.js");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_elastislide/includes/jquery.elastislide.css");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_elastislide/includes/jquery.complete.elastislide.js");
 </script>
 <?php } else { ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_elastislide/includes/jquery.elastislide.css");
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_elastislide/includes/modernizr.custom.17475.js");
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_elastislide/includes/jquerypp.custom.js");
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_elastislide/includes/jquery.elastislide.js");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_elastislide/includes/jquery.elastislide.css");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_elastislide/includes/modernizr.custom.17475.js");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_elastislide/includes/jquerypp.custom.js");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_elastislide/includes/jquery.elastislide.js");
 </script>
 <?php }

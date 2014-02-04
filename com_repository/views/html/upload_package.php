@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Upload a Package';
 
-$pines->uploader->load();
+$_->uploader->load();
 
 // Find the max upload size.
 $upload_max = trim(ini_get('upload_max_filesize'));

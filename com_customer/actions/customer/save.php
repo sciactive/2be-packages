@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -19,7 +19,7 @@ if ( isset($_REQUEST['id']) ) {
 		pines_error('Requested customer id is not accessible.');
 		return;
 	}
-	if ( (!in_array('account', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical')) && !empty($_REQUEST['password']) )
+	if ( (!in_array('account', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical')) && !empty($_REQUEST['password']) )
 		$customer->password($_REQUEST['password']);
 } else {
 	if ( !gatekeeper('com_customer/newcustomer') )
@@ -29,19 +29,19 @@ if ( isset($_REQUEST['id']) ) {
 }
 
 // General
-if (!in_array('name', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->name)) {
-	$customer->name_first = $pines->com_customer->title_case($_REQUEST['name_first']);
-	$customer->name_middle = $pines->com_customer->title_case($_REQUEST['name_middle']);
-	$customer->name_last = $pines->com_customer->title_case($_REQUEST['name_last']);
+if (!in_array('name', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->name)) {
+	$customer->name_first = $_->com_customer->title_case($_REQUEST['name_first']);
+	$customer->name_middle = $_->com_customer->title_case($_REQUEST['name_middle']);
+	$customer->name_last = $_->com_customer->title_case($_REQUEST['name_last']);
 	$customer->name = "{$customer->name_first} {$customer->name_last}";
 }
-if ($pines->config->com_customer->ssn_field && (!in_array('ssn', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->ssn)))
+if ($_->config->com_customer->ssn_field && (!in_array('ssn', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->ssn)))
 	$customer->ssn = preg_replace('/\D/', '', $_REQUEST['ssn']);
-if (!in_array('dob', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->dob))
+if (!in_array('dob', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->dob))
 	$customer->dob = strtotime($_REQUEST['dob']);
-if (!in_array('email', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->email))
+if (!in_array('email', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->email))
 	$customer->email = $_REQUEST['email'];
-if (!in_array('company', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || (!isset($customer->company) || !isset($customer->job_title))) {
+if (!in_array('company', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || (!isset($customer->company) || !isset($customer->job_title))) {
 	$customer->company = null;
 	if (preg_match('/^\d+/', $_REQUEST['company'])) {
 		$customer->company = com_customer_company::factory(intval($_REQUEST['company']));
@@ -57,12 +57,12 @@ $customer->phone_home = preg_replace('/\D/', '', $_REQUEST['phone_home']);
 $customer->fax = preg_replace('/\D/', '', $_REQUEST['fax']);
 $customer->timezone = $_REQUEST['timezone'];
 $customer->referrer = $_REQUEST['referrer'];
-if (!in_array('description', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->description))
+if (!in_array('description', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->description))
 	$customer->description = $_REQUEST['description'];
 
 // Account
-if (!in_array('account', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->username)) {
-	if (!$pines->config->com_user->email_usernames) {
+if (!in_array('account', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->username)) {
+	if (!$_->config->com_user->email_usernames) {
 		$customer->username = $_REQUEST['username'];
 		if (empty($_REQUEST['username']))
 			$customer->username = uniqid('user');
@@ -72,14 +72,14 @@ if (!in_array('account', $pines->config->com_customer->critical_fields_customer)
 	else
 		$customer->remove_tag('enabled');
 }
-if (!in_array('membership', $pines->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->member)) {
+if (!in_array('membership', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->member)) {
 	if ($_REQUEST['member'] == 'ON')
 		$customer->make_member();
 	else
 		$customer->member = false;
 	$customer->member_exp = strtotime($_REQUEST['member_exp']);
 }
-if ($pines->config->com_customer->adjustpoints && gatekeeper('com_customer/adjustpoints'))
+if ($_->config->com_customer->adjustpoints && gatekeeper('com_customer/adjustpoints'))
 	$customer->adjust_points((int) $_REQUEST['adjust_points']);
 
 // Addresses
@@ -116,13 +116,13 @@ foreach ($customer->attributes as &$cur_attribute) {
 unset($cur_attribute);
 
 // Customer validation to ensure that the fields were filled out correctly.
-if (in_array('name', $pines->config->com_customer->required_fields_customer) && empty($customer->name)) {
+if (in_array('name', $_->config->com_customer->required_fields_customer) && empty($customer->name)) {
 	$customer->print_form();
 	pines_notice('Please specify a name.');
 	return;
 }
 if (empty($customer->ssn)) {
-	if (in_array('ssn', $pines->config->com_customer->required_fields_customer)) {
+	if (in_array('ssn', $_->config->com_customer->required_fields_customer)) {
 		$customer->print_form();
 		pines_notice('Please provide an SSN.');
 		return;
@@ -133,29 +133,29 @@ if (empty($customer->ssn)) {
 		pines_notice('The SSN must be a 9 digit number.');
 		return;
 	}
-	$test = $pines->entity_manager->get_entity(array('class' => com_customer_customer, 'skip_ac' => true), array('&', 'tag' => array('com_customer', 'customer'), 'strict' => array('ssn', $customer->ssn), '!guid' => $customer->guid));
+	$test = $_->entity_manager->get_entity(array('class' => com_customer_customer, 'skip_ac' => true), array('&', 'tag' => array('com_customer', 'customer'), 'strict' => array('ssn', $customer->ssn), '!guid' => $customer->guid));
 	if (isset($test)) {
 		$customer->print_form();
 		pines_notice('Another customer already has this SSN.');
 		return;
 	}
 }
-if (in_array('dob', $pines->config->com_customer->required_fields_customer) && empty($customer->dob)) {
+if (in_array('dob', $_->config->com_customer->required_fields_customer) && empty($customer->dob)) {
 	$customer->print_form();
 	pines_notice('Please specify a date of birth.');
 	return;
 }
-if (in_array('email', $pines->config->com_customer->required_fields_customer) && empty($customer->email)) {
+if (in_array('email', $_->config->com_customer->required_fields_customer) && empty($customer->email)) {
 	$customer->print_form();
 	pines_notice('Please specify an email.');
 	return;
 }
-if (in_array('company', $pines->config->com_customer->required_fields_customer) && empty($customer->company)) {
+if (in_array('company', $_->config->com_customer->required_fields_customer) && empty($customer->company)) {
 	$customer->print_form();
 	pines_notice('Please specify a company.');
 	return;
 }
-if (in_array('phone', $pines->config->com_customer->required_fields_customer) &&
+if (in_array('phone', $_->config->com_customer->required_fields_customer) &&
 	empty($customer->phone_cell) &&
 	empty($customer->phone_work) &&
 	empty($customer->phone_home)) {
@@ -163,27 +163,27 @@ if (in_array('phone', $pines->config->com_customer->required_fields_customer) &&
 	pines_notice('Please specify at least one phone number.');
 	return;
 }
-if (in_array('referrer', $pines->config->com_customer->required_fields_customer) && empty($customer->referrer)) {
+if (in_array('referrer', $_->config->com_customer->required_fields_customer) && empty($customer->referrer)) {
 	$customer->print_form();
 	pines_notice('Please specify a referrer.');
 	return;
 }
-if (!empty($customer->referrer) && !in_array($customer->referrer, $pines->config->com_customer->referrer_values)) {
+if (!empty($customer->referrer) && !in_array($customer->referrer, $_->config->com_customer->referrer_values)) {
 	$customer->print_form();
 	pines_notice('Please choose from the available referrers.');
 	return;
 }
-if (in_array('description', $pines->config->com_customer->required_fields_customer) && empty($customer->description)) {
+if (in_array('description', $_->config->com_customer->required_fields_customer) && empty($customer->description)) {
 	$customer->print_form();
 	pines_notice('Please specify a description.');
 	return;
 }
-if (in_array('password', $pines->config->com_customer->required_fields_customer) && empty($customer->tmp_password)) {
+if (in_array('password', $_->config->com_customer->required_fields_customer) && empty($customer->tmp_password)) {
 	$customer->print_form();
 	pines_notice('Please specify a password.');
 	return;
 }
-if (in_array('address', $pines->config->com_customer->required_fields_customer)) {
+if (in_array('address', $_->config->com_customer->required_fields_customer)) {
 	switch ($customer->address_type) {
 			case 'us':
 				if (empty($customer->address_1) ||
@@ -205,13 +205,13 @@ if (in_array('address', $pines->config->com_customer->required_fields_customer))
 }
 
 
-$un_check = $pines->user_manager->check_username($customer->username, $customer->guid);
+$un_check = $_->user_manager->check_username($customer->username, $customer->guid);
 if (!$un_check['result']) {
 	$customer->print_form();
 	pines_notice($un_check['message']);
 	return;
 }
-$test = $pines->entity_manager->get_entity(
+$test = $_->entity_manager->get_entity(
 		array('class' => user, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_user', 'user'),
@@ -224,13 +224,13 @@ if (isset($test)) {
 	pines_notice('There is already a user with that email address. Please use a different email.');
 	return;
 }
-if (empty($customer->password) && !$pines->config->com_user->pw_empty) {
+if (empty($customer->password) && !$_->config->com_user->pw_empty) {
 	$customer->print_form();
 	pines_notice('Please specify a password.');
 	return;
 }
 
-if ($pines->config->com_customer->global_customers)
+if ($_->config->com_customer->global_customers)
 	$customer->ac->other = 1;
 
 if ($customer->save()) {

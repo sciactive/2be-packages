@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->sub_position;
 
 // It gets the sidemenu entity, checks for a sorted_menu or uses the natural_menu.
-$menu = $pines->com_content->get_sidemenu(); // by default gets sorted or returns natural or returns false if not ready yet.
+$menu = $_->com_content->get_sidemenu(); // by default gets sorted or returns natural or returns false if not ready yet.
 ?>
 <style type="text/css">
 .side-menu-list .top-category, .top-category+i, .top-sidemenu-item {

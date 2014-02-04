@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -22,11 +22,11 @@ class com_example extends component {
 	 * @return module The module.
 	 */
 	public function list_foobars() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_example', 'foobar/list', 'content');
 
-		$module->foobars = $pines->entity_manager->get_entities(
+		$module->foobars = $_->entity_manager->get_entities(
 				array('class' => com_example_foobar),
 				array('&',
 					'tag' => array('com_example', 'foobar')

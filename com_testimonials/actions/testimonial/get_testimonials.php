@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 // The permissions on this are weak, because we want testimonials to be public
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 // If not set, they will just be null
@@ -31,6 +31,6 @@ $review_option_limit = isset($_REQUEST['review_limit']) ? (int) $_REQUEST['revie
 if ($_REQUEST['review_option_type'] == 'review') {
 	$review_option_additional_tags[] = 'review'; // add this tag so we search by this.
 }
-$result = $pines->com_testimonials->get_testimonials($review_data_type, $review_option_reverse, $review_option_limit, $review_option_offset, $review_option_additional_tags, $review_entity_guid, $review_entity_class, $review_option_name, $review_ratings_off);
+$result = $_->com_testimonials->get_testimonials($review_data_type, $review_option_reverse, $review_option_limit, $review_option_offset, $review_option_additional_tags, $review_entity_guid, $review_entity_class, $review_option_name, $review_ratings_off);
 
-$pines->page->override_doc(json_encode($result));
+$_->page->override_doc(json_encode($result));

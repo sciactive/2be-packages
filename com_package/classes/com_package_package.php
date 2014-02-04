@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -48,7 +48,7 @@ class com_package_package {
 	 * @param bool $is_file Whether to load a Slim archive package.
 	 */
 	public function __construct($package, $is_file = false) {
-		global $pines;
+		global $_;
 		if ($is_file) {
 			if (!is_readable($package))
 				return;
@@ -59,7 +59,7 @@ class com_package_package {
 			$this->name = $this->info['package'];
 			unset($this->info['package']);
 		} else {
-			$info = $pines->com_package->db['packages'][$package];
+			$info = $_->com_package->db['packages'][$package];
 			if (isset($info)) {
 				$this->name = $package;
 				$this->installed = true;
@@ -77,13 +77,13 @@ class com_package_package {
 	 * @return com_package_package The new instance.
 	 */
 	public static function factory() {
-		global $pines;
+		global $_;
 		$class = get_class();
 		$args = func_get_args();
 		$object = new $class($args[0], $args[1]);
 		if (empty($object->name))
 			return null;
-		$pines->hook->hook_object($object, $class.'->', false);
+		$_->hook->hook_object($object, $class.'->', false);
 		return $object;
 	}
 
@@ -132,13 +132,13 @@ class com_package_package {
 	 * @return bool True or false.
 	 */
 	public function is_ready($skip_package_checks = false) {
-		global $pines;
+		global $_;
 		// Check if a newer version is installed.
 		if (
-				isset($pines->com_package->db['packages'][$this->name]) &&
+				isset($_->com_package->db['packages'][$this->name]) &&
 				version_compare(
 					$this->info['version'],
-					$pines->com_package->db['packages'][$this->name]['version'],
+					$_->com_package->db['packages'][$this->name]['version'],
 					'<'
 				)
 			)
@@ -149,7 +149,7 @@ class com_package_package {
 				// If the service is provided, it may just be because this
 				// package is already installed. Check if the component is the
 				// same.
-				if (isset($pines->com_package->db['services'][$cur_service]) && !in_array($this->name, $pines->com_package->db['services'][$cur_service]))
+				if (isset($_->com_package->db['services'][$cur_service]) && !in_array($this->name, $_->com_package->db['services'][$cur_service]))
 					return false;
 			}
 		}
@@ -158,7 +158,7 @@ class com_package_package {
 			foreach ($this->info['depend'] as $cur_type => $cur_value) {
 				if ($skip_package_checks && in_array($cur_type, array('component', 'package', 'service')))
 					continue;
-				if (!$pines->depend->check($cur_type, $cur_value))
+				if (!$_->depend->check($cur_type, $cur_value))
 					return false;
 			}
 		}
@@ -167,7 +167,7 @@ class com_package_package {
 			foreach ($this->info['conflict'] as $cur_type => $cur_value) {
 				if ($skip_package_checks && in_array($cur_type, array('component', 'package', 'service')))
 					continue;
-				if ($pines->depend->check($cur_type, $cur_value))
+				if ($_->depend->check($cur_type, $cur_value))
 					return false;
 			}
 		}
@@ -191,7 +191,7 @@ class com_package_package {
 	 * @return bool True on success, false on failure.
 	 */
 	public function install($force = false, $skip_package_checks = false) {
-		global $pines;
+		global $_;
 		if (!$this->is_installable())
 			return false;
 		if (!$this->is_ready($skip_package_checks)) {
@@ -201,15 +201,15 @@ class com_package_package {
 		}
 		if ($this->info['type'] == 'system') {
 			// Should this require $force?
-			pines_log("Replacing existing system \"{$pines->info->name}\" version {$pines->info->version} with new system \"{$this->name}\" {$this->info['version']}.", 'notice');
-			$old_package = $pines->com_package->get_system();
+			pines_log("Replacing existing system \"{$_->info->name}\" version {$_->info->version} with new system \"{$this->name}\" {$this->info['version']}.", 'notice');
+			$old_package = $_->com_package->get_system();
 			if (!isset($old_package) || !$old_package->is_installed() || !$old_package->remove(false, true)) {
 				pines_log("Could not remove \"{$old_package->name}\" version {$old_package->info['version']} for replacement.", 'error');
 				return false;
 			}
 		} else {
-			if (isset($pines->com_package->db['packages'][$this->name])) {
-				pines_log("Replacing existing package \"{$this->name}\" version {$pines->com_package->db['packages'][$this->name]['version']} with new version {$this->info['version']}.", 'notice');
+			if (isset($_->com_package->db['packages'][$this->name])) {
+				pines_log("Replacing existing package \"{$this->name}\" version {$_->com_package->db['packages'][$this->name]['version']} with new version {$this->info['version']}.", 'notice');
 				$old_package = com_package_package::factory($this->name);
 				if (!isset($old_package) || !$old_package->is_installed() || !$old_package->remove(false, true)) {
 					pines_log("Could not remove \"{$old_package->name}\" version {$old_package->info['version']} for replacement.", 'error');
@@ -225,8 +225,8 @@ class com_package_package {
 				$this->slim->working_directory = $this->info['type'] == 'template' ? 'templates/' : 'components/';
 				if (!$this->slim->extract('', true, '/^_MEDIA\//'))
 					return false;
-				$pines->components[] = $this->name;
-				$pines->all_components[] = $this->name;
+				$_->components[] = $this->name;
+				$_->all_components[] = $this->name;
 				break;
 			case 'system':
 				if (!is_writable("components/com_package/includes/cache/sys_{$this->name}.php"))
@@ -257,7 +257,7 @@ class com_package_package {
 				return false;
 		}
 		pines_log("Successfully installed new package \"{$this->name}\" version {$this->info['version']}. Rebuilding package database.", 'notice');
-		$pines->com_package->rebuild_db();
+		$_->com_package->rebuild_db();
 		return true;
 	}
 
@@ -268,7 +268,7 @@ class com_package_package {
 	 * @return bool True on success, false on failure.
 	 */
 	public function remove($force = false, $for_upgrade = false) {
-		global $pines;
+		global $_;
 		if (!$this->installed)
 			return false;
 		if (!$for_upgrade)
@@ -287,7 +287,7 @@ class com_package_package {
 				}
 				if (in_array('user_manager', (array) $this->info['services'])) {
 					// If we are removing the user manager, we need to log the user out.
-					$pines->user_manager->logout();
+					$_->user_manager->logout();
 				}
 				$files = $this->dir_find($dir);
 				$files[] = $dir;
@@ -316,8 +316,8 @@ class com_package_package {
 					}
 				}
 				if ($return) {
-					$pines->components = array_diff($pines->components, array($this->name));
-					$pines->all_components = array_diff($pines->all_components, array($this->name));
+					$_->components = array_diff($_->components, array($this->name));
+					$_->all_components = array_diff($_->all_components, array($this->name));
 				}
 				break;
 			case 'system':
@@ -379,7 +379,7 @@ class com_package_package {
 			} else {
 				pines_log("Error removing package \"{$this->name}\" version {$this->info['version']}. Check that all files were removed correctly. Rebuilding package database.", 'error');
 			}
-			$pines->com_package->rebuild_db();
+			$_->com_package->rebuild_db();
 		}
 		return $return;
 	}

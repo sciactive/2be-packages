@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/editemployee') )
@@ -21,14 +21,14 @@ if (!isset($employee->guid)) {
 
 // General
 $employee->nickname = $_REQUEST['nickname'];
-if ($pines->config->com_hrm->ssn_field && gatekeeper('com_hrm/showssn'))
+if ($_->config->com_hrm->ssn_field && gatekeeper('com_hrm/showssn'))
 	$employee->ssn = preg_replace('/\D/', '', $_REQUEST['ssn']);
 $employee->new_hire = ($_REQUEST['new_hire'] == 'ON');
 $employee->hire_date = empty($_REQUEST['hire_date']) ? null : strtotime($_REQUEST['hire_date']);
 $employee->job_title = $_REQUEST['job_title'];
 $employee->training_completion_date = empty($_REQUEST['training_completion_date']) ? null : strtotime($_REQUEST['training_completion_date']);
 $employee->description = $_REQUEST['description'];
-if ($pines->config->com_hrm->com_calendar)
+if ($_->config->com_hrm->com_calendar)
 	$employee->color = $_REQUEST['color'];
 $employee->phone_ext = preg_replace('/\D/', '', $_REQUEST['phone_ext']);
 $employee->other_phone = preg_replace('/\D/', '', $_REQUEST['other_phone']);
@@ -50,7 +50,7 @@ foreach ($employee->employee_attributes as &$cur_attribute) {
 }
 unset($cur_attribute);
 
-if ($pines->config->com_hrm->ssn_field_require && empty($employee->ssn)) {
+if ($_->config->com_hrm->ssn_field_require && empty($employee->ssn)) {
 	$employee->print_form();
 	pines_notice('Please provide an SSN.');
 	return;

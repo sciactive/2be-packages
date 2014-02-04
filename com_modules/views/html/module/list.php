@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Modules';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_modules/module/list']);
 
-$module_types = $pines->com_modules->module_types();
+$module_types = $_->com_modules->module_types();
 ?>
 <script type="text/javascript">
 	pines(function(){
@@ -76,7 +76,7 @@ $module_types = $pines->com_modules->module_types();
 			<td><?php e($module->position); ?></td>
 			<td><?php e($module->order); ?></td>
 			<td><?php echo ($module->enabled ? 'Yes' : 'No'); ?></td>
-			<td><?php e("{$pines->info->$component->name} - {$module_types[$component][$name]['cname']}"); ?></td>
+			<td><?php e("{$_->info->$component->name} - {$module_types[$component][$name]['cname']}"); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

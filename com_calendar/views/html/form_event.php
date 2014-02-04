@@ -12,7 +12,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <style type="text/css" >
@@ -78,7 +78,7 @@ defined('P_RUN') or die('Direct access prohibited');
 			employee.empty();
 			<?php
 			// Load employee departments.
-			foreach ($pines->config->com_hrm->employee_departments as $cur_dept) {
+			foreach ($_->config->com_hrm->employee_departments as $cur_dept) {
 				$cur_dept_info = explode(':', $cur_dept);
 				$cur_name = $cur_dept_info[0];
 				$cur_color = $cur_dept_info[1];

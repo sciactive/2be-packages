@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = 'Payroll Report';
@@ -18,12 +18,12 @@ $this->title .= ' ('.h(format_date($this->start_date, 'date_short')).' - '.h(for
 
 if ($this->descendants)
 	$this->note = 'Including locations beneath '.h($this->location->name);
-$pines->icons->load();
-$pines->com_jstree->load();
-$pines->com_pgrid->load();
+$_->icons->load();
+$_->com_jstree->load();
+$_->com_pgrid->load();
 $google_drive = false;
-if (isset($pines->com_googledrive)) {
-    $pines->com_googledrive->export_to_drive('csv');
+if (isset($_->com_googledrive)) {
+    $_->com_googledrive->export_to_drive('csv');
     $google_drive = true;
 } else {
     pines_log("Google Drive is not installed", 'notice');
@@ -86,14 +86,14 @@ if (isset($pines->com_googledrive)) {
 					});
 				}},
                                 <?php // Need to check if Google Drive is installed
-                                    if ($google_drive && !empty($pines->config->com_googledrive->client_id)) { ?>
+                                    if ($google_drive && !empty($_->config->com_googledrive->client_id)) { ?>
                                         {type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
                                         // First need to set the rows to which we want to export
                                         setRows(rows);
                                         // Then we have to check if we have permission to post to user's google drive
                                         checkAuth();
                                     }},
-                                    <?php } elseif ($google_drive && empty($pines->config->com_googledrive->client_id)) { ?>
+                                    <?php } elseif ($google_drive && empty($_->config->com_googledrive->client_id)) { ?>
                                         {type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
                                         // They have com_googledrive installed but didn't set the client id, so alert them on click
                                         alert('You need to set the CLIENT ID before you can export to Google Drive');
@@ -243,7 +243,7 @@ if (isset($pines->com_googledrive)) {
 					'total_pay' => 0
 				);
 			}
-			$schedule = $pines->entity_manager->get_entities(
+			$schedule = $_->entity_manager->get_entities(
 				array('class' => com_calendar_event),
 				array('&',
 					'tag' => array('com_calendar', 'event'),
@@ -255,7 +255,7 @@ if (isset($pines->com_googledrive)) {
 			foreach ($schedule as $cur_schedule)
 				$totals[$cur_employee->guid]['scheduled'] += $cur_schedule->scheduled;
 
-			$issues = $pines->entity_manager->get_entities(
+			$issues = $_->entity_manager->get_entities(
 				array('class' => com_hrm_issue),
 				array('&',
 					'tag' => array('com_hrm', 'issue'),
@@ -267,7 +267,7 @@ if (isset($pines->com_googledrive)) {
 			foreach ($issues as $cur_issue)
 				$totals[$cur_employee->guid]['penalties'] += $cur_issue->issue_type->penalty * $cur_issue->quantity;
 
-			$bonuses = $pines->entity_manager->get_entities(
+			$bonuses = $_->entity_manager->get_entities(
 				array('class' => com_hrm_bonus),
 				array('&',
 					'tag' => array('com_hrm', 'bonus'),

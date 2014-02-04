@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Receive Inventory';
 if (!gatekeeper('com_sales/receivelocation'))
 	$this->note = 'Only use this form to receive inventory into your <strong>current</strong> location ('.(!isset($_SESSION['user']->group) ? 'No Location' : h($_SESSION['user']->group->name)).').';
-$pines->com_pgrid->load();
-$pines->com_jstree->load();
-if ($pines->config->com_sales->autocomplete_product)
-	$pines->com_sales->load_product_select();
+$_->com_pgrid->load();
+$_->com_jstree->load();
+if ($_->config->com_sales->autocomplete_product)
+	$_->com_sales->load_product_select();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'stock/receive')); ?>">
 	<script type="text/javascript">
@@ -186,7 +186,7 @@ if ($pines->config->com_sales->autocomplete_product)
 									}
 								});
 							};
-							<?php if ($pines->config->com_sales->autocomplete_product) { ?>
+							<?php if ($_->config->com_sales->autocomplete_product) { ?>
 							textbox.productselect({select: function(event, ui){select(ui.item.value); return false;}});
 							<?php } ?>
 							textbox.keydown(function(e){

@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_customer/listcompanies') )
 	punt_user(null, pines_url('com_customer', 'company/search', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $query = strtolower($_REQUEST['q']);
@@ -40,7 +40,7 @@ if (empty($query)) {
 		$selector['match'][] = array('zip', $r_num_query);
 		$selector['match'][] = array('fax', $r_num_query);
 	}
-	$companies = (array) $pines->entity_manager->get_entities(
+	$companies = (array) $_->entity_manager->get_entities(
 			array('class' => com_customer_company),
 			array('&',
 				'tag' => array('com_customer', 'company')
@@ -70,4 +70,4 @@ unset($cur_company);
 if (empty($companies))
 	$companies = null;
 
-$pines->page->override_doc(json_encode($companies));
+$_->page->override_doc(json_encode($companies));

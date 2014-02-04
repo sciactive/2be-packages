@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -87,9 +87,9 @@ class com_sales_manufacturer extends entity {
 	 * @return string The location of the company logo.
 	 */
 	public function get_logo($full = false) {
-		global $pines;
+		global $_;
 		if (isset($this->logo))
-			return $full ? $pines->uploader->url($pines->uploader->real($this->logo), true) : $this->logo;
+			return $full ? $_->uploader->url($_->uploader->real($this->logo), true) : $this->logo;
 		return '';
 	}
 

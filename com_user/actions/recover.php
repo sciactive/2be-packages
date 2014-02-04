@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_user->pw_recovery)
+if (!$_->config->com_user->pw_recovery)
 	throw new HttpClientException(null, 404);
 
 if (empty($_REQUEST['type'])) {
@@ -25,7 +25,7 @@ switch ($_REQUEST['type']) {
 		$user = user::factory($_REQUEST['account']);
 		break;
 	case 'username':
-		$user = $pines->entity_manager->get_entity(
+		$user = $_->entity_manager->get_entity(
 				array('class' => user),
 				array('&',
 					'tag' => array('com_user', 'user', 'enabled'),
@@ -37,7 +37,7 @@ switch ($_REQUEST['type']) {
 
 if (!isset($user) || !isset($user->guid) || !$user->has_tag('enabled') || !gatekeeper('com_user/login', $user)) {
 	pines_error('Requested user id is not accessible.');
-	$pines->user_manager->print_login();
+	$_->user_manager->print_login();
 	return;
 }
 
@@ -53,13 +53,13 @@ if (!$user->save()) {
 $link = h(pines_url('com_user', 'recoverpassword', array('id' => $user->guid, 'secret' => $user->secret), true));
 $macros = array(
 	'recover_link' => $link,
-	'minutes' => h($pines->config->com_user->pw_recovery_minutes),
+	'minutes' => h($_->config->com_user->pw_recovery_minutes),
 	'to_phone' => h(format_phone($user->phone)),
 	'to_fax' => h(format_phone($user->fax)),
 	'to_timezone' => h($user->timezone),
 	'to_address' => $user->address_type == 'us' ? h("{$user->address_1} {$user->address_2}").'<br />'.h("{$user->city}, {$user->state} {$user->zip}") : '<pre>'.h($user->address_international).'</pre>'
 );
-if ($pines->com_mailer->send_mail('com_user/recover_account', $macros, $user))
+if ($_->com_mailer->send_mail('com_user/recover_account', $macros, $user))
 	pines_notice('We have sent an email to your registered email address. Please check your email to continue with account recovery.');
 else
 	pines_error('Couldn\'t send recovery email.');

@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = 'Extended Service Plans';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_esp/list']);
 ?>
@@ -253,7 +253,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<label><span class="pf-label">Dispose as</span>
 			<select class="pf-field" name="dispose">
 				<?php
-					foreach ($pines->config->com_esp->disposal_types as $cur_dispo) {
+					foreach ($_->config->com_esp->disposal_types as $cur_dispo) {
 						$dispo_array = explode(':', $cur_dispo);
 						echo '<option value="'.h($dispo_array[0]).'">'.h($dispo_array[1]).'</option>';
 					}
@@ -273,7 +273,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<?php
 				$dispo_counter = 0;
 				$filter_array = explode(',', $this->show);
-				foreach ($pines->config->com_esp->disposal_types as $cur_dispo) {
+				foreach ($_->config->com_esp->disposal_types as $cur_dispo) {
 					$dispo_array = explode(':', $cur_dispo);
 					echo '<input class="pf-field inclusive" type="checkbox" name="'.h($dispo_array[0]).'" value="'.h($dispo_array[0]).'"';
 					echo in_array($dispo_array[0], $filter_array) ? 'checked="checked">' : '>';

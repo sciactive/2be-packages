@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Actions';
-$pines->com_jstree->load();
-$pines->com_ptags->load();
-if ($pines->config->com_calendar->com_customer)
-	$pines->com_customer->load_customer_select();
+$_->com_jstree->load();
+$_->com_ptags->load();
+if ($_->config->com_calendar->com_customer)
+	$_->com_customer->load_customer_select();
 ?>
 <style type="text/css" >
 	#p_muid_filter button {
@@ -111,7 +111,7 @@ if ($pines->config->com_calendar->com_customer)
 				filter: $(this).attr("data-value")
 			});
 		});
-		<?php if ($pines->config->com_calendar->com_customer) { ?>
+		<?php if ($_->config->com_calendar->com_customer) { ?>
 		$("#p_muid_new_interaction [name=interaction_date]").datepicker({
 			dateFormat: "yy-mm-dd",
 			changeMonth: true,
@@ -420,7 +420,7 @@ if ($pines->config->com_calendar->com_customer)
 		<?php } ?>
 	};
 	<?php } ?>
-	<?php if ($pines->config->com_calendar->com_customer) { ?>
+	<?php if ($_->config->com_calendar->com_customer) { ?>
 	// Create an appointment.
 	pines.<?php echo $this->cal_muid; ?>_new_appointment = function(){
 		var interaction_dialog = $("#p_muid_new_interaction");
@@ -618,7 +618,7 @@ if ($pines->config->com_calendar->com_customer)
 		} ?>
 	</select>
 </div>
-<?php } if ($pines->config->com_calendar->com_customer) { ?>
+<?php } if ($_->config->com_calendar->com_customer) { ?>
 <div id="p_muid_interaction_dialog" title="Process Customer Interaction" style="display: none;">
 	<div class="pf-form">
 		<div class="pf-element">
@@ -695,7 +695,7 @@ if ($pines->config->com_calendar->com_customer)
 		<div class="pf-element">
 			<label><span class="pf-label">Interaction Type</span>
 				<select name="interaction_type">
-					<?php foreach ($pines->config->com_customer->interaction_types as $cur_type) {
+					<?php foreach ($_->config->com_customer->interaction_types as $cur_type) {
 						$cur_type = explode(':', $cur_type);
 						echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
 					} ?>

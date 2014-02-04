@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
 	punt_user(null, pines_url('com_dash'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage'))
@@ -59,4 +59,4 @@ if ($widgets) {
 		$dashboard->tabs[$_REQUEST['key']]['columns'][$key]['widgets'][$wkey] = $widget;
 }
 
-$pines->page->override_doc(json_encode($dashboard->save()));
+$_->page->override_doc(json_encode($dashboard->save()));

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/listproducts') )
@@ -17,7 +17,7 @@ if ( !gatekeeper('com_sales/listproducts') )
 $module = new module('com_sales', 'product/report_images', 'content');
 $module->section1 = $module->section2 = $module->section3 = $module->section4 = $module->complete = array();
 
-$products = (array) $pines->entity_manager->get_entities(
+$products = (array) $_->entity_manager->get_entities(
 		array('class' => com_sales_product),
 		array('&',
 			'tag' => array('com_sales', 'product')

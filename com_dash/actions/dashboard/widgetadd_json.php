@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
 	punt_user(null, pines_url('com_dash'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage'))
@@ -30,12 +30,12 @@ if ($dashboard->locked && !gatekeeper('com_dash/manage'))
 if (!isset($dashboard->tabs[$_REQUEST['key']]))
 	throw new HttpClientException(null, 400);
 
-$widgets = $pines->com_dash->widget_types();
+$widgets = $_->com_dash->widget_types();
 foreach ($widgets as $cur_component => $cur_widget_set) {
 	foreach ($cur_widget_set as $cur_widget_name => $cur_widget) {
 		// Check its conditions.
 		foreach ((array) $cur_widget['widget']['depends'] as $cur_type => $cur_value) {
-			if (!$pines->depend->check($cur_type, $cur_value)) {
+			if (!$_->depend->check($cur_type, $cur_value)) {
 				unset($widgets[$cur_component][$cur_widget_name]);
 				if (!$widgets[$cur_component])
 					unset($widgets[$cur_component]);
@@ -51,7 +51,7 @@ reset($dashboard->tabs[$_REQUEST['key']]['columns']);
 $add_widgets = json_decode($_REQUEST['widgets'], true);
 foreach ($add_widgets as $cur_widget) {
 	if (!isset($widgets[$cur_widget['component']][$cur_widget['widget']])) {
-		$pines->page->override_doc(json_encode(false));
+		$_->page->override_doc(json_encode(false));
 		return;
 	}
 	$key = key($dashboard->tabs[$_REQUEST['key']]['columns']);
@@ -64,4 +64,4 @@ foreach ($add_widgets as $cur_widget) {
 		reset($dashboard->tabs[$_REQUEST['key']]['columns']);
 }
 
-$pines->page->override_doc(json_encode($dashboard->save()));
+$_->page->override_doc(json_encode($dashboard->save()));

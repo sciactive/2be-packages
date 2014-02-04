@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -22,7 +22,7 @@ class com_loan extends component {
 	 * @return module The module.
 	 */
 	public function list_loans($show) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_loan', 'loan/list', 'content');
 		$module->show = $show;
@@ -38,15 +38,15 @@ class com_loan extends component {
 	 * @return module The form's module.
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/dateselect', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 	
@@ -58,8 +58,8 @@ class com_loan extends component {
 	 * @return module The form's module.
 	 */
 	public function location_select_form($location = null, $descendants = false) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/locationselect', 'content');
 		if (!isset($location)) {
@@ -69,7 +69,7 @@ class com_loan extends component {
 		}
 		$module->descendants = $descendants;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 	
@@ -80,13 +80,13 @@ class com_loan extends component {
 	 * @return module The form's module.
 	 */
 	public function search_status_form($cur_state) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/searchstatus', 'content');
 		$module->cur_state = json_decode($cur_state);
 		
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 	
@@ -99,13 +99,13 @@ class com_loan extends component {
 	 * @return module The form's module.
 	 */
 	public function make_payments_form($loan_ids) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/makepayments', 'content');
 		$module->loan_ids = $loan_ids;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 	
@@ -118,13 +118,13 @@ class com_loan extends component {
 	 * @return module The form's module.
 	 */
 	public function loan_status_form($loan_ids) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/loanstatus', 'content');
 		$module->loan_ids = $loan_ids;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 	
@@ -137,13 +137,13 @@ class com_loan extends component {
 	 * @return module The form's module.
 	 */
 	public function cust_history_form($loan_ids) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/cust_history', 'content');
 		$module->loan_ids = $loan_ids;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 	
@@ -155,24 +155,24 @@ class com_loan extends component {
 	 * @return module The form's module.
 	 */
 	public function add_interaction_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 		header('Content-Type: application/json');
 
 		$module = new module('com_loan', 'form/add_interaction', 'content');
 		$module->entity = $this;
 
-		$pines->page->modules['head'] = array();
+		$_->page->modules['head'] = array();
 		$content = $module->render();
 		// Render any modules placed into the head. (In case they add more.)
-		foreach ($pines->page->modules['head'] as $cur_module)
+		foreach ($_->page->modules['head'] as $cur_module)
 			$cur_module->render();
 		// Now get their content.
 		$head = '';
-		foreach ($pines->page->modules['head'] as $cur_module)
+		foreach ($_->page->modules['head'] as $cur_module)
 			$head .= $cur_module->render();
 
-		$pines->page->override_doc($head.$content);
+		$_->page->override_doc($head.$content);
 		return $module;
 	}
 	
@@ -229,7 +229,7 @@ class com_loan extends component {
 	*/
 
 	function add_interaction($loan_id, $employee, $type, $status, $comments) {
-		global $pines;
+		global $_;
 		
 		$loan = com_loan_loan::factory((int) $loan_id);
 		$customer = $loan->customer;
@@ -261,7 +261,7 @@ class com_loan extends component {
 		$interaction->status = $status;
 		$interaction->comments = $comments;
 
-		$existing_appt = $pines->entity_manager->get_entity(
+		$existing_appt = $_->entity_manager->get_entity(
 			array('class' => com_customer_interaction),
 			array('&',
 				'data' => array('status', 'open'),
@@ -275,14 +275,14 @@ class com_loan extends component {
 			return false;
 		}
 
-		if ($pines->config->com_customer->com_calendar) {
+		if ($_->config->com_customer->com_calendar) {
 			// Create the interaction calendar event.
 			$event = com_calendar_event::factory();
 			$event->employee = $employee;
 			$location = $employee->group;
 			$event->appointment = true;
 			$event->label = $interaction->type;
-			foreach ($pines->config->com_customer->interaction_types as $cur_type) {
+			foreach ($_->config->com_customer->interaction_types as $cur_type) {
 				if (strpos($cur_type, $interaction->type))
 					$symbol = explode(':', $cur_type);
 			}
@@ -316,7 +316,7 @@ class com_loan extends component {
 		$interaction->ac->other = 2;
 
 		if ($interaction->save()) {
-			if ($pines->config->com_customer->com_calendar) {
+			if ($_->config->com_customer->com_calendar) {
 				$event->appointment = $interaction;
 				$event->group = $location;
 				$event->save();

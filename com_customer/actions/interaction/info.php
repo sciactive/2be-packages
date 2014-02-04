@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_customer/viewhistory') )
 	punt_user(null, pines_url('com_customer', 'interaction/info', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 // Change the timezone to the supplied timezone or user's timezone.
@@ -26,7 +26,7 @@ else
 
 $interaction = com_customer_interaction::factory((int) $_REQUEST['id']);
 if (!isset($interaction->guid))
-	$pines->page->override_doc();
+	$_->page->override_doc();
 
 if (!isset($interaction->sale->guid)) {
 	$sale_title = '';
@@ -62,6 +62,6 @@ $json_struct = (object) array(
 	'review_comments'	=> (array) $interaction->review_comments
 );
 
-$pines->page->override_doc(json_encode($json_struct));
+$_->page->override_doc(json_encode($json_struct));
 
 date_default_timezone_set($cur_timezone);

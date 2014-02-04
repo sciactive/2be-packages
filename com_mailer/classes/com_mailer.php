@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -54,11 +54,11 @@ class com_mailer extends component {
 	 * @return module The module.
 	 */
 	public function list_renditions() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_mailer', 'rendition/list', 'content');
 
-		$module->renditions = $pines->entity_manager->get_entities(
+		$module->renditions = $_->entity_manager->get_entities(
 				array('class' => com_mailer_rendition),
 				array('&',
 					'tag' => array('com_mailer', 'rendition')
@@ -76,11 +76,11 @@ class com_mailer extends component {
 	 * @return module The module.
 	 */
 	public function list_templates() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_mailer', 'template/list', 'content');
 
-		$module->templates = $pines->entity_manager->get_entities(
+		$module->templates = $_->entity_manager->get_entities(
 				array('class' => com_mailer_template),
 				array('&',
 					'tag' => array('com_mailer', 'template')
@@ -101,9 +101,9 @@ class com_mailer extends component {
 	 * @return array Mail types.
 	 */
 	public function mail_types() {
-		global $pines;
+		global $_;
 		$return = array();
-		foreach ($pines->components as $cur_component) {
+		foreach ($_->components as $cur_component) {
 			if (strpos($cur_component, 'tpl_') === 0)
 				continue;
 			if (!file_exists("components/$cur_component/mails.php"))
@@ -124,14 +124,14 @@ class com_mailer extends component {
 	 * @return bool True on success, false on failure, 0 if the database hasn't been set up.
 	 */
 	public function unsubscribe_add($email) {
-		global $pines;
+		global $_;
 		// Validate and lowercase email address.
 		if (!preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i', $email))
 			return false;
 		$email = strtolower($email);
 
 		// Get the DB.
-		$filename = $pines->config->com_mailer->unsubscribe_db;
+		$filename = $_->config->com_mailer->unsubscribe_db;
 		if (!$filename) {
 			pines_log('Unsubscribed user database has not been set up yet. Please edit the config for com_mailer.', 'error');
 			return 0;
@@ -195,14 +195,14 @@ class com_mailer extends component {
 	 * @return bool True if the address is unsubscribed or on failure, false if it isn't or the database hasn't been set up.
 	 */
 	public function unsubscribe_query($email) {
-		global $pines;
+		global $_;
 		// Validate and lowercase email address.
 		if (!preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i', $email))
 			return false;
 		$email = strtolower($email);
 
 		// Get the DB.
-		$filename = $pines->config->com_mailer->unsubscribe_db;
+		$filename = $_->config->com_mailer->unsubscribe_db;
 		if (!file_exists($filename) || !is_readable($filename)) {
 			pines_log('Unsubscribed user database has not been set up yet. Please edit the config for com_mailer.', 'error');
 			return false;
@@ -241,14 +241,14 @@ class com_mailer extends component {
 	 * @return bool True on success, false on failure.
 	 */
 	public function unsubscribe_remove($email) {
-		global $pines;
+		global $_;
 		// Validate and lowercase email address.
 		if (!preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i', $email))
 			return false;
 		$email = strtolower($email);
 
 		// Get the DB.
-		$filename = $pines->config->com_mailer->unsubscribe_db;
+		$filename = $_->config->com_mailer->unsubscribe_db;
 		if (!file_exists($filename) || !is_readable($filename)) {
 			pines_log('Unsubscribed user database has not been set up yet. Please edit the config for com_mailer.', 'error');
 			return false;
@@ -287,7 +287,7 @@ class com_mailer extends component {
 	 * @return bool|com_mailer_mail True on success, false on failure. If $send is false, returns the mail instead.
 	 */
 	public function send_mail($mail, $macros = array(), $recipient = null, $send = true) {
-		global $pines;
+		global $_;
 		if ((array) $mail !== $mail) {
 			list($component, $defname) = explode('/', $mail, 2);
 			$mail = array(
@@ -299,14 +299,14 @@ class com_mailer extends component {
 		if (!$def)
 			return false;
 
-		$from = $pines->config->com_mailer->from_address;
+		$from = $_->config->com_mailer->from_address;
 
 		// Format recipient.
 		if ($recipient && is_string($recipient))
 			$recipient = (object) array('email' => $recipient);
 
 		// Find any renditions.
-		$renditions = (array) $pines->entity_manager->get_entities(
+		$renditions = (array) $_->entity_manager->get_entities(
 				array('class' => com_mailer_rendition),
 				array('&',
 					'tag' => array('com_mailer', 'rendition'),
@@ -340,7 +340,7 @@ class com_mailer extends component {
 						else
 							$check_email = trim($rendition->to);
 						// Check for a user or group with that email.
-						$user = $pines->entity_manager->get_entity(
+						$user = $_->entity_manager->get_entity(
 								array('class' => user),
 								array('&',
 									'tag' => array('com_user', 'user'),
@@ -350,7 +350,7 @@ class com_mailer extends component {
 						if ($user)
 							$recipient = $user;
 						else {
-							$group = $pines->entity_manager->get_entity(
+							$group = $_->entity_manager->get_entity(
 									array('class' => group),
 									array('&',
 										'tag' => array('com_user', 'group'),
@@ -365,15 +365,15 @@ class com_mailer extends component {
 						$recipient = (object) array('email' => $rendition->to);
 				} else {
 					// Send to the master address if there's no recipient.
-					if (!$pines->config->com_mailer->master_address)
+					if (!$_->config->com_mailer->master_address)
 						return false;
-					$recipient = (object) array('email' => $pines->config->com_mailer->master_address);
+					$recipient = (object) array('email' => $_->config->com_mailer->master_address);
 				}
 			}
 		} elseif (!$recipient) {
-			if ($def['has_recipient'] || !$pines->config->com_mailer->master_address)
+			if ($def['has_recipient'] || !$_->config->com_mailer->master_address)
 				return false;
-			$recipient = (object) array('email' => $pines->config->com_mailer->master_address);
+			$recipient = (object) array('email' => $_->config->com_mailer->master_address);
 		}
 
 		// Remove emails that are on the unsubscribed list if the definition
@@ -432,7 +432,7 @@ class com_mailer extends component {
 		}
 
 		// Get the template.
-		$templates = (array) $pines->entity_manager->get_entities(
+		$templates = (array) $_->entity_manager->get_entities(
 				array('class' => com_mailer_template),
 				array('&',
 					'tag' => array('com_mailer', 'template'),
@@ -456,7 +456,7 @@ class com_mailer extends component {
 		$body['content'] = str_replace('#content#', $body['content'], str_replace('#content#', $template->content, $template->document));
 
 		// Protects users from being unsubscribed by anyone.
-		$unsubscribe_secret = md5($recipient->email.$pines->config->com_mailer->unsubscribe_key);
+		$unsubscribe_secret = md5($recipient->email.$_->config->com_mailer->unsubscribe_key);
 		$unsubscribe_url = pines_url('com_mailer', 'unsubscribe', array('email' => $recipient->email, 'verify' => $unsubscribe_secret), true);
 
 		// Replace macros and search strings.
@@ -471,7 +471,7 @@ class com_mailer extends component {
 				$cur_field = str_replace('#subject#', h($body['subject']), $cur_field);
 			// Links
 			if (strpos($cur_field, '#site_link#') !== false)
-				$cur_field = str_replace('#site_link#', h($pines->config->full_location), $cur_field);
+				$cur_field = str_replace('#site_link#', h($_->config->full_location), $cur_field);
 			if (strpos($cur_field, '#unsubscribe_link#') !== false)
 				$cur_field = str_replace('#unsubscribe_link#', h($unsubscribe_url), $cur_field);
 			// Recipient
@@ -511,9 +511,9 @@ class com_mailer extends component {
 				$cur_field = str_replace('#time_long#', h(format_date(time(), 'time_long')), $cur_field);
 			// System
 			if (strpos($cur_field, '#system_name#') !== false)
-				$cur_field = str_replace('#system_name#', h($pines->config->system_name), $cur_field);
+				$cur_field = str_replace('#system_name#', h($_->config->system_name), $cur_field);
 			if (strpos($cur_field, '#page_title#') !== false)
-				$cur_field = str_replace('#page_title#', h($pines->config->page_title), $cur_field);
+				$cur_field = str_replace('#page_title#', h($_->config->page_title), $cur_field);
 			// Definition Macros
 			foreach ($def['macros'] as $cur_name => $cur_desc) {
 				if (isset($macros[$cur_name]) && strpos($cur_field, "#$cur_name#") !== false)

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $module = new module('com_entityhelper', 'default_helper');
@@ -59,7 +59,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listgroups')) { ?>
 				<td style="font-weight:bold;">Primary</td>
 				<td>
 					<?php
-					$user_array = $pines->entity_manager->get_entities(
+					$user_array = $_->entity_manager->get_entities(
 							array('class' => user, 'limit' => 51),
 							array('&',
 								'tag' => array('com_user', 'user', 'enabled'),
@@ -90,7 +90,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listgroups')) { ?>
 				<td style="font-weight:bold;">Secondary</td>
 				<td>
 					<?php
-					$user_array = $pines->entity_manager->get_entities(
+					$user_array = $_->entity_manager->get_entities(
 							array('class' => user, 'limit' => 51),
 							array('&',
 								'tag' => array('com_user', 'user', 'enabled'),

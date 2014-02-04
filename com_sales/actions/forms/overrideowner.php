@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/overrideowner') )
@@ -24,4 +24,4 @@ if (!isset($entity->guid)) {
 	return;
 }
 
-$pines->com_sales->override_form($entity);
+$_->com_sales->override_form($entity);

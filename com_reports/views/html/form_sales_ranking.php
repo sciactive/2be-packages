@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = isset($this->entity->guid) ? 'Editing Sales Ranking ['.h($this->entity->guid).']' : 'New Sales Ranking';
-$pines->com_jstree->load();
-$pines->com_pgrid->load();
+$_->com_jstree->load();
+$_->com_pgrid->load();
 ?>
 <script type='text/javascript'>
 	pines(function(){
@@ -238,7 +238,7 @@ $pines->com_pgrid->load();
 		<label><span class="pf-label">End Date</span>
 			<input class="pf-field" type="text" name="end" value="<?php ($this->entity->end_date) ? e(format_date($this->entity->end_date - 1, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" style="text-align: center;" /></label>
 	</div>
-	<?php if ($pines->depend->check('component', 'com_mifi')) { ?>
+	<?php if ($_->depend->check('component', 'com_mifi')) { ?>
 	<div class="pf-element">
 		<span class="pf-label">Exclude Pending Contracts</span>
 		<label><input type="checkbox" class="pf-field" name="exclude_pending_contracts" value="ON"<?php echo $this->entity->exclude_pending_contracts ? ' checked="checked"' : ''; ?> /> Exclude sales with pending MiFi contracts from rankings.</label>

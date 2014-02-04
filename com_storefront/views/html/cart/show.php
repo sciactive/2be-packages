@@ -8,9 +8,9 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$pines->icons->load();
+$_->icons->load();
 ?>
 <style type="text/css">
 	.com_storefront_nobg {
@@ -78,7 +78,7 @@ $pines->icons->load();
 </style>
 <script type="text/javascript">
 	pines(function(){
-		var dec = <?php echo (int) $pines->config->com_sales->dec; ?>;
+		var dec = <?php echo (int) $_->config->com_sales->dec; ?>;
 		var round_to_dec = function(value){
 			var rnd = Math.pow(10, dec);
 			var mult = value * rnd;
@@ -291,20 +291,20 @@ $pines->icons->load();
 		<div class="unit_price" style="display: none;"></div>
 		<button type="button" class="btn" title="Remove"><i class="icon-remove"></i></button>
 		<div class="name"></div>
-		<?php if ($pines->config->com_storefront->cart_prices) { ?>
+		<?php if ($_->config->com_storefront->cart_prices) { ?>
 		<div class="price"></div>
 		<?php } ?>
 		<div class="qty ui-corner-all">1</div>
 		<br style="clear: both; height: 0;" />
 	</div>
-	<?php foreach ($pines->com_storefront->cart() as $cur_item) { ?>
+	<?php foreach ($_->com_storefront->cart() as $cur_item) { ?>
 	<div class="product guid_<?php e($cur_item['product']->guid); ?>">
 		<div class="guid" style="display: none;"><?php e($cur_item['product']->guid); ?></div>
 		<div class="unit_price" style="display: none;"><?php e($cur_item['product']->unit_price); ?></div>
 		<button type="button" class="btn" title="Remove"><i class="icon-remove"></i></button>
 		<div class="name"><?php e($cur_item['product']->name); ?></div>
-		<?php if ($pines->config->com_storefront->cart_prices) { ?>
-		<div class="price">$<?php e($pines->com_sales->round($cur_item['product']->unit_price * $cur_item['quantity'], true)); ?></div>
+		<?php if ($_->config->com_storefront->cart_prices) { ?>
+		<div class="price">$<?php e($_->com_sales->round($cur_item['product']->unit_price * $cur_item['quantity'], true)); ?></div>
 		<?php } ?>
 		<div class="qty ui-corner-all"><?php e($cur_item['quantity']); ?></div>
 		<br style="clear: both; height: 0;" />
@@ -312,11 +312,11 @@ $pines->icons->load();
 	<?php } ?>
 </div>
 <div id="com_storefront_cart_controls">
-	<div class="yes_items"<?php echo !$pines->com_storefront->cart() ? ' style="display: none;"' : ''; ?>>
-		<?php if ($pines->config->com_storefront->cart_subtotal) { ?>
+	<div class="yes_items"<?php echo !$_->com_storefront->cart() ? ' style="display: none;"' : ''; ?>>
+		<?php if ($_->config->com_storefront->cart_subtotal) { ?>
 		<div class="subtotal_label">Subtotal <small>(before tax/fees)</small></div><div class="subtotal"></div>
 		<br style="clear: both; height: 0;" />
-		<?php } if ($pines->config->com_storefront->cart_link) { ?>
+		<?php } if ($_->config->com_storefront->cart_link) { ?>
 		<div class="cart_link"><a href="<?php e(pines_url('com_storefront', 'cart/view')); ?>">See Cart</a></div>
 		<br style="clear: both; height: 0;" />
 		<?php } ?>
@@ -324,7 +324,7 @@ $pines->icons->load();
 		<button type="button" class="checkout btn btn-primary" onclick="pines.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);"><i class="icon-ok icon-white"></i> Check-Out</button>
 		<br style="clear: both; height: 0;" />
 	</div>
-	<div class="no_items"<?php echo $pines->com_storefront->cart() ? ' style="display: none;"' : ''; ?>>
+	<div class="no_items"<?php echo $_->com_storefront->cart() ? ' style="display: none;"' : ''; ?>>
 		There are no items in your cart.
 	</div>
 </div>

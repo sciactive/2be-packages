@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Tax/Fee' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide tax/fee details in this form.';
@@ -60,7 +60,7 @@ $this->note = 'Provide tax/fee details in this form.';
 			<span class="pf-note">Hold Ctrl (Command on Mac) to select multiple groups.</span>
 			<select class="pf-field" name="locations[]" multiple="multiple" size="6">
 				<?php
-				$pines->user_manager->group_sort($this->locations, 'name');
+				$_->user_manager->group_sort($this->locations, 'name');
 				foreach ($this->locations as $cur_group) {
 					?><option value="<?php e($cur_group->guid); ?>"<?php echo $cur_group->in_array($this->entity->locations) ? ' selected="selected"' : ''; ?>><?php e(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
 				} ?>

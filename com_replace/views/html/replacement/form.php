@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Replacement' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide replacement details in this form.';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_replace', 'replacement/save')); ?>">
 	<script type="text/javascript">

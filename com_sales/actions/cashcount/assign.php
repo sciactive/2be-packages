@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper('com_sales/assigncashcount') )
@@ -21,7 +21,7 @@ if (!isset($location->guid))
 
 if (!isset($location)) {
 	pines_error('Requested location id is not accessible.');
-	$pines->com_sales->list_cashcounts();
+	$_->com_sales->list_cashcounts();
 	return;
 }
 

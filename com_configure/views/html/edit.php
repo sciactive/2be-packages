@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = h("Editing Configuration for {$this->entity->name}");
 if ($this->entity->per_user) {
@@ -19,7 +19,7 @@ if ($this->entity->per_user) {
 	elseif ($this->entity->type == 'group')
 		$this->note = "For {$this->entity->type} <a data-entity=\"".h($this->entity->user->guid)."\" data-entity-context=\"group\">".h("{$this->entity->user->name} [{$this->entity->user->groupname}]").'</a>.';
 }
-$pines->com_ptags->load();
+$_->com_ptags->load();
 ?>
 <div class="hero-unit">
 	<h1><?php e("{$this->entity->info->name} {$this->entity->info->version}"); ?></h1>

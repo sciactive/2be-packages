@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -51,18 +51,18 @@ class com_hrm_rto extends entity {
 	 * @return bool True or false.
 	 */
 	public function conflicting() {
-		global $pines;
+		global $_;
 
-		if ($pines->config->com_hrm->com_calendar) {
+		if ($_->config->com_hrm->com_calendar) {
 			$selector = array('&', 'ref' => array('employee', $this->employee), 'tag' => array('com_calendar', 'event'));
 			$selector1 = array('&', 'gte' => array('start', $this->start), 'lte' => array('start', $this->end));
 			$selector2 = array('&', 'gte' => array('end', $this->start), 'lte' => array('end', $this->end));
 			$selector3 = array('&', 'gte' => array('end', $this->end), 'lte' => array('start', $this->start));
 
 			$conflicts = array_merge(
-				$pines->entity_manager->get_entities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector1),
-				$pines->entity_manager->get_entities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector2),
-				$pines->entity_manager->get_entities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector3)
+				$_->entity_manager->get_entities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector1),
+				$_->entity_manager->get_entities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector2),
+				$_->entity_manager->get_entities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector3)
 			);
 		} else {
 			$conflicts = array();
@@ -95,14 +95,14 @@ class com_hrm_rto extends entity {
 	 * Print a form to edit the rto.
 	 */
 	public function print_form() {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_hrm', 'timeoff/request', 'content');
 		$module->entity = $this;
 		$module->requests = array();
 		// Load all pending time off requests so they can be edited if needed.
-		$module->requests = $pines->entity_manager->get_entities(array('class' => com_hrm_rto), array('!&', 'data' => array('status', 'approved')), array('&', 'tag' => array('com_hrm', 'rto'), 'ref' => array('user', $_SESSION['user'])));
-		$pines->page->override_doc($module->render());
+		$module->requests = $_->entity_manager->get_entities(array('class' => com_hrm_rto), array('!&', 'data' => array('status', 'approved')), array('&', 'tag' => array('com_hrm', 'rto'), 'ref' => array('user', $_SESSION['user'])));
+		$_->page->override_doc($module->render());
 	}
 }

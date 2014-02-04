@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $bc = '<li class="active"><span class="breadcrumb_item">'.h($this->entity->name).'</span></li>';
 
 if ($this->entity->has_tag('product')) {
-	$categories = (array) $pines->entity_manager->get_entities(
+	$categories = (array) $_->entity_manager->get_entities(
 			array('class' => com_sales_category),
 			array('&',
 				'tag' => array('com_sales', 'category'),

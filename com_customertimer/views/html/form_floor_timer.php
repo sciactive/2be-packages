@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Floor Timer ['.h($this->entity->name).']';
-$pines->com_pgrid->load();
-$pines->com_customer->load_customer_select();
+$_->com_pgrid->load();
+$_->com_customer->load_customer_select();
 ?>
 <style type="text/css">
 	#p_muid_station_layout {
@@ -167,9 +167,9 @@ $pines->com_customer->load_customer_select();
 			$("#p_muid_customer_action_status").html(
 				station.customer.points_remain < 0 ?
 					"Overdrawn" :
-					station.customer.points_remain <= <?php echo (int) $pines->config->com_customertimer->level_critical; ?> ?
+					station.customer.points_remain <= <?php echo (int) $_->config->com_customertimer->level_critical; ?> ?
 						"Critical" :
-						station.customer.points_remain <= <?php echo (int) $pines->config->com_customertimer->level_warning; ?> ?
+						station.customer.points_remain <= <?php echo (int) $_->config->com_customertimer->level_warning; ?> ?
 							"Warning" :
 							"OK"
 			);
@@ -197,7 +197,7 @@ $pines->com_customer->load_customer_select();
 			station.customer = customer;
 			$(".name", station.element).html(pines.safe(customer.name));
 			$(".points_remain", station.element).html(pines.safe(customer.points_remain));
-			if (customer.points_remain <= <?php echo (int) $pines->config->com_customertimer->level_critical; ?>) {
+			if (customer.points_remain <= <?php echo (int) $_->config->com_customertimer->level_critical; ?>) {
 				if (station.element.hasClass("btn-success"))
 					station.element.removeClass("btn-success");
 				if (station.element.hasClass("btn-warning"))
@@ -205,7 +205,7 @@ $pines->com_customer->load_customer_select();
 				if (!station.element.hasClass("btn-danger"))
 					station.element.addClass("btn-danger");
 				worst_status = "btn-danger";
-			} else if (customer.points_remain <= <?php echo (int) $pines->config->com_customertimer->level_warning; ?>) {
+			} else if (customer.points_remain <= <?php echo (int) $_->config->com_customertimer->level_warning; ?>) {
 				if (station.element.hasClass("btn-success"))
 					station.element.removeClass("btn-success");
 				if (!station.element.hasClass("btn-warning"))

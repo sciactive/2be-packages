@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/editproduct') )
 	punt_user(null, pines_url('com_reports', 'maintenance/prodswocats'));
 
-$pines->com_reports->products_wo_categories();
+$_->com_reports->products_wo_categories();

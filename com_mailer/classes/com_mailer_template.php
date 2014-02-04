@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -23,11 +23,11 @@ class com_mailer_template extends entity {
 		if (parent::__construct($id) !== null)
 			return;
 		// Defaults.
-		global $pines;
+		global $_;
 		$this->enabled = true;
 		$this->conditions = array();
 		$this->replacements = array();
-		$full_location = h($pines->config->full_location);
+		$full_location = h($_->config->full_location);
 		$this->content = <<<EOF
 <div style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3A3A;">
 	<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#ffffff" align="center" border="0">
@@ -148,10 +148,10 @@ EOF;
 			return false;
 		if (!$this->conditions)
 			return true;
-		global $pines;
+		global $_;
 		// Check that all conditions are met.
 		foreach ($this->conditions as $cur_type => $cur_value) {
-			if (!$pines->depend->check($cur_type, $cur_value))
+			if (!$_->depend->check($cur_type, $cur_value))
 				return false;
 		}
 		return true;

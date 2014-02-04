@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!$this->employed ? 'Prior ' : '').'Employees';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_hrm/employee/list']);
 ?>
@@ -421,7 +421,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<label><span class="pf-label">Issue</span>
 				<select name="issue_type">
 					<?php
-						foreach ($pines->com_hrm->get_issue_types() as $cur_issue) {
+						foreach ($_->com_hrm->get_issue_types() as $cur_issue) {
 							echo '<option value="'.h($cur_issue->guid).'">'.h($cur_issue->name).'</option>';
 						}
 					?>
@@ -456,7 +456,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<label><span class="pf-label">Reason for Termination</span>
 			<select name="reason">
 				<?php 
-					foreach ($pines->config->com_hrm->termination_reasons as $cur_dispo) {
+					foreach ($_->config->com_hrm->termination_reasons as $cur_dispo) {
 						$dispo_array = explode(':', $cur_dispo);
 						echo '<option value="'.h($dispo_array[0]).'">'.h($dispo_array[1]).'</option>';
 					}

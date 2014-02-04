@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_loan/listloans') )
 	punt_user(null, pines_url('com_loan', 'loan/list'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 // Time span.
@@ -81,7 +81,7 @@ if (preg_match('/^\s*$/', $query)) {
 			);
 		if ($or)
 			$args[] = $or;
-		$loans = (array) call_user_func_array(array($pines->entity_manager, 'get_entities'), $args);
+		$loans = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
 	}
 } else {
 	if ($loan_id_match = preg_match_all('/loan:(\d+)/', $query, $loan_ids))
@@ -110,14 +110,14 @@ if (preg_match('/^\s*$/', $query)) {
 	// Only search for loans if it's a normal search.
 	if (!isset($loans)) {
 		$args = array(
-				array('class' => com_loan_loan, 'reverse' => true, 'limit' => $pines->config->com_loan->loan_search_limit),
+				array('class' => com_loan_loan, 'reverse' => true, 'limit' => $_->config->com_loan->loan_search_limit),
 				$selector
 			);
 		if ($or)
 			$args[] = $or;
 		if ($selector2)
 			$args[] = $selector2;
-		$loans = (array) call_user_func_array(array($pines->entity_manager, 'get_entities'), $args);
+		$loans = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
 	}
 }
 
@@ -185,18 +185,18 @@ if ($loans) {
 			'status'				=> h($cur_status),
 			'archived'				=> h($archived),
 			'collection_code'		=> (isset($cur_loan->collection_code)) ? h($cur_loan->collection_code) : '',
-			'principal'				=> "$".h($pines->com_sales->round($cur_loan->principal, true)),
+			'principal'				=> "$".h($_->com_sales->round($cur_loan->principal, true)),
 			'term'					=> h($cur_loan->term." ".$cur_loan->term_type),
 			'apr'					=> h($cur_loan->apr)."%",
-			'balance'				=> !isset($cur_loan->remaining_balance) ? "$".h($pines->com_sales->round($cur_loan->principal, true)): '$'.h($pines->com_sales->round($cur_loan->remaining_balance, true)),
-			'payment'				=> "$".h($pines->com_sales->round($cur_loan->frequency_payment, true)),
+			'balance'				=> !isset($cur_loan->remaining_balance) ? "$".h($_->com_sales->round($cur_loan->principal, true)): '$'.h($_->com_sales->round($cur_loan->remaining_balance, true)),
+			'payment'				=> "$".h($_->com_sales->round($cur_loan->frequency_payment, true)),
 			'missed_first_payment'	=> h($missed_first_payment),
-			'next_payment_amount'	=> "$".h($pines->com_sales->round($cur_loan->payments[0]['next_payment_due_amount'], true)),
-			'current_past_due'		=> ($cur_loan->payments[0]['past_due'] < .01) ? "$0.00" : '$'.h($pines->com_sales->round($cur_loan->payments[0]['past_due'], true)),
+			'next_payment_amount'	=> "$".h($_->com_sales->round($cur_loan->payments[0]['next_payment_due_amount'], true)),
+			'current_past_due'		=> ($cur_loan->payments[0]['past_due'] < .01) ? "$0.00" : '$'.h($_->com_sales->round($cur_loan->payments[0]['past_due'], true)),
 			'next_payment_due'		=> h($next_due_payment),
-			'total_payments_made'	=> empty($cur_loan->payments[0]['total_interest_paid']) ? "$0.00" : '$'.h($pines->com_sales->round(($cur_loan->payments[0]['total_principal_paid'] + $cur_loan->payments[0]['total_interest_paid']), true)),
-			'total_principal_paid'	=> empty($cur_loan->payments[0]['total_principal_paid']) ? "$0.00" : '$'.h($pines->com_sales->round($cur_loan->payments[0]['total_principal_paid'], true)),
-			'total_interest_paid'	=> empty($cur_loan->payments[0]['total_interest_paid']) ? "$0.00" : '$'.h($pines->com_sales->round($cur_loan->payments[0]['total_interest_paid'], true)),
+			'total_payments_made'	=> empty($cur_loan->payments[0]['total_interest_paid']) ? "$0.00" : '$'.h($_->com_sales->round(($cur_loan->payments[0]['total_principal_paid'] + $cur_loan->payments[0]['total_interest_paid']), true)),
+			'total_principal_paid'	=> empty($cur_loan->payments[0]['total_principal_paid']) ? "$0.00" : '$'.h($_->com_sales->round($cur_loan->payments[0]['total_principal_paid'], true)),
+			'total_interest_paid'	=> empty($cur_loan->payments[0]['total_interest_paid']) ? "$0.00" : '$'.h($_->com_sales->round($cur_loan->payments[0]['total_interest_paid'], true)),
 		);
 		$cur_loan = $json_struct;
 	}
@@ -206,4 +206,4 @@ if ($loans) {
 		$loans = null;
 }
 
-$pines->page->override_doc(json_encode($loans));
+$_->page->override_doc(json_encode($loans));

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -82,8 +82,8 @@ class entity implements entity_interface {
 	 */
 	public function __construct($id = 0) {
 		if ($id > 0) {
-			global $pines;
-			$entity = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
+			global $_;
+			$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => $this->tags));
 			if (isset($entity)) {
 				$this->guid = $entity->guid;
 				$this->tags = $entity->tags;
@@ -99,12 +99,12 @@ class entity implements entity_interface {
 	 * @return entity The new instance.
 	 */
 	public static function factory() {
-		global $pines;
+		global $_;
 		$class = get_called_class();
 		$args = func_get_args();
 		$reflector = new ReflectionClass($class);
 		$entity = $reflector->newInstanceArgs($args);
-		$pines->hook->hook_object($entity, $class.'->', false);
+		$_->hook->hook_object($entity, $class.'->', false);
 		return $entity;
 	}
 
@@ -118,7 +118,7 @@ class entity implements entity_interface {
 	 * @return entity The new instance.
 	 */
 	public static function factory_reference($reference) {
-		global $pines;
+		global $_;
 		$class = $reference[2];
 		$entity = call_user_func(array($class, 'factory'));
 		$entity->reference_sleep($reference);
@@ -135,7 +135,7 @@ class entity implements entity_interface {
 	 * @return mixed The value of the variable or nothing if it doesn't exist.
 	 */
 	public function &__get($name) {
-		global $pines;
+		global $_;
 		if ($this->is_a_sleeping_reference)
 			$this->reference_wake();
 		if ($name === 'guid' || $name === 'tags')
@@ -315,10 +315,10 @@ class entity implements entity_interface {
 	}
 
 	public function delete() {
-		global $pines;
+		global $_;
 		if ($this->is_a_sleeping_reference)
 			$this->reference_wake();
-		return $pines->entity_manager->delete_entity($this);
+		return $_->entity_manager->delete_entity($this);
 	}
 
 	/**
@@ -494,7 +494,7 @@ class entity implements entity_interface {
 	 * @access private
 	 */
 	private function reference_to_entity(&$item, $key) {
-		global $pines;
+		global $_;
 		if ($this->is_a_sleeping_reference)
 			$this->reference_wake();
 		if ((array) $item === $item) {
@@ -519,10 +519,10 @@ class entity implements entity_interface {
 	 * @return bool True on success, false on failure.
 	 */
 	private function reference_wake() {
-		global $pines;
+		global $_;
 		if (!$this->is_a_sleeping_reference)
 			return true;
-		$entity = $pines->entity_manager->get_entity(array('class' => $this->sleeping_reference[2], 'skip_ac' => (bool) $this->_p_use_skip_ac), array('&', 'guid' => $this->sleeping_reference[1]));
+		$entity = $_->entity_manager->get_entity(array('class' => $this->sleeping_reference[2], 'skip_ac' => (bool) $this->_p_use_skip_ac), array('&', 'guid' => $this->sleeping_reference[1]));
 		if (!isset($entity))
 			return false;
 		$this->is_a_sleeping_reference = false;
@@ -538,8 +538,8 @@ class entity implements entity_interface {
 			$this->reference_wake();
 		if (!isset($this->guid))
 			return false;
-		global $pines;
-		$refresh = $pines->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $this->guid));
+		global $_;
+		$refresh = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $this->guid));
 		if (!isset($refresh))
 			return 0;
 		$this->tags = $refresh->tags;
@@ -564,10 +564,10 @@ class entity implements entity_interface {
 	}
 
 	public function save() {
-		global $pines;
+		global $_;
 		if ($this->is_a_sleeping_reference)
 			$this->reference_wake();
-		return $pines->entity_manager->save_entity($this);
+		return $_->entity_manager->save_entity($this);
 	}
 
 	public function to_reference() {

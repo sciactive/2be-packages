@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -24,11 +24,11 @@ class com_sales_tx extends entity {
 	 * @return com_sales_tx The new instance.
 	 */
 	public static function factory() {
-		global $pines;
+		global $_;
 		$class = get_class();
 		$entity = new $class();
 		$entity->ac = (object) array('user' => 2, 'group' => 2, 'other' => 2);
-		$pines->hook->hook_object($entity, $class.'->', false);
+		$_->hook->hook_object($entity, $class.'->', false);
 		return $entity;
 	}
 

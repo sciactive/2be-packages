@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$pines->icons->load();
+$_->icons->load();
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_pgrid/includes/jquery.pgrid.<?php e($pines->config->com_pgrid->styling); ?>.css");
-	pines.loadcss("<?php e($pines->config->location); ?>components/com_pgrid/includes/jquery.pgrid.<?php e($pines->config->com_pgrid->styling); ?>.icons.css");
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_pgrid/includes/<?php echo $pines->config->debug_mode ? 'jquery.pgrid.js' : 'jquery.pgrid.min.js'; ?>");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_pgrid/includes/jquery.pgrid.<?php e($_->config->com_pgrid->styling); ?>.css");
+	pines.loadcss("<?php e($_->config->location); ?>components/com_pgrid/includes/jquery.pgrid.<?php e($_->config->com_pgrid->styling); ?>.icons.css");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_pgrid/includes/<?php echo $_->config->debug_mode ? 'jquery.pgrid.js' : 'jquery.pgrid.min.js'; ?>");
 	pines.load(function(){
-		$.fn.pgrid.defaults.pgrid_toolbar_target = "<?php echo stripslashes($pines->config->com_pgrid->toolbar_target); ?>";
+		$.fn.pgrid.defaults.pgrid_toolbar_target = "<?php echo stripslashes($_->config->com_pgrid->toolbar_target); ?>";
 	});
 </script>

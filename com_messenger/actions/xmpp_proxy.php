@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
-set_time_limit($pines->config->com_messenger->proxy_timeout * 2);
+$_->page->override = true;
+set_time_limit($_->config->com_messenger->proxy_timeout * 2);
 
 $headers = array();
 foreach ($_SERVER as $name => $value) {
@@ -31,15 +31,15 @@ if (!empty($_SERVER['HTTP_COOKIE']))
 // Set up the cURL request.
 $request = curl_init();
 $opts = array(
-	CURLOPT_URL				=> $pines->config->com_messenger->xmpp_bosh_url,
+	CURLOPT_URL				=> $_->config->com_messenger->xmpp_bosh_url,
 	CURLOPT_FOLLOWLOCATION	=> true,
-	CURLOPT_USERAGENT		=> $pines->info->com_messenger->name.' '.$pines->info->com_messenger->version,
+	CURLOPT_USERAGENT		=> $_->info->com_messenger->name.' '.$_->info->com_messenger->version,
 	CURLOPT_HEADER			=> true,
 	CURLINFO_HEADER_OUT		=> true,
 	CURLOPT_HTTPHEADER		=> $headers,
 	CURLOPT_RETURNTRANSFER	=> true,
 	CURLOPT_CONNECTTIMEOUT	=> 30,
-	CURLOPT_TIMEOUT			=> $pines->config->com_messenger->proxy_timeout,
+	CURLOPT_TIMEOUT			=> $_->config->com_messenger->proxy_timeout,
 	CURLOPT_MAXCONNECTS		=> 1000,
 );
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

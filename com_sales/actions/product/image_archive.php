@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/listproducts') )
@@ -42,7 +42,7 @@ if (
 }
 
 // Get all products with images.
-$products = $pines->entity_manager->get_entities(
+$products = $_->entity_manager->get_entities(
 		array('class' => com_sales_product, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'product')
@@ -137,5 +137,5 @@ if (!file_exists("$tmp_dir/archive.tar.gz")) {
 }
 header('Content-Type: application/x-gzip');
 header('Content-Disposition: attachment; filename=image-archive.tar.gz');
-$pines->page->override = true;
-$pines->page->override_doc(file_get_contents("$tmp_dir/archive.tar.gz"));
+$_->page->override = true;
+$_->page->override_doc(file_get_contents("$tmp_dir/archive.tar.gz"));

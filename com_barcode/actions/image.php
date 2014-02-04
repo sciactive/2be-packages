@@ -52,13 +52,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 
 if (!isset($_REQUEST['code'])) {
-	$pines->page->override_doc("\0");
+	$_->page->override_doc("\0");
 	return;
 }
 
@@ -83,21 +83,21 @@ $bgcolor = $_REQUEST['bgcolor'];
 $color = $_REQUEST['color'];
 
 if (!isset($type))
-	$type = $pines->config->com_barcode->type;
+	$type = $_->config->com_barcode->type;
 if (!isset($width))
-	$width = $pines->config->com_barcode->width;
+	$width = $_->config->com_barcode->width;
 if (!isset($height))
-	$height = $pines->config->com_barcode->height;
+	$height = $_->config->com_barcode->height;
 if (!isset($xres))
-	$xres = $pines->config->com_barcode->xres;
+	$xres = $_->config->com_barcode->xres;
 if (!isset($font))
-	$font = $pines->config->com_barcode->font;
+	$font = $_->config->com_barcode->font;
 if (!isset($bgcolor))
-	$bgcolor = $pines->config->com_barcode->bgcolor;
+	$bgcolor = $_->config->com_barcode->bgcolor;
 if (!isset($color))
-	$color = $pines->config->com_barcode->color;
+	$color = $_->config->com_barcode->color;
 if (!$style)
-	$style = $pines->config->com_barcode->output_type == 'jpg' ? 36 : ($pines->config->com_barcode->output_type == 'gif' ? 134 : 70);
+	$style = $_->config->com_barcode->output_type == 'jpg' ? 36 : ($_->config->com_barcode->output_type == 'gif' ? 134 : 70);
 
 switch ($type) {
 	case 'I25':

@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Packages';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_packager/package/list']);
 ?>
@@ -92,10 +92,10 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				case 'component':
 				case 'template':
 					$component = $package->component;
-					e($pines->info->$component->name);
+					e($_->info->$component->name);
 					break;
 				case 'system':
-					e($pines->info->name);
+					e($_->info->name);
 					break;
 				case 'meta':
 					e($package->meta['name']);
@@ -105,10 +105,10 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				case 'component':
 				case 'template':
 					$component = $package->component;
-					e($pines->info->$component->author);
+					e($_->info->$component->author);
 					break;
 				case 'system':
-					e($pines->info->author);
+					e($_->info->author);
 					break;
 				case 'meta':
 					e($package->meta['author']);
@@ -130,10 +130,10 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				case 'component':
 				case 'template':
 					$component = $package->component;
-					e($pines->info->$component->version);
+					e($_->info->$component->version);
 					break;
 				case 'system':
-					e($pines->info->version);
+					e($_->info->version);
 					break;
 				case 'meta':
 					e($package->meta['version']);

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 ?>
@@ -111,7 +111,7 @@ defined('P_RUN') or die('Direct access prohibited');
 				<select class="span12" name="collection_code">
 					<option value="">None</option>
 				<?php 
-				$codes = $pines->config->com_loan->collections_codes;
+				$codes = $_->config->com_loan->collections_codes;
 				asort($codes);
 				foreach ($codes as $cur_code) {
 					$cur_code = explode(':', $cur_code);

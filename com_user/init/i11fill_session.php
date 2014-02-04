@@ -8,9 +8,9 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (isset($_SESSION['user_id']))
-	$pines->user_manager->fill_session();
+	$_->user_manager->fill_session();
 

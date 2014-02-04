@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_newsletter/listmail') )
@@ -16,7 +16,7 @@ if ( !gatekeeper('com_newsletter/listmail') )
 
 $list = explode(',', $_REQUEST['mail_id']);
 foreach ($list as $cur_mail) {
-	$mail = $pines->entity_manager->get_entity(array(), array('&', 'guid' => (int) $cur_mail, 'tag' => array('com_newsletter', 'mail')));
+	$mail = $_->entity_manager->get_entity(array(), array('&', 'guid' => (int) $cur_mail, 'tag' => array('com_newsletter', 'mail')));
 	if ( !isset($mail) ) {
 		$failed_deletes .= (empty($failed_deletes) ? '' : ', ').$cur_mail;
 	}

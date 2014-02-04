@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_reports/reportproducts') )
@@ -44,4 +44,4 @@ if (!empty($_REQUEST['types'])) {
 	}
 }
 
-$pines->com_reports->report_product_details($start_date, $end_date, $location, $descendants, $types);
+$_->com_reports->report_product_details($start_date, $end_date, $location, $descendants, $types);

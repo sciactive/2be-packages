@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -66,8 +66,8 @@ class com_sales_stock extends entity {
 	 * @return string The reason, or "unknown" if no last transaction could be found.
 	 */
 	public function last_reason() {
-		global $pines;
-		$last_tx = $pines->entity_manager->get_entity(
+		global $_;
+		$last_tx = $_->entity_manager->get_entity(
 				array('reverse' => true, 'class' => com_sales_tx),
 				array('&',
 					'tag' => array('com_sales', 'transaction', 'stock_tx'),
@@ -86,11 +86,11 @@ class com_sales_stock extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'stock/form', 'content');
 		$module->entity = $this;
-		$module->vendors = (array) $pines->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
-		$module->locations = $pines->user_manager->get_groups();
+		$module->vendors = (array) $_->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
+		$module->locations = $_->user_manager->get_groups();
 
 		return $module;
 	}
@@ -221,10 +221,10 @@ class com_sales_stock extends entity {
 	 * @return bool True on success, false on failure.
 	 */
 	public function save() {
-		global $pines;
+		global $_;
 
-		if ($pines->config->com_sales->unique_serials && !empty($this->serial)) {
-			$test = $pines->entity_manager->get_entity(array('class' => com_sales_stock, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'stock'), 'strict' => array('serial', $this->serial), '!guid' => $this->guid));
+		if ($_->config->com_sales->unique_serials && !empty($this->serial)) {
+			$test = $_->entity_manager->get_entity(array('class' => com_sales_stock, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'stock'), 'strict' => array('serial', $this->serial), '!guid' => $this->guid));
 			if (isset($test)) {
 				pines_notice('There is already a stock entry with that serial. Serials must be unique.');
 				return false;

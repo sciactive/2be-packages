@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
  * The standard uploader.
- * @global com_elfinderupload $pines->uploader
+ * @global com_elfinderupload $_->uploader
  */
-$pines->uploader = 'com_elfinderupload';
+$_->uploader = 'com_elfinderupload';

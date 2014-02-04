@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -22,11 +22,11 @@ class com_raffle extends component {
 	 * @return module The module.
 	 */
 	public function list_raffles() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_raffle', 'raffle/list', 'content');
 
-		$module->raffles = $pines->entity_manager->get_entities(
+		$module->raffles = $_->entity_manager->get_entities(
 				array('class' => com_raffle_raffle),
 				array('&',
 					'tag' => array('com_raffle', 'raffle')

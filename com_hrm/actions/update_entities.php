@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('system/all') )
@@ -21,7 +21,7 @@ $errors = array();
 $offset = $count = $nochange = 0;
 // Grab entities, 50 at a time, and update.
 do {
-	$entities = $pines->entity_manager->get_entities(
+	$entities = $_->entity_manager->get_entities(
 			array('limit' => 50, 'offset' => $offset, 'class' => com_hrm_timeclock),
 			array('&',
 				'tag' => array('com_hrm', 'timeclock')
@@ -34,7 +34,7 @@ do {
 			$changed = true;
 			foreach ($cur_entity->timeclock as $key => $cur_entry) {
 				// Check that it doesn't already exist.
-				$prev_entry = $pines->entity_manager->get_entity(
+				$prev_entry = $_->entity_manager->get_entity(
 						array('class' => com_hrm_timeclock_entry),
 						array('&',
 							'tag' => array('com_hrm', 'timeclock_entry'),

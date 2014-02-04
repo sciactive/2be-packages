@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/shipstock') )
@@ -45,7 +45,7 @@ foreach ($transfer->products as $cur_product) {
 		$selector['data'] = array('serial', array_pop($serials[$cur_product->guid]));
 	}
 	$stock = null;
-	$stock_array = $pines->entity_manager->get_entities(
+	$stock_array = $_->entity_manager->get_entities(
 			array('class' => com_sales_stock, 'skip_ac' => true),
 			$selector,
 			array('!&',

@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Package' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide package details in this form.';
-$pines->editor->load();
-$pines->uploader->load();
-$pines->com_pgrid->load();
-$pines->com_ptags->load();
+$_->editor->load();
+$_->uploader->load();
+$_->com_pgrid->load();
+$_->com_ptags->load();
 ?>
 <style type="text/css" >
 	#p_muid_sortable {
@@ -218,7 +218,7 @@ $pines->com_ptags->load();
 								if (substr($cur_component, 0, 4) != 'com_')
 									continue;
 								?>
-							<option value="<?php e($cur_component); ?>"<?php echo (($this->entity->component == $cur_component) ? ' selected="selected"' : ''); ?>><?php e("{$pines->info->$cur_component->name} [{$cur_component}]"); ?></option>
+							<option value="<?php e($cur_component); ?>"<?php echo (($this->entity->component == $cur_component) ? ' selected="selected"' : ''); ?>><?php e("{$_->info->$cur_component->name} [{$cur_component}]"); ?></option>
 							<?php } ?>
 						</select>
 					</label>
@@ -238,7 +238,7 @@ $pines->com_ptags->load();
 								if (substr($cur_component, 0, 4) != 'tpl_')
 									continue;
 								?>
-							<option value="<?php e($cur_component); ?>"<?php echo (($this->entity->component == $cur_component) ? ' selected="selected"' : ''); ?>><?php echo "{$pines->info->$cur_component->name} [{$cur_component}]"; ?></option>
+							<option value="<?php e($cur_component); ?>"<?php echo (($this->entity->component == $cur_component) ? ' selected="selected"' : ''); ?>><?php echo "{$_->info->$cur_component->name} [{$cur_component}]"; ?></option>
 							<?php } ?>
 						</select>
 					</label>

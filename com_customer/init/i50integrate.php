@@ -8,8 +8,8 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ($pines->config->com_customer->com_calendar && !$pines->depend->check('component', 'com_calendar'))
-	$pines->config->com_customer->com_calendar = false;
+if ($_->config->com_customer->com_calendar && !$_->depend->check('component', 'com_calendar'))
+	$_->config->com_customer->com_calendar = false;

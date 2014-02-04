@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_reports/attendance') )
@@ -39,4 +39,4 @@ $employee = empty($_REQUEST['employee']) ? null : com_hrm_employee::factory((int
 $location = empty($_REQUEST['location']) ? null : group::factory((int) $_REQUEST['location']);
 $descendants = ($_REQUEST['descendants'] == 'true');
 
-$pines->com_reports->hours_clocked($start_date, $end_date, $location, $employee, $descendants);
+$_->com_reports->hours_clocked($start_date, $end_date, $location, $employee, $descendants);

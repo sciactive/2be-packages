@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!empty($_REQUEST['id'])) {
@@ -26,12 +26,12 @@ $pending_count = false;
 if ($_SESSION['user']->group->com_sales_task_cashcount) {
 	if ( isset($entity->group->guid) && !$entity->group->is($_SESSION['user']->group) ) {
 		pines_notice('This cash count belongs to a different location.');
-		$pines->com_sales->list_cashcounts();
+		$_->com_sales->list_cashcounts();
 		return;
 	}
 	if (!isset($entity->guid) && isset($_SESSION['user']->group)) {
 		// Look for any cashcounts that are waiting to be committed.
-		$existing_counts = $pines->entity_manager->get_entities(
+		$existing_counts = $_->entity_manager->get_entities(
 				array('class' => com_sales_cashcount),
 				array('&',
 					'tag' => array('com_sales', 'cashcount'),
@@ -54,7 +54,7 @@ if ($_SESSION['user']->group->com_sales_task_cashcount) {
 
 if ($pending_count) {
 	pines_notice('There is a cash count pending for your location, it must be approved or declined.');
-	$pines->com_sales->list_cashcounts();
+	$_->com_sales->list_cashcounts();
 	return;
 }
 

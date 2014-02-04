@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ($pines->config->static_location === '' || !$pines->config->com_content->replace_static)
+if ($_->config->static_location === '' || !$_->config->com_content->replace_static)
 	return;
 
 /**
@@ -20,8 +20,8 @@ if ($pines->config->static_location === '' || !$pines->config->com_content->repl
  * @param array &$array Return value array.
  */
 function com_content__replace_static(&$array) {
-	global $pines;
-	$array[0] = str_replace($pines->config->rela_location.$pines->config->upload_location, $pines->config->static_location.$pines->config->upload_location, $array[0]);
+	global $_;
+	$array[0] = str_replace($_->config->rela_location.$_->config->upload_location, $_->config->static_location.$_->config->upload_location, $array[0]);
 }
 
-$pines->hook->add_callback('$pines->format_content', 10, 'com_content__replace_static');
+$_->hook->add_callback('$_->format_content', 10, 'com_content__replace_static');

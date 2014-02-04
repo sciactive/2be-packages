@@ -8,27 +8,27 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 header("Content-type: text/css");
 //$file = __FILE__;
 //include('system/includes/externalcache.php');
 
-$review_background = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->review_background)) ? $pines->config->com_testimonials->review_background : '#eeeeee';
-$review_text = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->review_text)) ? $pines->config->com_testimonials->review_text : '#333333';
-$average_background = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->average_background)) ? $pines->config->com_testimonials->average_background : '#cccccc';
-$author_text = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->author_text)) ? $pines->config->com_testimonials->author_text : '#999999';
-$feedback_background = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_background)) ? $pines->config->com_testimonials->feedback_background : '#66b8de';
-$feedback_background_opened = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_background_opened)) ? $pines->config->com_testimonials->feedback_background_opened : '#0088cc';
-$feedback_color = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_color)) ? $pines->config->com_testimonials->feedback_color : '#fcfcfc';
-$feedback_color_opened = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_color_opened)) ? $pines->config->com_testimonials->feedback_color_opened : '#ffffff';
-$feedback_hr_top = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_hr_top)) ? $pines->config->com_testimonials->feedback_hr_top : '#005c9e';;
-$feedback_hr_bottom = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->feedback_hr_bottom)) ? $pines->config->com_testimonials->feedback_hr_bottom : '#5cb4f2';
-$scroll_up_background = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->scroll_up_background)) ? $pines->config->com_testimonials->scroll_up_background : '#dedede';
-$scroll_up_text = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->scroll_up_text)) ? $pines->config->com_testimonials->scroll_up_text : '#aaaaaa';
-$list_item_border = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonials->list_item_border)) ? $pines->config->com_testimonials->list_item_border : '#dddddd';
-$misc_css = $pines->config->com_testimonials->misc_css;
+$review_background = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->review_background)) ? $_->config->com_testimonials->review_background : '#eeeeee';
+$review_text = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->review_text)) ? $_->config->com_testimonials->review_text : '#333333';
+$average_background = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->average_background)) ? $_->config->com_testimonials->average_background : '#cccccc';
+$author_text = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->author_text)) ? $_->config->com_testimonials->author_text : '#999999';
+$feedback_background = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_background)) ? $_->config->com_testimonials->feedback_background : '#66b8de';
+$feedback_background_opened = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_background_opened)) ? $_->config->com_testimonials->feedback_background_opened : '#0088cc';
+$feedback_color = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_color)) ? $_->config->com_testimonials->feedback_color : '#fcfcfc';
+$feedback_color_opened = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_color_opened)) ? $_->config->com_testimonials->feedback_color_opened : '#ffffff';
+$feedback_hr_top = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_hr_top)) ? $_->config->com_testimonials->feedback_hr_top : '#005c9e';;
+$feedback_hr_bottom = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->feedback_hr_bottom)) ? $_->config->com_testimonials->feedback_hr_bottom : '#5cb4f2';
+$scroll_up_background = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->scroll_up_background)) ? $_->config->com_testimonials->scroll_up_background : '#dedede';
+$scroll_up_text = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->scroll_up_text)) ? $_->config->com_testimonials->scroll_up_text : '#aaaaaa';
+$list_item_border = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->list_item_border)) ? $_->config->com_testimonials->list_item_border : '#dddddd';
+$misc_css = $_->config->com_testimonials->misc_css;
 
 ?>
 /* style tag used only for ide purposes. 

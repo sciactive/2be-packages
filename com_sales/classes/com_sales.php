@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -58,14 +58,14 @@ class com_sales extends component {
 	 * @todo Finish calling this in all appropriate places.
 	 */
 	public function call_payment_process($arguments = array(), &$result = null) {
-		global $pines;
+		global $_;
 		if (!is_array($arguments))
 			return false;
 		if (empty($arguments['action']))
 			return false;
 		if ($arguments['action'] != 'request' && $arguments['action'] != 'request_cust' && !is_object($arguments['ticket']))
 			return false;
-		foreach ($pines->config->com_sales->processing_types as $cur_type) {
+		foreach ($_->config->com_sales->processing_types as $cur_type) {
 			if ($arguments['name'] != $cur_type['name'])
 				continue;
 			if (!is_callable($cur_type['callback']))
@@ -84,7 +84,7 @@ class com_sales extends component {
 	 * @todo Finish calling this in all appropriate places.
 	 */
 	public function call_product_actions($arguments = array(), $times = 1) {
-		global $pines;
+		global $_;
 		if (!is_array($arguments))
 			return false;
 		if (empty($arguments['type']))
@@ -94,7 +94,7 @@ class com_sales extends component {
 		// If the product has no actions associated with it, don't bother going through the actions.
 		if (!is_array($arguments['product']->actions) || !$arguments['product']->actions)
 			return true;
-		foreach ($pines->config->com_sales->product_actions as $cur_action) {
+		foreach ($_->config->com_sales->product_actions as $cur_action) {
 			if (is_array($cur_action['type'])) {
 				if (!in_array($arguments['type'], $cur_action['type']))
 					continue;
@@ -122,15 +122,15 @@ class com_sales extends component {
 	 * @return module The form's module.
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/date_selector', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -146,10 +146,10 @@ class com_sales extends component {
 	 * @return com_sales_product|null The product if it is found, null if it isn't.
 	 */
 	public function get_product_by_code($code) {
-		global $pines;
+		global $_;
 		if (isset($this->product_cache[$code])) {
 			// Check if the cached one is old.
-			$tmp_product = $pines->entity_manager->get_entity(
+			$tmp_product = $_->entity_manager->get_entity(
 					array('class' => com_sales_product),
 					array('&',
 						'guid' => array($this->product_cache[$code]->guid),
@@ -173,7 +173,7 @@ class com_sales extends component {
 			}
 		}
 		// Check for a SKU match first.
-		$product = $pines->entity_manager->get_entity(
+		$product = $_->entity_manager->get_entity(
 				array('class' => com_sales_product),
 				array('&',
 					'tag' => array('com_sales', 'product'),
@@ -182,7 +182,7 @@ class com_sales extends component {
 			);
 		if (!isset($product->guid)) {
 			// If that didn't match, check for an additional barcode.
-			$product = $pines->entity_manager->get_entity(
+			$product = $_->entity_manager->get_entity(
 					array('class' => com_sales_product),
 					array('&',
 						'tag' => array('com_sales', 'product'),
@@ -208,7 +208,7 @@ class com_sales extends component {
 	 * @return com_sales_po|null A PO, or null if nothing is found.
 	 */
 	public function get_origin_po($product, $location = null, &$suggestions = array()) {
-		global $pines;
+		global $_;
 		// First check through the suggestions to see if they match.
 		foreach ($suggestions as &$cur_po) {
 			if (!isset($cur_po->guid) || !$cur_po->has_tag('com_sales', 'po'))
@@ -234,7 +234,7 @@ class com_sales extends component {
 			);
 		if (isset($location))
 			$selector['ref'][] = array('destination', $location);
-		return $pines->entity_manager->get_entity(
+		return $_->entity_manager->get_entity(
 				array('class' => com_sales_po),
 				$selector
 			);
@@ -253,7 +253,7 @@ class com_sales extends component {
 	 * @return array|null An array with the transfer and stock entry, or null if nothing is found.
 	 */
 	public function get_origin_transfer($product, $serial = null, $location = null, &$suggestions = array()) {
-		global $pines;
+		global $_;
 		// First check through the suggestions to see if they match.
 		foreach ($suggestions as &$cur_transfer) {
 			if (!isset($cur_transfer->guid) || !$cur_transfer->has_tag('com_sales', 'transfer'))
@@ -300,7 +300,7 @@ class com_sales extends component {
 			$selector['array'] = array('pending_serials', $serial);
 		if (isset($location))
 			$selector['ref'][] = array('destination', $location);
-		$entities = (array) $pines->entity_manager->get_entities(
+		$entities = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_transfer),
 				$selector
 			);
@@ -356,7 +356,7 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_cashcounts($start_date = null, $end_date = null, $location = null, $descendants = false, $finished = false) {
-		global $pines;
+		global $_;
 
 		$form = new module('com_sales', 'cashcount/listform', 'right');
 		$module = new module('com_sales', 'cashcount/list', 'content');
@@ -379,7 +379,7 @@ class com_sales extends component {
 			$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 		else
 			$or = array('|', 'ref' => array('group', $location));
-		$module->counts = $pines->entity_manager->get_entities(
+		$module->counts = $_->entity_manager->get_entities(
 				array('class' => com_sales_cashcount),
 				$selector,
 				$or,
@@ -421,11 +421,11 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_categories() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'category/list', 'content');
 
-		$module->categories = $pines->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category')));
+		$module->categories = $_->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category')));
 
 		if ( empty($module->categories) )
 			pines_notice('No categories found.');
@@ -442,7 +442,7 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_countsheets($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'countsheet/list', 'content');
 
@@ -461,7 +461,7 @@ class com_sales extends component {
 			$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 		else
 			$or = array('|', 'ref' => array('group', $location));
-		$module->countsheets = $pines->entity_manager->get_entities(array('class' => com_sales_countsheet), $selector, $approved_selector, $or);
+		$module->countsheets = $_->entity_manager->get_entities(array('class' => com_sales_countsheet), $selector, $approved_selector, $or);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -488,11 +488,11 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_manufacturers() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'manufacturer/list', 'content');
 
-		$module->manufacturers = $pines->entity_manager->get_entities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
+		$module->manufacturers = $_->entity_manager->get_entities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
 
 		if ( empty($module->manufacturers) )
 			pines_notice('There are no manufacturers.');
@@ -505,11 +505,11 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_payment_types() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'paymenttype/list', 'content');
 
-		$module->payment_types = $pines->entity_manager->get_entities(array('class' => com_sales_payment_type), array('&', 'tag' => array('com_sales', 'payment_type')));
+		$module->payment_types = $_->entity_manager->get_entities(array('class' => com_sales_payment_type), array('&', 'tag' => array('com_sales', 'payment_type')));
 
 		if ( empty($module->payment_types) )
 			pines_notice('There are no payment types.');
@@ -522,11 +522,11 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_return_checklists() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'returnchecklist/list', 'content');
 
-		$module->return_checklists = $pines->entity_manager->get_entities(array('class' => com_sales_return_checklist), array('&', 'tag' => array('com_sales', 'return_checklist')));
+		$module->return_checklists = $_->entity_manager->get_entities(array('class' => com_sales_return_checklist), array('&', 'tag' => array('com_sales', 'return_checklist')));
 
 		if ( empty($module->return_checklists) )
 			pines_notice('There are no return checklists.');
@@ -540,11 +540,11 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_pos($finished = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'po/list', 'content');
 
-		$module->pos = $pines->entity_manager->get_entities(
+		$module->pos = $_->entity_manager->get_entities(
 				array('class' => com_sales_po),
 				array('&',
 					'tag' => array('com_sales', 'po'),
@@ -598,7 +598,7 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_returns($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'return/list', 'content');
 
@@ -613,7 +613,7 @@ class com_sales extends component {
 			$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 		else
 			$or = array('|', 'ref' => array('group', $location));
-		$module->returns = $pines->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$module->returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -635,7 +635,7 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_sales($start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'sale/list', 'content');
 
@@ -650,7 +650,7 @@ class com_sales extends component {
 			$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 		else
 			$or = array('|', 'ref' => array('group', $location));
-		$module->sales = $pines->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$module->sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -672,7 +672,7 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_shipments($removed = false, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'shipment/list', 'content');
 
@@ -694,7 +694,7 @@ class com_sales extends component {
 
 		if ($removed) {
 			// Show shipments from the old system.
-			if ($pines->config->com_sales->ready_to_ship == 'invoice') {
+			if ($_->config->com_sales->ready_to_ship == 'invoice') {
 				$selector = array('|',
 						'data' => array(
 							array('status', 'invoiced'),
@@ -706,7 +706,7 @@ class com_sales extends component {
 						'data' => array('status', 'paid')
 					);
 			}
-			$module->sales = (array) $pines->entity_manager->get_entities(
+			$module->sales = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_sale),
 					array('&',
 						'tag' => array('com_sales', 'sale', 'shipping_shipped'),
@@ -716,7 +716,7 @@ class com_sales extends component {
 				);
 		}
 
-		$module->shipments = (array) $pines->entity_manager->get_entities(
+		$module->shipments = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_shipment),
 				array('&',
 					'tag' => array('com_sales', 'shipment'),
@@ -733,11 +733,11 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_shippers() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'shipper/list', 'content');
 
-		$module->shippers = $pines->entity_manager->get_entities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
+		$module->shippers = $_->entity_manager->get_entities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
 
 		if ( empty($module->shippers) )
 			pines_notice('There are no shippers.');
@@ -752,15 +752,15 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_specials($enabled = true) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'special/list', 'content');
 
 		$module->enabled = $enabled;
 		if ($enabled) {
-			$module->specials = $pines->entity_manager->get_entities(array('class' => com_sales_special), array('&', 'tag' => array('com_sales', 'special'), 'data' => array('enabled', true)));
+			$module->specials = $_->entity_manager->get_entities(array('class' => com_sales_special), array('&', 'tag' => array('com_sales', 'special'), 'data' => array('enabled', true)));
 		} else {
-			$module->specials = $pines->entity_manager->get_entities(array('class' => com_sales_special), array('&', 'tag' => array('com_sales', 'special')), array('!&', 'data' => array('enabled', true)));
+			$module->specials = $_->entity_manager->get_entities(array('class' => com_sales_special), array('&', 'tag' => array('com_sales', 'special')), array('!&', 'data' => array('enabled', true)));
 		}
 
 		if ( empty($module->specials) )
@@ -778,7 +778,7 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_stock($removed = false, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'stock/list', 'content');
 
@@ -786,7 +786,7 @@ class com_sales extends component {
 		if ($removed) {
 			$module->removed = true;
 			$module->location = $_SESSION['user']->group;
-			$module->stock = $pines->entity_manager->get_entities(
+			$module->stock = $_->entity_manager->get_entities(
 					array('class' => com_sales_stock),
 					array('&', 'tag' => array('com_sales', 'stock')),
 					array('!&', 'isset' => 'location')
@@ -803,7 +803,7 @@ class com_sales extends component {
 				else
 					$or = array('|', 'ref' => array('location', $location));
 				$module->location = $location;
-				$module->stock = $pines->entity_manager->get_entities(
+				$module->stock = $_->entity_manager->get_entities(
 					array('class' => com_sales_stock),
 					array('&', 'tag' => array('com_sales', 'stock'), array('isset' => 'location')),
 					$or
@@ -823,11 +823,11 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_tax_fees() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'taxfee/list', 'content');
 
-		$module->tax_fees = $pines->entity_manager->get_entities(array('class' => com_sales_tax_fee), array('&', 'tag' => array('com_sales', 'tax_fee')));
+		$module->tax_fees = $_->entity_manager->get_entities(array('class' => com_sales_tax_fee), array('&', 'tag' => array('com_sales', 'tax_fee')));
 
 		if ( empty($module->tax_fees) )
 			pines_notice('There are no taxes/fees.');
@@ -842,14 +842,14 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_transfers($finished = false, $just_pending_shipment = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'transfer/list', 'content');
 
 		$module->finished = $finished;
 		if ($just_pending_shipment) {
 			if (isset($_SESSION['user']->group)) {
-				$module->transfers = $pines->entity_manager->get_entities(
+				$module->transfers = $_->entity_manager->get_entities(
 						array('class' => com_sales_transfer),
 						array('&',
 							'tag' => array('com_sales', 'transfer'),
@@ -866,7 +866,7 @@ class com_sales extends component {
 				$module->transfers = array();
 			}
 		} else {
-			$module->transfers = $pines->entity_manager->get_entities(
+			$module->transfers = $_->entity_manager->get_entities(
 					array('class' => com_sales_transfer),
 					array('&',
 						'tag' => array('com_sales', 'transfer'),
@@ -886,11 +886,11 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function list_vendors() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'vendor/list', 'content');
 
-		$module->vendors = $pines->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
+		$module->vendors = $_->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
 
 		if ( empty($module->vendors) )
 			pines_notice('There are no vendors.');
@@ -932,8 +932,8 @@ class com_sales extends component {
 	 * @return module The form's module.
 	 */
 	public function location_select_form($location = null, $descendants = false) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/location_selector', 'content');
 		if (!isset($location)) {
@@ -943,7 +943,7 @@ class com_sales extends component {
 		}
 		$module->descendants = $descendants;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -956,13 +956,13 @@ class com_sales extends component {
 	 * @return module The form's module.
 	 */
 	public function override_form($entity = null) {
-		global $pines;
-		$pines->page->override = true;
+		global $_;
+		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/overrideowner', 'content');
 		$module->entity = $entity;
 
-		$pines->page->override_doc($module->render());
+		$_->page->override_doc($module->render());
 		return $module;
 	}
 
@@ -996,11 +996,11 @@ class com_sales extends component {
 	 * @param array &$array The argument array.
 	 */
 	public function payment_manager(&$array) {
-		global $pines;
+		global $_;
 		switch ($array['action']) {
 			case 'request':
 				$module = new module('com_sales', 'forms/payment_manager');
-				$pines->page->override_doc($module->render());
+				$_->page->override_doc($module->render());
 				break;
 			case 'approve':
 				if (gatekeeper('com_sales/manager')) {
@@ -1008,7 +1008,7 @@ class com_sales extends component {
 					unset($array['payment']['data']['password']);
 					$array['payment']['status'] = 'approved';
 				} else {
-					if ($id = $pines->user_manager->authenticate($array['payment']['data']['username'], $array['payment']['data']['password'])) {
+					if ($id = $_->user_manager->authenticate($array['payment']['data']['username'], $array['payment']['data']['password'])) {
 						$user = user::factory($id);
 						$array['payment']['status'] = gatekeeper('com_sales/manager', $user) ? 'approved' : 'manager_approval_needed';
 					} else {
@@ -1038,7 +1038,7 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function print_receive_form() {
-		global $pines;
+		global $_;
 
 		$selector_po = array('&', 'tag' => array('com_sales', 'po'), 'data' => array(array('final', true), array('finished', false)));
 		$selector_transfer = array('&', 'tag' => array('com_sales', 'transfer'), 'data' => array(array('final', true), array('finished', false), array('shipped', true)));
@@ -1047,28 +1047,28 @@ class com_sales extends component {
 		if (!gatekeeper('com_sales/receivelocation')) {
 			$selector_po['ref'] = array('destination', $_SESSION['user']->group);
 			$selector_transfer['ref'] = array('destination', $_SESSION['user']->group);
-			$module->pos = (array) $pines->entity_manager->get_entities(
+			$module->pos = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_po, 'skip_ac' => true),
 					$selector_po
 				);
-			$module->transfers = (array) $pines->entity_manager->get_entities(
+			$module->transfers = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_transfer, 'skip_ac' => true),
 					$selector_transfer
 				);
 		} else {
 			$groups = $_SESSION['user']->group->get_descendants(true);
-			$module->pos = (array) $pines->entity_manager->get_entities(
+			$module->pos = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_po, 'skip_ac' => true),
 					$selector_po,
 					array('|', 'ref' => array('destination', $groups))
 				);
-			$module->transfers = (array) $pines->entity_manager->get_entities(
+			$module->transfers = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_transfer, 'skip_ac' => true),
 					$selector_transfer,
 					array('|', 'ref' => array('destination', $groups))
 				);
 		}
-		$module->categories = (array) $pines->entity_manager->get_entities(
+		$module->categories = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_category),
 				array('&',
 					'tag' => array('com_sales', 'category'),
@@ -1085,9 +1085,9 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function print_sales_total() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'sale/totals', 'content');
-		$module->locations = $pines->user_manager->get_groups();
+		$module->locations = $_->user_manager->get_groups();
 		$module->show_all = gatekeeper('com_sales/totalothersales');
 
 		return $module;
@@ -1108,16 +1108,16 @@ class com_sales extends component {
 	 * @param array $options Options for cropping and thumbnail method.
 	 */
 	public function process_product_image(&$image, $type = 'prod_img', $options = array()) {
-		global $pines;
+		global $_;
 		$image->setImageFormat('png');
 		switch ($type) {
 			case 'thumbnail':
 				// Fit the image into the thumbnail size.
-				$image->thumbnailImage($pines->config->com_sales->product_thumbnail_width, $pines->config->com_sales->product_thumbnail_height, true);
+				$image->thumbnailImage($_->config->com_sales->product_thumbnail_width, $_->config->com_sales->product_thumbnail_height, true);
 
 				// Create a transparent canvas.
 				$canvas = clone $image;
-				$canvas->newImage($pines->config->com_sales->product_thumbnail_width, $pines->config->com_sales->product_thumbnail_height, 'none');
+				$canvas->newImage($_->config->com_sales->product_thumbnail_width, $_->config->com_sales->product_thumbnail_height, 'none');
 				$canvas->setImageFormat('png');
 				
 				// Get the image dimensions.
@@ -1125,8 +1125,8 @@ class com_sales extends component {
 				$height = $image->getImageHeight();
 
 				// Calculate position of the thumbnail on the canvas.
-				$x = ($pines->config->com_sales->product_thumbnail_width - $width) / 2;
-				$y = ($pines->config->com_sales->product_thumbnail_height - $height) / 2;
+				$x = ($_->config->com_sales->product_thumbnail_width - $width) / 2;
+				$y = ($_->config->com_sales->product_thumbnail_height - $height) / 2;
 
 				// Composite the image.
 				$canvas->compositeImage($image, imagick::COMPOSITE_OVER, $x, $y);
@@ -1137,13 +1137,13 @@ class com_sales extends component {
 			case 'prod_img':
 			case 'prod_tmb':
 			default:
-				if ($pines->config->com_sales->product_images_crop) {
+				if ($_->config->com_sales->product_images_crop) {
 					// Figure out how much we need to crop by blurring it first.
 					$copy = clone $image;
 					// Adjust this for blur amount.
 					$copy->blurImage(8, 3);
 					// Adjust this for crop sensitivity.
-					$copy->trimImage($pines->config->com_sales->product_images_crop_sensitivity);
+					$copy->trimImage($_->config->com_sales->product_images_crop_sensitivity);
 					// Now that Imagick cropped a blurred copy, we can find where it should be cropped.
 					$page = $copy->getImagePage();
 					$width = $copy->getImageWidth();
@@ -1171,8 +1171,8 @@ class com_sales extends component {
 				}
 				$width = $image->getImageWidth();
 				$height = $image->getImageHeight();
-				if ($width > $pines->config->com_sales->product_images_max_width)
-					$image->thumbnailImage($pines->config->com_sales->product_images_max_width, $height, true);
+				if ($width > $_->config->com_sales->product_images_max_width)
+					$image->thumbnailImage($_->config->com_sales->product_images_max_width, $height, true);
 				// Process any additional crop options.
 				if (isset($options['h']) && isset($options['w']) && isset($options['x']) && isset($options['y'])) {
 					$image->cropImage((int)$options['w'], (int)$options['h'], (int)$options['x'], (int)$options['y']);
@@ -1184,26 +1184,26 @@ class com_sales extends component {
 				// Now make a product image thumbnail. Start by stripping metadata.
 				$image->stripImage();
 				// Thumbnail sizing method.
-				$tmb_method = $pines->config->com_sales->product_images_tmb_style;
+				$tmb_method = $_->config->com_sales->product_images_tmb_style;
 				if (isset($options['tmb_method']))
 					$tmb_method = $options['tmb_method'];
 				if ($tmb_method == 'crop') {
 					// Scale the image near the thumbnail size.
 					$width = $image->getImageWidth();
 					$height = $image->getImageHeight();
-					$fit_by_width = ($pines->config->com_sales->product_images_tmb_width / $width) > ($pines->config->com_sales->product_images_tmb_height / $height);
+					$fit_by_width = ($_->config->com_sales->product_images_tmb_width / $width) > ($_->config->com_sales->product_images_tmb_height / $height);
 					if ($fit_by_width)
-						$image->thumbnailImage($pines->config->com_sales->product_images_tmb_width, 0, false);
+						$image->thumbnailImage($_->config->com_sales->product_images_tmb_width, 0, false);
 					else
-						$image->thumbnailImage(0, $pines->config->com_sales->product_images_tmb_height, false);
+						$image->thumbnailImage(0, $_->config->com_sales->product_images_tmb_height, false);
 				} else
-					$image->thumbnailImage($pines->config->com_sales->product_images_tmb_width, $pines->config->com_sales->product_images_tmb_height, true);
+					$image->thumbnailImage($_->config->com_sales->product_images_tmb_width, $_->config->com_sales->product_images_tmb_height, true);
 
 				// Now we need to overlay it into an image the right size,
 				// effectively cropping the extra or padding with transparency.
 				// Create a transparent canvas.
 				$canvas = clone $image;
-				$canvas->newImage($pines->config->com_sales->product_images_tmb_width, $pines->config->com_sales->product_images_tmb_height, 'none');
+				$canvas->newImage($_->config->com_sales->product_images_tmb_width, $_->config->com_sales->product_images_tmb_height, 'none');
 				$canvas->setImageFormat('png');
 				
 				// Get the image dimensions.
@@ -1211,8 +1211,8 @@ class com_sales extends component {
 				$height = $image->getImageHeight();
 
 				// Calculate position of the thumbnail on the canvas.
-				$x = ($pines->config->com_sales->product_images_tmb_width - $width) / 2;
-				$y = ($pines->config->com_sales->product_images_tmb_height - $height) / 2;
+				$x = ($_->config->com_sales->product_images_tmb_width - $width) / 2;
+				$y = ($_->config->com_sales->product_images_tmb_height - $height) / 2;
 
 				// Composite the image.
 				$canvas->compositeImage($image, imagick::COMPOSITE_OVER, $x, $y);
@@ -1259,7 +1259,7 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function track_product($serial = null, $sku = null, $start_date = null, $end_date = null, $location = null, $descendants = false, $types = null) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'product/track', 'content');
 		$module->stock = array();
@@ -1279,7 +1279,7 @@ class com_sales extends component {
 		$selector = array('&', 'tag' => array('com_sales', 'stock'));
 		if (!empty($sku)) {
 			$module->sku = $countsheet_code = $sku;
-			$product = $pines->com_sales->get_product_by_code($sku);
+			$product = $_->com_sales->get_product_by_code($sku);
 			$selector['ref'] = array('product', $product);
 		}
 		if (!empty($serial)) {
@@ -1306,7 +1306,7 @@ class com_sales extends component {
 		$module->descendants = $descendants;
 		$module->stock = $module->transactions = array();
 		if (isset($serial) || isset($sku))
-			$module->stock = $pines->entity_manager->get_entities(array('class' => com_sales_stock), $selector);
+			$module->stock = $_->entity_manager->get_entities(array('class' => com_sales_stock), $selector);
 
 		foreach ($module->stock as $cur_stock) {
 			// Grab all of the requested transactions for any stock items matching the given product code.
@@ -1314,7 +1314,7 @@ class com_sales extends component {
 			if ($module->types['invoice']) {
 				$current_ref = $or['ref'];
 				$or['ref'] = array('products', $cur_stock);
-				$invoices = $pines->entity_manager->get_entities(
+				$invoices = $_->entity_manager->get_entities(
 					array('class' => com_sales_sale, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1325,7 +1325,7 @@ class com_sales extends component {
 			if ($module->types['return']) {
 				$current_ref = $or['ref'];
 				$or['ref'] = array('products', $cur_stock);
-				$returns = $pines->entity_manager->get_entities(
+				$returns = $_->entity_manager->get_entities(
 					array('class' => com_sales_return, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1337,7 +1337,7 @@ class com_sales extends component {
 			if ($module->types['swap']) {
 				$current_ref = $or['ref'];
 				$or['ref'] = array('item', $cur_stock);
-				$swaps = $pines->entity_manager->get_entities(
+				$swaps = $_->entity_manager->get_entities(
 					array('class' => com_sales_tx, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1349,7 +1349,7 @@ class com_sales extends component {
 				$or['ref'] = $current_ref;
 			}
 			if ($module->types['countsheet']) {
-				$countsheets = $pines->entity_manager->get_entities(
+				$countsheets = $_->entity_manager->get_entities(
 					array('class' => com_sales_countsheet, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1361,7 +1361,7 @@ class com_sales extends component {
 			}
 			$or['ref'][0] = 'destination';
 			if ($module->types['transfer']) {
-				$transfers = $pines->entity_manager->get_entities(
+				$transfers = $_->entity_manager->get_entities(
 					array('class' => com_sales_transfer, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1372,7 +1372,7 @@ class com_sales extends component {
 				);
 			}
 			if ($module->types['po']) {
-				$pos = $pines->entity_manager->get_entities(
+				$pos = $_->entity_manager->get_entities(
 					array('class' => com_sales_po, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1434,10 +1434,10 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function warehouse_assigned() {
-		global $pines;
+		global $_;
 
 		// Get sales with warehouse items.
-		$sales = (array) $pines->entity_manager->get_entities(
+		$sales = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_sale),
 				array('&',
 					'tag' => array('com_sales', 'sale', 'shipping_pending'),
@@ -1473,7 +1473,7 @@ class com_sales extends component {
 	 * @return module The list's module.
 	 */
 	public function warehouse_pending($ordered = false, $start_date = null, $end_date = null, $location = null, $descendants = false) {
-		global $pines;
+		global $_;
 
 		$module = new module('com_sales', 'warehouse/pending', 'content');
 
@@ -1497,7 +1497,7 @@ class com_sales extends component {
 			else
 				$or = array('|', 'ref' => array('group', $location));
 		}
-		$module->sales = (array) $pines->entity_manager->get_entities(
+		$module->sales = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_sale),
 				$selector,
 				$or,
@@ -1523,10 +1523,10 @@ class com_sales extends component {
 	 * @return module The module.
 	 */
 	public function warehouse_shipped() {
-		global $pines;
+		global $_;
 
 		// Get sales with warehouse items.
-		$sales = (array) $pines->entity_manager->get_entities(
+		$sales = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_sale),
 				array('&',
 					'tag' => array('com_sales', 'sale'),
@@ -1559,8 +1559,8 @@ class com_sales extends component {
 	 */
 	public function round($value, $string = false, $decimal = null) {
 		if (!isset($decimal)) {
-			global $pines;
-			$decimal = $pines->config->com_sales->dec;
+			global $_;
+			$decimal = $_->config->com_sales->dec;
 		}
 		$rnd = pow(10, $decimal);
 		$mult = $value * $rnd;

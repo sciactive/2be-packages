@@ -8,22 +8,22 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_plaza/listpackages') )
 	punt_user(null, pines_url('com_plaza', 'package/list'));
 
-$pines->page->override = true;
+$_->page->override = true;
 if ($_REQUEST['local'] == 'true') {
-	$package = $pines->com_package->db['packages'][$_REQUEST['name']];
+	$package = $_->com_package->db['packages'][$_REQUEST['name']];
 } else {
-	$index = $pines->com_plaza->get_index(null, $_REQUEST['publisher']);
+	$index = $_->com_plaza->get_index(null, $_REQUEST['publisher']);
 	$package = $index['packages'][$_REQUEST['name']];
 }
 if (isset($package)) {
 	$module = new module('com_plaza', 'package/info');
 	$module->package = $package;
 
-	$pines->page->override_doc($module->render());
+	$_->page->override_doc($module->render());
 }

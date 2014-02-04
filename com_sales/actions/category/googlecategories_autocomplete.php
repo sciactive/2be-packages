@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/editcategory') && !gatekeeper('com_sales/newcategory'))
 	punt_user(null, pines_url('com_sales', 'category/list'));
 
 header('Content-Type: application/json');
-$pines->page->override = true;
+$_->page->override = true;
 
 $googlecategories = file_get_contents("components/com_sales/includes/googlecategories.txt");
 
@@ -32,4 +32,4 @@ foreach ($results as &$cur_result){
 }
 unset($cur_result);
 
-$pines->page->override_doc(json_encode($results));
+$_->page->override_doc(json_encode($results));

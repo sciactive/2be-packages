@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/warehouse') )
@@ -40,7 +40,7 @@ if (!$products) {
 	return;
 }
 
-$pos = $pines->entity_manager->get_entities(
+$pos = $_->entity_manager->get_entities(
 		array('class' => com_sales_po),
 		array('&',
 			'tag' => array('com_sales', 'po'),

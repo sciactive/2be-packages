@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Goal Calculator';
-$pines->icons->load();
+$_->icons->load();
 
 $daysthismonth = (int) date('t');
 $dayspassed = (int) date('j');
@@ -109,8 +109,8 @@ foreach ($goals as $goal) {
 				<?php foreach ($trends as $trend) { ?>
 				<tr>
 					<td class="goal"><span><?php e($trend['goal']); ?></span></td>
-					<td class="alert-success goal_green"><?php e($pines->com_sales->round($trend['green'], true)); ?></td>
-					<td class="alert goal_yellow"><?php e($pines->com_sales->round($trend['yellow'], true)); ?></td>
+					<td class="alert-success goal_green"><?php e($_->com_sales->round($trend['green'], true)); ?></td>
+					<td class="alert goal_yellow"><?php e($_->com_sales->round($trend['yellow'], true)); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>

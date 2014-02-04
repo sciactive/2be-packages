@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -79,10 +79,10 @@ class com_sales_payment_type extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 		$module = new module('com_sales', 'paymenttype/form', 'content');
 		$module->entity = $this;
-		$module->processing_types = (array) $pines->config->com_sales->processing_types;
+		$module->processing_types = (array) $_->config->com_sales->processing_types;
 
 		return $module;
 	}

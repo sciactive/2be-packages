@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($_REQUEST['peruser']) {
@@ -19,7 +19,7 @@ if ($_REQUEST['peruser']) {
 		punt_user(null, pines_url('com_configure', 'edit', $_GET));
 }
 
-if (!array_key_exists($_REQUEST['component'], $pines->configurator->component_files)) {
+if (!array_key_exists($_REQUEST['component'], $_->configurator->component_files)) {
 	pines_error('Given component either does not exist, or has no configuration file!');
 	return;
 }

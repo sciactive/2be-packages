@@ -8,21 +8,21 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-if (isset($pines->com_elfinder))
-	$pines->com_elfinder->load();
-$content_css = array_merge($pines->editor->get_css(), array(h($pines->config->location . $pines->template->editor_css)));
+if (isset($_->com_elfinder))
+	$_->com_elfinder->load();
+$content_css = array_merge($_->editor->get_css(), array(h($_->config->location . $_->template->editor_css)));
 ?>
 <script type="text/javascript">
-pines.loadjs("<?php e($pines->config->location); ?>components/com_tinymce/includes/tiny_mce/jquery.tinymce.js");
+pines.loadjs("<?php e($_->config->location); ?>components/com_tinymce/includes/tiny_mce/jquery.tinymce.js");
 pines(function(){
 $("textarea.peditor").tinymce({
 	// Location of TinyMCE script
-	script_url: '<?php e($pines->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
+	script_url: '<?php e($_->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
 	// General options
 	theme: "advanced",
-	<?php switch ($pines->config->com_tinymce->skin) {
+	<?php switch ($_->config->com_tinymce->skin) {
 		case 'default':
 		default:
 			break;
@@ -49,7 +49,7 @@ $("textarea.peditor").tinymce({
 			<?php
 			break;
 	}
-	switch ($pines->config->com_tinymce->features) {
+	switch ($_->config->com_tinymce->features) {
 		case 'default':
 		default:
 			?>
@@ -81,12 +81,12 @@ $("textarea.peditor").tinymce({
 			break;
 		case 'custom':
 			?>
-			plugins : <?php echo json_encode($pines->config->com_tinymce->custom_plugins); ?>,
+			plugins : <?php echo json_encode($_->config->com_tinymce->custom_plugins); ?>,
 			// Theme options
-			theme_advanced_buttons1: <?php echo json_encode($pines->config->com_tinymce->custom_bar_1); ?>,
-			theme_advanced_buttons2: <?php echo json_encode($pines->config->com_tinymce->custom_bar_2); ?>,
-			theme_advanced_buttons3: <?php echo json_encode($pines->config->com_tinymce->custom_bar_3); ?>,
-			theme_advanced_buttons4: <?php echo json_encode($pines->config->com_tinymce->custom_bar_4); ?>,
+			theme_advanced_buttons1: <?php echo json_encode($_->config->com_tinymce->custom_bar_1); ?>,
+			theme_advanced_buttons2: <?php echo json_encode($_->config->com_tinymce->custom_bar_2); ?>,
+			theme_advanced_buttons3: <?php echo json_encode($_->config->com_tinymce->custom_bar_3); ?>,
+			theme_advanced_buttons4: <?php echo json_encode($_->config->com_tinymce->custom_bar_4); ?>,
 			<?php
 			break;
 	} ?>
@@ -95,12 +95,12 @@ $("textarea.peditor").tinymce({
 	theme_advanced_statusbar_location: "bottom",
 	theme_advanced_resizing: true,
 	theme_advanced_resize_horizontal: false,
-	<?php if (isset($pines->com_elfinder)) { ?>
+	<?php if (isset($_->com_elfinder)) { ?>
 	// Use elFinder as the file browser.
 	file_browser_callback : function(field_name, url, type, win){
 		elfdlg = $("<div></div>").appendTo("body").elfinder({
 			url: <?php echo json_encode(pines_url("com_elfinder", "connector")); ?>,
-			height: <?php echo (int) $pines->config->com_elfinder->default_height; ?>,
+			height: <?php echo (int) $_->config->com_elfinder->default_height; ?>,
 			resizable : false,
 			getFileCallback: function(file) {
 				$("input[name="+field_name+"]", win.document).val(file);
@@ -121,19 +121,19 @@ $("textarea.peditor").tinymce({
 	<?php } ?>
 	// Template's editor CSS
 	content_css: <?php echo json_encode(implode(',', $content_css)); ?>,
-	preformatted: <?php echo $pines->config->com_tinymce->preformatted ? 'true' : 'false'; ?>,
+	preformatted: <?php echo $_->config->com_tinymce->preformatted ? 'true' : 'false'; ?>,
 	schema: "html5",
 	onchange_callback: function(i){var el=i.getElement();if(el)$(el).triggerHandler('change');},
 	handle_event_callback: function(e, i){var el=i.getElement();if(el)$(el).triggerHandler(e.type);return true;}
 });
 $("textarea.peditor-simple").tinymce({
-	script_url: '<?php e($pines->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
+	script_url: '<?php e($_->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
 	theme: "advanced",
 	theme_advanced_buttons1: "newdocument,|,bold,italic,underline,strikethrough,|,undo,redo,|,bullist,numlist",
 	theme_advanced_buttons2: "",
 	theme_advanced_buttons3: "",
 	theme_advanced_buttons4: "",
-	<?php switch ($pines->config->com_tinymce->skin) {
+	<?php switch ($_->config->com_tinymce->skin) {
 		case 'default':
 		default:
 			break;
@@ -156,15 +156,15 @@ $("textarea.peditor-simple").tinymce({
 			break;
 	} ?>
 	content_css: <?php echo json_encode(implode(',', $content_css)); ?>,
-	preformatted: <?php echo $pines->config->com_tinymce->preformatted ? 'true' : 'false'; ?>,
+	preformatted: <?php echo $_->config->com_tinymce->preformatted ? 'true' : 'false'; ?>,
 	schema: "html5",
 	onchange_callback: function(i){var el=i.getElement();if(el)$(el).triggerHandler('change');},
 	handle_event_callback: function(e, i){var el=i.getElement();if(el)$(el).triggerHandler(e.type);return true;}
 });
 $("textarea.peditor-email").tinymce({
-	script_url : '<?php e($pines->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
+	script_url : '<?php e($_->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
 	theme : "advanced",
-	<?php switch ($pines->config->com_tinymce->skin) {
+	<?php switch ($_->config->com_tinymce->skin) {
 		case 'default':
 		default:
 			break;
@@ -201,11 +201,11 @@ $("textarea.peditor-email").tinymce({
 	theme_advanced_statusbar_location : "bottom",
 	theme_advanced_resizing : true,
 	theme_advanced_resize_horizontal : true,
-	<?php if (isset($pines->com_elfinder)) { ?>
+	<?php if (isset($_->com_elfinder)) { ?>
 	file_browser_callback : function(field_name, url, type, win){
 		elfdlg = $("<div></div>").appendTo("body").elfinder({
 			url: <?php echo json_encode(pines_url("com_elfinder", "connector")); ?>,
-			height: <?php echo (int) $pines->config->com_elfinder->default_height; ?>,
+			height: <?php echo (int) $_->config->com_elfinder->default_height; ?>,
 			resizable : false,
 			getFileCallback: function(file) {
 				$("input[name="+field_name+"]", win.document).val(file);
@@ -225,7 +225,7 @@ $("textarea.peditor-email").tinymce({
 	<?php } ?>
 	relative_urls: false,
 	remove_script_host: false,
-	document_base_url: <?php echo json_encode($pines->config->full_location); ?>,
+	document_base_url: <?php echo json_encode($_->config->full_location); ?>,
 	keep_styles: true,
 	object_resizing: false,
 	doctype: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',

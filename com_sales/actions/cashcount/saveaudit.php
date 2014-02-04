@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 
@@ -34,7 +34,7 @@ foreach ($cashcount->currency as $key => $cur_currency) {
 	$audit->total += ((float) $cur_currency) * $audit->count[$key];
 }
 
-if ($pines->config->com_sales->global_cashcounts)
+if ($_->config->com_sales->global_cashcounts)
 	$audit->ac->other = 1;
 
 if ($audit->save()) {

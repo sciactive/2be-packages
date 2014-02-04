@@ -8,29 +8,29 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/viewwarehouse') && !gatekeeper('com_sales/warehouse') )
 	punt_user(null, pines_url('com_sales', 'warehouse/pending_info'));
 
-$pines->page->override = true;
+$_->page->override = true;
 
 list ($sale_id, $key) = explode('_', $_REQUEST['id']);
 $sale = com_sales_sale::factory((int) $sale_id);
 if (!isset($sale->guid)) {
-	$pines->page->override_doc('Couldn\'t find specified sale.');
+	$_->page->override_doc('Couldn\'t find specified sale.');
 	return;
 }
 
 $product = $sale->products[(int) $key]['entity'];
 if (!isset($product->guid)) {
-	$pines->page->override_doc('Couldn\'t find specified product.');
+	$_->page->override_doc('Couldn\'t find specified product.');
 	return;
 }
 
 // Warehouse group.
-$warehouse = group::factory($pines->config->com_sales->warehouse_group);
+$warehouse = group::factory($_->config->com_sales->warehouse_group);
 if (!isset($warehouse->guid)) {
 	pines_error('Warehouse group is not configured correctly.');
 	return;
@@ -40,7 +40,7 @@ $module = new module('com_sales', 'warehouse/pending_info');
 
 // Find warehouse stock.
 $module->warehouse_entity = $warehouse;
-$module->warehouse = $pines->entity_manager->get_entities(
+$module->warehouse = $_->entity_manager->get_entities(
 		array('class' => com_sales_stock, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'stock'),
@@ -53,7 +53,7 @@ $module->warehouse = $pines->entity_manager->get_entities(
 	);
 
 // Find PO products.
-$module->pos = (array) $pines->entity_manager->get_entities(
+$module->pos = (array) $_->entity_manager->get_entities(
 		array('class' => com_sales_po, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'po'),
@@ -66,7 +66,7 @@ $module->pos = (array) $pines->entity_manager->get_entities(
 	);
 
 // Find transfer products.
-$module->transfers = (array) $pines->entity_manager->get_entities(
+$module->transfers = (array) $_->entity_manager->get_entities(
 		array('class' => com_sales_transfer, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'transfer'),
@@ -79,7 +79,7 @@ $module->transfers = (array) $pines->entity_manager->get_entities(
 	);
 
 // Find item in current inventory.
-$stock = (array) $pines->entity_manager->get_entities(
+$stock = (array) $_->entity_manager->get_entities(
 		array('class' => com_sales_stock, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'stock'),
@@ -103,4 +103,4 @@ foreach ($stock as $cur_stock) {
 
 $module->product = $product;
 
-$pines->page->override_doc($module->render());
+$_->page->override_doc($module->render());

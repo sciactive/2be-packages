@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -73,10 +73,10 @@ class com_dash extends component {
 	 * @return module The module.
 	 */
 	public function manage() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_dash', 'manage/list', 'content');
-		$module->dashboards = $pines->entity_manager->get_entities(
+		$module->dashboards = $_->entity_manager->get_entities(
 				array('class' => com_dash_dashboard),
 				array('&',
 					'tag' => array('com_dash', 'dashboard')
@@ -97,9 +97,9 @@ class com_dash extends component {
 	 * @return array Widget types.
 	 */
 	public function widget_types() {
-		global $pines;
+		global $_;
 		$return = array();
-		foreach ($pines->components as $cur_component) {
+		foreach ($_->components as $cur_component) {
 			if (strpos($cur_component, 'tpl_') === 0)
 				continue;
 			if (!file_exists("components/$cur_component/modules.php"))
@@ -125,9 +125,9 @@ class com_dash extends component {
 	 * @return array Button types.
 	 */
 	public function button_types() {
-		global $pines;
+		global $_;
 		$return = array();
-		foreach ($pines->components as $cur_component) {
+		foreach ($_->components as $cur_component) {
 			if (strpos($cur_component, 'tpl_') === 0)
 				continue;
 			if (!file_exists("components/$cur_component/buttons.php"))

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -23,7 +23,7 @@ defined('P_RUN') or die('Direct access prohibited');
  * - "name" - The name of your type. Ex: 'com_giftcard/giftcard'
  * - "cname" - The common name of your action. Ex: 'Gift Card'
  * - "description" - A description of the action. Ex: 'Deduct the payment from a gift card.'
- * - "callback" - Callback to your function. Ex: array($pines->com_giftcard, 'process_giftcard')
+ * - "callback" - Callback to your function. Ex: array($_->com_giftcard, 'process_giftcard')
  *
  * The callback will be passed an array which may contain the following
  * associative entries:
@@ -72,9 +72,9 @@ defined('P_RUN') or die('Direct access prohibited');
  * If "action" is "void", the callback needs to set "status" to "voided" on
  * success.
  *
- * @var array $pines->config->com_sales->processing_types
+ * @var array $_->config->com_sales->processing_types
  */
-$pines->config->com_sales->processing_types = array();
+$_->config->com_sales->processing_types = array();
 
 /**
  * List of product actions.
@@ -93,7 +93,7 @@ $pines->config->com_sales->processing_types = array();
  * - "description" - A description of the action.
  *   Ex: 'Creates a GamePhear account for the customer.'
  * - "callback" - Callback to your function.
- *   Ex: array($pines->com_gamephear, 'create_account')
+ *   Ex: array($_->com_gamephear, 'create_account')
  *
  * The callback will be passed an array which may contain the following
  * associative entries:
@@ -106,6 +106,6 @@ $pines->config->com_sales->processing_types = array();
  * - "po" - The PO entity.
  * - "transfer" - The transfer entity.
  *
- * @var array $pines->config->com_sales->product_actions
+ * @var array $_->config->com_sales->product_actions
  */
-$pines->config->com_sales->product_actions = array();
+$_->config->com_sales->product_actions = array();

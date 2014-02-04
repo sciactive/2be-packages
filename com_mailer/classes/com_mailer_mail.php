@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -74,7 +74,7 @@ class com_mailer_mail {
 	 * @param string $message The message text.
 	 */
 	public function __construct($sender, $recipient, $subject, $message) {
-		global $pines;
+		global $_;
 		// Validate incoming parameters.
 		if (!preg_match('/^.+@.+$/',$sender))
 			pines_error('Invalid value for email sender.');
@@ -93,7 +93,7 @@ class com_mailer_mail {
 		$this->headers['Content-Type'] = 'multipart/mixed;boundary="MIME_BOUNDRY"';
 		//$this->headers['X-Mailer'] = 'PHP5';
 		$this->headers['X-Priority'] = '3';
-		$this->headers['User-Agent'] = "{$pines->info->name} {$pines->info->version}";
+		$this->headers['User-Agent'] = "{$_->info->name} {$_->info->version}";
 		// Define some default MIME types
 		$this->mimeTypes['doc'] = 'application/msword';
 		$this->mimeTypes['pdf'] = 'application/pdf';
@@ -144,10 +144,10 @@ class com_mailer_mail {
 	 * @return com_mailer_mail The new instance.
 	 */
 	public static function factory($sender, $recipient, $subject, $message) {
-		global $pines;
+		global $_;
 		$class = get_class();
 		$instance = new $class($sender, $recipient, $subject, $message);
-		$pines->hook->hook_object($instance, $class.'->', false);
+		$_->hook->hook_object($instance, $class.'->', false);
 		return $instance;
 	}
 
@@ -240,7 +240,7 @@ class com_mailer_mail {
 	 * @return bool True on success, false on failure.
 	 */
 	public function send() {
-		global $pines;
+		global $_;
 		// First verify values.
 		if (!preg_match('/^.+@.+$/', $this->sender))
 			return false;
@@ -253,9 +253,9 @@ class com_mailer_mail {
 		$required_headers = array();
 
 		// Are we in testing mode?
-		if ($pines->config->com_mailer->testing_mode) {
+		if ($_->config->com_mailer->testing_mode) {
 			// If the testing email is empty, just return true.
-			if (empty($pines->config->com_mailer->testing_email))
+			if (empty($_->config->com_mailer->testing_email))
 				return true;
 			// The testing email isn't empty, so replace stuff now.
 			// Save the original to, cc, and bcc in additional headers.
@@ -272,7 +272,7 @@ class com_mailer_mail {
 						break;
 				}
 			}
-			$to = $pines->config->com_mailer->testing_email;
+			$to = $_->config->com_mailer->testing_email;
 			$subject = '*Test* '.$this->subject;
 		} else {
 			$to = $this->recipient;
@@ -287,6 +287,6 @@ class com_mailer_mail {
 		$message = $this->buildTextPart().$this->buildAttachmentPart()."--MIME_BOUNDRY--\n";
 
 		// Now send the mail.
-		return mail($to, $subject, $message, $headers, $pines->config->com_mailer->additional_parameters);
+		return mail($to, $subject, $message, $headers, $_->config->com_mailer->additional_parameters);
 	}
 }

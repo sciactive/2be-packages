@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Database Setup';
 ?>
 <form class="pf-form" method="post" action="<?php e(pines_url('com_mysql', 'setup')); ?>" autocomplete="off">
 	<div class="pf-element">
-		You have successfully installed the <?php e($pines->info->com_mysql->name); ?> in <?php e("{$pines->info->name} {$pines->info->version}"); ?>. Now you need to configure a database to use.
+		You have successfully installed the <?php e($_->info->com_mysql->name); ?> in <?php e("{$_->info->name} {$_->info->version}"); ?>. Now you need to configure a database to use.
 		The user and database can be created for you by filling out the "Automatic Setup" section below.
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Database Information</h3>
-		<p>Please provide the information <?php e($pines->info->name); ?> will use to connect to your database below.</p>
+		<p>Please provide the information <?php e($_->info->name); ?> will use to connect to your database below.</p>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Host</span>

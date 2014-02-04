@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper())
 	punt_user(null, pines_url('com_pdf', 'image', $_GET));
 
-$pines->page->override = true;
+$_->page->override = true;
 
 $file = 'media/pdf/'.clean_filename($_REQUEST['file']);
 $pdfpage = intval($_REQUEST['page']) - 1;
@@ -42,8 +42,8 @@ if ($pdfpage >= 0 && $pdfpage < $pagecount) {
 
 	$output = $im->getimageblob();
 	header('Content-Type: image/png');
-	$pines->page->override_doc($output);
+	$_->page->override_doc($output);
 } else {
 	header('Content-Type: text/plain');
-	$pines->page->override_doc('Invalid file or page.');
+	$_->page->override_doc('Invalid file or page.');
 }

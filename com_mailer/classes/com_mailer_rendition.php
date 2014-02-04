@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -98,10 +98,10 @@ class com_mailer_rendition extends entity {
 			return false;
 		if (!$this->conditions)
 			return true;
-		global $pines;
+		global $_;
 		// Check that all conditions are met.
 		foreach ($this->conditions as $cur_type => $cur_value) {
-			if (!$pines->depend->check($cur_type, $cur_value))
+			if (!$_->depend->check($cur_type, $cur_value))
 				return false;
 		}
 		return true;

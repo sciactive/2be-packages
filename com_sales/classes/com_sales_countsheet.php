@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -72,7 +72,7 @@ class com_sales_countsheet extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_form() {
-		global $pines;
+		global $_;
 
 		if (!isset($this->group->guid))
 			$this->group = $_SESSION['user']->group;
@@ -110,7 +110,7 @@ class com_sales_countsheet extends entity {
 	 * @return module The form's module.
 	 */
 	public function print_review() {
-		global $pines;
+		global $_;
 
 		$this->run_count();
 
@@ -145,7 +145,7 @@ class com_sales_countsheet extends entity {
 	 * </ul>
 	 */
 	public function run_count() {
-		global $pines;
+		global $_;
 		// Committed countsheets can't be run again.
 		if ($this->final)
 			return;
@@ -177,7 +177,7 @@ class com_sales_countsheet extends entity {
 		foreach ($entries as &$cur_entry) {
 			if ($cur_entry->qty <= 0)
 				continue;
-			$stock = (array) $pines->entity_manager->get_entities(
+			$stock = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_stock, 'limit' => $cur_entry->qty),
 					$and_selector,
 					$not_selector,
@@ -202,10 +202,10 @@ class com_sales_countsheet extends entity {
 		foreach ($entries as &$cur_entry) {
 			if ($cur_entry->qty <= 0)
 				continue;
-			$product = $pines->com_sales->get_product_by_code($cur_entry->code);
+			$product = $_->com_sales->get_product_by_code($cur_entry->code);
 			if (!isset($product))
 				continue;
-			$stock = (array) $pines->entity_manager->get_entities(
+			$stock = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_stock, 'limit' => $cur_entry->qty),
 					$and_selector,
 					$not_selector,
@@ -237,7 +237,7 @@ class com_sales_countsheet extends entity {
 			// If there are more than one, it's not a serial.
 			if ($cur_entry->qty <= 0)
 				continue;
-			$stock = (array) $pines->entity_manager->get_entities(
+			$stock = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_stock, 'limit' => 5),
 					$and_selector,
 					$not_selector,
@@ -266,10 +266,10 @@ class com_sales_countsheet extends entity {
 		foreach ($entries as &$cur_entry) {
 			if ($cur_entry->qty <= 0)
 				continue;
-			$product = $pines->com_sales->get_product_by_code($cur_entry->code);
+			$product = $_->com_sales->get_product_by_code($cur_entry->code);
 			if (!isset($product))
 				continue;
-			$stock = (array) $pines->entity_manager->get_entities(
+			$stock = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_stock, 'limit' => 5),
 					$and_selector,
 					$not_selector,
@@ -312,7 +312,7 @@ class com_sales_countsheet extends entity {
 				}
 			}
 			if (!$found) {
-				$stock_history = (array) $pines->entity_manager->get_entities(
+				$stock_history = (array) $_->entity_manager->get_entities(
 						array('class' => com_sales_stock, 'limit' => 5),
 						array('&',
 							'strict' => array('serial', $cur_entry->code)
@@ -337,7 +337,7 @@ class com_sales_countsheet extends entity {
 			$this->invalid = array_merge($this->invalid, array_fill(0, $cur_entry->qty, $cur_entry->code));
 		}
 		// Find entries that should be counted, but weren't found.
-		$this->missing = (array) $pines->entity_manager->get_entities(
+		$this->missing = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_stock),
 				$and_selector,
 				$not_selector,

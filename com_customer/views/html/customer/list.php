@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Customers';
 $this->note = 'Begin by searching for a customer.';
-$pines->com_pgrid->load();
-$pines->com_jstree->load();
+$_->com_pgrid->load();
+$_->com_jstree->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_customer/customer/list']);
 ?>
@@ -199,7 +199,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				<?php } ?>
 				//{type: 'button', text: 'E-Mail', extra_class: 'picon picon-mail-message-new', multi_select: true, url: 'mailto:__col_2__', delimiter: ','},
 				{type: 'separator'},
-				<?php if ($pines->config->com_customer->resetpoints && gatekeeper('com_customer/resetpoints')) { ?>
+				<?php if ($_->config->com_customer->resetpoints && gatekeeper('com_customer/resetpoints')) { ?>
 				{type: 'button', title: 'Reset the Customer\'s Points', extra_class: 'picon picon-edit-clear', multi_select: true, url: <?php echo json_encode(pines_url('com_customer', 'customer/resetpoints', array('id' => '__title__'))); ?>, delimiter: ','},
 				<?php } if (gatekeeper('com_customer/deletecustomer')) { ?>
 				{type: 'button', title: 'Remove as Customer', extra_class: 'picon picon-list-remove', confirm: true, multi_select: true, url: <?php echo json_encode(pines_url('com_customer', 'customer/remove', array('id' => '__title__'))); ?>, delimiter: ','},
@@ -371,11 +371,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 </table>
 <div id="p_muid_interaction_dialog" title="Log Customer Interaction" style="display: none;">
 	<form class="pf-form" method="post" action="">
-		<?php if (gatekeeper('com_customer/manageinteractions') && $pines->config->com_customer->com_calendar) { ?>
+		<?php if (gatekeeper('com_customer/manageinteractions') && $_->config->com_customer->com_calendar) { ?>
 		<div class="pf-element pf-full-width">
 			<label><span class="pf-label">Employee</span>
 				<select name="employee">
-				<?php foreach ($pines->com_hrm->get_employees() as $cur_employee) {
+				<?php foreach ($_->com_hrm->get_employees() as $cur_employee) {
 					$selected = $_SESSION['user']->is($cur_employee) ? ' selected="selected"' : '';
 					echo '<option value="'.$cur_employee->guid.'"'.$selected.'>'.h($cur_employee->name).'</option>"';
 				} ?>
@@ -391,7 +391,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element">
 			<label><span class="pf-label">Interaction Type</span>
 				<select name="interaction_type">
-					<?php foreach ($pines->config->com_customer->interaction_types as $cur_type) {
+					<?php foreach ($_->config->com_customer->interaction_types as $cur_type) {
 						$cur_type = explode(':', $cur_type);
 						echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
 					} ?>

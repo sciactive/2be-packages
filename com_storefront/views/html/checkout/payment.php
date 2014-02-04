@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Payment Options';
 ?>
@@ -64,7 +64,7 @@ $this->title = 'Payment Options';
 	<form id="p_muid_form" method="POST" action="<?php e(pines_url('com_storefront', 'checkout/paymentsave')); ?>">
 		<br class="pf-clearing" />
 		<?php
-		$pines->com_sales->call_payment_process(array(
+		$_->com_sales->call_payment_process(array(
 			'action' => 'request_cust',
 			'name' => $cur_payment_type->processing_type,
 			'ticket' => $_SESSION['com_storefront_sale']
@@ -81,7 +81,7 @@ $this->title = 'Payment Options';
 		<?php } ?>
 		<div class="pf-element pf-buttons">
 			<input type="hidden" name="com_storefront_payment_id" value="<?php e($cur_payment_type->guid); ?>" />
-			<input class="pf-button btn btn-primary" type="submit" value="<?php echo $this->review_form ? h($pines->config->com_storefront->complete_order_text) : 'Continue'; ?>" />
+			<input class="pf-button btn btn-primary" type="submit" value="<?php echo $this->review_form ? h($_->config->com_storefront->complete_order_text) : 'Continue'; ?>" />
 		</div>
 	</form>
 	<?php } else { ?>
@@ -143,7 +143,7 @@ $this->title = 'Payment Options';
 		<?php } ?>
 		<div class="pf-element pf-buttons">
 			<input type="hidden" name="com_storefront_payment_id" value="" />
-			<input class="pf-button btn btn-primary" type="submit" value="<?php echo $this->review_form ? h($pines->config->com_storefront->complete_order_text) : 'Continue'; ?>" />
+			<input class="pf-button btn btn-primary" type="submit" value="<?php echo $this->review_form ? h($_->config->com_storefront->complete_order_text) : 'Continue'; ?>" />
 		</div>
 	</form>
 	<?php } ?>

@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/managestock') && !gatekeeper('com_sales/receive'))
 	punt_user(null, pines_url('com_sales', 'transfer/products', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 $transfer = com_sales_transfer::factory((int) $_REQUEST['id']);
@@ -37,4 +37,4 @@ unset($cur_product);
 if (empty($products))
 	$products = null;
 
-$pines->page->override_doc(json_encode($products));
+$_->page->override_doc(json_encode($products));

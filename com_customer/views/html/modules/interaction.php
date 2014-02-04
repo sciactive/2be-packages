@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Add Customer Interaction';
-$pines->icons->load();
-//$pines->com_customer->load_customer_select();
+$_->icons->load();
+//$_->com_customer->load_customer_select();
 $module = new module('com_customer', 'customer/select');
 echo $module->render();
 ?>
@@ -81,7 +81,7 @@ echo $module->render();
 		<div class="pf-element" style="clear:left;max-width:100%">
 			<label><span class="pf-label">Interaction Type</span>
 				<select id="p_muid_type" name="interaction_type" style="width:140px; max-width:90%;">
-					<?php foreach ($pines->config->com_customer->interaction_types as $cur_type) {
+					<?php foreach ($_->config->com_customer->interaction_types as $cur_type) {
 						$cur_type = explode(':', $cur_type);
 						echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
 					} ?>

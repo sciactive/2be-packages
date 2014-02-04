@@ -8,16 +8,16 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 if (empty($this->title))
-	$this->title = 'Log in to '.h($pines->config->system_name);
-$this->check_username = ($pines->config->com_user->allow_registration && $pines->config->com_user->check_username);
+	$this->title = 'Log in to '.h($_->config->system_name);
+$this->check_username = ($_->config->com_user->allow_registration && $_->config->com_user->check_username);
 if ($this->check_username)
-	$pines->icons->load();
+	$_->icons->load();
 
 // Activate SAWASC support.
-$this->sawasc = $pines->com_user->activate_sawasc();
+$this->sawasc = $_->com_user->activate_sawasc();
 
 ?>
 <?php if ($this->check_username) { ?>
@@ -38,7 +38,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 <?php } if ($this->sawasc || ($this->style != 'compact' && $this->style != 'small')) { ?>
 <script type="text/javascript">
 	<?php if ($this->sawasc) { ?>
-	pines.loadjs("<?php e($pines->config->location); ?>components/com_user/includes/hash.js");
+	pines.loadjs("<?php e($_->config->location); ?>components/com_user/includes/hash.js");
 	<?php } ?>
 	pines(function(){
 		<?php if ($this->style != 'compact' && $this->style != 'small') { ?>
@@ -65,7 +65,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 <?php } ?>
 <div id="p_muid_form" class="clearfix"<?php echo ($this->style == 'compact') ? ' style="display: none; max-height: 500px; overflow-y: auto; overflow-x: hidden;"' : ''; ?>>
 	<form class="pf-form" method="post" action="<?php e(pines_url()); ?>">
-		<?php if ($pines->config->com_user->allow_registration) { ?>
+		<?php if ($_->config->com_user->allow_registration) { ?>
 		<div class="pf-element">
 			<script type="text/javascript">
 				pines(function(){
@@ -163,7 +163,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 		</div>
 		<?php } ?>
 		<div class="pf-element">
-			<label><span class="pf-label"><?php echo $pines->config->com_user->email_usernames ? 'Email' : 'Username'; ?></span>
+			<label><span class="pf-label"><?php echo $_->config->com_user->email_usernames ? 'Email' : 'Username'; ?></span>
 				<?php if ($this->style != 'small') { ?>
 				<span class="pf-group" style="display: block;">
 				<?php } ?>
@@ -179,26 +179,26 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Password</span>
-				<?php echo ($pines->config->com_user->pw_empty ? '<span class="pf-note">May be blank.</span>' : ''); ?>
+				<?php echo ($_->config->com_user->pw_empty ? '<span class="pf-note">May be blank.</span>' : ''); ?>
 				<input class="pf-field" type="password" name="password" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 		</div>
-		<?php if ($pines->config->com_user->allow_registration) { ?>
+		<?php if ($_->config->com_user->allow_registration) { ?>
 		<div id="p_muid_register_form" style="display: none;">
 			<div class="pf-element">
 				<label><span class="pf-label">Re-enter Password</span>
 					<input class="pf-field" type="password" name="password2" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
-			<?php if ($pines->config->com_user->referral_codes) { ?>
+			<?php if ($_->config->com_user->referral_codes) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Referral Code</span>
 					<span class="pf-note">Optional</span>
 					<input class="pf-field" type="text" name="referral_code" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
-			<?php } if ($pines->config->com_user->one_step_registration) { ?>
+			<?php } if ($_->config->com_user->one_step_registration) { ?>
 			<div class="pf-element">
 				<span class="pf-required">*</span> Required field.
 			</div>
-			<?php if (in_array('name', $pines->config->com_user->reg_fields)) { ?>
+			<?php if (in_array('name', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">First Name <span class="pf-required">*</span></span>
 					<input class="pf-field" type="text" name="name_first" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
@@ -211,22 +211,22 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 				<label><span class="pf-label">Last Name</span>
 					<input class="pf-field" type="text" name="name_last" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
-			<?php } if (!$pines->config->com_user->email_usernames && in_array('email', $pines->config->com_user->reg_fields)) { ?>
+			<?php } if (!$_->config->com_user->email_usernames && in_array('email', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Email <span class="pf-required">*</span></span>
 					<input class="pf-field" type="email" name="email" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
-			<?php } if (in_array('phone', $pines->config->com_user->reg_fields)) { ?>
+			<?php } if (in_array('phone', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone Number</span>
 					<input class="pf-field" type="tel" name="phone" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
-			<?php } if (in_array('fax', $pines->config->com_user->reg_fields)) { ?>
+			<?php } if (in_array('fax', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Fax Number</span>
 					<input class="pf-field" type="tel" name="fax" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
-			<?php } if (in_array('timezone', $pines->config->com_user->reg_fields)) { ?>
+			<?php } if (in_array('timezone', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element<?php echo ($this->style == 'small') ? ' pf-full-width' : ''; ?>">
 				<label><span class="pf-label">Timezone</span>
 					<span class="pf-note">This overrides the primary group's timezone.</span>
@@ -242,7 +242,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 					<?php echo ($this->style == 'compact') ? '</div>' : ''; ?>
 				</label>
 			</div>
-			<?php } if (in_array('address', $pines->config->com_user->reg_fields)) { ?>
+			<?php } if (in_array('address', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<script type="text/javascript">
 					pines(function(){
@@ -372,7 +372,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 			<input class="pf-button btn" type="reset" name="reset" value="Reset" />
 			<?php } ?>
 		</div>
-		<?php if (!$this->hide_recovery && $pines->config->com_user->pw_recovery) { ?>
+		<?php if (!$this->hide_recovery && $_->config->com_user->pw_recovery) { ?>
 		<div class="pf-element" id="p_muid_recovery">
 			<?php if ($this->style != 'small') { ?>
 			<span class="pf-label" style="height: 1px;">&nbsp;</span>

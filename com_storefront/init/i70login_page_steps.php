@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (gatekeeper())
@@ -23,11 +23,11 @@ function com_storefront__catch_login_page(&$array) {
 	if ((!isset($array[0]) || $array[0] == 'content')) {
 		$url = pines_url('com_storefront', 'checkout/shipping');
 		if ($array[1] == $url || $_REQUEST['url'] == $url) {
-			global $pines;
+			global $_;
 			// Load the steps module.
-			$pines->com_storefront->checkout_step('1');
+			$_->com_storefront->checkout_step('1');
 		}
 	}
 }
 
-$pines->hook->add_callback('$pines->user_manager->print_login', -10, 'com_storefront__catch_login_page');
+$_->hook->add_callback('$_->user_manager->print_login', -10, 'com_storefront__catch_login_page');

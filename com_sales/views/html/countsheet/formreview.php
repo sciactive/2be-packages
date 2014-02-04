@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Reviewing Countsheet ['.h($this->entity->guid).'] at '.h($this->entity->group->name);
 $this->note = 'Created by '.h($this->entity->user->name).' on '.h(format_date($this->entity->p_cdate, 'full_long')).'.';
 if (isset($this->entity->run_count_date))
 	$this->note .= ' Run on '.h(format_date($this->entity->run_count_date, 'full_long')).'.';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <script type="text/javascript">
 	pines(function(){

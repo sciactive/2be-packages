@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = h($this->entity->name);
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 ?>
 <style type="text/css" >
 	.p_muid_issue_actions button {

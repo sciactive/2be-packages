@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 $customer = (isset($_SESSION['user']) && $_SESSION['user']->has_tag('customer'));
 
 // get a testimonial to have loaded
-$aggregate = $pines->com_testimonials->get_testimonials('aggregate', true, 20, 0, array('rated'));
-$testimonials = $pines->com_testimonials->get_testimonials('individual', true, 20, 0, array('approved', 'share'), null, null, null, false, true);
+$aggregate = $_->com_testimonials->get_testimonials('aggregate', true, 20, 0, array('rated'));
+$testimonials = $_->com_testimonials->get_testimonials('individual', true, 20, 0, array('approved', 'share'), null, null, null, false, true);
 if (is_array($testimonials)) {
 	$testimonial = $testimonials[0];
 }
-$pines->com_timeago->load();
-$pines->com_testimonials->load();
+$_->com_timeago->load();
+$_->com_testimonials->load();
 ?>
 
 <div id="p_muid_testimonials" class="span12 testimonials-module">
@@ -53,8 +53,8 @@ $pines->com_testimonials->load();
 					</div>
 					<div class="testimonial-loader"><i class="icon-spinner icon-spin"></i><p>Loading</p></div>
 					<div class="testimonial loaded-testimonial" itemprop="review" itemscope itemtype="http://schema.org/Review">
-						<meta itemprop="name" content="<?php e($pines->config->com_testimonials->business_review_name); ?>" />
-						<meta itemprop="about" content="<?php e($pines->config->com_testimonials->business_review_name); ?>" />
+						<meta itemprop="name" content="<?php e($_->config->com_testimonials->business_review_name); ?>" />
+						<meta itemprop="about" content="<?php e($_->config->com_testimonials->business_review_name); ?>" />
 						<?php
 						if (is_array($testimonial)) { ?>
 						<meta itemprop="datePublished" content="<?php e($testimonial['date']); ?>">
@@ -187,9 +187,9 @@ $pines->com_testimonials->load();
 									}
 								}
 								?>
-								<div style="text-align:center;"><a class="btn btn-success btn-block btn-large signup-button" href="<?php e($pines->config->com_testimonials->signup_link); ?>">Sign Up!</a></div>
+								<div style="text-align:center;"><a class="btn btn-success btn-block btn-large signup-button" href="<?php e($_->config->com_testimonials->signup_link); ?>">Sign Up!</a></div>
 								<?php
-								$login = $pines->user_manager->print_login(null, $url);
+								$login = $_->user_manager->print_login(null, $url);
 								$login->detach();
 								echo $login->render();
 								?>

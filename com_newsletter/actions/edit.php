@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_newsletter/listmail') )
 	punt_user(null, pines_url('com_newsletter', 'list'));
 
 if ( !empty($_REQUEST['mail_id']) ) {
-	$mail = $pines->entity_manager->get_entity(array(), array('&', 'guid' => (int) $_REQUEST['mail_id'], 'tag' => array('com_newsletter', 'mail')));
+	$mail = $_->entity_manager->get_entity(array(), array('&', 'guid' => (int) $_REQUEST['mail_id'], 'tag' => array('com_newsletter', 'mail')));
 	if ( !isset($mail) ) {
 		pines_error('Invalid mail!');
 		return false;
@@ -34,7 +34,7 @@ if ( $_REQUEST['update'] == 'yes' ) {
 			unset($mail->attachments[$key]);
 	}
 	if (!empty($_REQUEST['attachment'])) {
-		if (!in_array($_REQUEST['attachment'], $mail->attachments) && $pines->uploader->check($_REQUEST['attachment'])) {
+		if (!in_array($_REQUEST['attachment'], $mail->attachments) && $_->uploader->check($_REQUEST['attachment'])) {
 			$mail->attachments[] = $_REQUEST['attachment'];
 		} else {
 			pines_error("File attachment failed.\n");
@@ -46,4 +46,4 @@ if ( $_REQUEST['update'] == 'yes' ) {
 	pines_notice("Saved mail [$mail->name]");
 }
 
-$pines->com_newsletter->edit_mail($mail, 'com_newsletter', 'edit');
+$_->com_newsletter->edit_mail($mail, 'com_newsletter', 'edit');

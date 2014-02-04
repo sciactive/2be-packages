@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -21,7 +21,7 @@ defined('P_RUN') or die('Direct access prohibited');
  * @return bool|array The result of the check, or the help array.
  */
 function com_uasniffer__browser_check($value, $help = false) {
-	global $pines;
+	global $_;
 	if ($help) {
 		$return = array();
 		$return['cname'] = 'Browser Checker';
@@ -87,7 +87,7 @@ EOF;
 			strpos($value, '(') !== false ||
 			strpos($value, ')') !== false
 		)
-		return $pines->depend->simple_parse($value, 'com_uasniffer__browser_check');
+		return $_->depend->simple_parse($value, 'com_uasniffer__browser_check');
 	switch ($value) {
 		default:
 			// Just check that there is a user agent string.
@@ -103,7 +103,7 @@ EOF;
 			break;
 		case 'mobile':
 		case 'mobile-real':
-			if ($pines->config->com_uasniffer->use_simple_mobile_detection) {
+			if ($_->config->com_uasniffer->use_simple_mobile_detection) {
 				// This nice regex is available at http://johannburkard.de/blog/www/mobile/simple-mobile-phone-detection.html.
 				$truth = preg_match('/(IEMobile|Windows CE|NetFront|PlayStation|PLAYSTATION|like Mac OS X|MIDP|UP\.Browser|Symbian|Nintendo|Android)/', $_SERVER['HTTP_USER_AGENT']);
 			} else {
@@ -195,4 +195,4 @@ EOF;
 	}
 }
 
-$pines->depend->checkers['browser'] = 'com_uasniffer__browser_check';
+$_->depend->checkers['browser'] = 'com_uasniffer__browser_check';

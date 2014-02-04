@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_user/listusers') )
 	punt_user(null, pines_url('com_user', 'listusers'));
 
-$pines->user_manager->list_users($_REQUEST['enabled'] != 'false');
+$_->user_manager->list_users($_REQUEST['enabled'] != 'false');

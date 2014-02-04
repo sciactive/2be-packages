@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -33,11 +33,11 @@ class com_configure extends component implements configurator_interface {
 	 * Fills the $component_files array.
 	 */
 	public function __construct() {
-		global $pines;
+		global $_;
 		$this->component_files['system'] = array('defaults' => 'system/defaults.php', 'config' => 'system/config.php', 'info' => 'system/info.php');
-		foreach ($pines->all_components as $cur_component) {
+		foreach ($_->all_components as $cur_component) {
 			$cur_dir = (substr($cur_component, 0, 4) != 'tpl_') ? 'components' : 'templates';
-			if (in_array($cur_component, $pines->components)) {
+			if (in_array($cur_component, $_->components)) {
 				$cur_files = array('defaults' => "$cur_dir/$cur_component/defaults.php", 'config' => "$cur_dir/$cur_component/config.php", 'info' => "$cur_dir/$cur_component/info.php");
 			} else {
 				$cur_files = array('defaults' => "$cur_dir/.$cur_component/defaults.php", 'config' => "$cur_dir/.$cur_component/config.php", 'info' => "$cur_dir/.$cur_component/info.php");
@@ -57,13 +57,13 @@ class com_configure extends component implements configurator_interface {
 	 * @return bool True on success, false on failure.
 	 */
 	public function disable_component($component) {
-		global $pines;
-		if (!in_array($component, $pines->all_components)) {
+		global $_;
+		if (!in_array($component, $_->all_components)) {
 			pines_log("Failed to disable component $component. Component isn't installed", 'error');
 			return false;
 		}
 		$cur_dir = (substr($component, 0, 4) != 'tpl_') ? 'components' : 'templates';
-		if (in_array($component, $pines->components) && rename("$cur_dir/$component", "$cur_dir/.$component")) {
+		if (in_array($component, $_->components) && rename("$cur_dir/$component", "$cur_dir/.$component")) {
 			pines_log("Disabled component $component.", 'notice');
 			return true;
 		} else {
@@ -82,13 +82,13 @@ class com_configure extends component implements configurator_interface {
 	 * @return bool True on success, false on failure.
 	 */
 	public function enable_component($component) {
-		global $pines;
-		if (!in_array($component, $pines->all_components)) {
+		global $_;
+		if (!in_array($component, $_->all_components)) {
 			pines_log("Failed to enable component $component. Component isn't installed", 'error');
 			return false;
 		}
 		$cur_dir = (substr($component, 0, 4) != 'tpl_') ? 'components' : 'templates';
-		if (!in_array($component, $pines->components) && rename("$cur_dir/.$component", "$cur_dir/$component")) {
+		if (!in_array($component, $_->components) && rename("$cur_dir/.$component", "$cur_dir/$component")) {
 			pines_log("Enabled component $component.", 'notice');
 			return true;
 		} else {
@@ -102,13 +102,13 @@ class com_configure extends component implements configurator_interface {
 	 * @return module The module.
 	 */
 	public function list_components() {
-		global $pines;
+		global $_;
 		$module = new module('com_configure', 'list', 'content');
 
 		$module->components = array();
 		$module->components[] = configurator_component::factory('system');
 		$module->per_user = false;
-		foreach ($pines->all_components as $cur_component) {
+		foreach ($_->all_components as $cur_component) {
 			$module->components[] = configurator_component::factory($cur_component);
 		}
 
@@ -121,7 +121,7 @@ class com_configure extends component implements configurator_interface {
 	 * @return module The module.
 	 */
 	public function list_components_peruser(&$condition_obj = null) {
-		global $pines;
+		global $_;
 		$module = new module('com_configure', 'list', 'content');
 
 		$module->components = array();
@@ -129,16 +129,16 @@ class com_configure extends component implements configurator_interface {
 		$module->user = $condition_obj;
 		if ($condition_obj->is_com_configure_condition) {
 			$module->per_condition = true;
-			$module->conditions = $pines->entity_manager->get_entities(array('class' => com_configure_condition), array('&', 'tag' => array('com_configure', 'condition')));
-			$pines->entity_manager->sort($module->conditions, 'name');
+			$module->conditions = $_->entity_manager->get_entities(array('class' => com_configure_condition), array('&', 'tag' => array('com_configure', 'condition')));
+			$_->entity_manager->sort($module->conditions, 'name');
 		} else {
 			$module->per_user = true;
-			$module->groups = $pines->user_manager->get_groups();
+			$module->groups = $_->user_manager->get_groups();
 			usort($module->groups, array($this, 'sort_groups'));
-			$module->users = $pines->user_manager->get_users();
+			$module->users = $_->user_manager->get_users();
 			usort($module->users, array($this, 'sort_users'));
 		}
-		foreach ($pines->all_components as $cur_component) {
+		foreach ($_->all_components as $cur_component) {
 			$module->components[] = configurator_component::factory($cur_component);
 		}
 		foreach ($module->components as &$cur_component) {
@@ -154,14 +154,14 @@ class com_configure extends component implements configurator_interface {
 	 * @param array $com_array The component config array to load.
 	 */
 	public function load_per_user_array($sys_array, $com_array) {
-		global $pines;
+		global $_;
 		if ($sys_array) {
 			$conf = include('system/defaults.php');
 			foreach ($conf as $key => $value) {
 				if (!$value['peruser'] || !isset($sys_array[$value['name']]))
 					continue;
 				$name = $value['name'];
-				$pines->config->$name = $sys_array[$name];
+				$_->config->$name = $sys_array[$name];
 			}
 		}
 		if ($com_array) {
@@ -173,7 +173,7 @@ class com_configure extends component implements configurator_interface {
 					if (!$value['peruser'] || !isset($cur_array[$value['name']]))
 						continue;
 					$name = $value['name'];
-					$pines->config->$cur_com->$name = $cur_array[$name];
+					$_->config->$cur_com->$name = $cur_array[$name];
 				}
 			}
 		}

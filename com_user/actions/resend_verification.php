@@ -8,19 +8,19 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
-if (!$pines->config->com_user->confirm_email || !gatekeeper() || !isset($_SESSION['user']->secret)) {
-	$pines->page->override_doc('false');
+if (!$_->config->com_user->confirm_email || !gatekeeper() || !isset($_SESSION['user']->secret)) {
+	$_->page->override_doc('false');
 	return;
 }
 
 // Send the verification email.
 if ($_SESSION['user']->send_email_verification())
-	$pines->page->override_doc('true');
+	$_->page->override_doc('true');
 else
-	$pines->page->override_doc('false');
+	$_->page->override_doc('false');

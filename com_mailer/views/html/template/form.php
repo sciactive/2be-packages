@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Template' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide template details in this form.';
-$pines->editor->load();
-$pines->com_pgrid->load();
+$_->editor->load();
+$_->com_pgrid->load();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_mailer', 'template/save')); ?>">
 	<script type="text/javascript">
@@ -213,7 +213,7 @@ $pines->com_pgrid->load();
 									<td rowspan="2">Links</td>
 									<td>#site_link#</td>
 									<td>The URL of the site, to be used in a link.</td>
-									<td><?php e($pines->config->full_location); ?></td>
+									<td><?php e($_->config->full_location); ?></td>
 								</tr>
 								<tr>
 									<td>#unsubscribe_link#</td>
@@ -307,12 +307,12 @@ $pines->com_pgrid->load();
 									<td rowspan="2">System</td>
 									<td>#system_name#</td>
 									<td>The system name.</td>
-									<td><?php e($pines->config->system_name); ?></td>
+									<td><?php e($_->config->system_name); ?></td>
 								</tr>
 								<tr>
 									<td>#page_title#</td>
 									<td>The page title.</td>
-									<td><?php e($pines->config->page_title); ?></td>
+									<td><?php e($_->config->page_title); ?></td>
 								</tr>
 							</tbody>
 						</table>

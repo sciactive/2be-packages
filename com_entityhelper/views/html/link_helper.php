@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <style type="text/css">
@@ -21,7 +21,7 @@ pines.entity_helper_url = <?php echo json_encode(pines_url('com_entityhelper', '
 pines(function(){
 $("body").on("click", "a[data-entity]", function(){
 var e = this;
-pines.loadjs("<?php e($pines->config->location); ?>components/com_entityhelper/includes/entityhelper.js");
+pines.loadjs("<?php e($_->config->location); ?>components/com_entityhelper/includes/entityhelper.js");
 pines(function(){pines.entity_helper(e);});
 });
 });

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -25,11 +25,11 @@ class com_customertimer extends component {
 	 * @return module The module.
 	 */
 	public function list_floors() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_customertimer', 'list_floors', 'content');
 
-		$module->floors = $pines->entity_manager->get_entities(array('class' => com_customertimer_floor), array('&', 'tag' => array('com_customertimer', 'floor')));
+		$module->floors = $_->entity_manager->get_entities(array('class' => com_customertimer_floor), array('&', 'tag' => array('com_customertimer', 'floor')));
 
 		if ( empty($module->floors) )
 			pines_notice('There are no floors.');
@@ -39,7 +39,7 @@ class com_customertimer extends component {
 
 	/* Keeping this to use some code later.
 	public function login_logout($id, $password) {
-		global $pines;
+		global $_;
 		if (!is_numeric($id)) {
 			pines_notice('Please provide a customer ID.');
 			return false;
@@ -65,7 +65,7 @@ class com_customertimer extends component {
 		}
 		if ($customer->points <= 0) {
 			pines_notice('Your account balance has reached zero.');
-			if (!$pines->config->com_customertimer->debt_login)
+			if (!$_->config->com_customertimer->debt_login)
 				return false;
 		}
 		return $logins->login($customer);

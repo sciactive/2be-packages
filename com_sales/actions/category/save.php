@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -29,7 +29,7 @@ if ( isset($_REQUEST['id']) ) {
 $category->name = $_REQUEST['name'];
 $category->enabled = ($_REQUEST['enabled'] == 'ON');
 
-if ($pines->config->com_sales->com_storefront) {
+if ($_->config->com_sales->com_storefront) {
 	// Storefront
 	$category->alias = preg_replace('/[^\w\d-.]/', '', $_REQUEST['alias']);
 	$category->replace_title = $_REQUEST['replace_title'];
@@ -44,7 +44,7 @@ if ($pines->config->com_sales->com_storefront) {
 		if (isset($cur_page->guid))
 			$category->show_pages[] = $cur_page;
 	}
-	if ($pines->config->com_sales->google_categories)
+	if ($_->config->com_sales->google_categories)
 		$category->google_category = $_REQUEST['google_category'];
 	$category->show_products = ($_REQUEST['show_products'] == 'ON');
 	$category->description = $_REQUEST['description'];
@@ -95,7 +95,7 @@ if ($pines->config->com_sales->com_storefront) {
 			'category' => $category
 		);
 	}
-	$pines->com_sales->sort_specs($category->specs);
+	$_->com_sales->sort_specs($category->specs);
 
 	// Page Head
 	$category->title_use_name = ($_REQUEST['title_use_name'] == 'ON');
@@ -172,7 +172,7 @@ foreach ($category->children as $key => &$cur_child) {
 unset($cur_child);
 
 // Check Google category.
-if ($pines->config->com_sales->google_categories) {
+if ($_->config->com_sales->google_categories) {
 	if (empty($category->google_category)) {
 		$category->print_form();
 		pines_notice('Please specify a corresponding Google Shopping category.');

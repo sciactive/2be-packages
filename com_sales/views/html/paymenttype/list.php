@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Payment Types';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/paymenttype/list']);
 ?>
@@ -61,7 +61,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<tr>
 			<th>Name</th>
 			<th>Enabled</th>
-			<?php if ($pines->config->com_sales->com_storefront) { ?>
+			<?php if ($_->config->com_sales->com_storefront) { ?>
 			<th>Storefront</th>
 			<?php } ?>
 			<th>Kick Drawer</th>
@@ -76,7 +76,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<tr title="<?php e($payment_type->guid); ?>">
 			<td><a data-entity="<?php e($payment_type->guid); ?>" data-entity-context="com_sales_payment_type"><?php e($payment_type->name); ?></a></td>
 			<td><?php echo $payment_type->enabled ? 'Yes' : 'No'; ?></td>
-			<?php if ($pines->config->com_sales->com_storefront) { ?>
+			<?php if ($_->config->com_sales->com_storefront) { ?>
 			<td><?php echo $payment_type->storefront ? 'Yes' : 'No'; ?></td>
 			<?php } ?>
 			<td><?php echo $payment_type->kick_drawer ? 'Yes' : 'No'; ?></td>

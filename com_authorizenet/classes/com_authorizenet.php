@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -60,7 +60,7 @@ class com_authorizenet extends component {
 	 * @return module|null If action is "request", a form module is returned.
 	 */
 	function payment_credit(&$array) {
-		global $pines;
+		global $_;
 		switch ($array['action']) {
 			case 'request':
 				$module = new module('com_authorizenet', 'form_payment');
@@ -114,7 +114,7 @@ class com_authorizenet extends component {
 			case 'tender':
 				$firstname = $array['payment']['data']['name_first'];
 				$lastname = $array['payment']['data']['name_last'];
-				$amt = $pines->com_sales->round((float) $array['payment']['amount']);
+				$amt = $_->com_sales->round((float) $array['payment']['amount']);
 				$card_num = $array['payment']['data']['card_number'];
 				$exp_date = $array['payment']['data']['card_exp_month'].$array['payment']['data']['card_exp_year'];
 				//$address = $args['payment']['data']['address'];
@@ -122,13 +122,13 @@ class com_authorizenet extends component {
 				//$zip = $args['payment']['data']['zip'];
 				$card_code = $array['payment']['data']['cid'];
 				$invoice_num = ($array['ticket']->has_tag('sale') ? 'SA' : 'RE').$array['ticket']->id;
-				$transaction_name = $pines->config->com_authorizenet->trans_name;
+				$transaction_name = $_->config->com_authorizenet->trans_name;
 
 				$post_values = array(
 					// the API Login ID and Transaction Key must be replaced with valid values
-					'x_login'			=> $pines->config->com_authorizenet->apilogin,
-					'x_tran_key'		=> $pines->config->com_authorizenet->tran_key,
-					'x_test_request'	=> ($pines->config->com_authorizenet->test_mode) ? 'TRUE' : 'FALSE',
+					'x_login'			=> $_->config->com_authorizenet->apilogin,
+					'x_tran_key'		=> $_->config->com_authorizenet->tran_key,
+					'x_test_request'	=> ($_->config->com_authorizenet->test_mode) ? 'TRUE' : 'FALSE',
 
 					'x_version'			=> '3.1',
 					'x_delim_data'		=> 'TRUE',
@@ -152,7 +152,7 @@ class com_authorizenet extends component {
 				);
 
 				// If the card is a merchant card and not an online account.
-				if ($pines->config->com_authorizenet->merchant_type == 'retail') {
+				if ($_->config->com_authorizenet->merchant_type == 'retail') {
 					$post_values['x_cpversion'] = '1.0';
 					$post_values['x_market_type'] = '2';
 					$post_values['x_device_type'] = '5';
@@ -166,7 +166,7 @@ class com_authorizenet extends component {
 				}
 				$post_string = rtrim($post_string, '& ');
 
-				$request = curl_init($pines->config->com_authorizenet->post_url);
+				$request = curl_init($_->config->com_authorizenet->post_url);
 				curl_setopt($request, CURLOPT_HEADER, 0);
 				curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($request, CURLOPT_POSTFIELDS, $post_string);
@@ -192,7 +192,7 @@ class com_authorizenet extends component {
 					'card_exp_year'		=> $array['payment']['data']['card_exp_year'],
 					'card_swiped'		=> $array['payment']['data']['card_swiped']
 				);
-				if ($pines->config->com_authorizenet->merchant_type == 'retail') {
+				if ($_->config->com_authorizenet->merchant_type == 'retail') {
 					$response_code = $response_array[1];
 				} else {
 					$response_code = $response_array[0];
@@ -241,9 +241,9 @@ class com_authorizenet extends component {
 			case 'void':
 				$post_values = array(
 					// the API Login ID and Transaction Key must be replaced with valid values
-					'x_login'			=> $pines->config->com_authorizenet->apilogin,
-					'x_tran_key'		=> $pines->config->com_authorizenet->tran_key,
-					'x_test_request'	=> ($pines->config->com_authorizenet->test_mode) ? 'TRUE' : 'FALSE',
+					'x_login'			=> $_->config->com_authorizenet->apilogin,
+					'x_tran_key'		=> $_->config->com_authorizenet->tran_key,
+					'x_test_request'	=> ($_->config->com_authorizenet->test_mode) ? 'TRUE' : 'FALSE',
 
 					'x_version'			=> '3.1',
 					'x_delim_data'		=> 'TRUE',
@@ -260,7 +260,7 @@ class com_authorizenet extends component {
 				}
 				$post_string = rtrim($post_string, '& ');
 
-				$request = curl_init($pines->config->com_authorizenet->post_url);
+				$request = curl_init($_->config->com_authorizenet->post_url);
 				curl_setopt($request, CURLOPT_HEADER, 0);
 				curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($request, CURLOPT_POSTFIELDS, $post_string);
@@ -294,18 +294,18 @@ class com_authorizenet extends component {
 				pines_notice($response_array[3]);
 				break;
 			case 'return':
-				$amt = $pines->com_sales->round((float) $array['payment']['amount'], true);
+				$amt = $_->com_sales->round((float) $array['payment']['amount'], true);
 				$card_num = !empty($array['payment']['data']['card_number']) ? $array['payment']['data']['card_number'] : $array['payment']['com_authorizenet_credit_info']['card_number'];
 				$exp_date = !empty($array['payment']['data']['card_exp_month']) ? $array['payment']['data']['card_exp_month'].$array['payment']['data']['card_exp_year'] : $array['payment']['com_authorizenet_credit_info']['card_exp_month'].$array['payment']['com_authorizenet_credit_info']['card_exp_year'];
 				$transaction_id = $array['payment']['com_authorizenet_credit_info']['transaction_id'];
 				$card_type = $array['payment']['com_authorizenet_credit_info']['card_type'];
-				$transaction_name = 'RETURN: '.$pines->config->com_authorizenet->trans_name;
+				$transaction_name = 'RETURN: '.$_->config->com_authorizenet->trans_name;
 
 				$post_values = array(
 					// The API Login ID and Transaction Key must be replaced with valid values
-					'x_login'			=> $pines->config->com_authorizenet->apilogin,
-					'x_tran_key'		=> $pines->config->com_authorizenet->tran_key,
-					'x_test_request'	=> ($pines->config->com_authorizenet->test_mode) ? 'TRUE' : 'FALSE',
+					'x_login'			=> $_->config->com_authorizenet->apilogin,
+					'x_tran_key'		=> $_->config->com_authorizenet->tran_key,
+					'x_test_request'	=> ($_->config->com_authorizenet->test_mode) ? 'TRUE' : 'FALSE',
 
 					'x_version'			=> '3.1',
 					'x_delim_data'		=> 'TRUE',
@@ -326,7 +326,7 @@ class com_authorizenet extends component {
 				}
 				$post_string = rtrim($post_string, '& ');
 
-				$request = curl_init($pines->config->com_authorizenet->post_url);
+				$request = curl_init($_->config->com_authorizenet->post_url);
 				curl_setopt($request, CURLOPT_HEADER, 0);
 				curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($request, CURLOPT_POSTFIELDS, $post_string);

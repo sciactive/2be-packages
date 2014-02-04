@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!empty($_REQUEST['id'])) {
 	$entity = com_content_page::factory((int) $_REQUEST['id']);
 } else {
-	$entity = $pines->entity_manager->get_entity(
+	$entity = $_->entity_manager->get_entity(
 			array('class' => com_content_page),
 			array('&',
 				'tag' => array('com_content', 'page'),
@@ -30,15 +30,15 @@ if (!isset($entity->guid) || !$entity->ready())
 	throw new HttpClientException(null, 404);
 
 // Set the default variant for pages.
-if ($pines->config->com_content->page_variant && $pines->com_content->is_variant_valid($pines->config->com_content->page_variant)) {
-	$cur_template = $pines->current_template;
-	$pines->config->$cur_template->variant = $pines->config->com_content->page_variant;
+if ($_->config->com_content->page_variant && $_->com_content->is_variant_valid($_->config->com_content->page_variant)) {
+	$cur_template = $_->current_template;
+	$_->config->$cur_template->variant = $_->config->com_content->page_variant;
 }
 
 // Check for and set the variant for the current template.
-if (isset($entity->variants[$pines->current_template]) && $pines->com_content->is_variant_valid($entity->variants[$pines->current_template])) {
-	$cur_template = $pines->current_template;
-	$pines->config->$cur_template->variant = $entity->variants[$pines->current_template];
+if (isset($entity->variants[$_->current_template]) && $_->com_content->is_variant_valid($entity->variants[$_->current_template])) {
+	$cur_template = $_->current_template;
+	$_->config->$cur_template->variant = $entity->variants[$_->current_template];
 }
 
 // Page title.
@@ -48,13 +48,13 @@ else
 	$title = format_content($entity->title);
 switch ($entity->get_option('title_position')) {
 	case 'prepend':
-		$pines->page->title_pre("$title - ");
+		$_->page->title_pre("$title - ");
 		break;
 	case 'append':
-		$pines->page->title(" - $title");
+		$_->page->title(" - $title");
 		break;
 	case 'replace':
-		$pines->page->title_set($title);
+		$_->page->title_set($title);
 		break;
 }
 

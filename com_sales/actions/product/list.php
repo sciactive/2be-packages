@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/listproducts') )
 	punt_user(null, pines_url('com_sales', 'product/list'));
 
-$pines->com_sales->list_products($_REQUEST['enabled'] != 'false', $_REQUEST['show']);
+$_->com_sales->list_products($_REQUEST['enabled'] != 'false', $_REQUEST['show']);

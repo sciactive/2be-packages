@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_customer/defaultgroups') )
 	punt_user(null, pines_url('com_customer', 'defaultgroups'));
 
 // Save the default primary group.
-$cur_group = $pines->entity_manager->get_entity(
+$cur_group = $_->entity_manager->get_entity(
 		array('class' => group),
 		array('&',
 			'tag' => array('com_user', 'group'),
@@ -33,7 +33,7 @@ if (isset($group->guid)) {
 }
 
 // Save the default secondary groups.
-$cur_groups = $pines->entity_manager->get_entities(
+$cur_groups = $_->entity_manager->get_entities(
 		array('class' => group),
 		array('&',
 			'tag' => array('com_user', 'group'),

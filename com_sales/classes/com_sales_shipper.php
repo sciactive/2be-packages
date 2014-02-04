@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -105,8 +105,8 @@ class com_sales_shipper extends entity {
 			else
 				return $number;
 		}
-		global $pines;
-		return str_replace('#tracking_number#', urlencode($number), $pines->com_sales->tracking_urls[$this->tracking]);
+		global $_;
+		return str_replace('#tracking_number#', urlencode($number), $_->com_sales->tracking_urls[$this->tracking]);
 	}
 
 	/**

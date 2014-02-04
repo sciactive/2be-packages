@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_packager/newpackage') )
 	punt_user(null, pines_url('com_packager', 'package/wizard'));
 
-$pines->com_packager->package_wizard();
+$_->com_packager->package_wizard();

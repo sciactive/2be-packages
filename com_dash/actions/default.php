@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_dash/dash') ) {
-	if ($pines->request_option == '' && $pines->request_action == '' && !gatekeeper()) {
+	if ($_->request_option == '' && $_->request_action == '' && !gatekeeper()) {
 		// This is the default component, and the user isn't logged in, so
 		// instead of just dumping the user with a nasty message, print a nice
 		// login form.
-		$pines->user_manager->print_login();
+		$_->user_manager->print_login();
 		return;
 	} else
 		punt_user(null, pines_url('com_dash'));

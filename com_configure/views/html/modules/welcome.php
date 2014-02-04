@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Welcome to '.h($pines->info->name);
+$this->title = 'Welcome to '.h($_->info->name);
 ?>
 <div class="page-header">
-	<h2>Welcome to <?php e($pines->info->name); ?> <small>version <?php e($pines->info->version); ?></small></h2>
+	<h2>Welcome to <?php e($_->info->name); ?> <small>version <?php e($_->info->version); ?></small></h2>
 </div>
-<p>Congratulations on successfully installing <?php e($pines->info->name); ?>
+<p>Congratulations on successfully installing <?php e($_->info->name); ?>
 	on your system. <a href="#p_muid_migrating" data-toggle="modal">Are you migrating from another installation?</a></p>
 <div class="modal hide" id="p_muid_migrating">
 	<div class="modal-header">

@@ -8,8 +8,8 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ($pines->config->com_fortune->show)
-	$pines->com_fortune->print_fortune();
+if ($_->config->com_fortune->show)
+	$_->com_fortune->print_fortune();

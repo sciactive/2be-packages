@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Packing List for Shipment '.h($this->entity->id);
 
-if ($pines->current_template != 'tpl_print') {
+if ($_->current_template != 'tpl_print') {
 ?>
 <style type="text/css" media="print">
 	#p_muid_print_link {display: none;}

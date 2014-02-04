@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($_REQUEST['type'] == 'return') {
@@ -38,7 +38,7 @@ if ($_REQUEST['type'] == 'return') {
 	}
 }
 
-if ($pines->config->com_sales->com_customer && $ticket->status != 'invoiced' && $ticket->status != 'paid' && $ticket->status != 'processed' && $ticket->status != 'voided') {
+if ($_->config->com_sales->com_customer && $ticket->status != 'invoiced' && $ticket->status != 'paid' && $ticket->status != 'processed' && $ticket->status != 'voided') {
 	$ticket->customer = null;
 	if (preg_match('/^\d+/', $_REQUEST['customer'])) {
 		$ticket->customer = com_customer_customer::factory((int) $_REQUEST['customer']);
@@ -47,12 +47,12 @@ if ($pines->config->com_sales->com_customer && $ticket->status != 'invoiced' && 
 	}
 }
 
-$pines->page->override = true;
-$pines->com_sales->call_payment_process(array(
+$_->page->override = true;
+$_->com_sales->call_payment_process(array(
 	'action' => 'request',
 	'name' => $_REQUEST['name'],
 	'ticket' => $ticket
 ), $module);
 
 if (isset($module))
-	$pines->page->override_doc($module->render());
+	$_->page->override_doc($module->render());

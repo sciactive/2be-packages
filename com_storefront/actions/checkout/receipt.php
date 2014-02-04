@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper()) {
@@ -16,7 +16,7 @@ if (!gatekeeper()) {
 	return;
 }
 
-if ($pines->config->com_storefront->catalog_mode)
+if ($_->config->com_storefront->catalog_mode)
 	return;
 
 // Load the sale.
@@ -26,7 +26,7 @@ if (!isset($sale->guid) || !$_SESSION['user']->is($sale->customer)) {
 	return;
 }
 
-if ($pines->config->template_override && $pines->depend->check('component', 'tpl_print') && $pines->current_template != 'tpl_print') {
+if ($_->config->template_override && $_->depend->check('component', 'tpl_print') && $_->current_template != 'tpl_print') {
 	$module = new module('com_storefront', 'checkout/receipt_print', 'content');
 	$module->entity = $sale;
 }

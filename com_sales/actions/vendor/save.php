@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -53,7 +53,7 @@ if ($_REQUEST['remove_logo'] == 'ON' && isset($vendor->logo))
 	unset($vendor->logo);
 
 // Logo image.
-if (!empty($_REQUEST['logo']) && $pines->uploader->check($_REQUEST['logo']))
+if (!empty($_REQUEST['logo']) && $_->uploader->check($_REQUEST['logo']))
 	$vendor->logo = $_REQUEST['logo'];
 
 if (empty($vendor->name)) {
@@ -61,14 +61,14 @@ if (empty($vendor->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_sales_vendor, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'vendor'), 'data' => array('name', $vendor->name)));
+$test = $_->entity_manager->get_entity(array('class' => com_sales_vendor, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'vendor'), 'data' => array('name', $vendor->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$vendor->print_form();
 	pines_notice('There is already a vendor with that name. Please choose a different name.');
 	return;
 }
 
-if ($pines->config->com_sales->global_vendors)
+if ($_->config->com_sales->global_vendors)
 	$vendor->ac->other = 1;
 
 if ($vendor->save()) {

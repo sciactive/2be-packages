@@ -8,12 +8,12 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Foobar' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide foobar details in this form.';
-$pines->editor->load();
-$pines->com_pgrid->load();
+$_->editor->load();
+$_->com_pgrid->load();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_example', 'foobar/save')); ?>">
 	<script type="text/javascript">

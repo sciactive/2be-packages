@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Loan Overview';
 $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float:right;"> Loan ID: '.h($this->entity->id).'</span>';
@@ -19,7 +19,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 	</div>
 	<div class="pf-element pf-full-width">
 		<div class="pf-label" style="width:280px !important;margin-right:60px;margin-left:5px;">
-			<span style="font-weight:bold;">Principal Amount: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->principal, true)); ?></span></span><br/>
+			<span style="font-weight:bold;">Principal Amount: <span style="float:right;"><?php echo '$'.h($_->com_sales->round($this->entity->principal, true)); ?></span></span><br/>
 			<span style="font-weight:bold;">APR: <span style="float:right;"><?php e($this->entity->apr).'%'; ?></span></span><br/>
 			<span style="font-weight:bold;">Term: <span style="float:right;"><?php e($this->entity->term); echo " ".h($this->entity->term_type); ?></span></span><br/>
 			<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
@@ -132,7 +132,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 			<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 			<span>Rate (Per Period): <span style="float:right;"><?php e(round($this->entity->rate_per_period, 3)).'%'; ?></span></span><br/>
 			<span>Payments Scheduled: <span style="float:right;"><?php e($this->entity->number_payments); ?></span></span><br/>
-			<span>Total Payments: <span style="float:right;"><?php echo ($this->entity->new_total_payment_sum) ? '$'.h($pines->com_sales->round($this->entity->new_total_payment_sum)) : '$'.h($pines->com_sales->round($this->entity->total_payment_sum)); ?></span></span><br/>
+			<span>Total Payments: <span style="float:right;"><?php echo ($this->entity->new_total_payment_sum) ? '$'.h($_->com_sales->round($this->entity->new_total_payment_sum)) : '$'.h($_->com_sales->round($this->entity->total_payment_sum)); ?></span></span><br/>
 
 			<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 			<span>Remaining Payments: <span style="float:right;">
@@ -147,7 +147,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 			</span></span><br/>
 			<span>Percentage Principal Paid: <span style="float:right;">
 					<?php
-					echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? h($pines->com_sales->round($this->entity->payments[0]['percentage_paid'], true)).'%' : '0.00%';
+					echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? h($_->com_sales->round($this->entity->payments[0]['percentage_paid'], true)).'%' : '0.00%';
 				?>
 			</span></span>
 			<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
@@ -157,10 +157,10 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 			<span>Total Initial Finance Charges: <span style="float:right;"><?php echo '$'.h($this->entity->total_interest_sum_original); ?></span></span><br/>
 			<span>Total Fees & Adjustments: <span style="float:right;"><?php echo (isset($this->entity->total_fees_adjustments)) ? '$'.h($this->entity->total_fees_adjustments) : '$0.00'; ?></span></span><br/>
 			<span>Total Current Finance Charges: <span style="float:right;"><?php echo '$'.h($this->entity->total_interest_sum); ?></span></span><br/>
-			<span>Est. Interest Savings: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->est_interest_savings, true)); ?></span></span><br/><br/>
+			<span>Est. Interest Savings: <span style="float:right;"><?php echo '$'.h($_->com_sales->round($this->entity->est_interest_savings, true)); ?></span></span><br/><br/>
 
 			<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;"><?php echo $payment_frequency; ?> Payment: <span style="float:right;"><?php echo '$'.h($this->entity->frequency_payment); ?></span></span></div><br/>
-			<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;">Remaining Balance: <span style="float:right;"><?php echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? '$'.h($pines->com_sales->round($this->entity->payments[0]['remaining_balance'], true)) : "$".h($pines->com_sales->round($this->entity->principal, true)); ?></span></span></div><br/>
+			<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;">Remaining Balance: <span style="float:right;"><?php echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? '$'.h($_->com_sales->round($this->entity->payments[0]['remaining_balance'], true)) : "$".h($_->com_sales->round($this->entity->principal, true)); ?></span></span></div><br/>
 
 			<div>
 				<span style="font-weight:bold;font-size:1.1em;">
@@ -169,19 +169,19 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 						* Short Amount:
 						<span style="float:right;">
 							<?php
-								echo "$".h($pines->com_sales->round($this->entity->payments[0]['sum_payment_short'], true));
+								echo "$".h($_->com_sales->round($this->entity->payments[0]['sum_payment_short'], true));
 							?>
 						</span>
 					</span>
 					<?php } ?>
 					<?php
-						if ($pines->com_sales->round($this->entity->payments[0]['unpaid_balance'] >= 0.01)) {
+						if ($_->com_sales->round($this->entity->payments[0]['unpaid_balance'] >= 0.01)) {
 					?>
 					<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 					<span style="font-size:.9em;">Unpaid Balance: </span>
 					<span style="float:right;font-size:.9em;">
 						<?php
-							echo "$".h($pines->com_sales->round($this->entity->payments[0]['unpaid_balance'], true));
+							echo "$".h($_->com_sales->round($this->entity->payments[0]['unpaid_balance'], true));
 						?>
 					</span>
 					<?php
@@ -193,20 +193,20 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 					<span style="font-size:.9em;"><br/>Unpaid Interest:</span>
 					<span style="float:right;font-size:.9em;">
 						<?php
-							echo "$".h($pines->com_sales->round($this->entity->payments[0]['unpaid_interest'], true));
+							echo "$".h($_->com_sales->round($this->entity->payments[0]['unpaid_interest'], true));
 						?>
 					</span>
 					<?php
 						}
 					?>
 					<?php
-						if ($pines->com_sales->round($this->entity->payments[0]['past_due'] >= 0.01)) {
+						if ($_->com_sales->round($this->entity->payments[0]['past_due'] >= 0.01)) {
 					?>
 					<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 					<span style="color:#b30909;">Past Due:</span>
 					<span style="float:right;color:#b30909;">
 						<?php
-							echo "$".h($pines->com_sales->round($this->entity->payments[0]['past_due'], true));
+							echo "$".h($_->com_sales->round($this->entity->payments[0]['past_due'], true));
 						?>
 					</span>
 					<?php
@@ -222,20 +222,20 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 									pines(function(){
 										$("#p_muid_next_payment").popover({
 											trigger: 'hover',
-											title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(h((string) ($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $pines->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
-											content: 'Past Due: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($this->entity->payments[0]['past_due'], true)));?>+'</span><br/>'+<?php echo json_encode(h($payment_frequency));?>+' Payment: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true))); ?>+'</span><br/><span style="font-size:.8em;">Past Due Amount is due immediately.</span>',
+											title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(h((string) ($_->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $_->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
+											content: 'Past Due: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($this->entity->payments[0]['past_due'], true)));?>+'</span><br/>'+<?php echo json_encode(h($payment_frequency));?>+' Payment: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true))); ?>+'</span><br/><span style="font-size:.8em;">Past Due Amount is due immediately.</span>',
 											placement: 'right'
 										});
 									});
 								</script>
 								<?php
 							}
-							echo ($this->entity->payments[0]['past_due'] >= 0.01) ? '<span style="cursor:pointer;" id="p_muid_next_payment">$'.(h($pines->com_sales->round(($this->entity->payments[0]['next_payment_due_amount'] + $pines->com_sales->round($this->entity->payments[0]['past_due'])), true))).'</span>' : "$".h($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true));
+							echo ($this->entity->payments[0]['past_due'] >= 0.01) ? '<span style="cursor:pointer;" id="p_muid_next_payment">$'.(h($_->com_sales->round(($this->entity->payments[0]['next_payment_due_amount'] + $_->com_sales->round($this->entity->payments[0]['past_due'])), true))).'</span>' : "$".h($_->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true));
 							?>
 						</span><br/>
 						<span style="float:left;background:none; border:none;font-size:.8em;">Due:</span>
 						<span style="float:right;background:none; border:none;font-size:.8em;"> <?php echo (isset($this->entity->payments[0]['next_payment_due'])) ? h(format_date($this->entity->payments[0]['next_payment_due'], "date_short")) : h(format_date($this->entity->first_payment_date, "date_short")); ?></span>
-						<span style="clear:both;float:left;background:none; border:none;font-size:.6em;"> <?php echo ($pines->com_sales->round($this->entity->payments[0]['past_due'] >= .01)) ? "Past Due Amount is due immediately." : ""; ?></span>
+						<span style="clear:both;float:left;background:none; border:none;font-size:.6em;"> <?php echo ($_->com_sales->round($this->entity->payments[0]['past_due'] >= .01)) ? "Past Due Amount is due immediately." : ""; ?></span>
 					</div>
 				</span>
 			</div>
@@ -263,7 +263,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 			<tbody>
 				<tr>
 					<td colspan="9">Principal Balance</td>
-					<td>$<?php e($pines->com_sales->round($this->entity->principal, true)); ?></td>
+					<td>$<?php e($_->com_sales->round($this->entity->principal, true)); ?></td>
 				</tr>
 				<?php
 				$first_one = false;
@@ -348,25 +348,25 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 					<td style="text-align:right;">
 						<?php
 						if (!empty($payment['extra_payments'])) {
-							echo "$".h($pines->com_sales->round($payment['payment_amount_paid_orig'], true));
+							echo "$".h($_->com_sales->round($payment['payment_amount_paid_orig'], true));
 							foreach ($payment['extra_payments'] as $extra_payment) {
-								echo "<br/>$".h($pines->com_sales->round(($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional']), true));
+								echo "<br/>$".h($_->com_sales->round(($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional']), true));
 							}
 						} elseif ($payment['payment_status'] != "not due yet" && $payment['payment_short'] > 0)
-							echo '$'.h($pines->com_sales->round($payment['payment_amount_paid'], true)).'<span style="padding-left:3px;">*</span>';
+							echo '$'.h($_->com_sales->round($payment['payment_amount_paid'], true)).'<span style="padding-left:3px;">*</span>';
 						else
-							echo "$".h($pines->com_sales->round($payment['payment_amount_paid'], true));
+							echo "$".h($_->com_sales->round($payment['payment_amount_paid'], true));
 						?>
 					</td>
 					<td>
 						<?php
 						if (!empty($payment['extra_payments'])) {
-							echo ($pines->com_sales->round($payment['payment_additional_orig']) > 0) ? "$".h($pines->com_sales->round($payment['payment_additional_orig'], true)) : "&nbsp;";
+							echo ($_->com_sales->round($payment['payment_additional_orig']) > 0) ? "$".h($_->com_sales->round($payment['payment_additional_orig'], true)) : "&nbsp;";
 							foreach ($payment['extra_payments'] as $extra_payment) {
-								echo ($pines->com_sales->round($extra_payment['payment_additional']) > 0) ? "<br/>$".h($pines->com_sales->round(($extra_payment['payment_additional']), true)) : "<br/>&nbsp;";
+								echo ($_->com_sales->round($extra_payment['payment_additional']) > 0) ? "<br/>$".h($_->com_sales->round(($extra_payment['payment_additional']), true)) : "<br/>&nbsp;";
 							}
-						} elseif ($payment['payment_status'] != "not due yet" && ($payment['payment_principal_expected'] + $payment['payment_interest_expected']) < $pines->com_sales->round($payment['payment_amount_paid']))
-							echo ($pines->com_sales->round($payment['payment_additional']) > 0) ? '$'.h($pines->com_sales->round($payment['payment_additional'], true)) : "&nbsp;";
+						} elseif ($payment['payment_status'] != "not due yet" && ($payment['payment_principal_expected'] + $payment['payment_interest_expected']) < $_->com_sales->round($payment['payment_amount_paid']))
+							echo ($_->com_sales->round($payment['payment_additional']) > 0) ? '$'.h($_->com_sales->round($payment['payment_additional'], true)) : "&nbsp;";
 						?>
 					</td>
 					<td>
@@ -379,8 +379,8 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 								pines(function(){
 									$("#p_muid_tooltip_<?php e($uniq2); ?>").popover({
 										trigger: 'hover',
-										title: 'Unpaid Interest: $'+<?php echo json_encode(h($pines->com_sales->round($payment['payment_interest_unpaid'], true))); ?>,
-										content: 'Expected Interest: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['payment_interest_expected'], true))); ?>+'</span><br/>Interest Paid: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['payment_interest_paid'], true))); ?>+' </span><br/><span style="font-size:.8em;">Interest is calculated based on the terms of the loan at the time of payment.</span>',
+										title: 'Unpaid Interest: $'+<?php echo json_encode(h($_->com_sales->round($payment['payment_interest_unpaid'], true))); ?>,
+										content: 'Expected Interest: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($payment['payment_interest_expected'], true))); ?>+'</span><br/>Interest Paid: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($payment['payment_interest_paid'], true))); ?>+' </span><br/><span style="font-size:.8em;">Interest is calculated based on the terms of the loan at the time of payment.</span>',
 										placement: "right",
 										html: true
 									});
@@ -389,39 +389,39 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 							<?php
 
 							if (!empty($payment['extra_payments'])) {
-								echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.h($uniq2).'">$'.h($pines->com_sales->round($payment['payment_interest_paid_orig'], true)).'</span>';
+								echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.h($uniq2).'">$'.h($_->com_sales->round($payment['payment_interest_paid_orig'], true)).'</span>';
 								foreach ($payment['extra_payments'] as $extra_payment) {
-									echo ($pines->com_sales->round($extra_payment['payment_interest_paid']) > 0) ? "<br/>$".h($pines->com_sales->round($extra_payment['payment_interest_paid'], true)) : "<br/>-";
+									echo ($_->com_sales->round($extra_payment['payment_interest_paid']) > 0) ? "<br/>$".h($_->com_sales->round($extra_payment['payment_interest_paid'], true)) : "<br/>-";
 								}
 							} else
-								echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.h($uniq2).'">$'.h($pines->com_sales->round($payment['payment_interest_paid'], true)).'</span>';
+								echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.h($uniq2).'">$'.h($_->com_sales->round($payment['payment_interest_paid'], true)).'</span>';
 						} else {
 							if (!empty($payment['extra_payments'])) {
-								echo '$'.h($pines->com_sales->round($payment['payment_interest_paid_orig'], true));
+								echo '$'.h($_->com_sales->round($payment['payment_interest_paid_orig'], true));
 								foreach ($payment['extra_payments'] as $extra_payment) {
-									echo ($pines->com_sales->round($extra_payment['payment_interest_paid']) > 0) ? "<br/>$".h($pines->com_sales->round($extra_payment['payment_interest_paid'], true)) : "<br/>-";
+									echo ($_->com_sales->round($extra_payment['payment_interest_paid']) > 0) ? "<br/>$".h($_->com_sales->round($extra_payment['payment_interest_paid'], true)) : "<br/>-";
 								}
 							} else
-								echo '$'.h($pines->com_sales->round($payment['payment_interest_paid'], true));
+								echo '$'.h($_->com_sales->round($payment['payment_interest_paid'], true));
 						}
 						?>
 					</td>
 					<td>
 						<?php
 						if (!empty($payment['extra_payments'])) {
-							echo '$'.h($pines->com_sales->round($payment['payment_principal_paid_orig'], true));
+							echo '$'.h($_->com_sales->round($payment['payment_principal_paid_orig'], true));
 							foreach ($payment['extra_payments'] as $extra_payment) {
-								echo "<br/>$".h($pines->com_sales->round($extra_payment['payment_principal_paid'], true));
+								echo "<br/>$".h($_->com_sales->round($extra_payment['payment_principal_paid'], true));
 							}
 						} else
-							echo '$'.h($pines->com_sales->round($payment['payment_principal_paid'], true));
+							echo '$'.h($_->com_sales->round($payment['payment_principal_paid'], true));
 						?>
 					</td>
 
 					<?php if (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) { ?>
 					<td>
 						<?php
-						if ($pines->com_sales->round($payment['payment_balance_unpaid']) >= .01 && $payment['payment_status'] != 'partial_not_due') {
+						if ($_->com_sales->round($payment['payment_balance_unpaid']) >= .01 && $payment['payment_status'] != 'partial_not_due') {
 							// showing tooltip to show unpaid balance specific to this payment.
 							// javascript to control tooltip:
 							$uniq = uniqid();
@@ -430,23 +430,23 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 								pines(function(){
 									$("#p_muid_tooltip_<?php e($uniq); ?>").popover({
 										trigger: 'hover',
-										title: 'Unpaid Balance: $'+<?php echo json_encode(h($pines->com_sales->round($payment['payment_balance_unpaid'], true))); ?>,
-										content: 'Previous Remaining Balance: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['remaining_balance'], true))); ?>+'</span><br/>Expected Balance: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['scheduled_balance'], true))); ?>+' </span><br/><span style="font-size:.8em;">Calculated unpaid balance based on the terms of the loan at the time of payment.</span>',
+										title: 'Unpaid Balance: $'+<?php echo json_encode(h($_->com_sales->round($payment['payment_balance_unpaid'], true))); ?>,
+										content: 'Previous Remaining Balance: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($payment['remaining_balance'], true))); ?>+'</span><br/>Expected Balance: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($payment['scheduled_balance'], true))); ?>+' </span><br/><span style="font-size:.8em;">Calculated unpaid balance based on the terms of the loan at the time of payment.</span>',
 										placement: "right"
 									});
 								});
 							</script>
 							<?php
-							echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.h($uniq).'">$'.h($pines->com_sales->round($payment['remaining_balance'], true))."</span>";
+							echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.h($uniq).'">$'.h($_->com_sales->round($payment['remaining_balance'], true))."</span>";
 						} elseif (isset($payment['remaining_balance'])) {
-							echo '$'.h($pines->com_sales->round($payment['remaining_balance'], true));
+							echo '$'.h($_->com_sales->round($payment['remaining_balance'], true));
 						}
 						?>
 					</td>
-					<td><?php echo '$'.h($pines->com_sales->round($payment['scheduled_balance'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($payment['scheduled_balance'], true)); ?></td>
 					<?php } else { ?>
 					<td></td>
-					<td><?php echo '$'.h($pines->com_sales->round($payment['scheduled_balance'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($payment['scheduled_balance'], true)); ?></td>
 					<?php } ?>
 				</tr>
 				<?php } ?>
@@ -470,15 +470,15 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 			<tbody>
 				<tr>
 					<td colspan="4">Principal Balance</td>
-					<td>$<?php e($pines->com_sales->round($this->entity->principal, true)); ?></td>
+					<td>$<?php e($_->com_sales->round($this->entity->principal, true)); ?></td>
 				</tr>
 				<?php foreach ($this->entity->schedule as $schedule) { ?>
 				<tr>
 					<td><?php e(format_date($schedule['scheduled_date_expected'], "date_short")); ?></td>
-					<td><?php echo '$'.h($pines->com_sales->round($schedule['payment_amount_expected'], true)); ?></td>
-					<td><?php echo '$'.h($pines->com_sales->round($schedule['payment_interest_expected'], true)); ?></td>
-					<td><?php echo '$'.h($pines->com_sales->round($schedule['payment_principal_expected'], true)); ?></td>
-					<td><?php echo '$'.h($pines->com_sales->round($schedule['scheduled_balance'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($schedule['payment_amount_expected'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($schedule['payment_interest_expected'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($schedule['payment_principal_expected'], true)); ?></td>
+					<td><?php echo '$'.h($_->com_sales->round($schedule['scheduled_balance'], true)); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>

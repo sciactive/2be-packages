@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($this->render == 'body' && gatekeeper('com_sales/listreturns')) {
@@ -53,7 +53,7 @@ echo $module->render();
 				<td style="font-weight:bold;">Void Date</td>
 				<td><?php e(format_date($this->entity->void_date, 'full_short')); ?></td>
 			</tr>
-			<?php } if ($pines->config->com_sales->com_customer && isset($this->entity->customer->guid)) { ?>
+			<?php } if ($_->config->com_sales->com_customer && isset($this->entity->customer->guid)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Customer</td>
 				<td><a data-entity="<?php e($this->entity->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($this->entity->customer->name); ?></a></td>
@@ -129,9 +129,9 @@ echo $module->render();
 				e(implode(' ', $text));
 				?></td>
 				<td style="text-align: right;"><?php e($cur_product['quantity']); ?></td>
-				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
-				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['return_fee'], true); ?></td>
-				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['line_total'] - (float) $cur_product['return_fee'], true); ?></td>
+				<td style="text-align: right;">$<?php echo $_->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
+				<td style="text-align: right;">$<?php echo $_->com_sales->round($cur_product['return_fee'], true); ?></td>
+				<td style="text-align: right;">$<?php echo $_->com_sales->round($cur_product['line_total'] - (float) $cur_product['return_fee'], true); ?></td>
 			</tr>
 			<?php
 			$stock_entities = array();
@@ -166,7 +166,7 @@ echo $module->render();
 			<tr>
 				<td style="width: 80%;"><a data-entity="<?php e($cur_special['entity']->guid); ?>" data-entity-context="com_sales_special"><?php e(($cur_special['entity']->hide_code ? '' : "{$cur_special['code']} - ").$cur_special['name']); ?></a></td>
 				<td style="white-space: pre;"><?php echo $cur_special['before_tax'] ? 'Before Tax' : 'After Tax'; ?></td>
-				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_special['discount'], true); ?></td>
+				<td style="text-align: right;">$<?php echo $_->com_sales->round($cur_special['discount'], true); ?></td>
 			</tr>
 			<?php } ?>
 		</tbody>
@@ -187,7 +187,7 @@ echo $module->render();
 			<?php foreach ($this->entity->payments as $cur_payment) { ?>
 			<tr>
 				<td><a data-entity="<?php e($cur_payment['entity']->guid); ?>" data-entity-context="com_sales_payment_type"><?php e($cur_payment['label']); ?></a></td>
-				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_payment['amount'], true); ?></td>
+				<td style="text-align: right;">$<?php echo $_->com_sales->round($cur_payment['amount'], true); ?></td>
 			</tr>
 			<?php } ?>
 		</tbody>
@@ -215,7 +215,7 @@ echo $module->render();
 		</thead>
 		<tbody>
 			<?php
-			$txs = (array) $pines->entity_manager->get_entities(
+			$txs = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_tx),
 					array('&',
 						'tag' => array('com_sales', 'transaction'),
@@ -237,7 +237,7 @@ echo $module->render();
 			<?php if (isset($cur_tx->amount)) { ?>
 			<tr>
 				<td colspan="2" style="text-align: right;">Amount</td>
-				<td colspan="3">$<?php echo $pines->com_sales->round($cur_tx->amount, true); ?></td>
+				<td colspan="3">$<?php echo $_->com_sales->round($cur_tx->amount, true); ?></td>
 			</tr>
 			<?php } } ?>
 		</tbody>

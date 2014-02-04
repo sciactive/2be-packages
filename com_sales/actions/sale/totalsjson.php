@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/totalsales') )
 	punt_user(null, pines_url('com_sales', 'sale/totalsjson', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 // Format the location.
@@ -43,7 +43,7 @@ $selector = array('&',
 $or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 
 // Get all transactions.
-$tx_array = (array) $pines->entity_manager->get_entities(array('class' => com_sales_tx, 'skip_ac' => true),  array('|', 'tag' => array('sale_tx', 'payment_tx')), $selector, $or);
+$tx_array = (array) $_->entity_manager->get_entities(array('class' => com_sales_tx, 'skip_ac' => true),  array('|', 'tag' => array('sale_tx', 'payment_tx')), $selector, $or);
 $invoice_array = array('subtotal' => 0.00, 'total' => 0.00, 'count' => 0);
 $sale_array = array('subtotal' => 0.00, 'total' => 0.00, 'count' => 0);
 $sale_array_user = array();
@@ -143,4 +143,4 @@ if (empty($tx_array)) {
 	);
 }
 
-$pines->page->override_doc(json_encode($return));
+$_->page->override_doc(json_encode($return));

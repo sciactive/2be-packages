@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$pines->com_bootstrap->load();
-$max_columns = $pines->config->com_bootstrap->grid_columns;
+$_->com_bootstrap->load();
+$max_columns = $_->config->com_bootstrap->grid_columns;
 ?>
 <style type="text/css" scoped="scoped">
 	#p_muid_tab {
@@ -374,10 +374,10 @@ $max_columns = $pines->config->com_bootstrap->grid_columns;
 			<?php } elseif ($cur_button == 'line_break') { ?>
 		<a class="line_break btn disabled"><span>&nbsp;</span></a>
 			<?php } else {
-				$cur_def = $pines->com_dash->get_button_def($cur_button);
+				$cur_def = $_->com_dash->get_button_def($cur_button);
 				// Check its conditions.
 				foreach ((array) $cur_def['depends'] as $cur_type => $cur_value) {
-					if (!$pines->depend->check($cur_type, $cur_value))
+					if (!$_->depend->check($cur_type, $cur_value))
 						continue 2;
 				} ?>
 		<a class="btn" href="<?php e($cur_def['href']); ?>" title="<?php e($cur_def['description']); ?>">
@@ -392,10 +392,10 @@ $max_columns = $pines->config->com_bootstrap->grid_columns;
 			<div class="key" style="display: none;"><?php e($cur_c_key); ?></div>
 			<?php foreach ((array) $cur_column['widgets'] as $cur_w_key => $cur_widget) {
 				// Get the widget definition.
-				$cur_def = $pines->com_dash->get_widget_def($cur_widget);
+				$cur_def = $_->com_dash->get_widget_def($cur_widget);
 				// Check its conditions.
 				foreach ((array) $cur_def['widget']['depends'] as $cur_type => $cur_value) {
-					if (!$pines->depend->check($cur_type, $cur_value))
+					if (!$_->depend->check($cur_type, $cur_value))
 						continue 2;
 				} ?>
 			<div class="object well clearfix">

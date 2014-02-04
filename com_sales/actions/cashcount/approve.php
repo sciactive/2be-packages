@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!gatekeeper('com_sales/approvecashcount') )
@@ -16,13 +16,13 @@ if (!gatekeeper('com_sales/approvecashcount') )
 
 if (!isset($_REQUEST['id'])) {
 	pines_error('Requested cash count id is not accessible.');
-	$pines->com_sales->list_cashcounts();
+	$_->com_sales->list_cashcounts();
 	return;
 }
 $entity = com_sales_cashcount::factory((int) $_REQUEST['id']);
 if (!$entity->final) {
 	pines_notice('This cash count has not been committed.');
-	$pines->com_sales->list_cashcounts();
+	$_->com_sales->list_cashcounts();
 	return;
 }
 $entity->print_review();

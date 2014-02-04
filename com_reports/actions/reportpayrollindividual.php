@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_reports/reportpayroll') )
@@ -49,4 +49,4 @@ $adjustment = (float) str_replace('$', '', $_REQUEST['adjustment']);
 $reghours = (float) str_replace('$', '', $_REQUEST['reghours']);
 $overtime = (float) str_replace('$', '', $_REQUEST['overtime']);
 
-$pines->com_reports->report_payroll_individual($start_date, $end_date, $emp, $payperhour, $hours, $total, $salary, $commission, $hourreport, $adjustment, $reghours, $overtime);
+$_->com_reports->report_payroll_individual($start_date, $end_date, $emp, $payperhour, $hours, $total, $salary, $commission, $hourreport, $adjustment, $reghours, $overtime);

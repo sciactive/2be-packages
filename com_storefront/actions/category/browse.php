@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (!empty($_REQUEST['id'])) {
 	$entity = com_sales_category::factory((int) $_REQUEST['id']);
 } else {
-	$entity = $pines->entity_manager->get_entity(
+	$entity = $_->entity_manager->get_entity(
 			array('class' => com_sales_category),
 			array('&',
 				'tag' => array('com_sales', 'category'),
@@ -37,13 +37,13 @@ else
 switch ($entity->title_position) {
 	case 'prepend':
 	default:
-		$pines->page->title_pre("$title - ");
+		$_->page->title_pre("$title - ");
 		break;
 	case 'append':
-		$pines->page->title(" - $title");
+		$_->page->title(" - $title");
 		break;
 	case 'replace':
-		$pines->page->title_set($title);
+		$_->page->title_set($title);
 		break;
 }
 
@@ -73,13 +73,13 @@ foreach ((array) $entity->show_pages as $cur_page) {
 	$page_module->detach();
 	$module->show_page_modules[] = $page_module;
 	// Check for and set the variant for the current template.
-	if (isset($cur_page->variants[$pines->current_template]) && $pines->com_content->is_variant_valid($cur_page->variants[$pines->current_template])) {
-		$cur_template = $pines->current_template;
-		$pines->config->$cur_template->variant = $cur_page->variants[$pines->current_template];
+	if (isset($cur_page->variants[$_->current_template]) && $_->com_content->is_variant_valid($cur_page->variants[$_->current_template])) {
+		$cur_template = $_->current_template;
+		$_->config->$cur_template->variant = $cur_page->variants[$_->current_template];
 	}
 }
 $module->page = isset($_REQUEST['page']) ? (int) $_REQUEST['page'] : 1;
-$module->products_per_page = $pines->config->com_storefront->products_per_page;
+$module->products_per_page = $_->config->com_storefront->products_per_page;
 switch ($_REQUEST['sort']) {
 	case 'name':
 	default:

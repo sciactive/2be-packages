@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Edit Timeclock for '.h($this->entity->user->name);
-$pines->com_datetimepicker->load();
+$_->com_datetimepicker->load();
 ?>
 <style type="text/css">
 	#p_muid_timeclock_edit .entry > div {

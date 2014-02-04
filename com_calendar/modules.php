@@ -8,16 +8,16 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-global $pines;
+global $_;
 return array(
 	'agenda' => array(
 		'cname' => 'Agenda',
 		'description' => 'Show your agenda.',
 		'image' => 'includes/agenda_screen.png',
-		'view_callback' => array($pines->com_calendar, 'agenda_widget'),
+		'view_callback' => array($_->com_calendar, 'agenda_widget'),
 		'form' => 'modules/agenda_form',
 		'type' => 'module imodule widget',
 		'widget' => array(

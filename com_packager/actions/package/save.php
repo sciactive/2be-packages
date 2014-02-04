@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( isset($_REQUEST['id']) ) {
@@ -99,13 +99,13 @@ $package->screenshots = (array) json_decode($_REQUEST['screenshots'], true);
 foreach ($package->screenshots as $key => &$cur_screen) {
 	if ($cur_screen['alt'] == 'Click to edit description...')
 		$cur_screen['alt'] = '';
-	if (!$pines->uploader->check($cur_screen['file']))
+	if (!$_->uploader->check($cur_screen['file']))
 		unset($package->screenshots[$key]);
 }
 unset($cur_screen);
 $package->screenshots = array_values($package->screenshots);
 $package->icon = $_REQUEST['icon'];
-if (!$pines->uploader->check($package->icon))
+if (!$_->uploader->check($package->icon))
 	$package->icon = null;
 
 if (empty($package->name)) {
@@ -118,12 +118,12 @@ if (!in_array($package->type, array('system', 'meta')) && empty($package->compon
 	pines_notice('Please specify a component.');
 	return;
 }
-if (!in_array($package->type, array('system', 'meta')) && !in_array($package->component, $pines->all_components)) {
+if (!in_array($package->type, array('system', 'meta')) && !in_array($package->component, $_->all_components)) {
 	$package->print_form();
 	pines_notice('Selected component was not found.');
 	return;
 }
-$test = $pines->entity_manager->get_entity(array('class' => com_packager_package, 'skip_ac' => true), array('&', 'tag' => array('com_packager', 'package'), 'data' => array('name', $package->name)));
+$test = $_->entity_manager->get_entity(array('class' => com_packager_package, 'skip_ac' => true), array('&', 'tag' => array('com_packager', 'package'), 'data' => array('name', $package->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$package->print_form();
 	pines_notice('There is already a package with that name. Please choose a different name.');
@@ -131,7 +131,7 @@ if (isset($test) && $test->guid != $_REQUEST['id']) {
 }
 foreach ($package->screenshots as $cur_screen) {
 	// Check the size of the images.
-	$filesize = (float) filesize($pines->uploader->real($cur_screen['file'])) / 1024;
+	$filesize = (float) filesize($_->uploader->real($cur_screen['file'])) / 1024;
 	if ($filesize > 300) {
 		$package->print_form();
 		pines_notice(basename($cur_screen['file']).' is '.number_format($filesize).'KB. The maximum screenshot size is 300KB.');
@@ -139,7 +139,7 @@ foreach ($package->screenshots as $cur_screen) {
 	}
 }
 
-if ($pines->config->com_packager->global_packages)
+if ($_->config->com_packager->global_packages)
 	$package->ac->other = 1;
 
 if ($package->save()) {

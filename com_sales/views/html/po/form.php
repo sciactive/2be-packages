@@ -8,15 +8,15 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Purchase Order' : 'Editing PO ['.h($this->entity->po_number).']';
 $this->note = 'Provide PO details in this form.';
 if ($this->entity->final)
 	$this->note .= ' Most options cannot be edited after the PO has been committed.';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (!$this->entity->final)
-	$pines->com_jstree->load();
+	$_->com_jstree->load();
 $read_only = '';
 if ($this->entity->final)
 	$read_only = 'readonly="readonly"';
@@ -30,7 +30,7 @@ if ($this->entity->final)
 				product_dialog = $("#p_muid_product_dialog"),
 				product_edit_dialog = $("#p_muid_product_edit_dialog"),
 				cur_vendor = <?php echo ($this->entity->vendor->guid ? json_encode($this->entity->vendor->guid) : 'null'); ?>,
-				dec = <?php echo (int) $pines->config->com_sales->dec; ?>; // Number of decimal places to round to.
+				dec = <?php echo (int) $_->config->com_sales->dec; ?>; // Number of decimal places to round to.
 			var round_to_dec = function(value){
 				var rnd = Math.pow(10, dec);
 				var mult = value * rnd;
@@ -439,7 +439,7 @@ if ($this->entity->final)
 			<select class="pf-field" name="vendor" id="p_muid_vendor">
 				<option value="null">-- None --</option>
 				<?php
-				$pines->entity_manager->sort($this->vendors, 'name');
+				$_->entity_manager->sort($this->vendors, 'name');
 				foreach ($this->vendors as $cur_vendor) { ?>
 				<option value="<?php e($cur_vendor->guid); ?>"<?php echo $this->entity->vendor->guid == $cur_vendor->guid ? ' selected="selected"' : ''; ?>><?php e($cur_vendor->name); ?></option>
 				<?php } ?>
@@ -559,7 +559,7 @@ if ($this->entity->final)
 							?></td>
 							<?php } ?>
 							<td><?php e($cur_product['cost']); ?></td>
-							<td><?php echo $pines->com_sales->round((int) $cur_product['quantity'] * (float) $cur_product['cost']); ?></td>
+							<td><?php echo $_->com_sales->round((int) $cur_product['quantity'] * (float) $cur_product['cost']); ?></td>
 							<td><?php
 								$vendors = array();
 								foreach ($cur_product['entity']->vendors as $cur_vendor) {

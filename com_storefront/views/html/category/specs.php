@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = 'Narrow Selection';
@@ -29,7 +29,7 @@ if (!$specs) {
 <div id="p_muid_specs" class="com_storefront_specs">
 <?php
 // Sort the specs.
-$pines->com_sales->sort_specs($specs);
+$_->com_sales->sort_specs($specs);
 
 foreach ($specs as $cur_spec) {
 	switch ($cur_spec['type']) {

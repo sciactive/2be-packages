@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_mailer/listtemplates') )
 	punt_user(null, pines_url('com_mailer', 'template/list'));
 
-$pines->com_mailer->list_templates();
+$_->com_mailer->list_templates();

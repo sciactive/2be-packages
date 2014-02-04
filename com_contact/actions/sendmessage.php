@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 $name = str_replace("\n", '', $_REQUEST['author_name']);
@@ -16,7 +16,7 @@ $phone = $_REQUEST['author_phone'];
 $email = $_REQUEST['author_email'];
 $title = str_replace("\n", '', $_REQUEST['subject']);
 $message = $_REQUEST['message'];
-$send_to = $pines->config->com_contact->contact_email;
+$send_to = $_->config->com_contact->contact_email;
 if (empty($name) || empty($phone) || empty($email) || empty($title) || empty($message)) {
 	pines_notice('Please complete all fields of the contact form.');
 	return;

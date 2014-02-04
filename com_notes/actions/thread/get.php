@@ -8,21 +8,21 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_notes/seethreads') )
 	punt_user(null, pines_url('com_notes', 'thread/list'));
 
-$pines->page->override = true;
+$_->page->override = true;
 
-$entity = $pines->entity_manager->get_entity(array('class' => $_REQUEST['context']), array('&', 'guid' => (int) $_REQUEST['id']));
+$entity = $_->entity_manager->get_entity(array('class' => $_REQUEST['context']), array('&', 'guid' => (int) $_REQUEST['id']));
 if (!isset($entity->guid)) {
-	$pines->page->override_doc(json_encode(false));
+	$_->page->override_doc(json_encode(false));
 	return;
 }
 
-$threads = $pines->entity_manager->get_entities(
+$threads = $_->entity_manager->get_entities(
 		array('class' => com_notes_thread),
 		array('&',
 			'tag' => array('com_notes', 'thread'),
@@ -33,7 +33,7 @@ $threads = $pines->entity_manager->get_entities(
 		)
 	);
 // Order threads by their modification date.
-$pines->entity_manager->sort($threads, 'p_mdate');
+$_->entity_manager->sort($threads, 'p_mdate');
 
 $return = array();
 foreach ($threads as $cur_thread) {
@@ -56,4 +56,4 @@ foreach ($threads as $cur_thread) {
 	$return[] = $cur_struct;
 }
 
-$pines->page->override_doc(json_encode($return));
+$_->page->override_doc(json_encode($return));

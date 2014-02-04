@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
-	global $pines;
+	global $_;
 	$module = new module('com_entityhelper', 'default_helper');
 	$module->render = $this->render;
 	$module->entity = $this->entity;
@@ -101,7 +101,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 			<tr>
 				<td style="font-weight:bold;">Code</td>
 				<?php if (isset($this->entity->collection_code)) {
-					foreach ($pines->config->com_loan->collections_codes as $cur_code) {
+					foreach ($_->config->com_loan->collections_codes as $cur_code) {
 						$cur_code = explode(':', $cur_code);
 						if ($cur_code[0] == $this->entity->collection_code) {
 							$code_description = $cur_code[1];
@@ -306,7 +306,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 					if ($this->entity->status == 'paid off') 
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
 					else
-						echo '$'.h($pines->com_sales->round($this->entity->payoff_amount, true)); 
+						echo '$'.h($_->com_sales->round($this->entity->payoff_amount, true)); 
 					?>
 				</td>
 			</tr>

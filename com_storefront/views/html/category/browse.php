@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($this->entity->show_title)
@@ -16,7 +16,7 @@ if ($this->entity->show_title)
 
 // Get the products in this category.
 if ($this->entity->show_products)
-	$products = $pines->com_storefront->get_cat_products($this->entity, $this->page, $this->products_per_page, $offset, $count, $pages, $this->sort_var, $this->sort_reverse);
+	$products = $_->com_storefront->get_cat_products($this->entity, $this->page, $this->products_per_page, $offset, $count, $pages, $this->sort_var, $this->sort_reverse);
 
 foreach ((array) $this->show_page_modules as $cur_module) {
 	echo $cur_module->render();
@@ -91,6 +91,6 @@ foreach ((array) $this->show_page_modules as $cur_module) {
 	/**
 	 * Include the category template.
 	 */
-	include(__DIR__.'/templates/'.clean_filename($pines->config->com_storefront->category_template).'.php'); ?>
+	include(__DIR__.'/templates/'.clean_filename($_->config->com_storefront->category_template).'.php'); ?>
 </div>
 <?php echo $header; } }

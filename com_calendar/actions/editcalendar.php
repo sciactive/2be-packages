@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_calendar/viewcalendar') && !gatekeeper('com_calendar/editcalendar') )
@@ -41,7 +41,7 @@ else {
 	} while(empty($timezone) && isset($parent->guid));
 }
 if (empty($timezone))
-	$timezone = $pines->config->timezone;
+	$timezone = $_->config->timezone;
 
 // Calculate using correct timezone.
 $cur_timezone = date_default_timezone_get();
@@ -58,4 +58,4 @@ date_default_timezone_set($cur_timezone);
 $descendants = ($_REQUEST['descendants'] == 'true');
 $filter = !empty($_REQUEST['filter']) ? $_REQUEST['filter'] : 'all';
 
-$pines->com_calendar->show_calendar($view_type, $start, $end, $timezone, $location, $employee, $descendants, $filter);
+$_->com_calendar->show_calendar($view_type, $start, $end, $timezone, $location, $employee, $descendants, $filter);

@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_hrm/clock') )
 	punt_user(null, pines_url('com_hrm', 'timeoff/save'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if (isset($_REQUEST['employee'])) {	
@@ -37,7 +37,7 @@ if (isset($_REQUEST['employee'])) {
 	if (!empty($_REQUEST['id'])) {
 		$rto = com_hrm_rto::factory((int) $_REQUEST['id']);
 		if (!isset($rto->guid)) {
-			$pines->page->override_doc('false');
+			$_->page->override_doc('false');
 			return;
 		}
 	} else {
@@ -46,7 +46,7 @@ if (isset($_REQUEST['employee'])) {
 
 	$rto->employee = com_hrm_employee::factory((int) $_REQUEST['employee']);
 	if (!isset($rto->employee->guid)) {
-		$pines->page->override_doc('false');
+		$_->page->override_doc('false');
 		return;
 	}
 	$rto->reason = $_REQUEST['reason'];
@@ -55,12 +55,12 @@ if (isset($_REQUEST['employee'])) {
 	$rto->end = mktime($rto->all_day ? 23 : $_REQUEST['time_end'],$rto->all_day ? 59 : 0,$rto->all_day ? 59 : 0,$rto_endmonth,$rto_endday,$rto_endyear);
 	$rto->status = 'pending';
 
-	if ($pines->config->com_hrm->global_rtos)
+	if ($_->config->com_hrm->global_rtos)
 		$rto->ac->other = 1;
 
 	if ($rto->save()) {
-		$pines->page->override_doc('true');
+		$_->page->override_doc('true');
 	} else {
-		$pines->page->override_doc('false');
+		$_->page->override_doc('false');
 	}
 }

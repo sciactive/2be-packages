@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -41,10 +41,10 @@ class com_menueditor extends component {
 	 * Add menu entries from the menu editor to the menu system.
 	 * @param array $entries_array An array of entries from the menu editor.
 	 * @param array $override_values An optional array of values that will override values from the entries. Should be in key => value format.
-	 * @return array The menu arrays that were added to $pines->menu->menu_arrays.
+	 * @return array The menu arrays that were added to $_->menu->menu_arrays.
 	 */
 	public function add_entries($entries_array, $override_values = array()) {
-		global $pines;
+		global $_;
 		$return = array();
 		foreach ($entries_array as $cur_entry) {
 			$cur_entry = array_merge($cur_entry, $override_values);
@@ -72,7 +72,7 @@ class com_menueditor extends component {
 			if ($cur_entry['children'])
 				$depend['children'] = true;
 			$array['depend'] = $depend;
-			$pines->menu->menu_arrays[] = $array;
+			$_->menu->menu_arrays[] = $array;
 			$return[] = $array;
 		}
 		return $return;
@@ -129,11 +129,11 @@ class com_menueditor extends component {
 	 * @return module The module.
 	 */
 	public function list_entries() {
-		global $pines;
+		global $_;
 
 		$module = new module('com_menueditor', 'entry/list', 'content');
 
-		$module->entries = $pines->entity_manager->get_entities(
+		$module->entries = $_->entity_manager->get_entities(
 				array('class' => com_menueditor_entry),
 				array('&',
 					'tag' => array('com_menueditor', 'entry')

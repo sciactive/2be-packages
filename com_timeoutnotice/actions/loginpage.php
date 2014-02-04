@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-$pines->page->override = true;
+$_->page->override = true;
 
 $login = new module('com_timeoutnotice', 'login');
 $loginhtml = $login->render('module_head');
-$pines->page->override_doc($loginhtml);
+$_->page->override_doc($loginhtml);

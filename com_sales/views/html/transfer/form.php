@@ -8,17 +8,17 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Transfer' : 'Editing  Transfer ['.h($this->entity->guid).']';
 $this->note = 'Use this form to transfer inventory to another location.';
 if ($this->entity->final)
 	$this->note .= ' Most options cannot be edited after the transfer has been committed.';
-$pines->com_pgrid->load();
+$_->com_pgrid->load();
 if (!$this->entity->final)
-	$pines->com_jstree->load();
-if ($pines->config->com_sales->autocomplete_product)
-	$pines->com_sales->load_product_select();
+	$_->com_jstree->load();
+if ($_->config->com_sales->autocomplete_product)
+	$_->com_sales->load_product_select();
 $read_only = '';
 if ($this->entity->final)
 	$read_only = 'readonly="readonly"';
@@ -86,7 +86,7 @@ $missing_stock = array();
 									}
 								});
 							};
-							<?php if ($pines->config->com_sales->autocomplete_product) { ?>
+							<?php if ($_->config->com_sales->autocomplete_product) { ?>
 							textbox.productselect({select: function(event, ui){select(ui.item.value); return false;}});
 							<?php } ?>
 							textbox.keydown(function(e){

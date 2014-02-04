@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Make Payments on Loan(s)';
-$pines->icons->load();
+$_->icons->load();
 
 $loan_ids = $this->loan_ids;
 if (!is_array($loan_ids))
@@ -262,7 +262,7 @@ if (!is_array($loan_ids))
 			<?php 
 			$c = 1;
 			foreach ($loan_ids as $cur_id) {
-			$cur_loan = $pines->com_loan->get_payment_amounts($cur_id);
+			$cur_loan = $_->com_loan->get_payment_amounts($cur_id);
 			$tag_status = $cur_loan->get_loan_status(true);
 			$display_status = $cur_loan->get_loan_status();
 			if ($cur_loan->temp_paid_off || $tag_status != 'active') { ?>

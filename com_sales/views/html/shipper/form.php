@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Shipper' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide shipper details in this form.';
@@ -196,11 +196,11 @@ $this->note = 'Provide shipper details in this form.';
 		<div class="pf-group">
 			<div class="pf-field">
 				Choose a predefined URL or use a custom one:<br />
-				<label><input type="radio" name="tracking" value="usps"<?php echo $this->entity->tracking == 'usps' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($pines->com_sales->tracking_urls['usps']); ?>" /> USPS</label>
-				<label><input type="radio" name="tracking" value="ups"<?php echo $this->entity->tracking == 'ups' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($pines->com_sales->tracking_urls['ups']); ?>" /> UPS</label>
-				<label><input type="radio" name="tracking" value="fedex"<?php echo $this->entity->tracking == 'fedex' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($pines->com_sales->tracking_urls['fedex']); ?>" /> FedEx</label>
-				<label><input type="radio" name="tracking" value="dhl"<?php echo $this->entity->tracking == 'dhl' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($pines->com_sales->tracking_urls['dhl']); ?>" /> DHL</label>
-				<label><input type="radio" name="tracking" value="ontrac"<?php echo $this->entity->tracking == 'ontrac' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($pines->com_sales->tracking_urls['ontrac']); ?>" /> OnTrac</label>
+				<label><input type="radio" name="tracking" value="usps"<?php echo $this->entity->tracking == 'usps' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($_->com_sales->tracking_urls['usps']); ?>" /> USPS</label>
+				<label><input type="radio" name="tracking" value="ups"<?php echo $this->entity->tracking == 'ups' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($_->com_sales->tracking_urls['ups']); ?>" /> UPS</label>
+				<label><input type="radio" name="tracking" value="fedex"<?php echo $this->entity->tracking == 'fedex' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($_->com_sales->tracking_urls['fedex']); ?>" /> FedEx</label>
+				<label><input type="radio" name="tracking" value="dhl"<?php echo $this->entity->tracking == 'dhl' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($_->com_sales->tracking_urls['dhl']); ?>" /> DHL</label>
+				<label><input type="radio" name="tracking" value="ontrac"<?php echo $this->entity->tracking == 'ontrac' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($_->com_sales->tracking_urls['ontrac']); ?>" /> OnTrac</label>
 				<label><input type="radio" name="tracking" value="custom"<?php echo $this->entity->tracking == 'custom' ? ' checked="checked"' : ''; ?> /> Custom</label>
 			</div>
 			<input class="pf-field" type="text" id="p_muid_tracking_url" name="tracking_url" size="40" value="<?php e($this->entity->tracking_url); ?>" data-intial-value="<?php e($this->entity->tracking_url); ?>" />

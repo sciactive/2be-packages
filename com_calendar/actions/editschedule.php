@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper() )
@@ -18,4 +18,4 @@ $employee = com_hrm_employee::factory((int)$_REQUEST['employee']);
 if (!isset($employee->guid))
 	return;
 
-$pines->com_calendar->schedule_form($employee);
+$_->com_calendar->schedule_form($employee);

@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$pines->config->com_storefront->show_categories)
+if (!$_->config->com_storefront->show_categories)
 	return;
 
-$categories = (array) $pines->entity_manager->get_entities(
+$categories = (array) $_->entity_manager->get_entities(
 		array('class' => com_sales_category),
 		array('&',
 			'tag' => array('com_sales', 'category'),
@@ -36,13 +36,13 @@ if (!$categories) {
  * @param string $path The menu path.
  */
 function com_storefront__category_menu($category, $path) {
-	global $pines;
+	global $_;
 	if (!$category->children)
 		return;
 	foreach ($category->children as $cur_category) {
 		if (!isset($cur_category) || !$cur_category->enabled)
 			continue;
-		$pines->menu->menu_arrays[] = array(
+		$_->menu->menu_arrays[] = array(
 			'path' => "{$path}/cat_{$cur_category->guid}",
 			'text' => $cur_category->name,
 			'href' => array('com_storefront', 'category/browse', array('a' => $cur_category->alias))
@@ -63,7 +63,7 @@ foreach ($categories as $cur_category) {
 	if (strpos($cur_category->menu_position, '/') === false) {
 		// It's a new top level menu.
 		$menu_position = "com_storefront_cat_{$cur_category->guid}";
-		$pines->menu->menu_arrays[] = array(
+		$_->menu->menu_arrays[] = array(
 			'path' => "com_storefront_cat_{$cur_category->guid}",
 			'text' => $cur_category->name,
 			'position' => $cur_category->menu_position
@@ -71,7 +71,7 @@ foreach ($categories as $cur_category) {
 	} else {
 		// It's part of another menu.
 		$menu_position = $cur_category->menu_position;
-		$pines->menu->menu_arrays[] = array(
+		$_->menu->menu_arrays[] = array(
 			'path' => $cur_category->menu_position,
 			'text' => $cur_category->name,
 			'href' => array('com_storefront', 'category/browse', array('a' => $cur_category->alias))

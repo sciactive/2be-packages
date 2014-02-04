@@ -8,18 +8,18 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_plaza/editpackages') )
 	punt_user(null, pines_url('com_plaza', 'package/list'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 if ($_REQUEST['local'] == 'true') {
-	$package = $pines->com_package->db['packages'][$_REQUEST['name']];
+	$package = $_->com_package->db['packages'][$_REQUEST['name']];
 } else {
-	$index = $pines->com_plaza->get_index(null, $_REQUEST['publisher']);
+	$index = $_->com_plaza->get_index(null, $_REQUEST['publisher']);
 	$package = $index['packages'][$_REQUEST['name']];
 }
 
@@ -28,18 +28,18 @@ if (!isset($package) || !in_array($do, array('install', 'upgrade', 'remove', 're
 	return;
 
 // Download the package.
-if (($do == 'install' || $do == 'reinstall' || $do == 'upgrade') && !$pines->com_plaza->package_download($package))
+if (($do == 'install' || $do == 'reinstall' || $do == 'upgrade') && !$_->com_plaza->package_download($package))
 	return;
 
 if ($do != 'reinstall') {
-	$changes = $pines->com_plaza->calculate_changes_full($package, $do);
+	$changes = $_->com_plaza->calculate_changes_full($package, $do);
 	if (!$changes['possible'] || $changes['service'])
 		return;
 	// Download all required packages.
 	if ($changes['install']) {
 		foreach ($changes['install'] as $key => $cur_package_name) {
 			$cur_package = $index['packages'][$cur_package_name];
-			if (!$pines->com_plaza->package_download($cur_package))
+			if (!$_->com_plaza->package_download($cur_package))
 				return;
 		}
 	}
@@ -54,7 +54,7 @@ switch ($do) {
 			if ($changes['install']) {
 				foreach ($changes['install'] as $key => $cur_package_name) {
 					$cur_package = $index['packages'][$cur_package_name];
-					if (!$pines->com_plaza->package_install($cur_package, true)) {
+					if (!$_->com_plaza->package_install($cur_package, true)) {
 						$passed = false;
 					} else {
 						unset($changes['install'][$key]);
@@ -63,8 +63,8 @@ switch ($do) {
 			}
 			if ($changes['remove']) {
 				foreach ($changes['remove'] as $key => $cur_package_name) {
-					$cur_package = $pines->com_package->db['packages'][$cur_package_name];
-					if (!$pines->com_plaza->package_remove($cur_package, true)) {
+					$cur_package = $_->com_package->db['packages'][$cur_package_name];
+					if (!$_->com_plaza->package_remove($cur_package, true)) {
 						$passed = false;
 					} else {
 						unset($changes['remove'][$key]);
@@ -76,9 +76,9 @@ switch ($do) {
 				break;
 		} while (!$passed);
 		if ($passed && $do == 'install') {
-			$return = $pines->com_plaza->package_install($package);
+			$return = $_->com_plaza->package_install($package);
 		} elseif ($passed) {
-			$return = $pines->com_plaza->package_upgrade($package);
+			$return = $_->com_plaza->package_upgrade($package);
 		} else {
 			$return = false;
 		}
@@ -90,7 +90,7 @@ switch ($do) {
 			if ($changes['install']) {
 				foreach ($changes['install'] as $key => $cur_package_name) {
 					$cur_package = $index['packages'][$cur_package_name];
-					if (!$pines->com_plaza->package_install($cur_package, true)) {
+					if (!$_->com_plaza->package_install($cur_package, true)) {
 						$passed = false;
 					} else {
 						unset($changes['install'][$key]);
@@ -99,8 +99,8 @@ switch ($do) {
 			}
 			if ($changes['remove']) {
 				foreach ($changes['remove'] as $key => $cur_package_name) {
-					$cur_package = $pines->com_package->db['packages'][$cur_package_name];
-					if (!$pines->com_plaza->package_remove($cur_package, true)) {
+					$cur_package = $_->com_package->db['packages'][$cur_package_name];
+					if (!$_->com_plaza->package_remove($cur_package, true)) {
 						$passed = false;
 					} else {
 						unset($changes['remove'][$key]);
@@ -112,14 +112,14 @@ switch ($do) {
 				break;
 		} while (!$passed);
 		if ($passed) {
-			$return = $pines->com_plaza->package_remove($package);
+			$return = $_->com_plaza->package_remove($package);
 		} else {
 			$return = false;
 		}
 		break;
 	case 'reinstall':
-		$return = $pines->com_plaza->package_reinstall($package);
+		$return = $_->com_plaza->package_reinstall($package);
 		break;
 }
 
-$pines->page->override_doc(json_encode($return));
+$_->page->override_doc(json_encode($return));

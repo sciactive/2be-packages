@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_plaza/editpackages') )
 	punt_user(null, pines_url('com_plaza', 'clearcache'));
 
-if ($pines->com_plaza->clear_cache()) {
+if ($_->com_plaza->clear_cache()) {
 	pines_notice('Package and index cache cleared successfully.');
 } else {
 	pines_error('Error clearing cache.');

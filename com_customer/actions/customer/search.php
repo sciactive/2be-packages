@@ -8,13 +8,13 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_customer/listcustomers') )
 	punt_user(null, pines_url('com_customer', 'customer/search', $_REQUEST));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 // Time span.
@@ -67,7 +67,7 @@ if (empty($query)) {
 		);
 		if ($or)
 			$args[] = $or;
-		$customers = (array) call_user_func_array(array($pines->entity_manager, 'get_entities'), $args);
+		$customers = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
 	}
 } else {
 	$num_query = preg_replace('/\D/', '', $query);
@@ -88,17 +88,17 @@ if (empty($query)) {
 		$selector2['match'][] = array('fax', $r_num_query);
 	}
 	$args = array(
-			array('class' => com_customer_customer, 'limit' => $pines->config->com_customer->customer_search_limit),
+			array('class' => com_customer_customer, 'limit' => $_->config->com_customer->customer_search_limit),
 			$selector,
 			$selector2
 		);
 	if ($or)
 		$args[] = $or;
-	$customers = (array) call_user_func_array(array($pines->entity_manager, 'get_entities'), $args);
+	$customers = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
 	$count_customers = count($customers);
 	// Only bother searching companies if the limit hasn't been reached.
-	if ($pines->config->com_customer->customer_search_limit - $count_customers) {
-		$companies = $pines->entity_manager->get_entities(
+	if ($_->config->com_customer->customer_search_limit - $count_customers) {
+		$companies = $_->entity_manager->get_entities(
 				array('class' => com_customer_company),
 				array('&',
 					'tag' => array('com_customer', 'company'),
@@ -106,8 +106,8 @@ if (empty($query)) {
 				)
 			);
 		if ($companies) {
-			$comp_customers = (array) $pines->entity_manager->get_entities(
-					array('class' => com_customer_customer, 'limit' => ($pines->config->com_customer->customer_search_limit - $count_customers)),
+			$comp_customers = (array) $_->entity_manager->get_entities(
+					array('class' => com_customer_customer, 'limit' => ($_->config->com_customer->customer_search_limit - $count_customers)),
 					array('&',
 						'tag' => array('com_customer', 'customer'),
 						'ref' => array('company', $companies)
@@ -154,4 +154,4 @@ unset($cur_customer);
 if (!$customers)
 	$customers = null;
 
-$pines->page->override_doc(json_encode($customers));
+$_->page->override_doc(json_encode($customers));

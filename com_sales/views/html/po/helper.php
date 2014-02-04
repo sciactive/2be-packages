@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($this->render == 'body' && (gatekeeper('com_sales/listpos') || gatekeeper('com_sales/managestock'))) {
@@ -108,7 +108,7 @@ echo $module->render();
 				</td>
 				<?php } ?>
 				<td><?php e($cur_product['cost']); ?></td>
-				<td><?php echo $pines->com_sales->round((int) $cur_product['quantity'] * (float) $cur_product['cost']); ?></td>
+				<td><?php echo $_->com_sales->round((int) $cur_product['quantity'] * (float) $cur_product['cost']); ?></td>
 			</tr>
 			<?php if ($this->entity->final && $received) { ?>
 			<tr>
@@ -126,7 +126,7 @@ echo $module->render();
 	</table>
 </div>
 <?php
-$sales = $pines->entity_manager->get_entities(
+$sales = $_->entity_manager->get_entities(
 		array('class' => com_sales_sale),
 		array('&',
 			'tag' => array('com_sales', 'sale'),

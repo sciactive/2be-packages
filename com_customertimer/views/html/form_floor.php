@@ -8,11 +8,11 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Floor' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide floor details in this form.';
-$pines->uploader->load();
+$_->uploader->load();
 ?>
 <style type="text/css">
 	#p_muid_form .station_layout {

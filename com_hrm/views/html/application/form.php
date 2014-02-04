@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing ['.h($this->entity->name).']';
 ?>
@@ -64,7 +64,7 @@ $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing
 	<div class="pf-element">
 		<span class="pf-label">Desired Position</span>
 		<select class="pf-field" name="position">
-			<?php foreach ($pines->config->com_hrm->employee_departments as $cur_dept) {
+			<?php foreach ($_->config->com_hrm->employee_departments as $cur_dept) {
 			$cur_dept = explode(':', $cur_dept); ?>
 			<option value="<?php e($cur_dept[0]); ?>"<?php echo $this->entity->position == $cur_dept[0] ? ' selected="selected"' : ''; ?>><?php e($cur_dept[0]); ?></option>
 			<?php } ?>
@@ -90,7 +90,7 @@ $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing
 		<label><span class="pf-label">Phone</span>
 			<input class="pf-field" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 	</div>
-	<?php if ($pines->config->com_hrm->ssn_field) { ?>
+	<?php if ($_->config->com_hrm->ssn_field) { ?>
 	<div class="pf-element">
 		<label><span class="pf-label">SSN</span>
 			<span class="pf-note">Without dashes.</span>

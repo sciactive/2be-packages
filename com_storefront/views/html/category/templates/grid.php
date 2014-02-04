@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <style type="text/css">
@@ -27,7 +27,7 @@ pines(function(){
 	$("#p_muid_products").on("click", ".product", function(){
 		pines.get(<?php echo json_encode(pines_url('com_storefront', 'product', array('a' => '__alias__'))); ?>.replace("__alias__", $(this).children(".product_alias").text()));
 	}).on("click", "button.add_cart", function(e){
-		<?php if (!$pines->config->com_storefront->catalog_mode) { ?>
+		<?php if (!$_->config->com_storefront->catalog_mode) { ?>
 		var button = $(this), product = button.closest(".product"), guid = parseInt(button.parent().siblings(".product_guid").text());
 		pines.com_storefront_add_to_cart(guid, product.find(".name").text(), parseFloat(product.find(".price > .value").text()), product);
 		e.stopPropagation();
@@ -48,7 +48,7 @@ pines(function(){
 		<div class="product_alias" style="display: none;"><?php e($cur_product->alias); ?></div>
 		<div class="product_main">
 			<?php if (isset($cur_product->thumbnail)) { ?>
-			<img class="thumb" alt="<?php e($cur_product->name); ?>" src="<?php e($pines->config->location.$cur_product->thumbnail); ?>" />
+			<img class="thumb" alt="<?php e($cur_product->name); ?>" src="<?php e($_->config->location.$cur_product->thumbnail); ?>" />
 			<?php } ?>
 			<div class="name"><a href="<?php e(pines_url('com_storefront', 'product', array('a' => $cur_product->alias))); ?>"><?php e($cur_product->name); ?></a></div>
 			<div class="info">
@@ -59,8 +59,8 @@ pines(function(){
 			</div>
 			
 			<div class="price_box clearfix">
-				<div class="price"><?php echo $pines->com_storefront->format_price($cur_product->unit_price); ?><span class="value"><?php echo isset($cur_product->unit_price) ? round($cur_product->unit_price, 2) : ''; ?></span></div>
-				<?php if (!$pines->config->com_storefront->catalog_mode) { ?>
+				<div class="price"><?php echo $_->com_storefront->format_price($cur_product->unit_price); ?><span class="value"><?php echo isset($cur_product->unit_price) ? round($cur_product->unit_price, 2) : ''; ?></span></div>
+				<?php if (!$_->config->com_storefront->catalog_mode) { ?>
 				<button class="add_cart btn btn-primary"><i class="icon-shopping-cart icon-white"></i> Add to Cart</button>
 				<?php } ?>
 			</div>

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -28,11 +28,11 @@ class com_customertimer_tx extends entity {
 	 * @return com_customertimer_tx The new instance.
 	 */
 	public static function factory() {
-		global $pines;
+		global $_;
 		$class = get_class();
 		$args = func_get_args();
 		$entity = new $class($args);
-		$pines->hook->hook_object($entity, $class.'->', false);
+		$_->hook->hook_object($entity, $class.'->', false);
 		return $entity;
 	}
 

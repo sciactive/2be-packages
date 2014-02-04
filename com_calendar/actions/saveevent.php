@@ -8,35 +8,35 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_calendar/editcalendar'))
 	punt_user(null, pines_url('com_calendar', 'editcalendar'));
 
-$pines->page->override = true;
+$_->page->override = true;
 header('Content-Type: application/json');
 
 if (!isset($_REQUEST['employee'])) {
-	$pines->page->override_doc(json_encode(array('result' => false, 'message' => 'Please choose an employee for this event.')));
+	$_->page->override_doc(json_encode(array('result' => false, 'message' => 'Please choose an employee for this event.')));
 	return;
 }
 if (!empty($_REQUEST['id'])) {
 	$event = com_calendar_event::factory((int) $_REQUEST['id']);
 	if (!isset($event->guid)) {
-		$pines->page->override_doc(json_encode(array('result' => false, 'message' => 'The calendar was altered while editing the event.')));
+		$_->page->override_doc(json_encode(array('result' => false, 'message' => 'The calendar was altered while editing the event.')));
 		return;
 	}
 	if (isset($event->appointment)) {
-		$pines->page->override_doc(json_encode(array('result' => false, 'message' => 'You cannot edit appointments.')));
+		$_->page->override_doc(json_encode(array('result' => false, 'message' => 'You cannot edit appointments.')));
 		return;
 	}
 	if ($event->time_off) {
-		$pines->page->override_doc(json_encode(array('result' => false, 'message' => 'You cannot edit time off.')));
+		$_->page->override_doc(json_encode(array('result' => false, 'message' => 'You cannot edit time off.')));
 		return;
 	}
 	if (!gatekeeper('com_calendar/managecalendar') && !($event->user->guid && $_SESSION['user']->is($event->user))) {
-		$pines->page->override_doc(json_encode(array('result' => false, 'message' => 'You can only edit your own events.')));
+		$_->page->override_doc(json_encode(array('result' => false, 'message' => 'You can only edit your own events.')));
 		return;
 	}
 } else {
@@ -59,7 +59,7 @@ if (!isset($event->employee->guid)) {
 	unset($event->employee);
 	$location = group::factory((int) $_REQUEST['location']);
 	if (!isset($location->guid)) {
-		$pines->page->override_doc(json_encode(array('result' => false, 'message' => 'The specified location for this event does not exist.')));
+		$_->page->override_doc(json_encode(array('result' => false, 'message' => 'The specified location for this event does not exist.')));
 		date_default_timezone_set($cur_timezone);
 		return;
 	}
@@ -94,9 +94,9 @@ if ($event->save()) {
 	$event->group = $location;
 	$event->save();
 	$action = ( isset($_REQUEST['id']) ) ? 'Saved' : 'Entered';
-	$pines->page->override_doc(json_encode(array('result' => true, 'message' => $action.' ['.$event->title.']')));
+	$_->page->override_doc(json_encode(array('result' => true, 'message' => $action.' ['.$event->title.']')));
 } else {
-	$pines->page->override_doc(json_encode(array('result' => false, 'message' => 'Error saving event. Do you have permission?')));
+	$_->page->override_doc(json_encode(array('result' => false, 'message' => 'Error saving event. Do you have permission?')));
 }
 
 date_default_timezone_set($cur_timezone);

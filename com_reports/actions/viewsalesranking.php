@@ -8,14 +8,14 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_reports/viewsalesranking') )
 	punt_user(null, pines_url('com_reports', 'viewsalesranking', array('id' => $_REQUEST['id'])));
 
 if ($_REQUEST['id'] === 'latest') {
-	$entity = $pines->entity_manager->get_entity(
+	$entity = $_->entity_manager->get_entity(
 			array('class' => com_reports_sales_ranking, 'reverse' => true),
 			array('&',
 				'tag' => array('com_reports', 'sales_ranking')

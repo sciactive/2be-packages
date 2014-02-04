@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -31,8 +31,8 @@ class com_elfinderupload extends component implements uploader_interface {
 	 */
 	public function load() {
 		if (!$this->js_loaded) {
-			global $pines;
-			$pines->com_elfinder->load();
+			global $_;
+			$_->com_elfinder->load();
 			$module = new module('com_elfinderupload', 'elfinder', 'head');
 			$module->render();
 			$this->js_loaded = true;
@@ -42,8 +42,8 @@ class com_elfinderupload extends component implements uploader_interface {
 	public function check($url) {
 		if (empty($url))
 			return false;
-		global $pines;
-		$root_url = $pines->config->com_elfinder->root_url;
+		global $_;
+		$root_url = $_->config->com_elfinder->root_url;
 		if (strpos($url, '..') !== false)
 			return false;
 		return (substr($url, 0, strlen($root_url)) == $root_url);
@@ -52,9 +52,9 @@ class com_elfinderupload extends component implements uploader_interface {
 	public function real($url) {
 		if (empty($url))
 			return '';
-		global $pines;
-		$root = $pines->config->com_elfinder->root;
-		$root_url = $pines->config->com_elfinder->root_url;
+		global $_;
+		$root = $_->config->com_elfinder->root;
+		$root_url = $_->config->com_elfinder->root_url;
 		return $root . join('/', array_map('urldecode', explode('/', substr($url, strlen($root_url)))));
 	}
 
@@ -72,12 +72,12 @@ class com_elfinderupload extends component implements uploader_interface {
 	public function url($real, $full = false) {
 		if (empty($real))
 			return '';
-		global $pines;
-		$root = $pines->config->com_elfinder->root;
+		global $_;
+		$root = $_->config->com_elfinder->root;
 		if ($full)
-			$root_url = $pines->config->com_elfinder->full_root_url;
+			$root_url = $_->config->com_elfinder->full_root_url;
 		else
-			$root_url = $pines->config->com_elfinder->root_url;
+			$root_url = $_->config->com_elfinder->root_url;
 		return $root_url . join('/', array_map('urlencode', explode('/', substr($real, strlen($root)))));
 	}
 }

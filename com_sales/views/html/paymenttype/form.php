@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines *//* @var $this module */
+/* @var $_ pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Payment Type' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide payment type details in this form.';
@@ -32,7 +32,7 @@ $this->note = 'Provide payment type details in this form.';
 		<label><span class="pf-label">Enabled</span>
 			<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->enabled ? ' checked="checked"' : ''; ?> /></label>
 	</div>
-	<?php if ($pines->config->com_sales->com_storefront) { ?>
+	<?php if ($_->config->com_sales->com_storefront) { ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Enabled in Storefront</span>
 			<span class="pf-note">Check to make this a web storefront payment type.</span>

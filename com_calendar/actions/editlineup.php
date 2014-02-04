@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper() )
@@ -18,4 +18,4 @@ $location = group::factory((int)$_REQUEST['location']);
 if (!isset($location->guid))
 	return;
 
-$pines->com_calendar->lineup_form($location);
+$_->com_calendar->lineup_form($location);

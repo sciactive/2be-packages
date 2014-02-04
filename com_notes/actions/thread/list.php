@@ -8,10 +8,10 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_notes/listthreads') )
 	punt_user(null, pines_url('com_notes', 'thread/list'));
 
-$pines->com_notes->list_threads();
+$_->com_notes->list_threads();

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $pines pines */
+/* @var $_ pines */
 defined('P_RUN') or die('Direct access prohibited');
 
 if ( !gatekeeper('com_sales/trackproducts') )
@@ -42,4 +42,4 @@ if (!empty($_REQUEST['types'])) {
 
 $descendants = ($_REQUEST['descendants'] == 'true');
 
-$pines->com_sales->track_product($_REQUEST['serial'], $_REQUEST['sku'], $start_date, $end_date, $location, $descendants, $types);
+$_->com_sales->track_product($_REQUEST['serial'], $_REQUEST['sku'], $start_date, $end_date, $location, $descendants, $types);
