@@ -12,12 +12,12 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php echo htmlspecialchars(clean_filename($pines->config->com_bootstrap->theme)); ?>/css/<?php echo $pines->config->debug_mode ? 'bootstrap.css' : 'bootstrap.min.css'; ?>");
+pines.loadcss("<?php e($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($pines->config->com_bootstrap->theme)); ?>/css/<?php echo $pines->config->debug_mode ? 'bootstrap.css' : 'bootstrap.min.css'; ?>");
 <?php if ($pines->config->com_bootstrap->responsive && file_exists('components/com_bootstrap/includes/themes/'.clean_filename($pines->config->com_bootstrap->theme).'/css/'.($pines->config->debug_mode ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css'))) { ?>
-pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php echo htmlspecialchars(clean_filename($pines->config->com_bootstrap->theme)); ?>/css/<?php echo $pines->config->debug_mode ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css'; ?>");
+pines.loadcss("<?php e($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($pines->config->com_bootstrap->theme)); ?>/css/<?php echo $pines->config->debug_mode ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css'; ?>");
 <?php } ?>
-pines.loadcss("<?php echo htmlspecialchars($pines->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome.css");
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php echo htmlspecialchars(clean_filename($pines->config->com_bootstrap->theme)); ?>/js/<?php echo $pines->config->debug_mode ? 'bootstrap.js' : 'bootstrap.min.js'; ?>");
+pines.loadcss("<?php e($pines->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome.css");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($pines->config->com_bootstrap->theme)); ?>/js/<?php echo $pines->config->debug_mode ? 'bootstrap.js' : 'bootstrap.min.js'; ?>");
 // Get the current number of columns in the CSS grid.
 pines.com_bootstrap_get_columns = function(){
 	var cur_grid = 0, cur_test;
@@ -35,15 +35,15 @@ pines(function(){
 */ ?>
 </script>
 <noscript>
-<link href="<?php echo htmlspecialchars($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php echo htmlspecialchars(clean_filename($pines->config->com_bootstrap->theme)); ?>/css/<?php echo $pines->config->debug_mode ? 'bootstrap.css' : 'bootstrap.min.css'; ?>" media="all" rel="stylesheet" type="text/css" />
+<link href="<?php e($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($pines->config->com_bootstrap->theme)); ?>/css/<?php echo $pines->config->debug_mode ? 'bootstrap.css' : 'bootstrap.min.css'; ?>" media="all" rel="stylesheet" type="text/css" />
 <?php if ($pines->config->com_bootstrap->responsive && file_exists('components/com_bootstrap/includes/themes/'.clean_filename($pines->config->com_bootstrap->theme).'/css/'.($pines->config->debug_mode ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css'))) { ?>
-<link href="<?php echo htmlspecialchars($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php echo htmlspecialchars(clean_filename($pines->config->com_bootstrap->theme)); ?>/css/<?php echo $pines->config->debug_mode ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css'; ?>" media="all" rel="stylesheet" type="text/css" />
+<link href="<?php e($pines->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($pines->config->com_bootstrap->theme)); ?>/css/<?php echo $pines->config->debug_mode ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css'; ?>" media="all" rel="stylesheet" type="text/css" />
 <?php } ?>
-<link href="<?php echo htmlspecialchars($pines->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome.css" media="all" rel="stylesheet" type="text/css" />
+<link href="<?php e($pines->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome.css" media="all" rel="stylesheet" type="text/css" />
 </noscript>
 <!--[if IE 7]>
 <script type="text/javascript">
-pines.loadcss("<?php echo htmlspecialchars($pines->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome-ie7.min.css");
+pines.loadcss("<?php e($pines->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome-ie7.min.css");
 </script>
 <![endif]-->
 <style type="text/css">

@@ -267,8 +267,8 @@ if (!is_array($loan_ids))
 			$display_status = $cur_loan->get_loan_status();
 			if ($cur_loan->temp_paid_off || $tag_status != 'active') { ?>
 			<tr class="payment-row <?php echo ($tag_status == 'paidoff' || $cur_loan->temp_paid_off) ? 'success' : 'warning'; ?>">
-				<td class="vertical-middle entity-link"><a data-entity="<?php echo htmlspecialchars($cur_loan->guid); ?>" data-entity-context="com_loan_loan"><?php echo $cur_loan->id; ?></a></td>
-				<td class="vertical-middle entity-link"><a data-entity="<?php echo htmlspecialchars($cur_loan->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($cur_loan->customer->name); ?></a></td>
+				<td class="vertical-middle entity-link"><a data-entity="<?php e($cur_loan->guid); ?>" data-entity-context="com_loan_loan"><?php echo $cur_loan->id; ?></a></td>
+				<td class="vertical-middle entity-link"><a data-entity="<?php e($cur_loan->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($cur_loan->customer->name); ?></a></td>
 				<?php if ($tag_status == 'paidoff' || $cur_loan->temp_paid_off) { ?>
 				<td colspan="3" class="vertical-middle text-right text-success" style="font-weight:bold;">Paid Off!</td>
 				<?php } else { ?>
@@ -277,16 +277,16 @@ if (!is_array($loan_ids))
 			</tr>
 			<tr class="action-row <?php echo ($tag_status == 'paidoff' || $cur_loan->temp_paid_off) ? 'success' : 'warning'; ?>">
 				<td colspan="3" class="vertical-middle"><span class="payment-date-label">Last Payment Made</span></td>
-				<td colspan="2" class="vertical-middle text-right"><?php echo (!empty($cur_loan->paid)) ? htmlspecialchars(format_date($cur_loan->payments[0]['last_payment_made'], 'date_sort')) : 'None Made';?></td>
+				<td colspan="2" class="vertical-middle text-right"><?php echo (!empty($cur_loan->paid)) ? h(format_date($cur_loan->payments[0]['last_payment_made'], 'date_sort')) : 'None Made';?></td>
 			</tr>
 			<?php } else { ?>
 			<tr class="payment-row <?php echo ($cur_loan->temp_past_due > 0) ? 'text-error' : ''; ?>">
-				<td class="vertical-middle entity-link"><a data-entity="<?php echo htmlspecialchars($cur_loan->guid); ?>" data-entity-context="com_loan_loan"><?php echo $cur_loan->id; ?></a></td>
-				<td class="vertical-middle entity-link"><a data-entity="<?php echo htmlspecialchars($cur_loan->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($cur_loan->customer->name); ?></a></td>
-				<td class="vertical-middle"><span class="nextdue-tooltip" data-due="<?php echo (date("c",$cur_loan->temp_next_due_date)); ?>" data-date="<?php echo (format_date($cur_loan->temp_next_due_date, 'date_short')); ?>"><?php echo htmlspecialchars('$'.number_format($cur_loan->temp_next_due, 2, '.', '')); ?></span></td>
-				<td class="vertical-middle"><span class="<?php echo ($cur_loan->temp_past_due > 0) ? 'pastdue-tooltip': ''; ?>" data-due="<?php echo (date("c", $cur_loan->temp_past_due_date));?>" data-date="<?php echo (format_date($cur_loan->temp_past_due_date, 'date_short')); ?>"><?php echo htmlspecialchars('$'.number_format($cur_loan->temp_past_due, 2, '.', '')); ?></span></td>
+				<td class="vertical-middle entity-link"><a data-entity="<?php e($cur_loan->guid); ?>" data-entity-context="com_loan_loan"><?php echo $cur_loan->id; ?></a></td>
+				<td class="vertical-middle entity-link"><a data-entity="<?php e($cur_loan->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($cur_loan->customer->name); ?></a></td>
+				<td class="vertical-middle"><span class="nextdue-tooltip" data-due="<?php echo (date("c",$cur_loan->temp_next_due_date)); ?>" data-date="<?php echo (format_date($cur_loan->temp_next_due_date, 'date_short')); ?>"><?php e('$'.number_format($cur_loan->temp_next_due, 2, '.', '')); ?></span></td>
+				<td class="vertical-middle"><span class="<?php echo ($cur_loan->temp_past_due > 0) ? 'pastdue-tooltip': ''; ?>" data-due="<?php echo (date("c", $cur_loan->temp_past_due_date));?>" data-date="<?php echo (format_date($cur_loan->temp_past_due_date, 'date_short')); ?>"><?php e('$'.number_format($cur_loan->temp_past_due, 2, '.', '')); ?></span></td>
 				<td class="vertical-middle text-right">
-					<input class="payment-input  text-right <?php echo ($cur_loan->temp_past_due > 0) ? 'text-error' : ''; ?>" type="text" tabindex="<?php echo $c+1; ?>" name="payment" value="<?php echo htmlspecialchars('$'.number_format($cur_loan->temp_next_due + $cur_loan->temp_past_due, 2, '.', '')); ?>" placeholder="Amount"/>
+					<input class="payment-input  text-right <?php echo ($cur_loan->temp_past_due > 0) ? 'text-error' : ''; ?>" type="text" tabindex="<?php echo $c+1; ?>" name="payment" value="<?php e('$'.number_format($cur_loan->temp_next_due + $cur_loan->temp_past_due, 2, '.', '')); ?>" placeholder="Amount"/>
 				</td>
 			</tr>
 			<tr class="action-row">
@@ -303,7 +303,7 @@ if (!is_array($loan_ids))
 					
 				</td>
 				<td colspan="2" class="vertical-middle text-center"><span class="payment-status text-success hide"><i class="icon-ok"></i> Saved!</span></td>
-				<td colspan="1" class="text-right"><button tabindex="<?php echo $c+2; ?>" class="btn btn-info payment-process" type="text" date-id="<?php echo htmlspecialchars($cur_loan->guid); ?>">Process</button></td>
+				<td colspan="1" class="text-right"><button tabindex="<?php echo $c+2; ?>" class="btn btn-info payment-process" type="text" date-id="<?php e($cur_loan->guid); ?>">Process</button></td>
 			</tr>
 			<?php } $c += 3; } ?>
 		</tbody>

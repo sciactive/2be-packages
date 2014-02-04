@@ -41,7 +41,7 @@ $pines->com_pgrid->load();
 		});
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_customer', 'defaultgroupssave')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_customer', 'defaultgroupssave')); ?>">
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Default Groups</span>
 		<span class="pf-note">New customers created through the CRM will be placed in these groups. Newly registering customers will use the user manager's defaults.</span>
@@ -60,11 +60,11 @@ $pines->com_pgrid->load();
 					</thead>
 					<tbody>
 					<?php foreach($this->groups as $cur_group) { ?>
-						<tr title="<?php echo htmlspecialchars($cur_group->guid); ?>" class="<?php echo $cur_group->get_children() ? 'parent ' : ''; ?><?php echo (isset($cur_group->parent) && $cur_group->parent->in_array($this->groups)) ? htmlspecialchars("child ch_{$cur_group->parent->guid} ") : ''; ?>">
-							<td><input type="radio" name="group" value="<?php echo htmlspecialchars($cur_group->guid); ?>" <?php echo $cur_group->default_customer_primary ? 'checked="checked" ' : ''; ?>/></td>
-							<td><input type="checkbox" name="groups[]" value="<?php echo htmlspecialchars($cur_group->guid); ?>" <?php echo $cur_group->default_customer_secondary ? 'checked="checked" ' : ''; ?>/></td>
-							<td><?php echo htmlspecialchars($cur_group->name); ?></td>
-							<td><a data-entity="<?php echo htmlspecialchars($cur_group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($cur_group->groupname); ?></a></td>
+						<tr title="<?php e($cur_group->guid); ?>" class="<?php echo $cur_group->get_children() ? 'parent ' : ''; ?><?php echo (isset($cur_group->parent) && $cur_group->parent->in_array($this->groups)) ? h("child ch_{$cur_group->parent->guid} ") : ''; ?>">
+							<td><input type="radio" name="group" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->default_customer_primary ? 'checked="checked" ' : ''; ?>/></td>
+							<td><input type="checkbox" name="groups[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->default_customer_secondary ? 'checked="checked" ' : ''; ?>/></td>
+							<td><?php e($cur_group->name); ?></td>
+							<td><a data-entity="<?php e($cur_group->guid); ?>" data-entity-context="group"><?php e($cur_group->groupname); ?></a></td>
 						</tr>
 					<?php } ?>
 					</tbody>

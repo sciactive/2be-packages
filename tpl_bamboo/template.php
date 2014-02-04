@@ -29,22 +29,22 @@ Released   : 20090820
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title><?php echo htmlspecialchars($pines->page->get_title()); ?></title>
-		<link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo htmlspecialchars($pines->config->location); ?>favicon.ico" />
+		<title><?php e($pines->page->get_title()); ?></title>
+		<link rel="icon" type="image/vnd.microsoft.icon" href="<?php e($pines->config->location); ?>favicon.ico" />
 
-		<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/style.css" media="all" rel="stylesheet" type="text/css" />
+		<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/style.css" media="all" rel="stylesheet" type="text/css" />
 
-		<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />
-		<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />
-		<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/dropdown/dropdown.vertical.rtl.css" media="all" rel="stylesheet" type="text/css" />
-		<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/dropdown/themes/default/default.ultimate.css" media="all" rel="stylesheet" type="text/css" />
+		<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />
+		<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />
+		<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/dropdown/dropdown.vertical.rtl.css" media="all" rel="stylesheet" type="text/css" />
+		<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/dropdown/themes/default/default.ultimate.css" media="all" rel="stylesheet" type="text/css" />
 
-		<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->rela_location); ?>system/includes/js.php"></script>
+		<script type="text/javascript" src="<?php e($pines->config->rela_location); ?>system/includes/js.php"></script>
 
 		<?php echo $pines->page->render_modules('head', 'module_head'); ?>
 
 		<!--[if lt IE 7]>
-		<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/js/jquery/jquery.dropdown.js"></script>
+		<script type="text/javascript" src="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/js/jquery/jquery.dropdown.js"></script>
 		<![endif]-->
 	</head>
 	<body>
@@ -56,10 +56,10 @@ Released   : 20090820
 			pines(function(){
 				<?php
 				if ( $error ) { foreach ($error as $cur_item) {
-					echo 'pines.error('.json_encode(htmlspecialchars($cur_item)).", \"Error\");\n";
+					echo 'pines.error('.json_encode(h($cur_item)).", \"Error\");\n";
 				} }
 				if ( $notice ) { foreach ($notice as $cur_item) {
-					echo 'pines.notice('.json_encode(htmlspecialchars($cur_item)).", \"Notice\");\n";
+					echo 'pines.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
 				} }
 				?>
 			});
@@ -70,8 +70,8 @@ Released   : 20090820
 			<div id="header-wrapper">
 				<div id="header">
 					<div id="logo">
-						<h1><a href="<?php echo htmlspecialchars(pines_url()); ?>"><?php echo htmlspecialchars($pines->config->page_title); ?></a></h1>
-						<p><?php echo htmlspecialchars($pines->config->tpl_bamboo->slogan); ?></p>
+						<h1><a href="<?php e(pines_url()); ?>"><?php e($pines->config->page_title); ?></a></h1>
+						<p><?php e($pines->config->tpl_bamboo->slogan); ?></p>
 						<br style="clear: left;" /><br />
 						<?php echo $pines->page->render_modules('header', 'module_header'); ?>
 					</div>
@@ -113,7 +113,7 @@ Released   : 20090820
 		<div id="footer-wrapper">
 			<div id="footer">
 				<?php echo $pines->page->render_modules('footer', 'module_header'); ?>
-				<p class="copyright"><?php echo htmlspecialchars($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
+				<p class="copyright"><?php e($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
 			</div>
 			<br style="clear: both; height: 0;" />
 			<!-- end #footer -->

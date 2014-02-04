@@ -131,7 +131,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	</script>
 	<div class="pf-element pf-heading">
 		<div style="float: right;">
-			<a data-entity="<?php echo htmlspecialchars($this->entity->guid); ?>" data-entity-context="com_sales_sale">Sale <?php echo htmlspecialchars($this->entity->id); ?></a>
+			<a data-entity="<?php e($this->entity->guid); ?>" data-entity-context="com_sales_sale">Sale <?php e($this->entity->id); ?></a>
 		</div>
 		<h3>Item to Swap/Remove</h3>
 	</div>
@@ -139,7 +139,7 @@ defined('P_RUN') or die('Direct access prohibited');
 		if (!$cur_product['stock_entities'])
 			continue; ?>
 	<div class="pf-element">
-		<span class="pf-label"><a data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars("{$cur_product['entity']->name} [{$cur_product['entity']->sku}]"); ?></a></span>
+		<span class="pf-label"><a data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e("{$cur_product['entity']->name} [{$cur_product['entity']->sku}]"); ?></a></span>
 		<div class="pf-group">
 			<div class="pf-field">
 				<?php foreach ($cur_product['stock_entities'] as $cur_stock) {
@@ -153,7 +153,7 @@ defined('P_RUN') or die('Direct access prohibited');
 					if ($cur_product['entity']->serialized)
 						$classes .= ' serialized';
 					?>
-				<label style="display: block;"><input type="radio" name="swap_item" data-product="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-guid="<?php echo htmlspecialchars($cur_stock->guid); ?>" value="<?php echo htmlspecialchars($key.'_'.$cur_stock->guid); ?>" class="<?php echo $classes; ?>" /> <a data-entity="<?php echo htmlspecialchars($cur_stock->guid); ?>" data-entity-context="com_sales_stock">Entry <?php echo htmlspecialchars($cur_stock->guid . (!empty($cur_stock->serial) ? " (Serial: {$cur_stock->serial})" : '')); ?></a></label>
+				<label style="display: block;"><input type="radio" name="swap_item" data-product="<?php e($cur_product['entity']->guid); ?>" data-guid="<?php e($cur_stock->guid); ?>" value="<?php e($key.'_'.$cur_stock->guid); ?>" class="<?php echo $classes; ?>" /> <a data-entity="<?php e($cur_stock->guid); ?>" data-entity-context="com_sales_stock">Entry <?php e($cur_stock->guid . (!empty($cur_stock->serial) ? " (Serial: {$cur_stock->serial})" : '')); ?></a></label>
 				<?php } ?>
 			</div>
 		</div>

@@ -83,17 +83,17 @@ foreach($this->groups as $cur_group) {
 	</thead>
 	<tbody>
 	<?php foreach($this->groups as $group) { ?>
-		<tr title="<?php echo htmlspecialchars($group->guid); ?>" class="<?php
+		<tr title="<?php e($group->guid); ?>" class="<?php
 		if (in_array($group->guid, $parents))
 			echo "parent ";
 		if (isset($group->parent) && $group->parent->in_array($this->groups))
-			echo htmlspecialchars("child ch_{$group->parent->guid}");
+			e("child ch_{$group->parent->guid}");
 		?>">
-			<td><?php echo htmlspecialchars($group->guid); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($group->groupname); ?></a></td>
-			<td><?php echo htmlspecialchars($group->name); ?></td>
-			<td><a href="mailto:<?php echo htmlspecialchars($group->email); ?>"><?php echo htmlspecialchars($group->email); ?></a></td>
-			<td><?php echo htmlspecialchars($group->timezone); ?></td>
+			<td><?php e($group->guid); ?></td>
+			<td><a data-entity="<?php e($group->guid); ?>" data-entity-context="group"><?php e($group->groupname); ?></a></td>
+			<td><?php e($group->name); ?></td>
+			<td><a href="mailto:<?php e($group->email); ?>"><?php e($group->email); ?></a></td>
+			<td><?php e($group->timezone); ?></td>
 			<td><?php
 			$user_array = $pines->entity_manager->get_entities(
 					array('class' => user, 'limit' => 51),
@@ -111,7 +111,7 @@ foreach($this->groups as $cur_group) {
 			if ($count < 15) {
 				$user_list = '';
 				foreach ($user_array as $cur_user) {
-					$user_list .= (empty($user_list) ? '' : ', ').'<a data-entity="'.htmlspecialchars($cur_user->guid).'" data-entity-context="user">'.htmlspecialchars($cur_user->username).'</a>';
+					$user_list .= (empty($user_list) ? '' : ', ').'<a data-entity="'.h($cur_user->guid).'" data-entity-context="user">'.h($cur_user->username).'</a>';
 				}
 				echo $user_list;
 			} elseif ($count === 51) {

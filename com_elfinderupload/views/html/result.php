@@ -14,7 +14,7 @@ $this->title = 'elFinder Uploader Results';
 ?>
 <div class="pf-form">
 	<div class="pf-element pf-heading">
-		<h4>File: <?php echo htmlspecialchars($this->file); ?></h4>
+		<h4>File: <?php e($this->file); ?></h4>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Check Passed</span>
@@ -24,20 +24,20 @@ $this->title = 'elFinder Uploader Results';
 	<div class="pf-element">
 		<span class="pf-label">Real Path</span>
 		<span class="pf-note">This path can be used in code to manipulate the file.</span>
-		<span class="pf-field"><?php $real = $pines->uploader->real($this->file); echo htmlspecialchars($real); ?></span>
+		<span class="pf-field"><?php $real = $pines->uploader->real($this->file); e($real); ?></span>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Relative URL</span>
 		<span class="pf-note">This path can be used for browser access to the file.</span>
-		<span class="pf-field"><?php $url = $pines->uploader->url($real); echo htmlspecialchars($url); ?></span>
+		<span class="pf-field"><?php $url = $pines->uploader->url($real); e($url); ?></span>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Full URL</span>
 		<span class="pf-note">This path can be used for access to the file in email, another server, etc.</span>
-		<span class="pf-field"><?php $furl = $pines->uploader->url($real, true); echo htmlspecialchars($furl); ?></span>
+		<span class="pf-field"><?php $furl = $pines->uploader->url($real, true); e($furl); ?></span>
 	</div>
 	<div class="pf-element pf-heading">
-		<h4>Temp File: <?php echo htmlspecialchars($this->tmpfile); ?></h4>
+		<h4>Temp File: <?php e($this->tmpfile); ?></h4>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Check Passed</span>
@@ -47,10 +47,10 @@ $this->title = 'elFinder Uploader Results';
 	<div class="pf-element">
 		<span class="pf-label">Real Path</span>
 		<span class="pf-note">This path can be used in code to manipulate the file.</span>
-		<span class="pf-field"><?php $real = $pines->uploader->temp($this->tmpfile); echo htmlspecialchars($real); ?></span>
+		<span class="pf-field"><?php $real = $pines->uploader->temp($this->tmpfile); e($real); ?></span>
 	</div>
 	<div class="pf-element pf-heading">
-		<h4>Folder: <?php echo htmlspecialchars($this->folder); ?></h4>
+		<h4>Folder: <?php e($this->folder); ?></h4>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Check Passed</span>
@@ -58,21 +58,21 @@ $this->title = 'elFinder Uploader Results';
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Real Path</span>
-		<span class="pf-field"><?php $real = $pines->uploader->real($this->folder); echo htmlspecialchars($real); ?></span>
+		<span class="pf-field"><?php $real = $pines->uploader->real($this->folder); e($real); ?></span>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Relative URL</span>
-		<span class="pf-field"><?php $url = $pines->uploader->url($real); echo htmlspecialchars($url); ?></span>
+		<span class="pf-field"><?php $url = $pines->uploader->url($real); e($url); ?></span>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Full URL</span>
-		<span class="pf-field"><?php $furl = $pines->uploader->url($real, true); echo htmlspecialchars($furl); ?></span>
+		<span class="pf-field"><?php $furl = $pines->uploader->url($real, true); e($furl); ?></span>
 	</div>
 	<fieldset class="pf-group">
 		<legend>Multi-File Uploading Result</legend>
 		<?php foreach ((array) $this->files as $file) { ?>
 		<div class="pf-element pf-heading">
-			<h4>File: <?php echo htmlspecialchars($file); ?></h4>
+			<h4>File: <?php e($file); ?></h4>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Check Passed</span>
@@ -80,15 +80,15 @@ $this->title = 'elFinder Uploader Results';
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Real Path</span>
-			<span class="pf-field"><?php $real = $pines->uploader->real($file); echo htmlspecialchars($real); ?></span>
+			<span class="pf-field"><?php $real = $pines->uploader->real($file); e($real); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Relative URL</span>
-			<span class="pf-field"><?php $url = $pines->uploader->url($real); echo htmlspecialchars($url); ?></span>
+			<span class="pf-field"><?php $url = $pines->uploader->url($real); e($url); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Full URL</span>
-			<span class="pf-field"><?php $furl = $pines->uploader->url($real, true); echo htmlspecialchars($furl); ?></span>
+			<span class="pf-field"><?php $furl = $pines->uploader->url($real, true); e($furl); ?></span>
 		</div>
 		<?php } ?>
 	</fieldset>

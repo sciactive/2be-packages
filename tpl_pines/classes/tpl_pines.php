@@ -76,12 +76,12 @@ class tpl_pines extends template {
 	public function sub_menu(&$menu, $header_style = false, $top_level = true) {
 		$count = count($menu);
 		$return = '<li><a class="'.($header_style ? 'ui-widget-header' : 'ui-state-default').($menu[0]['current_page'] ? ($top_level ? '' : ' ui-priority-primary') : '').($menu[0]['current_page_parent'] ? ($top_level ? '' : ' ui-priority-primary') : '').'" href="'.
-			(isset($menu[0]['href']) ? htmlspecialchars($menu[0]['href']) : 'javascript:void(0);').'"'.
+			(isset($menu[0]['href']) ? h($menu[0]['href']) : 'javascript:void(0);').'"'.
 			(isset($menu[0]['onclick']) ? " onclick=\"{$menu[0]['onclick']}\"" : '').
 			(isset($menu[0]['target']) ? " target=\"{$menu[0]['target']}\"" : '')
 			.'>'.
 			($top_level && ($menu[0]['current_page'] || $menu[0]['current_page_parent']) ? '<span class="ui-icon ui-icon-triangle-1-s"></span>' : '').
-			htmlspecialchars($menu[0]['text']).
+			h($menu[0]['text']).
 			($count > 1 ? '<span class="ui-icon ui-icon-triangle-1-se"></span>' : '').'</a>';
 		if ($count > 1) {
 			$return .= '<ul>';

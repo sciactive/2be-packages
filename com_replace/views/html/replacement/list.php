@@ -66,8 +66,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->replacements as $replacement) { ?>
-		<tr title="<?php echo htmlspecialchars($replacement->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($replacement->guid); ?>" data-entity-context="com_replace_replacement"><?php echo htmlspecialchars($replacement->name); ?></a></td>
+		<tr title="<?php e($replacement->guid); ?>">
+			<td><a data-entity="<?php e($replacement->guid); ?>" data-entity-context="com_replace_replacement"><?php e($replacement->name); ?></a></td>
 			<td><?php echo ($replacement->enabled ? 'Yes' : 'No'); ?></td>
 			<td><?php echo count($replacement->strings); ?></td>
 		</tr>

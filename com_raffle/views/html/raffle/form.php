@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Raffle' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Raffle' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide raffle details in this form.';
 $pines->com_pgrid->load();
 ?>
@@ -126,20 +126,20 @@ $pines->com_pgrid->load();
 		});
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_raffle', 'raffle/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_raffle', 'raffle/save')); ?>">
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars($this->entity->name); ?>" /></label>
+			<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Public</span>
@@ -155,7 +155,7 @@ $pines->com_pgrid->load();
 	<div class="pf-element">
 		<label><span class="pf-label">Places</span>
 			<span class="pf-note">The number of winners.</span>
-			<input class="pf-field" type="text" name="places" size="5" value="<?php echo htmlspecialchars($this->entity->places); ?>" /></label>
+			<input class="pf-field" type="text" name="places" size="5" value="<?php e($this->entity->places); ?>" /></label>
 	</div>
 	<?php } else { ?>
 	<div class="pf-element">
@@ -178,10 +178,10 @@ $pines->com_pgrid->load();
 			<tbody>
 				<?php foreach ($this->entity->contestants as $cur_contestant) { ?>
 				<tr>
-					<td><?php echo htmlspecialchars($cur_contestant['first_name']); ?></td>
-					<td><?php echo htmlspecialchars($cur_contestant['last_name']); ?></td>
-					<td><?php echo htmlspecialchars($cur_contestant['email']); ?></td>
-					<td><?php echo htmlspecialchars(format_phone($cur_contestant['phone'])); ?></td>
+					<td><?php e($cur_contestant['first_name']); ?></td>
+					<td><?php e($cur_contestant['last_name']); ?></td>
+					<td><?php e($cur_contestant['email']); ?></td>
+					<td><?php e(format_phone($cur_contestant['phone'])); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>
@@ -233,10 +233,10 @@ $pines->com_pgrid->load();
 			<tbody>
 				<?php foreach ($this->entity->public_contestants as $cur_contestant) { ?>
 				<tr>
-					<td><?php echo htmlspecialchars($cur_contestant['first_name']); ?></td>
-					<td><?php echo htmlspecialchars($cur_contestant['last_name']); ?></td>
-					<td><?php echo htmlspecialchars($cur_contestant['email']); ?></td>
-					<td><?php echo htmlspecialchars(format_phone($cur_contestant['phone'])); ?></td>
+					<td><?php e($cur_contestant['first_name']); ?></td>
+					<td><?php e($cur_contestant['last_name']); ?></td>
+					<td><?php e($cur_contestant['email']); ?></td>
+					<td><?php e(format_phone($cur_contestant['phone'])); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>
@@ -244,9 +244,9 @@ $pines->com_pgrid->load();
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_raffle', 'raffle/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_raffle', 'raffle/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

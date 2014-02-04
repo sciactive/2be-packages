@@ -23,13 +23,13 @@ if ($this->render == 'body') {
 ?>
 <h4 style="float: left;">
 	<?php if ($icon) { ?>
-	<i style="float: left; height: 16px; width: 16px;" class="<?php echo htmlspecialchars($icon); ?>"></i>&nbsp;
+	<i style="float: left; height: 16px; width: 16px;" class="<?php e($icon); ?>"></i>&nbsp;
 	<?php }
-	echo htmlspecialchars($type); ?>
+	e($type); ?>
 </h4>
 <?php if ($url_list) { ?>
 <div style="float: right;">
-	<a href="<?php echo htmlspecialchars($url_list); ?>">List <?php echo htmlspecialchars($types); ?></a>
+	<a href="<?php e($url_list); ?>">List <?php e($types); ?></a>
 </div>
 <?php } ?>
 <div style="clear: both; padding-top: 1em;" class="clearfix">
@@ -39,27 +39,27 @@ if ($this->render == 'body') {
 	</div>
 	<?php if ($this->entity->user->guid) { ?>
 	<div style="float: right; clear: right; font-size:.9em;">
-		Owned by <a data-entity="<?php echo htmlspecialchars($this->entity->user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($this->entity->user->info('name')); ?></a>
+		Owned by <a data-entity="<?php e($this->entity->user->guid); ?>" data-entity-context="user"><?php e($this->entity->user->info('name')); ?></a>
 	</div>
 	<?php } if ($this->entity->group->guid) { ?>
 	<div style="float: right; clear: right; font-size:.9em;">
-		Belongs to group <a data-entity="<?php echo htmlspecialchars($this->entity->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($this->entity->group->info('name')); ?></a>
+		Belongs to group <a data-entity="<?php e($this->entity->group->guid); ?>" data-entity-context="group"><?php e($this->entity->group->info('name')); ?></a>
 	</div>
 	<?php } ?>
 </div>
 <?php if ($image) { ?>
 <div style="clear: both; padding-top: 1em; text-align: center;">
 	<span class="thumbnail" style="display: inline-block; max-width: 90%;">
-		<img src="<?php echo htmlspecialchars($image); ?>" alt="" style="max-width: 100%;">
+		<img src="<?php e($image); ?>" alt="" style="max-width: 100%;">
 	</span>
 </div>
 <?php } } elseif ($this->render == 'footer') {
 	$url_view = $this->entity->info('url_view');
 	$url_edit = $this->entity->info('url_edit');
 	if ($url_view) { ?>
-<a href="<?php echo htmlspecialchars($url_view); ?>" class="btn">View</a>
+<a href="<?php e($url_view); ?>" class="btn">View</a>
 <?php } if ($url_edit) { ?>
-<a href="<?php echo htmlspecialchars($url_edit); ?>" class="btn">Edit</a>
+<a href="<?php e($url_edit); ?>" class="btn">Edit</a>
 <?php } if (!$url_view && !$url_edit) { ?>
 <a href="javascript:void(0);" class="btn" data-dismiss="modal">Close</a>
 <?php } }

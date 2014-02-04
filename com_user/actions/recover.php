@@ -50,14 +50,14 @@ if (!$user->save()) {
 }
 
 // Send the recovery email.
-$link = htmlspecialchars(pines_url('com_user', 'recoverpassword', array('id' => $user->guid, 'secret' => $user->secret), true));
+$link = h(pines_url('com_user', 'recoverpassword', array('id' => $user->guid, 'secret' => $user->secret), true));
 $macros = array(
 	'recover_link' => $link,
-	'minutes' => htmlspecialchars($pines->config->com_user->pw_recovery_minutes),
-	'to_phone' => htmlspecialchars(format_phone($user->phone)),
-	'to_fax' => htmlspecialchars(format_phone($user->fax)),
-	'to_timezone' => htmlspecialchars($user->timezone),
-	'to_address' => $user->address_type == 'us' ? htmlspecialchars("{$user->address_1} {$user->address_2}").'<br />'.htmlspecialchars("{$user->city}, {$user->state} {$user->zip}") : '<pre>'.htmlspecialchars($user->address_international).'</pre>'
+	'minutes' => h($pines->config->com_user->pw_recovery_minutes),
+	'to_phone' => h(format_phone($user->phone)),
+	'to_fax' => h(format_phone($user->fax)),
+	'to_timezone' => h($user->timezone),
+	'to_address' => $user->address_type == 'us' ? h("{$user->address_1} {$user->address_2}").'<br />'.h("{$user->city}, {$user->state} {$user->zip}") : '<pre>'.h($user->address_international).'</pre>'
 );
 if ($pines->com_mailer->send_mail('com_user/recover_account', $macros, $user))
 	pines_notice('We have sent an email to your registered email address. Please check your email to continue with account recovery.');

@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Employee' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Employee' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide employee account details in this form.';
 $pines->editor->load();
 $pines->com_pgrid->load();
@@ -123,7 +123,7 @@ $pines->com_pgrid->load();
 		});
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_hrm', 'employee/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_hrm', 'employee/save')); ?>">
 	<ul class="nav nav-tabs" style="clear: both;">
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
 		<li><a href="#p_muid_tab_attributes" data-toggle="tab">Attributes</a></li>
@@ -135,17 +135,17 @@ $pines->com_pgrid->load();
 		<div class="tab-pane active" id="p_muid_tab_general">
 			<?php if (isset($this->entity->guid)) { ?>
 			<div class="date_info" style="float: right; text-align: right;">
-				<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
 				<span class="pf-label">Name</span>
-				<span class="pf-field"><?php echo htmlspecialchars($this->entity->name); ?></span>
+				<span class="pf-field"><?php e($this->entity->name); ?></span>
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Username</span>
-				<span class="pf-field"><?php echo htmlspecialchars($this->entity->username); ?></span>
+				<span class="pf-field"><?php e($this->entity->username); ?></span>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Nickname</span>
@@ -155,7 +155,7 @@ $pines->com_pgrid->load();
 			<div class="pf-element">
 				<label><span class="pf-label">SSN</span>
 					<span class="pf-note">Without dashes.</span>
-					<input class="pf-field" type="text" name="ssn" size="24" value="<?php echo htmlspecialchars($this->entity->ssn); ?>" /></label>
+					<input class="pf-field" type="text" name="ssn" size="24" value="<?php e($this->entity->ssn); ?>" /></label>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
@@ -164,19 +164,19 @@ $pines->com_pgrid->load();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Hire Date</span>
-					<input class="pf-field" type="text" size="24" name="hire_date" value="<?php echo empty($this->entity->hire_date) ? '' : htmlspecialchars(format_date($this->entity->hire_date, 'date_sort')); ?>" /></label>
+					<input class="pf-field" type="text" size="24" name="hire_date" value="<?php echo empty($this->entity->hire_date) ? '' : h(format_date($this->entity->hire_date, 'date_sort')); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Job Title</span>
 					<select class="pf-field" name="job_title">
 						<?php foreach ($pines->config->com_hrm->employee_departments as $cur_dept) { $cur_dept = explode(':', $cur_dept); ?>
-						<option value="<?php echo htmlspecialchars($cur_dept[0]); ?>" <?php echo ($this->entity->job_title == $cur_dept[0]) ? 'selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_dept[0]); ?></option>
+						<option value="<?php e($cur_dept[0]); ?>" <?php echo ($this->entity->job_title == $cur_dept[0]) ? 'selected="selected"' : ''; ?>><?php e($cur_dept[0]); ?></option>
 						<?php } ?>
 					</select></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Training Completion Date</span>
-					<input class="pf-field" type="text" size="24" name="training_completion_date" value="<?php echo empty($this->entity->training_completion_date) ? '' : htmlspecialchars(format_date($this->entity->training_completion_date, 'date_sort')); ?>" /></label>
+					<input class="pf-field" type="text" size="24" name="training_completion_date" value="<?php echo empty($this->entity->training_completion_date) ? '' : h(format_date($this->entity->training_completion_date, 'date_sort')); ?>" /></label>
 			</div>
 			<?php if ($pines->config->com_hrm->com_calendar) { ?>
 			<div class="pf-element">
@@ -204,11 +204,11 @@ $pines->com_pgrid->load();
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone Extension</span>
-					<input class="pf-field" type="number" name="phone_ext" size="5" value="<?php echo htmlspecialchars($this->entity->phone_ext); ?>" /></label>
+					<input class="pf-field" type="number" name="phone_ext" size="5" value="<?php e($this->entity->phone_ext); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Other Phone</span>
-					<input class="pf-field input-mask" type="tel" name="other_phone" size="14" value="<?php echo htmlspecialchars($this->entity->other_phone); ?>" /></label>
+					<input class="pf-field input-mask" type="tel" name="other_phone" size="14" value="<?php e($this->entity->other_phone); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Compensation</span>
@@ -221,18 +221,18 @@ $pines->com_pgrid->load();
 						<option value="salary" <?php echo ($this->entity->pay_type == 'salary') ? 'selected="selected"' : ''; ?>>Salary</option>
 						<option value="salary_commission" <?php echo ($this->entity->pay_type == 'salary_commission') ? 'selected="selected"' : ''; ?>>Salary + Commission</option>
 					</select>
-					<label id="p_muid_rate">$<input type="text" name="pay_rate" size="8" value="<?php echo htmlspecialchars($this->entity->pay_rate); ?>" /><span class="comp_label"></span></label>
+					<label id="p_muid_rate">$<input type="text" name="pay_rate" size="8" value="<?php e($this->entity->pay_rate); ?>" /><span class="comp_label"></span></label>
 				</span>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Hours in Full Workday</span>
 					<span class="pf-note">When the employee is scheduled "all day", it will be considered this many hours.</span>
 					<span class="pf-note">Leave blank to use the default.</span>
-					<input class="pf-field" type="text" name="workday_length" size="24" value="<?php echo htmlspecialchars($this->entity->workday_length); ?>" /></label>
+					<input class="pf-field" type="text" name="workday_length" size="24" value="<?php e($this->entity->workday_length); ?>" /></label>
 			</div>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Description</span><br />
-				<textarea rows="3" cols="35" class="pf-field peditor" style="width: 100%;" name="description"><?php echo htmlspecialchars($this->entity->description); ?></textarea>
+				<textarea rows="3" cols="35" class="pf-field peditor" style="width: 100%;" name="description"><?php e($this->entity->description); ?></textarea>
 			</div>
 			<br class="pf-clearing" />
 		</div>
@@ -248,8 +248,8 @@ $pines->com_pgrid->load();
 					<tbody>
 						<?php foreach ($this->entity->employee_attributes as $cur_attribute) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars($cur_attribute['name']); ?></td>
-							<td><?php echo htmlspecialchars($cur_attribute['value']); ?></td>
+							<td><?php e($cur_attribute['name']); ?></td>
+							<td><?php e($cur_attribute['value']); ?></td>
 						</tr>
 						<?php } ?>
 					</tbody>
@@ -313,19 +313,19 @@ $pines->com_pgrid->load();
 					<tbody>
 						<?php foreach ($this->entity->commissions as $cur_commission) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars(format_date($cur_commission['date'])); ?></td>
+							<td><?php e(format_date($cur_commission['date'])); ?></td>
 							<td style="text-align: right;"><?php echo isset($cur_commission['amount']) ? number_format($cur_commission['amount'], 2) : ''; ?></td>
 							<td><?php
 							if (!isset($cur_commission['ticket']->guid)) {
 								echo "Ticket not found.";
 							} elseif ($cur_commission['ticket']->has_tag('sale')) {
-								echo htmlspecialchars("Sale: {$cur_commission['ticket']->id}");
+								e("Sale: {$cur_commission['ticket']->id}");
 							} elseif ($cur_commission['ticket']->has_tag('return')) {
-								echo htmlspecialchars("Return: {$cur_commission['ticket']->id}");
+								e("Return: {$cur_commission['ticket']->id}");
 							}
 							?></td>
-							<td><?php echo htmlspecialchars("{$cur_commission['product']->guid}: {$cur_commission['product']->name}"); ?></td>
-							<td><?php echo htmlspecialchars($cur_commission['note']); ?></td>
+							<td><?php e("{$cur_commission['product']->guid}: {$cur_commission['product']->name}"); ?></td>
+							<td><?php e($cur_commission['note']); ?></td>
 						</tr>
 						<?php } ?>
 					</tbody>
@@ -337,9 +337,9 @@ $pines->com_pgrid->load();
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="Cancel" />
 	</div>
 </form>

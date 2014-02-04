@@ -12,14 +12,14 @@
 defined('P_RUN') or die('Direct access prohibited');
 if (isset($pines->com_elfinder))
 	$pines->com_elfinder->load();
-$content_css = array_merge($pines->editor->get_css(), array(htmlspecialchars($pines->config->location . $pines->template->editor_css)));
+$content_css = array_merge($pines->editor->get_css(), array(h($pines->config->location . $pines->template->editor_css)));
 ?>
 <script type="text/javascript">
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_tinymce/includes/tiny_mce/jquery.tinymce.js");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_tinymce/includes/tiny_mce/jquery.tinymce.js");
 pines(function(){
 $("textarea.peditor").tinymce({
 	// Location of TinyMCE script
-	script_url: '<?php echo htmlspecialchars($pines->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
+	script_url: '<?php e($pines->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
 	// General options
 	theme: "advanced",
 	<?php switch ($pines->config->com_tinymce->skin) {
@@ -127,7 +127,7 @@ $("textarea.peditor").tinymce({
 	handle_event_callback: function(e, i){var el=i.getElement();if(el)$(el).triggerHandler(e.type);return true;}
 });
 $("textarea.peditor-simple").tinymce({
-	script_url: '<?php echo htmlspecialchars($pines->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
+	script_url: '<?php e($pines->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
 	theme: "advanced",
 	theme_advanced_buttons1: "newdocument,|,bold,italic,underline,strikethrough,|,undo,redo,|,bullist,numlist",
 	theme_advanced_buttons2: "",
@@ -162,7 +162,7 @@ $("textarea.peditor-simple").tinymce({
 	handle_event_callback: function(e, i){var el=i.getElement();if(el)$(el).triggerHandler(e.type);return true;}
 });
 $("textarea.peditor-email").tinymce({
-	script_url : '<?php echo htmlspecialchars($pines->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
+	script_url : '<?php e($pines->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',
 	theme : "advanced",
 	<?php switch ($pines->config->com_tinymce->skin) {
 		case 'default':

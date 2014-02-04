@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Sign Packages';
 ?>
-<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_repository', 'signpackage')); ?>">
+<form class="pf-form" method="post" action="<?php e(pines_url('com_repository', 'signpackage')); ?>">
 	<div class="pf-element pf-heading">
 		<p>A password is required to sign packages. Please enter the password below and try again.</p>
 	</div>

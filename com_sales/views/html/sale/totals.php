@@ -185,11 +185,11 @@ $pines->com_jstree->load();
 	<?php } ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Start Date</span>
-			<input class="pf-field" type="text" id="p_muid_date_start" name="date_start" size="24" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+			<input class="pf-field" type="text" id="p_muid_date_start" name="date_start" size="24" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">End Date</span>
-			<input class="pf-field" type="text" id="p_muid_date_end" name="date_end" size="24" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+			<input class="pf-field" type="text" id="p_muid_date_end" name="date_end" size="24" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 	</div>
 	<div class="pf-element pf-buttons">
 		<button id="p_muid_retrieve_totals" class="pf-button btn">Retrieve</button>

@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Dashboards';
 if (isset($this->category))
-	$this->title .= htmlspecialchars(" in {$this->category->name} [{$this->category->alias}]");
+	$this->title .= h(" in {$this->category->name} [{$this->category->alias}]");
 $pines->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_dash/manage/list']);
@@ -67,15 +67,15 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->dashboards as $dashboard) { ?>
-		<tr title="<?php echo htmlspecialchars($dashboard->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($dashboard->guid); ?>" data-entity-context="com_dash_dashboard"><?php echo htmlspecialchars($dashboard->guid); ?></a></td>
-			<td><?php echo htmlspecialchars("{$dashboard->user->name} [{$dashboard->user->username}]"); ?></td>
+		<tr title="<?php e($dashboard->guid); ?>">
+			<td><a data-entity="<?php e($dashboard->guid); ?>" data-entity-context="com_dash_dashboard"><?php e($dashboard->guid); ?></a></td>
+			<td><?php e("{$dashboard->user->name} [{$dashboard->user->username}]"); ?></td>
 			<td><?php echo $dashboard->is($dashboard->user->dashboard) ? 'Yes' : 'No'; ?></td>
-			<td><?php echo htmlspecialchars("{$dashboard->group->name} [{$dashboard->group->groupname}]"); ?></td>
-			<td><?php echo htmlspecialchars(format_date($dashboard->p_cdate)); ?></td>
-			<td><?php echo htmlspecialchars(format_date($dashboard->p_mdate)); ?></td>
+			<td><?php e("{$dashboard->group->name} [{$dashboard->group->groupname}]"); ?></td>
+			<td><?php e(format_date($dashboard->p_cdate)); ?></td>
+			<td><?php e(format_date($dashboard->p_mdate)); ?></td>
 			<td><?php echo $dashboard->locked ? 'Yes' : 'No'; ?></td>
-			<td><?php echo htmlspecialchars(count($dashboard->tabs)); ?></td>
+			<td><?php e(count($dashboard->tabs)); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

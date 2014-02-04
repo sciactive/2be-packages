@@ -74,17 +74,17 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->shippers as $shipper) { ?>
-		<tr title="<?php echo htmlspecialchars($shipper->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php echo htmlspecialchars($shipper->name); ?></a></td>
-			<td><a href="mailto:<?php echo htmlspecialchars($shipper->email); ?>"><?php echo htmlspecialchars($shipper->email); ?></a></td>
-			<td><?php echo htmlspecialchars($shipper->address_1); ?></td>
-			<td><?php echo htmlspecialchars($shipper->address_2); ?></td>
-			<td><?php echo htmlspecialchars($shipper->city); ?></td>
-			<td><?php echo htmlspecialchars($shipper->state); ?></td>
-			<td><?php echo htmlspecialchars($shipper->zip); ?></td>
-			<td><?php echo htmlspecialchars(format_phone($shipper->phone_work)); ?></td>
-			<td><?php echo htmlspecialchars(format_phone($shipper->fax)); ?></td>
-			<td><?php echo htmlspecialchars($shipper->account_number); ?></td>
+		<tr title="<?php e($shipper->guid); ?>">
+			<td><a data-entity="<?php e($shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php e($shipper->name); ?></a></td>
+			<td><a href="mailto:<?php e($shipper->email); ?>"><?php e($shipper->email); ?></a></td>
+			<td><?php e($shipper->address_1); ?></td>
+			<td><?php e($shipper->address_2); ?></td>
+			<td><?php e($shipper->city); ?></td>
+			<td><?php e($shipper->state); ?></td>
+			<td><?php e($shipper->zip); ?></td>
+			<td><?php e(format_phone($shipper->phone_work)); ?></td>
+			<td><?php e(format_phone($shipper->fax)); ?></td>
+			<td><?php e($shipper->account_number); ?></td>
 			<td><?php echo $shipper->can_track() ? 'Yes' : 'No'; ?></td>
 		</tr>
 	<?php } ?>

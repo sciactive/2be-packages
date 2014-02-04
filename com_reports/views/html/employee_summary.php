@@ -11,9 +11,9 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$this->title = 'Employee Summary ['.htmlspecialchars($this->location->name).']';
+$this->title = 'Employee Summary ['.h($this->location->name).']';
 if ($this->descendants)
-	$this->note = 'Including locations beneath '.htmlspecialchars($this->location->name);
+	$this->note = 'Including locations beneath '.h($this->location->name);
 $pines->icons->load();
 $pines->com_jstree->load();
 $pines->com_pgrid->load();
@@ -273,18 +273,18 @@ if (isset($pines->com_googledrive)) {
 			foreach ((array) $totals as $cur_total) {
 				$cur_total['profit'] = ($cur_total['total_sold']-$cur_total['total_returned'])-$cur_total['cost'];
 			?>
-			<tr title="<?php echo htmlspecialchars($cur_total['employee']->guid); ?>">
-				<td><?php echo htmlspecialchars($cur_total['employee']->name); ?></td>
-				<td><?php echo htmlspecialchars($cur_total['qty_sold']); ?></td>
-				<td><?php echo htmlspecialchars($cur_total['qty_returned']); ?></td>
-				<td><?php echo htmlspecialchars($cur_total['qty_net']); ?></td>
-				<td class="total">$<?php echo htmlspecialchars(number_format($cur_total['total_sold'], 2, '.', '')); ?></td>
-				<td class="total">$<?php echo htmlspecialchars(number_format($cur_total['total_returned'], 2, '.', '')); ?></td>
-				<td class="total">$<?php echo htmlspecialchars(number_format($cur_total['total_net'], 2, '.', '')); ?></td>
-				<td class="total">$<?php echo htmlspecialchars(number_format($cur_total['adjustment'], 2, '.', '')); ?></td>
-				<td class="total">$<?php echo htmlspecialchars(number_format($cur_total['cost'], 2, '.', '')); ?></td>
-				<td class="total">$<?php echo htmlspecialchars(number_format($cur_total['profit'], 2, '.', '')); ?></td>
-				<td class="total">$<?php echo htmlspecialchars(number_format($cur_total['commission'], 2, '.', '')); ?></td>
+			<tr title="<?php e($cur_total['employee']->guid); ?>">
+				<td><?php e($cur_total['employee']->name); ?></td>
+				<td><?php e($cur_total['qty_sold']); ?></td>
+				<td><?php e($cur_total['qty_returned']); ?></td>
+				<td><?php e($cur_total['qty_net']); ?></td>
+				<td class="total">$<?php e(number_format($cur_total['total_sold'], 2, '.', '')); ?></td>
+				<td class="total">$<?php e(number_format($cur_total['total_returned'], 2, '.', '')); ?></td>
+				<td class="total">$<?php e(number_format($cur_total['total_net'], 2, '.', '')); ?></td>
+				<td class="total">$<?php e(number_format($cur_total['adjustment'], 2, '.', '')); ?></td>
+				<td class="total">$<?php e(number_format($cur_total['cost'], 2, '.', '')); ?></td>
+				<td class="total">$<?php e(number_format($cur_total['profit'], 2, '.', '')); ?></td>
+				<td class="total">$<?php e(number_format($cur_total['commission'], 2, '.', '')); ?></td>
 			</tr>
 			<?php } ?>
 		</tbody>

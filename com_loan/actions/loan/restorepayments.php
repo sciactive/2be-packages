@@ -103,7 +103,7 @@ if ($restore_point_value > $count_restores) {
 $restore_point = $loan->history->all_payments[$restore_point_value];
 
 // It was necessary to htmlspecialchars the restore_name in the hidden input.
-if (htmlspecialchars(strtolower($restore_point['all_delete']['delete_name'])) != strtolower($restore_name)) {
+if (h(strtolower($restore_point['all_delete']['delete_name'])) != strtolower($restore_name)) {
 	// The hidden inputs were tampered with.
 	pines_notice('Please select a valid restore point.');
 	pines_redirect(pines_url('com_loan', 'loan/editpayments'));

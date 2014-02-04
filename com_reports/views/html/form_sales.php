@@ -70,13 +70,13 @@ $pines->com_jstree->load();
 					continue;
 				$cur_select = (isset($this->employee->group) && $this->employee->is($cur_employee)) ? 'selected=\"selected\"' : ''; ?>
 				if (group_id == <?php echo json_encode($cur_employee->group->guid); ?>) {
-					employee.append("<option value=\"<?php echo htmlspecialchars($cur_employee->guid); ?>\" <?php echo $cur_select; ?>><?php echo htmlspecialchars($cur_employee->name); ?></option>");
+					employee.append("<option value=\"<?php e($cur_employee->guid); ?>\" <?php echo $cur_select; ?>><?php e($cur_employee->name); ?></option>");
 				}
 			<?php } ?>
 		};
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_reports', 'reportsales')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_reports', 'reportsales')); ?>">
 	<div class="pf-element">
 		<label><input type="checkbox" name="descendants" value="ON" <?php echo $this->descendants ? 'checked="checked"' : ''; ?> /> Include Descendants</label>
 		<div class="pf-element location_tree"></div>
@@ -86,14 +86,14 @@ $pines->com_jstree->load();
 	</div>
 	<div class="pf-element" style="padding-bottom: 0px;">
 		<span class="pf-note">Start</span>
-		<input class="form_date" type="text" name="start" value="<?php echo ($this->date[0]) ? htmlspecialchars(format_date($this->date[0], 'date_sort')) : htmlspecialchars(format_date(time(), 'date_sort')); ?>" />
+		<input class="form_date" type="text" name="start" value="<?php ($this->date[0]) ? e(format_date($this->date[0], 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
 	</div>
 	<div class="pf-element">
 		<span class="pf-note">End</span>
-		<input class="form_date" type="text" name="end" value="<?php echo ($this->date[1]) ? htmlspecialchars(format_date($this->date[1] - 1, 'date_sort')) : htmlspecialchars(format_date(time(), 'date_sort')); ?>" />
+		<input class="form_date" type="text" name="end" value="<?php ($this->date[1]) ? e(format_date($this->date[1] - 1, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
 	</div>
 	<div class="pf-element">
-		<input type="hidden" name="location" value="<?php echo htmlspecialchars($this->location); ?>" />
+		<input type="hidden" name="location" value="<?php e($this->location); ?>" />
 		<input class="btn btn-primary" type="submit" value="View Report" />
 	</div>
 </form>

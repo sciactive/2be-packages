@@ -22,9 +22,9 @@ $this->title = 'Packaging Results';
 		$successes++;
 		?>
 	<div class="pf-element">
-		<span class="pf-label"><?php echo htmlspecialchars($cur_result['entity']->name); ?></span>
+		<span class="pf-label"><?php e($cur_result['entity']->name); ?></span>
 		<span class="pf-note">Now you can download the package.</span>
-		<span class="pf-field"><a href="<?php echo htmlspecialchars("{$pines->config->location}{$cur_result['path']}"); ?>"><?php echo htmlspecialchars($cur_result['filename']); ?></a></span>
+		<span class="pf-field"><a href="<?php e("{$pines->config->location}{$cur_result['path']}"); ?>"><?php e($cur_result['filename']); ?></a></span>
 	</div>
 	<?php } if (!$successes) { ?>
 	<div class="pf-element">
@@ -40,10 +40,10 @@ $this->title = 'Packaging Results';
 		$failures++;
 		?>
 	<div class="pf-element">
-		<span class="pf-label"><?php echo htmlspecialchars($cur_result['entity']->name); ?></span>
+		<span class="pf-label"><?php e($cur_result['entity']->name); ?></span>
 		<div class="pf-group">
-			<div class="pf-field">The filename which your package was attempted to be created with is "<?php echo htmlspecialchars($cur_result['path']); ?>". If you don't have access to this path, try to gain access to it and attempt packaging again.</div>
-			<div class="pf-field">You can attempt to <a href="<?php echo htmlspecialchars(pines_url('com_packager', 'package/make', array('id' => $cur_result['entity']->guid))); ?>">create the package again</a>.</div>
+			<div class="pf-field">The filename which your package was attempted to be created with is "<?php e($cur_result['path']); ?>". If you don't have access to this path, try to gain access to it and attempt packaging again.</div>
+			<div class="pf-field">You can attempt to <a href="<?php e(pines_url('com_packager', 'package/make', array('id' => $cur_result['entity']->guid))); ?>">create the package again</a>.</div>
 		</div>
 	</div>
 	<?php } if (!$failures) { ?>

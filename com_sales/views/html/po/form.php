@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Purchase Order' : 'Editing PO ['.htmlspecialchars($this->entity->po_number).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Purchase Order' : 'Editing PO ['.h($this->entity->po_number).']';
 $this->note = 'Provide PO details in this form.';
 if ($this->entity->final)
 	$this->note .= ' Most options cannot be edited after the PO has been committed.';
@@ -21,7 +21,7 @@ $read_only = '';
 if ($this->entity->final)
 	$read_only = 'readonly="readonly"';
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'po/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'po/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			var products = $("#p_muid_products"),
@@ -160,7 +160,7 @@ if ($this->entity->final)
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
 						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
-							filename: 'PO <?php echo htmlspecialchars($this->entity->po_number); ?>',
+							filename: 'PO <?php e($this->entity->po_number); ?>',
 							content: rows
 						});
 					}}
@@ -176,7 +176,7 @@ if ($this->entity->final)
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
 						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
-							filename: 'PO <?php echo htmlspecialchars($this->entity->po_number); ?> - Received',
+							filename: 'PO <?php e($this->entity->po_number); ?> - Received',
 							content: rows
 						});
 					}}
@@ -192,7 +192,7 @@ if ($this->entity->final)
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
 						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
-							filename: 'PO <?php echo htmlspecialchars($this->entity->po_number); ?> - Not Received',
+							filename: 'PO <?php e($this->entity->po_number); ?> - Not Received',
 							content: rows
 						});
 					}}
@@ -409,11 +409,11 @@ if ($this->entity->final)
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
@@ -425,11 +425,11 @@ if ($this->entity->final)
 	<div class="pf-element">
 		<label><span class="pf-label">PO #</span>
 			<span class="pf-note">If left blank, one will be auto-generated.</span>
-			<input class="pf-field" type="text" name="po_number" size="24" value="<?php echo htmlspecialchars($this->entity->po_number); ?>" <?php echo $read_only; ?> /></label>
+			<input class="pf-field" type="text" name="po_number" size="24" value="<?php e($this->entity->po_number); ?>" <?php echo $read_only; ?> /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Reference #</span>
-			<input class="pf-field" type="text" name="reference_number" size="24" value="<?php echo htmlspecialchars($this->entity->reference_number); ?>" /></label>
+			<input class="pf-field" type="text" name="reference_number" size="24" value="<?php e($this->entity->reference_number); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label>
@@ -441,13 +441,13 @@ if ($this->entity->final)
 				<?php
 				$pines->entity_manager->sort($this->vendors, 'name');
 				foreach ($this->vendors as $cur_vendor) { ?>
-				<option value="<?php echo htmlspecialchars($cur_vendor->guid); ?>"<?php echo $this->entity->vendor->guid == $cur_vendor->guid ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_vendor->name); ?></option>
+				<option value="<?php e($cur_vendor->guid); ?>"<?php echo $this->entity->vendor->guid == $cur_vendor->guid ? ' selected="selected"' : ''; ?>><?php e($cur_vendor->name); ?></option>
 				<?php } ?>
 			</select>
 			<?php } else { ?>
 			<span class="pf-note">Vendor can't be changed after PO is committed or received.</span>
 			<span class="pf-field">
-				<a data-entity="<?php echo htmlspecialchars($this->entity->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php echo htmlspecialchars($this->entity->vendor->name); ?></a>
+				<a data-entity="<?php e($this->entity->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php e($this->entity->vendor->name); ?></a>
 			</span>
 			<?php } ?>
 		</label>
@@ -457,7 +457,7 @@ if ($this->entity->final)
 		<?php if ($this->location_fixed) { ?>
 		<span class="pf-note">Destination can't be changed for this PO.</span>
 		<span class="pf-field">
-			<a data-entity="<?php echo htmlspecialchars($this->entity->destination->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($this->entity->destination->guid ? "{$this->entity->destination->name} [{$this->entity->destination->groupname}]" : ''); ?></a>
+			<a data-entity="<?php e($this->entity->destination->guid); ?>" data-entity-context="group"><?php e($this->entity->destination->guid ? "{$this->entity->destination->name} [{$this->entity->destination->groupname}]" : ''); ?></a>
 		</span>
 		<?php } elseif (!$this->entity->final && empty($this->entity->received)) { ?>
 		<div class="pf-group">
@@ -466,10 +466,10 @@ if ($this->entity->final)
 		<?php } else { ?>
 		<span class="pf-note">Destination can't be changed after PO is committed or received.</span>
 		<span class="pf-field">
-			<a data-entity="<?php echo htmlspecialchars($this->entity->destination->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($this->entity->destination->guid ? "{$this->entity->destination->name} [{$this->entity->destination->groupname}]" : ''); ?></a>
+			<a data-entity="<?php e($this->entity->destination->guid); ?>" data-entity-context="group"><?php e($this->entity->destination->guid ? "{$this->entity->destination->name} [{$this->entity->destination->groupname}]" : ''); ?></a>
 		</span>
 		<?php } ?>
-		<input type="hidden" name="destination" value="<?php echo htmlspecialchars($this->entity->destination->guid); ?>" />
+		<input type="hidden" name="destination" value="<?php e($this->entity->destination->guid); ?>" />
 	</div>
 	<div class="pf-element">
 		<label>
@@ -478,13 +478,13 @@ if ($this->entity->final)
 			<select class="pf-field" name="shipper">
 				<option value="null">-- None --</option>
 				<?php foreach ($this->shippers as $cur_shipper) { ?>
-				<option value="<?php echo htmlspecialchars($cur_shipper->guid); ?>"<?php echo $this->entity->shipper->guid == $cur_shipper->guid ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_shipper->name); ?></option>
+				<option value="<?php e($cur_shipper->guid); ?>"<?php echo $this->entity->shipper->guid == $cur_shipper->guid ? ' selected="selected"' : ''; ?>><?php e($cur_shipper->name); ?></option>
 				<?php } ?>
 			</select>
 			<?php } else { ?>
 			<span class="pf-note">Shipper can't be changed after PO is received.</span>
 			<span class="pf-field">
-				<a data-entity="<?php echo htmlspecialchars($this->entity->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php echo htmlspecialchars($this->entity->shipper->name); ?></a>
+				<a data-entity="<?php e($this->entity->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php e($this->entity->shipper->name); ?></a>
 			</span>
 			<?php } ?>
 		</label>
@@ -500,14 +500,14 @@ if ($this->entity->final)
 			});
 		</script>
 		<label><span class="pf-label">ETA</span>
-			<input class="pf-field" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? htmlspecialchars(format_date($this->entity->eta, 'date_sort')) : ''); ?>" /></label>
+			<input class="pf-field" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? h(format_date($this->entity->eta, 'date_sort')) : ''); ?>" /></label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<label><span class="pf-label">Tracking Number(s)</span>
 			<span class="pf-note">One per line.</span>
 			<span class="pf-group pf-full-width">
 				<span class="pf-field" style="display: block;">
-					<textarea style="width: 100%;" rows="3" cols="35" name="tracking_numbers"><?php echo isset($this->entity->tracking_numbers) ? htmlspecialchars(implode("\n", $this->entity->tracking_numbers)) : ''; ?></textarea>
+					<textarea style="width: 100%;" rows="3" cols="35" name="tracking_numbers"><?php echo isset($this->entity->tracking_numbers) ? h(implode("\n", $this->entity->tracking_numbers)) : ''; ?></textarea>
 				</span>
 			</span></label>
 	</div>
@@ -540,10 +540,10 @@ if ($this->entity->final)
 							if (!isset($missing_products[$cur_product['entity']->guid]))
 								$missing_products[$cur_product['entity']->guid] = array('entity' => $cur_product['entity'], 'quantity' => $cur_product['quantity']);
 							?>
-						<tr title="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>">
-							<td><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-							<td><?php echo htmlspecialchars($cur_product['entity']->name); ?></td>
-							<td><?php echo htmlspecialchars($cur_product['quantity']); ?></td>
+						<tr title="<?php e($cur_product['entity']->guid); ?>">
+							<td><?php e($cur_product['entity']->sku); ?></td>
+							<td><?php e($cur_product['entity']->name); ?></td>
+							<td><?php e($cur_product['quantity']); ?></td>
 							<?php if ($this->entity->final) { ?>
 							<td><?php
 								$rec_qty = 0;
@@ -558,7 +558,7 @@ if ($this->entity->final)
 								echo (int) $rec_qty;
 							?></td>
 							<?php } ?>
-							<td><?php echo htmlspecialchars($cur_product['cost']); ?></td>
+							<td><?php e($cur_product['cost']); ?></td>
 							<td><?php echo $pines->com_sales->round((int) $cur_product['quantity'] * (float) $cur_product['cost']); ?></td>
 							<td><?php
 								$vendors = array();
@@ -566,7 +566,7 @@ if ($this->entity->final)
 									if (isset($cur_vendor['entity']->guid))
 										$vendors[] = $cur_vendor['entity']->guid;
 								}
-								echo htmlspecialchars(json_encode($vendors));
+								e(json_encode($vendors));
 							?></td>
 							<td><?php echo $cur_product['locked'] ? '1' : '0'; ?></td>
 						</tr>
@@ -653,13 +653,13 @@ if ($this->entity->final)
 								}
 							?>
 							<tr>
-								<td><a data-entity="<?php echo htmlspecialchars($cur_entity->guid); ?>" data-entity-context="com_sales_stock"><?php echo htmlspecialchars($cur_entity->guid); ?></a></td>
-								<td><?php echo htmlspecialchars($cur_entity->product->sku); ?></td>
-								<td><a data-entity="<?php echo htmlspecialchars($cur_entity->product->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_entity->product->name); ?></a></td>
-								<td><?php echo htmlspecialchars($cur_entity->serial); ?></td>
-								<td><a data-entity="<?php echo htmlspecialchars($cur_entity->user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars("{$cur_entity->user->name} [{$cur_entity->user->username}]"); ?></a></td>
-								<td><a data-entity="<?php echo htmlspecialchars($cur_entity->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$cur_entity->group->name} [{$cur_entity->group->groupname}]"); ?></a></td>
-								<td><?php echo htmlspecialchars(format_date($cur_entity->p_cdate, 'full_sort')); ?></td>
+								<td><a data-entity="<?php e($cur_entity->guid); ?>" data-entity-context="com_sales_stock"><?php e($cur_entity->guid); ?></a></td>
+								<td><?php e($cur_entity->product->sku); ?></td>
+								<td><a data-entity="<?php e($cur_entity->product->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_entity->product->name); ?></a></td>
+								<td><?php e($cur_entity->serial); ?></td>
+								<td><a data-entity="<?php e($cur_entity->user->guid); ?>" data-entity-context="user"><?php e("{$cur_entity->user->name} [{$cur_entity->user->username}]"); ?></a></td>
+								<td><a data-entity="<?php e($cur_entity->group->guid); ?>" data-entity-context="group"><?php e("{$cur_entity->group->name} [{$cur_entity->group->groupname}]"); ?></a></td>
+								<td><?php e(format_date($cur_entity->p_cdate, 'full_sort')); ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>
@@ -683,9 +683,9 @@ if ($this->entity->final)
 						<tbody>
 							<?php foreach ($missing_products as $cur_entry) { ?>
 							<tr>
-								<td><?php echo htmlspecialchars($cur_entry['entity']->sku); ?></td>
-								<td><a data-entity="<?php echo htmlspecialchars($cur_entry['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_entry['entity']->name); ?></a></td>
-								<td><?php echo htmlspecialchars($cur_entry['quantity']); ?></td>
+								<td><?php e($cur_entry['entity']->sku); ?></td>
+								<td><a data-entity="<?php e($cur_entry['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_entry['entity']->name); ?></a></td>
+								<td><?php e($cur_entry['quantity']); ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>
@@ -699,19 +699,19 @@ if ($this->entity->final)
 		<h3>Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php echo htmlspecialchars($this->entity->comments); ?></textarea></div>
+		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php e($this->entity->comments); ?></textarea></div>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } if ( isset($this->item_ids) ) { ?>
-		<input type="hidden" name="item_ids" value="<?php echo htmlspecialchars($this->item_ids); ?>" />
+		<input type="hidden" name="item_ids" value="<?php e($this->item_ids); ?>" />
 		<?php } ?>
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="<?php echo isset($this->item_ids) ? 'Save w/o Attaching' : 'Save'; ?>" onclick="$('#p_muid_save').val('save');" />
 		<?php if (!$this->entity->final) { ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="<?php echo isset($this->item_ids) ? 'Commit and Attach' : 'Commit'; ?>" onclick="$('#p_muid_save').val('commit');" />
 		<?php } ?>
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'po/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'po/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

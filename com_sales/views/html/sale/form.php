@@ -38,13 +38,13 @@ defined('P_RUN') or die('Direct access prohibited');
 if (!isset($this->entity->guid))
 	$this->title = 'New Sale';
 elseif ($this->entity->status == 'quoted')
-	$this->title = 'Quoted Sale ['.htmlspecialchars($this->entity->id).']';
+	$this->title = 'Quoted Sale ['.h($this->entity->id).']';
 elseif ($this->entity->status == 'invoiced')
-	$this->title = 'Invoiced Sale ['.htmlspecialchars($this->entity->id).']';
+	$this->title = 'Invoiced Sale ['.h($this->entity->id).']';
 elseif ($this->entity->status == 'paid')
-	$this->title = 'Paid Sale ['.htmlspecialchars($this->entity->id).']';
+	$this->title = 'Paid Sale ['.h($this->entity->id).']';
 elseif ($this->entity->status == 'voided')
-	$this->title = 'Voided Sale ['.htmlspecialchars($this->entity->id).']';
+	$this->title = 'Voided Sale ['.h($this->entity->id).']';
 $this->note = 'Use this form to edit a sale.';
 $pines->com_pgrid->load();
 if ($pines->config->com_sales->com_customer)
@@ -77,15 +77,15 @@ if ($pines->config->com_sales->com_esp) {
 		display: none;
 	}
 </style>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'sale/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'sale/save')); ?>">
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<script type="text/javascript">
@@ -544,7 +544,7 @@ if ($pines->config->com_sales->com_esp) {
 											$selector
 										);
 									foreach ($stock_entries as $cur_stock) {
-										$json_struct->serials[] = htmlspecialchars($cur_stock->serial);
+										$json_struct->serials[] = h($cur_stock->serial);
 									}
 								}
 								?>
@@ -1675,7 +1675,7 @@ if ($pines->config->com_sales->com_esp) {
 			<?php if ($this->entity->status != 'invoiced' && $this->entity->status != 'paid' && $this->entity->status != 'voided') { ?>
 			<span class="pf-note">Enter part of a name, company, email, or phone # to search.</span>
 			<?php } ?>
-			<input class="pf-field" type="text" id="p_muid_customer" name="customer" size="24" value="<?php echo $this->entity->customer->guid ? htmlspecialchars("{$this->entity->customer->guid}: \"{$this->entity->customer->name}\"") : ''; ?>" <?php if ($this->entity->status == 'invoiced' || $this->entity->status == 'paid' || $this->entity->status == 'voided') echo 'disabled="disabled" '; ?>/>
+			<input class="pf-field" type="text" id="p_muid_customer" name="customer" size="24" value="<?php echo $this->entity->customer->guid ? h("{$this->entity->customer->guid}: \"{$this->entity->customer->name}\"") : ''; ?>" <?php if ($this->entity->status == 'invoiced' || $this->entity->status == 'paid' || $this->entity->status == 'voided') echo 'disabled="disabled" '; ?>/>
 		</label>
 	</div>
 	<?php } ?>
@@ -1690,9 +1690,9 @@ if ($pines->config->com_sales->com_esp) {
 			</thead>
 			<tbody>
 			<?php foreach($this->categories as $category) { ?>
-				<tr title="<?php echo htmlspecialchars($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? htmlspecialchars("child ch_{$category->parent->guid} ") : ''; ?>">
+				<tr title="<?php e($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? h("child ch_{$category->parent->guid} ") : ''; ?>">
 					<td><?php echo isset($category->parent) ? $category->array_search($category->parent->children) + 1 : '0' ; ?></td>
-					<td><?php echo htmlspecialchars($category->name); ?></td>
+					<td><?php e($category->name); ?></td>
 					<td><?php echo count($category->products); ?></td>
 				</tr>
 			<?php } ?>
@@ -1742,22 +1742,22 @@ if ($pines->config->com_sales->com_esp) {
 						if (!isset($cur_product['entity']))
 							continue;
 						?>
-				<tr title="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>">
-					<td><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-					<td><?php echo htmlspecialchars($cur_product['entity']->name); ?></td>
-					<td><?php echo htmlspecialchars($cur_product['serial']); ?></td>
-					<td><?php echo htmlspecialchars($cur_product['delivery']); ?></td>
-					<td><?php echo htmlspecialchars($cur_product['quantity']); ?></td>
-					<td><?php echo htmlspecialchars($cur_product['price']); ?></td>
-					<td><?php echo htmlspecialchars($cur_product['discount']); ?></td>
-					<td><?php echo htmlspecialchars($cur_product['line_total']); ?></td>
-					<td><?php echo htmlspecialchars($cur_product['fees']); ?></td>
+				<tr title="<?php e($cur_product['entity']->guid); ?>">
+					<td><?php e($cur_product['entity']->sku); ?></td>
+					<td><?php e($cur_product['entity']->name); ?></td>
+					<td><?php e($cur_product['serial']); ?></td>
+					<td><?php e($cur_product['delivery']); ?></td>
+					<td><?php e($cur_product['quantity']); ?></td>
+					<td><?php e($cur_product['price']); ?></td>
+					<td><?php e($cur_product['discount']); ?></td>
+					<td><?php e($cur_product['line_total']); ?></td>
+					<td><?php e($cur_product['fees']); ?></td>
 					<?php if ($pines->config->com_sales->com_esp) { ?>
-					<td><?php echo htmlspecialchars($cur_product['esp']); ?></td>
+					<td><?php e($cur_product['esp']); ?></td>
 					<?php } else { ?>
 					<td>NA</td>
 					<?php } ?>
-					<td><?php echo htmlspecialchars($cur_product['salesperson']->guid.': '.$cur_product['salesperson']->name); ?></td>
+					<td><?php e($cur_product['salesperson']->guid.': '.$cur_product['salesperson']->name); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>
@@ -1846,8 +1846,8 @@ if ($pines->config->com_sales->com_esp) {
 		<div class="pf-note">
 			<div style="text-align: left;">
 				<?php foreach ($this->payment_types as $cur_payment_type) { ?>
-				<button id="p_muid_payment_<?php echo htmlspecialchars($cur_payment_type->guid); ?>" class="btn payment-button" type="button" style="margin-bottom: 2px;" value="<?php echo htmlspecialchars(json_encode((object) array('guid' => $cur_payment_type->guid, 'name' => $cur_payment_type->name, 'minimum' => $cur_payment_type->minimum, 'maximum' => $cur_payment_type->maximum, 'processing_type' => $cur_payment_type->processing_type))); ?>">
-					<span class="picon picon-32 picon-view-financial-payment-mode" style="display: block; padding-top: 32px; min-width: 50px; background-repeat: no-repeat; background-position: top center;"><?php echo htmlspecialchars($cur_payment_type->name); ?></span>
+				<button id="p_muid_payment_<?php e($cur_payment_type->guid); ?>" class="btn payment-button" type="button" style="margin-bottom: 2px;" value="<?php e(json_encode((object) array('guid' => $cur_payment_type->guid, 'name' => $cur_payment_type->name, 'minimum' => $cur_payment_type->minimum, 'maximum' => $cur_payment_type->maximum, 'processing_type' => $cur_payment_type->processing_type))); ?>">
+					<span class="picon picon-32 picon-view-financial-payment-mode" style="display: block; padding-top: 32px; min-width: 50px; background-repeat: no-repeat; background-position: top center;"><?php e($cur_payment_type->name); ?></span>
 				</button>
 				<?php } ?>
 			</div>
@@ -1911,7 +1911,7 @@ if ($pines->config->com_sales->com_esp) {
 			<div id="p_muid_shipping_form">
 				<div class="pf-element">
 					<label><span class="pf-label">Name</span>
-						<input class="pf-field" type="text" name="shipping_name" size="24" value="<?php echo htmlspecialchars($this->entity->shipping_address->name); ?>" /></label>
+						<input class="pf-field" type="text" name="shipping_name" size="24" value="<?php e($this->entity->shipping_address->name); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<script type="text/javascript">
@@ -1937,15 +1937,15 @@ if ($pines->config->com_sales->com_esp) {
 				<div id="p_muid_address_us" style="display: none;">
 					<div class="pf-element">
 						<label><span class="pf-label">Address 1</span>
-							<input class="pf-field" type="text" name="shipping_address_1" size="24" value="<?php echo htmlspecialchars($this->entity->shipping_address->address_1); ?>" /></label>
+							<input class="pf-field" type="text" name="shipping_address_1" size="24" value="<?php e($this->entity->shipping_address->address_1); ?>" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Address 2</span>
-							<input class="pf-field" type="text" name="shipping_address_2" size="24" value="<?php echo htmlspecialchars($this->entity->shipping_address->address_2); ?>" /></label>
+							<input class="pf-field" type="text" name="shipping_address_2" size="24" value="<?php e($this->entity->shipping_address->address_2); ?>" /></label>
 					</div>
 					<div class="pf-element">
 						<span class="pf-label">City, State</span>
-						<input class="pf-field" type="text" name="shipping_city" size="15" value="<?php echo htmlspecialchars($this->entity->shipping_address->city); ?>" />
+						<input class="pf-field" type="text" name="shipping_city" size="15" value="<?php e($this->entity->shipping_address->city); ?>" />
 						<select class="pf-field" name="shipping_state">
 							<option value="">None</option>
 							<?php foreach (array(
@@ -2010,7 +2010,7 @@ if ($pines->config->com_sales->com_esp) {
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Zip</span>
-							<input class="pf-field" type="text" name="shipping_zip" size="24" value="<?php echo htmlspecialchars($this->entity->shipping_address->zip); ?>" /></label>
+							<input class="pf-field" type="text" name="shipping_zip" size="24" value="<?php e($this->entity->shipping_address->zip); ?>" /></label>
 					</div>
 				</div>
 			</div>
@@ -2019,7 +2019,7 @@ if ($pines->config->com_sales->com_esp) {
 					<label><span class="pf-label">Address</span>
 						<span class="pf-group pf-full-width">
 							<span class="pf-field" style="display: block;">
-								<textarea style="width: 100%;" rows="3" cols="35" name="shipping_address_international"><?php echo htmlspecialchars($this->entity->shipping_address->address_international); ?></textarea>
+								<textarea style="width: 100%;" rows="3" cols="35" name="shipping_address_international"><?php e($this->entity->shipping_address->address_international); ?></textarea>
 							</span>
 						</span></label>
 				</div>
@@ -2029,7 +2029,7 @@ if ($pines->config->com_sales->com_esp) {
 	</div>
 	<div id="p_muid_comments_dialog" title="Comments" style="display: none;">
 		<div class="pf-element pf-full-width">
-			<textarea class="pf-field pf-full-width" style="width: 96%; height: 100%;" rows="3" cols="35" id="p_muid_comments" name="comments"><?php echo htmlspecialchars($this->entity->comments); ?></textarea>
+			<textarea class="pf-field pf-full-width" style="width: 96%; height: 100%;" rows="3" cols="35" id="p_muid_comments" name="comments"><?php e($this->entity->comments); ?></textarea>
 		</div>
 	</div>
 	<?php if (!empty($this->returns)) { ?>
@@ -2039,7 +2039,7 @@ if ($pines->config->com_sales->com_esp) {
 		<div class="pf-group">
 		<?php foreach($this->returns as $cur_return) { ?>
 		<span class="pf-field">
-			<a data-entity="<?php echo htmlspecialchars($cur_return->guid); ?>" data-entity-context="com_sales_return">Return <?php echo htmlspecialchars($cur_return->id); ?></a>
+			<a data-entity="<?php e($cur_return->guid); ?>" data-entity-context="com_sales_return">Return <?php e($cur_return->id); ?></a>
 		</span><br />
 		<?php } ?>
 		</div>
@@ -2047,7 +2047,7 @@ if ($pines->config->com_sales->com_esp) {
 	<?php } ?>
 	<div class="pf-element pf-buttons" id="p_muid_buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 
 		<input type="hidden" id="p_muid_sale_process_type" name="process" value="quote" />
@@ -2066,6 +2066,6 @@ if ($pines->config->com_sales->com_esp) {
 		<input class="pf-button btn btn-primary" type="button" value="Save" onclick="$('#p_muid_sale_process_type').val('save'); pines.com_sales_run_check();" />
 		<?php } ?>
 
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'sale/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'sale/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

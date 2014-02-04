@@ -11,9 +11,9 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$this->title = 'Payroll Summary ['.htmlspecialchars($this->location->name).']';
+$this->title = 'Payroll Summary ['.h($this->location->name).']';
 if ($this->descendants)
-	$this->note = 'Including locations beneath '.htmlspecialchars($this->location->name);
+	$this->note = 'Including locations beneath '.h($this->location->name);
 $pines->icons->load();
 $pines->com_jstree->load();
 $pines->com_pgrid->load();
@@ -202,15 +202,15 @@ if (isset($pines->com_googledrive)) {
 				$commission_total[1]++;
 			}
 			?>
-		<tr title="<?php echo htmlspecialchars($cur_employee['entity']->guid);?>" >
-			<td><a data-entity="<?php echo htmlspecialchars($cur_employee['entity']->guid); ?>" data-entity-context="com_hrm_employee"><?php echo htmlspecialchars($cur_employee['entity']->name); ?></a></td>
-			<td><?php echo htmlspecialchars(strtoupper($cur_employee['commission_status']));?></td>
+		<tr title="<?php e($cur_employee['entity']->guid);?>" >
+			<td><a data-entity="<?php e($cur_employee['entity']->guid); ?>" data-entity-context="com_hrm_employee"><?php e($cur_employee['entity']->name); ?></a></td>
+			<td><?php e(strtoupper($cur_employee['commission_status']));?></td>
 			<td><?php echo $cur_employee['commission_status'] != 'salary' ? 'N/A' : number_format($cur_employee['salary_pay_period'], 2, '.', ''); ?></td>
 			<td style="text-align: center;"><?php echo ($cur_employee['commission_status'] != 'salary' && $cur_employee['sales_total'] != 0 && $cur_employee['commission_status'] != 'hourly') ? number_format((($cur_employee['commission'] / $cur_employee['sales_total']) * 100), 2, '.', '') : '-'; ?></td>
-			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? htmlspecialchars($cur_employee['number_sales']) : '-'; ?></td>
+			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? h($cur_employee['number_sales']) : '-'; ?></td>
 			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? '$'.number_format($cur_employee['sales_total'], 2, '.', '') : '-'; ?></td>
 			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? number_format($cur_employee['entity']->pay_rate, 2, '.', '') : '-'; ?></td>
-			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? htmlspecialchars($cur_employee['hour_total']) : '-'; ?></td>
+			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? h($cur_employee['hour_total']) : '-'; ?></td>
 			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? '$'.number_format($cur_employee['reghours'], 2, '.', '') : '-'; ?></td>
 			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? '$'.number_format($cur_employee['overtimehours'], 2, '.', '') : '-'; ?></td>
 			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? '$'.number_format($cur_employee['hour_pay_total'], 2, '.', '') : '-'; ?></td>
@@ -222,8 +222,8 @@ if (isset($pines->com_googledrive)) {
 			<td style="text-align: center;">$<?php echo number_format($cur_employee['adjustments'], 2, '.', '');?></td>
 			<td><?php echo "$".number_format($cur_employee['total_with_reimburse'], 2, '.', '');?></td>
 			<td></td>
-			<td><a data-entity="<?php echo htmlspecialchars($cur_employee['entity']->group->guid);?>" data-entity-context="group"><?php echo htmlspecialchars($cur_employee['entity']->group->name);?></a></td>
-			<td><?php echo htmlspecialchars($cur_employee->job_title)?></td>
+			<td><a data-entity="<?php e($cur_employee['entity']->group->guid);?>" data-entity-context="group"><?php e($cur_employee['entity']->group->name);?></a></td>
+			<td><?php e($cur_employee->job_title)?></td>
 			<td style="text-align: center;"><?php echo $cur_employee['commission_status'] != 'salary' ? number_format($cur_employee['total_rate'], 2, '.', '') : '-'; ?></td>
 		</tr>
 		<?php }
@@ -234,7 +234,7 @@ if (isset($pines->com_googledrive)) {
 			<td style="font-weight: bold; text-align: center;"><?php echo number_format($this->commission_percent * 100, 2, '.', '').'%';?></td>
 			<td style="font-weight: bold; text-align: center;"><?php echo '$'.number_format($this->group_salary_total, 2, '.', ''); ?></td>
 			<td style="font-weight: bold; text-align: center;"><?php echo $commission_total[1] != 0 ? number_format($commission_total[0] / $commission_total[1], 2, '.', '') : '0.00'; ?></td>
-			<td style="font-weight: bold; text-align: center;"><?php echo htmlspecialchars($this->group_num_sales); ?></td>
+			<td style="font-weight: bold; text-align: center;"><?php e($this->group_num_sales); ?></td>
 			<td style="font-weight: bold; text-align: center;"><?php echo '$'.number_format($this->group_sales_total, 2, '.', ''); ?></td>
 			<td style="font-weight: bold; text-align: center;"><?php echo number_format($this->pay_rate_total, 2, '.', ''); ?></td>
 			<td style="font-weight: bold; text-align: center;"><?php echo number_format($this->group_hours, 2, '.', ''); ?></td>

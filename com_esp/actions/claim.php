@@ -30,7 +30,7 @@ if ($esp->status != 'registered') {
 
 // Claim the accident using the given ESP.
 $esp->status = 'claimed';
-$esp->claim_info = array('date' => time(), 'note' => htmlspecialchars($_REQUEST['comments']), 'user' => $_SESSION['user']);
+$esp->claim_info = array('date' => time(), 'note' => h($_REQUEST['comments']), 'user' => $_SESSION['user']);
 
 if ($esp->save()) {
 		pines_notice('Claimed ESP ['.$esp->customer->name.']');

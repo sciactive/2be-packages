@@ -18,7 +18,7 @@ if (!$this->fixes) { ?>
 	Congratulations, there were no unnecessary categories found.
 </p>
 <?php } else { ?>
-<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_sales', 'category/fixhiersave')); ?>">
+<form class="pf-form" method="post" action="<?php e(pines_url('com_sales', 'category/fixhiersave')); ?>">
 	<div class="pf-element">
 		When a product is in a category, it is listed in the storefront in all the
 		parent categories as well. Therefore, a product doesn't need to be placed in
@@ -41,14 +41,14 @@ if (!$this->fixes) { ?>
 			<tbody>
 				<?php foreach($this->fixes as $cur_key => $cur_fix) { ?>
 				<tr>
-					<td><input type="checkbox" checked="checked" name="fixes[]" value="<?php echo htmlspecialchars($cur_key); ?>" /></td>
-					<td><a data-entity="<?php echo htmlspecialchars($cur_fix['category']->guid); ?>" data-entity-context="com_sales_category"><?php echo htmlspecialchars($cur_fix['category']->name); ?></a></td>
-					<td><a data-entity="<?php echo htmlspecialchars($cur_fix['product']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_fix['product']->name); ?></a></td>
+					<td><input type="checkbox" checked="checked" name="fixes[]" value="<?php e($cur_key); ?>" /></td>
+					<td><a data-entity="<?php e($cur_fix['category']->guid); ?>" data-entity-context="com_sales_category"><?php e($cur_fix['category']->name); ?></a></td>
+					<td><a data-entity="<?php e($cur_fix['product']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_fix['product']->name); ?></a></td>
 					<td>
 						<?php
 						$links = array();
 						foreach ($cur_fix['reasons'] as $cur_reason)
-							$links[] = '<a data-entity="'.htmlspecialchars($cur_reason->guid).'" data-entity-context="com_sales_category">'.htmlspecialchars($cur_reason->name).'</a>';
+							$links[] = '<a data-entity="'.h($cur_reason->guid).'" data-entity-context="com_sales_category">'.h($cur_reason->name).'</a>';
 						echo implode(', ', $links);
 						?>
 					</td>

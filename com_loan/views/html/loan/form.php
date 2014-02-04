@@ -10,11 +10,11 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Loan' : 'Editing Loan ['.htmlspecialchars($this->entity->id).'] for '.htmlspecialchars($this->entity->customer->name);
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Loan' : 'Editing Loan ['.h($this->entity->id).'] for '.h($this->entity->customer->name);
 $this->note = 'Provide loan details in this form.';
 $pines->com_customer->load_customer_select();
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_loan', 'loan/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			// Creation date Date Picker.
@@ -103,11 +103,11 @@ $pines->com_customer->load_customer_select();
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-heading">
@@ -115,23 +115,23 @@ $pines->com_customer->load_customer_select();
 	</div>
 	<div class="pf-element">
 		<span class="pf-note">Enter part of a name, company, email, or phone # to search.</span>
-		<input id="p_muid_customer" class="pf-field" type="text" name="customer" value="<?php echo (isset($this->entity->customer->guid) ? htmlspecialchars("{$this->entity->customer->guid}: {$this->entity->customer->name}") : ''); ?>"/>
+		<input id="p_muid_customer" class="pf-field" type="text" name="customer" value="<?php echo (isset($this->entity->customer->guid) ? h("{$this->entity->customer->guid}: {$this->entity->customer->name}") : ''); ?>"/>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Loan Information</h3>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Creation Date</span>
-		<input id="p_muid_creation_date" class="pf-field" type="text" name="creation_date" value="<?php echo isset($this->entity->creation_date) ? htmlspecialchars(format_date($this->entity->creation_date, 'date_sort')) : ''; ?>"/>
+		<input id="p_muid_creation_date" class="pf-field" type="text" name="creation_date" value="<?php echo isset($this->entity->creation_date) ? h(format_date($this->entity->creation_date, 'date_sort')) : ''; ?>"/>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Principal Amount</span>
-		<input id="p_muid_prin" class="pf-field" type="text" name="principal" value="<?php echo (!empty($this->entity->principal) ? htmlspecialchars("\${$this->entity->principal}") : ''); ?>"/>
+		<input id="p_muid_prin" class="pf-field" type="text" name="principal" value="<?php echo (!empty($this->entity->principal) ? h("\${$this->entity->principal}") : ''); ?>"/>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">APR</span>
 		<span class="pf-note">Annual Percentage Rate</span>
-		<input id="p_muid_apr" class="pf-field" type="text" name="apr" value="<?php echo (!empty($this->entity->apr) ? htmlspecialchars("{$this->entity->apr}%") : ''); ?>"/>
+		<input id="p_muid_apr" class="pf-field" type="text" name="apr" value="<?php echo (!empty($this->entity->apr) ? h("{$this->entity->apr}%") : ''); ?>"/>
 	</div>
 	<div class="pf-element">
 		<label for="p_muid_term">
@@ -139,7 +139,7 @@ $pines->com_customer->load_customer_select();
 			<span class="pf-note">Length of loan in years or months.</span>
 		</label>
 		<div class="pf-group">
-			<input id="p_muid_term" class="pf-field" type="text" name="term" value="<?php echo (!empty($this->entity->term) ? htmlspecialchars($this->entity->term) : ''); ?>"/>
+			<input id="p_muid_term" class="pf-field" type="text" name="term" value="<?php echo (!empty($this->entity->term) ? h($this->entity->term) : ''); ?>"/>
 			<select class="pf-field" name="term_type">
 				<option value="months"<?php echo $this->entity->term_type == 'months' ? ' selected="selected"' : ''; ?>>Months</option>
 				<option value="years"<?php echo $this->entity->term_type == 'years' ? ' selected="selected"' : ''; ?>>Years</option>
@@ -148,7 +148,7 @@ $pines->com_customer->load_customer_select();
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">First Payment Date</span>
-		<input id="p_muid_first_payment_date" class="pf-field" type="text" name="first_payment_date" value="<?php echo isset($this->entity->first_payment_date) ? htmlspecialchars(format_date($this->entity->first_payment_date, 'date_sort')) : ''; ?>"/>
+		<input id="p_muid_first_payment_date" class="pf-field" type="text" name="first_payment_date" value="<?php echo isset($this->entity->first_payment_date) ? h(format_date($this->entity->first_payment_date, 'date_sort')) : ''; ?>"/>
 	</div>
 	<div class="pf-element">
 		<label>
@@ -193,9 +193,9 @@ $pines->com_customer->load_customer_select();
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_loan', 'loan/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_loan', 'loan/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

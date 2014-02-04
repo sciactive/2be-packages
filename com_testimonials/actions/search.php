@@ -114,7 +114,7 @@ foreach ($testimonials as $key => &$cur_testimonial) {
 		'share_allowed'	=> ($cur_testimonial->share) ? 'Yes' : 'No',
 		'share_anon'	=> ($cur_testimonial->anon) ? 'Yes' : 'No',
 		'original'		=> substr($cur_testimonial->feedback, 0, 40),
-		'quotes'		=> (!empty($cur_testimonial->quotefeedback)) ? htmlspecialchars(substr($cur_testimonial->quotefeedback, 0, 40)).'...' : ''
+		'quotes'		=> (!empty($cur_testimonial->quotefeedback)) ? h(substr($cur_testimonial->quotefeedback, 0, 40)).'...' : ''
 	);
 	$cur_testimonial = $json_struct;
 }

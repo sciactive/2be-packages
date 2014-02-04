@@ -82,22 +82,22 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->users as $user) { ?>
-		<tr title="<?php echo htmlspecialchars($user->guid); ?>">
-			<td><?php echo htmlspecialchars($user->guid); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($user->username); ?></a></td>
+		<tr title="<?php e($user->guid); ?>">
+			<td><?php e($user->guid); ?></td>
+			<td><a data-entity="<?php e($user->guid); ?>" data-entity-context="user"><?php e($user->username); ?></a></td>
 			<?php if (in_array('name', $pines->config->com_user->user_fields)) { ?>
-			<td><?php echo htmlspecialchars($user->name); ?></td>
+			<td><?php e($user->name); ?></td>
 			<?php } if (!$pines->config->com_user->email_usernames && in_array('email', $pines->config->com_user->user_fields)) { ?>
-			<td><a href="mailto:<?php echo htmlspecialchars($user->email); ?>"><?php echo htmlspecialchars($user->email); ?></a></td>
+			<td><a href="mailto:<?php e($user->email); ?>"><?php e($user->email); ?></a></td>
 			<?php } if (in_array('timezone', $pines->config->com_user->user_fields)) { ?>
-			<td><?php echo htmlspecialchars($user->get_timezone()).(empty($user->timezone) ? ' (I)' : ' (A)'); ?></td>
+			<td><?php e($user->get_timezone()).(empty($user->timezone) ? ' (I)' : ' (A)'); ?></td>
 			<?php } ?>
-			<td><a data-entity="<?php echo htmlspecialchars($user->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($user->group->groupname); ?></a></td>
+			<td><a data-entity="<?php e($user->group->guid); ?>" data-entity-context="group"><?php e($user->group->groupname); ?></a></td>
 			<td><?php
 			if (count($user->groups) < 15) {
 				$group_list = '';
 				foreach ($user->groups as $cur_group) {
-					$group_list .= (empty($group_list) ? '' : ', ').'<a data-entity="'.htmlspecialchars($cur_group->guid).'" data-entity-context="group">'.htmlspecialchars($cur_group->groupname).'</a>';
+					$group_list .= (empty($group_list) ? '' : ', ').'<a data-entity="'.h($cur_group->guid).'" data-entity-context="group">'.h($cur_group->groupname).'</a>';
 				}
 				echo $group_list;
 			} else {
@@ -106,7 +106,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			?></td>
 			<td><?php echo $user->inherit_abilities ? 'Yes' : 'No'; ?></td>
 			<?php if ($pines->config->com_user->referral_codes) { ?>
-			<td><?php echo htmlspecialchars($user->referral_code); ?></td>
+			<td><?php e($user->referral_code); ?></td>
 			<?php } ?>
 		</tr>
 	<?php } ?>

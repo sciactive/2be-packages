@@ -71,12 +71,12 @@ $module_types = $pines->com_modules->module_types();
 	<tbody>
 	<?php foreach($this->modules as $module) {
 		list ($component, $name) = explode('/', $module->type, 2); ?>
-		<tr title="<?php echo htmlspecialchars($module->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($module->guid); ?>" data-entity-context="com_modules_module"><?php echo htmlspecialchars($module->name); ?></a></td>
-			<td><?php echo htmlspecialchars($module->position); ?></td>
-			<td><?php echo htmlspecialchars($module->order); ?></td>
+		<tr title="<?php e($module->guid); ?>">
+			<td><a data-entity="<?php e($module->guid); ?>" data-entity-context="com_modules_module"><?php e($module->name); ?></a></td>
+			<td><?php e($module->position); ?></td>
+			<td><?php e($module->order); ?></td>
 			<td><?php echo ($module->enabled ? 'Yes' : 'No'); ?></td>
-			<td><?php echo htmlspecialchars("{$pines->info->$component->name} - {$module_types[$component][$name]['cname']}"); ?></td>
+			<td><?php e("{$pines->info->$component->name} - {$module_types[$component][$name]['cname']}"); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

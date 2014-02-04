@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Category' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Category' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide category details in this form.';
 $pines->editor->load();
 $pines->com_pgrid->load();
@@ -26,7 +26,7 @@ $pines->com_ptags->load();
 		list-style-type: disc;
 	}
 </style>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_content', 'category/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_content', 'category/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			$("#p_muid_menu_entries").menueditor({
@@ -96,7 +96,7 @@ $pines->com_ptags->load();
 					<span class="pf-label">Name</span>
 					<span class="pf-group pf-full-width">
 						<span class="pf-field" style="display: block;">
-							<input style="width: 100%;" type="text" name="name" value="<?php echo htmlspecialchars($this->entity->name); ?>" />
+							<input style="width: 100%;" type="text" name="name" value="<?php e($this->entity->name); ?>" />
 						</span>
 					</span>
 				</label>
@@ -106,7 +106,7 @@ $pines->com_ptags->load();
 					<span class="pf-label">Alias</span>
 					<span class="pf-group pf-full-width">
 						<span class="pf-field" style="display: block;">
-							<input style="width: 100%;" type="text" name="alias" value="<?php echo htmlspecialchars($this->entity->alias); ?>" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
+							<input style="width: 100%;" type="text" name="alias" value="<?php e($this->entity->alias); ?>" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
 						</span>
 					</span>
 				</label>
@@ -126,7 +126,7 @@ $pines->com_ptags->load();
 				<div class="pf-group pf-full-width">
 					<label><input class="pf-field" type="checkbox" id="p_muid_use_name" name="title_use_name" value="ON"<?php echo $this->entity->title_use_name ? ' checked="checked"' : ''; ?> /> Use name as title.</label><br />
 					<span class="pf-field" style="display: block;">
-						<input style="width: 100%;" type="text" id="p_muid_title" name="title" value="<?php echo htmlspecialchars($this->entity->title); ?>" />
+						<input style="width: 100%;" type="text" id="p_muid_title" name="title" value="<?php e($this->entity->title); ?>" />
 					</span>
 				</div>
 			</div>
@@ -142,11 +142,11 @@ $pines->com_ptags->load();
 			<?php if (isset($this->entity->guid)) { ?>
 			<div class="date_info" style="float: right; text-align: right;">
 				<?php if (isset($this->entity->user)) { ?>
-				<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-				<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
@@ -165,7 +165,7 @@ $pines->com_ptags->load();
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Tags</span>
 				<div class="pf-group">
-					<input class="pf-field" type="text" name="content_tags" size="24" value="<?php echo isset($this->entity->content_tags) ? htmlspecialchars(implode(',', $this->entity->content_tags)) : ''; ?>" />
+					<input class="pf-field" type="text" name="content_tags" size="24" value="<?php echo isset($this->entity->content_tags) ? h(implode(',', $this->entity->content_tags)) : ''; ?>" />
 					<script type="text/javascript">
 						pines(function(){
 							$("#p_muid_form [name=content_tags]").ptags({
@@ -195,7 +195,7 @@ $pines->com_ptags->load();
 								if ($category->is($entity))
 									continue;
 								?>
-								<option value="<?php echo htmlspecialchars($category->guid); ?>"<?php echo $category->is($entity->parent) ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars("{$prefix} {$category->name}"); ?></option>
+								<option value="<?php e($category->guid); ?>"<?php echo $category->is($entity->parent) ? ' selected="selected"' : ''; ?>><?php e("{$prefix} {$category->name}"); ?></option>
 								<?php
 								if ($category->children)
 									com_content__category_form_children($category, $entity, "{$prefix}->");
@@ -205,7 +205,7 @@ $pines->com_ptags->load();
 							if ($category->is($this->entity))
 								continue;
 							?>
-							<option value="<?php echo htmlspecialchars($category->guid); ?>"<?php echo $category->is($this->entity->parent) ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($category->name); ?></option>
+							<option value="<?php e($category->guid); ?>"<?php echo $category->is($this->entity->parent) ? ' selected="selected"' : ''; ?>><?php e($category->name); ?></option>
 							<?php
 							if ($category->children)
 								com_content__category_form_children($category, $this->entity);
@@ -220,7 +220,7 @@ $pines->com_ptags->load();
 					<?php if ($this->entity->pages) { ?>
 					<ol id="p_muid_pages" class="pf-field well" style="padding: 1em 1em 1em 3em; min-width: 300px;">
 						<?php foreach ($this->entity->pages as $cur_page) { ?>
-						<li class="page alert alert-info" title="<?php echo htmlspecialchars($cur_page->guid); ?>"><a data-entity="<?php echo htmlspecialchars($cur_page->guid); ?>" data-entity-context="com_content_page"><?php echo htmlspecialchars($cur_page->name); ?></a> <a href="javascript:void(0);" class="remove" style="float: right;">&times;</a></li>
+						<li class="page alert alert-info" title="<?php e($cur_page->guid); ?>"><a data-entity="<?php e($cur_page->guid); ?>" data-entity-context="com_content_page"><?php e($cur_page->name); ?></a> <a href="javascript:void(0);" class="remove" style="float: right;">&times;</a></li>
 						<?php } ?>
 					</ol>
 					<?php } else { ?>
@@ -343,8 +343,8 @@ $pines->com_ptags->load();
 					<tbody>
 						<?php if (isset($this->entity->meta_tags)) foreach ($this->entity->meta_tags as $cur_value) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars($cur_value['name']); ?></td>
-							<td><?php echo htmlspecialchars($cur_value['content']); ?></td>
+							<td><?php e($cur_value['name']); ?></td>
+							<td><?php e($cur_value['content']); ?></td>
 						</tr>
 						<?php } ?>
 					</tbody>
@@ -360,8 +360,8 @@ $pines->com_ptags->load();
 							<div class="pf-field"><em><?php
 							$name_links = array();
 							foreach (array('description', 'keywords', 'robots', 'rating', 'distribution') as $cur_name) {
-								$name_html = htmlspecialchars($cur_name);
-								$name_js = htmlspecialchars(json_encode($cur_name));
+								$name_html = h($cur_name);
+								$name_js = h(json_encode($cur_name));
 								$name_links[] = "<a href=\"javascript:void(0);\" onclick=\"\$('#p_muid_cur_meta_tag_name').val($name_js);\">$name_html</a>";
 							}
 							echo implode(', ', $name_links);
@@ -399,7 +399,7 @@ $pines->com_ptags->load();
 					<span class="pf-note"><a href="javascript:void(0);" onclick="$('#p_muid_custom_head_help').dialog({width: 800, height: 600, modal: false})">Read Me First</a></span>
 					<span class="pf-group pf-full-width">
 						<span class="pf-field" style="display: block;">
-							<textarea style="width: 100%;" rows="3" cols="35" name="custom_head"><?php echo htmlspecialchars($this->entity->custom_head); ?></textarea>
+							<textarea style="width: 100%;" rows="3" cols="35" name="custom_head"><?php e($this->entity->custom_head); ?></textarea>
 						</span>
 					</span></label>
 			</div>
@@ -625,7 +625,7 @@ $pines->com_ptags->load();
 				<span class="pf-label">Menu Entries</span>
 				<span class="pf-note">It isn't necessary to add the same conditions on menu entries. They will only appear if the Category Conditions are met.</span>
 				<div class="pf-group">
-					<input class="pf-field" type="text" name="com_menueditor_entries" id="p_muid_menu_entries" size="24" value="<?php echo htmlspecialchars(json_encode($this->entity->com_menueditor_entries)); ?>" />
+					<input class="pf-field" type="text" name="com_menueditor_entries" id="p_muid_menu_entries" size="24" value="<?php e(json_encode($this->entity->com_menueditor_entries)); ?>" />
 				</div>
 			</div>
 			<div class="pf-element">
@@ -660,7 +660,7 @@ $pines->com_ptags->load();
 			<div class="pf-element">
 				<label><span class="pf-label">Per Page</span>
 					<span class="pf-note">The number of content pages to show per page. Use 0 to show all pages. Leave blank to use the default</span>
-					<input class="pf-field" type="text" name="per_page" size="5" value="<?php echo htmlspecialchars($this->entity->per_page); ?>" /></label>
+					<input class="pf-field" type="text" name="per_page" size="5" value="<?php e($this->entity->per_page); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Pagination Type</span>
@@ -685,7 +685,7 @@ $pines->com_ptags->load();
 				<h3>Intro</h3>
 			</div>
 			<div class="pf-element pf-full-width">
-				<textarea rows="8" cols="35" class="peditor" style="width: 100%;" name="intro"><?php echo htmlspecialchars($this->entity->intro); ?></textarea>
+				<textarea rows="8" cols="35" class="peditor" style="width: 100%;" name="intro"><?php e($this->entity->intro); ?></textarea>
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Page Variants</h3>
@@ -749,13 +749,13 @@ $pines->com_ptags->load();
 				<?php } else { ?>
 				<select class="pf-field" id="p_muid_variant_template" style="max-width: 200px;">
 					<?php foreach ($variants as $cur_template => $cur_variants) { ?>
-					<option value="<?php echo htmlspecialchars($cur_template); ?>"<?php echo $cur_template == $pines->current_template ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars("{$pines->info->$cur_template->name} ($cur_template)"); ?></option>
+					<option value="<?php e($cur_template); ?>"<?php echo $cur_template == $pines->current_template ? ' selected="selected"' : ''; ?>><?php e("{$pines->info->$cur_template->name} ($cur_template)"); ?></option>
 					<?php } ?>
 				</select>
 				<select class="pf-field" id="p_muid_variant_variant" style="max-width: 200px;">
 					<?php foreach ($variants as $cur_template => $cur_variants) {
 						foreach ($cur_variants as $cur_description => $cur_variant) { ?>
-					<option class="<?php echo htmlspecialchars($cur_template); ?>" value="<?php echo htmlspecialchars($cur_variant); ?>"><?php echo htmlspecialchars($cur_description); ?></option>
+					<option class="<?php e($cur_template); ?>" value="<?php e($cur_variant); ?>"><?php e($cur_description); ?></option>
 					<?php } } ?>
 				</select>
 				<button class="pf-field btn btn-success" type="button" id="p_muid_variant_button">Add</button>
@@ -763,11 +763,11 @@ $pines->com_ptags->load();
 			</div>
 			<div id="p_muid_variants">
 				<?php foreach ((array) $this->entity->variants as $cur_template => $cur_variant) { ?>
-				<div class="pf-element pf-full-width <?php echo htmlspecialchars($cur_template); ?>">
+				<div class="pf-element pf-full-width <?php e($cur_template); ?>">
 					<button class="pf-field btn btn-danger remove" style="float: right;" type="button">Remove</button>
-					<span class="pf-label"><?php echo htmlspecialchars("{$pines->info->$cur_template->name} ($cur_template)"); ?></span>
-					<span class="pf-field"><?php echo htmlspecialchars($cur_variant); ?></span>
-					<input type="hidden" name="variants[]" value="<?php echo htmlspecialchars("{$cur_template}::{$cur_variant}"); ?>" />
+					<span class="pf-label"><?php e("{$pines->info->$cur_template->name} ($cur_template)"); ?></span>
+					<span class="pf-field"><?php e($cur_variant); ?></span>
+					<input type="hidden" name="variants[]" value="<?php e("{$cur_template}::{$cur_variant}"); ?>" />
 				</div>
 				<?php } ?>
 			</div>
@@ -791,9 +791,9 @@ $pines->com_ptags->load();
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_content', 'category/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_content', 'category/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

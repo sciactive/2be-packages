@@ -24,31 +24,31 @@ if ($this->render == 'body' && gatekeeper('com_sales/listmanufacturers')) { ?>
 		<tbody>
 			<tr>
 				<td style="font-weight:bold;">GUID</td>
-				<td><?php echo htmlspecialchars($this->entity->guid); ?></td>
+				<td><?php e($this->entity->guid); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Name</td>
-				<td><?php echo htmlspecialchars($this->entity->name); ?></td>
+				<td><?php e($this->entity->name); ?></td>
 			</tr>
 			<?php if (!empty($this->entity->email)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Email</td>
-				<td><a href="mailto:<?php echo htmlspecialchars($this->entity->email); ?>"><?php echo htmlspecialchars($this->entity->email); ?></a></td>
+				<td><a href="mailto:<?php e($this->entity->email); ?>"><?php e($this->entity->email); ?></a></td>
 			</tr>
 			<?php } if (!empty($this->entity->phone_work)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Phone</td>
-				<td><a href="tel:<?php echo htmlspecialchars($this->entity->phone_work); ?>"><?php echo htmlspecialchars(format_phone($this->entity->phone_work)); ?></a></td>
+				<td><a href="tel:<?php e($this->entity->phone_work); ?>"><?php e(format_phone($this->entity->phone_work)); ?></a></td>
 			</tr>
 			<?php } if (!empty($this->entity->fax)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Fax</td>
-				<td><a href="tel:<?php echo htmlspecialchars($this->entity->fax); ?>"><?php echo htmlspecialchars(format_phone($this->entity->fax)); ?></a></td>
+				<td><a href="tel:<?php e($this->entity->fax); ?>"><?php e(format_phone($this->entity->fax)); ?></a></td>
 			</tr>
 			<?php } if (isset($this->entity->logo)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Company Logo</td>
-				<td><img src="<?php echo htmlspecialchars($this->entity->get_logo()); ?>" alt="Company Logo" /></td>
+				<td><img src="<?php e($this->entity->get_logo()); ?>" alt="Company Logo" /></td>
 			</tr>
 			<?php } ?>
 		</tbody>
@@ -60,14 +60,14 @@ if ($this->render == 'body' && gatekeeper('com_sales/listmanufacturers')) { ?>
 	<h3 style="margin:10px 0;">Address</h3>
 	<address>
 		<?php if ($this->entity->address_type == 'us') {
-			echo htmlspecialchars($this->entity->address_1).'<br />';
+			e($this->entity->address_1).'<br />';
 			if (!empty($this->entity->address_2))
-				echo htmlspecialchars($this->entity->address_2).'<br />';
-			echo htmlspecialchars($this->entity->city).', ';
-			echo htmlspecialchars($this->entity->state).' ';
-			echo htmlspecialchars($this->entity->zip);
+				e($this->entity->address_2).'<br />';
+			e($this->entity->city).', ';
+			e($this->entity->state).' ';
+			e($this->entity->zip);
 		} else {
-			echo '<pre>'.htmlspecialchars($this->entity->address_international).'</pre>';
+			echo '<pre>'.h($this->entity->address_international).'</pre>';
 		} ?>
 	</address>
 </div>
@@ -95,10 +95,10 @@ if ($products) { ?>
 		<tbody>
 			<?php foreach ($products as $cur_product) { ?>
 			<tr>
-				<td><?php echo htmlspecialchars($cur_product->sku); ?></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_product->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_product->name); ?></a></td>
+				<td><?php e($cur_product->sku); ?></td>
+				<td><a data-entity="<?php e($cur_product->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_product->name); ?></a></td>
 				<td><?php echo $cur_product->enabled ? 'Yes' : 'No'; ?></td>
-				<td><?php echo htmlspecialchars($cur_product->manufacturer_sku); ?></td>
+				<td><?php e($cur_product->manufacturer_sku); ?></td>
 			</tr>
 			<?php } ?>
 		</tbody>

@@ -10,12 +10,12 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Welcome to '.htmlspecialchars($pines->info->name);
+$this->title = 'Welcome to '.h($pines->info->name);
 ?>
 <div class="page-header">
-	<h2>Welcome to <?php echo htmlspecialchars($pines->info->name); ?> <small>version <?php echo htmlspecialchars($pines->info->version); ?></small></h2>
+	<h2>Welcome to <?php e($pines->info->name); ?> <small>version <?php e($pines->info->version); ?></small></h2>
 </div>
-<p>Congratulations on successfully installing <?php echo htmlspecialchars($pines->info->name); ?>
+<p>Congratulations on successfully installing <?php e($pines->info->name); ?>
 	on your system. <a href="#p_muid_migrating" data-toggle="modal">Are you migrating from another installation?</a></p>
 <div class="modal hide" id="p_muid_migrating">
 	<div class="modal-header">
@@ -35,7 +35,7 @@ $this->title = 'Welcome to '.htmlspecialchars($pines->info->name);
 					<div class="accordion-inner clearfix">
 						You need to reinstall all the components and templates
 						you had installed on the previous installation. You can
-						do that in the <a href="<?php echo htmlspecialchars(pines_url('com_plaza', 'package/repository')); ?>">WonderPHP Plaza</a>.
+						do that in the <a href="<?php e(pines_url('com_plaza', 'package/repository')); ?>">WonderPHP Plaza</a>.
 					</div>
 				</div>
 			</div>
@@ -86,7 +86,7 @@ $this->title = 'Welcome to '.htmlspecialchars($pines->info->name);
 						com_entitytools. If you don't already have it installed
 						on the old installation, install it. Now go to System ->
 						Entity Tools -> Export to export your entities. Then on
-						this system, go to <a href="<?php echo htmlspecialchars(pines_url('com_entitytools', 'import')); ?>">Import</a>
+						this system, go to <a href="<?php e(pines_url('com_entitytools', 'import')); ?>">Import</a>
 						and select the file that the export returned.
 					</div>
 				</div>
@@ -121,33 +121,33 @@ $this->title = 'Welcome to '.htmlspecialchars($pines->info->name);
 </div>
 <div>
 	To help you get started with WonderPHP, here are some important areas in the
-	<a href="<?php echo htmlspecialchars(pines_url('com_configure', 'list')); ?>">configuration</a>:
+	<a href="<?php e(pines_url('com_configure', 'list')); ?>">configuration</a>:
 	<h4 style="text-align: center;">Settings and Preferences</h4>
 	<dl style="margin-top: 0;">
-		<dt><a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'system'))); ?>">WonderPHP Config</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'system'))); ?>">WonderPHP Config</a></dt>
 		<dd>Main system config includes things like names, default templates and component, timezone, etc.</dd>
 
-		<dt><a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'com_user'))); ?>">User Manager</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_user'))); ?>">User Manager</a></dt>
 		<dd>The user manager provides user and group abilities. You can tune it to work just how you'd like here.</dd>
 
-		<dt><a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'com_content'))); ?>">CMS</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_content'))); ?>">CMS</a></dt>
 		<dd>The CMS, or Content Management System is what builds the pages in your website. You can set defaults and options here.</dd>
 
-		<dt><a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'com_timeoutnotice'))); ?>">Timeout Notice</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_timeoutnotice'))); ?>">Timeout Notice</a></dt>
 		<dd>The timeout notice will log users out after they've been idle for a while. You can set up its features here.</dd>
 
-		<dt><a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'com_logger'))); ?>">Logger</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_logger'))); ?>">Logger</a></dt>
 		<dd>The logger keeps a log of important things that happen on your website. You can set up how and where it logs information here.</dd>
 	</dl>
 	<h4 style="text-align: center;">Appearance</h4>
 	<dl style="margin-top: 0;">
-		<dt><a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'system'))); ?>">WonderPHP Config</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'system'))); ?>">WonderPHP Config</a></dt>
 		<dd>The main system config lets you choose default templates, which change the whole site's appearance.</dd>
 
-		<dt><a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'com_bootstrap'))); ?>">Bootstrap</a> and <a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'com_jquery'))); ?>">jQuery</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_bootstrap'))); ?>">Bootstrap</a> and <a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_jquery'))); ?>">jQuery</a></dt>
 		<dd>Bootstrap provides theming for most of the form inputs, buttons, and other various elements. jQuery UI provides theming for many of the widgets, like the data grids, and the tpl_pines template. Try different combinations of Bootstrap and jQuery UI themes.</dd>
 
-		<dt><a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'tpl_pinescms'))); ?>">Pines CMS Template</a> and <a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'tpl_pines'))); ?>">Pines Template</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'tpl_pinescms'))); ?>">Pines CMS Template</a> and <a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'tpl_pines'))); ?>">Pines Template</a></dt>
 		<dd>These are the default templates for WonderPHP. You can configure a lot of options for each of them, including changing their layout.</dd>
 	</dl>
 </div>

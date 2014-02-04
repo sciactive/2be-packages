@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Pages';
 if (isset($this->category))
-	$this->title .= htmlspecialchars(" in {$this->category->name} [{$this->category->alias}]");
+	$this->title .= h(" in {$this->category->name} [{$this->category->alias}]");
 $pines->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_content/page/list']);
@@ -75,9 +75,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->pages as $page) { ?>
-		<tr title="<?php echo htmlspecialchars($page->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($page->guid); ?>" data-entity-context="com_content_page"><?php echo htmlspecialchars($page->name); ?></a></td>
-			<td><?php echo htmlspecialchars($page->alias); ?></td>
+		<tr title="<?php e($page->guid); ?>">
+			<td><a data-entity="<?php e($page->guid); ?>" data-entity-context="com_content_page"><?php e($page->name); ?></a></td>
+			<td><?php e($page->alias); ?></td>
 			<td><?php echo ($page->enabled ? 'Yes' : 'No'); ?></td>
 			<td><?php echo (isset($page->show_front_page) ? ($page->show_front_page ? 'Yes' : 'No') : 'Use Default'); ?></td>
 			<td>
@@ -88,11 +88,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					echo '';
 			?>
 			</td>
-			<td><?php echo htmlspecialchars(format_date($page->p_cdate)); ?></td>
-			<td><?php echo htmlspecialchars(format_date($page->p_mdate)); ?></td>
-			<td><?php echo htmlspecialchars(format_date($page->publish_begin)); ?></td>
-			<td><?php echo isset($page->publish_end) ? htmlspecialchars(format_date($page->publish_end)) : ''; ?></td>
-			<td><?php echo htmlspecialchars(implode(', ', $page->content_tags)); ?></td>
+			<td><?php e(format_date($page->p_cdate)); ?></td>
+			<td><?php e(format_date($page->p_mdate)); ?></td>
+			<td><?php e(format_date($page->publish_begin)); ?></td>
+			<td><?php echo isset($page->publish_end) ? h(format_date($page->publish_end)) : ''; ?></td>
+			<td><?php e(implode(', ', $page->content_tags)); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

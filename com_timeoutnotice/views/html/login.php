@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Login';
 ?>
-<form class="pf-form com_timeoutnotice_login_form" method="post" action="<?php echo htmlspecialchars(pines_url()); ?>">
+<form class="pf-form com_timeoutnotice_login_form" method="post" action="<?php e(pines_url()); ?>">
 	<div class="pf-element">
 		Your session has timed out.<br />
 		Please login again to continue, or <a href="javascript:void(0)" class="already_loggedin">did you already login</a>?

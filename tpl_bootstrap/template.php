@@ -47,17 +47,17 @@ $width = ($pines->config->template->width == 'fluid') ? '-fluid' : '';
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title><?php echo htmlspecialchars($pines->page->get_title()); ?></title>
-	<link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo htmlspecialchars($pines->config->location); ?>favicon.ico" />
+	<title><?php e($pines->page->get_title()); ?></title>
+	<link rel="icon" type="image/vnd.microsoft.icon" href="<?php e($pines->config->location); ?>favicon.ico" />
 	<meta name="HandheldFriendly" content="true" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->rela_location); ?>system/includes/js.php"></script>
+	<script type="text/javascript" src="<?php e($pines->config->rela_location); ?>system/includes/js.php"></script>
 	<script type="text/javascript">pines(function(){if ($.pnotify) {
 		$.pnotify.defaults.opacity = .9;
 		$.pnotify.defaults.delay = 15000;
 	}});</script>
 	<?php if ($pines->config->tpl_bootstrap->ajax) { ?>
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/js/ajax.js"></script>
+	<script type="text/javascript" src="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/js/ajax.js"></script>
 	<?php } ?>
 	<?php if ($pines->template->verify_color($pines->config->tpl_bootstrap->lighter_color) && $pines->template->verify_color($pines->config->tpl_bootstrap->darker_color) && $pines->template->verify_color($pines->config->tpl_bootstrap->border_color)) { ?>
 	<!--[if lt IE 8]>
@@ -69,20 +69,20 @@ $width = ($pines->config->template->width == 'fluid') ? '-fluid' : '';
 	<![endif]-->
 	<?php } ?>
 	<!--[if lt IE 8]>
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/js/jquery/jquery.dropdown.js"></script>
+	<script type="text/javascript" src="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/js/jquery/jquery.dropdown.js"></script>
 	<![endif]-->
 	<?php if (!empty($pines->config->tpl_bootstrap->custom_ie_code)) {
 		echo $pines->config->tpl_bootstrap->custom_ie_code;
 	}  echo $pines->page->render_modules('head', 'module_head'); ?>
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/pines.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/print.css" media="print" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/pines.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/print.css" media="print" rel="stylesheet" type="text/css" />
 	<?php if (!empty($pines->config->tpl_bootstrap->font_folder)) { ?>
-	<link href="<?php echo htmlspecialchars($pines->config->tpl_bootstrap->font_folder); ?>stylesheet.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->tpl_bootstrap->font_folder); ?>stylesheet.css" media="all" rel="stylesheet" type="text/css" />
 	<?php } 
 	if (!empty($pines->config->tpl_bootstrap->link_css)) {
 		$link_css = explode(',', $pines->config->tpl_bootstrap->link_css);
 		foreach ($link_css as $cur_link) {
-			echo '<link type="text/css" rel="stylesheet" href="'.htmlspecialchars($pines->config->location).$cur_link.'" />';
+			echo '<link type="text/css" rel="stylesheet" href="'.h($pines->config->location).$cur_link.'" />';
 		}
 	}
 	?>
@@ -237,10 +237,10 @@ $width = ($pines->config->template->width == 'fluid') ? '-fluid' : '';
 			pines(function(){
 				<?php
 				if ( $error ) { foreach ($error as $cur_item) {
-					echo 'pines.error('.json_encode(htmlspecialchars($cur_item)).", \"Error\");\n";
+					echo 'pines.error('.json_encode(h($cur_item)).", \"Error\");\n";
 				} }
 				if ( $notice ) { foreach ($notice as $cur_item) {
-					echo 'pines.notice('.json_encode(htmlspecialchars($cur_item)).", \"Notice\");\n";
+					echo 'pines.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
 				} }
 				?>
 			});
@@ -257,20 +257,20 @@ $width = ($pines->config->template->width == 'fluid') ? '-fluid' : '';
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</a>
-					<a class="brand" href="<?php echo htmlspecialchars($pines->config->full_location); ?>">
+					<a class="brand" href="<?php e($pines->config->full_location); ?>">
 						<?php if ($pines->config->tpl_bootstrap->use_header_image) { ?>
-						<img src="<?php echo htmlspecialchars($pines->config->tpl_bootstrap->header_image); ?>" alt="<?php echo htmlspecialchars($pines->config->page_title); ?>" />
+						<img src="<?php e($pines->config->tpl_bootstrap->header_image); ?>" alt="<?php e($pines->config->page_title); ?>" />
 						<?php } else { ?>
 							<span>
 						<?php	switch ($pines->config->tpl_bootstrap->brand_type) {
 								case "System Name":
-									echo htmlspecialchars($pines->config->system_name);
+									e($pines->config->system_name);
 									break;
 								case "Page Title":
-									echo htmlspecialchars($pines->config->page_title);
+									e($pines->config->page_title);
 									break;
 								case "Custom":
-									echo htmlspecialchars($pines->config->tpl_bootstrap->brand_name);
+									e($pines->config->tpl_bootstrap->brand_name);
 									break;
 								} ?>
 							</span>	
@@ -338,7 +338,7 @@ $width = ($pines->config->template->width == 'fluid') ? '-fluid' : '';
 			<div class="row-fluid">
 				<div class="span12 positions">
 					<div id="footer_position"><?php echo $pines->page->render_modules('footer', 'module_header'); ?></div>
-					<p id="copyright"><?php echo htmlspecialchars($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
+					<p id="copyright"><?php e($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
 				</div>
 			</div>
 		</div>

@@ -78,23 +78,23 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->transfers as $transfer) { ?>
-		<tr title="<?php echo htmlspecialchars($transfer->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($transfer->guid); ?>" data-entity-context="com_sales_transfer"><?php echo htmlspecialchars($transfer->guid); ?></a></td>
-			<td><?php echo htmlspecialchars($transfer->reference_number); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($transfer->origin->guid); ?>" data-entity-context="group"><?php echo $transfer->origin->guid ? htmlspecialchars("{$transfer->origin->name} [{$transfer->origin->groupname}]") : ''; ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($transfer->destination->guid); ?>" data-entity-context="group"><?php echo $transfer->destination->guid ? htmlspecialchars("{$transfer->destination->name} [{$transfer->destination->groupname}]") : ''; ?></a></td>
-			<td><?php echo $transfer->shipped ? htmlspecialchars(format_date($transfer->shipped_date, 'full_sort')) : 'No'; ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($transfer->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php echo htmlspecialchars($transfer->shipper->name); ?></a></td>
-			<td><?php echo $transfer->eta ? htmlspecialchars(format_date($transfer->eta, 'date_sort')) : 'None'; ?></td>
+		<tr title="<?php e($transfer->guid); ?>">
+			<td><a data-entity="<?php e($transfer->guid); ?>" data-entity-context="com_sales_transfer"><?php e($transfer->guid); ?></a></td>
+			<td><?php e($transfer->reference_number); ?></td>
+			<td><a data-entity="<?php e($transfer->origin->guid); ?>" data-entity-context="group"><?php echo $transfer->origin->guid ? h("{$transfer->origin->name} [{$transfer->origin->groupname}]") : ''; ?></a></td>
+			<td><a data-entity="<?php e($transfer->destination->guid); ?>" data-entity-context="group"><?php echo $transfer->destination->guid ? h("{$transfer->destination->name} [{$transfer->destination->groupname}]") : ''; ?></a></td>
+			<td><?php echo $transfer->shipped ? h(format_date($transfer->shipped_date, 'full_sort')) : 'No'; ?></td>
+			<td><a data-entity="<?php e($transfer->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php e($transfer->shipper->name); ?></a></td>
+			<td><?php echo $transfer->eta ? h(format_date($transfer->eta, 'date_sort')) : 'None'; ?></td>
 			<td><?php echo $transfer->final ? ($transfer->finished ? 'Received' : (empty($transfer->received) ? 'Not Received' : 'Partially Received')) : 'Not Committed'; ?></td>
 			<td><?php
 			$names = array();
 			foreach ((array) $transfer->products as $cur_product) {
-				$names[] = '<a data-entity="'.htmlspecialchars($cur_product->guid).'" data-entity-context="com_sales_product">'.htmlspecialchars("{$cur_product->name} [{$cur_product->sku}]").'</a>';
+				$names[] = '<a data-entity="'.h($cur_product->guid).'" data-entity-context="com_sales_product">'.h("{$cur_product->name} [{$cur_product->sku}]").'</a>';
 			}
 			echo implode(', ', $names);
 			?></td>
-			<td><?php echo htmlspecialchars($transfer->comments); ?></td>
+			<td><?php e($transfer->comments); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

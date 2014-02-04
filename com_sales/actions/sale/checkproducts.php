@@ -55,18 +55,18 @@ foreach ($products as $key => $cur_product) {
 	$serial = $cur_product->values[2];
 	if ($product->serialized && empty($serial)) {
 		$success = false;
-		$messages[] = htmlspecialchars("The product {$product->name} requires a serial number.");
+		$messages[] = h("The product {$product->name} requires a serial number.");
 		continue;
 	}
 	$qty = (int) $cur_product->values[4];
 	if ($qty <= 0) {
 		$success = false;
-		$messages[] = htmlspecialchars("The product {$product->name} has no quantity.");
+		$messages[] = h("The product {$product->name} has no quantity.");
 		continue;
 	}
 	if ($product->serialized && $qty > 1) {
 		$success = false;
-		$messages[] = htmlspecialchars("The product {$product->name} is serialized and can't take a quantity more than 1.");
+		$messages[] = h("The product {$product->name} is serialized and can't take a quantity more than 1.");
 		continue;
 	}
 	$cur_selector = $selector;
@@ -83,7 +83,7 @@ foreach ($products as $key => $cur_product) {
 	$count = count($stock);
 	if ($count <> $qty) { // Yeah, I used > too. Whatever, it could happen.
 		$success = false;
-		$messages[] = htmlspecialchars('Couldn\'t find '.($count ? 'all of ' : '')."product {$product->name} in current inventory.".($count ? " Found {$count}." : ''));
+		$messages[] = h('Couldn\'t find '.($count ? 'all of ' : '')."product {$product->name} in current inventory.".($count ? " Found {$count}." : ''));
 	}
 	foreach ($stock as $cur_stock)
 		$guids[] = $cur_stock->guid;

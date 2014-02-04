@@ -185,7 +185,7 @@ class com_testimonials extends component {
 				$review['author'] = $cur_testimonial->author;
 				$review['date'] = format_date($cur_testimonial->date, 'date_short');
 				$review['timeago'] =  date("c", $cur_testimonial->date);
-				$review['testimonial'] = (!empty($cur_testimonial->quotefeedback)) ?  htmlspecialchars($cur_testimonial->quotefeedback) : htmlspecialchars($cur_testimonial->feedback);
+				$review['testimonial'] = (!empty($cur_testimonial->quotefeedback)) ?  h($cur_testimonial->quotefeedback) : h($cur_testimonial->feedback);
 				$review['rating'] = $cur_testimonial->rating;
 				$review['tags'] = json_encode($cur_testimonial->tags);
 				if (gatekeeper('com_testimonials/showentityhelp')) {

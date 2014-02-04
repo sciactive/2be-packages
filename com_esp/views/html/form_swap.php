@@ -13,11 +13,11 @@ defined('P_RUN') or die('Direct access prohibited');
 ?>
 <form class="pf-form" id="p_muid_form" action="">
 	<div class="pf-element pf-heading">
-		<h3><?php echo htmlspecialchars($this->entity->item['entity']->name); ?></h3>
+		<h3><?php e($this->entity->item['entity']->name); ?></h3>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Item Serial</span>
-		<span class="pf-field"><?php echo htmlspecialchars($this->entity->item['serial']); ?></span>
+		<span class="pf-field"><?php e($this->entity->item['serial']); ?></span>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>New Item</h3>

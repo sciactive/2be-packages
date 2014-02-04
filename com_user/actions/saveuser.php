@@ -249,15 +249,15 @@ if ($user->save()) {
 	pines_log('Saved user ['.$user->username.']');
 	if ($pines->config->com_user->confirm_email && $confirm_email) {
 		// Send the verification email.
-		$link = htmlspecialchars(pines_url('com_user', 'verifyuser', array('id' => $user->guid, 'type' => 'change', 'secret' => $user->new_email_secret), true));
-		$link2 = htmlspecialchars(pines_url('com_user', 'verifyuser', array('id' => $user->guid, 'type' => 'cancelchange', 'secret' => $user->cancel_email_secret), true));
+		$link = h(pines_url('com_user', 'verifyuser', array('id' => $user->guid, 'type' => 'change', 'secret' => $user->new_email_secret), true));
+		$link2 = h(pines_url('com_user', 'verifyuser', array('id' => $user->guid, 'type' => 'cancelchange', 'secret' => $user->cancel_email_secret), true));
 		$macros = array(
-			'old_email' => htmlspecialchars($user->email),
-			'new_email' => htmlspecialchars($user->new_email_address),
-			'to_phone' => htmlspecialchars(format_phone($user->phone)),
-			'to_fax' => htmlspecialchars(format_phone($user->fax)),
-			'to_timezone' => htmlspecialchars($user->timezone),
-			'to_address' => $user->address_type == 'us' ? htmlspecialchars("{$user->address_1} {$user->address_2}").'<br />'.htmlspecialchars("{$user->city}, {$user->state} {$user->zip}") : '<pre>'.htmlspecialchars($user->address_international).'</pre>'
+			'old_email' => h($user->email),
+			'new_email' => h($user->new_email_address),
+			'to_phone' => h(format_phone($user->phone)),
+			'to_fax' => h(format_phone($user->fax)),
+			'to_timezone' => h($user->timezone),
+			'to_address' => $user->address_type == 'us' ? h("{$user->address_1} {$user->address_2}").'<br />'.h("{$user->city}, {$user->state} {$user->zip}") : '<pre>'.h($user->address_international).'</pre>'
 		);
 		$macros2 = $macros;
 		$macros['verify_link'] = $link;

@@ -69,11 +69,11 @@ class jtemplate_adapter {
 		include('templates/tpl_joomlatemplates/classes/fake_joomla_classes.php');
 
 		// Set up the fake environment.
-		$this->template = htmlspecialchars($template);
+		$this->template = h($template);
 		$this->template_dir = $template_dir;
-		$this->language = htmlspecialchars($pines->config->tpl_joomlatemplates->language);
-		$this->direction = htmlspecialchars($pines->config->tpl_joomlatemplates->direction);
-		$this->baseurl = htmlspecialchars($pines->config->location.'templates/tpl_joomlatemplates');
+		$this->language = h($pines->config->tpl_joomlatemplates->language);
+		$this->direction = h($pines->config->tpl_joomlatemplates->direction);
+		$this->baseurl = h($pines->config->location.'templates/tpl_joomlatemplates');
 		$this->params = new jtemplate_params($template, $template_dir);
 	}
 	
@@ -221,15 +221,15 @@ class jtemplate_adapter {
 		$pines->template->cur_module_options = $options;
 		switch ($options['type']) {
 			case 'head':
-				$content = "\n<title>".htmlspecialchars($pines->page->get_title())."</title>\n".
-				'<link href="'.htmlspecialchars($pines->config->location).'templates/'.htmlspecialchars($pines->current_template).'/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />'."\n".
-				'<link href="'.htmlspecialchars($pines->config->location).'templates/'.htmlspecialchars($pines->current_template).'/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />'."\n".
-				'<link href="'.htmlspecialchars($pines->config->location).'templates/'.htmlspecialchars($pines->current_template).'/css/dropdown/themes/jqueryui/jqueryui.css" media="all" rel="stylesheet" type="text/css" />'."\n".
-				'<link href="'.htmlspecialchars($pines->config->location).'templates/'.htmlspecialchars($pines->current_template).'/css/dropdown_fix.css" media="all" rel="stylesheet" type="text/css" />'."\n".
-				'<script type="text/javascript" src="'.htmlspecialchars($pines->config->rela_location).'system/includes/js.php"></script>'."\n".
-//				'<script type="text/javascript" src="'.htmlspecialchars($pines->config->location).'templates/'.htmlspecialchars($pines->current_template).'/js/template.js"></script>'."\n".
+				$content = "\n<title>".h($pines->page->get_title())."</title>\n".
+				'<link href="'.h($pines->config->location).'templates/'.h($pines->current_template).'/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />'."\n".
+				'<link href="'.h($pines->config->location).'templates/'.h($pines->current_template).'/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />'."\n".
+				'<link href="'.h($pines->config->location).'templates/'.h($pines->current_template).'/css/dropdown/themes/jqueryui/jqueryui.css" media="all" rel="stylesheet" type="text/css" />'."\n".
+				'<link href="'.h($pines->config->location).'templates/'.h($pines->current_template).'/css/dropdown_fix.css" media="all" rel="stylesheet" type="text/css" />'."\n".
+				'<script type="text/javascript" src="'.h($pines->config->rela_location).'system/includes/js.php"></script>'."\n".
+//				'<script type="text/javascript" src="'.h($pines->config->location).'templates/'.h($pines->current_template).'/js/template.js"></script>'."\n".
 				'<!--[if lt IE 7]>'."\n".
-				'<script type="text/javascript" src="'.htmlspecialchars($pines->config->location).'templates/'.htmlspecialchars($pines->current_template).'/js/jquery/jquery.dropdown.js"></script>'."\n".
+				'<script type="text/javascript" src="'.h($pines->config->location).'templates/'.h($pines->current_template).'/js/jquery/jquery.dropdown.js"></script>'."\n".
 				'<![endif]-->'."\n".
 				$pines->page->render_modules('head', 'module_head')."\n";
 				break;

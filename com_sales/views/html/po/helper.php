@@ -24,12 +24,12 @@ echo $module->render();
 		<tbody>
 			<tr>
 				<td style="font-weight:bold;">PO Number</td>
-				<td><?php echo htmlspecialchars($this->entity->po_number); ?></td>
+				<td><?php e($this->entity->po_number); ?></td>
 			</tr>
 			<?php if (!empty($this->entity->reference_number)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Reference Number</td>
-				<td><?php echo htmlspecialchars($this->entity->reference_number); ?></td>
+				<td><?php e($this->entity->reference_number); ?></td>
 			</tr>
 			<?php } ?>
 			<tr>
@@ -38,19 +38,19 @@ echo $module->render();
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Vendor</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php echo htmlspecialchars($this->entity->vendor->name); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php e($this->entity->vendor->name); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Destination</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->destination->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$this->entity->destination->name} [{$this->entity->destination->groupname}]"); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->destination->guid); ?>" data-entity-context="group"><?php e("{$this->entity->destination->name} [{$this->entity->destination->groupname}]"); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Shipper</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php echo htmlspecialchars($this->entity->shipper->name); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php e($this->entity->shipper->name); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">ETA</td>
-				<td><?php echo ($this->entity->eta ? htmlspecialchars(format_date($this->entity->eta, 'date_sort')) : ''); ?></td>
+				<td><?php echo ($this->entity->eta ? h(format_date($this->entity->eta, 'date_sort')) : ''); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Tracking #</td>
@@ -58,10 +58,10 @@ echo $module->render();
 					if (isset($this->entity->shipper->guid) && $this->entity->shipper->can_track()) {
 						$links = array();
 						foreach ((array) $this->entity->tracking_numbers as $cur_number)
-							$links[] = '<a href="'.htmlspecialchars($this->entity->shipper->tracking_url($cur_number)).'" target="_blank">'.htmlspecialchars($cur_number).'</a>';
+							$links[] = '<a href="'.h($this->entity->shipper->tracking_url($cur_number)).'" target="_blank">'.h($cur_number).'</a>';
 						echo implode('<br />', $links);
 					} else
-						echo str_replace("\n", '<br />', htmlspecialchars(isset($this->entity->tracking_numbers) ? implode("\n", $this->entity->tracking_numbers) : ''));
+						echo str_replace("\n", '<br />', h(isset($this->entity->tracking_numbers) ? implode("\n", $this->entity->tracking_numbers) : ''));
 				?></td>
 			</tr>
 		</tbody>
@@ -88,9 +88,9 @@ echo $module->render();
 			$all_received = (array) $this->entity->received;
 			foreach ((array) $this->entity->products as $cur_product) { ?>
 			<tr>
-				<td><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_product['entity']->name); ?></a></td>
-				<td><?php echo htmlspecialchars($cur_product['quantity']); ?></td>
+				<td><?php e($cur_product['entity']->sku); ?></td>
+				<td><a data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_product['entity']->name); ?></a></td>
+				<td><?php e($cur_product['quantity']); ?></td>
 				<?php if ($this->entity->final) { ?>
 				<td>
 					<?php
@@ -107,7 +107,7 @@ echo $module->render();
 					?>
 				</td>
 				<?php } ?>
-				<td><?php echo htmlspecialchars($cur_product['cost']); ?></td>
+				<td><?php e($cur_product['cost']); ?></td>
 				<td><?php echo $pines->com_sales->round((int) $cur_product['quantity'] * (float) $cur_product['cost']); ?></td>
 			</tr>
 			<?php if ($this->entity->final && $received) { ?>
@@ -116,7 +116,7 @@ echo $module->render();
 				<td colspan="4"><?php
 				$text = array();
 				foreach ($received as $cur_received)
-					$text[] = '<a data-entity="'.htmlspecialchars($cur_received->guid).'" data-entity-context="com_sales_stock">'.htmlspecialchars($cur_received->guid.(!empty($cur_received->serial) ? " (Serial: $cur_received->serial)" : '')).'</a>';
+					$text[] = '<a data-entity="'.h($cur_received->guid).'" data-entity-context="com_sales_stock">'.h($cur_received->guid.(!empty($cur_received->serial) ? " (Serial: $cur_received->serial)" : '')).'</a>';
 				echo implode(', ', $text);
 				?></td>
 			</tr>
@@ -153,9 +153,9 @@ if ($sales) {
 						continue;
 					?>
 			<tr>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_sale->guid); ?>" data-entity-context="com_sales_sale"><?php echo htmlspecialchars($cur_sale->id); ?></a></td>
-				<td><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_product['entity']->name); ?></a></td>
+				<td><a data-entity="<?php e($cur_sale->guid); ?>" data-entity-context="com_sales_sale"><?php e($cur_sale->id); ?></a></td>
+				<td><?php e($cur_product['entity']->sku); ?></td>
+				<td><a data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_product['entity']->name); ?></a></td>
 			</tr>
 			<?php } } ?>
 		</tbody>
@@ -167,12 +167,12 @@ if (!empty($this->entity->comments)) { ?>
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Comments</h3>
-	<div style="white-space: pre-wrap; padding-bottom: .5em;"><?php echo htmlspecialchars($this->entity->comments); ?></div>
+	<div style="white-space: pre-wrap; padding-bottom: .5em;"><?php e($this->entity->comments); ?></div>
 </div>
 <?php } } elseif ($this->render == 'footer') { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_sales', 'po/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
+<a href="<?php e(pines_url('com_sales', 'po/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
 <?php if (!$this->entity->finished && ( (gatekeeper('com_sales/receive') && isset($this->entity->destination->guid) && $this->entity->destination->is($_SESSION['user']->group)) || (gatekeeper('com_sales/receivelocation') && isset($this->entity->destination->guid) && isset($_SESSION['user']->group->guid) && $this->entity->destination->in_array($_SESSION['user']->group->get_descendants(true))) ) ) { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_sales', 'stock/receive', array('location' => $this->entity->destination->guid, 'shipments' => $this->entity->guid))); ?>" class="btn">Receive</a>
+<a href="<?php e(pines_url('com_sales', 'stock/receive', array('location' => $this->entity->destination->guid, 'shipments' => $this->entity->guid))); ?>" class="btn">Receive</a>
 <?php } if (gatekeeper('com_sales/listpos')) { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_sales', 'po/list')); ?>" class="btn">View in List</a>
+<a href="<?php e(pines_url('com_sales', 'po/list')); ?>" class="btn">View in List</a>
 <?php } }

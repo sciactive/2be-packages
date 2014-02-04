@@ -58,9 +58,9 @@ class tpl_print extends template {
 	public function sub_menu($menu) {
 		$return = '<li class="ui-state-default'.($menu[0]['current_page'] ? ' current_page' : '').($menu[0]['current_page_parent'] ? ' current_page_parent' : '').'"><a'.
 			(count($menu) > 1 ? ' class="dir" href="' : ' href="').
-			(isset($menu[0]['href']) ? htmlspecialchars($menu[0]['href']) : 'javascript:void(0);').
+			(isset($menu[0]['href']) ? h($menu[0]['href']) : 'javascript:void(0);').
 			(isset($menu[0]['onclick']) ? "\" onclick=\"{$menu[0]['onclick']}\">" : '">').
-			htmlspecialchars($menu[0]['text']).'</a>';
+			h($menu[0]['text']).'</a>';
 		if (count($menu) > 1) {
 			$return .= '<ul>';
 			foreach ($menu as $key => $value) {

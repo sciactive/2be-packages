@@ -40,37 +40,37 @@ echo $module->render();
 		<tbody>
 			<tr>
 				<td style="font-weight:bold;">GUID</td>
-				<td><?php echo htmlspecialchars($this->entity->guid); ?></td>
+				<td><?php e($this->entity->guid); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Testimonial ID</td>
-				<td><?php echo htmlspecialchars($this->entity->id); ?></td>
+				<td><?php e($this->entity->id); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Customer</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($this->entity->customer->name); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($this->entity->customer->name); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Testimonial Status</td>
-				<td><?php echo htmlspecialchars(ucwords($status)); ?></td>
+				<td><?php e(ucwords($status)); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Created By</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($this->entity->user->name); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->user->guid); ?>" data-entity-context="user"><?php e($this->entity->user->name); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Location</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($this->entity->group->name); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->group->guid); ?>" data-entity-context="group"><?php e($this->entity->group->name); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Date</td>
-				<td><?php echo htmlspecialchars(format_date($this->entity->p_cdate)); ?></td>
+				<td><?php e(format_date($this->entity->p_cdate)); ?></td>
 			</tr>
 		</tbody>
 	</table>
 </div>
 <?php } elseif ($this->render == 'footer') { ?>
-	<a href="<?php echo htmlspecialchars(pines_url('com_testimonials', $action, array('show' => 'id:'.$this->entity->id, 'type' => $status))); ?>" class="btn">View in List</a>
+	<a href="<?php e(pines_url('com_testimonials', $action, array('show' => 'id:'.$this->entity->id, 'type' => $status))); ?>" class="btn">View in List</a>
 	<?php if (gatekeeper('com_testimonials/edittestimonials')) { ?>
-	<a href="<?php echo htmlspecialchars(pines_url('com_testimonials', 'testimonial/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
+	<a href="<?php e(pines_url('com_testimonials', 'testimonial/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
 <?php } }

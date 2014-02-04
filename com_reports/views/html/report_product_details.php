@@ -11,9 +11,9 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$this->title = 'Product Details Report ['.htmlspecialchars($this->location->name).']';
+$this->title = 'Product Details Report ['.h($this->location->name).']';
 if (!$this->all_time)
-	$this->note = htmlspecialchars(format_date($this->start_date, 'date_short')).' - '.htmlspecialchars(format_date($this->end_date - 1, 'date_short'));
+	$this->note = h(format_date($this->start_date, 'date_short')).' - '.h(format_date($this->end_date - 1, 'date_short'));
 
 $pines->icons->load();
 $pines->com_jstree->load();
@@ -254,16 +254,16 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				}
 			?>
 			<tr <?php echo $class; ?>>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_tx->guid); ?>" data-entity-context="<?php echo $tx_type == 'SA' ? 'com_sales_sale' : 'com_sales_return'; ?>"><?php echo htmlspecialchars($cur_tx->id); ?></a></td>
-				<td><?php echo htmlspecialchars(format_date($cur_tx->p_cdate)); ?></td>
-				<td><?php echo htmlspecialchars($cur_status); ?></td>
-				<td><?php echo htmlspecialchars($cur_item['delivery']); ?></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_tx->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($cur_tx->group->name); ?></a></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_item['salesperson']->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($cur_item['salesperson']->name); ?></a></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_tx->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($cur_tx->customer->name); ?></a></td>
-				<td><?php echo htmlspecialchars($cur_item['sku']); ?></td>
-				<td><?php echo htmlspecialchars($cur_item['serial']); ?></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_item['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_item['entity']->name); ?></a></td>
+				<td><a data-entity="<?php e($cur_tx->guid); ?>" data-entity-context="<?php echo $tx_type == 'SA' ? 'com_sales_sale' : 'com_sales_return'; ?>"><?php e($cur_tx->id); ?></a></td>
+				<td><?php e(format_date($cur_tx->p_cdate)); ?></td>
+				<td><?php e($cur_status); ?></td>
+				<td><?php e($cur_item['delivery']); ?></td>
+				<td><a data-entity="<?php e($cur_tx->group->guid); ?>" data-entity-context="group"><?php e($cur_tx->group->name); ?></a></td>
+				<td><a data-entity="<?php e($cur_item['salesperson']->guid); ?>" data-entity-context="user"><?php e($cur_item['salesperson']->name); ?></a></td>
+				<td><a data-entity="<?php e($cur_tx->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($cur_tx->customer->name); ?></a></td>
+				<td><?php e($cur_item['sku']); ?></td>
+				<td><?php e($cur_item['serial']); ?></td>
+				<td><a data-entity="<?php e($cur_item['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_item['entity']->name); ?></a></td>
 				<td>$<?php echo round($cur_item['entity']->vendors[0]['cost'], 2); ?></td>
 				<td>$<?php echo round($cur_item['price'], 2); ?></td>
 			</tr>

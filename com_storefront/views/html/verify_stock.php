@@ -65,14 +65,14 @@ $pines->com_pgrid->load();
 		</thead>
 		<tbody>
 		<?php foreach($this->items as $cur_item) { ?>
-			<tr title="<?php echo htmlspecialchars($cur_item->guid); ?>">
-				<td><?php echo htmlspecialchars($cur_item->sku); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->name); ?></td>
+			<tr title="<?php e($cur_item->guid); ?>">
+				<td><?php e($cur_item->sku); ?></td>
+				<td><?php e($cur_item->name); ?></td>
 				<td><?php echo ($cur_item->enabled ? 'Yes' : 'No'); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->manufacturer->name); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->manufacturer_sku); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->pricing_method); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->stock_type); ?></td>
+				<td><?php e($cur_item->manufacturer->name); ?></td>
+				<td><?php e($cur_item->manufacturer_sku); ?></td>
+				<td><?php e($cur_item->pricing_method); ?></td>
+				<td><?php e($cur_item->stock_type); ?></td>
 			</tr>
 		<?php } ?>
 		</tbody>
@@ -95,14 +95,14 @@ $pines->com_pgrid->load();
 		</thead>
 		<tbody>
 		<?php foreach($this->image_descs as $cur_item) { ?>
-			<tr title="<?php echo htmlspecialchars($cur_item->guid); ?>">
-				<td><?php echo htmlspecialchars($cur_item->sku); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->name); ?></td>
+			<tr title="<?php e($cur_item->guid); ?>">
+				<td><?php e($cur_item->sku); ?></td>
+				<td><?php e($cur_item->name); ?></td>
 				<td><?php echo ($cur_item->enabled ? 'Yes' : 'No'); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->manufacturer->name); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->manufacturer_sku); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->pricing_method); ?></td>
-				<td><?php echo htmlspecialchars($cur_item->stock_type); ?></td>
+				<td><?php e($cur_item->manufacturer->name); ?></td>
+				<td><?php e($cur_item->manufacturer_sku); ?></td>
+				<td><?php e($cur_item->pricing_method); ?></td>
+				<td><?php e($cur_item->stock_type); ?></td>
 			</tr>
 		<?php } ?>
 		</tbody>

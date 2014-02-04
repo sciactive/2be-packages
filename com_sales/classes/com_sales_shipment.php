@@ -91,31 +91,31 @@ class com_sales_shipment extends entity {
 		$tracking_links = array();
 		if (isset($this->shipper->guid) && $this->shipper->can_track()) {
 			foreach ($this->tracking_numbers as $cur_number) {
-				$url = htmlspecialchars($this->shipper->tracking_url($cur_number));
+				$url = h($this->shipper->tracking_url($cur_number));
 				$tracking_links[] = '<a href="'.$url.'" target="_blank">'.$url.'</a>';
 			}
 		} else {
 			foreach ($this->tracking_numbers as $cur_number)
-				$tracking_links[] = htmlspecialchars($cur_number);
+				$tracking_links[] = h($cur_number);
 		}
-		$address = '<strong>'.htmlspecialchars($this->shipping_address->name).'</strong><br />';
+		$address = '<strong>'.h($this->shipping_address->name).'</strong><br />';
 		if ($this->shipping_address->address_type == 'us') {
 			if (!empty($this->shipping_address->address_1)) {
-				$address .= htmlspecialchars($this->shipping_address->address_1.' '.$this->shipping_address->address_2).'<br />';
-				$address .= htmlspecialchars($this->shipping_address->city).', '.htmlspecialchars($this->shipping_address->state).' '.htmlspecialchars($this->shipping_address->zip);
+				$address .= h($this->shipping_address->address_1.' '.$this->shipping_address->address_2).'<br />';
+				$address .= h($this->shipping_address->city).', '.h($this->shipping_address->state).' '.h($this->shipping_address->zip);
 			}
 		} else
-			$address .= str_replace("\n", '<br />', htmlspecialchars($this->shipping_address->address_international));
+			$address .= str_replace("\n", '<br />', h($this->shipping_address->address_international));
 
 		$macros = array(
 			'packing_list' => $module->render(),
-			'sale_id' => htmlspecialchars($this->ref->id),
-			'sale_total' => htmlspecialchars($this->ref->total),
-			'shipper' => htmlspecialchars($this->shipper->name),
+			'sale_id' => h($this->ref->id),
+			'sale_total' => h($this->ref->total),
+			'shipper' => h($this->shipper->name),
 			'tracking_link' => implode('<br />', $tracking_links),
-			'eta' => htmlspecialchars($this->eta ? format_date($this->eta, 'date_long') : ''),
+			'eta' => h($this->eta ? format_date($this->eta, 'date_long') : ''),
 			'address' => $address,
-			'notes' => htmlspecialchars($this->notes),
+			'notes' => h($this->notes),
 		);
 		return $pines->com_mailer->send_mail($this->tracking_numbers ? 'com_sales/sale_shipped_tracking' : 'com_sales/sale_shipped', $macros, $this->ref->customer);
 	}

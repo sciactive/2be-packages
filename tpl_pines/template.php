@@ -44,30 +44,30 @@ header('Content-Type: text/html');
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title><?php echo htmlspecialchars($pines->page->get_title()); ?></title>
-	<link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo htmlspecialchars($pines->config->location); ?>favicon.ico" />
+	<title><?php e($pines->page->get_title()); ?></title>
+	<link rel="icon" type="image/vnd.microsoft.icon" href="<?php e($pines->config->location); ?>favicon.ico" />
 	<meta name="HandheldFriendly" content="true" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/dropdown/themes/jqueryui/jqueryui.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/dropdown/themes/jqueryui/jqueryui.css" media="all" rel="stylesheet" type="text/css" />
 
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->rela_location); ?>system/includes/js.php"></script>
+	<script type="text/javascript" src="<?php e($pines->config->rela_location); ?>system/includes/js.php"></script>
 	<?php if ($pines->config->tpl_pines->menu_delay) { ?>
 	<script type="text/javascript">pines.tpl_pines_menu_delay = true;</script>
 	<?php } ?>
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/js/template.js"></script>
+	<script type="text/javascript" src="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/js/template.js"></script>
 	<?php if ($pines->config->tpl_pines->ajax) { ?>
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/js/ajax.js"></script>
+	<script type="text/javascript" src="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/js/ajax.js"></script>
 	<?php } ?>
 
 	<!--[if lt IE 7]>
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/js/jquery/jquery.dropdown.js"></script>
+	<script type="text/javascript" src="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/js/jquery/jquery.dropdown.js"></script>
 	<![endif]-->
 
 	<?php echo $pines->page->render_modules('head', 'module_head'); ?>
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/pines.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/print.css" media="print" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/pines.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/print.css" media="print" rel="stylesheet" type="text/css" />
 	<style type="text/css">.page-width {width: auto;<?php echo $pines->config->template->width === 0 ? '' : ' max-width: '.(int) $pines->config->template->width.'px;'; ?>}</style>
 </head>
 <body class="ui-widget ui-widget-content<?php echo in_array('shadows', $pines->config->tpl_pines->fancy_style) ? ' shadows' : ''; echo in_array('printfix', $pines->config->tpl_pines->fancy_style) ? ' printfix' : ''; echo in_array('printheader', $pines->config->tpl_pines->fancy_style) ? ' printheader' : ''; echo in_array('nosidegutters', $pines->config->tpl_pines->fancy_style) ? ' nosidegutters' : ''; ?>">
@@ -80,10 +80,10 @@ header('Content-Type: text/html');
 			pines(function(){
 				<?php
 				if ( $error ) { foreach ($error as $cur_item) {
-					echo 'pines.error('.json_encode(htmlspecialchars($cur_item)).", \"Error\");\n";
+					echo 'pines.error('.json_encode(h($cur_item)).", \"Error\");\n";
 				} }
 				if ( $notice ) { foreach ($notice as $cur_item) {
-					echo 'pines.notice('.json_encode(htmlspecialchars($cur_item)).", \"Notice\");\n";
+					echo 'pines.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
 				} }
 				?>
 			});
@@ -96,11 +96,11 @@ header('Content-Type: text/html');
 			<div class="row-fluid">
 				<div class="span4">
 					<div id="page_title">
-						<a href="<?php echo htmlspecialchars($pines->config->full_location); ?>">
+						<a href="<?php e($pines->config->full_location); ?>">
 							<?php if ($pines->config->tpl_pines->use_header_image) { ?>
-							<img src="<?php echo htmlspecialchars($pines->config->tpl_pines->header_image); ?>" alt="<?php echo htmlspecialchars($pines->config->page_title); ?>" />
+							<img src="<?php e($pines->config->tpl_pines->header_image); ?>" alt="<?php e($pines->config->page_title); ?>" />
 							<?php } else { ?>
-							<span><?php echo htmlspecialchars($pines->config->page_title); ?></span>
+							<span><?php e($pines->config->page_title); ?></span>
 							<?php } ?>
 						</a>
 					</div>
@@ -164,7 +164,7 @@ header('Content-Type: text/html');
 			<div class="row-fluid">
 				<div class="span12">
 					<div id="footer_position"><?php echo $pines->page->render_modules('footer', 'module_header'); ?></div>
-					<p id="copyright"><?php echo htmlspecialchars($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
+					<p id="copyright"><?php e($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
 				</div>
 			</div>
 		</div>

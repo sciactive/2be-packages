@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Floor' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Floor' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide floor details in this form.';
 $pines->uploader->load();
 ?>
@@ -219,7 +219,7 @@ $pines->uploader->load();
 		});
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_customertimer', 'savefloor')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_customertimer', 'savefloor')); ?>">
 	<ul class="nav nav-tabs" style="clear: both;">
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
 		<li><a href="#p_muid_tab_layout" data-toggle="tab">Station Layout</a></li>
@@ -229,16 +229,16 @@ $pines->uploader->load();
 			<?php if (isset($this->entity->guid)) { ?>
 			<div class="date_info" style="float: right; text-align: right;">
 				<?php if (isset($this->entity->user)) { ?>
-				<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-				<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Name</span>
-					<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars($this->entity->name); ?>" /></label>
+					<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Enabled</span>
@@ -246,7 +246,7 @@ $pines->uploader->load();
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Description</span>
-				<textarea class="pf-field" rows="3" cols="35" name="description"><?php echo htmlspecialchars($this->entity->description); ?></textarea>
+				<textarea class="pf-field" rows="3" cols="35" name="description"><?php e($this->entity->description); ?></textarea>
 			</div>
 			<div class="pf-element">
 				<script type="text/javascript">
@@ -258,12 +258,12 @@ $pines->uploader->load();
 				</script>
 				<label><span class="pf-label">Background</span>
 					<span class="pf-note">See the Station Layout tab to preview the background.</span>
-					<input class="pf-field puploader" type="text" name="background" value="<?php echo htmlspecialchars($this->entity->background); ?>" /></label>
+					<input class="pf-field puploader" type="text" name="background" value="<?php e($this->entity->background); ?>" /></label>
 			</div>
 			<?php /* <div class="pf-element pf-full-width">
 				<span class="pf-label">Background Preview</span>
 				<div class="pf-group">
-					<span class="pf-field"><img class="station_layout_bg" src="<?php echo htmlspecialchars($this->entity->background); ?>" alt="Floor Background" style="max-width: 100%; width: auto; height: auto; border: 1px dashed black;" /></span>
+					<span class="pf-field"><img class="station_layout_bg" src="<?php e($this->entity->background); ?>" alt="Floor Background" style="max-width: 100%; width: auto; height: auto; border: 1px dashed black;" /></span>
 				</div>
 			</div> */ ?>
 			<div id="p_muid_station_layout_sizer"></div>
@@ -292,20 +292,20 @@ $pines->uploader->load();
 				</div>
 				<br class="pf-clearing" />
 				<div class="station_layout">
-					<img class="station_layout_bg" src="<?php echo htmlspecialchars($this->entity->background); ?>" alt="Floor Background" />
+					<img class="station_layout_bg" src="<?php e($this->entity->background); ?>" alt="Floor Background" />
 					<div class="station_floor"></div>
 					<br class="pf-clearing" />
 				</div>
-				<input type="hidden" name="stations" value="<?php echo htmlspecialchars(json_encode($this->entity->stations, JSON_FORCE_OBJECT)); ?>" />
+				<input type="hidden" name="stations" value="<?php e(json_encode($this->entity->stations, JSON_FORCE_OBJECT)); ?>" />
 			</div>
 			<br class="pf-clearing" />
 		</div>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_customertimer', 'listfloors'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_customertimer', 'listfloors'))); ?>);" value="Cancel" />
 	</div>
 </form>

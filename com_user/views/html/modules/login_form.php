@@ -24,7 +24,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	<div class="pf-element">
 		<label><span class="pf-label">Compact Link Text</span>
 			<span class="pf-note">Only applicable for "Compact" style.</span>
-			<input class="pf-field" type="text" name="compact_text" size="24" value="<?php echo isset($this->compact_text) ? htmlspecialchars($this->compact_text) : 'Login/Register'; ?>" /></label>
+			<input class="pf-field" type="text" name="compact_text" size="24" value="<?php echo isset($this->compact_text) ? h($this->compact_text) : 'Login/Register'; ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Hide Recovery Link</span>
@@ -34,6 +34,6 @@ defined('P_RUN') or die('Direct access prohibited');
 	<div class="pf-element">
 		<label><span class="pf-label">URL</span>
 			<span class="pf-note">URL to which to redirect the user after they log in.</span>
-			<input class="pf-field" type="text" name="url" size="24" value="<?php echo htmlspecialchars($this->url); ?>" /></label>
+			<input class="pf-field" type="text" name="url" size="24" value="<?php e($this->url); ?>" /></label>
 	</div>
 </div>

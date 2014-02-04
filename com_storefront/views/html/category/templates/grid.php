@@ -44,18 +44,18 @@ pines(function(){
 <div class="row-fluid">
 	<?php } $i++; ?>
 	<div class="span4 product">
-		<div class="product_guid" style="display: none;"><?php echo htmlspecialchars($cur_product->guid); ?></div>
-		<div class="product_alias" style="display: none;"><?php echo htmlspecialchars($cur_product->alias); ?></div>
+		<div class="product_guid" style="display: none;"><?php e($cur_product->guid); ?></div>
+		<div class="product_alias" style="display: none;"><?php e($cur_product->alias); ?></div>
 		<div class="product_main">
 			<?php if (isset($cur_product->thumbnail)) { ?>
-			<img class="thumb" alt="<?php echo htmlspecialchars($cur_product->name); ?>" src="<?php echo htmlspecialchars($pines->config->location.$cur_product->thumbnail); ?>" />
+			<img class="thumb" alt="<?php e($cur_product->name); ?>" src="<?php e($pines->config->location.$cur_product->thumbnail); ?>" />
 			<?php } ?>
-			<div class="name"><a href="<?php echo htmlspecialchars(pines_url('com_storefront', 'product', array('a' => $cur_product->alias))); ?>"><?php echo htmlspecialchars($cur_product->name); ?></a></div>
+			<div class="name"><a href="<?php e(pines_url('com_storefront', 'product', array('a' => $cur_product->alias))); ?>"><?php e($cur_product->name); ?></a></div>
 			<div class="info">
 				<?php if (!empty($cur_product->manufacturer_sku)) { ?>
-				<strong>Model:</strong> <?php echo format_content(htmlspecialchars($cur_product->manufacturer_sku)); ?> | 
+				<strong>Model:</strong> <?php echo format_content(h($cur_product->manufacturer_sku)); ?> | 
 				<?php } ?>
-				<strong>SKU:</strong> <?php echo format_content(htmlspecialchars($cur_product->sku)); ?>
+				<strong>SKU:</strong> <?php echo format_content(h($cur_product->sku)); ?>
 			</div>
 			
 			<div class="price_box clearfix">

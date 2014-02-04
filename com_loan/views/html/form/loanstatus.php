@@ -103,7 +103,7 @@ if (!is_array($loan_ids))
 	<?php foreach ($loan_ids as $cur_id) {
 			$cur_loan = com_loan_loan::factory((int) $cur_id); ?>
 	<div class="item clearfix">
-		<h4><?php echo htmlspecialchars($cur_loan->customer->name); ?>  <span class="loan-label pull-right">Loan ID: <?php echo htmlspecialchars($cur_loan->id); ?></span></h4>
+		<h4><?php e($cur_loan->customer->name); ?>  <span class="loan-label pull-right">Loan ID: <?php e($cur_loan->id); ?></span></h4>
 		<div class="name row-fluid">
 			<div class="span8">
 				<select class="span12" name="loan_status" data-guid="<?php echo $cur_loan->guid; ?>">

@@ -700,7 +700,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		</tr>
 	</thead>
 	<tbody>
-		<tr title="<?php echo htmlspecialchars($loan->guid); ?>">
+		<tr title="<?php e($loan->guid); ?>">
 			<td>-</td>
 			<td>-</td>
 			<td>-</td>

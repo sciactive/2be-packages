@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Add a New Repository';
 $this->note = 'Use this form to add a trusted repository.';
 ?>
-<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_plaza', 'repository/save')); ?>">
+<form class="pf-form" method="post" action="<?php e(pines_url('com_plaza', 'repository/save')); ?>">
 	<div class="pf-element pf-heading">
 		<h3>Repository Details</h3>
 	</div>

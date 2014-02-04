@@ -138,12 +138,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		else
 			$week_start = strtotime('last monday 12:00 AM');
 		?>
-		<tr title="<?php echo htmlspecialchars($employee->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($employee->timeclock->guid); ?>" data-entity-context="com_hrm_timeclock"><?php echo htmlspecialchars($employee->guid); ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($employee->guid); ?>" data-entity-context="com_hrm_employee"><?php echo htmlspecialchars($employee->name); ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($employee->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($employee->group->name); ?></a></td>
+		<tr title="<?php e($employee->guid); ?>">
+			<td><a data-entity="<?php e($employee->timeclock->guid); ?>" data-entity-context="com_hrm_timeclock"><?php e($employee->guid); ?></a></td>
+			<td><a data-entity="<?php e($employee->guid); ?>" data-entity-context="com_hrm_employee"><?php e($employee->name); ?></a></td>
+			<td><a data-entity="<?php e($employee->group->guid); ?>" data-entity-context="group"><?php e($employee->group->name); ?></a></td>
 			<td><?php echo $employee->timeclock->clocked_in_time() ? 'In' : 'Out'; ?></td>
-			<td><?php echo $employee->timeclock->clocked_in_time() ? htmlspecialchars(format_date($employee->timeclock->clocked_in_time(), 'full_sort', '', $employee_timezone)) : ''; ?></td>
+			<td><?php echo $employee->timeclock->clocked_in_time() ? h(format_date($employee->timeclock->clocked_in_time(), 'full_sort', '', $employee_timezone)) : ''; ?></td>
 			<td><?php echo round($employee->timeclock->sum($today_start, time()) / (60 * 60), 2).' hours'; ?></td>
 			<td><?php echo round($employee->timeclock->sum($week_start, time()) / (60 * 60), 2).' hours'; ?></td>
 		</tr>
@@ -152,7 +152,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 </table>
 <small>* Today and this week are calculated with regard to the employee's timezone. Week starts on Monday.</small>
 <div title="Hours Clocked Report" id="p_muid_report_dialog" style="display: none;">
-	<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_hrm', 'employee/timeclock/report')); ?>">
+	<form class="pf-form" method="post" action="<?php e(pines_url('com_hrm', 'employee/timeclock/report')); ?>">
 		<?php
 		// Calculate the start of last week.
 		if (date('w') == '1')
@@ -163,11 +163,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		?>
 		<div class="pf-element">
 			<label><span class="pf-label">Start Date</span>
-				<input class="pf-field" name="date_start" type="text" size="24" value="<?php echo htmlspecialchars(format_date($week_start, 'custom', 'Y-m-d')); ?>" /></label>
+				<input class="pf-field" name="date_start" type="text" size="24" value="<?php e(format_date($week_start, 'custom', 'Y-m-d')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">End Date</span>
-				<input class="pf-field" name="date_end" type="text" size="24" value="<?php echo htmlspecialchars(format_date($week_end - 1, 'custom', 'Y-m-d')); ?>" /></label>
+				<input class="pf-field" name="date_end" type="text" size="24" value="<?php e(format_date($week_end - 1, 'custom', 'Y-m-d')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Local Timezones</span>

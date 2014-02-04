@@ -10,12 +10,12 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Testimonial' : 'Editing Testimonial ['.htmlspecialchars($this->entity->id).'] for '.htmlspecialchars($this->entity->customer->name);
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Testimonial' : 'Editing Testimonial ['.h($this->entity->id).'] for '.h($this->entity->customer->name);
 $this->note = 'Provide testimonial details in this form.';
 $pines->com_customer->load_customer_select();
 $pines->com_ptags->load();
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_testimonials', 'testimonial/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_testimonials', 'testimonial/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			// Customer Autocomplete.
@@ -89,12 +89,12 @@ $pines->com_ptags->load();
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>Customer: <span><?php echo htmlspecialchars("{$this->entity->customer->name} [{$this->entity->customer->username}]"); ?></span></div>
-		<div>User: <span><?php echo ($this->entity->user) ? htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]") : 'See Customer.'; ?></span></div>
-		<div>Group: <span><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>Customer: <span><?php e("{$this->entity->customer->name} [{$this->entity->customer->username}]"); ?></span></div>
+		<div>User: <span><?php echo ($this->entity->user) ? h("{$this->entity->user->name} [{$this->entity->user->username}]") : 'See Customer.'; ?></span></div>
+		<div>Group: <span><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-heading">
@@ -102,7 +102,7 @@ $pines->com_ptags->load();
 	</div>
 	<div class="pf-element">
 		<span class="pf-note">Enter part of a name, company, email, or phone # to search.</span>
-		<input id="p_muid_customer" class="pf-field" type="text" name="customer" value="<?php echo (isset($this->entity->customer->guid) ? htmlspecialchars("{$this->entity->customer->guid}: {$this->entity->customer->name}") : ''); ?>"/>
+		<input id="p_muid_customer" class="pf-field" type="text" name="customer" value="<?php echo (isset($this->entity->customer->guid) ? h("{$this->entity->customer->guid}: {$this->entity->customer->name}") : ''); ?>"/>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Feedback</h3>
@@ -111,14 +111,14 @@ $pines->com_ptags->load();
 		<span class="pf-label">Customer Feedback
 			<span class="pf-note">Testimonial uses this feedback as default if it's approved.</span>
 		</span>
-		<textarea class="pf-field" style="width:60%; min-height: 125px;" name="feedback"><?php echo isset($this->entity->feedback) ? htmlspecialchars($this->entity->feedback) : ''; ?></textarea>
+		<textarea class="pf-field" style="width:60%; min-height: 125px;" name="feedback"><?php echo isset($this->entity->feedback) ? h($this->entity->feedback) : ''; ?></textarea>
 	</div>
 	<?php if (gatekeeper('com_testimonials/quotetestimonials')) { ?>
 		<div class="pf-element pf-full-width">
 			<span class="pf-label">Quote Feedback for Testimonial 
 				<span class="pf-note">If desired, you can quote part of the feedback for the testimonial instead.</span>
 			</span>
-			<textarea class="pf-field" style="width:60%; min-height: 125px;" name="quotefeedback"><?php echo isset($this->entity->quotefeedback) ? htmlspecialchars($this->entity->quotefeedback) : ''; ?></textarea>
+			<textarea class="pf-field" style="width:60%; min-height: 125px;" name="quotefeedback"><?php echo isset($this->entity->quotefeedback) ? h($this->entity->quotefeedback) : ''; ?></textarea>
 		</div>
 	<?php } ?>
 	<div class="pf-element">
@@ -148,7 +148,7 @@ $pines->com_ptags->load();
 					}
 				} ?>
 		</div>
-		<input type="hidden" name="rating" value="<?php echo ($this->entity->rating) ? htmlspecialchars($this->entity->rating) : ''; ?>" />
+		<input type="hidden" name="rating" value="<?php echo ($this->entity->rating) ? h($this->entity->rating) : ''; ?>" />
 	</div>
 	<?php if (gatekeeper('com_testimonials/edittags')) { ?>
 	<div class="pf-element">
@@ -188,9 +188,9 @@ $pines->com_ptags->load();
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="type" value="form" />
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_testimonials', 'testimonial/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_testimonials', 'testimonial/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

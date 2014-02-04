@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Special' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Special' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide special details in this form.';
 $pines->uploader->load();
 $pines->com_pgrid->load();
@@ -38,7 +38,7 @@ $specials = $pines->entity_manager->get_entities(
 	);
 $pines->entity_manager->sort($specials, 'name');
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'special/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'special/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			$(".p_muid_product_select", "#p_muid_form").productselect();
@@ -257,21 +257,21 @@ $pines->entity_manager->sort($specials, 'name');
 			<?php if (isset($this->entity->guid)) { ?>
 			<div class="date_info" style="float: right; text-align: right;">
 				<?php if (isset($this->entity->user)) { ?>
-				<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-				<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Code</span>
 					<span class="pf-note">This code can be used to add the special to a sale. It is not case sensitive.</span>
-					<input class="pf-field" type="text" name="code" size="24" value="<?php echo htmlspecialchars($this->entity->code); ?>" onchange="this.value=this.value.toUpperCase();" /></label>
+					<input class="pf-field" type="text" name="code" size="24" value="<?php e($this->entity->code); ?>" onchange="this.value=this.value.toUpperCase();" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Name</span>
-					<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars($this->entity->name); ?>" /></label>
+					<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Enabled</span>
@@ -294,7 +294,7 @@ $pines->entity_manager->sort($specials, 'name');
 			<div class="pf-element">
 				<label><span class="pf-label">Quantity per Ticket</span>
 					<span class="pf-note">Enter 0 (zero) for unlimited.</span>
-					<input class="pf-field" type="text" name="per_ticket" size="24" value="<?php echo htmlspecialchars($this->entity->per_ticket); ?>" onchange="this.value=this.value.replace(/\D/g, '');" /></label>
+					<input class="pf-field" type="text" name="per_ticket" size="24" value="<?php e($this->entity->per_ticket); ?>" onchange="this.value=this.value.replace(/\D/g, '');" /></label>
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Discounts</h3>
@@ -312,9 +312,9 @@ $pines->entity_manager->sort($specials, 'name');
 					<tbody>
 						<?php if (isset($this->entity->discounts)) foreach ($this->entity->discounts as $cur_value) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars($cur_value['type']); ?></td>
-							<td><?php echo htmlspecialchars($cur_value['qualifier']->sku); ?></td>
-							<td><?php echo htmlspecialchars($cur_value['value']); ?></td>
+							<td><?php e($cur_value['type']); ?></td>
+							<td><?php e($cur_value['qualifier']->sku); ?></td>
+							<td><?php e($cur_value['value']); ?></td>
 						</tr>
 						<?php } ?>
 					</tbody>
@@ -355,7 +355,7 @@ $pines->entity_manager->sort($specials, 'name');
 												$cur_parent = $cur_parent->parent;
 											}
 											?>
-										<option value="<?php echo htmlspecialchars($cur_cat->guid); ?>"><?php echo htmlspecialchars(str_repeat('->', $num_parents).' '.$cur_cat->name); ?></option>
+										<option value="<?php e($cur_cat->guid); ?>"><?php e(str_repeat('->', $num_parents).' '.$cur_cat->name); ?></option>
 										<?php } ?>
 									</select></label>
 							</div>
@@ -401,26 +401,26 @@ $pines->entity_manager->sort($specials, 'name');
 					<tbody>
 						<?php if (isset($this->entity->requirements)) foreach ($this->entity->requirements as $cur_value) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars($cur_value['type']); ?></td>
+							<td><?php e($cur_value['type']); ?></td>
 							<td><?php
 							switch ($cur_value['type']) {
 								case 'has_product':
 								case 'has_not_product':
-									echo htmlspecialchars($cur_value['value']->sku);
+									e($cur_value['value']->sku);
 									break;
 								/* case 'has_category':
 								case 'has_not_category':
-									echo htmlspecialchars($cur_value['value']->guid);
+									e($cur_value['value']->guid);
 									break; */
 								case 'has_special':
 								case 'has_not_special':
-									echo ($cur_value['value'] === 'any') ? 'any' : htmlspecialchars($cur_value['value']->guid);
+									echo ($cur_value['value'] === 'any') ? 'any' : h($cur_value['value']->guid);
 									break;
 								case 'date_lt':
 								case 'date_gt':
-									echo htmlspecialchars(format_date($cur_value['value'], 'custom', 'Y-m-d'));
+									e(format_date($cur_value['value'], 'custom', 'Y-m-d'));
 								default:
-									echo htmlspecialchars($cur_value['value']);
+									e($cur_value['value']);
 									break;
 							}
 							?></td>
@@ -473,7 +473,7 @@ $pines->entity_manager->sort($specials, 'name');
 												$cur_parent = $cur_parent->parent;
 											}
 											?>
-										<option value="<?php echo htmlspecialchars($cur_cat->guid); ?>"><?php echo htmlspecialchars(str_repeat('->', $num_parents).' '.$cur_cat->name); ?></option>
+										<option value="<?php e($cur_cat->guid); ?>"><?php e(str_repeat('->', $num_parents).' '.$cur_cat->name); ?></option>
 										<?php } ?>
 									</select></label>
 							</div>
@@ -484,7 +484,7 @@ $pines->entity_manager->sort($specials, 'name');
 									<select class="pf-field">
 										<option value="any">-- Any Other Special --</option>
 										<?php foreach ($specials as $cur_special) { ?>
-										<option value="<?php echo htmlspecialchars($cur_special->guid); ?>"><?php echo htmlspecialchars($cur_special->name); ?></option>
+										<option value="<?php e($cur_special->guid); ?>"><?php e($cur_special->name); ?></option>
 										<?php } ?>
 									</select></label>
 							</div>
@@ -508,9 +508,9 @@ $pines->entity_manager->sort($specials, 'name');
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'special/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'special/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

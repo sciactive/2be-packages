@@ -73,17 +73,17 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->vendors as $vendor) { ?>
-		<tr title="<?php echo htmlspecialchars($vendor->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php echo htmlspecialchars($vendor->name); ?></a></td>
-			<td><a href="mailto:<?php echo htmlspecialchars($vendor->email); ?>"><?php echo htmlspecialchars($vendor->email); ?></a></td>
-			<td><?php echo htmlspecialchars(format_phone($vendor->phone_work)); ?></td>
-			<td><?php echo htmlspecialchars(format_phone($vendor->fax)); ?></td>
-			<td><?php echo htmlspecialchars($vendor->address_1); ?></td>
-			<td><?php echo htmlspecialchars($vendor->address_2); ?></td>
-			<td><?php echo htmlspecialchars($vendor->city); ?></td>
-			<td><?php echo htmlspecialchars($vendor->state); ?></td>
-			<td><?php echo htmlspecialchars($vendor->zip); ?></td>
-			<td><?php echo htmlspecialchars($vendor->account_number); ?></td>
+		<tr title="<?php e($vendor->guid); ?>">
+			<td><a data-entity="<?php e($vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php e($vendor->name); ?></a></td>
+			<td><a href="mailto:<?php e($vendor->email); ?>"><?php e($vendor->email); ?></a></td>
+			<td><?php e(format_phone($vendor->phone_work)); ?></td>
+			<td><?php e(format_phone($vendor->fax)); ?></td>
+			<td><?php e($vendor->address_1); ?></td>
+			<td><?php e($vendor->address_2); ?></td>
+			<td><?php e($vendor->city); ?></td>
+			<td><?php e($vendor->state); ?></td>
+			<td><?php e($vendor->zip); ?></td>
+			<td><?php e($vendor->account_number); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

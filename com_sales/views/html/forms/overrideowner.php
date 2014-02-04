@@ -55,7 +55,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Override User</span>
-			<input class="pf-field salesperson_box" type="text" name="user" value="<?php echo isset($this->entity->user->guid) ? htmlspecialchars("{$this->entity->user->guid}: {$this->entity->user->name}") : ''; ?>" /></label>
+			<input class="pf-field salesperson_box" type="text" name="user" value="<?php echo isset($this->entity->user->guid) ? h("{$this->entity->user->guid}: {$this->entity->user->name}") : ''; ?>" /></label>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Location</h3>

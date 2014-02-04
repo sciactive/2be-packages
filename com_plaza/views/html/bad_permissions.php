@@ -18,7 +18,7 @@ $this->title = 'Unsafe File Permissions Detected';
 </p>
 <p>
 	The best solution is to set this directory to a different user and group by running:<br />
-	<code style="font-size: .8em;">chown -Rv root:root <?php echo htmlspecialchars(P_BASE_PATH); ?>components/com_plaza/includes/cache/certs/authorities/</code><br />
+	<code style="font-size: .8em;">chown -Rv root:root <?php e(P_BASE_PATH); ?>components/com_plaza/includes/cache/certs/authorities/</code><br />
 </p>
 <p>
 	This directory is used to store authority certificates. These certificates

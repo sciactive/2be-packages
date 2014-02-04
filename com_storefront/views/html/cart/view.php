@@ -29,11 +29,11 @@ $this->title = 'Shopping Cart';
 				$subtotal += $cur_item['product']->unit_price * $cur_item['quantity'];
 				?>
 			<tr>
-				<td><?php echo htmlspecialchars($cur_item['product']->sku); ?></td>
-				<td><?php echo htmlspecialchars($cur_item['product']->name); ?></td>
-				<td style="text-align: right;"><?php echo htmlspecialchars($cur_item['quantity']); ?></td>
-				<td style="text-align: right;">$<?php echo htmlspecialchars($pines->com_sales->round($cur_item['product']->unit_price, true)); ?></td>
-				<td style="text-align: right;">$<?php echo htmlspecialchars($pines->com_sales->round($cur_item['product']->unit_price * $cur_item['quantity'], true)); ?></td>
+				<td><?php e($cur_item['product']->sku); ?></td>
+				<td><?php e($cur_item['product']->name); ?></td>
+				<td style="text-align: right;"><?php e($cur_item['quantity']); ?></td>
+				<td style="text-align: right;">$<?php e($pines->com_sales->round($cur_item['product']->unit_price, true)); ?></td>
+				<td style="text-align: right;">$<?php e($pines->com_sales->round($cur_item['product']->unit_price * $cur_item['quantity'], true)); ?></td>
 			</tr>
 			<?php } ?>
 		</tbody>
@@ -41,7 +41,7 @@ $this->title = 'Shopping Cart';
 	<br />
 	<div style="padding: .5em;">Subtotal <small>(before tax/fees)</small><div style="float: right; text-align: right;"><?php echo $pines->com_storefront->format_price($subtotal, 'long'); ?></div></div>
 	<br style="clear: both;" /><br />
-	<button type="button" class="checkout btn btn-primary" style="float: right; clear: right;" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);">Check-Out</button>
+	<button type="button" class="checkout btn btn-primary" style="float: right; clear: right;" onclick="pines.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);">Check-Out</button>
 	<br style="height: 0; clear: both;" />
 </div>
 <?php } else { ?>

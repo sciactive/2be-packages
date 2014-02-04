@@ -24,29 +24,29 @@ if ($this->render == 'body' && (gatekeeper('com_sales/managestock') || gatekeepe
 		<tbody>
 			<tr>
 				<td style="font-weight:bold;">Transfer ID</td>
-				<td><?php echo htmlspecialchars($this->entity->guid); ?></td>
+				<td><?php e($this->entity->guid); ?></td>
 			</tr>
 			<?php if (!empty($this->entity->reference_number)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Reference Number</td>
-				<td><?php echo htmlspecialchars($this->entity->reference_number); ?></td>
+				<td><?php e($this->entity->reference_number); ?></td>
 			</tr>
 			<?php } ?>
 			<tr>
 				<td style="font-weight:bold;">Origin</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->origin->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$this->entity->origin->name} [{$this->entity->origin->groupname}]"); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->origin->guid); ?>" data-entity-context="group"><?php e("{$this->entity->origin->name} [{$this->entity->origin->groupname}]"); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Destination</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->destination->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$this->entity->destination->name} [{$this->entity->destination->groupname}]"); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->destination->guid); ?>" data-entity-context="group"><?php e("{$this->entity->destination->name} [{$this->entity->destination->groupname}]"); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Shipper</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php echo htmlspecialchars($this->entity->shipper->name); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php e($this->entity->shipper->name); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">ETA</td>
-				<td><?php echo ($this->entity->eta ? htmlspecialchars(format_date($this->entity->eta, 'date_sort')) : ''); ?></td>
+				<td><?php echo ($this->entity->eta ? h(format_date($this->entity->eta, 'date_sort')) : ''); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Status</td>
@@ -55,11 +55,11 @@ if ($this->render == 'body' && (gatekeeper('com_sales/managestock') || gatekeepe
 			<?php if ($this->entity->shipped) { ?>
 			<tr>
 				<td style="font-weight:bold;">Date Shipped</td>
-				<td><?php echo htmlspecialchars(format_date($this->entity->shipped_date, 'full_long')); ?></td>
+				<td><?php e(format_date($this->entity->shipped_date, 'full_long')); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">User Who Shipped</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->shipped_user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars("{$this->entity->shipped_user->name} [{$this->entity->shipped_user->username}]"); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->shipped_user->guid); ?>" data-entity-context="user"><?php e("{$this->entity->shipped_user->name} [{$this->entity->shipped_user->username}]"); ?></a></td>
 			</tr>
 			<?php } ?>
 		</tbody>
@@ -96,9 +96,9 @@ if ($this->render == 'body' && (gatekeeper('com_sales/managestock') || gatekeepe
 			}
 			foreach ($products as $cur_product) { ?>
 			<tr>
-				<td><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_product['entity']->name); ?></a></td>
-				<td><?php echo htmlspecialchars($cur_product['quantity']); ?></td>
+				<td><?php e($cur_product['entity']->sku); ?></td>
+				<td><a data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_product['entity']->name); ?></a></td>
+				<td><?php e($cur_product['quantity']); ?></td>
 				<?php if ($this->entity->final) { ?>
 				<td>
 					<?php
@@ -136,7 +136,7 @@ if ($this->render == 'body' && (gatekeeper('com_sales/managestock') || gatekeepe
 				<td colspan="3"><?php
 				$text = array();
 				foreach ($shipped as $cur_shipped)
-					$text[] = '<a data-entity="'.htmlspecialchars($cur_shipped->guid).'" data-entity-context="com_sales_stock">'.htmlspecialchars($cur_shipped->guid.(!empty($cur_shipped->serial) ? " (Serial: $cur_shipped->serial)" : '')).'</a>';
+					$text[] = '<a data-entity="'.h($cur_shipped->guid).'" data-entity-context="com_sales_stock">'.h($cur_shipped->guid.(!empty($cur_shipped->serial) ? " (Serial: $cur_shipped->serial)" : '')).'</a>';
 				echo implode(', ', $text);
 				?></td>
 			</tr>
@@ -146,7 +146,7 @@ if ($this->render == 'body' && (gatekeeper('com_sales/managestock') || gatekeepe
 				<td colspan="3"><?php
 				$text = array();
 				foreach ($received as $cur_received)
-					$text[] = '<a data-entity="'.htmlspecialchars($cur_received->guid).'" data-entity-context="com_sales_stock">'.htmlspecialchars($cur_received->guid.(!empty($cur_received->serial) ? " (Serial: $cur_received->serial)" : '')).'</a>';
+					$text[] = '<a data-entity="'.h($cur_received->guid).'" data-entity-context="com_sales_stock">'.h($cur_received->guid.(!empty($cur_received->serial) ? " (Serial: $cur_received->serial)" : '')).'</a>';
 				echo implode(', ', $text);
 				?></td>
 			</tr>
@@ -159,8 +159,8 @@ if ($this->render == 'body' && (gatekeeper('com_sales/managestock') || gatekeepe
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Comments</h3>
-	<div style="white-space: pre-wrap; padding-bottom: .5em;"><?php echo htmlspecialchars($this->entity->comments); ?></div>
+	<div style="white-space: pre-wrap; padding-bottom: .5em;"><?php e($this->entity->comments); ?></div>
 </div>
 <?php } } elseif ($this->render == 'footer' && $this->entity->final && !$this->entity->shipped && gatekeeper('com_sales/shipstock')) { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_sales', 'transfer/ship', array('id' => $this->entity->guid))); ?>" class="btn">Ship</a>
+<a href="<?php e(pines_url('com_sales', 'transfer/ship', array('id' => $this->entity->guid))); ?>" class="btn">Ship</a>
 <?php }

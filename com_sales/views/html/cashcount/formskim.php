@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Skim from Cash Count ['.htmlspecialchars($this->entity->cashcount->guid).'] at '.htmlspecialchars($this->entity->cashcount->group->name);
+$this->title = 'Skim from Cash Count ['.h($this->entity->cashcount->guid).'] at '.h($this->entity->cashcount->group->name);
 $this->note = 'Count the cash as you take it out of the drawer.';
 ?>
 <style type="text/css" >
@@ -101,13 +101,13 @@ $this->note = 'Count the cash as you take it out of the drawer.';
 		update_total();
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'cashcount/saveskim')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'cashcount/saveskim')); ?>">
 	<?php if (!empty($this->entity->cashcount->review_comments)) {?>
 	<div class="pf-element pf-heading">
 		<h3>Reviewer Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-field"><?php echo htmlspecialchars($this->entity->cashcount->review_comments); ?></div>
+		<div class="pf-field"><?php e($this->entity->cashcount->review_comments); ?></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-heading">
@@ -117,8 +117,8 @@ $this->note = 'Count the cash as you take it out of the drawer.';
 	<div class="pf-element pf-full-width" style="position: relative;">
 		<?php foreach ($this->entity->cashcount->currency as $key => $cur_denom) { ?>
 		<div class="pf-element">
-			<input class="pf-field entry" type="text" name="count_<?php echo htmlspecialchars($key); ?>" title="<?php echo htmlspecialchars($cur_denom); ?>" value="0" />
-			x <span class="amount"><?php echo htmlspecialchars($this->entity->cashcount->currency_symbol . $cur_denom); ?></span>
+			<input class="pf-field entry" type="text" name="count_<?php e($key); ?>" title="<?php e($cur_denom); ?>" value="0" />
+			x <span class="amount"><?php e($this->entity->cashcount->currency_symbol . $cur_denom); ?></span>
 			<button class="pf-field btn btn-success add_btn" type="button"><i class="icon-plus icon-white"></i></button>
 			<button class="pf-field btn btn-danger remove_btn" type="button"><i class="icon-minus icon-white"></i></button>
 		</div>
@@ -132,11 +132,11 @@ $this->note = 'Count the cash as you take it out of the drawer.';
 		<h3>Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php echo htmlspecialchars($this->entity->comments); ?></textarea></div>
+		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php e($this->entity->comments); ?></textarea></div>
 	</div>
 	<div class="pf-element pf-buttons">
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->cashcount->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->cashcount->guid); ?>" />
 		<input class="pf-button btn btn-primary submit_button" type="button" value="Finish Skim" onclick="pines.com_sales_verify();" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

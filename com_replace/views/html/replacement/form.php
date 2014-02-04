@@ -10,11 +10,11 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Replacement' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Replacement' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide replacement details in this form.';
 $pines->com_pgrid->load();
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_replace', 'replacement/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_replace', 'replacement/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			// Strings
@@ -159,16 +159,16 @@ $pines->com_pgrid->load();
 			<?php if (isset($this->entity->guid)) { ?>
 			<div class="date_info" style="float: right; text-align: right;">
 				<?php if (isset($this->entity->user)) { ?>
-				<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-				<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Name</span>
-					<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars($this->entity->name); ?>" /></label>
+					<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Enabled</span>
@@ -190,9 +190,9 @@ $pines->com_pgrid->load();
 					<tbody>
 						<?php foreach ($this->entity->strings as $key => $cur_string) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars($key); ?></td>
-							<td><?php echo htmlspecialchars($cur_string['search']); ?></td>
-							<td><?php echo htmlspecialchars($cur_string['replace']); ?></td>
+							<td><?php e($key); ?></td>
+							<td><?php e($cur_string['search']); ?></td>
+							<td><?php e($cur_string['replace']); ?></td>
 							<td><?php echo $cur_string['macros'] ? 'Yes' : 'No'; ?></td>
 						</tr>
 						<?php } ?>
@@ -317,9 +317,9 @@ $pines->com_pgrid->load();
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_replace', 'replacement/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_replace', 'replacement/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

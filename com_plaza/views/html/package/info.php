@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Package Info for '.htmlspecialchars($this->package['package']);
+$this->title = 'Package Info for '.h($this->package['package']);
 ?>
 <div id="p_muid_info">
 	<style type="text/css">
@@ -44,44 +44,44 @@ $this->title = 'Package Info for '.htmlspecialchars($this->package['package']);
 	<div class="pf-form">
 		<div class="pf-element pf-heading">
 			<?php if (!empty($this->package['icon'])) { ?>
-			<img src="<?php echo htmlspecialchars(pines_url('com_plaza', 'package/media', array('local' => 'false', 'name' => $this->package['package'], 'publisher' => $this->package['publisher'], 'media' => $this->package['icon']))); ?>" alt="Icon" class="icon" style="width: 32px; height: 32px;" />
+			<img src="<?php e(pines_url('com_plaza', 'package/media', array('local' => 'false', 'name' => $this->package['package'], 'publisher' => $this->package['publisher'], 'media' => $this->package['icon']))); ?>" alt="Icon" class="icon" style="width: 32px; height: 32px;" />
 			<?php } ?>
-			<h3><span class="name"><?php echo htmlspecialchars($this->package['name']); ?></span><span class="package" style="float: right;"><?php echo htmlspecialchars($this->package['package']); ?></span></h3>
+			<h3><span class="name"><?php e($this->package['name']); ?></span><span class="package" style="float: right;"><?php e($this->package['package']); ?></span></h3>
 			<p style="clear: right;">
-				<span>By <span class="author"><?php echo htmlspecialchars($this->package['author']); ?></span></span>
-				<span class="version">Version <span class="text"><?php echo htmlspecialchars($this->package['version']); ?></span></span>
+				<span>By <span class="author"><?php e($this->package['author']); ?></span></span>
+				<span class="version">Version <span class="text"><?php e($this->package['version']); ?></span></span>
 			</p>
 		</div>
-		<div class="pf-element pf-full-width short_description"><?php echo htmlspecialchars($this->package['short_description']); ?></div>
+		<div class="pf-element pf-full-width short_description"><?php e($this->package['short_description']); ?></div>
 		<?php if ($this->package['services']) { ?>
 		<div class="pf-element services">
 			<span class="pf-label">Provides Services</span>
-			<span class="pf-field"><?php echo htmlspecialchars(implode(', ', $this->package['services'])); ?></span>
+			<span class="pf-field"><?php e(implode(', ', $this->package['services'])); ?></span>
 		</div>
 		<?php } ?>
 		<div class="pf-element license">
 			<span class="pf-label">License</span>
 			<?php if (preg_match('/^https?:\/\//', $this->package['license'])) { ?>
-			<span class="pf-field"><a href="<?php echo htmlspecialchars($this->package['license']); ?>" target="_blank"><?php echo htmlspecialchars($this->package['license']); ?></a></span>
+			<span class="pf-field"><a href="<?php e($this->package['license']); ?>" target="_blank"><?php e($this->package['license']); ?></a></span>
 			<?php } else { ?>
-			<span class="pf-field"><?php echo htmlspecialchars($this->package['license']); ?></span>
+			<span class="pf-field"><?php e($this->package['license']); ?></span>
 			<?php } ?>
 		</div>
 		<div class="pf-element license">
 			<span class="pf-label">Website</span>
 			<?php if (preg_match('/^https?:\/\//', $this->package['website'])) { ?>
-			<span class="pf-field"><a href="<?php echo htmlspecialchars($this->package['website']); ?>" target="_blank"><?php echo htmlspecialchars($this->package['website']); ?></a></span>
+			<span class="pf-field"><a href="<?php e($this->package['website']); ?>" target="_blank"><?php e($this->package['website']); ?></a></span>
 			<?php } else { ?>
-			<span class="pf-field"><?php echo htmlspecialchars($this->package['website']); ?></span>
+			<span class="pf-field"><?php e($this->package['website']); ?></span>
 			<?php } ?>
 		</div>
-		<div class="pf-element description"><?php echo str_replace("\n", '<br />', htmlspecialchars($this->package['description'])); ?></div>
+		<div class="pf-element description"><?php echo str_replace("\n", '<br />', h($this->package['description'])); ?></div>
 		<?php if ($this->package['screens']) { if (isset($pines->com_fancybox)) { ?>
 		<div class="pf-element pf-full-width screenshots">
 			<div id="p_muid_fancybox" class="ui-widget-content ui-corner-all">
 				<?php foreach ($this->package['screens'] as $cur_screen) { ?>
-				<a rel="p_muid_ss" title="<?php echo htmlspecialchars($cur_screen['alt']); ?>" href="<?php echo htmlspecialchars($pines->com_plaza->package_get_media($this->package, $cur_screen['file'], true)); ?>">
-					<img class="screen_small" alt="<?php echo htmlspecialchars($cur_screen['alt']); ?>" src="<?php echo htmlspecialchars($pines->com_plaza->package_get_media($this->package, $cur_screen['file'], true)); ?>" />
+				<a rel="p_muid_ss" title="<?php e($cur_screen['alt']); ?>" href="<?php e($pines->com_plaza->package_get_media($this->package, $cur_screen['file'], true)); ?>">
+					<img class="screen_small" alt="<?php e($cur_screen['alt']); ?>" src="<?php e($pines->com_plaza->package_get_media($this->package, $cur_screen['file'], true)); ?>" />
 				</a>
 				<?php } ?>
 			</div>
@@ -97,7 +97,7 @@ $this->title = 'Package Info for '.htmlspecialchars($this->package['package']);
 			<span class="pf-note">Install com_fancybox for a fancier screenshot experience.</span>
 			<?php foreach ($this->package['screens'] as $cur_screen) { ?>
 			<div class="pf-group">
-				<div class="pf-field"><a href="<?php echo htmlspecialchars(pines_url('com_plaza', 'package/media', array('local' => 'false', 'name' => $this->package['package'], 'publisher' => $this->package['publisher'], 'media' => $cur_screen['file']))); ?>" target="_blank"><?php echo htmlspecialchars($cur_screen['alt']); ?></a></div>
+				<div class="pf-field"><a href="<?php e(pines_url('com_plaza', 'package/media', array('local' => 'false', 'name' => $this->package['package'], 'publisher' => $this->package['publisher'], 'media' => $cur_screen['file']))); ?>" target="_blank"><?php e($cur_screen['alt']); ?></a></div>
 			</div>
 			<?php } ?>
 		</div>
@@ -107,7 +107,7 @@ $this->title = 'Package Info for '.htmlspecialchars($this->package['package']);
 			<br />
 			<div class="depend" style="display: none; padding-left: 10px;">
 				<?php foreach ($this->package['depend'] as $key => $value) { ?>
-				<span class="pf-label"><?php echo htmlspecialchars($key); ?></span><div class="pf-group"><div class="pf-field"><?php echo htmlspecialchars($value); ?></div></div>
+				<span class="pf-label"><?php e($key); ?></span><div class="pf-group"><div class="pf-field"><?php e($value); ?></div></div>
 				<?php } ?>
 			</div>
 		</div>
@@ -117,7 +117,7 @@ $this->title = 'Package Info for '.htmlspecialchars($this->package['package']);
 			<br />
 			<div class="conflict" style="display: none; padding-left: 10px;">
 				<?php foreach ($this->package['conflict'] as $key => $value) { ?>
-				<span class="pf-label"><?php echo htmlspecialchars($key); ?></span><div class="pf-group"><div class="pf-field"><?php echo htmlspecialchars($value); ?></div></div>
+				<span class="pf-label"><?php e($key); ?></span><div class="pf-group"><div class="pf-field"><?php e($value); ?></div></div>
 				<?php } ?>
 			</div>
 		</div>
@@ -127,7 +127,7 @@ $this->title = 'Package Info for '.htmlspecialchars($this->package['package']);
 			<br />
 			<div class="recommend" style="display: none; padding-left: 10px;">
 				<?php foreach ($this->package['recommend'] as $key => $value) { ?>
-				<span class="pf-label"><?php echo htmlspecialchars($key); ?></span><div class="pf-group"><div class="pf-field"><?php echo htmlspecialchars($value); ?></div></div>
+				<span class="pf-label"><?php e($key); ?></span><div class="pf-group"><div class="pf-field"><?php e($value); ?></div></div>
 				<?php } ?>
 			</div>
 		</div>

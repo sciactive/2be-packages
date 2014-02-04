@@ -44,8 +44,8 @@ pines(function(){
 <div style="height: .5em;">&nbsp;</div>
 <?php foreach ($products as $key => $cur_product) { ?>
 <div class="product page-header">
-	<div class="product_guid" style="display: none;"><?php echo htmlspecialchars($cur_product->guid); ?></div>
-	<div class="product_alias" style="display: none;"><?php echo htmlspecialchars($cur_product->alias); ?></div>
+	<div class="product_guid" style="display: none;"><?php e($cur_product->guid); ?></div>
+	<div class="product_alias" style="display: none;"><?php e($cur_product->alias); ?></div>
 	<div class="product_right alert alert-info">
 		<div class="padding_box">
 			<div class="price"><?php echo $pines->com_storefront->format_price($cur_product->unit_price); ?><span class="value"><?php echo isset($cur_product->unit_price) ? round($cur_product->unit_price, 2) : ''; ?></span></div>
@@ -60,18 +60,18 @@ pines(function(){
 		<?php if (isset($cur_product->thumbnail)) { ?>
 		<div class="product_left">
 			<div class="padding_box">
-				<img class="thumb" alt="<?php echo htmlspecialchars($cur_product->name); ?>" src="<?php echo htmlspecialchars($pines->config->location.$cur_product->thumbnail); ?>" />
+				<img class="thumb" alt="<?php e($cur_product->name); ?>" src="<?php e($pines->config->location.$cur_product->thumbnail); ?>" />
 			</div>
 		</div>
 		<?php } ?>
 		<div class="product_info<?php echo isset($cur_product->thumbnail) ? ' size_less' : ''; ?>">
 			<div class="padding_box">
-				<div class="name"><a href="<?php echo htmlspecialchars(pines_url('com_storefront', 'product', array('a' => $cur_product->alias))); ?>"><?php echo htmlspecialchars($cur_product->name); ?></a></div>
+				<div class="name"><a href="<?php e(pines_url('com_storefront', 'product', array('a' => $cur_product->alias))); ?>"><?php e($cur_product->name); ?></a></div>
 				<div class="info">
 					<?php if (!empty($cur_product->manufacturer_sku)) { ?>
-					<strong>Model:</strong> <?php echo format_content(htmlspecialchars($cur_product->manufacturer_sku)); ?> | 
+					<strong>Model:</strong> <?php echo format_content(h($cur_product->manufacturer_sku)); ?> | 
 					<?php } ?>
-					<strong>SKU:</strong> <?php echo format_content(htmlspecialchars($cur_product->sku)); ?>
+					<strong>SKU:</strong> <?php echo format_content(h($cur_product->sku)); ?>
 				</div>
 				<br />
 				<div class="desc"><?php echo format_content($cur_product->short_description); ?></div>

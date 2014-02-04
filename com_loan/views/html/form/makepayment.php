@@ -64,17 +64,17 @@ switch ($this->entity->payment_frequency) {
 <form class="pf-form" id="p_muid_form" action="">
 	<div class="pf-element pf-full-width">
 		<div class="pf-label" style="width:100%;">
-			<span><?php echo (!empty($this->entity->past_due)) ? 'Past Due: <span style="float:right;"><span style="color:#B30909;">$'.htmlspecialchars($pines->com_sales->round($this->entity->past_due, true)).'</span></span><br/>' : ''; ?></span>
-			<span><?php echo $payment_frequency; ?> Payment: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true)); ?></span></span><br/>
-			<span>Fees: <span style="float:right;"><?php echo ($this->entity->payment_fees) ? htmlspecialchars($this->entity->payment_fees) : '$0.00'; ?></span></span><br/>
-			<span>Adjustments: <span style="float:right;"><?php echo ($this->entity->payment_adjustments) ? htmlspecialchars($this->entity->payment_adjustments) : '$0.00'; ?></span></span><br/>
+			<span><?php echo (!empty($this->entity->past_due)) ? 'Past Due: <span style="float:right;"><span style="color:#B30909;">$'.h($pines->com_sales->round($this->entity->past_due, true)).'</span></span><br/>' : ''; ?></span>
+			<span><?php echo $payment_frequency; ?> Payment: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true)); ?></span></span><br/>
+			<span>Fees: <span style="float:right;"><?php echo ($this->entity->payment_fees) ? h($this->entity->payment_fees) : '$0.00'; ?></span></span><br/>
+			<span>Adjustments: <span style="float:right;"><?php echo ($this->entity->payment_adjustments) ? h($this->entity->payment_adjustments) : '$0.00'; ?></span></span><br/>
 			<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
-			<span style="font-size:1.5em;">Payment Due: <?php echo ($this->entity->past_due > 0) ? '<span class="btn-danger pull-right btn payment-button">$'.htmlspecialchars($pines->com_sales->round($this->entity->balance, true)).'</span>' : '<span class="btn-success pull-right btn payment-button">$'.htmlspecialchars($pines->com_sales->round($this->entity->balance, true)).'</span>'; ?></span><br/>
+			<span style="font-size:1.5em;">Payment Due: <?php echo ($this->entity->past_due > 0) ? '<span class="btn-danger pull-right btn payment-button">$'.h($pines->com_sales->round($this->entity->balance, true)).'</span>' : '<span class="btn-success pull-right btn payment-button">$'.h($pines->com_sales->round($this->entity->balance, true)).'</span>'; ?></span><br/>
 		</div>
 	</div>
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Enter Payment Amount
-			<span class="pf-note">Payment Due: <?php echo (isset($this->entity->payments[0]['next_payment_due'])) ? htmlspecialchars(format_date($this->entity->payments[0]['next_payment_due'], "date_short")) : htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span>
+			<span class="pf-note">Payment Due: <?php (isset($this->entity->payments[0]['next_payment_due'])) ? e(format_date($this->entity->payments[0]['next_payment_due'], "date_short")) : e(format_date($this->entity->first_payment_date, "date_short")); ?></span>
 		</span>
 		<span class="pf-field">
 			<input style="float:right;text-align:right;" class="pf-field" type="text" name="payment_amount" />
@@ -85,7 +85,7 @@ switch ($this->entity->payment_frequency) {
 			<span class="pf-note">Date of payment received.</span>
 		</span>
 		<span class="pf-field">
-			<input value="<?php echo htmlspecialchars(date('Y-m-d')); ?>" style="float:right;text-align:right;" class="pf-field" type="text" name="payment_date_input" />
+			<input value="<?php e(date('Y-m-d')); ?>" style="float:right;text-align:right;" class="pf-field" type="text" name="payment_date_input" />
 		</span>
 	</div>
 </form>

@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Edit Timeclock for '.htmlspecialchars($this->entity->user->name);
+$this->title = 'Edit Timeclock for '.h($this->entity->user->name);
 $pines->com_datetimepicker->load();
 ?>
 <style type="text/css">
@@ -304,9 +304,9 @@ $pines->com_datetimepicker->load();
 		<div class="pf-group">
 			<div style="float: right;"><button type="button" class="btn" id="p_muid_change_range">Change time range.</button></div>
 			<div class="pf-field" style="font-family: monospace;">
-				<?php echo htmlspecialchars(format_date($this->time_start, 'custom', 'D d M Y h:i:s A T', $this->entity->user->get_timezone())); ?>
+				<?php e(format_date($this->time_start, 'custom', 'D d M Y h:i:s A T', $this->entity->user->get_timezone())); ?>
 				<br />
-				<?php echo htmlspecialchars(format_date($this->time_end, 'custom', 'D d M Y h:i:s A T', $this->entity->user->get_timezone())); ?>
+				<?php e(format_date($this->time_end, 'custom', 'D d M Y h:i:s A T', $this->entity->user->get_timezone())); ?>
 			</div>
 		</div>
 	</div>
@@ -322,15 +322,15 @@ $pines->com_datetimepicker->load();
 					Out:&nbsp;<span class="time_out"><?php echo format_date($entry->out, 'custom', 'd M Y <\s\t\r\o\n\g>h:i:s A</\s\t\r\o\n\g> T', $this->entity->user->get_timezone(true)); ?></span>
 				</span>
 				<span class="pf-label time_range">
-					<span class="time_range"><?php echo htmlspecialchars(format_date_range($entry->in, $entry->out, null, $this->entity->user->get_timezone(true))); ?></span>
+					<span class="time_range"><?php e(format_date_range($entry->in, $entry->out, null, $this->entity->user->get_timezone(true))); ?></span>
 				</span>
-				<span class="pf-note timestamps">Timestamps: <span class="timestamp_in"><?php echo htmlspecialchars($entry->in); ?></span> - <span class="timestamp_out"><?php echo htmlspecialchars($entry->out); ?></span></span>
-				<span class="pf-label comments"><?php echo htmlspecialchars($entry->comments); ?></span>
+				<span class="pf-note timestamps">Timestamps: <span class="timestamp_in"><?php e($entry->in); ?></span> - <span class="timestamp_out"><?php e($entry->out); ?></span></span>
+				<span class="pf-label comments"><?php e($entry->comments); ?></span>
 				<br class="pf-clearing" />
 				<span class="pf-label ui-state-error ui-corner-all error" style="width: auto; display: none;">Overlaps with the next entry!</span>
 			</div>
-			<div class="guid" style="display: none;"><?php echo htmlspecialchars(json_encode($entry->guid)); ?></div>
-			<div class="extras" style="display: none;"><?php echo htmlspecialchars(json_encode($entry->extras)); ?></div>
+			<div class="guid" style="display: none;"><?php e(json_encode($entry->guid)); ?></div>
+			<div class="extras" style="display: none;"><?php e(json_encode($entry->extras)); ?></div>
 		</div>
 		<?php } ?>
 		<div id="p_muid_timeclock_entry_template" class="pf-element pf-full-width" style="display: none;">
@@ -353,14 +353,14 @@ $pines->com_datetimepicker->load();
 		</div>
 		<button class="add-button btn btn-success">Add</button>
 	</fieldset>
-	<form method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_hrm', 'employee/timeclock/save')); ?>">
+	<form method="post" id="p_muid_form" action="<?php e(pines_url('com_hrm', 'employee/timeclock/save')); ?>">
 		<input type="hidden" name="clock" value="" />
-		<input type="hidden" name="time_start" value="<?php echo htmlspecialchars($this->time_start); ?>" />
-		<input type="hidden" name="time_end" value="<?php echo htmlspecialchars($this->time_end); ?>" />
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->user->guid); ?>" />
+		<input type="hidden" name="time_start" value="<?php e($this->time_start); ?>" />
+		<input type="hidden" name="time_end" value="<?php e($this->time_end); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->user->guid); ?>" />
 		<div class="pf-element pf-buttons">
 			<input class="pf-button btn btn-primary" id="p_muid_submit" type="submit" value="Submit" />
-			<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_hrm', 'employee/timeclock/list'))); ?>);" value="Cancel" />
+			<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_hrm', 'employee/timeclock/list'))); ?>);" value="Cancel" />
 		</div>
 	</form>
 </div>

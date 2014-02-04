@@ -32,7 +32,7 @@ $pines->icons->load();
 				<select class="interaction_type" name="interaction_type" style="width:140px; max-width:90%;">
 					<?php foreach ($pines->config->com_customer->interaction_types as $cur_type) {
 						$cur_type = explode(':', $cur_type);
-						echo '<option value="'.htmlspecialchars($cur_type[1]).'">'.htmlspecialchars($cur_type[1]).'</option>';
+						echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
 					} ?>
 				</select></label>
 		</div>

@@ -13,11 +13,11 @@ defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = 'Company Paystub';
 if (isset($this->location))
-	$this->title .= ' ['.htmlspecialchars($this->location->name).']';
-$this->title .= ' ('.htmlspecialchars(format_date($this->entity->start, 'date_short')).' - '.htmlspecialchars(format_date($this->entity->end, 'date_short')).')';
+	$this->title .= ' ['.h($this->location->name).']';
+$this->title .= ' ('.h(format_date($this->entity->start, 'date_short')).' - '.h(format_date($this->entity->end, 'date_short')).')';
 
 if ($this->descendants)
-	$this->note = 'Including locations beneath '.htmlspecialchars($this->location->name);
+	$this->note = 'Including locations beneath '.h($this->location->name);
 $pines->icons->load();
 $pines->com_jstree->load();
 $pines->com_pgrid->load();
@@ -144,12 +144,12 @@ $pines->com_pgrid->load();
 			if (!$this->entire_company && ($cur_payment['location']->guid != $this->location->guid))
 				continue;
 		?>
-		<tr title="<?php echo htmlspecialchars($cur_payment['employee']->guid); ?>">
-			<td><?php echo htmlspecialchars($cur_payment['employee']->name); ?></td>
-			<td><?php echo htmlspecialchars($cur_payment['location']->name); ?></td>
-			<td><?php echo htmlspecialchars($cur_payment['pay_type']); ?></td>
-			<td><?php echo htmlspecialchars($cur_payment['qty_sold']); ?></td>
-			<td><?php echo htmlspecialchars($cur_payment['qty_returned']); ?></td>
+		<tr title="<?php e($cur_payment['employee']->guid); ?>">
+			<td><?php e($cur_payment['employee']->name); ?></td>
+			<td><?php e($cur_payment['location']->name); ?></td>
+			<td><?php e($cur_payment['pay_type']); ?></td>
+			<td><?php e($cur_payment['qty_sold']); ?></td>
+			<td><?php e($cur_payment['qty_returned']); ?></td>
 			<td class="amount">$<?php echo number_format($cur_payment['total_sold'], 2, '.', ''); ?></td>
 			<td class="amount">$<?php echo number_format($cur_payment['total_returned'], 2, '.', ''); ?></td>
 			<td><?php echo round($cur_payment['scheduled'] / 3600, 2); ?> hours</td>

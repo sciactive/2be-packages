@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Available Software';
 if (isset($this->service))
-	$this->title .= ' that Provides Service \''.htmlspecialchars($this->service).'\'';
+	$this->title .= ' that Provides Service \''.h($this->service).'\'';
 $pines->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_plaza/package/repository']);
@@ -318,12 +318,12 @@ if (isset($pines->com_fancybox))
 					continue;
 				?>
 			<tr>
-				<td><?php echo htmlspecialchars($package['name']); ?></td>
-				<td><?php echo htmlspecialchars($package['package']); ?></td>
-				<td><?php echo htmlspecialchars($package['publisher']); ?></td>
-				<td><?php echo htmlspecialchars($package['author']); ?></td>
-				<td><?php echo htmlspecialchars($this->db['packages'][$key]['version']); ?></td>
-				<td><?php echo htmlspecialchars($package['version']); ?></td>
+				<td><?php e($package['name']); ?></td>
+				<td><?php e($package['package']); ?></td>
+				<td><?php e($package['publisher']); ?></td>
+				<td><?php e($package['author']); ?></td>
+				<td><?php e($this->db['packages'][$key]['version']); ?></td>
+				<td><?php e($package['version']); ?></td>
 				<td><?php echo isset($this->db['packages'][$key]['version']) ? (version_compare($package['version'], $this->db['packages'][$key]['version']) ? 'Yes' : 'No') : ''; ?></td>
 				<td><?php switch($package['type']) {
 					case 'component':

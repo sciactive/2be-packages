@@ -72,8 +72,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->packages as $package) { ?>
-		<tr title="<?php echo htmlspecialchars($package->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($package->guid); ?>" data-entity-context="com_packager_package"><?php echo htmlspecialchars($package->name); ?></a></td>
+		<tr title="<?php e($package->guid); ?>">
+			<td><a data-entity="<?php e($package->guid); ?>" data-entity-context="com_packager_package"><?php e($package->name); ?></a></td>
 			<td><?php switch($package->type) {
 				case 'component':
 					echo 'Component';
@@ -92,32 +92,32 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				case 'component':
 				case 'template':
 					$component = $package->component;
-					echo htmlspecialchars($pines->info->$component->name);
+					e($pines->info->$component->name);
 					break;
 				case 'system':
-					echo htmlspecialchars($pines->info->name);
+					e($pines->info->name);
 					break;
 				case 'meta':
-					echo htmlspecialchars($package->meta['name']);
+					e($package->meta['name']);
 					break;
 			} ?></td>
 			<td><?php switch($package->type) {
 				case 'component':
 				case 'template':
 					$component = $package->component;
-					echo htmlspecialchars($pines->info->$component->author);
+					e($pines->info->$component->author);
 					break;
 				case 'system':
-					echo htmlspecialchars($pines->info->author);
+					e($pines->info->author);
 					break;
 				case 'meta':
-					echo htmlspecialchars($package->meta['author']);
+					e($package->meta['author']);
 					break;
 			} ?></td>
 			<td><?php switch($package->type) {
 				case 'component':
 				case 'template':
-					echo htmlspecialchars($package->component);
+					e($package->component);
 					break;
 				case 'system':
 					echo 'system';
@@ -130,13 +130,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				case 'component':
 				case 'template':
 					$component = $package->component;
-					echo htmlspecialchars($pines->info->$component->version);
+					e($pines->info->$component->version);
 					break;
 				case 'system':
-					echo htmlspecialchars($pines->info->version);
+					e($pines->info->version);
 					break;
 				case 'meta':
-					echo htmlspecialchars($package->meta['version']);
+					e($package->meta['version']);
 					break;
 			} ?></td>
 		</tr>

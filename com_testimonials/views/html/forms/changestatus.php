@@ -69,7 +69,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonial
 		<div class="span10 offset1">
 			<div class="original-feedback-heading">Original Feedback - Cannot be Edited.</div>
 			<blockquote class="clearfix">
-				<p>"<?php echo htmlspecialchars($this->entity->feedback); ?>"</p>
+				<p>"<?php e($this->entity->feedback); ?>"</p>
 				<small><?php echo $this->entity->create_author(); ?></small>
 				<div class="pull-right rating-container"> 
 					<span class="star-container">
@@ -98,7 +98,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonial
 		<div class="span10 offset1">
 			<div class="quoted-feedback-heading">Currently Using Quoted Version.</div>
 			<blockquote>
-				<p>"<?php echo htmlspecialchars($this->entity->quotefeedback); ?>"</p>
+				<p>"<?php e($this->entity->quotefeedback); ?>"</p>
 				<small><?php echo $this->entity->create_author(); ?></small>
 			</blockquote>
 		</div>
@@ -123,7 +123,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $pines->config->com_testimonial
 				Quote Feedback
 				<span class="" style="font-size: 10px; display:inline-block; font-weight: normal; text-transform: none;">If desired, you can quote/edit part of the feedback for the testimonial instead.</span>
 			</span>
-			<textarea style="width: 50%; float: right; vertical-align:top;" name="quotefeedback"><?php echo isset($this->entity->quotefeedback) ? htmlspecialchars($this->entity->quotefeedback) : ''; ?></textarea>
+			<textarea style="width: 50%; float: right; vertical-align:top;" name="quotefeedback"><?php echo isset($this->entity->quotefeedback) ? h($this->entity->quotefeedback) : ''; ?></textarea>
 			<?php } ?>
 		</div>
     </div>

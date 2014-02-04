@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = htmlspecialchars($this->entity->company_name).' Warboard';
+$this->title = h($this->entity->company_name).' Warboard';
 ?>
 <style type="text/css" >
 	#p_muid_warboard_table {
@@ -67,28 +67,28 @@ $this->title = htmlspecialchars($this->entity->company_name).' Warboard';
 		<tr>
 		<?php } ?>
 			<td>
-				<table class="location" id="p_muid_location_<?php echo htmlspecialchars($cur_location->guid); ?>">
+				<table class="location" id="p_muid_location_<?php e($cur_location->guid); ?>">
 					<tr class="wb_label">
 						<td colspan="2">
 							<strong><?php
-							echo htmlspecialchars($cur_location->name);
+							e($cur_location->name);
 							if ($pines->config->com_reports->warboard_states)
-								echo ', ' . htmlspecialchars($cur_location->state);
+								echo ', ' . h($cur_location->state);
 							?></strong>
 						</td>
-						<td><?php echo htmlspecialchars(format_phone($cur_location->phone)); ?></td>
+						<td><?php e(format_phone($cur_location->phone)); ?></td>
 					</tr>
 					<?php if ($pines->config->com_reports->warboard_phone2_show) { ?>
 					<tr class="wb_label">
-						<td colspan="2" style="text-align: right;"><?php echo htmlspecialchars($pines->config->com_reports->warboard_phone2_label); ?>&nbsp;</td>
-						<td><?php echo htmlspecialchars(format_phone($cur_location->phone2)); ?></td>
+						<td colspan="2" style="text-align: right;"><?php e($pines->config->com_reports->warboard_phone2_label); ?>&nbsp;</td>
+						<td><?php e(format_phone($cur_location->phone2)); ?></td>
 					</tr>
 					<?php } ?>
 					<tr class="heading">
 						<td colspan="3">District</td>
 					</tr>
 					<tr>
-						<td colspan="3"><?php echo isset($cur_location->parent->name) ? htmlspecialchars($cur_location->parent->name) : '-'; ?></td>
+						<td colspan="3"><?php echo isset($cur_location->parent->name) ? h($cur_location->parent->name) : '-'; ?></td>
 					</tr>
 					<?php
 					foreach ($this->entity->positions as $cur_title) {
@@ -96,7 +96,7 @@ $this->title = htmlspecialchars($this->entity->company_name).' Warboard';
 						$empty = true;
 					?>
 					<tr class="heading <?php echo strtolower(str_replace(' ', '_', $cur_location->guid.$cur_title)); ?>">
-						<td colspan="3"><?php echo htmlspecialchars($cur_title).$plural; ?></td>
+						<td colspan="3"><?php e($cur_title).$plural; ?></td>
 					</tr>
 					<?php
 					foreach ($employees as $cur_employee) {
@@ -106,9 +106,9 @@ $this->title = htmlspecialchars($this->entity->company_name).' Warboard';
 						$empty = false;
 						?>
 					<tr <?php echo ($cur_employee->new_hire) ? 'class="newhire"' : ''; ?>>
-						<td style="width: 25%;"><?php echo htmlspecialchars(format_date($cur_employee->hire_date, 'custom', 'n/j/y')); ?></td>
-						<td style="width: 50%;"><?php echo htmlspecialchars($cur_employee->name); ?></td>
-						<td style="width: 25%;"><?php echo htmlspecialchars(format_phone($cur_employee->phone)); ?></td>
+						<td style="width: 25%;"><?php e(format_date($cur_employee->hire_date, 'custom', 'n/j/y')); ?></td>
+						<td style="width: 50%;"><?php e($cur_employee->name); ?></td>
+						<td style="width: 25%;"><?php e(format_phone($cur_employee->phone)); ?></td>
 					</tr>
 						<?php
 					}
@@ -128,30 +128,30 @@ $this->title = htmlspecialchars($this->entity->company_name).' Warboard';
 		<?php $count++; } ?>
 	</tr>
 	<tr>
-		<td colspan="<?php echo htmlspecialchars($this->entity->columns); ?>"><strong>Important Numbers</strong></td>
+		<td colspan="<?php e($this->entity->columns); ?>"><strong>Important Numbers</strong></td>
 	</tr>
 	<tr>
 		<td>
 			<table class="hq">
 				<tr>
-					<td class="wb_label"><strong><?php echo htmlspecialchars($this->entity->hq->name); ?></strong></td>
+					<td class="wb_label"><strong><?php e($this->entity->hq->name); ?></strong></td>
 				</tr>
 				<tr>
-					<td><?php echo htmlspecialchars(format_phone($this->entity->hq->phone)); ?></td>
+					<td><?php e(format_phone($this->entity->hq->phone)); ?></td>
 				</tr>
 				<?php if ($pines->config->com_reports->warboard_phone2_show) { ?>
 				<tr>
-					<td><?php echo htmlspecialchars(rtrim($pines->config->com_reports->warboard_phone2_label, ': ')); ?>: <?php echo htmlspecialchars(format_phone($this->entity->hq->phone2)); ?></td>
+					<td><?php e(rtrim($pines->config->com_reports->warboard_phone2_label, ': ')); ?>: <?php e(format_phone($this->entity->hq->phone2)); ?></td>
 				</tr>
 				<?php } ?>
 				<tr>
-					<td>FAX: <?php echo htmlspecialchars(format_phone($this->entity->hq->fax)); ?></td>
+					<td>FAX: <?php e(format_phone($this->entity->hq->fax)); ?></td>
 				</tr>
 				<tr>
-					<td><?php echo htmlspecialchars($this->entity->hq->address_1); ?></td>
+					<td><?php e($this->entity->hq->address_1); ?></td>
 				</tr>
 				<tr>
-					<td><?php echo htmlspecialchars($this->entity->hq->city); ?>, <?php echo htmlspecialchars($this->entity->hq->state); ?> <?php echo htmlspecialchars($this->entity->hq->zip); ?></td>
+					<td><?php e($this->entity->hq->city); ?>, <?php e($this->entity->hq->state); ?> <?php e($this->entity->hq->zip); ?></td>
 				</tr>
 			</table>
 		</td>
@@ -170,9 +170,9 @@ $this->title = htmlspecialchars($this->entity->company_name).' Warboard';
 			$pines->entity_manager->sort($employees, 'job_title');
 		?>
 		<td colspan="<?php echo floor(($this->entity->columns - 1)/count($this->entity->important)); ?>">
-			<table class="important" id="p_muid_important_<?php echo htmlspecialchars($cur_important->guid); ?>">
+			<table class="important" id="p_muid_important_<?php e($cur_important->guid); ?>">
 				<tr>
-					<td colspan="<?php echo $columns; ?>" class="wb_label"><strong><?php echo htmlspecialchars($cur_important->name); ?></strong></td>
+					<td colspan="<?php echo $columns; ?>" class="wb_label"><strong><?php e($cur_important->name); ?></strong></td>
 				</tr>
 				<?php
 				foreach ($employees as $cur_employee) {
@@ -181,13 +181,13 @@ $this->title = htmlspecialchars($this->entity->company_name).' Warboard';
 					$important_count[$cur_important->guid]++;
 				?>
 				<tr>
-					<td><?php echo htmlspecialchars($cur_employee->name); ?></td>
-					<td><?php echo htmlspecialchars($cur_employee->job_title); ?></td>
-					<td><?php echo htmlspecialchars(format_phone($cur_employee->phone)); ?></td>
+					<td><?php e($cur_employee->name); ?></td>
+					<td><?php e($cur_employee->job_title); ?></td>
+					<td><?php e(format_phone($cur_employee->phone)); ?></td>
 					<?php if ($pines->config->com_reports->use_extension) { ?>
-					<td><?php echo !empty($cur_employee->phone_ext) ? 'ext '.htmlspecialchars($cur_employee->phone_ext) : ''; ?></td>
+					<td><?php echo !empty($cur_employee->phone_ext) ? 'ext '.h($cur_employee->phone_ext) : ''; ?></td>
 					<?php } if ($pines->config->com_reports->use_other_phone) { ?>
-					<td><?php echo !empty($cur_employee->other_phone) ? $pines->config->com_reports->other_phone_label.' '.htmlspecialchars(format_phone($cur_employee->other_phone)) : ''; ?></td>
+					<td><?php echo !empty($cur_employee->other_phone) ? $pines->config->com_reports->other_phone_label.' '.h(format_phone($cur_employee->other_phone)) : ''; ?></td>
 					<?php } ?>
 				</tr>
 				<?php } ?>

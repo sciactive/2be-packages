@@ -67,15 +67,15 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->repositories as $key => $repository) { ?>
-		<tr title="<?php echo htmlspecialchars(basename($repository['cert'])); ?>">
-			<td><?php echo htmlspecialchars($key + 1); ?></td>
-			<td><?php echo htmlspecialchars($repository['data']['subject']['OU']); ?></td>
-			<td><?php echo htmlspecialchars($repository['data']['subject']['O']); ?></td>
-			<td><a href="<?php echo htmlspecialchars($repository['url']); ?>" target="_blank"><?php echo htmlspecialchars($repository['url']); ?></a></td>
-			<td><?php echo htmlspecialchars(format_date(intval($repository['data']['validFrom_time_t']), 'date_med')).' to '.htmlspecialchars(format_date(intval($repository['data']['validTo_time_t']), 'date_med')); ?></td>
-			<td><?php echo htmlspecialchars("{$repository['data']['subject']['L']}, {$repository['data']['subject']['ST']}, {$repository['data']['subject']['C']}"); ?></td>
-			<td><a href="mailto:<?php echo htmlspecialchars($repository['data']['subject']['emailAddress']); ?>"><?php echo htmlspecialchars($repository['data']['subject']['emailAddress']); ?></a></td>
-			<td><?php echo htmlspecialchars(basename($repository['cert'])); ?></td>
+		<tr title="<?php e(basename($repository['cert'])); ?>">
+			<td><?php e($key + 1); ?></td>
+			<td><?php e($repository['data']['subject']['OU']); ?></td>
+			<td><?php e($repository['data']['subject']['O']); ?></td>
+			<td><a href="<?php e($repository['url']); ?>" target="_blank"><?php e($repository['url']); ?></a></td>
+			<td><?php e(format_date(intval($repository['data']['validFrom_time_t']), 'date_med')).' to '.h(format_date(intval($repository['data']['validTo_time_t']), 'date_med')); ?></td>
+			<td><?php e("{$repository['data']['subject']['L']}, {$repository['data']['subject']['ST']}, {$repository['data']['subject']['C']}"); ?></td>
+			<td><a href="mailto:<?php e($repository['data']['subject']['emailAddress']); ?>"><?php e($repository['data']['subject']['emailAddress']); ?></a></td>
+			<td><?php e(basename($repository['cert'])); ?></td>
 			<td>
 				<a href="javascript:void(0);" onclick="$(this).next().dialog({'width': 800});">Open Detail</a>
 				<div title="Repository Certificate Detail" style="display: none;">

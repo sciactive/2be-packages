@@ -67,18 +67,18 @@ $pines->com_pgrid->load();
 	<?php foreach($this->products as $product) {
 		$costs = $vendors = array();
 		foreach($product->vendors as $cur_vendor) {
-			$vendors[] = '<a data-entity="'.htmlspecialchars($cur_vendor['entity']->guid).'" data-entity-context="com_sales_vendor">'.htmlspecialchars($cur_vendor['entity']->name).'</a>';
+			$vendors[] = '<a data-entity="'.h($cur_vendor['entity']->guid).'" data-entity-context="com_sales_vendor">'.h($cur_vendor['entity']->name).'</a>';
 			$costs[] = '$'.$pines->com_sales->round($cur_vendor['cost'], true);
 		}
 	?>
-		<tr title="<?php echo htmlspecialchars($product->guid); ?>">
-			<td><?php echo htmlspecialchars($product->sku); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($product->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($product->name); ?></a></td>
-			<td style="text-align: right;">$<?php echo htmlspecialchars($pines->com_sales->round($product->unit_price, true)); ?></td>
-			<td style="text-align: right;"><?php echo htmlspecialchars(implode(', ', $costs)); ?></td>
+		<tr title="<?php e($product->guid); ?>">
+			<td><?php e($product->sku); ?></td>
+			<td><a data-entity="<?php e($product->guid); ?>" data-entity-context="com_sales_product"><?php e($product->name); ?></a></td>
+			<td style="text-align: right;">$<?php e($pines->com_sales->round($product->unit_price, true)); ?></td>
+			<td style="text-align: right;"><?php e(implode(', ', $costs)); ?></td>
 			<td><?php echo implode(', ', $vendors); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($product->manufacturer->guid); ?>" data-entity-context="com_sales_manufacturer"><?php echo htmlspecialchars($product->manufacturer->name); ?></a></td>
-			<td><?php echo htmlspecialchars($product->manufacturer_sku); ?></td>
+			<td><a data-entity="<?php e($product->manufacturer->guid); ?>" data-entity-context="com_sales_manufacturer"><?php e($product->manufacturer->name); ?></a></td>
+			<td><?php e($product->manufacturer_sku); ?></td>
 			<td><?php switch ($product->stock_type) {
 				case 'non_stocked':
 					echo 'Non Stocked';
@@ -95,8 +95,8 @@ $pines->com_pgrid->load();
 			} ?></td>
 			<td><?php echo ($product->serialized ? 'Yes' : 'No'); ?></td>
 			<td><?php echo ($product->discountable ? 'Yes' : 'No'); ?></td>
-			<td><?php echo htmlspecialchars(implode(', ', $product->additional_barcodes)); ?></td>
-			<td><?php echo htmlspecialchars($product->receipt_description); ?></td>
+			<td><?php e(implode(', ', $product->additional_barcodes)); ?></td>
+			<td><?php e($product->receipt_description); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

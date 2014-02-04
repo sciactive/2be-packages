@@ -24,15 +24,15 @@ $this->title = 'Hours Clocked Report';
 <div id="p_muid_report" class="pf-form">
 	<div class="pf-element">
 		<span class="pf-label">Generated</span>
-		<span class="pf-field"><?php echo htmlspecialchars(format_date(time(), 'full_short')); ?></span>
+		<span class="pf-field"><?php e(format_date(time(), 'full_short')); ?></span>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Timezone</span>
-		<span class="pf-field"><?php echo $this->local_timezones ? 'Based on Employee' : htmlspecialchars(date_default_timezone_get()); ?></span>
+		<span class="pf-field"><?php echo $this->local_timezones ? 'Based on Employee' : h(date_default_timezone_get()); ?></span>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Dates Reported</span>
-		<span class="pf-field"><?php echo htmlspecialchars(format_date($this->date_start, 'date_short').' - '.format_date($this->date_end - 1, 'date_short')); ?></span>
+		<span class="pf-field"><?php e(format_date($this->date_start, 'date_short').' - '.format_date($this->date_end - 1, 'date_short')); ?></span>
 	</div>
 	<?php $cur_timezone = date_default_timezone_get(); foreach ($this->employees as $cur_employee) {
 		if ($this->local_timezones)
@@ -41,15 +41,15 @@ $this->title = 'Hours Clocked Report';
 	<div class="employee">
 		<div class="pf-element pf-heading">
 			<h3>
-				<?php echo htmlspecialchars($cur_employee['entity']->name);
+				<?php e($cur_employee['entity']->name);
 				if ($this->local_timezones) { ?>
 				<small style="float: right;">
-					Timezone: <?php echo htmlspecialchars($cur_employee['timezone']); ?>
+					Timezone: <?php e($cur_employee['timezone']); ?>
 				</small>
 				<?php } ?>
 			</h3>
 			<?php if (isset($cur_employee['entity']->group->guid)) { ?>
-			<p><?php echo htmlspecialchars($cur_employee['entity']->group->name); ?></p>
+			<p><?php e($cur_employee['entity']->group->name); ?></p>
 			<?php } ?>
 		</div>
 		<table>

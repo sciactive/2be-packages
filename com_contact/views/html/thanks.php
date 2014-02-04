@@ -17,8 +17,8 @@ defined('P_RUN') or die('Direct access prohibited');
 		$page = (int) $pines->config->com_contact->thankyou_page;
 		pines_redirect(pines_url('com_content', 'page', array('id' => $page)));
 	} else {
-		$this->title = htmlspecialchars($pines->config->com_contact->thankyou_title);
-		echo htmlspecialchars($pines->config->com_contact->thankyou_message);
+		$this->title = h($pines->config->com_contact->thankyou_title);
+		e($pines->config->com_contact->thankyou_message);
 	}
 ?>
 </div>

@@ -65,10 +65,10 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->mails as $mail) { ?>
-		<tr title="<?php echo htmlspecialchars($mail->guid); ?>">
-			<td><?php echo htmlspecialchars($mail->name); ?></td>
-			<td><?php echo htmlspecialchars($mail->subject); ?></td>
-			<td><?php echo (is_array($mail->attachments) ? htmlspecialchars(implode(', ', $mail->attachments)) : ''); ?></td>
+		<tr title="<?php e($mail->guid); ?>">
+			<td><?php e($mail->name); ?></td>
+			<td><?php e($mail->subject); ?></td>
+			<td><?php echo (is_array($mail->attachments) ? h(implode(', ', $mail->attachments)) : ''); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

@@ -20,5 +20,5 @@ defined('P_RUN') or die('Direct access prohibited');
 		"action": <?php echo json_encode($pines->config->com_timeoutnotice->action); ?>,
 		"redirect_url": <?php echo json_encode($pines->config->com_timeoutnotice->redirect_url); ?>
 	};
-	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_timeoutnotice/includes/timeout_notice.js", true);
+	pines.loadjs("<?php e($pines->config->location); ?>components/com_timeoutnotice/includes/timeout_notice.js", true);
 </script>

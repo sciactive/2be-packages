@@ -121,7 +121,7 @@ $this->title = 'Edit Buttons';
 		</div>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div id="p_muid_cur_buttons" class="buttons button_well well <?php echo htmlspecialchars($this->buttons_size); ?>">
+		<div id="p_muid_cur_buttons" class="buttons button_well well <?php e($this->buttons_size); ?>">
 			<?php foreach ((array) $this->current_buttons as $cur_button) {
 				if ($cur_button == 'separator') { ?>
 			<a class="separator btn disabled"><span>&nbsp;</span></a>
@@ -134,10 +134,10 @@ $this->title = 'Edit Buttons';
 						if (!$pines->depend->check($cur_type, $cur_value))
 							continue 2;
 					} ?>
-			<a class="button btn" title="<?php echo htmlspecialchars($cur_def['description']); ?>">
-				<span class="component" style="display: none;"><?php echo htmlspecialchars($cur_button['component']); ?></span>
-				<span class="button_name" style="display: none;"><?php echo htmlspecialchars($cur_button['button']); ?></span>
-				<span class="picon <?php echo $this->buttons_size == 'large' ? 'picon-32' : ''; ?> <?php echo htmlspecialchars($cur_def['class']); ?>"><?php echo htmlspecialchars($cur_def['text']); ?></span>
+			<a class="button btn" title="<?php e($cur_def['description']); ?>">
+				<span class="component" style="display: none;"><?php e($cur_button['component']); ?></span>
+				<span class="button_name" style="display: none;"><?php e($cur_button['button']); ?></span>
+				<span class="picon <?php echo $this->buttons_size == 'large' ? 'picon-32' : ''; ?> <?php e($cur_def['class']); ?>"><?php e($cur_def['text']); ?></span>
 			</a>
 			<?php } } ?>
 		</div>
@@ -153,22 +153,22 @@ $this->title = 'Edit Buttons';
 			<h3>Separators</h3>
 		</div>
 		<div class="pf-element pf-full-width">
-			<div class="button_well <?php echo htmlspecialchars($this->buttons_size); ?>">
+			<div class="button_well <?php e($this->buttons_size); ?>">
 				<a class="separator btn disabled"><span>&nbsp;</span></a>
 				<a class="line_break btn disabled"><span>&nbsp;</span></a>
 			</div>
 		</div>
 		<?php foreach ((array) $this->buttons as $cur_component => $cur_button_list) { ?>
 		<div class="pf-element pf-heading">
-			<h3><?php echo htmlspecialchars($pines->info->$cur_component->name); ?></h3>
+			<h3><?php e($pines->info->$cur_component->name); ?></h3>
 		</div>
 		<div class="pf-element pf-full-width">
-			<div class="button_well <?php echo htmlspecialchars($this->buttons_size); ?>">
+			<div class="button_well <?php e($this->buttons_size); ?>">
 				<?php foreach ($cur_button_list as $cur_name => $cur_button) { ?>
-				<a class="button btn" title="<?php echo htmlspecialchars($cur_button['description']); ?>">
-					<span class="component" style="display: none;"><?php echo htmlspecialchars($cur_component); ?></span>
-					<span class="button_name" style="display: none;"><?php echo htmlspecialchars($cur_name); ?></span>
-					<span class="picon <?php echo $this->buttons_size == 'large' ? 'picon-32' : ''; ?> <?php echo htmlspecialchars($cur_button['class']); ?>"><?php echo htmlspecialchars($cur_button['text']); ?></span>
+				<a class="button btn" title="<?php e($cur_button['description']); ?>">
+					<span class="component" style="display: none;"><?php e($cur_component); ?></span>
+					<span class="button_name" style="display: none;"><?php e($cur_name); ?></span>
+					<span class="picon <?php echo $this->buttons_size == 'large' ? 'picon-32' : ''; ?> <?php e($cur_button['class']); ?>"><?php e($cur_button['text']); ?></span>
 				</a>
 				<?php } ?>
 			</div>

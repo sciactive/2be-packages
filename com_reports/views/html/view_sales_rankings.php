@@ -10,11 +10,11 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Sales Rankings: '.htmlspecialchars($this->entity->name).' ('.htmlspecialchars(format_date($this->entity->start_date, 'date_sort')).' - '.htmlspecialchars(format_date($this->entity->end_date - 1, 'date_sort')).')';
+$this->title = 'Sales Rankings: '.h($this->entity->name).' ('.h(format_date($this->entity->start_date, 'date_sort')).' - '.h(format_date($this->entity->end_date - 1, 'date_sort')).')';
 if ($this->entity->final)
-	$this->note = 'Finalized on '.htmlspecialchars(format_date($this->entity->final_date, 'full_long'));
+	$this->note = 'Finalized on '.h(format_date($this->entity->final_date, 'full_long'));
 else
-	$this->note = 'Current as of '.htmlspecialchars(format_date(time(), 'full_long'));
+	$this->note = 'Current as of '.h(format_date(time(), 'full_long'));
 $pines->com_jstree->load();
 $google_drive = false;
 if (isset($pines->com_googledrive)) {
@@ -165,21 +165,21 @@ $multiplier = $pines->config->com_reports->use_points ? $pines->config->com_repo
 					$totals['goal'] += $cur_rank['goal'];
 					$totals['trend'] += $cur_rank['trend'];
 				?>
-				<tr title="<?php echo htmlspecialchars($cur_rank['entity']->guid); ?>" class="<?php echo $class; ?>">
-					<td><?php echo htmlspecialchars($cur_rank['rank']); ?></td>
-					<td><?php echo htmlspecialchars($cur_rank['entity']->name); ?></td>
-					<td><?php echo isset($cur_rank['manager']->guid) ? htmlspecialchars($cur_rank['manager']->name) : 'OPEN'; ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['current'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.htmlspecialchars($cur_rank['current_apps']); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['last'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.htmlspecialchars($cur_rank['last_apps']); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['mtd'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.htmlspecialchars($cur_rank['mtd_apps']); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['goal'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['trend'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo htmlspecialchars(round($cur_rank['pct'], 0)); ?>%</td>
+				<tr title="<?php e($cur_rank['entity']->guid); ?>" class="<?php echo $class; ?>">
+					<td><?php e($cur_rank['rank']); ?></td>
+					<td><?php e($cur_rank['entity']->name); ?></td>
+					<td><?php echo isset($cur_rank['manager']->guid) ? h($cur_rank['manager']->name) : 'OPEN'; ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['current'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.h($cur_rank['current_apps']); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['last'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.h($cur_rank['last_apps']); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['mtd'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.h($cur_rank['mtd_apps']); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['goal'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['trend'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php e(round($cur_rank['pct'], 0)); ?>%</td>
 					<?php if ($key == count($this->entity->locations)-1) { ?>
 					<td class="right_justify"><?php if ($cur_rank['rank'] == 1) {
                                             echo '0';
                                         } else {
-                                            echo $prefix.htmlspecialchars(round(($loc_array[$cur_rank['rank']] - $loc_array[$cur_rank['rank'] - 1]) * $multiplier, 2));
+                                            echo $prefix.h(round(($loc_array[$cur_rank['rank']] - $loc_array[$cur_rank['rank'] - 1]) * $multiplier, 2));
                                         } ?>
 					<td class="right_justify">
 						<?php switch ($cur_rank['rank']) {
@@ -196,7 +196,7 @@ $multiplier = $pines->config->com_reports->use_points ? $pines->config->com_repo
 					</td>
 					<?php } else { ?>
 					<td style="text-align: center;"><?php echo (int) $cur_rank['child_count']; ?></td>
-					<td style="text-align: center;"><?php echo $prefix.htmlspecialchars(round($cur_rank['child_count'] > 0 ? $cur_rank['trend'] / $cur_rank['child_count'] * $multiplier : 0, 2)); ?></td>
+					<td style="text-align: center;"><?php echo $prefix.h(round($cur_rank['child_count'] > 0 ? $cur_rank['trend'] / $cur_rank['child_count'] * $multiplier : 0, 2)); ?></td>
 					<?php } ?>
 				</tr>
 				<?php $loc_count += 1;} if ($key == count($this->entity->locations)-1) {
@@ -211,12 +211,12 @@ $multiplier = $pines->config->com_reports->use_points ? $pines->config->com_repo
 				<tr class="total <?php echo $class; ?>">
 					<td class="rank"><span style="display: none;">9999999</span></td>
 					<td colspan="2">Total</td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($totals['current'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($totals['last'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($totals['mtd'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($totals['goal'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($totals['trend'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo htmlspecialchars(round($totals['pct'], 0)); ?>%</td>
+					<td class="right_justify"><?php echo $prefix.h(round($totals['current'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($totals['last'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($totals['mtd'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($totals['goal'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($totals['trend'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php e(round($totals['pct'], 0)); ?>%</td>
 					<td colspan="2"></td>
 				</tr>
 				<?php } ?>
@@ -256,17 +256,17 @@ $multiplier = $pines->config->com_reports->use_points ? $pines->config->com_repo
 						$class = 'red';
 					}
 				?>
-				<tr title="<?php echo htmlspecialchars($cur_rank['entity']->guid); ?>" class="<?php echo $class; ?>">
-					<td><?php echo htmlspecialchars($cur_rank['rank']); ?></td>
-					<td><?php echo htmlspecialchars(empty($cur_rank['entity']->nickname) ? $cur_rank['entity']->name : $cur_rank['entity']->nickname); ?></td>
-					<td><?php echo htmlspecialchars("{$cur_rank['location']->name} (".preg_replace('/\s.*/', '', $cur_rank['district']->name).')'); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['current'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.htmlspecialchars($cur_rank['current_apps']); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['last'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.htmlspecialchars($cur_rank['last_apps']); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['mtd'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.htmlspecialchars($cur_rank['mtd_apps']); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['goal'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['trend'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo htmlspecialchars(round($cur_rank['pct'], 0)); ?>%</td>
-					<td class="right_justify"><?php echo ($cur_rank['rank'] == 1) ? '0' : $prefix.htmlspecialchars(round(($cur_rank['mtd'] - $this->entity->employees[$key+1]['mtd']) * $multiplier, 2)); ?></td>
+				<tr title="<?php e($cur_rank['entity']->guid); ?>" class="<?php echo $class; ?>">
+					<td><?php e($cur_rank['rank']); ?></td>
+					<td><?php e(empty($cur_rank['entity']->nickname) ? $cur_rank['entity']->name : $cur_rank['entity']->nickname); ?></td>
+					<td><?php e("{$cur_rank['location']->name} (".preg_replace('/\s.*/', '', $cur_rank['district']->name).')'); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['current'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.h($cur_rank['current_apps']); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['last'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.h($cur_rank['last_apps']); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['mtd'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.h($cur_rank['mtd_apps']); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['goal'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['trend'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php e(round($cur_rank['pct'], 0)); ?>%</td>
+					<td class="right_justify"><?php echo ($cur_rank['rank'] == 1) ? '0' : $prefix.h(round(($cur_rank['mtd'] - $this->entity->employees[$key+1]['mtd']) * $multiplier, 2)); ?></td>
 					<td class="right_justify">
 						<?php switch ($cur_rank['rank']) {
 							case 1:
@@ -332,17 +332,17 @@ $multiplier = $pines->config->com_reports->use_points ? $pines->config->com_repo
 						$class = 'red';
 					}
 				?>
-				<tr title="<?php echo htmlspecialchars($cur_rank['entity']->guid); ?>" class="<?php echo $class; ?>">
-					<td><?php echo htmlspecialchars($cur_rank['rank']); ?></td>
-					<td><?php echo htmlspecialchars(empty($cur_rank['entity']->nickname) ? $cur_rank['entity']->name : $cur_rank['entity']->nickname); ?></td>
-					<td><?php echo htmlspecialchars("{$cur_rank['location']->name} (".preg_replace('/\s.*/', '', $cur_rank['district']->name).')'); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['current'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.htmlspecialchars($cur_rank['current_apps']); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['last'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.htmlspecialchars($cur_rank['last_apps']); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['mtd'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.htmlspecialchars($cur_rank['mtd_apps']); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['goal'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo $prefix.htmlspecialchars(round($cur_rank['trend'] * $multiplier, 2)); ?></td>
-					<td class="right_justify"><?php echo htmlspecialchars(round($cur_rank['pct'], 0)); ?>%</td>
-					<td class="right_justify"><?php echo ($cur_rank['rank'] == 1) ? '0' : $prefix.htmlspecialchars(round(($cur_rank['mtd'] - $this->entity->new_hires[$key+1]['mtd']) * $multiplier, 2)); ?></td>
+				<tr title="<?php e($cur_rank['entity']->guid); ?>" class="<?php echo $class; ?>">
+					<td><?php e($cur_rank['rank']); ?></td>
+					<td><?php e(empty($cur_rank['entity']->nickname) ? $cur_rank['entity']->name : $cur_rank['entity']->nickname); ?></td>
+					<td><?php e("{$cur_rank['location']->name} (".preg_replace('/\s.*/', '', $cur_rank['district']->name).')'); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['current'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.h($cur_rank['current_apps']); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['last'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.h($cur_rank['last_apps']); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['mtd'] * $multiplier, 2)); if ($this->mifi_checks) echo '/'.h($cur_rank['mtd_apps']); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['goal'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php echo $prefix.h(round($cur_rank['trend'] * $multiplier, 2)); ?></td>
+					<td class="right_justify"><?php e(round($cur_rank['pct'], 0)); ?>%</td>
+					<td class="right_justify"><?php echo ($cur_rank['rank'] == 1) ? '0' : $prefix.h(round(($cur_rank['mtd'] - $this->entity->new_hires[$key+1]['mtd']) * $multiplier, 2)); ?></td>
 					<td class="right_justify">
 						<?php // switch ($cur_rank['rank']) {
 							//case 1:

@@ -25,7 +25,7 @@ $this->title = 'Change Your Password';
 		});
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_user', 'savepassword')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_user', 'savepassword')); ?>">
 	<div class="pf-element pf-heading">
 		<h3>Provide Your Current Password</h3>
 	</div>
@@ -46,6 +46,6 @@ $this->title = 'Change Your Password';
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

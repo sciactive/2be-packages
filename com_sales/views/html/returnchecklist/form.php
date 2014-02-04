@@ -10,28 +10,28 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Return Checklist' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Return Checklist' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide Return Checklist details in this form.';
 $pines->com_pgrid->load();
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'returnchecklist/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'returnchecklist/save')); ?>">
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars($this->entity->name); ?>" /></label>
+			<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Label</span>
-			<input class="pf-field" type="text" name="label" size="24" value="<?php echo htmlspecialchars($this->entity->label); ?>" /></label>
+			<input class="pf-field" type="text" name="label" size="24" value="<?php e($this->entity->label); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Enabled</span>
@@ -158,10 +158,10 @@ $pines->com_pgrid->load();
 					<tbody>
 						<?php if (isset($this->entity->conditions)) foreach ($this->entity->conditions as $cur_value) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars($cur_value['condition']); ?></td>
-							<td><?php echo htmlspecialchars($cur_value['type']); ?></td>
-							<td><?php echo htmlspecialchars($cur_value['amount']); ?></td>
-							<td><?php echo htmlspecialchars($cur_value['always'] ? 'Yes' : 'No'); ?></td>
+							<td><?php e($cur_value['condition']); ?></td>
+							<td><?php e($cur_value['type']); ?></td>
+							<td><?php e($cur_value['amount']); ?></td>
+							<td><?php e($cur_value['always'] ? 'Yes' : 'No'); ?></td>
 						</tr>
 						<?php } ?>
 					</tbody>
@@ -199,9 +199,9 @@ $pines->com_pgrid->load();
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'returnchecklist/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'returnchecklist/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

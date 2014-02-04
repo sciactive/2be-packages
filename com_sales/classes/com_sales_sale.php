@@ -359,8 +359,8 @@ class com_sales_sale extends entity {
 
 		$macros = array(
 			'receipt' => $module->render(),
-			'sale_id' => htmlspecialchars($this->id),
-			'sale_total' => htmlspecialchars($this->total),
+			'sale_id' => h($this->id),
+			'sale_total' => h($this->total),
 		);
 		return $pines->com_mailer->send_mail('com_sales/sale_receipt', $macros, $this->customer);
 	}

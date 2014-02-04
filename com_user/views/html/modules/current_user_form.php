@@ -18,7 +18,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	<div class="pf-element">
 		<label><span class="pf-label">Text</span>
 			<span class="pf-note">"#name#" and "#username#" will be replaced by the current user's name and username.</span>
-			<input class="pf-field" type="text" name="text" size="36" value="<?php echo isset($this->text) ? htmlspecialchars($this->text) : 'Logged in as #name# [#username#].'; ?>" /></label>
+			<input class="pf-field" type="text" name="text" size="36" value="<?php echo isset($this->text) ? h($this->text) : 'Logged in as #name# [#username#].'; ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Text Align</span>
@@ -41,16 +41,16 @@ defined('P_RUN') or die('Direct access prohibited');
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Margin (Pixels)</span>
-		<label class="pf-field" style="white-space: nowrap;">Top: <input type="number" name="margin_top" size="5" value="<?php echo isset($this->margin_top) ? htmlspecialchars($this->margin_top) : '0'; ?>" /></label>
-		<label class="pf-field" style="white-space: nowrap;">Right: <input type="number" name="margin_right" size="5" value="<?php echo isset($this->margin_right) ? htmlspecialchars($this->margin_right) : '0'; ?>" /></label>
-		<label class="pf-field" style="white-space: nowrap;">Bottom: <input type="number" name="margin_bottom" size="5" value="<?php echo isset($this->margin_bottom) ? htmlspecialchars($this->margin_bottom) : '0'; ?>" /></label>
-		<label class="pf-field" style="white-space: nowrap;">Left: <input type="number" name="margin_left" size="5" value="<?php echo isset($this->margin_left) ? htmlspecialchars($this->margin_left) : '0'; ?>" /></label>
+		<label class="pf-field" style="white-space: nowrap;">Top: <input type="number" name="margin_top" size="5" value="<?php echo isset($this->margin_top) ? h($this->margin_top) : '0'; ?>" /></label>
+		<label class="pf-field" style="white-space: nowrap;">Right: <input type="number" name="margin_right" size="5" value="<?php echo isset($this->margin_right) ? h($this->margin_right) : '0'; ?>" /></label>
+		<label class="pf-field" style="white-space: nowrap;">Bottom: <input type="number" name="margin_bottom" size="5" value="<?php echo isset($this->margin_bottom) ? h($this->margin_bottom) : '0'; ?>" /></label>
+		<label class="pf-field" style="white-space: nowrap;">Left: <input type="number" name="margin_left" size="5" value="<?php echo isset($this->margin_left) ? h($this->margin_left) : '0'; ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Padding (Pixels)</span>
-		<label class="pf-field" style="white-space: nowrap;">Top: <input type="number" name="padding_top" size="5" value="<?php echo isset($this->padding_top) ? htmlspecialchars($this->padding_top) : '0'; ?>" /></label>
-		<label class="pf-field" style="white-space: nowrap;">Right: <input type="number" name="padding_right" size="5" value="<?php echo isset($this->padding_right) ? htmlspecialchars($this->padding_right) : '0'; ?>" /></label>
-		<label class="pf-field" style="white-space: nowrap;">Bottom: <input type="number" name="padding_bottom" size="5" value="<?php echo isset($this->padding_bottom) ? htmlspecialchars($this->padding_bottom) : '0'; ?>" /></label>
-		<label class="pf-field" style="white-space: nowrap;">Left: <input type="number" name="padding_left" size="5" value="<?php echo isset($this->padding_left) ? htmlspecialchars($this->padding_left) : '0'; ?>" /></label>
+		<label class="pf-field" style="white-space: nowrap;">Top: <input type="number" name="padding_top" size="5" value="<?php echo isset($this->padding_top) ? h($this->padding_top) : '0'; ?>" /></label>
+		<label class="pf-field" style="white-space: nowrap;">Right: <input type="number" name="padding_right" size="5" value="<?php echo isset($this->padding_right) ? h($this->padding_right) : '0'; ?>" /></label>
+		<label class="pf-field" style="white-space: nowrap;">Bottom: <input type="number" name="padding_bottom" size="5" value="<?php echo isset($this->padding_bottom) ? h($this->padding_bottom) : '0'; ?>" /></label>
+		<label class="pf-field" style="white-space: nowrap;">Left: <input type="number" name="padding_left" size="5" value="<?php echo isset($this->padding_left) ? h($this->padding_left) : '0'; ?>" /></label>
 	</div>
 </div>

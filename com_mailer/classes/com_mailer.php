@@ -468,52 +468,52 @@ class com_mailer extends component {
 					$cur_field = str_replace($cur_string['search'], $cur_string['replace'], $cur_field);
 			}
 			if (strpos($cur_field, '#subject#') !== false)
-				$cur_field = str_replace('#subject#', htmlspecialchars($body['subject']), $cur_field);
+				$cur_field = str_replace('#subject#', h($body['subject']), $cur_field);
 			// Links
 			if (strpos($cur_field, '#site_link#') !== false)
-				$cur_field = str_replace('#site_link#', htmlspecialchars($pines->config->full_location), $cur_field);
+				$cur_field = str_replace('#site_link#', h($pines->config->full_location), $cur_field);
 			if (strpos($cur_field, '#unsubscribe_link#') !== false)
-				$cur_field = str_replace('#unsubscribe_link#', htmlspecialchars($unsubscribe_url), $cur_field);
+				$cur_field = str_replace('#unsubscribe_link#', h($unsubscribe_url), $cur_field);
 			// Recipient
 			if (strpos($cur_field, '#to_username#') !== false)
-				$cur_field = str_replace('#to_username#', htmlspecialchars($recipient->username ? $recipient->username : $recipient->groupname), $cur_field);
+				$cur_field = str_replace('#to_username#', h($recipient->username ? $recipient->username : $recipient->groupname), $cur_field);
 			if (strpos($cur_field, '#to_name#') !== false)
-				$cur_field = str_replace('#to_name#', htmlspecialchars($recipient->name), $cur_field);
+				$cur_field = str_replace('#to_name#', h($recipient->name), $cur_field);
 			if (strpos($cur_field, '#to_first_name#') !== false)
-				$cur_field = str_replace('#to_first_name#', htmlspecialchars($recipient->name_first), $cur_field);
+				$cur_field = str_replace('#to_first_name#', h($recipient->name_first), $cur_field);
 			if (strpos($cur_field, '#to_last_name#') !== false)
-				$cur_field = str_replace('#to_last_name#', htmlspecialchars($recipient->name_last), $cur_field);
+				$cur_field = str_replace('#to_last_name#', h($recipient->name_last), $cur_field);
 			if (strpos($cur_field, '#to_email#') !== false)
-				$cur_field = str_replace('#to_email#', htmlspecialchars($recipient->email), $cur_field);
+				$cur_field = str_replace('#to_email#', h($recipient->email), $cur_field);
 			// Current User
 			if (strpos($cur_field, '#username#') !== false)
-				$cur_field = str_replace('#username#', htmlspecialchars($_SESSION['user']->username), $cur_field);
+				$cur_field = str_replace('#username#', h($_SESSION['user']->username), $cur_field);
 			if (strpos($cur_field, '#name#') !== false)
-				$cur_field = str_replace('#name#', htmlspecialchars($_SESSION['user']->name), $cur_field);
+				$cur_field = str_replace('#name#', h($_SESSION['user']->name), $cur_field);
 			if (strpos($cur_field, '#first_name#') !== false)
-				$cur_field = str_replace('#first_name#', htmlspecialchars($_SESSION['user']->name_first), $cur_field);
+				$cur_field = str_replace('#first_name#', h($_SESSION['user']->name_first), $cur_field);
 			if (strpos($cur_field, '#last_name#') !== false)
-				$cur_field = str_replace('#last_name#', htmlspecialchars($_SESSION['user']->name_last), $cur_field);
+				$cur_field = str_replace('#last_name#', h($_SESSION['user']->name_last), $cur_field);
 			if (strpos($cur_field, '#email#') !== false)
-				$cur_field = str_replace('#email#', htmlspecialchars($_SESSION['user']->email), $cur_field);
+				$cur_field = str_replace('#email#', h($_SESSION['user']->email), $cur_field);
 			// Date/Time
 			if (strpos($cur_field, '#date_short#') !== false)
-				$cur_field = str_replace('#date_short#', htmlspecialchars(format_date(time(), 'date_short')), $cur_field);
+				$cur_field = str_replace('#date_short#', h(format_date(time(), 'date_short')), $cur_field);
 			if (strpos($cur_field, '#date_med#') !== false)
-				$cur_field = str_replace('#date_med#', htmlspecialchars(format_date(time(), 'date_med')), $cur_field);
+				$cur_field = str_replace('#date_med#', h(format_date(time(), 'date_med')), $cur_field);
 			if (strpos($cur_field, '#date_long#') !== false)
-				$cur_field = str_replace('#date_long#', htmlspecialchars(format_date(time(), 'date_long')), $cur_field);
+				$cur_field = str_replace('#date_long#', h(format_date(time(), 'date_long')), $cur_field);
 			if (strpos($cur_field, '#time_short#') !== false)
-				$cur_field = str_replace('#time_short#', htmlspecialchars(format_date(time(), 'time_short')), $cur_field);
+				$cur_field = str_replace('#time_short#', h(format_date(time(), 'time_short')), $cur_field);
 			if (strpos($cur_field, '#time_med#') !== false)
-				$cur_field = str_replace('#time_med#', htmlspecialchars(format_date(time(), 'time_med')), $cur_field);
+				$cur_field = str_replace('#time_med#', h(format_date(time(), 'time_med')), $cur_field);
 			if (strpos($cur_field, '#time_long#') !== false)
-				$cur_field = str_replace('#time_long#', htmlspecialchars(format_date(time(), 'time_long')), $cur_field);
+				$cur_field = str_replace('#time_long#', h(format_date(time(), 'time_long')), $cur_field);
 			// System
 			if (strpos($cur_field, '#system_name#') !== false)
-				$cur_field = str_replace('#system_name#', htmlspecialchars($pines->config->system_name), $cur_field);
+				$cur_field = str_replace('#system_name#', h($pines->config->system_name), $cur_field);
 			if (strpos($cur_field, '#page_title#') !== false)
-				$cur_field = str_replace('#page_title#', htmlspecialchars($pines->config->page_title), $cur_field);
+				$cur_field = str_replace('#page_title#', h($pines->config->page_title), $cur_field);
 			// Definition Macros
 			foreach ($def['macros'] as $cur_name => $cur_desc) {
 				if (isset($macros[$cur_name]) && strpos($cur_field, "#$cur_name#") !== false)

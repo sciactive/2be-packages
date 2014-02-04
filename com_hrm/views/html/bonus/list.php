@@ -107,12 +107,12 @@ $pines->com_hrm->load_employee_select();
 	</thead>
 	<tbody>
 	<?php foreach($this->bonuses as $cur_bonus) { ?>
-		<tr title="<?php echo htmlspecialchars($cur_bonus->guid); ?>">
-			<td><?php echo htmlspecialchars(format_date($cur_bonus->date)); ?></td>
-			<td><?php echo htmlspecialchars($cur_bonus->name); ?></td>
-			<td><?php echo htmlspecialchars($cur_bonus->employee->guid.': '.$cur_bonus->employee->name); ?></td>
-			<td>$<?php echo htmlspecialchars(number_format($cur_bonus->amount, 2, '.', '')); ?></td>
-			<td><?php echo htmlspecialchars($cur_bonus->comments); ?></td>
+		<tr title="<?php e($cur_bonus->guid); ?>">
+			<td><?php e(format_date($cur_bonus->date)); ?></td>
+			<td><?php e($cur_bonus->name); ?></td>
+			<td><?php e($cur_bonus->employee->guid.': '.$cur_bonus->employee->name); ?></td>
+			<td>$<?php e(number_format($cur_bonus->amount, 2, '.', '')); ?></td>
+			<td><?php e($cur_bonus->comments); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>
@@ -129,7 +129,7 @@ $pines->com_hrm->load_employee_select();
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Date</span>
-				<input type="text" size="24" name="effective_date" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+				<input type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Amount</span>

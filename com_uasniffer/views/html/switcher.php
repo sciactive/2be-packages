@@ -41,16 +41,16 @@ $switched = ($_COOKIE['com_uasniffer_switch'] == 'true');
 			}
 			$("#p_muid_links").delegate("a", "click", function(){
 				var cookie = values();
-				document.cookie = 'com_uasniffer_switch='+cookie[0]+'; expires='+cookie[1]+'; path=<?php echo htmlspecialchars($pines->config->rela_location); ?>';
+				document.cookie = 'com_uasniffer_switch='+cookie[0]+'; expires='+cookie[1]+'; path=<?php e($pines->config->rela_location); ?>';
 				location.reload(true);
 			});
 		});
 	</script>
 	<?php if ($this->show_both || !($is_mobile xor $switched)) { ?>
-	<a href="javascript:void(0);"><?php echo htmlspecialchars($this->mobile_text); ?></a>
+	<a href="javascript:void(0);"><?php e($this->mobile_text); ?></a>
 	<?php } if ($this->show_both) { ?>
 	|
 	<?php } if ($this->show_both || ($is_mobile xor $switched)) { ?>
-	<a href="javascript:void(0);"><?php echo htmlspecialchars($this->desktop_text); ?></a>
+	<a href="javascript:void(0);"><?php e($this->desktop_text); ?></a>
 	<?php } ?>
 </div>

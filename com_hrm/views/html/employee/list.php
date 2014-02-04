@@ -356,13 +356,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->employees as $employee) { ?>
-		<tr title="<?php echo htmlspecialchars($employee->guid); ?>">
-			<td><?php echo htmlspecialchars($employee->guid); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($employee->guid); ?>" data-entity-context="com_hrm_employee"><?php echo htmlspecialchars($employee->username); ?></a></td>
-			<td><?php echo htmlspecialchars($employee->name); ?></td>
-			<td><?php echo htmlspecialchars($employee->nickname); ?></td>
-			<td><?php echo htmlspecialchars($employee->email); ?></td>
-			<td><?php echo empty($employee->hire_date) ? '' : htmlspecialchars(format_date($employee->hire_date, 'date_sort')); ?></td>
+		<tr title="<?php e($employee->guid); ?>">
+			<td><?php e($employee->guid); ?></td>
+			<td><a data-entity="<?php e($employee->guid); ?>" data-entity-context="com_hrm_employee"><?php e($employee->username); ?></a></td>
+			<td><?php e($employee->name); ?></td>
+			<td><?php e($employee->nickname); ?></td>
+			<td><?php e($employee->email); ?></td>
+			<td><?php echo empty($employee->hire_date) ? '' : h(format_date($employee->hire_date, 'date_sort')); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>
@@ -377,7 +377,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Date</span>
-				<input type="text" size="24" name="effective_date" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+				<input type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Amount</span>
@@ -400,7 +400,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Date</span>
-				<input type="text" size="24" name="effective_date" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+				<input type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Amount</span>
@@ -422,14 +422,14 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				<select name="issue_type">
 					<?php
 						foreach ($pines->com_hrm->get_issue_types() as $cur_issue) {
-							echo '<option value="'.htmlspecialchars($cur_issue->guid).'">'.htmlspecialchars($cur_issue->name).'</option>';
+							echo '<option value="'.h($cur_issue->guid).'">'.h($cur_issue->name).'</option>';
 						}
 					?>
 				</select></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Occurred on</span>
-				<input type="text" size="24" name="effective_date" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+				<input type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label"># of Occurrences</span>
@@ -458,14 +458,14 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				<?php 
 					foreach ($pines->config->com_hrm->termination_reasons as $cur_dispo) {
 						$dispo_array = explode(':', $cur_dispo);
-						echo '<option value="'.htmlspecialchars($dispo_array[0]).'">'.htmlspecialchars($dispo_array[1]).'</option>';
+						echo '<option value="'.h($dispo_array[0]).'">'.h($dispo_array[1]).'</option>';
 					}
 				?>
 			</select></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Effective Date</span>
-			<input type="text" size="16" name="effective_date" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+			<input type="text" size="16" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 	</form>
 	<br />
@@ -476,7 +476,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element pf-heading dialog_title"></div>
 		<div class="pf-element">
 			<label><span class="pf-label">Effective Date</span>
-			<input type="text" size="16" name="effective_date" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+			<input type="text" size="16" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 	</form>
 	<br />

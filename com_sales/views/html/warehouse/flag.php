@@ -14,8 +14,8 @@ $this->title = 'Flag Warehouse Items';
 $pines->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.css");
-	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.js");
+	pines.loadcss("<?php e($pines->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.css");
+	pines.loadjs("<?php e($pines->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.js");
 	pines(function(){
 		var bgcolor_picker = $.farbtastic("#p_muid_bgcolor_picker", "#p_muid_bgcolor_input");
 		var textcolor_picker = $.farbtastic("#p_muid_textcolor_picker", "#p_muid_textcolor_input");
@@ -73,17 +73,17 @@ $pines->com_pgrid->load();
 		});
 	});
 </script>
-<form class="pf-form" id="p_muid_form" method="post" action="<?php echo htmlspecialchars(pines_url('com_sales', 'warehouse/flagsave')); ?>">
+<form class="pf-form" id="p_muid_form" method="post" action="<?php e(pines_url('com_sales', 'warehouse/flagsave')); ?>">
 	<div class="pf-element pf-heading">
 		<p>You're about to flag the following items:</p>
 	</div>
 	<?php foreach ($this->items as $cur_item) { ?>
 	<div class="pf-element">
-		<span class="pf-label">From <a data-entity="<?php echo htmlspecialchars($cur_item['sale']->guid); ?>" data-entity-context="com_sales_sale">Sale <?php echo htmlspecialchars($cur_item['sale']->id); ?></a></span>
+		<span class="pf-label">From <a data-entity="<?php e($cur_item['sale']->guid); ?>" data-entity-context="com_sales_sale">Sale <?php e($cur_item['sale']->id); ?></a></span>
 		<div class="pf-group">
 			<?php foreach ($cur_item['products'] as $cur_product) { ?>
 			<div class="pf-field">
-				<strong><a data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars("{$cur_product['entity']->name} [{$cur_product['entity']->sku}]"); ?></a></strong>
+				<strong><a data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e("{$cur_product['entity']->name} [{$cur_product['entity']->sku}]"); ?></a></strong>
 				<em>x <?php echo (int) $cur_product['quantity']; ?></em>
 			</div>
 			<?php } ?>
@@ -149,13 +149,13 @@ $pines->com_pgrid->load();
 		<label><span class="pf-label">Comments</span>
 			<span class="pf-group pf-full-width">
 				<span class="pf-field" style="display: block;">
-					<textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php echo htmlspecialchars($this->comments); ?></textarea>
+					<textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php e($this->comments); ?></textarea>
 				</span>
 			</span></label>
 	</div>
 	<div class="pf-element pf-buttons">
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->id); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->id); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
 	</div>
 </form>

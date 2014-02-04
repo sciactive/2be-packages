@@ -99,14 +99,14 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->rankings as $cur_ranking) { ?>
-		<tr title="<?php echo htmlspecialchars($cur_ranking->guid); ?>">
-			<td><?php echo htmlspecialchars($cur_ranking->guid); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($cur_ranking->guid); ?>" data-entity-context="com_reports_sales_ranking"><?php echo htmlspecialchars($cur_ranking->name); ?></a></td>
-			<td><?php echo htmlspecialchars(format_date($cur_ranking->start_date, 'date_sort')); ?></td>
-			<td><?php echo htmlspecialchars(format_date($cur_ranking->end_date - 1, 'date_sort')); ?></td>
+		<tr title="<?php e($cur_ranking->guid); ?>">
+			<td><?php e($cur_ranking->guid); ?></td>
+			<td><a data-entity="<?php e($cur_ranking->guid); ?>" data-entity-context="com_reports_sales_ranking"><?php e($cur_ranking->name); ?></a></td>
+			<td><?php e(format_date($cur_ranking->start_date, 'date_sort')); ?></td>
+			<td><?php e(format_date($cur_ranking->end_date - 1, 'date_sort')); ?></td>
 			<td><?php echo $cur_ranking->final ? 'Yes' : 'No'; ?></td>
-			<td><?php echo htmlspecialchars($cur_ranking->top_location->name); ?></td>
-			<td><?php echo htmlspecialchars($cur_ranking->user->name); ?></td>
+			<td><?php e($cur_ranking->top_location->name); ?></td>
+			<td><?php e($cur_ranking->user->name); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

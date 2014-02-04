@@ -20,7 +20,7 @@ if (!isset($entity->guid)) {
 	return;
 }
 if (isset($_REQUEST['history_note'])){
-	$entity->history[] = array('date' => time(), 'note' => htmlspecialchars($_REQUEST['history_note']), 'user' => $_SESSION['user']);
+	$entity->history[] = array('date' => time(), 'note' => h($_REQUEST['history_note']), 'user' => $_SESSION['user']);
 	$entity->save();
 }
 $entity->history();

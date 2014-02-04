@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Shipment' : 'Editing ['.htmlspecialchars($this->entity->id).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Shipment' : 'Editing ['.h($this->entity->id).']';
 $this->note = 'Provide shipment details in this form.';
 
 if ($this->entity->ref->has_tag('sale'))
@@ -34,7 +34,7 @@ else
 		float: right;
 	}
 </style>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'shipment/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'shipment/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			var packing_list = $("#p_muid_packing_list");
@@ -93,12 +93,12 @@ else
 		<span class="pf-label">Shipping Address</span>
 		<div class="pf-group">
 			<div class="pf-field">
-				<strong><?php echo htmlspecialchars($this->entity->shipping_address->name); ?></strong><br />
+				<strong><?php e($this->entity->shipping_address->name); ?></strong><br />
 				<?php if ($this->entity->shipping_address->address_type == 'us') { if (!empty($this->entity->shipping_address->address_1)) { ?>
-				<?php echo htmlspecialchars($this->entity->shipping_address->address_1.' '.$this->entity->shipping_address->address_2); ?><br />
-				<?php echo htmlspecialchars($this->entity->shipping_address->city); ?>, <?php echo htmlspecialchars($this->entity->shipping_address->state); ?> <?php echo htmlspecialchars($this->entity->shipping_address->zip); ?>
+				<?php e($this->entity->shipping_address->address_1.' '.$this->entity->shipping_address->address_2); ?><br />
+				<?php e($this->entity->shipping_address->city); ?>, <?php e($this->entity->shipping_address->state); ?> <?php e($this->entity->shipping_address->zip); ?>
 				<?php } } else { ?>
-				<?php echo str_replace("\n", '<br />', htmlspecialchars($this->entity->shipping_address->address_international)); ?>
+				<?php echo str_replace("\n", '<br />', h($this->entity->shipping_address->address_international)); ?>
 				<?php } ?>
 			</div>
 		</div>
@@ -108,7 +108,7 @@ else
 			<select class="pf-field" name="shipper">
 				<option value="null">-- None --</option>
 				<?php foreach ($this->shippers as $cur_shipper) { ?>
-				<option value="<?php echo htmlspecialchars($cur_shipper->guid); ?>"<?php echo $this->entity->shipper->guid == $cur_shipper->guid ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_shipper->name); ?></option>
+				<option value="<?php e($cur_shipper->guid); ?>"<?php echo $this->entity->shipper->guid == $cur_shipper->guid ? ' selected="selected"' : ''; ?>><?php e($cur_shipper->name); ?></option>
 				<?php } ?>
 			</select></label>
 	</div>
@@ -123,48 +123,48 @@ else
 			});
 		</script>
 		<label><span class="pf-label">ETA</span>
-			<input class="pf-field" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? htmlspecialchars(format_date($this->entity->eta, 'date_sort')) : ''); ?>" /></label>
+			<input class="pf-field" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? h(format_date($this->entity->eta, 'date_sort')) : ''); ?>" /></label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<label><span class="pf-label">Tracking Number(s)</span>
 			<span class="pf-note">One per line.</span>
 			<span class="pf-group pf-full-width">
 				<span class="pf-field" style="display: block;">
-					<textarea style="width: 100%;" rows="3" cols="35" name="tracking_numbers"><?php echo isset($this->entity->tracking_numbers) ? htmlspecialchars(implode("\n", $this->entity->tracking_numbers)) : ''; ?></textarea>
+					<textarea style="width: 100%;" rows="3" cols="35" name="tracking_numbers"><?php echo isset($this->entity->tracking_numbers) ? h(implode("\n", $this->entity->tracking_numbers)) : ''; ?></textarea>
 				</span>
 			</span></label>
 	</div>
 	<div class="pf-element pf-heading">
-		<h3>New Packing List - <a data-entity="<?php echo htmlspecialchars($this->entity->ref->guid); ?>" data-entity-context="<?php echo htmlspecialchars($ref_class); ?>"><?php echo htmlspecialchars($this->entity->ref->info('name')); ?></a></h3>
+		<h3>New Packing List - <a data-entity="<?php e($this->entity->ref->guid); ?>" data-entity-context="<?php e($ref_class); ?>"><?php e($this->entity->ref->info('name')); ?></a></h3>
 		<?php if (!empty($this->entity->ref->comments)) { ?>
 		<p>
 			<a href="javascript:void(0);" onclick="$(this).parent().next().slideToggle(); return false;">Comments</a>
 		</p>
 		<p style="display: none;">
-			<small><?php echo str_replace("\n", '<br />', htmlspecialchars($this->entity->ref->comments)); ?></small>
+			<small><?php echo str_replace("\n", '<br />', h($this->entity->ref->comments)); ?></small>
 		</p>
 		<?php } ?>
 	</div>
 	<div id="p_muid_packing_list">
 		<?php foreach ($this->entity->products as $key => $cur_product) { ?>
 		<div class="pf-element product">
-			<div class="key" style="display: none"><?php echo htmlspecialchars($key); ?></div>
-			<span class="pf-label"><a data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_product['entity']->name); ?></a> [SKU: <?php echo htmlspecialchars($cur_product['entity']->sku); ?>]</span>
-			<span class="pf-note">x <span class="ship_quantity"><?php echo htmlspecialchars(count($cur_product['stock_entities'])); ?></span></span>
+			<div class="key" style="display: none"><?php e($key); ?></div>
+			<span class="pf-label"><a data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_product['entity']->name); ?></a> [SKU: <?php e($cur_product['entity']->sku); ?>]</span>
+			<span class="pf-note">x <span class="ship_quantity"><?php e(count($cur_product['stock_entities'])); ?></span></span>
 			<div class="pf-group">
 				<div class="pf-field">
 					<?php if (!empty($cur_product['entity']->receipt_description)) { ?>
-					<div><?php echo htmlspecialchars($cur_product['entity']->receipt_description); ?></div>
+					<div><?php e($cur_product['entity']->receipt_description); ?></div>
 					<?php } ?>
 					<div style="font-size: .9em;">Itemized Breakdown:</div>
 					<?php foreach ($cur_product['stock_entities'] as $stock_key => $cur_stock) { ?>
 					<div class="well item_box">
-						<div class="guid" style="display: none"><?php echo htmlspecialchars($cur_stock->guid); ?></div>
+						<div class="guid" style="display: none"><?php e($cur_stock->guid); ?></div>
 						<button type="button" class="btn btn-mini number_box">#<?php echo (int) ($stock_key+1); ?></button>
-						<div>Stock Entry: <a data-entity="<?php echo htmlspecialchars($cur_stock->guid); ?>" data-entity-context="com_sales_stock"><?php echo htmlspecialchars($cur_stock->guid); ?></a></div>
-						<div>Shipped From: <a data-entity="<?php echo htmlspecialchars($cur_stock->location->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($cur_stock->location->name); ?></a></div>
+						<div>Stock Entry: <a data-entity="<?php e($cur_stock->guid); ?>" data-entity-context="com_sales_stock"><?php e($cur_stock->guid); ?></a></div>
+						<div>Shipped From: <a data-entity="<?php e($cur_stock->location->guid); ?>" data-entity-context="group"><?php e($cur_stock->location->name); ?></a></div>
 						<?php if ($cur_product['entity']->serialized) { ?>
-						<div>Serial: <?php echo htmlspecialchars($cur_stock->serial); ?></div>
+						<div>Serial: <?php e($cur_stock->serial); ?></div>
 						<?php } ?>
 					</div>
 					<?php } ?>
@@ -178,17 +178,17 @@ else
 		<label><span class="pf-label">Notes</span>
 			<span class="pf-group pf-full-width">
 				<span class="pf-field" style="display: block;">
-					<textarea style="width: 100%;" rows="3" cols="35" name="notes"><?php echo htmlspecialchars($this->entity->notes); ?></textarea>
+					<textarea style="width: 100%;" rows="3" cols="35" name="notes"><?php e($this->entity->notes); ?></textarea>
 				</span>
 			</span></label>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } else { ?>
-		<input type="hidden" name="ref_id" value="<?php echo htmlspecialchars($this->entity->ref->guid); ?>" />
+		<input type="hidden" name="ref_id" value="<?php e($this->entity->ref->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'shipment/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'shipment/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

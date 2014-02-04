@@ -348,7 +348,7 @@ if ($pines->config->com_calendar->com_customer)
 				if (data == "")
 					return;
 				pines.pause();
-				var form = $("<div title=\"Quick Schedule for <?php echo htmlspecialchars($this->location->name); ?>\"></div>").html(data+"<br />").dialog({
+				var form = $("<div title=\"Quick Schedule for <?php e($this->location->name); ?>\"></div>").html(data+"<br />").dialog({
 					bgiframe: true,
 					autoOpen: true,
 					modal: true,
@@ -386,7 +386,7 @@ if ($pines->config->com_calendar->com_customer)
 				if (data == "")
 					return;
 				pines.pause();
-				var form = $("<div title=\"Schedule Work for <?php echo htmlspecialchars($this->employee->name); ?>\"></div>").html(data+"<br />").dialog({
+				var form = $("<div title=\"Schedule Work for <?php e($this->employee->name); ?>\"></div>").html(data+"<br />").dialog({
 					bgiframe: true,
 					autoOpen: true,
 					modal: true,
@@ -606,7 +606,7 @@ if ($pines->config->com_calendar->com_customer)
 <?php } if (!$this->is_widget) { ?>
 <div>
 	<select id="p_muid_employee" name="employee" style="width: 100%;">
-		<option value="all"><?php echo htmlspecialchars($this->location->name); ?></option>
+		<option value="all"><?php e($this->location->name); ?></option>
 		<?php
 		// Load employees for this location.
 		foreach ($this->employees as $cur_employee) {
@@ -614,7 +614,7 @@ if ($pines->config->com_calendar->com_customer)
 				continue;
 			$cur_select = (isset($this->employee->group) && $this->employee->is($cur_employee)) ? 'selected="selected"' : '';
 			if ( $this->location->guid == $cur_employee->group->guid || ($this->descendants && $cur_employee->is_descendant($this->location)) )
-				echo '<option value="'.htmlspecialchars($cur_employee->guid).'" '.$cur_select.'>'.htmlspecialchars($cur_employee->name).'</option>';
+				echo '<option value="'.h($cur_employee->guid).'" '.$cur_select.'>'.h($cur_employee->name).'</option>';
 		} ?>
 	</select>
 </div>
@@ -681,29 +681,29 @@ if ($pines->config->com_calendar->com_customer)
 				<?php foreach ($this->employees as $cur_employee) {
 					$selected = $_SESSION['user']->is($cur_employee) ? ' selected="selected"' : '';
 					if ($cur_employee->in_group($this->location) || ($this->descendants && $cur_employee->is_descendant($this->location)))
-						echo '<option value="'.htmlspecialchars($cur_employee->guid).'"'.$selected.'>'.htmlspecialchars($cur_employee->name).'</option>"';
+						echo '<option value="'.h($cur_employee->guid).'"'.$selected.'>'.h($cur_employee->name).'</option>"';
 				} ?>
 			</select></label>
 		</div>
 		<?php } else { ?>
 		<div class="pf-element">
 			<label><span class="pf-label">Employee</span>
-				<?php echo htmlspecialchars($_SESSION['user']->name); ?></label>
+				<?php e($_SESSION['user']->name); ?></label>
 		</div>
-		<input type="hidden" name="employee" value="<?php echo htmlspecialchars($_SESSION['user']->guid); ?>" />
+		<input type="hidden" name="employee" value="<?php e($_SESSION['user']->guid); ?>" />
 		<?php } ?>
 		<div class="pf-element">
 			<label><span class="pf-label">Interaction Type</span>
 				<select name="interaction_type">
 					<?php foreach ($pines->config->com_customer->interaction_types as $cur_type) {
 						$cur_type = explode(':', $cur_type);
-						echo '<option value="'.htmlspecialchars($cur_type[1]).'">'.htmlspecialchars($cur_type[1]).'</option>';
+						echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
 					} ?>
 				</select></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Date</span>
-				<input type="text" size="22" name="interaction_date" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+				<input type="text" size="22" name="interaction_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element pf-full-width">
 			<span class="pf-label">Time</span>
@@ -739,7 +739,7 @@ if ($pines->config->com_calendar->com_customer)
 			</span>
 		</div>
 		<div class="pf-element">
-			<small>Using timezone: <?php echo htmlspecialchars($this->timezone); ?></small>
+			<small>Using timezone: <?php e($this->timezone); ?></small>
 		</div>
 		<div class="pf-element">
 			<label>

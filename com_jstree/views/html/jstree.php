@@ -12,10 +12,10 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_jstree/includes/<?php echo $pines->config->debug_mode ? 'jquery.jstree.js' : 'jquery.jstree.min.js'; ?>");
+	pines.loadjs("<?php e($pines->config->location); ?>components/com_jstree/includes/<?php echo $pines->config->debug_mode ? 'jquery.jstree.js' : 'jquery.jstree.min.js'; ?>");
 	pines(function(){
 		$.jstree.defaults.core.animation = 100;
-		$.jstree._themes = "<?php echo htmlspecialchars($pines->config->location); ?>components/com_jstree/includes/themes/";
+		$.jstree._themes = "<?php e($pines->config->location); ?>components/com_jstree/includes/themes/";
 		<?php if ($pines->depend->check('component', 'com_uasniffer') && $pines->depend->check('browser', 'mobile')) { ?>
 		$.jstree.defaults.themes.theme = "mobile";
 		<?php } else { ?>

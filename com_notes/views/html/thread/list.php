@@ -79,18 +79,18 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			if (class_exists($guess))
 				$context = $guess;
 		} ?>
-		<tr title="<?php echo htmlspecialchars($thread->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($thread->guid); ?>" data-entity-context="com_notes_thread"><?php echo htmlspecialchars($thread->guid); ?></a></td>
-			<td><?php echo htmlspecialchars(format_date($thread->p_mdate)); ?></td>
-			<td><?php echo htmlspecialchars(format_date($thread->p_cdate)); ?></td>
-			<td><?php echo isset($thread->entities[0]->guid) ? '<a data-entity="'.htmlspecialchars($thread->entities[0]->guid).'" data-entity-context="'.htmlspecialchars($context).'">'.htmlspecialchars($thread->entities[0]->info('name')).'</a>' : ''; ?></td>
+		<tr title="<?php e($thread->guid); ?>">
+			<td><a data-entity="<?php e($thread->guid); ?>" data-entity-context="com_notes_thread"><?php e($thread->guid); ?></a></td>
+			<td><?php e(format_date($thread->p_mdate)); ?></td>
+			<td><?php e(format_date($thread->p_cdate)); ?></td>
+			<td><?php echo isset($thread->entities[0]->guid) ? '<a data-entity="'.h($thread->entities[0]->guid).'" data-entity-context="'.h($context).'">'.h($thread->entities[0]->info('name')).'</a>' : ''; ?></td>
 			<td><?php echo ($thread->hidden ? 'Yes' : 'No'); ?></td>
 			<td><?php echo ($thread->ac->other ? 'everyone' : ($thread->ac->group ? 'my-group' : 'only-me')); ?></td>
-			<td><?php echo htmlspecialchars(count($thread->notes)); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($thread->user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($thread->user->info('name')); ?></a></td>
-			<td><?php $first_note = reset($thread->notes); echo htmlspecialchars(strlen($first_note['text']) > 100 ? substr($first_note['text'], 0, 100).'...' : $first_note['text']); ?></td>
-			<td><?php $last_note = end($thread->notes); ?><a data-entity="<?php echo htmlspecialchars($last_note['user']->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($last_note['user']->info('name')); ?></a></td>
-			<td><?php echo htmlspecialchars(strlen($last_note['text']) > 100 ? substr($last_note['text'], 0, 100).'...' : $last_note['text']); ?></td>
+			<td><?php e(count($thread->notes)); ?></td>
+			<td><a data-entity="<?php e($thread->user->guid); ?>" data-entity-context="user"><?php e($thread->user->info('name')); ?></a></td>
+			<td><?php $first_note = reset($thread->notes); e(strlen($first_note['text']) > 100 ? substr($first_note['text'], 0, 100).'...' : $first_note['text']); ?></td>
+			<td><?php $last_note = end($thread->notes); ?><a data-entity="<?php e($last_note['user']->guid); ?>" data-entity-context="user"><?php e($last_note['user']->info('name')); ?></a></td>
+			<td><?php e(strlen($last_note['text']) > 100 ? substr($last_note['text'], 0, 100).'...' : $last_note['text']); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

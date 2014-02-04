@@ -78,22 +78,22 @@ $this->title = 'Component Configuration';
 				<option value="null">-- Pick a User/Group --</option>
 				<optgroup label="Groups">
 					<?php foreach ($this->groups as $cur_group) { ?>
-					<option value="<?php echo htmlspecialchars($cur_group->guid); ?>group"<?php echo $cur_group->is($this->user) ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars("$cur_group->name [$cur_group->groupname]"); ?></option>
+					<option value="<?php e($cur_group->guid); ?>group"<?php echo $cur_group->is($this->user) ? ' selected="selected"' : ''; ?>><?php e("$cur_group->name [$cur_group->groupname]"); ?></option>
 					<?php } ?>
 				</optgroup>
 				<optgroup label="Users">
 					<?php foreach ($this->users as $cur_user) { ?>
-					<option value="<?php echo htmlspecialchars($cur_user->guid); ?>user"<?php echo $cur_user->is($this->user) ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars("$cur_user->name [$cur_user->username]"); ?></option>
+					<option value="<?php e($cur_user->guid); ?>user"<?php echo $cur_user->is($this->user) ? ' selected="selected"' : ''; ?>><?php e("$cur_user->name [$cur_user->username]"); ?></option>
 					<?php } ?>
 				</optgroup>
 			</select>
-			<button class="btn" type="button" onclick="pines.com_configure_go(<?php echo htmlspecialchars(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
+			<button class="btn" type="button" onclick="pines.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
 		</div>
 		<?php if (!$pines->config->com_configure->peruser) { ?>
 		<p>
 			Per user/group configuration is not enabled, so these settings will have
 			no effect. You can enable per user/group configuration
-			<a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'com_configure'))); ?>">here</a>.
+			<a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_configure'))); ?>">here</a>.
 		</p>
 		<?php } ?>
 	</div>
@@ -105,25 +105,25 @@ $this->title = 'Component Configuration';
 				<select id="p_muid_user_select" name="user_select" style="float: left;">
 					<option value="null">-- Pick a Condition --</option>
 					<?php foreach ($this->conditions as $cur_condition) { ?>
-					<option value="<?php echo htmlspecialchars($cur_condition->guid); ?>"<?php echo $cur_condition->is($this->user) ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_condition->name); ?></option>
+					<option value="<?php e($cur_condition->guid); ?>"<?php echo $cur_condition->is($this->user) ? ' selected="selected"' : ''; ?>><?php e($cur_condition->name); ?></option>
 					<?php } ?>
 				</select>
 			</div>
 			<div class="btn-group">
-				<button class="btn" type="button" onclick="pines.com_configure_go(<?php echo htmlspecialchars(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
+				<button class="btn" type="button" onclick="pines.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
 			</div>
 			&nbsp;&nbsp;&nbsp;
 			<div class="btn-group">
-				<button class="btn btn-success" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_configure', 'condition/edit'))); ?>)">New</button>
-				<button class="btn" type="button" onclick="pines.com_configure_go(<?php echo htmlspecialchars(json_encode(pines_url('com_configure', 'condition/edit'))); ?>)">Edit</button>
-				<button class="btn btn-danger" type="button" onclick="pines.com_configure_go(<?php echo htmlspecialchars(json_encode(pines_url('com_configure', 'condition/delete'))); ?>)">Delete</button>
+				<button class="btn btn-success" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_configure', 'condition/edit'))); ?>)">New</button>
+				<button class="btn" type="button" onclick="pines.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'condition/edit'))); ?>)">Edit</button>
+				<button class="btn btn-danger" type="button" onclick="pines.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'condition/delete'))); ?>)">Delete</button>
 			</div>
 		</div>
 		<?php if (!$pines->config->com_configure->percondition) { ?>
 		<p>
 			Per condition configuration is not enabled, so these settings will have
 			no effect. You can enable per condition configuration
-			<a href="<?php echo htmlspecialchars(pines_url('com_configure', 'edit', array('component' => 'com_configure'))); ?>">here</a>.
+			<a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_configure'))); ?>">here</a>.
 		</p>
 		<?php } ?>
 	</div>
@@ -147,10 +147,10 @@ $this->title = 'Component Configuration';
 		<div class="accordion-group">
 			<a class="accordion-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_components" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
 				<big class="accordion-toggle">
-					<span class="title"><?php echo htmlspecialchars($cur_component->info->name); ?></span>
+					<span class="title"><?php e($cur_component->info->name); ?></span>
 					<?php echo $cur_component->config ? ' <span class="label label-info">Modified</span>' : ''; echo $cur_component->is_disabled() ? ' <span class="label label-important">Disabled</span>' : ''; ?>
 					<span class="version">
-						<span class="version-text"><?php echo htmlspecialchars($cur_component->name); ?> <?php echo htmlspecialchars($cur_component->info->version); ?></span>
+						<span class="version-text"><?php e($cur_component->name); ?> <?php e($cur_component->info->version); ?></span>
 					</span>
 				</big>
 			</a>
@@ -158,23 +158,23 @@ $this->title = 'Component Configuration';
 				<div class="accordion-inner clearfix">
 					<div class="buttons btn-group">
 						<?php if ($cur_component->is_configurable()) { ?>
-						<input class="btn" type="button" onclick="pines.com_configure_go(<?php echo htmlspecialchars(json_encode(pines_url('com_configure', 'edit', array('component' => $cur_component->name)))); ?>);" value="Configure" />
-						<input class="btn" type="button" onclick="pines.com_configure_go(<?php echo htmlspecialchars(json_encode(pines_url('com_configure', 'view', array('component' => $cur_component->name)))); ?>);" value="View Config" />
+						<input class="btn" type="button" onclick="pines.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'edit', array('component' => $cur_component->name)))); ?>);" value="Configure" />
+						<input class="btn" type="button" onclick="pines.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'view', array('component' => $cur_component->name)))); ?>);" value="View Config" />
 						<?php } if (!$this->per_user && !$this->per_condition) {
 							if ($cur_component->name != 'system') { if ($cur_component->is_disabled()) { ?>
-							<input class="btn btn-success" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_configure', 'enable', array('component' => $cur_component->name)))); ?>);" value="Enable" />
+							<input class="btn btn-success" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_configure', 'enable', array('component' => $cur_component->name)))); ?>);" value="Enable" />
 							<?php } else { ?>
-							<input class="btn btn-danger" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_configure', 'disable', array('component' => $cur_component->name)))); ?>);" value="Disable" />
+							<input class="btn btn-danger" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_configure', 'disable', array('component' => $cur_component->name)))); ?>);" value="Disable" />
 							<?php } }
 						} ?>
 					</div>
-					<div class="short_description"><?php echo htmlspecialchars($cur_component->info->short_description); ?></div>
+					<div class="short_description"><?php e($cur_component->info->short_description); ?></div>
 					<?php if (is_array($cur_component->info->services)) { ?>
-					<div class="service">This component provides <?php echo (count($cur_component->info->services) == 1) ? 'a service' : 'services'; ?>: <?php echo htmlspecialchars(implode(', ', $cur_component->info->services)); ?></div>
+					<div class="service">This component provides <?php echo (count($cur_component->info->services) == 1) ? 'a service' : 'services'; ?>: <?php e(implode(', ', $cur_component->info->services)); ?></div>
 					<?php } ?>
-					<div class="license">License: <?php echo (substr($cur_component->info->license, 0, 4) == 'http') ? '<a href="'.htmlspecialchars($cur_component->info->license).'" target="_blank">'.htmlspecialchars($cur_component->info->license).'</a>' : htmlspecialchars($cur_component->info->license); ?></div>
-					<div class="license">Website: <?php echo (substr($cur_component->info->website, 0, 4) == 'http') ? '<a href="'.htmlspecialchars($cur_component->info->website).'" target="_blank">'.htmlspecialchars($cur_component->info->website).'</a>' : htmlspecialchars($cur_component->info->website); ?></div>
-					<div class="description"><?php echo str_replace("\n", '<br />', htmlspecialchars($cur_component->info->description)); ?></div>
+					<div class="license">License: <?php echo (substr($cur_component->info->license, 0, 4) == 'http') ? '<a href="'.h($cur_component->info->license).'" target="_blank">'.h($cur_component->info->license).'</a>' : h($cur_component->info->license); ?></div>
+					<div class="license">Website: <?php echo (substr($cur_component->info->website, 0, 4) == 'http') ? '<a href="'.h($cur_component->info->website).'" target="_blank">'.h($cur_component->info->website).'</a>' : h($cur_component->info->website); ?></div>
+					<div class="description"><?php echo str_replace("\n", '<br />', h($cur_component->info->description)); ?></div>
 				</div>
 			</div>
 		</div>

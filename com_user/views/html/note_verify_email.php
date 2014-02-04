@@ -14,7 +14,7 @@ $this->title = 'New User Registration';
 $this->note = 'The next step is to verify the email address you entered.';
 ?>
 <div>
-	An email has been sent to <?php echo htmlspecialchars($this->entity->email); ?> with a
+	An email has been sent to <?php e($this->entity->email); ?> with a
 	verification link.
 	<?php if ($pines->config->com_user->unconfirmed_access) { ?>
 	You will have limited access until you verify your email address by clicking

@@ -25,7 +25,7 @@ if ($pines->config->com_user->email_usernames)
 		}).change();
 	});
 </script>
-<form class="pf-form" id="p_muid_form" method="post" action="<?php echo htmlspecialchars(pines_url('com_user', 'recover')); ?>">
+<form class="pf-form" id="p_muid_form" method="post" action="<?php e(pines_url('com_user', 'recover')); ?>">
 	<?php if ($pines->config->com_user->email_usernames) { ?>
 	<input class="pf-field" type="hidden" name="type" value="password" />
 	<?php } else { ?>
@@ -48,6 +48,6 @@ if ($pines->config->com_user->email_usernames)
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -230,18 +230,18 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach ($this->plans as $plan) { ?>
-		<tr title="<?php echo htmlspecialchars($plan->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($plan->guid); ?>" data-entity-context="com_esp_plan">ESP<?php echo htmlspecialchars($plan->id); ?></a></td>
-			<td><?php echo htmlspecialchars($plan->card->product->name); ?></td>
-			<td><?php echo htmlspecialchars($plan->card->serial); ?></td>
-			<td><?php echo htmlspecialchars($plan->customer->name); ?></td>
-			<td><?php echo htmlspecialchars($plan->item->product->name); ?></td>
-			<td><?php echo htmlspecialchars($plan->item->serial); ?></td>
-			<td><?php echo htmlspecialchars(format_date($plan->expiration_date, 'date_sort')); ?></td>
-			<td><?php echo htmlspecialchars($plan->sale->id); ?></td>
-			<td><?php echo htmlspecialchars(format_date($plan->sale->tender_date, 'date_sort')); ?></td>
-			<td><?php echo htmlspecialchars(ucwords($plan->status)); ?></td>
-			<td><?php echo htmlspecialchars($plan->unique_id); ?></td>
+		<tr title="<?php e($plan->guid); ?>">
+			<td><a data-entity="<?php e($plan->guid); ?>" data-entity-context="com_esp_plan">ESP<?php e($plan->id); ?></a></td>
+			<td><?php e($plan->card->product->name); ?></td>
+			<td><?php e($plan->card->serial); ?></td>
+			<td><?php e($plan->customer->name); ?></td>
+			<td><?php e($plan->item->product->name); ?></td>
+			<td><?php e($plan->item->serial); ?></td>
+			<td><?php e(format_date($plan->expiration_date, 'date_sort')); ?></td>
+			<td><?php e($plan->sale->id); ?></td>
+			<td><?php e(format_date($plan->sale->tender_date, 'date_sort')); ?></td>
+			<td><?php e(ucwords($plan->status)); ?></td>
+			<td><?php e($plan->unique_id); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>
@@ -255,7 +255,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				<?php
 					foreach ($pines->config->com_esp->disposal_types as $cur_dispo) {
 						$dispo_array = explode(':', $cur_dispo);
-						echo '<option value="'.htmlspecialchars($dispo_array[0]).'">'.htmlspecialchars($dispo_array[1]).'</option>';
+						echo '<option value="'.h($dispo_array[0]).'">'.h($dispo_array[1]).'</option>';
 					}
 				?>
 			</select>
@@ -275,9 +275,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				$filter_array = explode(',', $this->show);
 				foreach ($pines->config->com_esp->disposal_types as $cur_dispo) {
 					$dispo_array = explode(':', $cur_dispo);
-					echo '<input class="pf-field inclusive" type="checkbox" name="'.htmlspecialchars($dispo_array[0]).'" value="'.htmlspecialchars($dispo_array[0]).'"';
+					echo '<input class="pf-field inclusive" type="checkbox" name="'.h($dispo_array[0]).'" value="'.h($dispo_array[0]).'"';
 					echo in_array($dispo_array[0], $filter_array) ? 'checked="checked">' : '>';
-					echo htmlspecialchars($dispo_array[1]) . '<br />';
+					e($dispo_array[1]) . '<br />';
 					$dispo_counter++;
 				}
 			?>

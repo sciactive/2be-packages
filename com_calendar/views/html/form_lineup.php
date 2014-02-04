@@ -32,7 +32,7 @@ defined('P_RUN') or die('Direct access prohibited');
 		$("#p_muid_lineup [name=shifts]").ptags();
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_lineup" action="<?php echo htmlspecialchars(pines_url('com_calendar', 'savelineup')); ?>">
+<form class="pf-form" method="post" id="p_muid_lineup" action="<?php e(pines_url('com_calendar', 'savelineup')); ?>">
 	<div class="pf-element">
 		<small>Dates and times are calculated using each employee's timezone.</small>
 	</div>
@@ -42,7 +42,7 @@ defined('P_RUN') or die('Direct access prohibited');
 			foreach ($this->employees as $cur_employee) {
 				if (!$cur_employee->in_group($this->location))
 					continue;
-				echo '<option value="'.htmlspecialchars($cur_employee->guid).'">'.htmlspecialchars($cur_employee->name).'</option>"';
+				echo '<option value="'.h($cur_employee->guid).'">'.h($cur_employee->name).'</option>"';
 			} ?>
 		</select>
 	</div>
@@ -52,14 +52,14 @@ defined('P_RUN') or die('Direct access prohibited');
 				$shift = explode('-', $cur_shift);
 				$shift_start = format_date(strtotime($shift[0]), 'time_short');
 				$shift_end = format_date(strtotime($shift[1]), 'time_short'); ?>
-				<option value="<?php echo htmlspecialchars($cur_shift); ?>"><?php echo htmlspecialchars($shift_start).' - '.htmlspecialchars($shift_end); ?></option>
+				<option value="<?php e($cur_shift); ?>"><?php e($shift_start).' - '.h($shift_end); ?></option>
 			<?php } ?>
 		</select>
 	</div>
 	<div class="pf-element pf-full-width">
 		<span id="p_muid_calendar"></span>
 	</div>
-	<input type="hidden" name="location" value="<?php echo htmlspecialchars($this->location->guid); ?>" />
+	<input type="hidden" name="location" value="<?php e($this->location->guid); ?>" />
 	<div class="pf-element pf-full-width">
 		<input type="hidden" name="shifts" value="" />
 	</div>

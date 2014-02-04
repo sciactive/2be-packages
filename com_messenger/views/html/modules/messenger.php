@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 if (!isset($this->widget_title))
 	$this->widget_title = 'Chat #name# [#username#]';
 if (!empty($this->widget_title))
-	$this->title = htmlspecialchars(str_replace(array('#name#', '#username#'), array($_SESSION['user']->name, $_SESSION['user']->username), $this->widget_title));
+	$this->title = h(str_replace(array('#name#', '#username#'), array($_SESSION['user']->name, $_SESSION['user']->username), $this->widget_title));
 
 if (!isset($this->interface))
 	$this->interface = 'inline';
@@ -60,10 +60,10 @@ if ($this->interface == 'floating') {
 			sound: <?php echo json_encode($this->sounds == 'true'); ?>,
 			sounds: {
 				<?php if ($this->presence_sounds == 'true') { ?>
-				offline: ["<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/offline.ogg", "<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/offline.mp3"],
-				online: ["<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/online.ogg", "<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/online.mp3"],
+				offline: ["<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/offline.ogg", "<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/offline.mp3"],
+				online: ["<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/online.ogg", "<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/online.mp3"],
 				<?php } ?>
-				received: ["<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/received.ogg", "<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/received.mp3"]
+				received: ["<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/received.ogg", "<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/sounds/received.mp3"]
 			},
 			<?php if ($this->status_url == 'true') { ?>
 			onconnect: function(){

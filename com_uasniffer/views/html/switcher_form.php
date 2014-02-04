@@ -14,11 +14,11 @@ defined('P_RUN') or die('Direct access prohibited');
 <div class="pf-form">
 	<div class="pf-element">
 		<label><span class="pf-label">Mobile Link Text</span>
-			<input class="pf-field" type="text" name="mobile_text" size="24" value="<?php echo isset($this->mobile_text) ? htmlspecialchars($this->mobile_text) : 'Mobile Version'; ?>" /></label>
+			<input class="pf-field" type="text" name="mobile_text" size="24" value="<?php echo isset($this->mobile_text) ? h($this->mobile_text) : 'Mobile Version'; ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Desktop Link Text</span>
-			<input class="pf-field" type="text" name="desktop_text" size="24" value="<?php echo isset($this->desktop_text) ? htmlspecialchars($this->desktop_text) : 'Desktop Version'; ?>" /></label>
+			<input class="pf-field" type="text" name="desktop_text" size="24" value="<?php echo isset($this->desktop_text) ? h($this->desktop_text) : 'Desktop Version'; ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Center Links</span>

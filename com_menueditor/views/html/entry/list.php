@@ -69,13 +69,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->entries as $entry) { ?>
-		<tr title="<?php echo htmlspecialchars($entry->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($entry->guid); ?>" data-entity-context="com_menueditor_entry"><?php echo htmlspecialchars($entry->name); ?></a></td>
-			<td><?php echo htmlspecialchars($entry->text); ?></td>
-			<td><?php echo htmlspecialchars($entry->sort_order); ?></td>
+		<tr title="<?php e($entry->guid); ?>">
+			<td><a data-entity="<?php e($entry->guid); ?>" data-entity-context="com_menueditor_entry"><?php e($entry->name); ?></a></td>
+			<td><?php e($entry->text); ?></td>
+			<td><?php e($entry->sort_order); ?></td>
 			<td><?php echo ($entry->enabled ? 'Yes' : 'No'); ?></td>
-			<td><?php echo htmlspecialchars($entry->location); ?></td>
-			<td><?php echo empty($entry->link) ? '' : '<a href="'.htmlspecialchars($entry->link).'" target="_blank">'.  htmlspecialchars($entry->link).'</a>'; ?></td>
+			<td><?php e($entry->location); ?></td>
+			<td><?php echo empty($entry->link) ? '' : '<a href="'.h($entry->link).'" target="_blank">'.  h($entry->link).'</a>'; ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

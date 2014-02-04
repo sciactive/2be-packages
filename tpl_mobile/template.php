@@ -20,14 +20,14 @@ $menu = $pines->page->render_modules('main_menu', 'module_head');
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title><?php echo htmlspecialchars($pines->page->get_title()); ?></title>
+	<title><?php e($pines->page->get_title()); ?></title>
 	<meta name="HandheldFriendly" content="true" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo htmlspecialchars($pines->config->location); ?>favicon.ico" />
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->rela_location); ?>system/includes/js.php"></script>
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/js/template.js"></script>
+	<link rel="icon" type="image/vnd.microsoft.icon" href="<?php e($pines->config->location); ?>favicon.ico" />
+	<script type="text/javascript" src="<?php e($pines->config->rela_location); ?>system/includes/js.php"></script>
+	<script type="text/javascript" src="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/js/template.js"></script>
 	<?php echo $pines->page->render_modules('head', 'module_head'); ?>
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/<?php echo htmlspecialchars($pines->current_template); ?>/css/pines.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/<?php e($pines->current_template); ?>/css/pines.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="navbar" class="navbar navbar-fixed-top">
@@ -40,12 +40,12 @@ $menu = $pines->page->render_modules('main_menu', 'module_head');
 				<span class="icon-bar"></span>
 			</button>
 			<?php } if ($pines->config->tpl_mobile->use_header_image) { ?>
-			<a class="brand brand-image" href="<?php echo htmlspecialchars(pines_url()); ?>">
-				<img src="<?php echo htmlspecialchars($pines->config->tpl_mobile->header_image); ?>" alt="<?php echo htmlspecialchars($pines->config->page_title); ?>" />
+			<a class="brand brand-image" href="<?php e(pines_url()); ?>">
+				<img src="<?php e($pines->config->tpl_mobile->header_image); ?>" alt="<?php e($pines->config->page_title); ?>" />
 			</a>
 			<?php } else { ?>
-			<a class="brand" href="<?php echo htmlspecialchars(pines_url()); ?>">
-				<?php echo htmlspecialchars($pines->config->page_title); ?>
+			<a class="brand" href="<?php e(pines_url()); ?>">
+				<?php e($pines->config->page_title); ?>
 			</a>
 			<?php } ?>
 		</div>
@@ -62,10 +62,10 @@ $menu = $pines->page->render_modules('main_menu', 'module_head');
 			pines(function(){
 				<?php
 				if ( $error ) { foreach ($error as $cur_item) {
-					echo 'pines.error('.json_encode(htmlspecialchars($cur_item)).", \"Error\");\n";
+					echo 'pines.error('.json_encode(h($cur_item)).", \"Error\");\n";
 				} }
 				if ( $notice ) { foreach ($notice as $cur_item) {
-					echo 'pines.notice('.json_encode(htmlspecialchars($cur_item)).", \"Notice\");\n";
+					echo 'pines.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
 				} }
 				?>
 			});
@@ -94,7 +94,7 @@ $menu = $pines->page->render_modules('main_menu', 'module_head');
 	<div id="post_content"><?php echo $pines->page->render_modules('post_content', 'module_header'); ?></div>
 	<div id="footer" class="well">
 		<div class="modules"><?php echo $pines->page->render_modules('footer', 'module_header'); ?></div>
-		<p id="copyright"><?php echo htmlspecialchars($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
+		<p id="copyright"><?php e($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
 	</div>
 	<div id="bottom"><?php echo $pines->page->render_modules('bottom', 'module_header'); ?></div>
 </div>

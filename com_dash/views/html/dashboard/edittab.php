@@ -13,9 +13,9 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Edit Tab';
 $pines->com_bootstrap->load();
 $max_columns = $pines->config->com_bootstrap->grid_columns;
-$default_column = htmlspecialchars(floor($max_columns / 3));
+$default_column = h(floor($max_columns / 3));
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_dash', 'dashboard/tabsave', array('id' => (string) $this->entity->guid))); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_dash', 'dashboard/tabsave', array('id' => (string) $this->entity->guid))); ?>">
 	<style type="text/css" scoped="scoped">
 		#p_muid_form .new_column {
 			border: none;
@@ -179,11 +179,11 @@ $default_column = htmlspecialchars(floor($max_columns / 3));
 		<?php if ( !empty($this->key) ) { ?>
 		<button class="btn" id="p_muid_delete" type="button" style="float: right; margin-bottom: 4px;">Delete Tab</button>
 		<?php } ?>
-		<h3>Editing <?php echo isset($this->tab) ? 'Tab ['.htmlspecialchars($this->tab['name']).']' : 'New Tab'; ?></h3>
+		<h3>Editing <?php echo isset($this->tab) ? 'Tab ['.h($this->tab['name']).']' : 'New Tab'; ?></h3>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars($this->tab['name']); ?>" /></label>
+			<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->tab['name']); ?>" /></label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Layout</span>
@@ -192,12 +192,12 @@ $default_column = htmlspecialchars(floor($max_columns / 3));
 		</span>
 		<br /><br />
 		<div class="row-fluid" style="margin-bottom: 1em;">
-			<div class="span<?php echo htmlspecialchars($max_columns); ?> new_column alert-info" style="min-height: 40px; line-height: 40px; text-align: center;">Button area.</div>
+			<div class="span<?php e($max_columns); ?> new_column alert-info" style="min-height: 40px; line-height: 40px; text-align: center;">Button area.</div>
 		</div>
 		<div class="row-fluid" id="p_muid_cols">
 			<?php if (isset($this->tab['columns'])) { foreach ($this->tab['columns'] as $cur_key => $cur_column) {
-				$col_style = htmlspecialchars($cur_column['size'] < 1 ? floor($max_columns * $cur_column['size']) : $cur_column['size']); ?>
-			<div class="span<?php echo $col_style; ?> new_column alert-info" id="<?php echo htmlspecialchars($cur_key); ?>">
+				$col_style = h($cur_column['size'] < 1 ? floor($max_columns * $cur_column['size']) : $cur_column['size']); ?>
+			<div class="span<?php echo $col_style; ?> new_column alert-info" id="<?php e($cur_key); ?>">
 				<div style="padding: .4em;">
 					<div style="float: right;">
 						<a href="javascript:void(0);" class="remove_column btn btn-mini btn-info">Remove</a>
@@ -240,7 +240,7 @@ $default_column = htmlspecialchars(floor($max_columns / 3));
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( !empty($this->key) ) { ?>
-		<input type="hidden" name="key" value="<?php echo htmlspecialchars($this->key); ?>" />
+		<input type="hidden" name="key" value="<?php e($this->key); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
 		<?php if ( !empty($this->key) ) { ?>

@@ -363,7 +363,7 @@ $max_columns = $pines->config->com_bootstrap->grid_columns;
 	});
 </script>
 <div id="p_muid_tab" class="clearfix">
-	<div class="buttons well <?php echo htmlspecialchars($this->tab['buttons_size']); ?>">
+	<div class="buttons well <?php e($this->tab['buttons_size']); ?>">
 		<?php if ($this->editable) { ?>
 		<div class="controls">
 			<span class="edit_buttons w_icon icon-cog" title="Configure Buttons"></span>
@@ -380,16 +380,16 @@ $max_columns = $pines->config->com_bootstrap->grid_columns;
 					if (!$pines->depend->check($cur_type, $cur_value))
 						continue 2;
 				} ?>
-		<a class="btn" href="<?php echo htmlspecialchars($cur_def['href']); ?>" title="<?php echo htmlspecialchars($cur_def['description']); ?>">
-			<span class="picon <?php echo $this->tab['buttons_size'] == 'large' ? 'picon-32' : ''; ?> <?php echo htmlspecialchars($cur_def['class']); ?>"><?php echo htmlspecialchars($cur_def['text']); ?></span>
+		<a class="btn" href="<?php e($cur_def['href']); ?>" title="<?php e($cur_def['description']); ?>">
+			<span class="picon <?php echo $this->tab['buttons_size'] == 'large' ? 'picon-32' : ''; ?> <?php e($cur_def['class']); ?>"><?php e($cur_def['text']); ?></span>
 		</a>
 		<?php } } ?>
 	</div>
 	<div class="row-fluid">
 		<?php foreach ((array) $this->tab['columns'] as $cur_c_key => $cur_column) {
-			$col_style = htmlspecialchars($cur_column['size'] < 1 ? floor($max_columns * $cur_column['size']) : $cur_column['size']); ?>
+			$col_style = h($cur_column['size'] < 1 ? floor($max_columns * $cur_column['size']) : $cur_column['size']); ?>
 		<div class="span<?php echo $col_style; ?> column">
-			<div class="key" style="display: none;"><?php echo htmlspecialchars($cur_c_key); ?></div>
+			<div class="key" style="display: none;"><?php e($cur_c_key); ?></div>
 			<?php foreach ((array) $cur_column['widgets'] as $cur_w_key => $cur_widget) {
 				// Get the widget definition.
 				$cur_def = $pines->com_dash->get_widget_def($cur_widget);
@@ -399,8 +399,8 @@ $max_columns = $pines->config->com_bootstrap->grid_columns;
 						continue 2;
 				} ?>
 			<div class="object well clearfix">
-				<div class="key" style="display: none;"><?php echo htmlspecialchars($cur_w_key); ?></div>
-				<div class="options" style="display: none;"><?php echo htmlspecialchars(json_encode($cur_widget['options'])); ?></div>
+				<div class="key" style="display: none;"><?php e($cur_w_key); ?></div>
+				<div class="options" style="display: none;"><?php e(json_encode($cur_widget['options'])); ?></div>
 				<div class="alert-info widget_header clearfix"<?php echo $this->editable ? '' : ' style="cursor: default;"'; ?>>
 					<span class="title">Loading...</span>
 					<div class="controls dropdown clearfix">

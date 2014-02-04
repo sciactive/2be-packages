@@ -26,7 +26,7 @@ $this->title = 'Switch User';
 		padding-left: 95px; /* Width of labels + margin to inputs - button spacing. */
 	}
 </style>
-<form class="pf-form com_su_login_form" method="post" action="<?php echo htmlspecialchars(pines_url()); ?>">
+<form class="pf-form com_su_login_form" method="post" action="<?php e(pines_url()); ?>">
 	<?php if ($this->pin_login) { ?>
 	<div class="pf-element">
 		<label><span class="pf-label">PIN</span>

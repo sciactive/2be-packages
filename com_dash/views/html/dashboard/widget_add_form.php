@@ -47,7 +47,7 @@ $grid_thirds = floor($pines->config->com_bootstrap->grid_columns / 3);
 	<div class="ui-helper-clearfix" style="max-height: 600px; overflow-y: auto; clear: both; padding-bottom: 30px;">
 		<?php foreach ((array) $this->widgets as $cur_component => $cur_widget_list) { ?>
 		<div class="pf-element pf-heading">
-			<h3><?php echo htmlspecialchars($pines->info->$cur_component->name); ?></h3>
+			<h3><?php e($pines->info->$cur_component->name); ?></h3>
 		</div>
 		<div class="pf-element pf-full-width">
 			<div style="padding-right: .5em;">
@@ -61,13 +61,13 @@ $grid_thirds = floor($pines->config->com_bootstrap->grid_columns / 3);
 					<?php } ?>
 					<div class="span<?php echo $grid_thirds; ?>" style="margin-bottom: .5em;">
 						<div class="ui-widget-content ui-corner-all widget_type" style="padding: .5em; cursor: pointer;">
-							<div class="component" style="display: none;"><?php echo htmlspecialchars($cur_component); ?></div>
-							<div class="widget_name" style="display: none;"><?php echo htmlspecialchars($cur_name); ?></div>
-							<h4 style="margin-top: 0;"><?php echo htmlspecialchars($cur_widget['cname']); ?></h4>
-							<p style="margin-bottom: 0;"><?php echo htmlspecialchars($cur_widget['description']); ?></p>
+							<div class="component" style="display: none;"><?php e($cur_component); ?></div>
+							<div class="widget_name" style="display: none;"><?php e($cur_name); ?></div>
+							<h4 style="margin-top: 0;"><?php e($cur_widget['cname']); ?></h4>
+							<p style="margin-bottom: 0;"><?php e($cur_widget['description']); ?></p>
 							<?php if (isset($cur_widget['image'])) { ?>
 							<div style="text-align: left; margin-top: .5em;">
-								<img class="ui-widget-content ui-corner-all" style="padding: 0;" alt="<?php echo htmlspecialchars($cur_widget['cname']); ?>" src="<?php echo htmlspecialchars($pines->config->rela_location); ?>components/<?php echo htmlspecialchars($cur_component); ?>/<?php echo htmlspecialchars(clean_filename($cur_widget['image'])); ?>" />
+								<img class="ui-widget-content ui-corner-all" style="padding: 0;" alt="<?php e($cur_widget['cname']); ?>" src="<?php e($pines->config->rela_location); ?>components/<?php e($cur_component); ?>/<?php e(clean_filename($cur_widget['image'])); ?>" />
 							</div>
 							<?php } ?>
 						</div>

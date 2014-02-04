@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Floor Timer ['.htmlspecialchars($this->entity->name).']';
+$this->title = 'Floor Timer ['.h($this->entity->name).']';
 $pines->com_pgrid->load();
 $pines->com_customer->load_customer_select();
 ?>
@@ -340,7 +340,7 @@ $pines->com_customer->load_customer_select();
 	});
 </script>
 <div id="p_muid_station_layout" class="alert alert-success">
-	<img id="p_muid_layout_bg" src="<?php echo htmlspecialchars($this->entity->background); ?>" alt="Station Layout" />
+	<img id="p_muid_layout_bg" src="<?php e($this->entity->background); ?>" alt="Station Layout" />
 	<div id="p_muid_station_floor"></div>
 	<br style="clear: both; height: 1px;" />
 </div>

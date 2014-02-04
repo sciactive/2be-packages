@@ -17,5 +17,5 @@ foreach ((array) $pines->config->com_content->global_meta_tags as $cur_meta_tag)
 		continue;
 	?>
 
-<meta name="<?php echo htmlspecialchars($name); ?>" content="<?php echo htmlspecialchars(format_content($content)); ?>" />
+<meta name="<?php e($name); ?>" content="<?php e(format_content($content)); ?>" />
 <?php }

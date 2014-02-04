@@ -11,9 +11,9 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$this->title = 'Hours Clocked: '.htmlspecialchars($this->employee ? $this->employee->name : $this->location->name);
+$this->title = 'Hours Clocked: '.h($this->employee ? $this->employee->name : $this->location->name);
 if (!$this->all_time)
-	$this->note = htmlspecialchars(format_date($this->start_date, 'date_short')).' - '.htmlspecialchars(format_date($this->end_date - 1, 'date_short'));
+	$this->note = h(format_date($this->start_date, 'date_short')).' - '.h(format_date($this->end_date - 1, 'date_short'));
 
 $pines->com_jstree->load();
 $pines->com_pgrid->load();
@@ -197,8 +197,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 		<?php foreach($this->employees as $cur_employee) { ?>
-		<tr title="<?php echo htmlspecialchars($cur_employee['employee']->guid); ?>">
-			<td><?php echo htmlspecialchars($cur_employee['employee']->name); ?></td>
+		<tr title="<?php e($cur_employee['employee']->guid); ?>">
+			<td><?php e($cur_employee['employee']->name); ?></td>
 			<td><?php echo (float) $cur_employee['scheduled']; ?> hours</td>
 			<td><?php echo (float) $cur_employee['clocked']; ?> hours</td>
 			<td><span<?php if ($cur_employee['variance'] < 0) echo ' style="color: red;"'; ?>><?php echo (float) $cur_employee['variance']; ?> hours</span></td>
@@ -228,11 +228,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	<tbody>
 		<?php $clock_count = 1; foreach ($this->dates as $cur_date) { ?>
 		<tr class="total">
-			<td><?php echo htmlspecialchars($cur_date['date']); ?></td>
-			<td><?php echo htmlspecialchars($this->employee->group->name); ?></td>
+			<td><?php e($cur_date['date']); ?></td>
+			<td><?php e($this->employee->group->name); ?></td>
 			<td>Scheduled</td>
-			<td><?php if (isset($cur_date['sched_start'])) echo htmlspecialchars(format_date($cur_date['sched_start'], 'time_short')); ?></td>
-			<td><?php if (isset($cur_date['sched_end'])) echo htmlspecialchars(format_date($cur_date['sched_end'], 'time_short')); ?></td>
+			<td><?php if (isset($cur_date['sched_start'])) e(format_date($cur_date['sched_start'], 'time_short')); ?></td>
+			<td><?php if (isset($cur_date['sched_end'])) e(format_date($cur_date['sched_end'], 'time_short')); ?></td>
 			<td><?php echo round($cur_date['scheduled'] / 3600, 2).' hours'; ?></td>
 			<td></td>
 		</tr>
@@ -243,8 +243,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<td></td>
 			<td></td>
 			<td>Clocked</td>
-			<td><?php echo htmlspecialchars(format_date($cur_clock['in'], 'time_short')); ?></td>
-			<td><?php echo htmlspecialchars(format_date($cur_clock['out'], 'time_short')); ?></td>
+			<td><?php e(format_date($cur_clock['in'], 'time_short')); ?></td>
+			<td><?php e(format_date($cur_clock['out'], 'time_short')); ?></td>
 			<td><?php echo round($cur_clock['total'] / 3600, 2).' hours'; ?></td>
 			<td></td>
 		</tr>

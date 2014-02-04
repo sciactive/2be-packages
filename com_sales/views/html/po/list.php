@@ -80,31 +80,31 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->pos as $po) { ?>
-		<tr title="<?php echo htmlspecialchars($po->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($po->guid); ?>" data-entity-context="com_sales_po"><?php echo htmlspecialchars($po->po_number); ?></a></td>
-			<td><?php echo htmlspecialchars($po->reference_number); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($po->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php echo htmlspecialchars($po->vendor->name); ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($po->destination->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$po->destination->name} [{$po->destination->groupname}]"); ?></a></td>
+		<tr title="<?php e($po->guid); ?>">
+			<td><a data-entity="<?php e($po->guid); ?>" data-entity-context="com_sales_po"><?php e($po->po_number); ?></a></td>
+			<td><?php e($po->reference_number); ?></td>
+			<td><a data-entity="<?php e($po->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php e($po->vendor->name); ?></a></td>
+			<td><a data-entity="<?php e($po->destination->guid); ?>" data-entity-context="group"><?php e("{$po->destination->name} [{$po->destination->groupname}]"); ?></a></td>
 			<td><?php echo $po->final ? ($po->finished ? 'Received' : (empty($po->received) ? 'Not Received' : 'Partially Received')) : 'Not Committed'; ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($po->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php echo htmlspecialchars($po->shipper->name); ?></a></td>
-			<td><?php echo ($po->eta ? htmlspecialchars(format_date($po->eta, 'date_sort')) : ''); ?></td>
+			<td><a data-entity="<?php e($po->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php e($po->shipper->name); ?></a></td>
+			<td><?php echo ($po->eta ? h(format_date($po->eta, 'date_sort')) : ''); ?></td>
 			<td><?php
 				if (isset($po->shipper->guid) && $po->shipper->can_track()) {
 					$links = array();
 					foreach ((array) $po->tracking_numbers as $cur_number)
-						$links[] = '<a href="'.htmlspecialchars($po->shipper->tracking_url($cur_number)).'" target="_blank">'.htmlspecialchars($cur_number).'</a>';
+						$links[] = '<a href="'.h($po->shipper->tracking_url($cur_number)).'" target="_blank">'.h($cur_number).'</a>';
 					echo implode(', ', $links);
 				} else
-					echo htmlspecialchars(isset($po->tracking_numbers) ? implode(', ', $po->tracking_numbers) : '');
+					e(isset($po->tracking_numbers) ? implode(', ', $po->tracking_numbers) : '');
 			?></td>
 			<td><?php
 			$names = array();
 			foreach ((array) $po->products as $cur_product) {
-				$names[] = '<a data-entity="'.htmlspecialchars($cur_product['entity']->guid).'" data-entity-context="com_sales_product">'.htmlspecialchars("{$cur_product['entity']->name} [{$cur_product['entity']->sku}]").'</a>';
+				$names[] = '<a data-entity="'.h($cur_product['entity']->guid).'" data-entity-context="com_sales_product">'.h("{$cur_product['entity']->name} [{$cur_product['entity']->sku}]").'</a>';
 			}
 			echo implode(', ', $names);
 			?></td>
-			<td><?php echo htmlspecialchars($po->comments); ?></td>
+			<td><?php e($po->comments); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

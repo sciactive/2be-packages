@@ -28,7 +28,7 @@ if ($this->entity->enable_custom_head && $pines->config->com_content->custom_hea
 }
 
 if ($this->entity->get_option('show_title'))
-	$this->title = htmlspecialchars($this->entity->name);
+	$this->title = h($this->entity->name);
 
 $this->show_title = $this->entity->get_option('show_title');
 

@@ -34,7 +34,7 @@ $pines->com_sales->sort_specs($specs);
 foreach ($specs as $cur_spec) {
 	switch ($cur_spec['type']) {
 		case 'heading': ?>
-<h2><?php echo htmlspecialchars($cur_spec['name']); ?></h2>
+<h2><?php e($cur_spec['name']); ?></h2>
 <?php
 			break;
 		case 'bool':
@@ -42,7 +42,7 @@ foreach ($specs as $cur_spec) {
 				continue;
 			?>
 <div>
-	<strong><?php echo htmlspecialchars($cur_spec['name']); ?>:</strong>
+	<strong><?php e($cur_spec['name']); ?>:</strong>
 	<select name="">
 		<option value="">Any</option>
 		<option value="true">Yes</option>

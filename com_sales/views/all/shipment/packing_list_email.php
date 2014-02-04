@@ -20,10 +20,10 @@ defined('P_RUN') or die('Direct access prohibited');
 	</tr>
 	<?php foreach ($this->entity->products as $cur_product) { ?>
 	<tr>
-		<td valign="top" style="text-align: right;"><?php echo htmlspecialchars(count($cur_product['stock_entities'])); ?></td>
-		<td valign="top" style="text-align: left;"><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-		<td valign="top" style="text-align: left;"><?php echo $cur_product['stock_entities'][0]->serial ? htmlspecialchars($cur_product['stock_entities'][0]->serial) : 'N/A'; ?></td>
-		<td valign="top" style="text-align: left; width: 85%;"><?php echo htmlspecialchars($cur_product['entity']->name); ?></td>
+		<td valign="top" style="text-align: right;"><?php e(count($cur_product['stock_entities'])); ?></td>
+		<td valign="top" style="text-align: left;"><?php e($cur_product['entity']->sku); ?></td>
+		<td valign="top" style="text-align: left;"><?php echo $cur_product['stock_entities'][0]->serial ? h($cur_product['stock_entities'][0]->serial) : 'N/A'; ?></td>
+		<td valign="top" style="text-align: left; width: 85%;"><?php e($cur_product['entity']->name); ?></td>
 	</tr>
 	<?php } ?>
 </table>

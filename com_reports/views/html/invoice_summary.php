@@ -11,9 +11,9 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$this->title = 'Invoice Summary ['.htmlspecialchars($this->location->name).']';
+$this->title = 'Invoice Summary ['.h($this->location->name).']';
 if ($this->descendants)
-	$this->note = 'Including locations beneath '.htmlspecialchars($this->location->name);
+	$this->note = 'Including locations beneath '.h($this->location->name);
 $pines->icons->load();
 $pines->com_jstree->load();
 $pines->com_pgrid->load();
@@ -225,16 +225,16 @@ if (isset($pines->com_googledrive)) {
 					$total_cost += $cur_stock->cost;
 			}
 		?>
-		<tr title="<?php echo htmlspecialchars($cur_invoice->customer->guid); ?>" class="<?php echo $type; ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($cur_invoice->guid); ?>" data-entity-context="<?php echo $cur_invoice->has_tag('return') ? 'com_sales_return' : 'com_sales_sale'; ?>"><?php echo htmlspecialchars($cur_invoice->id); ?></a></td>
+		<tr title="<?php e($cur_invoice->customer->guid); ?>" class="<?php echo $type; ?>">
+			<td><a data-entity="<?php e($cur_invoice->guid); ?>" data-entity-context="<?php echo $cur_invoice->has_tag('return') ? 'com_sales_return' : 'com_sales_sale'; ?>"><?php e($cur_invoice->id); ?></a></td>
 			<td><?php echo ucwords($type); ?></td>
-			<td><?php echo htmlspecialchars(format_date($cur_invoice->p_cdate, 'full_sort')); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($cur_invoice->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($cur_invoice->group->name); ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($cur_invoice->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($cur_invoice->customer->name); ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($cur_invoice->user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($cur_invoice->user->name); ?></a></td>
-			<td class="total">$<?php echo htmlspecialchars(number_format($cur_invoice->subtotal, 2, '.', '')); ?></td>
-			<?php /* <td class="total">$<?php echo htmlspecialchars(number_format($total_cost, 2, '.', '')); ?></td>
-			<td class="total">$<?php echo htmlspecialchars(number_format(($cur_invoice->subtotal - $total_cost), 2, '.', '')); ?></td> */ ?>
+			<td><?php e(format_date($cur_invoice->p_cdate, 'full_sort')); ?></td>
+			<td><a data-entity="<?php e($cur_invoice->group->guid); ?>" data-entity-context="group"><?php e($cur_invoice->group->name); ?></a></td>
+			<td><a data-entity="<?php e($cur_invoice->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($cur_invoice->customer->name); ?></a></td>
+			<td><a data-entity="<?php e($cur_invoice->user->guid); ?>" data-entity-context="user"><?php e($cur_invoice->user->name); ?></a></td>
+			<td class="total">$<?php e(number_format($cur_invoice->subtotal, 2, '.', '')); ?></td>
+			<?php /* <td class="total">$<?php e(number_format($total_cost, 2, '.', '')); ?></td>
+			<td class="total">$<?php e(number_format(($cur_invoice->subtotal - $total_cost), 2, '.', '')); ?></td> */ ?>
 			<td><?php echo ucwords($cur_invoice->status); ?></td>
 			<?php
 			foreach ($payment_types as $cur_payment_type) { 
@@ -244,7 +244,7 @@ if (isset($pines->com_googledrive)) {
 					if ($cur_payment_type->is($cur_payment['entity']))
 						$pmt_total += $cur_payment['amount'];
 				}
-				echo htmlspecialchars(number_format($pmt_total, 2, '.', ''));
+				e(number_format($pmt_total, 2, '.', ''));
 				echo '</td>';
 			}
 			?>

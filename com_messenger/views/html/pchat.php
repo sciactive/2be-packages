@@ -19,14 +19,14 @@ $remote_server = !$pines->config->com_messenger->use_proxy && substr($pines->con
 ?>
 <script type="text/javascript">
 <?php if ($remote_server) { ?>
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/flxhr/flXHR.js");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_messenger/includes/flxhr/flXHR.js");
 <?php } ?>
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/strophejs-latest/strophe.js");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_messenger/includes/strophejs-latest/strophe.js");
 <?php if ($remote_server) { ?>
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.flxhr.js");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.flxhr.js");
 <?php } ?>
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.roster.js");
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.blocking.js");
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/pchat/jquery.pchat.js");
-pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_messenger/includes/pchat/jquery.pchat.default.css");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.roster.js");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.blocking.js");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/jquery.pchat.js");
+pines.loadcss("<?php e($pines->config->location); ?>components/com_messenger/includes/pchat/jquery.pchat.default.css");
 </script>

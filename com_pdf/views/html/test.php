@@ -12,19 +12,19 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'PDF Display Editor Testing'
 	?>
-<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_pdf', 'testprint')); ?>">
+<form class="pf-form" method="post" action="<?php e(pines_url('com_pdf', 'testprint')); ?>">
 	<div class="pf-element display_edit" id="p_muid_name">
 		<label><span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" value="<?php echo htmlspecialchars($entity->name); ?>" /></label>
+			<input class="pf-field" type="text" name="name" value="<?php e($entity->name); ?>" /></label>
 	</div>
 	<div class="pf-element" id="p_muid_age">
 		<label><span class="pf-label">Age</span>
 			<span class="pf-note">Not displayed.</span>
-			<input class="pf-field" type="number" name="age" value="<?php echo htmlspecialchars($entity->age); ?>" /></label>
+			<input class="pf-field" type="number" name="age" value="<?php e($entity->age); ?>" /></label>
 	</div>
 	<div class="pf-element display_edit" id="p_muid_phone">
 		<label><span class="pf-label">Phone</span>
-			<input class="pf-field" type="tel" name="phone" value="<?php echo htmlspecialchars($entity->phone); ?>" /></label>
+			<input class="pf-field" type="tel" name="phone" value="<?php e($entity->phone); ?>" /></label>
 	</div>
 	<div class="pf-element display_edit" id="p_muid_favfood"><span class="pf-label">What's your favorite food?</span>
 		<span class="pf-note">This will be your lunch.</span>

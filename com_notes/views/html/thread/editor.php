@@ -12,12 +12,12 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Attached Notes';
 if (isset($this->entity->guid))
-	$this->note = htmlspecialchars($this->entity->info('name'));
+	$this->note = h($this->entity->info('name'));
 $pines->icons->load();
 ?>
 <div id="p_muid_notes">
 	<?php if (!isset($this->entity->guid)) { ?>
-	Notes will be available once the <?php echo htmlspecialchars($this->entity->info('type')); ?> is saved.
+	Notes will be available once the <?php e($this->entity->info('type')); ?> is saved.
 	<?php } else { ?>
 	<style type="text/css" scoped="scoped">
 		#p_muid_current_threads.picon {

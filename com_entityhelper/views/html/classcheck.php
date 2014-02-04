@@ -70,7 +70,7 @@ $this->title = 'Class Check';
 		<tbody>
 			<?php foreach ($this->entity_classes as $cur_class) { ?>
 			<tr>
-				<td style="font-family: monospace;"><?php echo htmlspecialchars($cur_class); ?></td>
+				<td style="font-family: monospace;"><?php e($cur_class); ?></td>
 				<td><?php echo in_array($cur_class, $this->no_helper) ? 'No' : 'Yes'; ?></td>
 			</tr>
 			<?php } ?>

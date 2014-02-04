@@ -70,13 +70,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				if ($cur_stock->in_array($cur_product['returned_stock_entities']))
 					continue;
 		?>
-		<tr title="<?php echo htmlspecialchars($cur_stock->guid); ?>">
-			<td><?php echo htmlspecialchars(format_date($sale->tender_date, 'full_sort')); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars("{$cur_product['entity']->sku} : {$cur_product['entity']->name}"); ?></a></td>
-			<td><?php echo htmlspecialchars($cur_stock->serial); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($sale->guid); ?>" data-entity-context="com_sales_sale"><?php echo htmlspecialchars($sale->id); ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($sale->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$sale->group->name} [{$sale->group->groupname}]"); ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($sale->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($sale->customer->name); ?></a></td>
+		<tr title="<?php e($cur_stock->guid); ?>">
+			<td><?php e(format_date($sale->tender_date, 'full_sort')); ?></td>
+			<td><a data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e("{$cur_product['entity']->sku} : {$cur_product['entity']->name}"); ?></a></td>
+			<td><?php e($cur_stock->serial); ?></td>
+			<td><a data-entity="<?php e($sale->guid); ?>" data-entity-context="com_sales_sale"><?php e($sale->id); ?></a></td>
+			<td><a data-entity="<?php e($sale->group->guid); ?>" data-entity-context="group"><?php e("{$sale->group->name} [{$sale->group->groupname}]"); ?></a></td>
+			<td><a data-entity="<?php e($sale->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($sale->customer->name); ?></a></td>
 		</tr>
 	<?php } } } ?>
 	</tbody>

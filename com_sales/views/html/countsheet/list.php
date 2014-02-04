@@ -276,12 +276,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->countsheets as $countsheet) { ?>
-		<tr title="<?php echo htmlspecialchars($countsheet->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($countsheet->guid); ?>" data-entity-context="com_sales_countsheet"><?php echo htmlspecialchars($countsheet->guid); ?></a></td>
-			<td><?php echo htmlspecialchars($countsheet->group->name); ?></td>
-			<td><?php echo htmlspecialchars($countsheet->user->name); ?></td>
-			<td><?php echo htmlspecialchars(format_date($countsheet->p_cdate)); ?></td>
-			<td><?php echo htmlspecialchars(format_date($countsheet->p_mdate)); ?></td>
+		<tr title="<?php e($countsheet->guid); ?>">
+			<td><a data-entity="<?php e($countsheet->guid); ?>" data-entity-context="com_sales_countsheet"><?php e($countsheet->guid); ?></a></td>
+			<td><?php e($countsheet->group->name); ?></td>
+			<td><?php e($countsheet->user->name); ?></td>
+			<td><?php e(format_date($countsheet->p_cdate)); ?></td>
+			<td><?php e(format_date($countsheet->p_mdate)); ?></td>
 			<td><?php echo $countsheet->final ? 'Yes' : 'No'; ?></td>
 			<td><?php switch ($countsheet->status) {
 				case 'approved':
@@ -300,7 +300,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					echo 'Unrecognized';
 					break;
 			} ?></td>
-			<td><?php echo $countsheet->review_user->guid ? htmlspecialchars("{$countsheet->review_user->name} [{$countsheet->review_user->username}]") : '' ; ?></td>
+			<td><?php echo $countsheet->review_user->guid ? h("{$countsheet->review_user->name} [{$countsheet->review_user->username}]") : '' ; ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

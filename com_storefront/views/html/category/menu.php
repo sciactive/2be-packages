@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = htmlspecialchars($this->entity->name);
+$this->title = h($this->entity->name);
 ?>
 <div>
 	it works.

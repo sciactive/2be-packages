@@ -28,7 +28,7 @@ if ($this->id == 'random' || empty($this->id)) {
 	$this->entity = com_sales_product::factory((int) $this->id);
 }
 if (empty($this->title))
-	$this->title = htmlspecialchars($this->entity->name);
+	$this->title = h($this->entity->name);
 ?>
 <style type="text/css">
 	#p_muid_product {
@@ -58,11 +58,11 @@ if (empty($this->title))
 			});
 		});
 	</script>
-	<a href="<?php echo htmlspecialchars(pines_url('com_storefront', 'product', array('a' => $this->entity->alias))); ?>">
+	<a href="<?php e(pines_url('com_storefront', 'product', array('a' => $this->entity->alias))); ?>">
 		<?php if ($this->show_name) { ?>
-		<span class="title"><?php echo htmlspecialchars($this->entity->name); ?></span>
+		<span class="title"><?php e($this->entity->name); ?></span>
 		<?php } if ($this->show_thumbnail) { ?>
-		<span class="thumbnail"><img class="thumb" alt="<?php echo !empty($this->alt_text) ? htmlspecialchars($this->alt_text) : htmlspecialchars($this->entity->name); ?>" src="<?php echo !empty($this->entity->featured_image) ? htmlspecialchars($this->entity->featured_image) : htmlspecialchars($this->entity->thumbnail); ?>" /></span>
+		<span class="thumbnail"><img class="thumb" alt="<?php echo !empty($this->alt_text) ? h($this->alt_text) : h($this->entity->name); ?>" src="<?php echo !empty($this->entity->featured_image) ? h($this->entity->featured_image) : h($this->entity->thumbnail); ?>" /></span>
 		<?php } if ($this->show_price) { ?>
 		<span class="price"><?php echo isset($this->entity->unit_price) ? $pines->com_storefront->format_price($this->entity->unit_price) : ''; ?></span>
 		<?php } ?>

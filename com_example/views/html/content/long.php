@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = htmlspecialchars($this->position);
+$this->title = h($this->position);
 $this->note = 'This is example content.';
 ?>
 <p>

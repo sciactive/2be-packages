@@ -35,11 +35,11 @@ defined('P_RUN') or die('Direct access prohibited');
 		$("#p_muid_form [name=dates]").ptags();
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_calendar', 'saveschedule')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_calendar', 'saveschedule')); ?>">
 	<div class="pf-element">
 		<small>Dates and times are calculated using the employee's timezone.
 			<?php if (isset($this->entity->guid)) { ?>
-			(<?php echo htmlspecialchars($this->entity->get_timezone()); ?>)
+			(<?php e($this->entity->get_timezone()); ?>)
 			<?php } ?>
 		</small>
 	</div>
@@ -105,6 +105,6 @@ defined('P_RUN') or die('Direct access prohibited');
 		<input type="hidden" name="dates" value="" />
 	</div>
 	<?php if (isset($this->entity->guid)) { ?>
-	<input type="hidden" name="employee" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+	<input type="hidden" name="employee" value="<?php e($this->entity->guid); ?>" />
 	<?php } ?>
 </form>

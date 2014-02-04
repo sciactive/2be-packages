@@ -10,23 +10,23 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Payment Type' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Payment Type' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide payment type details in this form.';
 ?>
-<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_sales', 'paymenttype/save')); ?>">
+<form class="pf-form" method="post" action="<?php e(pines_url('com_sales', 'paymenttype/save')); ?>">
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars($this->entity->name); ?>" /></label>
+			<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Enabled</span>
@@ -53,12 +53,12 @@ $this->note = 'Provide payment type details in this form.';
 	<div class="pf-element">
 		<label><span class="pf-label">Minimum Charge</span>
 			<span class="pf-note">The minimum charge in dollars that this payment type will accept.</span>
-			<input class="pf-field" type="text" name="minimum" size="24" value="<?php echo htmlspecialchars($this->entity->minimum); ?>" /></label>
+			<input class="pf-field" type="text" name="minimum" size="24" value="<?php e($this->entity->minimum); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Maximum Charge</span>
 			<span class="pf-note">The maximum charge in dollars that this payment type will accept.</span>
-			<input class="pf-field" type="text" name="maximum" size="24" value="<?php echo htmlspecialchars($this->entity->maximum); ?>" /></label>
+			<input class="pf-field" type="text" name="maximum" size="24" value="<?php e($this->entity->maximum); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Allow Return Payment</span>
@@ -70,15 +70,15 @@ $this->note = 'Provide payment type details in this form.';
 			<span class="pf-note">This will determine how the payment is approved and processed.</span>
 			<select class="pf-field" name="processing_type" size="6">
 				<?php foreach ($this->processing_types as $cur_type) { ?>
-				<option value="<?php echo htmlspecialchars($cur_type['name']); ?>" title="<?php echo htmlspecialchars($cur_type['description']); ?>"<?php echo $this->entity->processing_type == $cur_type['name'] ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_type['cname']); ?></option>
+				<option value="<?php e($cur_type['name']); ?>" title="<?php e($cur_type['description']); ?>"<?php echo $this->entity->processing_type == $cur_type['name'] ? ' selected="selected"' : ''; ?>><?php e($cur_type['cname']); ?></option>
 				<?php } ?>
 			</select></label>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'paymenttype/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'paymenttype/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

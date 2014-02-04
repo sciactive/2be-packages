@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = htmlspecialchars($this->entity->name);
+$this->title = h($this->entity->name);
 if ($this->entity->places > 1)
 	$this->note = 'And the winners are...';
 else
@@ -54,11 +54,11 @@ foreach ($this->entity->winners as $cur_place => $cur_winner) { ?>
 		<span style="font-size: .9em;">
 			<?php
 			echo ($this->entity->places > 1 ? '<span class="badge '.($cur_place == 1 ? 'badge-success' : 'badge-info').'" style="font-size: 1em;">'.com_raffle__ordinal($cur_place).'</span>&nbsp;' : '');
-			echo htmlspecialchars("{$cur_winner['first_name']} {$cur_winner['last_name']}");
+			e("{$cur_winner['first_name']} {$cur_winner['last_name']}");
 			?>
 		</span>
 	</h1>
-	<p style="margin-top: 2em;"><?php echo htmlspecialchars(format_phone($cur_winner['phone'])); ?></p>
-	<p><a href="mailto:<?php echo htmlspecialchars($cur_winner['email']); ?>"><?php echo htmlspecialchars($cur_winner['email']); ?></a></p>
+	<p style="margin-top: 2em;"><?php e(format_phone($cur_winner['phone'])); ?></p>
+	<p><a href="mailto:<?php e($cur_winner['email']); ?>"><?php e($cur_winner['email']); ?></a></p>
 </div>
 <?php }

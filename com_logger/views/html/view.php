@@ -11,7 +11,7 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Log Files View';
-$this->note = $this->all_time ? 'Showing all time.' : 'Showing '.htmlspecialchars(format_date($this->start_date, 'date_short')).' - '.htmlspecialchars(format_date($this->end_date - 1, 'date_short')).'.';
+$this->note = $this->all_time ? 'Showing all time.' : 'Showing '.h(format_date($this->start_date, 'date_short')).' - '.h(format_date($this->end_date - 1, 'date_short')).'.';
 // This regex breaks apart the log entries into each part.
 preg_match_all('/^(\d{4}-\d{2}-\d{2}T[\d:-]+): ([a-z]+): (com_\w+)?, ([^:]+)?: ([\d.]+)?(.*?)? ?\(?(\d+)?\)?: (.*)$/mi', $this->log, $matches, PREG_SET_ORDER);
 $pines->icons->load();
@@ -266,7 +266,7 @@ foreach ($matches as $match) {
 	<tbody>
 	<?php foreach($matches as $cur_match) { ?>
 		<tr>
-			<td><?php echo htmlspecialchars(format_date($cur_match['timestamp'])); ?></td>
+			<td><?php e(format_date($cur_match['timestamp'])); ?></td>
 			<td><?php
 			switch ($cur_match[2]) {
 				case 'debug':
@@ -291,14 +291,14 @@ foreach ($matches as $match) {
 					$class = '';
 					break;
 			}
-			?><span class="<?php echo $class; ?>" style="display: inline-block; line-height: 16px; padding-left: 18px; background-repeat: no-repeat;"><?php echo htmlspecialchars($cur_match[2]); ?></span></td>
-			<td><?php echo htmlspecialchars($cur_match[3]); ?></td>
-			<td><?php echo htmlspecialchars($cur_match[4]); ?></td>
-			<td><?php echo htmlspecialchars($cur_match[5]); ?></td>
-			<td><?php echo htmlspecialchars($cur_match[6]); ?></td>
-			<td><?php echo htmlspecialchars($cur_match[7]); ?></td>
-			<td><?php echo htmlspecialchars($cur_match[8]); ?></td>
-			<td><?php echo htmlspecialchars('p_muid_'.$cur_match[2]); ?></td>
+			?><span class="<?php echo $class; ?>" style="display: inline-block; line-height: 16px; padding-left: 18px; background-repeat: no-repeat;"><?php e($cur_match[2]); ?></span></td>
+			<td><?php e($cur_match[3]); ?></td>
+			<td><?php e($cur_match[4]); ?></td>
+			<td><?php e($cur_match[5]); ?></td>
+			<td><?php e($cur_match[6]); ?></td>
+			<td><?php e($cur_match[7]); ?></td>
+			<td><?php e($cur_match[8]); ?></td>
+			<td><?php e('p_muid_'.$cur_match[2]); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

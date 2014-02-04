@@ -10,24 +10,24 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Tax/Fee' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Tax/Fee' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide tax/fee details in this form.';
 ?>
-<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_sales', 'taxfee/save')); ?>">
+<form class="pf-form" method="post" action="<?php e(pines_url('com_sales', 'taxfee/save')); ?>">
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars($this->entity->name); ?>" />
+			<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" />
 		</label>
 	</div>
 	<div class="pf-element">
@@ -50,7 +50,7 @@ $this->note = 'Provide tax/fee details in this form.';
 		<label>
 			<span class="pf-label">Rate</span>
 			<span class="pf-note">Enter a percentage (5 for 5%) or a flat rate in dollars (5 for $5).</span>
-			<input class="pf-field" type="text" name="rate" size="24" value="<?php echo htmlspecialchars($this->entity->rate); ?>" />
+			<input class="pf-field" type="text" name="rate" size="24" value="<?php e($this->entity->rate); ?>" />
 		</label>
 	</div>
 	<div class="pf-element">
@@ -62,16 +62,16 @@ $this->note = 'Provide tax/fee details in this form.';
 				<?php
 				$pines->user_manager->group_sort($this->locations, 'name');
 				foreach ($this->locations as $cur_group) {
-					?><option value="<?php echo htmlspecialchars($cur_group->guid); ?>"<?php echo $cur_group->in_array($this->entity->locations) ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
+					?><option value="<?php e($cur_group->guid); ?>"<?php echo $cur_group->in_array($this->entity->locations) ? ' selected="selected"' : ''; ?>><?php e(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
 				} ?>
 			</select>
 		</label>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'taxfee/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'taxfee/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

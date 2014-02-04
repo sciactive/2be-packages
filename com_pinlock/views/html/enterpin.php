@@ -17,7 +17,7 @@ $this->title = 'Verify Access';
 		if ($) $("#p_muid_form input[name=pin]").focus();
 	});
 </script>
-<form class="pf-form" id="p_muid_form" method="post" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>">
+<form class="pf-form" id="p_muid_form" method="post" action="<?php e($_SERVER["REQUEST_URI"]); ?>">
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">PIN</span>
@@ -26,9 +26,9 @@ $this->title = 'Verify Access';
 		</label>
 	</div>
 	<div class="pf-element pf-buttons">
-		<input type="hidden" name="option" value="<?php echo htmlspecialchars($this->orig_component); ?>" />
-		<input type="hidden" name="action" value="<?php echo htmlspecialchars($this->orig_action); ?>" />
-		<input type="hidden" name="sessionid" value="<?php echo htmlspecialchars($this->orig_sessionid); ?>" />
+		<input type="hidden" name="option" value="<?php e($this->orig_component); ?>" />
+		<input type="hidden" name="action" value="<?php e($this->orig_action); ?>" />
+		<input type="hidden" name="sessionid" value="<?php e($this->orig_sessionid); ?>" />
 		<input type="hidden" name="com_pinlock_continue" value="true" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Continue" />
 		<input class="pf-button btn" type="reset" name="reset" value="Reset" />

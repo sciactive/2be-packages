@@ -53,27 +53,27 @@ $pines->com_testimonials->load();
 					</div>
 					<div class="testimonial-loader"><i class="icon-spinner icon-spin"></i><p>Loading</p></div>
 					<div class="testimonial loaded-testimonial" itemprop="review" itemscope itemtype="http://schema.org/Review">
-						<meta itemprop="name" content="<?php echo htmlspecialchars($pines->config->com_testimonials->business_review_name); ?>" />
-						<meta itemprop="about" content="<?php echo htmlspecialchars($pines->config->com_testimonials->business_review_name); ?>" />
+						<meta itemprop="name" content="<?php e($pines->config->com_testimonials->business_review_name); ?>" />
+						<meta itemprop="about" content="<?php e($pines->config->com_testimonials->business_review_name); ?>" />
 						<?php
 						if (is_array($testimonial)) { ?>
-						<meta itemprop="datePublished" content="<?php echo htmlspecialchars($testimonial['date']); ?>">
+						<meta itemprop="datePublished" content="<?php e($testimonial['date']); ?>">
 						<blockquote>
-							<p itemprop="reviewBody">"<?php echo htmlspecialchars($testimonial['testimonial']); ?>"</p>
+							<p itemprop="reviewBody">"<?php e($testimonial['testimonial']); ?>"</p>
 						<?php if ($testimonial['author']) { ?>
 						<small>
 							<?php 
 							$just_author = preg_replace('/ in.*$/', '', $testimonial['author']);
 							$place = ' in'.preg_replace('/.*?in/', '', $testimonial['author']);
 							?>
-							<span itemprop="author"><?php echo htmlspecialchars($just_author); ?></span><?php echo htmlspecialchars($place); ?>
+							<span itemprop="author"><?php e($just_author); ?></span><?php e($place); ?>
 						</small>
 						<?php } ?>
 						<div class="pull-right rating-container" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"> 
 							<span>
 								<meta content="1" itemprop="worstRating">
 								<meta content="5" itemprop="bestRating">
-								<meta content="<?php echo htmlspecialchars((int) $testimonial['rating']); ?>" itemprop="ratingValue">
+								<meta content="<?php e((int) $testimonial['rating']); ?>" itemprop="ratingValue">
 							<?php 
 							for ($c = 1; $c <= 5; $c++) { 
 								if ((int) $testimonial['rating'] >= $c) { ?>
@@ -187,7 +187,7 @@ $pines->com_testimonials->load();
 									}
 								}
 								?>
-								<div style="text-align:center;"><a class="btn btn-success btn-block btn-large signup-button" href="<?php echo htmlspecialchars($pines->config->com_testimonials->signup_link); ?>">Sign Up!</a></div>
+								<div style="text-align:center;"><a class="btn btn-success btn-block btn-large signup-button" href="<?php e($pines->config->com_testimonials->signup_link); ?>">Sign Up!</a></div>
 								<?php
 								$login = $pines->user_manager->print_login(null, $url);
 								$login->detach();

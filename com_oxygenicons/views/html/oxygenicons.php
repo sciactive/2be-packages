@@ -12,5 +12,5 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_oxygenicons/includes/oxygen/icons.css");
+	pines.loadcss("<?php e($pines->config->location); ?>components/com_oxygenicons/includes/oxygen/icons.css");
 </script>

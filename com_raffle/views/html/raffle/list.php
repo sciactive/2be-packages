@@ -71,13 +71,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->raffles as $raffle) { ?>
-		<tr title="<?php echo htmlspecialchars($raffle->guid); ?>">
-			<td><?php echo htmlspecialchars($raffle->id); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($raffle->guid); ?>" data-entity-context="com_raffle_raffle"><?php echo htmlspecialchars($raffle->name); ?></a></td>
+		<tr title="<?php e($raffle->guid); ?>">
+			<td><?php e($raffle->id); ?></td>
+			<td><a data-entity="<?php e($raffle->guid); ?>" data-entity-context="com_raffle_raffle"><?php e($raffle->name); ?></a></td>
 			<td><?php echo (count($raffle->contestants) + count($raffle->public_contestants)); ?></td>
-			<td><?php echo htmlspecialchars($raffle->places); ?></td>
+			<td><?php e($raffle->places); ?></td>
 			<td><?php echo ($raffle->complete ? 'Yes' : 'No'); ?></td>
-			<td><?php echo ($raffle->public ? '<a href="'.htmlspecialchars(pines_url('com_raffle', 'enter', array('id' => $raffle->guid), true)).'" target="_blank">'.htmlspecialchars(pines_url('com_raffle', 'raffle', array('id' => $raffle->guid), true)).'</a>' : 'Not Public'); ?></td>
+			<td><?php echo ($raffle->public ? '<a href="'.h(pines_url('com_raffle', 'enter', array('id' => $raffle->guid), true)).'" target="_blank">'.h(pines_url('com_raffle', 'raffle', array('id' => $raffle->guid), true)).'</a>' : 'Not Public'); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

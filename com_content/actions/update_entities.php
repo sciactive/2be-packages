@@ -50,7 +50,7 @@ foreach ($entities as $cur_category) {
 //		if ($cur_entity->save())
 //			$success++;
 //		else
-//			$failed[] = htmlspecialchars($cur_entity->name);
+//			$failed[] = h($cur_entity->name);
 //	} else
 //		$no_change++;
 //}

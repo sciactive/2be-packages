@@ -53,7 +53,7 @@ $this->note = 'All new packages are signed against this certificate.';
 	<div id="p_muid_key_unsure" style="display: none;">
 		Your private key could not be verified as not readable. Please manually
 		check the address at
-		<?php echo htmlspecialchars("{$pines->config->location}{$pines->config->com_repository->repository_path}private/cert.key"); ?>.
+		<?php e("{$pines->config->location}{$pines->config->com_repository->repository_path}private/cert.key"); ?>.
 		If it is readable, you should block access to it by setting
 		"AllowOverride" to "All" in your Apache configuration. (Or something
 		similar if you're not using Apache.) After the key is verified to not be
@@ -63,7 +63,7 @@ $this->note = 'All new packages are signed against this certificate.';
 	<div id="p_muid_key_unsafe" style="display: none;">
 		<div style="float: left; height: 16px; width: 16px; margin: .5em;" class="ui-icon ui-icon-alert">&nbsp;</div>
 		Your private key is readable at the address,
-		<?php echo htmlspecialchars("{$pines->config->location}{$pines->config->com_repository->repository_path}private/cert.key"); ?>.
+		<?php e("{$pines->config->location}{$pines->config->com_repository->repository_path}private/cert.key"); ?>.
 		This is a serious security risk. This private key is used to sign
 		packages and should never be accessible to anyone but yourself. You
 		should block access to it by setting "AllowOverride" to "All" in your
@@ -80,7 +80,7 @@ $this->note = 'All new packages are signed against this certificate.';
 		software source. If your certificate is self signed, however, the user
 		will need to add your certificate as a trusted authority.
 		<div class="pf-group">
-			<a class="pf-field" href="<?php echo htmlspecialchars(pines_url('com_repository', 'publiccert', array(), true)); ?>" target="_blank"><?php echo htmlspecialchars(pines_url('com_repository', 'publiccert', array(), true)); ?></a>
+			<a class="pf-field" href="<?php e(pines_url('com_repository', 'publiccert', array(), true)); ?>" target="_blank"><?php e(pines_url('com_repository', 'publiccert', array(), true)); ?></a>
 		</div>
 	</div>
 	<?php } ?>
@@ -95,7 +95,7 @@ $this->note = 'All new packages are signed against this certificate.';
 		<span class="pf-note">Full repository certificate text.</span>
 		<span class="pf-group pf-full-width">
 			<span class="pf-field" style="display: block;">
-				<textarea readonly="readonly" style="width: 100%;" rows="8" cols="35"><?php echo htmlspecialchars($this->cert); ?></textarea>
+				<textarea readonly="readonly" style="width: 100%;" rows="8" cols="35"><?php e($this->cert); ?></textarea>
 			</span>
 		</span>
 	</div>
@@ -103,7 +103,7 @@ $this->note = 'All new packages are signed against this certificate.';
 		<span class="pf-label">Certificate Details</span>
 		<span class="pf-group pf-full-width">
 			<span class="pf-field" style="display: block;">
-				<textarea readonly="readonly" style="width: 100%;" rows="16" cols="35"><?php echo htmlspecialchars(print_r($this->data, true)); ?></textarea>
+				<textarea readonly="readonly" style="width: 100%;" rows="16" cols="35"><?php e(print_r($this->data, true)); ?></textarea>
 			</span>
 		</span>
 	</div>

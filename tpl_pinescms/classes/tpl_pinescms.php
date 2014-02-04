@@ -74,10 +74,10 @@ class tpl_pinescms extends template {
 	public function sub_menu(&$menu) {
 		$count = count($menu);
 		$return = '<li class="'.($menu[0]['current_page'] || $menu[0]['current_page_parent'] ? 'current_page' : '').'"><a'.($count > 1 ? ' class="dir"' : '').' href="'.
-			(isset($menu[0]['href']) ? htmlspecialchars($menu[0]['href']) : 'javascript:void(0);').'"'.
+			(isset($menu[0]['href']) ? h($menu[0]['href']) : 'javascript:void(0);').'"'.
 			(isset($menu[0]['onclick']) ? " onclick=\"{$menu[0]['onclick']}\"" : '').
 			(isset($menu[0]['target']) ? " target=\"{$menu[0]['target']}\"" : '')
-			.'>'.htmlspecialchars($menu[0]['text']).'</a>';
+			.'>'.h($menu[0]['text']).'</a>';
 		if ($count > 1) {
 			$return .= '<ul>';
 			foreach ($menu as $key => &$value) {

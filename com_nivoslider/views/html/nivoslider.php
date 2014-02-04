@@ -12,6 +12,6 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_nivoslider/includes/nivo-slider.css");
-	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_nivoslider/includes/<?php echo $pines->config->debug_mode ? 'jquery.nivo.slider.js' : 'jquery.nivo.slider.pack.js'; ?>");
+	pines.loadcss("<?php e($pines->config->location); ?>components/com_nivoslider/includes/nivo-slider.css");
+	pines.loadjs("<?php e($pines->config->location); ?>components/com_nivoslider/includes/<?php echo $pines->config->debug_mode ? 'jquery.nivo.slider.js' : 'jquery.nivo.slider.pack.js'; ?>");
 </script>

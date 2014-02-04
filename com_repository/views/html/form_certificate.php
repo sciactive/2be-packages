@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Generate a Certificate';
 $this->note = 'All packages will be signed against this new certificate. Any current signatures will become invalid.';
 ?>
-<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_repository', 'savecert')); ?>">
+<form class="pf-form" method="post" action="<?php e(pines_url('com_repository', 'savecert')); ?>">
 	<div class="pf-element">
 		<label><span class="pf-label">Country Name</span>
 			<span class="pf-note">2 Letter Code (Ex: US)</span>
@@ -42,7 +42,7 @@ $this->note = 'All packages will be signed against this new certificate. Any cur
 	<div class="pf-element">
 		<label><span class="pf-label">Common Name</span>
 			<span class="pf-note">Eg, The Repository (Ex: http://pines.example.com/repo/)</span>
-			<input class="pf-field" type="text" name="commonName" size="24" value="<?php echo htmlspecialchars($pines->config->full_location); ?>" /></label>
+			<input class="pf-field" type="text" name="commonName" size="24" value="<?php e($pines->config->full_location); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Email Address</span>
@@ -56,7 +56,7 @@ $this->note = 'All packages will be signed against this new certificate. Any cur
 			<span class="pf-note">Which digest method to use.</span>
 			<select class="pf-field" name="digest_alg">
 				<?php foreach (openssl_get_md_methods() as $cur_method) { ?>
-				<option value="<?php echo htmlspecialchars($cur_method); ?>"<?php echo ($cur_method == 'sha1') ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_method); ?></option>
+				<option value="<?php e($cur_method); ?>"<?php echo ($cur_method == 'sha1') ? ' selected="selected"' : ''; ?>><?php e($cur_method); ?></option>
 				<?php } ?>
 			</select></label>
 	</div>

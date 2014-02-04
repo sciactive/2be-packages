@@ -11,7 +11,7 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 if (empty($this->title))
-	$this->title = 'Log in to '.htmlspecialchars($pines->config->system_name);
+	$this->title = 'Log in to '.h($pines->config->system_name);
 $this->check_username = ($pines->config->com_user->allow_registration && $pines->config->com_user->check_username);
 if ($this->check_username)
 	$pines->icons->load();
@@ -38,7 +38,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 <?php } if ($this->sawasc || ($this->style != 'compact' && $this->style != 'small')) { ?>
 <script type="text/javascript">
 	<?php if ($this->sawasc) { ?>
-	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_user/includes/hash.js");
+	pines.loadjs("<?php e($pines->config->location); ?>components/com_user/includes/hash.js");
 	<?php } ?>
 	pines(function(){
 		<?php if ($this->style != 'compact' && $this->style != 'small') { ?>
@@ -64,7 +64,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 </script>
 <?php } ?>
 <div id="p_muid_form" class="clearfix"<?php echo ($this->style == 'compact') ? ' style="display: none; max-height: 500px; overflow-y: auto; overflow-x: hidden;"' : ''; ?>>
-	<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url()); ?>">
+	<form class="pf-form" method="post" action="<?php e(pines_url()); ?>">
 		<?php if ($pines->config->com_user->allow_registration) { ?>
 		<div class="pf-element">
 			<script type="text/javascript">
@@ -236,7 +236,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 						<?php $tz = DateTimeZone::listIdentifiers();
 						sort($tz);
 						foreach ($tz as $cur_tz) { ?>
-						<option value="<?php echo htmlspecialchars($cur_tz); ?>"><?php echo htmlspecialchars($cur_tz); ?></option>
+						<option value="<?php e($cur_tz); ?>"><?php e($cur_tz); ?></option>
 						<?php } ?>
 					</select>
 					<?php echo ($this->style == 'compact') ? '</div>' : ''; ?>
@@ -365,7 +365,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 			<?php if ($this->sawasc) { ?>
 			<input type="hidden" name="ClientHash" value="" />
 			<?php } if ( !empty($this->url) ) { ?>
-			<input type="hidden" name="url" value="<?php echo htmlspecialchars($this->url); ?>" />
+			<input type="hidden" name="url" value="<?php e($this->url); ?>" />
 			<?php } ?>
 			<input class="pf-button btn btn-primary" type="submit" name="submit" value="Log In" />
 			<?php if ($this->style != 'small') { ?>
@@ -377,7 +377,7 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 			<?php if ($this->style != 'small') { ?>
 			<span class="pf-label" style="height: 1px;">&nbsp;</span>
 			<?php } ?>
-			<a class="pf-field" href="<?php echo htmlspecialchars(pines_url('com_user', 'recover')); ?>">I can't access my account.</a>
+			<a class="pf-field" href="<?php e(pines_url('com_user', 'recover')); ?>">I can't access my account.</a>
 		</div>
 		<?php } ?>
 	</form>
@@ -408,5 +408,5 @@ $this->sawasc = $pines->com_user->activate_sawasc();
 		});
 	});
 </script>
-<a href="javascript:void(0);" id="p_muid_compact_link"><?php echo htmlspecialchars($this->compact_text); ?></a>
+<a href="javascript:void(0);" id="p_muid_compact_link"><?php e($this->compact_text); ?></a>
 <?php }

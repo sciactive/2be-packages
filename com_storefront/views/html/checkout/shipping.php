@@ -30,25 +30,25 @@ $this->title = 'Shipping Address';
 
 		// Fill in address with profile.
 		$("#p_muid_use_profile").click(function(){
-			$("[name=name]", "#p_muid_form").val(<?php echo json_encode(htmlspecialchars($this->user_address->name)); ?>).change();
+			$("[name=name]", "#p_muid_form").val(<?php echo json_encode(h($this->user_address->name)); ?>).change();
 			$("[name=address_type][value=<?php echo (!isset($this->user_address->address_type) || $this->user_address->address_type == 'us') ? 'us' : 'international'; ?>]", "#p_muid_form").attr("checked", true).change();
-			$("[name=address_1]", "#p_muid_form").val(<?php echo json_encode(htmlspecialchars($this->user_address->address_1)); ?>).change();
-			$("[name=address_2]", "#p_muid_form").val(<?php echo json_encode(htmlspecialchars($this->user_address->address_2)); ?>).change();
-			$("[name=city]", "#p_muid_form").val(<?php echo json_encode(htmlspecialchars($this->user_address->city)); ?>).change();
-			$("[name=state]", "#p_muid_form").val(<?php echo json_encode(htmlspecialchars($this->user_address->state)); ?>).change();
-			$("[name=zip]", "#p_muid_form").val(<?php echo json_encode(htmlspecialchars($this->user_address->zip)); ?>).change();
-			$("[name=address_international]", "#p_muid_form").val(<?php echo json_encode(htmlspecialchars($this->user_address->address_international)); ?>).change();
+			$("[name=address_1]", "#p_muid_form").val(<?php echo json_encode(h($this->user_address->address_1)); ?>).change();
+			$("[name=address_2]", "#p_muid_form").val(<?php echo json_encode(h($this->user_address->address_2)); ?>).change();
+			$("[name=city]", "#p_muid_form").val(<?php echo json_encode(h($this->user_address->city)); ?>).change();
+			$("[name=state]", "#p_muid_form").val(<?php echo json_encode(h($this->user_address->state)); ?>).change();
+			$("[name=zip]", "#p_muid_form").val(<?php echo json_encode(h($this->user_address->zip)); ?>).change();
+			$("[name=address_international]", "#p_muid_form").val(<?php echo json_encode(h($this->user_address->address_international)); ?>).change();
 		});
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_storefront', 'checkout/shippingsave')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_storefront', 'checkout/shippingsave')); ?>">
 	<div class="pf-element">
 		<span class="pf-label">Autofill</span>
 		<small><button type="button" class="pf-field btn" id="p_muid_use_profile">Use My Account Info</button></small>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars(isset($this->address->name) ? $this->address->name : $this->user_address->name); ?>" /></label>
+			<input class="pf-field" type="text" name="name" size="24" value="<?php e(isset($this->address->name) ? $this->address->name : $this->user_address->name); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Address Type</span>
@@ -58,15 +58,15 @@ $this->title = 'Shipping Address';
 	<div id="p_muid_address_us" style="display: none;">
 		<div class="pf-element">
 			<label><span class="pf-label">Address 1</span>
-				<input class="pf-field" type="text" name="address_1" size="24" value="<?php echo htmlspecialchars($this->address->address_1); ?>" /></label>
+				<input class="pf-field" type="text" name="address_1" size="24" value="<?php e($this->address->address_1); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Address 2</span>
-				<input class="pf-field" type="text" name="address_2" size="24" value="<?php echo htmlspecialchars($this->address->address_2); ?>" /></label>
+				<input class="pf-field" type="text" name="address_2" size="24" value="<?php e($this->address->address_2); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">City, State</span>
-			<input class="pf-field" type="text" name="city" size="15" value="<?php echo htmlspecialchars($this->address->city); ?>" />
+			<input class="pf-field" type="text" name="city" size="15" value="<?php e($this->address->city); ?>" />
 			<select class="pf-field" name="state">
 				<option value="">None</option>
 				<?php foreach (array(
@@ -131,7 +131,7 @@ $this->title = 'Shipping Address';
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Zip</span>
-				<input class="pf-field" type="text" name="zip" size="24" value="<?php echo htmlspecialchars($this->address->zip); ?>" /></label>
+				<input class="pf-field" type="text" name="zip" size="24" value="<?php e($this->address->zip); ?>" /></label>
 		</div>
 	</div>
 	<div id="p_muid_address_international" style="display: none;">
@@ -139,7 +139,7 @@ $this->title = 'Shipping Address';
 			<label><span class="pf-label">Address</span>
 				<span class="pf-field pf-full-width">
 					<span class="pf-field" style="display: block;">
-						<textarea style="width: 100%;" rows="3" cols="35" name="address_international"><?php echo htmlspecialchars($this->address->address_international); ?></textarea>
+						<textarea style="width: 100%;" rows="3" cols="35" name="address_international"><?php e($this->address->address_international); ?></textarea>
 					</span>
 				</span></label>
 		</div>

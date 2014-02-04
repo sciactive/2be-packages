@@ -10,9 +10,9 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Welcome to '.htmlspecialchars($pines->config->system_name);
+$this->title = 'Welcome to '.h($pines->config->system_name);
 $this->note = 'You are now registered and logged in.';
 ?>
 <div>
-	<?php echo htmlspecialchars($pines->config->com_user->reg_message_welcome); ?>
+	<?php e($pines->config->com_user->reg_message_welcome); ?>
 </div>

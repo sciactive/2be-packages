@@ -262,17 +262,17 @@ $pines->com_jstree->load();
 				break;
 		}
 	?>
-		<tr title="<?php echo htmlspecialchars($cur_transaction->entity->guid); ?>">
-			<td><?php echo htmlspecialchars(format_date($cur_transaction->entity->p_cdate)); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($cur_transaction->stock->guid); ?>" data-entity-context="com_sales_stock"><?php echo htmlspecialchars($cur_transaction->stock->guid); ?></a></td>
-			<td><?php echo htmlspecialchars($cur_transaction->product->sku); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($cur_transaction->product->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_transaction->product->name); ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$group->name} [{$group->groupname}]"); ?></a></td>
-			<td><a data-entity="<?php echo htmlspecialchars($link); ?>" data-entity-context="<?php echo htmlspecialchars($context); ?>"><?php echo htmlspecialchars($cur_transaction->entity->guid); ?></a></td>
-			<td><?php echo htmlspecialchars(ucwords($cur_transaction->type)); ?></td>
-			<td><?php echo htmlspecialchars($cur_transaction->transaction_info); ?></td>
-			<td><?php echo htmlspecialchars($quantity); ?></td>
-			<td><?php echo htmlspecialchars($serials); ?></td>
+		<tr title="<?php e($cur_transaction->entity->guid); ?>">
+			<td><?php e(format_date($cur_transaction->entity->p_cdate)); ?></td>
+			<td><a data-entity="<?php e($cur_transaction->stock->guid); ?>" data-entity-context="com_sales_stock"><?php e($cur_transaction->stock->guid); ?></a></td>
+			<td><?php e($cur_transaction->product->sku); ?></td>
+			<td><a data-entity="<?php e($cur_transaction->product->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_transaction->product->name); ?></a></td>
+			<td><a data-entity="<?php e($group->guid); ?>" data-entity-context="group"><?php e("{$group->name} [{$group->groupname}]"); ?></a></td>
+			<td><a data-entity="<?php e($link); ?>" data-entity-context="<?php e($context); ?>"><?php e($cur_transaction->entity->guid); ?></a></td>
+			<td><?php e(ucwords($cur_transaction->type)); ?></td>
+			<td><?php e($cur_transaction->transaction_info); ?></td>
+			<td><?php e($quantity); ?></td>
+			<td><?php e($serials); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

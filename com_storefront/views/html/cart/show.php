@@ -298,15 +298,15 @@ $pines->icons->load();
 		<br style="clear: both; height: 0;" />
 	</div>
 	<?php foreach ($pines->com_storefront->cart() as $cur_item) { ?>
-	<div class="product guid_<?php echo htmlspecialchars($cur_item['product']->guid); ?>">
-		<div class="guid" style="display: none;"><?php echo htmlspecialchars($cur_item['product']->guid); ?></div>
-		<div class="unit_price" style="display: none;"><?php echo htmlspecialchars($cur_item['product']->unit_price); ?></div>
+	<div class="product guid_<?php e($cur_item['product']->guid); ?>">
+		<div class="guid" style="display: none;"><?php e($cur_item['product']->guid); ?></div>
+		<div class="unit_price" style="display: none;"><?php e($cur_item['product']->unit_price); ?></div>
 		<button type="button" class="btn" title="Remove"><i class="icon-remove"></i></button>
-		<div class="name"><?php echo htmlspecialchars($cur_item['product']->name); ?></div>
+		<div class="name"><?php e($cur_item['product']->name); ?></div>
 		<?php if ($pines->config->com_storefront->cart_prices) { ?>
-		<div class="price">$<?php echo htmlspecialchars($pines->com_sales->round($cur_item['product']->unit_price * $cur_item['quantity'], true)); ?></div>
+		<div class="price">$<?php e($pines->com_sales->round($cur_item['product']->unit_price * $cur_item['quantity'], true)); ?></div>
 		<?php } ?>
-		<div class="qty ui-corner-all"><?php echo htmlspecialchars($cur_item['quantity']); ?></div>
+		<div class="qty ui-corner-all"><?php e($cur_item['quantity']); ?></div>
 		<br style="clear: both; height: 0;" />
 	</div>
 	<?php } ?>
@@ -317,11 +317,11 @@ $pines->icons->load();
 		<div class="subtotal_label">Subtotal <small>(before tax/fees)</small></div><div class="subtotal"></div>
 		<br style="clear: both; height: 0;" />
 		<?php } if ($pines->config->com_storefront->cart_link) { ?>
-		<div class="cart_link"><a href="<?php echo htmlspecialchars(pines_url('com_storefront', 'cart/view')); ?>">See Cart</a></div>
+		<div class="cart_link"><a href="<?php e(pines_url('com_storefront', 'cart/view')); ?>">See Cart</a></div>
 		<br style="clear: both; height: 0;" />
 		<?php } ?>
 		<button type="button" class="empty_cart btn btn-danger" title="Empty Cart"><i class="icon-trash icon-white"></i></button>
-		<button type="button" class="checkout btn btn-primary" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);"><i class="icon-ok icon-white"></i> Check-Out</button>
+		<button type="button" class="checkout btn btn-primary" onclick="pines.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);"><i class="icon-ok icon-white"></i> Check-Out</button>
 		<br style="clear: both; height: 0;" />
 	</div>
 	<div class="no_items"<?php echo $pines->com_storefront->cart() ? ' style="display: none;"' : ''; ?>>

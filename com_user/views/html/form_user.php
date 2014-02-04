@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New User' : 'Editing ['.htmlspecialchars($this->entity->username).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New User' : 'Editing ['.h($this->entity->username).']';
 $this->note = 'Provide user details in this form.';
 $pines->com_pgrid->load();
 //$pines->com_jstree->load();
@@ -88,7 +88,7 @@ if ($pines->config->com_user->check_username) { ?>
 		});
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_user', 'saveuser')); ?>" autocomplete="off">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_user', 'saveuser')); ?>" autocomplete="off">
 	<ul class="nav nav-tabs" style="clear: both;">
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
 		<?php if ($this->display_groups) { ?>
@@ -106,19 +106,19 @@ if ($pines->config->com_user->check_username) { ?>
 			<div style="float: right; text-align: right;">
 				<?php if (isset($this->entity->guid)) { ?>
 				<div class="date_info" style="margin-bottom: 1em;">
-					<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-					<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+					<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+					<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 				</div>
 				<?php } ?>
 				<div class="thumbnail pull-right">
-					<img src="<?php echo htmlspecialchars($this->entity->info('avatar')); ?>" alt="Avatar" title="Avatar by Gravatar" />
+					<img src="<?php e($this->entity->info('avatar')); ?>" alt="Avatar" title="Avatar by Gravatar" />
 				</div>
 			</div>
 			<?php if (!$pines->config->com_user->email_usernames && $this->display_username) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Username</span>
 					<span class="pf-group" style="display: block;">
-						<input class="pf-field" type="text" name="username" size="24" value="<?php echo htmlspecialchars($this->entity->username); ?>" />
+						<input class="pf-field" type="text" name="username" size="24" value="<?php e($this->entity->username); ?>" />
 						<?php if ($pines->config->com_user->check_username) { ?>
 						<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 						<span class="pf-field picon" id="p_muid_username_message"></span>
@@ -129,15 +129,15 @@ if ($pines->config->com_user->check_username) { ?>
 			<?php } if (in_array('name', $pines->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">First Name</span>
-					<input class="pf-field" type="text" name="name_first" size="24" value="<?php echo htmlspecialchars($this->entity->name_first); ?>" /></label>
+					<input class="pf-field" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Middle Name</span>
-					<input class="pf-field" type="text" name="name_middle" size="24" value="<?php echo htmlspecialchars($this->entity->name_middle); ?>" /></label>
+					<input class="pf-field" type="text" name="name_middle" size="24" value="<?php e($this->entity->name_middle); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Last Name</span>
-					<input class="pf-field" type="text" name="name_last" size="24" value="<?php echo htmlspecialchars($this->entity->name_last); ?>" /></label>
+					<input class="pf-field" type="text" name="name_last" size="24" value="<?php e($this->entity->name_last); ?>" /></label>
 			</div>
 			<?php } if ($this->display_enable) { ?>
 			<div class="pf-element">
@@ -149,7 +149,7 @@ if ($pines->config->com_user->check_username) { ?>
 				<?php if ($this->display_email_verified && isset($this->entity->secret)) { ?>
 				<label for="p_muid_email"><span class="pf-label">Email</span></label>
 				<div class="pf-group">
-					<input class="pf-field" type="email" name="email" id="p_muid_email" size="24" value="<?php echo htmlspecialchars($this->entity->email); ?>" />
+					<input class="pf-field" type="email" name="email" id="p_muid_email" size="24" value="<?php e($this->entity->email); ?>" />
 					<?php if ($pines->config->com_user->email_usernames && $pines->config->com_user->check_username) { ?>
 					<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 					<span class="pf-field picon" id="p_muid_username_message"></span>
@@ -159,7 +159,7 @@ if ($pines->config->com_user->check_username) { ?>
 				<?php } else { ?>
 				<label>
 					<span class="pf-label">Email</span>
-					<input class="pf-field" type="email" name="email" size="24" value="<?php echo htmlspecialchars($this->entity->email); ?>" />
+					<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" />
 					<?php if ($pines->config->com_user->email_usernames && $pines->config->com_user->check_username) { ?>
 					<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 					<span class="pf-field picon" id="p_muid_username_message"></span>
@@ -175,17 +175,17 @@ if ($pines->config->com_user->check_username) { ?>
 			<?php } } if (in_array('phone', $pines->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone</span>
-					<input class="pf-field" type="tel" name="phone" size="24" value="<?php echo htmlspecialchars(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<?php } if (in_array('fax', $pines->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Fax</span>
-					<input class="pf-field" type="tel" name="fax" size="24" value="<?php echo htmlspecialchars(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<?php } if ($pines->config->com_user->referral_codes) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Referral Code</span>
-					<input class="pf-field" type="text" name="referral_code" size="24" value="<?php echo htmlspecialchars($this->entity->referral_code); ?>" /></label>
+					<input class="pf-field" type="text" name="referral_code" size="24" value="<?php e($this->entity->referral_code); ?>" /></label>
 			</div>
 			<?php } if (in_array('timezone', $pines->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
@@ -198,7 +198,7 @@ if ($pines->config->com_user->check_username) { ?>
 						$tz = DateTimeZone::listIdentifiers();
 						sort($tz);
 						foreach ($tz as $cur_tz) {
-							?><option value="<?php echo htmlspecialchars($cur_tz); ?>"<?php echo $this->entity->timezone == $cur_tz ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_tz); ?></option><?php
+							?><option value="<?php e($cur_tz); ?>"<?php echo $this->entity->timezone == $cur_tz ? ' selected="selected"' : ''; ?>><?php e($cur_tz); ?></option><?php
 						} ?>
 					</select>
 				</label>
@@ -221,12 +221,12 @@ if ($pines->config->com_user->check_username) { ?>
 			<?php } elseif (isset($this->entity->guid) && $this->entity->is($_SESSION['user'])) { ?>
 			<div class="pf-element">
 				<span class="pf-label">Password</span>
-				<span class="pf-field"><a href="<?php echo htmlspecialchars(pines_url('com_user', 'updatepassword')); ?>" onclick="return confirm('If you have made changes and you don\'t submit them before leaving this page, they will be lost.');">Update your password.</a></span>
+				<span class="pf-field"><a href="<?php e(pines_url('com_user', 'updatepassword')); ?>" onclick="return confirm('If you have made changes and you don\'t submit them before leaving this page, they will be lost.');">Update your password.</a></span>
 			</div>
 			<?php } if ($this->display_pin && in_array('pin', $pines->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">PIN code</span>
-					<input class="pf-field" type="password" name="pin" size="5" value="<?php echo htmlspecialchars($this->entity->pin); ?>" <?php echo $pines->config->com_user->max_pin_length > 0 ? "maxlength=\"{$pines->config->com_user->max_pin_length}\"" : ''; ?>/></label>
+					<input class="pf-field" type="password" name="pin" size="5" value="<?php e($this->entity->pin); ?>" <?php echo $pines->config->com_user->max_pin_length > 0 ? "maxlength=\"{$pines->config->com_user->max_pin_length}\"" : ''; ?>/></label>
 			</div>
 			<?php } ?>
 			<br class="pf-clearing" />
@@ -246,7 +246,7 @@ if ($pines->config->com_user->check_username) { ?>
 							<?php
 							$pines->user_manager->group_sort($this->group_array_primary, 'name');
 							foreach ($this->group_array_primary as $cur_group) {
-								?><option value="<?php echo htmlspecialchars($cur_group->guid); ?>"<?php echo $cur_group->is($this->entity->group) ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
+								?><option value="<?php e($cur_group->guid); ?>"<?php echo $cur_group->is($this->entity->group) ? ' selected="selected"' : ''; ?>><?php e(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
 							} ?>
 						</select>
 					</label>
@@ -298,10 +298,10 @@ if ($pines->config->com_user->check_username) { ?>
 								</thead>
 								<tbody>
 								<?php foreach($this->group_array_secondary as $cur_group) { ?>
-									<tr title="<?php echo htmlspecialchars($cur_group->guid); ?>" class="<?php echo $cur_group->get_children() ? 'parent ' : ''; ?><?php echo (isset($cur_group->parent) && $cur_group->parent->in_array($this->group_array_secondary)) ? htmlspecialchars("child ch_{$cur_group->parent->guid} ") : ''; ?>">
-										<td><input type="checkbox" name="groups[]" value="<?php echo htmlspecialchars($cur_group->guid); ?>" <?php echo $cur_group->in_array($this->entity->groups) ? 'checked="checked" ' : ''; ?>/></td>
-										<td><?php echo htmlspecialchars($cur_group->name); ?></td>
-										<td><a data-entity="<?php echo htmlspecialchars($cur_group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($cur_group->groupname); ?></a></td>
+									<tr title="<?php e($cur_group->guid); ?>" class="<?php echo $cur_group->get_children() ? 'parent ' : ''; ?><?php echo (isset($cur_group->parent) && $cur_group->parent->in_array($this->group_array_secondary)) ? h("child ch_{$cur_group->parent->guid} ") : ''; ?>">
+										<td><input type="checkbox" name="groups[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->in_array($this->entity->groups) ? 'checked="checked" ' : ''; ?>/></td>
+										<td><?php e($cur_group->name); ?></td>
+										<td><a data-entity="<?php e($cur_group->guid); ?>" data-entity-context="group"><?php e($cur_group->groupname); ?></a></td>
 									</tr>
 								<?php } ?>
 								</tbody>
@@ -344,15 +344,15 @@ if ($pines->config->com_user->check_username) { ?>
 			<div id="p_muid_address_us" style="display: none;">
 				<div class="pf-element">
 					<label><span class="pf-label">Address 1</span>
-						<input class="pf-field" type="text" name="address_1" size="24" value="<?php echo htmlspecialchars($this->entity->address_1); ?>" /></label>
+						<input class="pf-field" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Address 2</span>
-						<input class="pf-field" type="text" name="address_2" size="24" value="<?php echo htmlspecialchars($this->entity->address_2); ?>" /></label>
+						<input class="pf-field" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<span class="pf-label">City, State</span>
-					<input class="pf-field" type="text" name="city" size="15" value="<?php echo htmlspecialchars($this->entity->city); ?>" />
+					<input class="pf-field" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
 					<select class="pf-field" name="state">
 						<option value="">None</option>
 						<?php foreach (array(
@@ -417,7 +417,7 @@ if ($pines->config->com_user->check_username) { ?>
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Zip</span>
-						<input class="pf-field" type="text" name="zip" size="24" value="<?php echo htmlspecialchars($this->entity->zip); ?>" /></label>
+						<input class="pf-field" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
 				</div>
 			</div>
 			<div id="p_muid_address_international" style="display: none;">
@@ -425,7 +425,7 @@ if ($pines->config->com_user->check_username) { ?>
 					<label><span class="pf-label">Address</span>
 						<span class="pf-group pf-full-width">
 							<span class="pf-field" style="display: block;">
-								<textarea style="width: 100%;" rows="3" cols="35" name="address_international"><?php echo htmlspecialchars($this->entity->address_international); ?></textarea>
+								<textarea style="width: 100%;" rows="3" cols="35" name="address_international"><?php e($this->entity->address_international); ?></textarea>
 							</span>
 						</span></label>
 				</div>
@@ -530,12 +530,12 @@ if ($pines->config->com_user->check_username) { ?>
 					<tbody>
 						<?php foreach ($this->entity->addresses as $cur_address) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars($cur_address['type']); ?></td>
-							<td><?php echo htmlspecialchars($cur_address['address_1']); ?></td>
-							<td><?php echo htmlspecialchars($cur_address['address_2']); ?></td>
-							<td><?php echo htmlspecialchars($cur_address['city']); ?></td>
-							<td><?php echo htmlspecialchars($cur_address['state']); ?></td>
-							<td><?php echo htmlspecialchars($cur_address['zip']); ?></td>
+							<td><?php e($cur_address['type']); ?></td>
+							<td><?php e($cur_address['address_1']); ?></td>
+							<td><?php e($cur_address['address_2']); ?></td>
+							<td><?php e($cur_address['city']); ?></td>
+							<td><?php e($cur_address['state']); ?></td>
+							<td><?php e($cur_address['zip']); ?></td>
 						</tr>
 						<?php } ?>
 					</tbody>
@@ -610,15 +610,15 @@ if ($pines->config->com_user->check_username) { ?>
 			<div class="abilities_accordion accordion">
 				<div class="accordion-group">
 					<a class="accordion-heading ui-helper-clearfix" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-						<big class="accordion-toggle"><?php echo ($cur_section == 'system') ? htmlspecialchars($pines->info->name) : htmlspecialchars($pines->info->$cur_section->name); ?> <span class="component"><?php echo htmlspecialchars($cur_section); ?></span></big>
+						<big class="accordion-toggle"><?php ($cur_section == 'system') ? e($pines->info->name) : e($pines->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
 					</a>
 					<div class="accordion-body collapse">
 						<div class="accordion-inner clearfix">
 							<div class="pf-element">
 								<?php foreach ($section_abilities as $cur_ability) { ?>
 								<label>
-									<input type="checkbox" name="<?php echo htmlspecialchars($cur_section); ?>[]" value="<?php echo htmlspecialchars($cur_ability[0]); ?>" <?php echo (array_search("{$cur_section}/{$cur_ability[0]}", $this->entity->abilities) !== false) ? 'checked="checked" ' : ''; ?>/>
-									<span title="<?php echo htmlspecialchars("{$cur_section}/{$cur_ability[0]}"); ?>" class="label label-info"><?php echo htmlspecialchars($cur_ability[1]); ?></span>&nbsp;<small><?php echo htmlspecialchars($cur_ability[2]); ?></small>
+									<input type="checkbox" name="<?php e($cur_section); ?>[]" value="<?php e($cur_ability[0]); ?>" <?php echo (array_search("{$cur_section}/{$cur_ability[0]}", $this->entity->abilities) !== false) ? 'checked="checked" ' : ''; ?>/>
+									<span title="<?php e("{$cur_section}/{$cur_ability[0]}"); ?>" class="label label-info"><?php e($cur_ability[1]); ?></span>&nbsp;<small><?php e($cur_ability[2]); ?></small>
 								</label>
 								<br class="pf-clearing" />
 								<?php } ?>
@@ -711,7 +711,7 @@ if ($pines->config->com_user->check_username) { ?>
 					</thead>
 					<tbody>
 						<?php foreach ($this->entity->attributes as $cur_attribute) { ?>
-						<tr><td><?php echo htmlspecialchars($cur_attribute['name']); ?></td><td><?php echo htmlspecialchars($cur_attribute['value']); ?></td></tr>
+						<tr><td><?php e($cur_attribute['name']); ?></td><td><?php e($cur_attribute['value']); ?></td></tr>
 						<?php } ?>
 					</tbody>
 				</table>
@@ -736,13 +736,13 @@ if ($pines->config->com_user->check_username) { ?>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
 		<?php if (gatekeeper('com_user/listusers')) { ?>
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_user', 'listusers'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_user', 'listusers'))); ?>);" value="Cancel" />
 		<?php } else { ?>
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 		<?php } ?>
 	</div>
 </form>

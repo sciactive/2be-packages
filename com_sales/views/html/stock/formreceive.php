@@ -12,13 +12,13 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Receive Inventory';
 if (!gatekeeper('com_sales/receivelocation'))
-	$this->note = 'Only use this form to receive inventory into your <strong>current</strong> location ('.(!isset($_SESSION['user']->group) ? 'No Location' : htmlspecialchars($_SESSION['user']->group->name)).').';
+	$this->note = 'Only use this form to receive inventory into your <strong>current</strong> location ('.(!isset($_SESSION['user']->group) ? 'No Location' : h($_SESSION['user']->group->name)).').';
 $pines->com_pgrid->load();
 $pines->com_jstree->load();
 if ($pines->config->com_sales->autocomplete_product)
 	$pines->com_sales->load_product_select();
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'stock/receive')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'stock/receive')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			var products = $("#p_muid_products");
@@ -407,9 +407,9 @@ if ($pines->config->com_sales->autocomplete_product)
 			</thead>
 			<tbody>
 			<?php foreach($this->categories as $category) { ?>
-				<tr title="<?php echo htmlspecialchars($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? htmlspecialchars("child ch_{$category->parent->guid} ") : ''; ?>">
+				<tr title="<?php e($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? h("child ch_{$category->parent->guid} ") : ''; ?>">
 					<td><?php echo isset($category->parent) ? $category->array_search($category->parent->children) + 1 : '0' ; ?></td>
-					<td><?php echo htmlspecialchars($category->name); ?></td>
+					<td><?php e($category->name); ?></td>
 					<td><?php echo count($category->products); ?></td>
 				</tr>
 			<?php } ?>
@@ -452,40 +452,40 @@ if ($pines->config->com_sales->autocomplete_product)
 				</thead>
 				<tbody>
 				<?php foreach($this->pos as $cur_shipment) { ?>
-					<tr title="<?php echo htmlspecialchars($cur_shipment->guid); ?>">
+					<tr title="<?php e($cur_shipment->guid); ?>">
 						<td>PO</td>
-						<td><a data-entity="<?php echo htmlspecialchars($cur_shipment->guid); ?>" data-entity-context="com_sales_po"><?php echo htmlspecialchars($cur_shipment->po_number); ?></a></td>
-						<td><?php echo ($cur_shipment->eta ? htmlspecialchars(format_date($cur_shipment->eta, 'date_sort')) : ''); ?></td>
-						<td><?php echo htmlspecialchars($cur_shipment->reference_number); ?></td>
-						<td><a data-entity="<?php echo htmlspecialchars($cur_shipment->destination->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$cur_shipment->destination->name} [{$cur_shipment->destination->groupname}]"); ?></a></td>
-						<td><a data-entity="<?php echo htmlspecialchars($cur_shipment->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php echo htmlspecialchars($cur_shipment->vendor->name); ?></a></td>
-						<td><a data-entity="<?php echo htmlspecialchars($cur_shipment->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php echo htmlspecialchars($cur_shipment->shipper->name); ?></a></td>
+						<td><a data-entity="<?php e($cur_shipment->guid); ?>" data-entity-context="com_sales_po"><?php e($cur_shipment->po_number); ?></a></td>
+						<td><?php echo ($cur_shipment->eta ? h(format_date($cur_shipment->eta, 'date_sort')) : ''); ?></td>
+						<td><?php e($cur_shipment->reference_number); ?></td>
+						<td><a data-entity="<?php e($cur_shipment->destination->guid); ?>" data-entity-context="group"><?php e("{$cur_shipment->destination->name} [{$cur_shipment->destination->groupname}]"); ?></a></td>
+						<td><a data-entity="<?php e($cur_shipment->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php e($cur_shipment->vendor->name); ?></a></td>
+						<td><a data-entity="<?php e($cur_shipment->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php e($cur_shipment->shipper->name); ?></a></td>
 						<td><?php echo $cur_shipment->final ? ($cur_shipment->finished ? 'Received' : (empty($cur_shipment->received) ? 'Not Received' : 'Partially Received')) : 'Not Committed'; ?></td>
 						<td><?php
 						$names = array();
 						foreach ((array) $cur_shipment->products as $cur_product)
-							$names[] = '<a data-entity="'.htmlspecialchars($cur_product['entity']->guid).'" data-entity-context="com_sales_product">'.htmlspecialchars("{$cur_product['entity']->name} [{$cur_product['entity']->sku}]").'</a>'.($cur_product['quantity'] > 1 ? htmlspecialchars(" x {$cur_product['quantity']}") : '');
+							$names[] = '<a data-entity="'.h($cur_product['entity']->guid).'" data-entity-context="com_sales_product">'.h("{$cur_product['entity']->name} [{$cur_product['entity']->sku}]").'</a>'.($cur_product['quantity'] > 1 ? h(" x {$cur_product['quantity']}") : '');
 						echo implode(', ', $names);
 						?></td>
-						<td><?php echo htmlspecialchars($cur_shipment->comments); ?></td>
+						<td><?php e($cur_shipment->comments); ?></td>
 					</tr>
 				<?php } foreach($this->transfers as $cur_shipment) { ?>
-					<tr title="<?php echo htmlspecialchars($cur_shipment->guid); ?>">
+					<tr title="<?php e($cur_shipment->guid); ?>">
 						<td>Transfer</td>
-						<td><a data-entity="<?php echo htmlspecialchars($cur_shipment->guid); ?>" data-entity-context="com_sales_transfer"><?php echo htmlspecialchars($cur_shipment->guid); ?></a></td>
-						<td><?php echo ($cur_shipment->eta ? htmlspecialchars(format_date($cur_shipment->eta, 'date_sort')) : ''); ?></td>
-						<td><?php echo htmlspecialchars($cur_shipment->reference_number); ?></td>
-						<td><a data-entity="<?php echo htmlspecialchars($cur_shipment->destination->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$cur_shipment->destination->name} [{$cur_shipment->destination->groupname}]"); ?></a></td>
-						<td><a data-entity="<?php echo htmlspecialchars($cur_shipment->origin->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$cur_shipment->origin->name} [{$cur_shipment->origin->groupname}]"); ?></a></td>
-						<td><a data-entity="<?php echo htmlspecialchars($cur_shipment->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php echo htmlspecialchars($cur_shipment->shipper->name); ?></a></td>
+						<td><a data-entity="<?php e($cur_shipment->guid); ?>" data-entity-context="com_sales_transfer"><?php e($cur_shipment->guid); ?></a></td>
+						<td><?php echo ($cur_shipment->eta ? h(format_date($cur_shipment->eta, 'date_sort')) : ''); ?></td>
+						<td><?php e($cur_shipment->reference_number); ?></td>
+						<td><a data-entity="<?php e($cur_shipment->destination->guid); ?>" data-entity-context="group"><?php e("{$cur_shipment->destination->name} [{$cur_shipment->destination->groupname}]"); ?></a></td>
+						<td><a data-entity="<?php e($cur_shipment->origin->guid); ?>" data-entity-context="group"><?php e("{$cur_shipment->origin->name} [{$cur_shipment->origin->groupname}]"); ?></a></td>
+						<td><a data-entity="<?php e($cur_shipment->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php e($cur_shipment->shipper->name); ?></a></td>
 						<td><?php echo $cur_shipment->final ? ($cur_shipment->finished ? 'Received' : (empty($cur_shipment->received) ? 'Not Received' : 'Partially Received')) : 'Not Committed'; ?></td>
 						<td><?php
 						$names = array();
 						foreach ((array) $cur_shipment->products as $cur_product)
-							$names[] = '<a data-entity="'.htmlspecialchars($cur_product->guid).'" data-entity-context="com_sales_product">'.htmlspecialchars("{$cur_product->name} [{$cur_product->sku}]").'</a>';
+							$names[] = '<a data-entity="'.h($cur_product->guid).'" data-entity-context="com_sales_product">'.h("{$cur_product->name} [{$cur_product->sku}]").'</a>';
 						echo implode(', ', $names);
 						?></td>
-						<td><?php echo htmlspecialchars($cur_shipment->comments); ?></td>
+						<td><?php e($cur_shipment->comments); ?></td>
 					</tr>
 				<?php } ?>
 				</tbody>
@@ -514,6 +514,6 @@ if ($pines->config->com_sales->autocomplete_product)
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="button" onclick="if (confirm('Are all of the product serials correct?')) $('#p_muid_form').submit();" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

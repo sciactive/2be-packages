@@ -72,16 +72,16 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->manufacturers as $manufacturer) { ?>
-		<tr title="<?php echo htmlspecialchars($manufacturer->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($manufacturer->guid); ?>" data-entity-context="com_sales_manufacturer"><?php echo htmlspecialchars($manufacturer->name); ?></a></td>
-			<td><?php echo htmlspecialchars($manufacturer->email); ?></td>
-			<td><?php echo htmlspecialchars($manufacturer->address_1); ?></td>
-			<td><?php echo htmlspecialchars($manufacturer->address_2); ?></td>
-			<td><?php echo htmlspecialchars($manufacturer->city); ?></td>
-			<td><?php echo htmlspecialchars($manufacturer->state); ?></td>
-			<td><?php echo htmlspecialchars($manufacturer->zip); ?></td>
-			<td><?php echo htmlspecialchars(format_phone($manufacturer->phone_work)); ?></td>
-			<td><?php echo htmlspecialchars(format_phone($manufacturer->fax)); ?></td>
+		<tr title="<?php e($manufacturer->guid); ?>">
+			<td><a data-entity="<?php e($manufacturer->guid); ?>" data-entity-context="com_sales_manufacturer"><?php e($manufacturer->name); ?></a></td>
+			<td><?php e($manufacturer->email); ?></td>
+			<td><?php e($manufacturer->address_1); ?></td>
+			<td><?php e($manufacturer->address_2); ?></td>
+			<td><?php e($manufacturer->city); ?></td>
+			<td><?php e($manufacturer->state); ?></td>
+			<td><?php e($manufacturer->zip); ?></td>
+			<td><?php e(format_phone($manufacturer->phone_work)); ?></td>
+			<td><?php e(format_phone($manufacturer->fax)); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

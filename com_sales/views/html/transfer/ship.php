@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Shipping Transfer ['.htmlspecialchars($this->entity->guid).']';
+$this->title = 'Shipping Transfer ['.h($this->entity->guid).']';
 $products = array();
 foreach ($this->entity->products as $cur_product) {
 	if (isset($products[$cur_product->guid])) {
@@ -32,10 +32,10 @@ foreach ($this->entity->products as $cur_product) {
 		margin: -.2em;
 	}
 </style>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'transfer/saveship')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'transfer/saveship')); ?>">
 	<div class="pf-element">
 		<span class="pf-label">Reference #</span>
-		<span class="pf-field"><?php echo htmlspecialchars($this->entity->reference_number); ?></span>
+		<span class="pf-field"><?php e($this->entity->reference_number); ?></span>
 	</div>
 	<div class="row-fluid" style="clear: both;">
 		<div class="span6">
@@ -43,15 +43,15 @@ foreach ($this->entity->products as $cur_product) {
 				<strong class="pf-label">Origin</strong>
 				<div class="pf-group">
 					<div class="pf-field">
-						<?php echo htmlspecialchars($this->entity->origin->name); ?>
+						<?php e($this->entity->origin->name); ?>
 						<address>
 							<?php if ($this->entity->origin->address_type == 'us') {
-								echo htmlspecialchars($this->entity->origin->address_1);
+								e($this->entity->origin->address_1);
 								if (!empty($this->entity->origin->address_2))
-									echo htmlspecialchars($this->entity->origin->address_2);
-								echo htmlspecialchars("{$this->entity->origin->city}, {$this->entity->origin->state} {$this->entity->origin->zip}");
+									e($this->entity->origin->address_2);
+								e("{$this->entity->origin->city}, {$this->entity->origin->state} {$this->entity->origin->zip}");
 							} else { ?>
-							<pre><?php echo htmlspecialchars($this->entity->origin->address_international); ?></pre>
+							<pre><?php e($this->entity->origin->address_international); ?></pre>
 							<?php } ?>
 						</address>
 					</div>
@@ -63,15 +63,15 @@ foreach ($this->entity->products as $cur_product) {
 				<strong class="pf-label">Destination</strong>
 				<div class="pf-group">
 					<div class="pf-field">
-						<?php echo htmlspecialchars($this->entity->destination->name); ?>
+						<?php e($this->entity->destination->name); ?>
 						<address>
 							<?php if ($this->entity->destination->address_type == 'us') {
-								echo htmlspecialchars($this->entity->destination->address_1);
+								e($this->entity->destination->address_1);
 								if (!empty($this->entity->destination->address_2))
-									echo htmlspecialchars($this->entity->destination->address_2);
-								echo htmlspecialchars("{$this->entity->destination->city}, {$this->entity->destination->state} {$this->entity->destination->zip}");
+									e($this->entity->destination->address_2);
+								e("{$this->entity->destination->city}, {$this->entity->destination->state} {$this->entity->destination->zip}");
 							} else { ?>
-							<pre><?php echo htmlspecialchars($this->entity->destination->address_international); ?></pre>
+							<pre><?php e($this->entity->destination->address_international); ?></pre>
 							<?php } ?>
 						</address>
 					</div>
@@ -81,11 +81,11 @@ foreach ($this->entity->products as $cur_product) {
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Shipper</span>
-		<span class="pf-field"><?php echo htmlspecialchars($this->entity->shipper->name); ?></span>
+		<span class="pf-field"><?php e($this->entity->shipper->name); ?></span>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">ETA</span>
-		<span class="pf-field"><?php echo htmlspecialchars(format_date($this->entity->eta, 'date_long')); ?></span>
+		<span class="pf-field"><?php e(format_date($this->entity->eta, 'date_long')); ?></span>
 	</div>
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Products</span>
@@ -104,12 +104,12 @@ foreach ($this->entity->products as $cur_product) {
 					<tbody>
 						<?php foreach ($products as $cur_product) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-							<td><?php echo htmlspecialchars($cur_product['entity']->name); ?></td>
-							<td><?php echo htmlspecialchars($cur_product['quantity']); ?></td>
+							<td><?php e($cur_product['entity']->sku); ?></td>
+							<td><?php e($cur_product['entity']->name); ?></td>
+							<td><?php e($cur_product['quantity']); ?></td>
 							<td>
 								<?php if ($cur_product['entity']->serialized) { ?>
-								<textarea cols="20" rows="2" name="serials_<?php echo htmlspecialchars($cur_product['entity']->guid); ?>"></textarea>
+								<textarea cols="20" rows="2" name="serials_<?php e($cur_product['entity']->guid); ?>"></textarea>
 								<?php } else { ?>
 								Not serialized.
 								<?php } ?>
@@ -126,13 +126,13 @@ foreach ($this->entity->products as $cur_product) {
 		<h3>Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div style="white-space: pre-wrap; padding-bottom: .5em;"><?php echo htmlspecialchars($this->entity->comments); ?></div>
+		<div style="white-space: pre-wrap; padding-bottom: .5em;"><?php e($this->entity->comments); ?></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-buttons">
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Ship" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

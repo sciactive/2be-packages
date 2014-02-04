@@ -11,9 +11,9 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$this->title = 'Calendar Events ['.htmlspecialchars($this->location->name).']';
+$this->title = 'Calendar Events ['.h($this->location->name).']';
 if ($this->descendants)
-	$this->note = 'Including locations beneath '.htmlspecialchars($this->location->name);
+	$this->note = 'Including locations beneath '.h($this->location->name);
 $pines->icons->load();
 $pines->com_jstree->load();
 $pines->com_pgrid->load();
@@ -249,15 +249,15 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				$cur_event_type = 'Event';
 			$info = str_replace('\'', '', $cur_event->information);
 		?>
-		<tr title="<?php echo htmlspecialchars($cur_event->guid); ?>" onmouseover="p_muid_notice.com_reports_issue_update(<?php echo htmlspecialchars(json_encode($cur_event->title)); ?>, <?php echo htmlspecialchars(json_encode($info)); ?>);">
-			<td><?php echo htmlspecialchars($cur_event->title); ?></td>
-			<td><?php echo htmlspecialchars(format_date($cur_event->start)); ?></td>
-			<td><?php echo htmlspecialchars(format_date($cur_event->end)); ?></td>
-			<td><?php echo htmlspecialchars($cur_event->group->name); ?></td>
-			<td><?php echo htmlspecialchars($cur_event->employee->name); ?></td>
-			<td><?php echo htmlspecialchars($cur_event_type); ?></td>
-			<td><?php echo htmlspecialchars(ucwords($cur_event->appointment->status)); ?></td>
-			<td><?php echo htmlspecialchars($cur_event->user->name); ?></td>
+		<tr title="<?php e($cur_event->guid); ?>" onmouseover="p_muid_notice.com_reports_issue_update(<?php e(json_encode($cur_event->title)); ?>, <?php e(json_encode($info)); ?>);">
+			<td><?php e($cur_event->title); ?></td>
+			<td><?php e(format_date($cur_event->start)); ?></td>
+			<td><?php e(format_date($cur_event->end)); ?></td>
+			<td><?php e($cur_event->group->name); ?></td>
+			<td><?php e($cur_event->employee->name); ?></td>
+			<td><?php e($cur_event_type); ?></td>
+			<td><?php e(ucwords($cur_event->appointment->status)); ?></td>
+			<td><?php e($cur_event->user->name); ?></td>
 		</tr>
 		<?php } ?>
 	</tbody>

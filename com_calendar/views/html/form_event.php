@@ -84,7 +84,7 @@ defined('P_RUN') or die('Direct access prohibited');
 				$cur_color = $cur_dept_info[1];
 				$cur_select = (!isset($this->entity->employee->group) && $this->entity->district == $cur_name) ? 'selected=\"selected\"' : '';
 			?>
-				employee.append("<option value=\"<?php echo htmlspecialchars($cur_name); ?>:<?php echo htmlspecialchars($cur_color); ?>\" <?php echo $cur_select; ?>><?php echo htmlspecialchars($cur_name); ?></option>");
+				employee.append("<option value=\"<?php e($cur_name); ?>:<?php e($cur_color); ?>\" <?php echo $cur_select; ?>><?php e($cur_name); ?></option>");
 			<?php }
 			// Load employees for this location.
 			foreach ($this->employees as $cur_employee) {
@@ -92,7 +92,7 @@ defined('P_RUN') or die('Direct access prohibited');
 					continue;
 				$cur_select = (isset($this->entity->employee->group) && $this->entity->employee->is($cur_employee)) ? 'selected=\"selected\"' : ''; ?>
 				if (group_id == <?php echo json_encode($cur_employee->group->guid); ?>)
-					employee.append("<option value=\"<?php echo htmlspecialchars($cur_employee->guid); ?>\" <?php echo $cur_select; ?>><?php echo htmlspecialchars($cur_employee->name); ?></option>");
+					employee.append("<option value=\"<?php e($cur_employee->guid); ?>\" <?php echo $cur_select; ?>><?php e($cur_employee->name); ?></option>");
 			<?php } ?>
 		};
 		<?php } ?>
@@ -136,13 +136,13 @@ defined('P_RUN') or die('Direct access prohibited');
 		<div class="pf-element">
 			<label>
 				<span class="pf-label">Label</span><br />
-				<input class="form_input" type="text" id="p_muid_event_label" name="event_label" value="<?php echo htmlspecialchars($this->entity->label); ?>" />
+				<input class="form_input" type="text" id="p_muid_event_label" name="event_label" value="<?php e($this->entity->label); ?>" />
 			</label>
 		</div>
 		<div class="pf-element">
 			<label>
 				<span class="pf-label">Info</span><br />
-				<textarea rows="2" cols="18" name="information"><?php echo htmlspecialchars($this->entity->information); ?></textarea>
+				<textarea rows="2" cols="18" name="information"><?php e($this->entity->information); ?></textarea>
 			</label>
 		</div>
 		<?php if (gatekeeper('com_calendar/managecalendar')) { ?>
@@ -155,7 +155,7 @@ defined('P_RUN') or die('Direct access prohibited');
 		</div>
 		<div class="pf-element location_tree" style="padding-bottom: 1em; width: 90%; max-height: 75px;"></div>
 		<?php } else { ?>
-		<input type="hidden" name="employee" value="<?php echo htmlspecialchars($_SESSION['user']->guid); ?>" />
+		<input type="hidden" name="employee" value="<?php e($_SESSION['user']->guid); ?>" />
 		<input type="hidden" name="private" value="ON" checked="checked" />
 		<?php } ?>
 	</div>
@@ -171,9 +171,9 @@ defined('P_RUN') or die('Direct access prohibited');
 		<div class="pf-element pf-full-width">
 			<label style="float: right;"><input class="pf-field" type="checkbox" name="all_day" value="ON" <?php echo ($this->entity->all_day) ? 'checked="checked" ' : ''; ?>/>All Day</label>
 			<span class="pf-label">Start</span><br style="clear: right;" />
-			<input class="form_center" type="text" size="10" id="p_muid_start" name="start" value="<?php echo empty($start_date) ? htmlspecialchars(format_date(time(), 'date_sort', '', $this->timezone)) : htmlspecialchars($start_date); ?>" />
+			<input class="form_center" type="text" size="10" id="p_muid_start" name="start" value="<?php empty($start_date) ? e(format_date(time(), 'date_sort', '', $this->timezone)) : e($start_date); ?>" />
 			<span class="combobox">
-				<input class="pf-field" type="text" name="time_start" size="10" value="<?php echo empty($start_time) ? htmlspecialchars(format_date(time(), 'time_short', '', $this->timezone)) : htmlspecialchars($start_time); ?>" />
+				<input class="pf-field" type="text" name="time_start" size="10" value="<?php empty($start_time) ? e(format_date(time(), 'time_short', '', $this->timezone)) : e($start_time); ?>" />
 				<a href="javascript:void(0);" class="ui-icon ui-icon-triangle-1-s"></a>
 				<select style="display: none;">
 					<option value="12:00 AM">12:00 AM</option>
@@ -205,9 +205,9 @@ defined('P_RUN') or die('Direct access prohibited');
 		</div>
 		<div class="pf-element pf-full-width">
 			<span class="pf-label">End</span><br style="clear: right;" />
-			<input class="form_center" type="text" size="10" id="p_muid_end" name="end" value="<?php echo empty($end_date) ? htmlspecialchars(format_date(time(), 'date_sort', '', $this->timezone)) : htmlspecialchars($end_date); ?>" />
+			<input class="form_center" type="text" size="10" id="p_muid_end" name="end" value="<?php empty($end_date) ? e(format_date(time(), 'date_sort', '', $this->timezone)) : e($end_date); ?>" />
 			<span class="combobox">
-				<input class="pf-field" type="text" name="time_end" size="10" value="<?php echo empty($end_time) ? htmlspecialchars(format_date(time(), 'time_short', '', $this->timezone)) : htmlspecialchars($end_time); ?>" />
+				<input class="pf-field" type="text" name="time_end" size="10" value="<?php empty($end_time) ? e(format_date(time(), 'time_short', '', $this->timezone)) : e($end_time); ?>" />
 				<a href="javascript:void(0);" class="ui-icon ui-icon-triangle-1-s"></a>
 				<select style="display: none;">
 					<option value="12:00 AM">12:00 AM</option>
@@ -238,12 +238,12 @@ defined('P_RUN') or die('Direct access prohibited');
 			</span>
 		</div>
 		<div class="pf-element">
-			<small>Using timezone: <?php echo htmlspecialchars($this->timezone); ?></small>
-			<input type="hidden" name="timezone" value="<?php echo htmlspecialchars($this->timezone); ?>" />
+			<small>Using timezone: <?php e($this->timezone); ?></small>
+			<input type="hidden" name="timezone" value="<?php e($this->timezone); ?>" />
 		</div>
 	</div>
-	<input type="hidden" name="location" value="<?php echo htmlspecialchars($this->location); ?>" />
+	<input type="hidden" name="location" value="<?php e($this->location); ?>" />
 	<?php if (isset($this->entity->guid)) { ?>
-	<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+	<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 	<?php } ?>
 </div>

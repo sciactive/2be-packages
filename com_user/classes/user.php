@@ -218,13 +218,13 @@ class user extends able_object implements user_interface {
 		$params = array('id' => $this->guid, 'type' => 'register', 'secret' => $this->secret);
 		if (!empty($url))
 			$params['url'] = $url;
-		$link = htmlspecialchars(pines_url('com_user', 'verifyuser', $params, true));
+		$link = h(pines_url('com_user', 'verifyuser', $params, true));
 		$macros = array(
 			'verify_link' => $link,
-			'to_phone' => htmlspecialchars(format_phone($this->phone)),
-			'to_fax' => htmlspecialchars(format_phone($this->fax)),
-			'to_timezone' => htmlspecialchars($this->timezone),
-			'to_address' => $this->address_type == 'us' ? htmlspecialchars("{$this->address_1} {$this->address_2}").'<br />'.htmlspecialchars("{$this->city}, {$this->state} {$this->zip}") : '<pre>'.htmlspecialchars($this->address_international).'</pre>'
+			'to_phone' => h(format_phone($this->phone)),
+			'to_fax' => h(format_phone($this->fax)),
+			'to_timezone' => h($this->timezone),
+			'to_address' => $this->address_type == 'us' ? h("{$this->address_1} {$this->address_2}").'<br />'.h("{$this->city}, {$this->state} {$this->zip}") : '<pre>'.h($this->address_international).'</pre>'
 		);
 		return $pines->com_mailer->send_mail('com_user/verify_email', $macros, $this);
 	}

@@ -137,6 +137,6 @@ pines(function(){
 	<?php } } ?>
 	$('.fancybox-elem', '#p_muid_fancybox').fancybox(<?php echo json_encode($options); ?>);
 });</script>
-<div id="p_muid_fancybox" class="<?php echo htmlspecialchars($this->class); ?>">
+<div id="p_muid_fancybox" class="<?php e($this->class); ?>">
 <?php echo $this->icontent; ?>
 </div>

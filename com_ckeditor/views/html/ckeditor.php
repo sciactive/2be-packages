@@ -12,14 +12,14 @@
 defined('P_RUN') or die('Direct access prohibited');
 if (isset($pines->com_elfinder))
 	$pines->com_elfinder->load();
-$content_css = array_merge($pines->editor->get_css(), array(htmlspecialchars($pines->config->location . $pines->template->editor_css)));
+$content_css = array_merge($pines->editor->get_css(), array(h($pines->config->location . $pines->template->editor_css)));
 ?>
 <script type="text/javascript">
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_ckeditor/includes/ckeditor/ckeditor.js");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_ckeditor/includes/ckeditor/ckeditor.js");
 pines.load(function(){
 	CKEDITOR.config.jqueryOverrideVal = true;
 });
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_ckeditor/includes/ckeditor/adapters/jquery.js");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_ckeditor/includes/ckeditor/adapters/jquery.js");
 
 pines(function(){
 // Stop CKEditor from adding new lines and indents to HTML source.

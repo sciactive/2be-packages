@@ -58,7 +58,7 @@ defined('P_RUN') or die('Direct access prohibited');
 <form class="pf-form" method="post" id="p_muid_form" action="">
 	<div class="pf-element">
 		<label><input type="checkbox" name="descendants" value="ON" <?php echo $this->descendants ? 'checked="checked"' : ''; ?> /> Include Descendants</label>
-		<input type="hidden" name="location" value="<?php echo htmlspecialchars($this->location); ?>" />
+		<input type="hidden" name="location" value="<?php e($this->location); ?>" />
 	</div>
 	<div class="pf-element location_tree" style="padding-bottom: 5px;"></div>
 </form>

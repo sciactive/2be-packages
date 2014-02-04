@@ -13,11 +13,11 @@ defined('P_RUN') or die('Direct access prohibited');
 
 $this->title = 'Payroll Report';
 if (isset($this->location))
-	$this->title .= ' ['.htmlspecialchars($this->location->name).']';
-$this->title .= ' ('.htmlspecialchars(format_date($this->start_date, 'date_short')).' - '.htmlspecialchars(format_date($this->end_date, 'date_short')).')';
+	$this->title .= ' ['.h($this->location->name).']';
+$this->title .= ' ('.h(format_date($this->start_date, 'date_short')).' - '.h(format_date($this->end_date, 'date_short')).')';
 
 if ($this->descendants)
-	$this->note = 'Including locations beneath '.htmlspecialchars($this->location->name);
+	$this->note = 'Including locations beneath '.h($this->location->name);
 $pines->icons->load();
 $pines->com_jstree->load();
 $pines->com_pgrid->load();
@@ -309,12 +309,12 @@ if (isset($pines->com_googledrive)) {
 		}
 		foreach ($totals as $cur_total) {
 		?>
-		<tr title="<?php echo htmlspecialchars($cur_total['employee']->guid); ?>">
-			<td><?php echo htmlspecialchars($cur_total['employee']->name); ?></td>
-			<td><?php echo htmlspecialchars($cur_total['employee']->group->name); ?></td>
-			<td><?php echo htmlspecialchars($cur_total['employee']->pay_type); ?></td>
-			<td><?php echo htmlspecialchars($cur_total['qty_sold']); ?></td>
-			<td><?php echo htmlspecialchars($cur_total['qty_returned']); ?></td>
+		<tr title="<?php e($cur_total['employee']->guid); ?>">
+			<td><?php e($cur_total['employee']->name); ?></td>
+			<td><?php e($cur_total['employee']->group->name); ?></td>
+			<td><?php e($cur_total['employee']->pay_type); ?></td>
+			<td><?php e($cur_total['qty_sold']); ?></td>
+			<td><?php e($cur_total['qty_returned']); ?></td>
 			<td class="amount">$<?php echo number_format($cur_total['total_sold'], 2, '.', ''); ?></td>
 			<td class="amount">$<?php echo number_format($cur_total['total_returned'], 2, '.', ''); ?></td>
 			<td><?php echo round($cur_total['scheduled'] / 3600, 2); ?> hours</td>

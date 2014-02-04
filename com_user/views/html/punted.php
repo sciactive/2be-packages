@@ -12,4 +12,4 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Return';
 ?>
-<a href="<?php echo htmlspecialchars($this->url); ?>">Return to Previous Page</a>
+<a href="<?php e($this->url); ?>">Return to Previous Page</a>

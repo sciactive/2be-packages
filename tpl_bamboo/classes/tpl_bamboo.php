@@ -70,11 +70,11 @@ class tpl_bamboo extends template {
 	public function sub_menu(&$menu) {
 		$count = count($menu);
 		$return = '<li><a'.($count > 1 ? ' class="dir"' : '').' href="'.
-			(isset($menu[0]['href']) ? htmlspecialchars($menu[0]['href']) : 'javascript:void(0);').'"'.
+			(isset($menu[0]['href']) ? h($menu[0]['href']) : 'javascript:void(0);').'"'.
 			(isset($menu[0]['onclick']) ? " onclick=\"{$menu[0]['onclick']}\"" : '').
 			(isset($menu[0]['target']) ? " target=\"{$menu[0]['target']}\"" : '')
 			.'>'.
-			htmlspecialchars($menu[0]['text']).
+			h($menu[0]['text']).
 			'</a>';
 		if ($count > 1) {
 			$return .= '<ul>';

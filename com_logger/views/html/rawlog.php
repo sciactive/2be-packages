@@ -12,4 +12,4 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Raw Log Files View';
 ?>
-<div style="font-family: monospace; white-space: pre; width: 100%; height: 600px; overflow: auto;"><?php echo htmlspecialchars($this->log); ?></div>
+<div style="font-family: monospace; white-space: pre; width: 100%; height: 600px; overflow: auto;"><?php e($this->log); ?></div>

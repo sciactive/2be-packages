@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Transfer' : 'Editing  Transfer ['.htmlspecialchars($this->entity->guid).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Transfer' : 'Editing  Transfer ['.h($this->entity->guid).']';
 $this->note = 'Use this form to transfer inventory to another location.';
 if ($this->entity->final)
 	$this->note .= ' Most options cannot be edited after the transfer has been committed.';
@@ -24,7 +24,7 @@ if ($this->entity->final)
 	$read_only = 'readonly="readonly"';
 $missing_stock = array();
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'transfer/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'transfer/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			var products = $("#p_muid_products");
@@ -260,7 +260,7 @@ $missing_stock = array();
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
 						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
-							filename: 'PO <?php echo htmlspecialchars($this->entity->po_number); ?> - Received',
+							filename: 'PO <?php e($this->entity->po_number); ?> - Received',
 							content: rows
 						});
 					}}
@@ -276,7 +276,7 @@ $missing_stock = array();
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
 						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
-							filename: 'PO <?php echo htmlspecialchars($this->entity->po_number); ?> - Not Received',
+							filename: 'PO <?php e($this->entity->po_number); ?> - Not Received',
 							content: rows
 						});
 					}}
@@ -350,11 +350,11 @@ $missing_stock = array();
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
@@ -365,7 +365,7 @@ $missing_stock = array();
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Reference #</span>
-			<input class="pf-field" type="text" name="reference_number" size="24" value="<?php echo htmlspecialchars($this->entity->reference_number); ?>" /></label>
+			<input class="pf-field" type="text" name="reference_number" size="24" value="<?php e($this->entity->reference_number); ?>" /></label>
 	</div>
 	<div class="row-fluid" style="clear: both;">
 		<div class="span6">
@@ -378,7 +378,7 @@ $missing_stock = array();
 				<?php } else { ?>
 				<span class="pf-note">Origin can't be changed after transfer is committed or shipped.</span>
 				<span class="pf-field">
-					<a data-entity="<?php echo htmlspecialchars($this->entity->origin->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($this->entity->origin->guid ? "{$this->entity->origin->name} [{$this->entity->origin->groupname}]" : ''); ?></a>
+					<a data-entity="<?php e($this->entity->origin->guid); ?>" data-entity-context="group"><?php e($this->entity->origin->guid ? "{$this->entity->origin->name} [{$this->entity->origin->groupname}]" : ''); ?></a>
 				</span>
 				<?php } ?>
 				<input type="hidden" name="origin" />
@@ -394,7 +394,7 @@ $missing_stock = array();
 				<?php } else { ?>
 				<span class="pf-note">Destination can't be changed after transfer is committed or shipped.</span>
 				<span class="pf-field">
-					<a data-entity="<?php echo htmlspecialchars($this->entity->destination->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($this->entity->destination->guid ? "{$this->entity->destination->name} [{$this->entity->destination->groupname}]" : ''); ?></a>
+					<a data-entity="<?php e($this->entity->destination->guid); ?>" data-entity-context="group"><?php e($this->entity->destination->guid ? "{$this->entity->destination->name} [{$this->entity->destination->groupname}]" : ''); ?></a>
 				</span>
 				<?php } ?>
 				<input type="hidden" name="destination" />
@@ -408,13 +408,13 @@ $missing_stock = array();
 			<select class="pf-field" name="shipper">
 				<option value="null">-- None --</option>
 				<?php foreach ($this->shippers as $cur_shipper) { ?>
-				<option value="<?php echo htmlspecialchars($cur_shipper->guid); ?>"<?php echo $this->entity->shipper->guid == $cur_shipper->guid ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_shipper->name); ?></option>
+				<option value="<?php e($cur_shipper->guid); ?>"<?php echo $this->entity->shipper->guid == $cur_shipper->guid ? ' selected="selected"' : ''; ?>><?php e($cur_shipper->name); ?></option>
 				<?php } ?>
 			</select>
 			<?php } else { ?>
 			<span class="pf-note">Shipper can't be changed after transfer is shipped.</span>
 			<span class="pf-field">
-				<a data-entity="<?php echo htmlspecialchars($this->entity->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php echo htmlspecialchars($this->entity->shipper->name); ?></a>
+				<a data-entity="<?php e($this->entity->shipper->guid); ?>" data-entity-context="com_sales_shipper"><?php e($this->entity->shipper->name); ?></a>
 			</span>
 			<?php } ?>
 		</label>
@@ -443,9 +443,9 @@ $missing_stock = array();
 			</thead>
 			<tbody>
 			<?php foreach($this->categories as $category) { ?>
-				<tr title="<?php echo htmlspecialchars($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? htmlspecialchars("child ch_{$category->parent->guid} ") : ''; ?>">
+				<tr title="<?php e($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? h("child ch_{$category->parent->guid} ") : ''; ?>">
 					<td><?php echo isset($category->parent) ? $category->array_search($category->parent->children) + 1 : '0' ; ?></td>
-					<td><?php echo htmlspecialchars($category->name); ?></td>
+					<td><?php e($category->name); ?></td>
 					<td><?php echo count($category->products); ?></td>
 				</tr>
 			<?php } ?>
@@ -484,9 +484,9 @@ $missing_stock = array();
 						<?php if (!$this->entity->shipped) {
 							foreach ($this->entity->products as $cur_product) { ?>
 						<tr>
-							<td><?php echo htmlspecialchars($cur_product->guid); ?></td>
-							<td><?php echo htmlspecialchars($cur_product->sku); ?></td>
-							<td><?php echo htmlspecialchars($cur_product->name); ?></td>
+							<td><?php e($cur_product->guid); ?></td>
+							<td><?php e($cur_product->sku); ?></td>
+							<td><?php e($cur_product->name); ?></td>
 							<td><?php echo $cur_product->serialized ? 'pending' : ''; ?></td>
 						</tr>
 						<?php }
@@ -496,10 +496,10 @@ $missing_stock = array();
 									$missing_stock[] = $cur_stock;
 								?>
 						<tr>
-							<td><?php echo htmlspecialchars($cur_stock->product->guid); ?></td>
-							<td><?php echo htmlspecialchars($cur_stock->product->sku); ?></td>
-							<td><?php echo htmlspecialchars($cur_stock->product->name); ?></td>
-							<td><?php echo htmlspecialchars($cur_stock->serial); ?></td>
+							<td><?php e($cur_stock->product->guid); ?></td>
+							<td><?php e($cur_stock->product->sku); ?></td>
+							<td><?php e($cur_stock->product->name); ?></td>
+							<td><?php e($cur_stock->serial); ?></td>
 						</tr>
 						<?php }
 						} ?>
@@ -526,10 +526,10 @@ $missing_stock = array();
 						<tbody>
 							<?php foreach ($this->entity->received as $cur_entity) { ?>
 							<tr>
-								<td><a data-entity="<?php echo htmlspecialchars($cur_entity->guid); ?>" data-entity-context="com_sales_stock"><?php echo htmlspecialchars($cur_entity->guid); ?></a></td>
-								<td><?php echo htmlspecialchars($cur_entity->product->sku); ?></td>
-								<td><a data-entity="<?php echo htmlspecialchars($cur_entity->product->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_entity->product->name); ?></a></td>
-								<td><?php echo htmlspecialchars($cur_entity->serial); ?></td>
+								<td><a data-entity="<?php e($cur_entity->guid); ?>" data-entity-context="com_sales_stock"><?php e($cur_entity->guid); ?></a></td>
+								<td><?php e($cur_entity->product->sku); ?></td>
+								<td><a data-entity="<?php e($cur_entity->product->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_entity->product->name); ?></a></td>
+								<td><?php e($cur_entity->serial); ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>
@@ -554,10 +554,10 @@ $missing_stock = array();
 						<tbody>
 							<?php foreach ($missing_stock as $cur_entity) { ?>
 							<tr>
-								<td><a data-entity="<?php echo htmlspecialchars($cur_entity->guid); ?>" data-entity-context="com_sales_stock"><?php echo htmlspecialchars($cur_entity->guid); ?></a></td>
-								<td><?php echo htmlspecialchars($cur_entity->product->sku); ?></td>
-								<td><a data-entity="<?php echo htmlspecialchars($cur_entity->product->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_entity->product->name); ?></a></td>
-								<td><?php echo htmlspecialchars($cur_entity->serial); ?></td>
+								<td><a data-entity="<?php e($cur_entity->guid); ?>" data-entity-context="com_sales_stock"><?php e($cur_entity->guid); ?></a></td>
+								<td><?php e($cur_entity->product->sku); ?></td>
+								<td><a data-entity="<?php e($cur_entity->product->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_entity->product->name); ?></a></td>
+								<td><?php e($cur_entity->serial); ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>
@@ -571,20 +571,20 @@ $missing_stock = array();
 		<h3>Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php echo htmlspecialchars($this->entity->comments); ?></textarea></div>
+		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php e($this->entity->comments); ?></textarea></div>
 	</div>
 	<br class="pf-clearing" />
 	<div class="pf-element pf-buttons">
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } if (!$this->entity->final) { ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Commit" onclick="$('#p_muid_save').val('commit');" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
 		<?php } ?>
 	</div>
 </form>

@@ -23,8 +23,8 @@ if ($this->is_widget) {
 	$pines->icons->load();
 	$this->timezone = $_SESSION['user']->get_timezone();
 } else {
-	$this->title = 'Company Schedule [' . htmlspecialchars(isset($this->employee) ? $this->employee->name  : $this->location->name) . ']';
-	$this->note = 'Timezone: '.htmlspecialchars($this->timezone);
+	$this->title = 'Company Schedule [' . h(isset($this->employee) ? $this->employee->name  : $this->location->name) . ']';
+	$this->note = 'Timezone: '.h($this->timezone);
 
 	if (isset($this->employee->guid))
 		$subject = $this->employee;
@@ -54,9 +54,9 @@ if ($this->is_widget) {
 <script type='text/javascript'>
 	<?php if ($this->is_widget) { ?>
 	// Calendar
-	pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_calendar/includes/fullcalendar.css");
-	pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_calendar/includes/customcolors.css");
-	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_calendar/includes/<?php echo $pines->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
+	pines.loadcss("<?php e($pines->config->location); ?>components/com_calendar/includes/fullcalendar.css");
+	pines.loadcss("<?php e($pines->config->location); ?>components/com_calendar/includes/customcolors.css");
+	pines.loadjs("<?php e($pines->config->location); ?>components/com_calendar/includes/<?php echo $pines->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
 	<?php } ?>
 	pines(function(){
 		pines.selected_event = '';

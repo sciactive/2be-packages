@@ -27,16 +27,16 @@ elseif (substr($pines->config->tpl_pinescms->variant, -6) === 'noside')
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title><?php echo htmlspecialchars($pines->page->get_title()); ?></title>
+	<title><?php e($pines->page->get_title()); ?></title>
 	<meta name="HandheldFriendly" content="true" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo htmlspecialchars($pines->config->location); ?>favicon.ico" />
+	<link rel="icon" type="image/vnd.microsoft.icon" href="<?php e($pines->config->location); ?>favicon.ico" />
 	<link href='http://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'>
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/tpl_pinescms/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/tpl_pinescms/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/tpl_pinescms/css/dropdown/default.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/tpl_pinescms/css/dropdown/default.pines.css" media="all" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="<?php echo htmlspecialchars($pines->config->rela_location); ?>system/includes/js.php"></script>
+	<link href="<?php e($pines->config->location); ?>templates/tpl_pinescms/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/tpl_pinescms/css/dropdown/dropdown.vertical.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/tpl_pinescms/css/dropdown/default.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/tpl_pinescms/css/dropdown/default.pines.css" media="all" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="<?php e($pines->config->rela_location); ?>system/includes/js.php"></script>
 	<script type="text/javascript">pines(function(){if($.pnotify){
 		$.pnotify.defaults.opacity = .9;
 		$.pnotify.defaults.delay = 15000;
@@ -44,9 +44,9 @@ elseif (substr($pines->config->tpl_pinescms->variant, -6) === 'noside')
 		pines.pnotify_alert_defaults.nonblock = false;
 	}});</script>
 	<?php echo $pines->page->render_modules('head', 'module_head'); ?>
-	<link href="<?php echo htmlspecialchars($pines->config->location); ?>templates/tpl_pinescms/css/style.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($pines->config->location); ?>templates/tpl_pinescms/css/style.css" media="all" rel="stylesheet" type="text/css" />
 </head>
-<body class="scheme-<?php echo htmlspecialchars($pines->config->tpl_pinescms->color_scheme); ?>">
+<body class="scheme-<?php e($pines->config->tpl_pinescms->color_scheme); ?>">
 	<div id="top"><?php
 		echo $pines->page->render_modules('top');
 		$error = $pines->page->get_error();
@@ -56,10 +56,10 @@ elseif (substr($pines->config->tpl_pinescms->variant, -6) === 'noside')
 			pines(function(){
 				<?php
 				if ( $error ) { foreach ($error as $cur_item) {
-					echo 'pines.error('.json_encode(htmlspecialchars($cur_item)).", \"Error\");\n";
+					echo 'pines.error('.json_encode(h($cur_item)).", \"Error\");\n";
 				} }
 				if ( $notice ) { foreach ($notice as $cur_item) {
-					echo 'pines.notice('.json_encode(htmlspecialchars($cur_item)).", \"Notice\");\n";
+					echo 'pines.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
 				} }
 				?>
 			});
@@ -71,7 +71,7 @@ elseif (substr($pines->config->tpl_pinescms->variant, -6) === 'noside')
 		<div class="navbar-inner">
 			<div <?php echo ($pines->config->tpl_pinescms->navigation_orientation == "nav-right") ? 'id="nav-right"' : '';?> class="container">
 				<?php if ($pines->config->tpl_pinescms->use_nav_logo) { ?>
-				<a href="<?php echo htmlspecialchars(pines_url()); ?>"><img id="nav-logo" class="<?php echo htmlspecialchars($pines->config->tpl_pinescms->navigation_orientation) ?>" src="<?php echo htmlspecialchars($pines->config->tpl_pinescms->nav_logo_image); ?>" alt="<?php echo htmlspecialchars($pines->config->page_title); ?>"/></a>
+				<a href="<?php e(pines_url()); ?>"><img id="nav-logo" class="<?php e($pines->config->tpl_pinescms->navigation_orientation) ?>" src="<?php e($pines->config->tpl_pinescms->nav_logo_image); ?>" alt="<?php e($pines->config->page_title); ?>"/></a>
 				<?php } ?>
 				<?php echo $pines->page->render_modules('main_menu', 'module_head'); ?>
 			</div>
@@ -81,11 +81,11 @@ elseif (substr($pines->config->tpl_pinescms->variant, -6) === 'noside')
 		<div id="shadow_box">
 			<?php if ($pines->config->tpl_pinescms->display_header) { ?>
 			<div id="pines_header" class="clearfix">
-				<a id="logo" href="<?php echo htmlspecialchars(pines_url()); ?>">
+				<a id="logo" href="<?php e(pines_url()); ?>">
 					<?php if ($pines->config->tpl_pinescms->use_header_image) { ?>
-					<img src="<?php echo htmlspecialchars($pines->config->tpl_pinescms->header_image); ?>" alt="<?php echo htmlspecialchars($pines->config->page_title); ?>" />
+					<img src="<?php e($pines->config->tpl_pinescms->header_image); ?>" alt="<?php e($pines->config->page_title); ?>" />
 					<?php } else { ?>
-					<span><?php echo htmlspecialchars($pines->config->page_title); ?></span>
+					<span><?php e($pines->config->page_title); ?></span>
 					<?php } ?>
 				</a>
 				<div id="header_search"><?php echo $pines->page->render_modules('search', 'module_head'); ?></div>
@@ -133,7 +133,7 @@ elseif (substr($pines->config->tpl_pinescms->variant, -6) === 'noside')
 				<?php if ($pines->config->tpl_pinescms->show_recycled_bits) { ?>
 				<div id="recycled_bits"></div>
 				<?php } ?>
-				<p><?php echo htmlspecialchars($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
+				<p><?php e($pines->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
 			</div>
 		</div>
 	</div>

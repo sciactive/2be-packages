@@ -11,7 +11,7 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Edit Loan Payments';
-$this->note =  'Customer: '.htmlspecialchars($this->entity->customer->name).'<span style="float:right;"> Loan ID: '.htmlspecialchars($this->entity->id).'</span>';
+$this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float:right;"> Loan ID: '.h($this->entity->id).'</span>';
 
 switch ($this->entity->payment_frequency) {
 	case "12":
@@ -147,7 +147,7 @@ switch ($this->entity->payment_frequency) {
 		}).change();
 
 
-		var loan_id = <?php echo htmlspecialchars($this->entity->guid); ?>;
+		var loan_id = <?php e($this->entity->guid); ?>;
 		$('#p_muid_make_payment').click(function() {
 			$.ajax({
 				url: <?php echo json_encode(pines_url('com_loan', 'forms/makepayments')); ?>,
@@ -184,13 +184,13 @@ switch ($this->entity->payment_frequency) {
 	});
 </script>
 <div id="p_muid_loan_toolbar" style="margin:10px 0;">
-	<a class="btn" href="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/list')); ?>">
+	<a class="btn" href="<?php e(pines_url('com_loan', 'loan/list')); ?>">
 		<span class="picon picon-go-parent-folder" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Loans</span>
 	</a>
 	<button id="p_muid_make_payment" class="btn" type="button">
 		<span class="picon picon-wallet-open" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Make Payment</span>
 	</button>
-	<a class="btn" href="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>">
+	<a class="btn" href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>">
 		<span class="picon picon-view-refresh" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Refresh</span>
 	</a>
 </div>
@@ -212,30 +212,30 @@ switch ($this->entity->payment_frequency) {
 			</div>
 			<div class="pf-element pf-full-width">
 				<div class="pf-label" style="width:280px !important;margin-right:60px;margin-left:5px;">
-					<span>Principal Amount: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($this->entity->principal, true)); ?></span></span><br/>
-					<span>Total Payments: <span style="float:right;"><?php echo ($this->entity->new_total_payment_sum) ? '$'.htmlspecialchars($pines->com_sales->round($this->entity->new_total_payment_sum)) : '$'.htmlspecialchars($pines->com_sales->round($this->entity->total_payment_sum)); ?></span></span><br/>
-					<span style="font-weight:bold;">Total Payments Paid: <span style="float:right;"><?php echo empty($this->entity->payments[0]['total_interest_paid']) ? "$0.00" : '$'.htmlspecialchars($pines->com_sales->round(($this->entity->payments[0]['total_principal_paid'] + $this->entity->payments[0]['total_interest_paid']), true)); ?></span></span><br/>
+					<span>Principal Amount: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->principal, true)); ?></span></span><br/>
+					<span>Total Payments: <span style="float:right;"><?php echo ($this->entity->new_total_payment_sum) ? '$'.h($pines->com_sales->round($this->entity->new_total_payment_sum)) : '$'.h($pines->com_sales->round($this->entity->total_payment_sum)); ?></span></span><br/>
+					<span style="font-weight:bold;">Total Payments Paid: <span style="float:right;"><?php echo empty($this->entity->payments[0]['total_interest_paid']) ? "$0.00" : '$'.h($pines->com_sales->round(($this->entity->payments[0]['total_principal_paid'] + $this->entity->payments[0]['total_interest_paid']), true)); ?></span></span><br/>
 					<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 
 					<?php if($this->entity->missed_first_payment && !(!empty($this->entity->paid))) {
 						?>
-						<span>First Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
-						<span>First Payment Missed: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['first_payment_missed'], "date_short")); ?></span></span><br/>
-						<span>Last Payment Made: <span style="float:right;"><span style="color:#b30909;"><?php echo htmlspecialchars($this->entity->payments[0]['last_payment_made']); ?></span></span></span><br/>
-						<span><strong>Next Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['next_payment_due'], "date_short")); ?></span></strong></span><br/>
+						<span>First Payment Due: <span style="float:right;"><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
+						<span>First Payment Missed: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['first_payment_missed'], "date_short")); ?></span></span><br/>
+						<span>Last Payment Made: <span style="float:right;"><span style="color:#b30909;"><?php e($this->entity->payments[0]['last_payment_made']); ?></span></span></span><br/>
+						<span><strong>Next Payment Due: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['next_payment_due'], "date_short")); ?></span></strong></span><br/>
 						<?php
 					} elseif (!empty($this->entity->paid)) {
 						?>
-						<span>First Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
-						<span>First Payment Made: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['first_payment_made'], "date_short")); ?></span></span><br/>
-						<span>Last Payment Made: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['last_payment_made'], "date_short")); ?></span></span><br/>
-						<span><strong>Next Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['next_payment_due'], "date_short")); ?></span></strong></span><br/>
+						<span>First Payment Due: <span style="float:right;"><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
+						<span>First Payment Made: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['first_payment_made'], "date_short")); ?></span></span><br/>
+						<span>Last Payment Made: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['last_payment_made'], "date_short")); ?></span></span><br/>
+						<span><strong>Next Payment Due: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['next_payment_due'], "date_short")); ?></span></strong></span><br/>
 						<?php
 					} else {
 						?>
-						<span>First Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
+						<span>First Payment Due: <span style="float:right;"><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
 						<span>Last Payment Made: <span style="float:right;">n/a</span></span><br/>
-						<span><strong>Next Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span></strong></span><br/>
+						<span><strong>Next Payment Due: <span style="float:right;"><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></span></strong></span><br/>
 						<?php
 					}
 					?>
@@ -243,17 +243,17 @@ switch ($this->entity->payment_frequency) {
 
 					<span>Remaining Payments: <span style="float:right;">
 							<?php
-							echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? htmlspecialchars(round($this->entity->payments[0]['remaining_payments'], 2)) : htmlspecialchars($this->entity->number_payments);
+							echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? h(round($this->entity->payments[0]['remaining_payments'], 2)) : h($this->entity->number_payments);
 						?>
 					</span></span><br/>
 					<span>Remaining Payment Due Dates: <span style="float:right;">
 							<?php
-							echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? htmlspecialchars($this->entity->payments[0]['remaining_payments_due']) : htmlspecialchars($this->entity->number_payments);
+							echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? h($this->entity->payments[0]['remaining_payments_due']) : h($this->entity->number_payments);
 						?>
 					</span></span><br/>
 					<span>Percentage Principal Paid: <span style="float:right;">
 							<?php
-							echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['percentage_paid'], true)).'%' : '0.00%';
+							echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? h($pines->com_sales->round($this->entity->payments[0]['percentage_paid'], true)).'%' : '0.00%';
 						?>
 					</span></span>
 					<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
@@ -263,13 +263,13 @@ switch ($this->entity->payment_frequency) {
 					<?php } ?>
 				</div>
 				<div class="pf-group" style="width:280px !important;margin-left:5px !important;float:left;margin-right:60px !important;">
-					<span>Total Initial Finance Charges: <span style="float:right;"><?php echo '$'.htmlspecialchars($this->entity->total_interest_sum_original); ?></span></span><br/>
-					<span>Total Fees & Adjustments: <span style="float:right;"><?php echo (isset($this->entity->total_fees_adjustments)) ? '$'.htmlspecialchars($this->entity->total_fees_adjustments) : '$0.00'; ?></span></span><br/>
-					<span>Total Finance Charges: <span style="float:right;"><?php echo '$'.htmlspecialchars($this->entity->total_interest_sum); ?></span></span><br/>
-					<span>Est. Interest Savings: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($this->entity->est_interest_savings, true)); ?></span></span><br/><br/>
+					<span>Total Initial Finance Charges: <span style="float:right;"><?php echo '$'.h($this->entity->total_interest_sum_original); ?></span></span><br/>
+					<span>Total Fees & Adjustments: <span style="float:right;"><?php echo (isset($this->entity->total_fees_adjustments)) ? '$'.h($this->entity->total_fees_adjustments) : '$0.00'; ?></span></span><br/>
+					<span>Total Finance Charges: <span style="float:right;"><?php echo '$'.h($this->entity->total_interest_sum); ?></span></span><br/>
+					<span>Est. Interest Savings: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->est_interest_savings, true)); ?></span></span><br/><br/>
 
-					<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;"><?php echo $payment_frequency; ?> Payment: <span style="float:right;"><?php echo '$'.htmlspecialchars($this->entity->frequency_payment); ?></span></span></div><br/>
-					<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;">Remaining Balance: <span style="float:right;"><?php echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? '$'.htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['remaining_balance'], true)) : "$".htmlspecialchars($pines->com_sales->round($this->entity->principal, true)); ?></span></span></div><br/>
+					<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;"><?php echo $payment_frequency; ?> Payment: <span style="float:right;"><?php echo '$'.h($this->entity->frequency_payment); ?></span></span></div><br/>
+					<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;">Remaining Balance: <span style="float:right;"><?php echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? '$'.h($pines->com_sales->round($this->entity->payments[0]['remaining_balance'], true)) : "$".h($pines->com_sales->round($this->entity->principal, true)); ?></span></span></div><br/>
 
 					<div>
 						<span style="font-weight:bold;font-size:1.1em;">
@@ -278,7 +278,7 @@ switch ($this->entity->payment_frequency) {
 								* Short Amount:
 								<span style="float:right;">
 									<?php
-										echo "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['sum_payment_short'], true));
+										echo "$".h($pines->com_sales->round($this->entity->payments[0]['sum_payment_short'], true));
 									?>
 								</span>
 							</span>
@@ -290,7 +290,7 @@ switch ($this->entity->payment_frequency) {
 							<span style="font-size:.9em;">Unpaid Balance: </span>
 							<span style="float:right;font-size:.9em;">
 								<?php
-									echo "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['unpaid_balance'], true));
+									echo "$".h($pines->com_sales->round($this->entity->payments[0]['unpaid_balance'], true));
 								?>
 							</span>
 							<?php
@@ -302,7 +302,7 @@ switch ($this->entity->payment_frequency) {
 							<span style="font-size:.9em;"><br/>Unpaid Interest:</span>
 							<span style="float:right;font-size:.9em;">
 								<?php
-									echo "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['unpaid_interest'], true));
+									echo "$".h($pines->com_sales->round($this->entity->payments[0]['unpaid_interest'], true));
 								?>
 							</span>
 							<?php
@@ -315,7 +315,7 @@ switch ($this->entity->payment_frequency) {
 							<span style="color:#b30909;">Past Due:</span>
 							<span style="float:right;color:#b30909;">
 								<?php
-									echo "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['past_due'], true));
+									echo "$".h($pines->com_sales->round($this->entity->payments[0]['past_due'], true));
 								?>
 							</span>
 							<?php
@@ -331,8 +331,8 @@ switch ($this->entity->payment_frequency) {
 											pines(function(){
 												$("#p_muid_next_payment").popover({
 													trigger: 'hover',
-													title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars((string) ($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $pines->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
-													content: 'Past Due: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['past_due'], true)));?>+'</span><br/>'+<?php echo json_encode(htmlspecialchars($payment_frequency));?>+' Payment: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true))); ?>+'</span><br/><span style="font-size:.8em;">Past Due Amount is due immediately.</span>',
+													title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(h((string) ($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $pines->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
+													content: 'Past Due: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($this->entity->payments[0]['past_due'], true)));?>+'</span><br/>'+<?php echo json_encode(h($payment_frequency));?>+' Payment: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true))); ?>+'</span><br/><span style="font-size:.8em;">Past Due Amount is due immediately.</span>',
 													placement: 'right',
 													html: true
 												});
@@ -340,11 +340,11 @@ switch ($this->entity->payment_frequency) {
 										</script>
 										<?php
 									}
-									echo ($this->entity->payments[0]['past_due'] >= 0.01) ? '<span style="cursor:pointer;" id="p_muid_next_payment">$'.(htmlspecialchars($pines->com_sales->round(($this->entity->payments[0]['next_payment_due_amount'] + $pines->com_sales->round($this->entity->payments[0]['past_due'])), true))).'</span>' : "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true));
+									echo ($this->entity->payments[0]['past_due'] >= 0.01) ? '<span style="cursor:pointer;" id="p_muid_next_payment">$'.(h($pines->com_sales->round(($this->entity->payments[0]['next_payment_due_amount'] + $pines->com_sales->round($this->entity->payments[0]['past_due'])), true))).'</span>' : "$".h($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true));
 									?>
 								</span><br/>
 								<span style="float:left;background:none; border:none;font-size:.8em;">Due:</span>
-								<span style="float:right;background:none; border:none;font-size:.8em;"> <?php echo (isset($this->entity->payments[0]['next_payment_due'])) ? htmlspecialchars(format_date($this->entity->payments[0]['next_payment_due'], "date_short")) : htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span>
+								<span style="float:right;background:none; border:none;font-size:.8em;"> <?php echo (isset($this->entity->payments[0]['next_payment_due'])) ? h(format_date($this->entity->payments[0]['next_payment_due'], "date_short")) : h(format_date($this->entity->first_payment_date, "date_short")); ?></span>
 								<span style="clear:both;float:left;background:none; border:none;font-size:.6em;"> <?php echo ($this->entity->payments[0]['past_due'] >= 0.01) ? "Past Due Amount is due immediately." : ""; ?></span>
 							</div>
 						</span>
@@ -368,7 +368,7 @@ switch ($this->entity->payment_frequency) {
 					echo "2. Payment History Restore Points are Available.<br/><br/>";
 					?>
 					<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
-					<form class="pf-form" method="post" id="p_muid_restore_form" action="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/restorepayments')); ?>">
+					<form class="pf-form" method="post" id="p_muid_restore_form" action="<?php e(pines_url('com_loan', 'loan/restorepayments')); ?>">
 					<div class="pf-element">
 						<span class="pf-label"  style="width:280px;">Choose a Restore Point</span>
 						<span class="pf-note"  style="width:280px;">Revert Payments to previous state.</span>
@@ -379,9 +379,9 @@ switch ($this->entity->payment_frequency) {
 								?>
 								<label>
 									<input class="pf-field" type="radio" name="restore_point" value="<?php echo $counter; ?>" />
-									<input class="pf-field" type="hidden" name="restore_name[]" value="<?php echo htmlspecialchars(ucfirst($restore['all_delete']['delete_name'])); ?>" />
-									<?php echo htmlspecialchars(format_date($restore['all_delete']['delete_date'], "full_short")); ?>
-									<?php echo '| Name: '.htmlspecialchars(ucfirst($restore['all_delete']['delete_name'])); ?>
+									<input class="pf-field" type="hidden" name="restore_name[]" value="<?php e(ucfirst($restore['all_delete']['delete_name'])); ?>" />
+									<?php e(format_date($restore['all_delete']['delete_date'], "full_short")); ?>
+									<?php echo '| Name: '.h(ucfirst($restore['all_delete']['delete_name'])); ?>
 								</label>
 								<br/>
 								<?php
@@ -392,7 +392,7 @@ switch ($this->entity->payment_frequency) {
 					</div>
 					<div class="pf-element" style="float:right;clear:none;">
 						<?php if ( isset($this->entity->guid) ) { ?>
-						<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+						<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 						<?php } ?>
 						<input id="restore_form_submit" class="pf-button btn btn-primary" type="submit" value="Restore" />
 					</div>
@@ -418,7 +418,7 @@ switch ($this->entity->payment_frequency) {
 			<div class="pf-element">
 				<p>Select Payment(s) to Edit.<br/><span style="font-size:.9em;">Preview Changes before Saving.</span></p>
 			</div>
-			<form class="pf-form" method="post" id="p_muid_edit_payment_form" action="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/editpayments')); ?>">
+			<form class="pf-form" method="post" id="p_muid_edit_payment_form" action="<?php e(pines_url('com_loan', 'loan/editpayments')); ?>">
 				<div class="pf-element pf-full-width" style="overflow: auto;">
 					<table class="table" style="min-width:100%;">
 						<thead>
@@ -441,7 +441,7 @@ switch ($this->entity->payment_frequency) {
 									<?php
 								} else {
 									foreach ($this->entity->pay_by_date as $pbd) {
-										$edit_unique_id = htmlspecialchars(uniqid());
+										$edit_unique_id = h(uniqid());
 									?>
 									<script type="text/javascript">
 										pines(function(){
@@ -492,12 +492,12 @@ switch ($this->entity->payment_frequency) {
 										});
 									</script>
 									<tr>
-										<td><input id="<?php echo 'receive_date_'.$edit_unique_id; ?>" type="text" value="<?php echo htmlspecialchars(format_date($pbd['date_received'], "date_sort")); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="receive_date[]"/></td>
-										<td><input id="<?php echo 'payment_amount_'.$edit_unique_id; ?>" type="text" value="<?php echo '$'.htmlspecialchars($pines->com_sales->round($pbd['payment_amount'], true)); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="payment_amount[]"/></td>
+										<td><input id="<?php echo 'receive_date_'.$edit_unique_id; ?>" type="text" value="<?php e(format_date($pbd['date_received'], "date_sort")); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="receive_date[]"/></td>
+										<td><input id="<?php echo 'payment_amount_'.$edit_unique_id; ?>" type="text" value="<?php echo '$'.h($pines->com_sales->round($pbd['payment_amount'], true)); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="payment_amount[]"/></td>
 
 										<?php if (gatekeeper('com_loan/deletepayments')) {
 											?>
-											<td><input id="<?php echo 'delete_payment_'.$edit_unique_id; ?>" type="checkbox" value="<?php echo htmlspecialchars($pbd['payment_id']); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="delete_payment[]"/></td>
+											<td><input id="<?php echo 'delete_payment_'.$edit_unique_id; ?>" type="checkbox" value="<?php e($pbd['payment_id']); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="delete_payment[]"/></td>
 											<?php
 										} ?>
 
@@ -511,11 +511,11 @@ switch ($this->entity->payment_frequency) {
 											</select>
 										</td>
 										<td>
-											<button type="button" class="pf-button btn btn-mini" name="<?php echo 'edit_button_'.$edit_unique_id; ?>" id="<?php echo htmlspecialchars($pbd['payment_id']); ?>"><i class="icon-pencil"></i> edit</button>
+											<button type="button" class="pf-button btn btn-mini" name="<?php echo 'edit_button_'.$edit_unique_id; ?>" id="<?php e($pbd['payment_id']); ?>"><i class="icon-pencil"></i> edit</button>
 										</td>
 										<td>
 											<button type="button" class="pf-button btn btn-mini" name="<?php echo 'reset_button_'.$edit_unique_id; ?>"><i class="icon-refresh"></i> reset</button>
-											<input type="hidden" id="<?php echo 'payment_id_'.$edit_unique_id; ?>" name="payment_id[]" value="<?php echo htmlspecialchars($pbd['payment_id']); ?>" disabled="disabled" />
+											<input type="hidden" id="<?php echo 'payment_id_'.$edit_unique_id; ?>" name="payment_id[]" value="<?php e($pbd['payment_id']); ?>" disabled="disabled" />
 										</td>
 									</tr>
 									<?php
@@ -530,7 +530,7 @@ switch ($this->entity->payment_frequency) {
 				</div>
 				<div class="pf-element" style="float:right;clear:none;">
 					<?php if ( isset($this->entity->guid) ) { ?>
-						<input id="edit_payment_loan_id" type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+						<input id="edit_payment_loan_id" type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 					<?php } ?>
 					<span class="pf-label" style="width:230px;">Save all Edited, Enabled Payments.</span>
 					<input name="editpayments" id="p_muid_edit_edit_save" class="pf-button btn btn-primary" type="submit" value="Save" />
@@ -551,7 +551,7 @@ switch ($this->entity->payment_frequency) {
 				<?php
 					if (gatekeeper('com_loan/deletepayments')) {
 						?>
-						<form class="pf-form" method="post" id="p_muid_all_payment_form" action="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/editpayments')); ?>">
+						<form class="pf-form" method="post" id="p_muid_all_payment_form" action="<?php e(pines_url('com_loan', 'loan/editpayments')); ?>">
 							<div class="pf-element ui-corner-all" style="float:left;clear:none;margin-right:30px;border:1px solid #ddd; padding: 10px;">
 								<span class="pf-label" style="width:230px;">Delete All Payments.
 									<span class="pf-note" style="width:100%;">A record of all payments will be stored.</span>
@@ -571,7 +571,7 @@ switch ($this->entity->payment_frequency) {
 							</div>
 							<div class="pf-element" style="float:right;clear:none;width:auto;margin-top:10px;">
 								<?php if ( isset($this->entity->guid) ) { ?>
-								<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+								<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 								<?php } ?>
 								<span class="pf-label" style="width:230px;">Save Changes to Payments.</span>
 								<input name="all_payments" class="pf-button btn btn-primary" type="submit" value="Save" />
@@ -728,38 +728,38 @@ switch ($this->entity->payment_frequency) {
 											echo '<span>Scheduled</span>';
 											break;
 										default:
-											echo htmlspecialchars(ucwords($delete_payment['delete_payment']['payment_type']));
+											e(ucwords($delete_payment['delete_payment']['payment_type']));
 											break;
 									}
 									?>
 								</td>
 								<td>
-									<?php echo htmlspecialchars(format_date($delete_payment['delete_info']['delete_date_expected'], "date_short")); ?>
+									<?php e(format_date($delete_payment['delete_info']['delete_date_expected'], "date_short")); ?>
 								</td>
 								<td>
-									<?php echo htmlspecialchars(format_date($delete_payment['delete_info']['delete_payment_received'], "date_short")); ?>
+									<?php e(format_date($delete_payment['delete_info']['delete_payment_received'], "date_short")); ?>
 								</td>
 								<td>
-									<?php echo htmlspecialchars(format_date($delete_payment['delete_info']['delete_date_recorded'], "date_short")); ?>
+									<?php e(format_date($delete_payment['delete_info']['delete_date_recorded'], "date_short")); ?>
 								</td>
 								<td>
-									<?php echo htmlspecialchars($delete_payment['delete_info']['delete_user_guid']." : ".$delete_payment['delete_info']['delete_user']); ?>
+									<?php e($delete_payment['delete_info']['delete_user_guid']." : ".$delete_payment['delete_info']['delete_user']); ?>
 								</td>
 								<td style="text-align:right;">
-									<?php echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_info']['delete_payment'], true)); ?>
+									<?php echo '$'.h($pines->com_sales->round($delete_payment['delete_info']['delete_payment'], true)); ?>
 								</td>
 								<td style="text-align:right;">
-									<?php echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_info']['delete_additional'], true)); ?>
+									<?php echo '$'.h($pines->com_sales->round($delete_payment['delete_info']['delete_additional'], true)); ?>
 								</td>
 								<td style="text-align:right;">
-									<?php echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_info']['delete_interest'], true)); ?>
+									<?php echo '$'.h($pines->com_sales->round($delete_payment['delete_info']['delete_interest'], true)); ?>
 								</td>
 								<td style="text-align:right;">
-									<?php echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_info']['delete_principal'], true)); ?>
+									<?php echo '$'.h($pines->com_sales->round($delete_payment['delete_info']['delete_principal'], true)); ?>
 								</td>
 								<?php
 								// A unique ID for each view dialog is necessary.
-								$uniqueID2 = htmlspecialchars(uniqid());
+								$uniqueID2 = h(uniqid());
 								?>
 								<td style="text-align:right;">
 									<script type="text/javascript">
@@ -787,7 +787,7 @@ switch ($this->entity->payment_frequency) {
 									<div id="p_muid_details_<?php echo $uniqueID2; ?>" title="Extended Details" style="display:none;">
 										<div class="pf-form">
 											<div class="pf-element pf-heading">
-												<p>The following <span class="alert-info" style="border:none;background:none;">record</span> was deleted: <span style="font-size:.9em;float:right;"><?php echo htmlspecialchars(format_date($delete_payment['delete_info']['delete_date_recorded'], "full_short")); ?></span></p>
+												<p>The following <span class="alert-info" style="border:none;background:none;">record</span> was deleted: <span style="font-size:.9em;float:right;"><?php e(format_date($delete_payment['delete_info']['delete_date_recorded'], "full_short")); ?></span></p>
 											</div>
 											<div class="pf-element pf-full-width" style="overflow: auto;">
 												<table class="table" style="min-width:100%;font-size:.8em;">
@@ -811,56 +811,56 @@ switch ($this->entity->payment_frequency) {
 																if (!$delete_payment['delete_payment']['extra_payments']) {
 																	// It doesn't have any extra payments.
 																	?>
-																	<td><span class="alert-info" style="border:none;background:none;"><?php echo htmlspecialchars(format_date($delete_payment['delete_payment']['payment_date_received'], "full_short")); ?></span></td>
-																	<td><span class="alert-info" style="border:none;background:none;"><?php echo htmlspecialchars(format_date($delete_payment['delete_info']['delete_date_recorded'], "full_short")); ?></span></td>
-																	<td style="text-align:right;"><span class="alert-info" style="border:none;background:none;">$<?php echo htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['payment_amount_paid'], true)); ?></span></td>
-																	<td style="text-align:right;"><?php echo ($edit_payment['edit_payment']['payment_additional'] >= .01) ? '<span class="alert-info" style="border:none;background:none;">$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['payment_additional'], true)).'</span>' : ''; ?></td>
-																	<td style="text-align:right;"><span class="alert-info" style="border:none;background:none;">$<?php echo htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['payment_interest_paid'], true)); ?></span></td>
-																	<td style="text-align:right;"><span class="alert-info" style="border:none;background:none;">$<?php echo htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['payment_principal_paid'], true)); ?></span></td>
-																	<td style="text-align:right;">$<?php echo htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['remaining_balance'], true)); ?></td>
-																	<td style="text-align:right;">$<?php echo htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['scheduled_balance'], true)); ?></td>
+																	<td><span class="alert-info" style="border:none;background:none;"><?php e(format_date($delete_payment['delete_payment']['payment_date_received'], "full_short")); ?></span></td>
+																	<td><span class="alert-info" style="border:none;background:none;"><?php e(format_date($delete_payment['delete_info']['delete_date_recorded'], "full_short")); ?></span></td>
+																	<td style="text-align:right;"><span class="alert-info" style="border:none;background:none;">$<?php e($pines->com_sales->round($delete_payment['delete_payment']['payment_amount_paid'], true)); ?></span></td>
+																	<td style="text-align:right;"><?php echo ($edit_payment['edit_payment']['payment_additional'] >= .01) ? '<span class="alert-info" style="border:none;background:none;">$'.h($pines->com_sales->round($delete_payment['delete_payment']['payment_additional'], true)).'</span>' : ''; ?></td>
+																	<td style="text-align:right;"><span class="alert-info" style="border:none;background:none;">$<?php e($pines->com_sales->round($delete_payment['delete_payment']['payment_interest_paid'], true)); ?></span></td>
+																	<td style="text-align:right;"><span class="alert-info" style="border:none;background:none;">$<?php e($pines->com_sales->round($delete_payment['delete_payment']['payment_principal_paid'], true)); ?></span></td>
+																	<td style="text-align:right;">$<?php e($pines->com_sales->round($delete_payment['delete_payment']['remaining_balance'], true)); ?></td>
+																	<td style="text-align:right;">$<?php e($pines->com_sales->round($delete_payment['delete_payment']['scheduled_balance'], true)); ?></td>
 																	<?php
 																} elseif ($delete_payment['delete_payment']['extra_payments']) {
 																	// It has extra payments, but they aren't highlighted.
 																	?>
 																	<td>
-																		<span class="alert-info" style="border:none;background:none;"><?php echo htmlspecialchars(format_date($delete_payment['delete_payment']['payment_date_received'], "full_short")); ?></span>
+																		<span class="alert-info" style="border:none;background:none;"><?php e(format_date($delete_payment['delete_payment']['payment_date_received'], "full_short")); ?></span>
 																		<?php foreach ($delete_payment['delete_payment']['extra_payments'] as $extra_payment) {
-																			echo '<br/>'.htmlspecialchars(format_date($extra_payment['payment_date_received'], "full_short"));
+																			echo '<br/>'.h(format_date($extra_payment['payment_date_received'], "full_short"));
 																		} ?>
 																	</td>
 																	<td>
-																		<span class="alert-info" style="border:none;background:none;"><?php echo htmlspecialchars(format_date($delete_payment['delete_payment']['payment_date_recorded'], "full_short")); ?></span>
+																		<span class="alert-info" style="border:none;background:none;"><?php e(format_date($delete_payment['delete_payment']['payment_date_recorded'], "full_short")); ?></span>
 																		<?php foreach ($delete_payment['delete_payment']['extra_payments'] as $extra_payment) {
-																			echo '<br/>'.htmlspecialchars(format_date($extra_payment['payment_date_recorded'], "full_short"));
+																			echo '<br/>'.h(format_date($extra_payment['payment_date_recorded'], "full_short"));
 																		} ?>
 																	</td>
 																	<td style="text-align:right;">
-																		<span class="alert-info" style="border:none;background:none;"><?php echo htmlspecialchars($pines->com_sales->round($delete_payment['delete_info']['delete_payment'], true)); ?></span>
+																		<span class="alert-info" style="border:none;background:none;"><?php e($pines->com_sales->round($delete_payment['delete_info']['delete_payment'], true)); ?></span>
 																		<?php foreach ($delete_payment['delete_paid']['extra_payments'] as $extra_payment) {
-																			echo '<br/>'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional'], true));
+																			echo '<br/>'.h($pines->com_sales->round($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional'], true));
 																		} ?>
 																	</td>
 																	<td style="text-align:right;">
-																		<span class="alert-info" style="border:none;background:none;"><?php echo htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['payment_additional'], true)); ?></span>
+																		<span class="alert-info" style="border:none;background:none;"><?php e($pines->com_sales->round($delete_payment['delete_payment']['payment_additional'], true)); ?></span>
 																		<?php foreach ($delete_payment['delete_paid']['extra_payments'] as $extra_payment) {
-																			echo '<br/>'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_additional'], true));
+																			echo '<br/>'.h($pines->com_sales->round($extra_payment['payment_additional'], true));
 																		} ?>
 																	</td>
 																	<td style="text-align:right;">
-																		<span class="alert-info" style="border:none;background:none;"><?php echo htmlspecialchars($pines->com_sales->round($delete_payment['delete_info']['delete_interest'], true)); ?></span>
+																		<span class="alert-info" style="border:none;background:none;"><?php e($pines->com_sales->round($delete_payment['delete_info']['delete_interest'], true)); ?></span>
 																		<?php foreach ($delete_payment['delete_paid']['extra_payments'] as $extra_payment) {
-																			echo '<br/>'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_interest_paid'], true));
+																			echo '<br/>'.h($pines->com_sales->round($extra_payment['payment_interest_paid'], true));
 																		} ?>
 																	</td>
 																	<td style="text-align:right;">
-																		<span class="alert-info" style="border:none;background:none;"><?php echo htmlspecialchars($pines->com_sales->round($delete_payment['delete_info']['delete_principal'], true)); ?></span>
+																		<span class="alert-info" style="border:none;background:none;"><?php e($pines->com_sales->round($delete_payment['delete_info']['delete_principal'], true)); ?></span>
 																		<?php foreach ($delete_payment['delete_paid']['extra_payments'] as $extra_payment) {
-																			echo '<br/>'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_principal_paid'], true));
+																			echo '<br/>'.h($pines->com_sales->round($extra_payment['payment_principal_paid'], true));
 																		} ?>
 																	</td>
-																	<td style="text-align:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['remaining_balance'], true)); ?></td>
-																	<td style="text-align:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['scheduled_balance'], true)); ?></td>
+																	<td style="text-align:right;"><?php echo '$'.h($pines->com_sales->round($delete_payment['delete_payment']['remaining_balance'], true)); ?></td>
+																	<td style="text-align:right;"><?php echo '$'.h($pines->com_sales->round($delete_payment['delete_payment']['scheduled_balance'], true)); ?></td>
 																	<?php
 																}
 															} else {
@@ -871,12 +871,12 @@ switch ($this->entity->payment_frequency) {
 																<td>
 																	<?php
 																	// Show parent payment (no highlight). Then show extra payments. Highlight extra payment with matching ID.
-																	echo htmlspecialchars(format_date($delete_payment['delete_payment']['payment_date_received'], "full_short"));
+																	e(format_date($delete_payment['delete_payment']['payment_date_received'], "full_short"));
 																	foreach ($delete_payment['delete_payment']['extra_payments'] as $extra_payment) {
 																		if ($extra_payment['payment_id'] == $delete_payment['delete_info']['delete_payment_id']) {
-																			echo '<br/><span class="alert-info" style="border:none;background:none;">'.htmlspecialchars(format_date($extra_payment['payment_date_received'], "full_short")).'</span>';
+																			echo '<br/><span class="alert-info" style="border:none;background:none;">'.h(format_date($extra_payment['payment_date_received'], "full_short")).'</span>';
 																		} else {
-																			echo '<br/>'.htmlspecialchars(format_date($extra_payment['payment_date_received'], "full_short"));
+																			echo '<br/>'.h(format_date($extra_payment['payment_date_received'], "full_short"));
 																		}
 																	}
 																	?>
@@ -884,12 +884,12 @@ switch ($this->entity->payment_frequency) {
 																<td>
 																	<?php
 																	// Show parent payment (no highlight). Then show extra payments. Highlight extra payment with matching ID.
-																	echo htmlspecialchars(format_date($delete_payment['delete_payment']['payment_date_recorded'], "full_short"));
+																	e(format_date($delete_payment['delete_payment']['payment_date_recorded'], "full_short"));
 																	foreach ($delete_payment['delete_payment']['extra_payments'] as $extra_payment) {
 																		if ($extra_payment['payment_id'] == $delete_payment['delete_info']['delete_payment_id']) {
-																			echo '<br><span class="alert-info" style="border:none;background:none;">'.htmlspecialchars(format_date($extra_payment['payment_date_recorded'], "full_short")).'</span>';
+																			echo '<br><span class="alert-info" style="border:none;background:none;">'.h(format_date($extra_payment['payment_date_recorded'], "full_short")).'</span>';
 																		} else {
-																			echo '<br/>'.htmlspecialchars(format_date($extra_payment['payment_date_recorded'], "full_short"));
+																			echo '<br/>'.h(format_date($extra_payment['payment_date_recorded'], "full_short"));
 																		}
 																	}
 																	?>
@@ -897,12 +897,12 @@ switch ($this->entity->payment_frequency) {
 																<td style="text-align:right;">
 																	<?php
 																	// Show parent payment (no highlight). Then show extra payments. Highlight extra payment with matching ID.
-																	echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['payment_amount_paid_orig'], true));
+																	echo '$'.h($pines->com_sales->round($delete_payment['delete_payment']['payment_amount_paid_orig'], true));
 																	foreach ($delete_payment['delete_payment']['extra_payments'] as $extra_payment) {
 																		if ($extra_payment['payment_id'] == $delete_payment['delete_info']['delete_payment_id']) {
-																			echo '<br><span class="alert-info" style="background:none;border:none;">$'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional_paid'], true)).'</span>';
+																			echo '<br><span class="alert-info" style="background:none;border:none;">$'.h($pines->com_sales->round($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional_paid'], true)).'</span>';
 																		} else {
-																			echo '<br/>$'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional_paid'], true));
+																			echo '<br/>$'.h($pines->com_sales->round($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional_paid'], true));
 																		}
 																	}
 																	?>
@@ -910,12 +910,12 @@ switch ($this->entity->payment_frequency) {
 																<td style="text-align:right;">
 																	<?php
 																	// Show parent payment (no highlight). Then show extra payments. Highlight extra payment with matching ID.
-																	echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['payment_additional_paid_orig'], true));
+																	echo '$'.h($pines->com_sales->round($delete_payment['delete_payment']['payment_additional_paid_orig'], true));
 																	foreach ($delete_payment['delete_payment']['extra_payments'] as $extra_payment) {
 																		if ($extra_payment['payment_id'] == $delete_payment['delete_info']['delete_payment_id']) {
-																			echo '<br><span class="alert-info" style="background:none;border:none;">$'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_additional_paid'], true)).'</span>';
+																			echo '<br><span class="alert-info" style="background:none;border:none;">$'.h($pines->com_sales->round($extra_payment['payment_additional_paid'], true)).'</span>';
 																		} else {
-																			echo '<br/>$'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_additional_paid'], true));
+																			echo '<br/>$'.h($pines->com_sales->round($extra_payment['payment_additional_paid'], true));
 																		}
 																	}
 																	?>
@@ -923,12 +923,12 @@ switch ($this->entity->payment_frequency) {
 																<td style="text-align:right;">
 																	<?php
 																	// Show parent payment (no highlight). Then show extra payments. Highlight extra payment with matching ID.
-																	echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['payment_interest_paid_orig'], true));
+																	echo '$'.h($pines->com_sales->round($delete_payment['delete_payment']['payment_interest_paid_orig'], true));
 																	foreach ($delete_payment['delete_payment']['extra_payments'] as $extra_payment) {
 																		if ($extra_payment['payment_id'] == $delete_payment['delete_info']['delete_payment_id']) {
-																			echo '<br><span class="alert-info" style="background:none;border:none;">$'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_interest_paid'], true)).'</span>';
+																			echo '<br><span class="alert-info" style="background:none;border:none;">$'.h($pines->com_sales->round($extra_payment['payment_interest_paid'], true)).'</span>';
 																		} else {
-																			echo '<br/>$'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_interest_paid'], true));
+																			echo '<br/>$'.h($pines->com_sales->round($extra_payment['payment_interest_paid'], true));
 																		}
 																	}
 																	?>
@@ -936,18 +936,18 @@ switch ($this->entity->payment_frequency) {
 																<td style="text-align:right;">
 																	<?php
 																	// Show parent payment (no highlight). Then show extra payments. Highlight extra payment with matching ID.
-																	echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['payment_principal_paid_orig'], true));
+																	echo '$'.h($pines->com_sales->round($delete_payment['delete_payment']['payment_principal_paid_orig'], true));
 																	foreach ($delete_payment['delete_payment']['extra_payments'] as $extra_payment) {
 																		if ($extra_payment['payment_id'] == $delete_payment['delete_info']['delete_payment_id']) {
-																			echo '<br><span class="alert-info" style="background:none;border:none;">$'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_principal_paid'], true)).'</span>';
+																			echo '<br><span class="alert-info" style="background:none;border:none;">$'.h($pines->com_sales->round($extra_payment['payment_principal_paid'], true)).'</span>';
 																		} else {
-																			echo '<br/>$'.htmlspecialchars($pines->com_sales->round($extra_payment['payment_principal_paid'], true));
+																			echo '<br/>$'.h($pines->com_sales->round($extra_payment['payment_principal_paid'], true));
 																		}
 																	}
 																	?>
 																</td>
-																<td style="text-align:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['remaining_balance'], true)); ?></td>
-																<td style="text-align:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_payment']['scheduled_balance'], true)); ?></td>
+																<td style="text-align:right;"><?php echo '$'.h($pines->com_sales->round($delete_payment['delete_payment']['remaining_balance'], true)); ?></td>
+																<td style="text-align:right;"><?php echo '$'.h($pines->com_sales->round($delete_payment['delete_payment']['scheduled_balance'], true)); ?></td>
 
 																<?php
 															}
@@ -998,22 +998,22 @@ switch ($this->entity->payment_frequency) {
 														$new_status = $delete_payment['delete_results']['new_status'];
 														$new_status_days_late = $delete_payment['delete_results']['new_payment_days_late'];
 														?>
-														<div class="alert-info" style="padding: 0 3px;background:none;border:none;">Delete Payment: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_info']['delete_payment'], true)); ?></span></div>
+														<div class="alert-info" style="padding: 0 3px;background:none;border:none;">Delete Payment: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($delete_payment['delete_info']['delete_payment'], true)); ?></span></div>
 														<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 														<div>
 															<span class="picon-flag-red" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;"> Decrease (-)</span>
-															<span style="float:right;padding-right:3px;"><?php echo '$-'.htmlspecialchars($pines->com_sales->round($delete_payment['delete_info']['delete_payment'], true)); ?></span>
+															<span style="float:right;padding-right:3px;"><?php echo '$-'.h($pines->com_sales->round($delete_payment['delete_info']['delete_payment'], true)); ?></span>
 														</div><br/>
 														<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 														<?php
 															if ($affected_interest >= .01) { ?>
-															<div>Interest Affected: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($affected_interest, true)); ?></span></div>
+															<div>Interest Affected: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($affected_interest, true)); ?></span></div>
 														<?php }
 															if ($affected_principal >= .01) { ?>
-															<div>Principal Affected: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($affected_principal, true)); ?></span></div>
+															<div>Principal Affected: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($affected_principal, true)); ?></span></div>
 														<?php }
 															if ($affected_additional >= .01) { ?>
-															<div>Additional Affected: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($affected_additional, true)); ?></span></div>
+															<div>Additional Affected: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($affected_additional, true)); ?></span></div>
 														<?php } ?>
 													</div>
 													<br/><br/><br/>
@@ -1034,10 +1034,10 @@ switch ($this->entity->payment_frequency) {
 																break;
 														}
 														?>
-														<div>Modified Date: <span style="float:right;"><?php echo htmlspecialchars(format_date($delete_payment['delete_info']['delete_date_recorded'], "full_short")); ?></span></div>
+														<div>Modified Date: <span style="float:right;"><?php e(format_date($delete_payment['delete_info']['delete_date_recorded'], "full_short")); ?></span></div>
 														<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 														<div style="margin-top:15px;"><span style="padding:5px;margin-right:20px;display:inline-block;float:left;">Delete Reason</span></div>
-														<div style="margin-top:15px;"><span class="well" style="padding:5px;background:inherit;color:inherit;display:inline-block;float:right;"><span class="<?php echo $icon_type; ?>" style="display:inline-block;line-height:16px;padding-left:20px; background-repeat:no-repeat;"><?php echo htmlspecialchars(ucwords($delete_payment['delete_info']['delete_reason'])); ?></span></span></div>
+														<div style="margin-top:15px;"><span class="well" style="padding:5px;background:inherit;color:inherit;display:inline-block;float:right;"><span class="<?php echo $icon_type; ?>" style="display:inline-block;line-height:16px;padding-left:20px; background-repeat:no-repeat;"><?php e(ucwords($delete_payment['delete_info']['delete_reason'])); ?></span></span></div>
 													</div>
 													<br/>
 													<div class="clearfix" style="margin-top:50px;">
@@ -1094,12 +1094,12 @@ switch ($this->entity->payment_frequency) {
 														<div class="well clearfix" style="background:inherit;padding:10px;color:inherit;">
 															<p style="font-size:1.1em;">1. This change affected <?php echo $change_affected; ?></p>
 															<div style="float:left;">
-																<span style="font-size:1.4em"><?php echo '$'.htmlspecialchars($pines->com_sales->round($previous_remaining, true)); ?></span>
+																<span style="font-size:1.4em"><?php echo '$'.h($pines->com_sales->round($previous_remaining, true)); ?></span>
 																<br/><br/>
 																<span style="font-size:.9em;">Previous Remaining Balance</span>
 															</div>
 															<div style="float:right;">
-																<span style="font-size:1.4em"><?php echo '$'.htmlspecialchars($pines->com_sales->round($modified_remaining, true)); ?></span>
+																<span style="font-size:1.4em"><?php echo '$'.h($pines->com_sales->round($modified_remaining, true)); ?></span>
 																<br/><br/>
 																<span style="font-size:.9em;">Modified Remaining Balance</span>
 															</div>
@@ -1117,16 +1117,16 @@ switch ($this->entity->payment_frequency) {
 																		echo '<span class="picon-task-complete" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span>';
 																		break;
 																	case "paid_late":
-																		echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
+																		echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
 																		break;
 																	case "partial_not_due":
 																		echo '<span class="picon-task-recurring" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span>';
 																		break;
 																	case "partial":
-																		echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
+																		echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
 																		break;
 																	case "missed":
-																		echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
+																		echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
 																		break;
 																}
 																?>
@@ -1153,16 +1153,16 @@ switch ($this->entity->payment_frequency) {
 																		echo '<span class="picon-task-complete" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span>';
 																		break;
 																	case "paid_late":
-																		echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
+																		echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
 																		break;
 																	case "partial_not_due":
 																		echo '<span class="picon-task-recurring" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span>';
 																		break;
 																	case "partial":
-																		echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
+																		echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
 																		break;
 																	case "missed":
-																		echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
+																		echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
 																		break;
 																}
 																?>
@@ -1205,7 +1205,7 @@ switch ($this->entity->payment_frequency) {
 					<p>Restore All Payments</p>
 				</div>
 				<div class="pf-element pf-full-width">
-					<form class="pf-form" method="post" id="p_muid_deleted_all_payments_form" action="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/restorepayments')); ?>">
+					<form class="pf-form" method="post" id="p_muid_deleted_all_payments_form" action="<?php e(pines_url('com_loan', 'loan/restorepayments')); ?>">
 						<div style="overflow:auto;">
 							<table class="table" style="min-width:100%;">
 								<thead>
@@ -1237,20 +1237,20 @@ switch ($this->entity->payment_frequency) {
 												<input class="p_muid_delete_restore_point" type="radio" name="delete_restore_point" value="<?php echo $ad; ?>"/>
 											</td>
 											<td>
-												<?php echo htmlspecialchars(format_date($all_delete['all_delete']['delete_date'], "full_short")); ?>
+												<?php e(format_date($all_delete['all_delete']['delete_date'], "full_short")); ?>
 											</td>
 											<td>
-												<?php echo htmlspecialchars(ucfirst($all_delete['all_delete']['delete_name'])); ?>
-												<input type="hidden" name="restore_name[]" value="<?php echo htmlspecialchars(ucfirst($all_delete['all_delete']['delete_name'])); ?>" />
+												<?php e(ucfirst($all_delete['all_delete']['delete_name'])); ?>
+												<input type="hidden" name="restore_name[]" value="<?php e(ucfirst($all_delete['all_delete']['delete_name'])); ?>" />
 											</td>
 											<td>
-												<?php echo htmlspecialchars(ucfirst($all_delete['all_delete']['delete_reason'])); ?>
+												<?php e(ucfirst($all_delete['all_delete']['delete_reason'])); ?>
 											</td>
 											<td>
-												<?php echo htmlspecialchars($all_delete['all_delete']['delete_guid']." : ".$all_delete['all_delete']['delete_user']); ?>
+												<?php e($all_delete['all_delete']['delete_guid']." : ".$all_delete['all_delete']['delete_user']); ?>
 											</td>
 											<td>
-												<?php echo '$'.htmlspecialchars($pines->com_sales->round($all_delete['all_delete']['delete_remaining_balance'], true)); ?>
+												<?php echo '$'.h($pines->com_sales->round($all_delete['all_delete']['delete_remaining_balance'], true)); ?>
 											</td>
 										</tr>
 										<?php
@@ -1263,7 +1263,7 @@ switch ($this->entity->payment_frequency) {
 						</div>
 						<div>
 							<?php if ( isset($this->entity->guid) ) { ?>
-								<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+								<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 								<input type="hidden" name="all_payments" value="delete_and_restore" />
 							<?php } ?>
 							<br/>
@@ -1301,19 +1301,19 @@ switch ($this->entity->payment_frequency) {
 									?>
 									<tr>
 										<td>
-											<?php echo htmlspecialchars(format_date($prev_restore['date_restored'], "full_short")); ?>
+											<?php e(format_date($prev_restore['date_restored'], "full_short")); ?>
 										</td>
 										<td>
-											<?php echo htmlspecialchars(format_date($prev_restore['restore_record']['all_delete']['delete_date'], "full_short")); ?>
+											<?php e(format_date($prev_restore['restore_record']['all_delete']['delete_date'], "full_short")); ?>
 										</td>
 										<td>
-											<?php echo htmlspecialchars(ucfirst($prev_restore['restore_record']['all_delete']['delete_name'])); ?>
+											<?php e(ucfirst($prev_restore['restore_record']['all_delete']['delete_name'])); ?>
 										</td>
 										<td>
-											<?php echo htmlspecialchars($prev_restore['guid']." : ".$prev_restore['user']); ?>
+											<?php e($prev_restore['guid']." : ".$prev_restore['user']); ?>
 										</td>
 										<td>
-											<?php echo '$'.htmlspecialchars($pines->com_sales->round($prev_restore['restore_record']['all_delete']['delete_remaining_balance'], true)); ?>
+											<?php echo '$'.h($pines->com_sales->round($prev_restore['restore_record']['all_delete']['delete_remaining_balance'], true)); ?>
 										</td>
 									</tr>
 									<?php
@@ -1467,16 +1467,16 @@ switch ($this->entity->payment_frequency) {
 													echo '<span style="color:#0a2aab;">Past Due</span>';
 												?>
 											</td>
-											<td><?php echo htmlspecialchars(format_date($edit_payment['edit_info']['edit_date_expected'], "date_short")); ?></td>
-											<td><?php echo htmlspecialchars(format_date($edit_payment['edit_info']['edit_date_received'], "date_short")); ?></td>
-											<td><?php echo htmlspecialchars(format_date($edit_payment['edit_info']['edit_date_recorded'], "date_short")); ?></td>
-											<td><?php echo htmlspecialchars($edit_payment['edit_info']['edit_user_guid'].' : '.$edit_payment['edit_info']['edit_user']); ?></td>
-											<td style="text-align:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($edit_payment['edit_info']['edit_payment'], true)); ?></td>
-											<td style="text-align:right;"><?php echo ($edit_payment['edit_info']['edit_additional'] >= .01) ? '$'.htmlspecialchars($pines->com_sales->round($edit_payment['edit_info']['edit_additional'], true)) : ''; ?></td>
+											<td><?php e(format_date($edit_payment['edit_info']['edit_date_expected'], "date_short")); ?></td>
+											<td><?php e(format_date($edit_payment['edit_info']['edit_date_received'], "date_short")); ?></td>
+											<td><?php e(format_date($edit_payment['edit_info']['edit_date_recorded'], "date_short")); ?></td>
+											<td><?php e($edit_payment['edit_info']['edit_user_guid'].' : '.$edit_payment['edit_info']['edit_user']); ?></td>
+											<td style="text-align:right;"><?php echo '$'.h($pines->com_sales->round($edit_payment['edit_info']['edit_payment'], true)); ?></td>
+											<td style="text-align:right;"><?php echo ($edit_payment['edit_info']['edit_additional'] >= .01) ? '$'.h($pines->com_sales->round($edit_payment['edit_info']['edit_additional'], true)) : ''; ?></td>
 											<td style="text-align:right;">
 												<?php
 													if ($edit_payment['edit_info']['edit_interest'] >= .01) {
-														echo '$'.htmlspecialchars($pines->com_sales->round($edit_payment['edit_info']['edit_interest'], true));
+														echo '$'.h($pines->com_sales->round($edit_payment['edit_info']['edit_interest'], true));
 													} elseif ($edit_payment['edit_info']['edit_payment'] >= .01) {
 														echo 'paid prior';
 													} else {
@@ -1484,7 +1484,7 @@ switch ($this->entity->payment_frequency) {
 													}
 												?>
 											</td>
-											<td style="text-align:right;"><?php echo ($edit_payment['edit_info']['edit_principal'] >= .01) ? '$'.htmlspecialchars($pines->com_sales->round($edit_payment['edit_info']['edit_principal'], true)) : '-'; ?></td>
+											<td style="text-align:right;"><?php echo ($edit_payment['edit_info']['edit_principal'] >= .01) ? '$'.h($pines->com_sales->round($edit_payment['edit_info']['edit_principal'], true)) : '-'; ?></td>
 											<?php
 												// A unique ID for each view dialog is necessary.
 												$uniqueID = uniqid();
@@ -1592,14 +1592,14 @@ switch ($this->entity->payment_frequency) {
 																		<td>
 																			n/a
 																		</td>
-																		<td><?php echo htmlspecialchars(format_date($original_received, "full_short")); ?></td>
-																		<td><?php echo htmlspecialchars(format_date($original_recorded, "full_short")); ?></td>
-																		<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($original_payment_amount, true)); ?></td>
-																		<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($original_additional, true)); ?></td>
-																		<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($original_interest, true)); ?></td>
-																		<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($original_principal, true)); ?></td>
-																		<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($original_payment['remaining_balance'], true)); ?></td>
-																		<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($original_payment['scheduled_balance'], true)); ?></td>
+																		<td><?php e(format_date($original_received, "full_short")); ?></td>
+																		<td><?php e(format_date($original_recorded, "full_short")); ?></td>
+																		<td><?php echo '$'.h($pines->com_sales->round($original_payment_amount, true)); ?></td>
+																		<td><?php echo '$'.h($pines->com_sales->round($original_additional, true)); ?></td>
+																		<td><?php echo '$'.h($pines->com_sales->round($original_interest, true)); ?></td>
+																		<td><?php echo '$'.h($pines->com_sales->round($original_principal, true)); ?></td>
+																		<td><?php echo '$'.h($pines->com_sales->round($original_payment['remaining_balance'], true)); ?></td>
+																		<td><?php echo '$'.h($pines->com_sales->round($original_payment['scheduled_balance'], true)); ?></td>
 																	</tr>
 																	<?php
 																	// For all other edits!
@@ -1642,14 +1642,14 @@ switch ($this->entity->payment_frequency) {
 																						echo '<span class="picon-view-calendar-day" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;"> Date</span>';
 																					?>
 																					</td>
-																					<td><?php echo htmlspecialchars(format_date($a_match['edit_info']['edit_date_received'], "full_short")); ?></td>
-																					<td><?php echo htmlspecialchars(format_date($a_match['edit_info']['edit_date_recorded'], "full_short")); ?></td>
-																					<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_info']['edit_payment'], true)); ?></td>
-																					<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_info']['edit_additional'], true)); ?></td>
-																					<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_info']['edit_interest'], true)); ?></td>
-																					<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_info']['edit_principal'], true)); ?></td>
-																					<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_results']['new_payment']['remaining_balance'], true)); ?></td>
-																					<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_results']['new_payment']['scheduled_balance'], true)); ?></td>
+																					<td><?php e(format_date($a_match['edit_info']['edit_date_received'], "full_short")); ?></td>
+																					<td><?php e(format_date($a_match['edit_info']['edit_date_recorded'], "full_short")); ?></td>
+																					<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_info']['edit_payment'], true)); ?></td>
+																					<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_info']['edit_additional'], true)); ?></td>
+																					<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_info']['edit_interest'], true)); ?></td>
+																					<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_info']['edit_principal'], true)); ?></td>
+																					<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_results']['new_payment']['remaining_balance'], true)); ?></td>
+																					<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_results']['new_payment']['scheduled_balance'], true)); ?></td>
 																				</tr>
 																				<?php
 																			} else {
@@ -1686,14 +1686,14 @@ switch ($this->entity->payment_frequency) {
 																				echo '<span class="picon-view-calendar-day" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;"> Date</span>';
 																			?>
 																			</td>
-																			<td><?php echo htmlspecialchars(format_date($a_match['edit_info']['edit_date_received'], "full_short")); ?></td>
-																			<td><?php echo htmlspecialchars(format_date($a_match['edit_info']['edit_date_recorded'], "full_short")); ?></td>
-																			<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_info']['edit_payment'], true)); ?></td>
-																			<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_info']['edit_additional'], true)); ?></td>
-																			<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_info']['edit_interest'], true)); ?></td>
-																			<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_info']['edit_principal'], true)); ?></td>
-																			<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_results']['new_payment']['remaining_balance'], true)); ?></td>
-																			<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($a_match['edit_results']['new_payment']['scheduled_balance'], true)); ?></td>
+																			<td><?php e(format_date($a_match['edit_info']['edit_date_received'], "full_short")); ?></td>
+																			<td><?php e(format_date($a_match['edit_info']['edit_date_recorded'], "full_short")); ?></td>
+																			<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_info']['edit_payment'], true)); ?></td>
+																			<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_info']['edit_additional'], true)); ?></td>
+																			<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_info']['edit_interest'], true)); ?></td>
+																			<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_info']['edit_principal'], true)); ?></td>
+																			<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_results']['new_payment']['remaining_balance'], true)); ?></td>
+																			<td><?php echo '$'.h($pines->com_sales->round($a_match['edit_results']['new_payment']['scheduled_balance'], true)); ?></td>
 																		</tr>
 																		<?php
 																			}
@@ -1719,10 +1719,10 @@ switch ($this->entity->payment_frequency) {
 																	// Check for Payment Change
 																	if ($edit_payment_count - 1 == 0) {
 																		$replaced = "original";
-																		$replaced_amount = '$'.htmlspecialchars($pines->com_sales->round($original_payment_amount, true));
+																		$replaced_amount = '$'.h($pines->com_sales->round($original_payment_amount, true));
 																		$replace_payment_difference = $edit_payment['edit_info']['edit_payment'] - $original_payment_amount;
 																	} else {
-																		$replaced_amount = '$'.htmlspecialchars($pines->com_sales->round($compare_matches[$edit_payment_count-2]['edit_info']['edit_payment'], true));
+																		$replaced_amount = '$'.h($pines->com_sales->round($compare_matches[$edit_payment_count-2]['edit_info']['edit_payment'], true));
 																		$replace_payment_difference = $edit_payment['edit_info']['edit_payment'] - $compare_matches[$edit_payment_count-2]['edit_info']['edit_payment'];
 																	}
 																	if ($replace_payment_difference >= .01)
@@ -1741,11 +1741,11 @@ switch ($this->entity->payment_frequency) {
 																		<div class="alert-info" style="padding: 0 3px;background:none;border:none;">Replaced Payment:
 																			<span style="float:right;"><?php echo $replaced_amount; ?></span>
 																		</div>
-																		<div class="alert-info" style="padding: 0 3px;">New Payment: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($edit_payment['edit_info']['edit_payment'], true)); ?></span></div>
+																		<div class="alert-info" style="padding: 0 3px;">New Payment: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($edit_payment['edit_info']['edit_payment'], true)); ?></span></div>
 																		<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 																		<div>
 																			<?php echo $payment_change; ?>
-																			<span style="float:right;padding-right:3px;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($replace_payment_difference, true)); ?></span>
+																			<span style="float:right;padding-right:3px;"><?php echo '$'.h($pines->com_sales->round($replace_payment_difference, true)); ?></span>
 																		</div><br/>
 																		<?php
 																		if ($date_change)
@@ -1754,14 +1754,14 @@ switch ($this->entity->payment_frequency) {
 
 																	if ($date_change) {
 																		?>
-																		<div class="alert-info" style="padding: 0 3px;background:none;border:none;">Original Receive Date: <span style="float:right;"><?php echo htmlspecialchars(format_date($edit_payment['edit_info']['edit_date_received_orig'], "date_short")); ?></span></div>
-																		<div class="alert-info" style="padding: 0 3px;">New Receive Date: <span style="float:right;"><?php echo htmlspecialchars(format_date($edit_payment['edit_info']['edit_date_received'], "date_short")); ?></span></div>
+																		<div class="alert-info" style="padding: 0 3px;background:none;border:none;">Original Receive Date: <span style="float:right;"><?php e(format_date($edit_payment['edit_info']['edit_date_received_orig'], "date_short")); ?></span></div>
+																		<div class="alert-info" style="padding: 0 3px;">New Receive Date: <span style="float:right;"><?php e(format_date($edit_payment['edit_info']['edit_date_received'], "date_short")); ?></span></div>
 																		<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 																		<div>
 																			<?php
 																			echo $date_change;
 																			?>
-																			<span style="float:right;padding-right:3px;"><?php echo htmlspecialchars(format_date_range($edit_payment['edit_info']['edit_date_received_orig'], $edit_payment['edit_info']['edit_date_received'], '#days#')); ?> Days</span>
+																			<span style="float:right;padding-right:3px;"><?php e(format_date_range($edit_payment['edit_info']['edit_date_received_orig'], $edit_payment['edit_info']['edit_date_received'], '#days#')); ?> Days</span>
 																		</div><br/>
 																	<?php
 																	}
@@ -1832,11 +1832,11 @@ switch ($this->entity->payment_frequency) {
 																	?>
 																	<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 																	<?php if ($affected_interest) { ?>
-																	<div>Interest Affected: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($affected_interest_value, true)); ?></span></div>
+																	<div>Interest Affected: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($affected_interest_value, true)); ?></span></div>
 																	<?php } if ($affected_principal) { ?>
-																	<div>Principal Affected: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($affected_principal_value, true)); ?></span></div>
+																	<div>Principal Affected: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($affected_principal_value, true)); ?></span></div>
 																	<?php } if ($affected_additional) { ?>
-																	<div>Additional Affected: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($affected_additional_value, true)); ?></span></div>
+																	<div>Additional Affected: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($affected_additional_value, true)); ?></span></div>
 																	<?php } ?>
 																</div>
 																<br/><br/><br/>
@@ -1857,10 +1857,10 @@ switch ($this->entity->payment_frequency) {
 																			break;
 																	}
 																	?>
-																	<div>Modified Date: <span style="float:right;"><?php echo htmlspecialchars(format_date($edit_payment['edit_info']['edit_date_recorded'], "full_short")); ?></span></div>
+																	<div>Modified Date: <span style="float:right;"><?php e(format_date($edit_payment['edit_info']['edit_date_recorded'], "full_short")); ?></span></div>
 																	<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 																	<div style="margin-top:15px;"><span style="padding:5px;margin-right:20px;display:inline-block;float:left;">Edit Reason</span></div>
-																	<div style="margin-top:15px;"><span class="well" style="padding:5px;background:inherit;color:inherit;display:inline-block;float:right;"><span class="<?php echo $icon_type; ?>" style="display:inline-block;line-height:16px;padding-left:20px; background-repeat:no-repeat;"><?php echo htmlspecialchars(ucwords($edit_payment['edit_info']['edit_reason'])); ?></span></span></div>
+																	<div style="margin-top:15px;"><span class="well" style="padding:5px;background:inherit;color:inherit;display:inline-block;float:right;"><span class="<?php echo $icon_type; ?>" style="display:inline-block;line-height:16px;padding-left:20px; background-repeat:no-repeat;"><?php e(ucwords($edit_payment['edit_info']['edit_reason'])); ?></span></span></div>
 																</div>
 																<br/><br/><br/>
 																<div>
@@ -1913,12 +1913,12 @@ switch ($this->entity->payment_frequency) {
 																	<div class="well clearfix" style="background:inherit;padding:10px;color:inherit;">
 																		<p style="font-size:1.1em;">1. This change affected <?php echo $change_affected; ?></p>
 																		<div style="float:left;">
-																			<span style="font-size:1.4em"><?php echo '$'.htmlspecialchars($pines->com_sales->round($previous_remaining, true)); ?></span>
+																			<span style="font-size:1.4em"><?php echo '$'.h($pines->com_sales->round($previous_remaining, true)); ?></span>
 																			<br/><br/>
 																			<span style="font-size:.9em;">Previous Remaining Balance</span>
 																		</div>
 																		<div style="float:right;">
-																			<span style="font-size:1.4em"><?php echo '$'.htmlspecialchars($pines->com_sales->round($modified_remaining, true)); ?></span>
+																			<span style="font-size:1.4em"><?php echo '$'.h($pines->com_sales->round($modified_remaining, true)); ?></span>
 																			<br/><br/>
 																			<span style="font-size:.9em;">Modified Remaining Balance</span>
 																		</div>
@@ -1936,16 +1936,16 @@ switch ($this->entity->payment_frequency) {
 																						echo '<span class="picon-task-complete" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span>';
 																						break;
 																					case "paid_late":
-																						echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
+																						echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
 																						break;
 																					case "partial_not_due":
 																						echo '<span class="picon-task-recurring" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span>';
 																						break;
 																					case "partial":
-																						echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
+																						echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
 																						break;
 																					case "missed":
-																						echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
+																						echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($old_status_days_late); echo ($old_status_days_late > 1 ? " days late" : " day late")."</span>";
 																						break;
 																				}
 																			?>
@@ -1972,16 +1972,16 @@ switch ($this->entity->payment_frequency) {
 																						echo '<span class="picon-task-complete" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span>';
 																						break;
 																					case "paid_late":
-																						echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
+																						echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
 																						break;
 																					case "partial_not_due":
 																						echo '<span class="picon-task-recurring" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span>';
 																						break;
 																					case "partial":
-																						echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
+																						echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
 																						break;
 																					case "missed":
-																						echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
+																						echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($new_status_days_late); echo ($new_status_days_late > 1 ? " days late" : " day late")."</span>";
 																						break;
 																				}
 																			?>
@@ -2029,30 +2029,30 @@ switch ($this->entity->payment_frequency) {
 				</div>
 				<div class="pf-element pf-full-width">
 					<div class="pf-label" style="width:280px !important;margin-right:60px;margin-left:5px;">
-						<span style="font-weight:bold;">Principal Amount: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($this->entity->principal, true)); ?></span></span><br/>
-						<span style="font-weight:bold;">APR: <span style="float:right;"><?php echo htmlspecialchars($this->entity->apr).'%'; ?></span></span><br/>
-						<span style="font-weight:bold;">Term: <span style="float:right;"><?php echo htmlspecialchars($this->entity->term); echo " ".htmlspecialchars($this->entity->term_type); ?></span></span><br/>
+						<span style="font-weight:bold;">Principal Amount: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->principal, true)); ?></span></span><br/>
+						<span style="font-weight:bold;">APR: <span style="float:right;"><?php e($this->entity->apr).'%'; ?></span></span><br/>
+						<span style="font-weight:bold;">Term: <span style="float:right;"><?php e($this->entity->term); echo " ".h($this->entity->term_type); ?></span></span><br/>
 						<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 
 						<?php if($this->entity->missed_first_payment && !(!empty($this->entity->paid))) {
 							?>
-							<span>First Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
-							<span>First Payment Missed: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['first_payment_missed'], "date_short")); ?></span></span><br/>
-							<span>Last Payment Made: <span style="float:right;"><span style="color:#b30909;"><?php echo htmlspecialchars($this->entity->payments[0]['last_payment_made']); ?></span></span></span><br/>
-							<span><strong>Next Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['next_payment_due'], "date_short")); ?></span></strong></span><br/>
+							<span>First Payment Due: <span style="float:right;"><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
+							<span>First Payment Missed: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['first_payment_missed'], "date_short")); ?></span></span><br/>
+							<span>Last Payment Made: <span style="float:right;"><span style="color:#b30909;"><?php e($this->entity->payments[0]['last_payment_made']); ?></span></span></span><br/>
+							<span><strong>Next Payment Due: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['next_payment_due'], "date_short")); ?></span></strong></span><br/>
 							<?php
 						} elseif (!empty($this->entity->paid)) {
 							?>
-							<span>First Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
-							<span>First Payment Made: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['first_payment_made'], "date_short")); ?></span></span><br/>
-							<span>Last Payment Made: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['last_payment_made'], "date_short")); ?></span></span><br/>
-							<span><strong>Next Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->payments[0]['next_payment_due'], "date_short")); ?></span></strong></span><br/>
+							<span>First Payment Due: <span style="float:right;"><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
+							<span>First Payment Made: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['first_payment_made'], "date_short")); ?></span></span><br/>
+							<span>Last Payment Made: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['last_payment_made'], "date_short")); ?></span></span><br/>
+							<span><strong>Next Payment Due: <span style="float:right;"><?php e(format_date($this->entity->payments[0]['next_payment_due'], "date_short")); ?></span></strong></span><br/>
 							<?php
 						} else {
 							?>
-							<span>First Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
+							<span>First Payment Due: <span style="float:right;"><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></span></span><br/>
 							<span>Last Payment Made: <span style="float:right;"><?php echo "n/a" ?></span></span><br/>
-							<span><strong>Next Payment Due: <span style="float:right;"><?php echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span></strong></span><br/>
+							<span><strong>Next Payment Due: <span style="float:right;"><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></span></strong></span><br/>
 							<?php
 						}
 						?>
@@ -2128,7 +2128,7 @@ switch ($this->entity->payment_frequency) {
 							</span></span><br/>
 						<span>Payment Type: <span style="float:right;">
 							<?php
-							htmlspecialchars($this->entity->payment_type);
+							h($this->entity->payment_type);
 							switch ($this->entity->payment_type) {
 								case "0":
 									echo "End of Period";
@@ -2141,37 +2141,37 @@ switch ($this->entity->payment_frequency) {
 							</span></span>
 
 						<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
-						<span>Rate (Per Period): <span style="float:right;"><?php echo htmlspecialchars(round($this->entity->rate_per_period, 3)).'%'; ?></span></span><br/>
-						<span>Payments Scheduled: <span style="float:right;"><?php echo htmlspecialchars($this->entity->number_payments); ?></span></span><br/>
-						<span>Total Payments: <span style="float:right;"><?php echo ($this->entity->new_total_payment_sum) ? '$'.htmlspecialchars($pines->com_sales->round($this->entity->new_total_payment_sum)) : '$'.htmlspecialchars($pines->com_sales->round($this->entity->total_payment_sum)); ?></span></span><br/>
+						<span>Rate (Per Period): <span style="float:right;"><?php e(round($this->entity->rate_per_period, 3)).'%'; ?></span></span><br/>
+						<span>Payments Scheduled: <span style="float:right;"><?php e($this->entity->number_payments); ?></span></span><br/>
+						<span>Total Payments: <span style="float:right;"><?php echo ($this->entity->new_total_payment_sum) ? '$'.h($pines->com_sales->round($this->entity->new_total_payment_sum)) : '$'.h($pines->com_sales->round($this->entity->total_payment_sum)); ?></span></span><br/>
 
 						<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 						<span>Remaining Payments: <span style="float:right;">
 								<?php
-								echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? htmlspecialchars(round($this->entity->payments[0]['remaining_payments'], 2)) : htmlspecialchars($this->entity->number_payments);
+								echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? h(round($this->entity->payments[0]['remaining_payments'], 2)) : h($this->entity->number_payments);
 							?>
 						</span></span><br/>
 						<span>Remaining Payment Due Dates: <span style="float:right;">
 								<?php
-								echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? htmlspecialchars($this->entity->payments[0]['remaining_payments_due']) : htmlspecialchars($this->entity->number_payments);
+								echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? h($this->entity->payments[0]['remaining_payments_due']) : h($this->entity->number_payments);
 							?>
 						</span></span><br/>
 						<span>Percentage Principal Paid: <span style="float:right;">
 								<?php
-								echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['percentage_paid'], true)).'%' : '0.00%';
+								echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? h($pines->com_sales->round($this->entity->payments[0]['percentage_paid'], true)).'%' : '0.00%';
 							?>
 						</span></span>
 						<div style="line-height:0px;border-bottom:1px solid #ddd; margin: 5px 0;">&nbsp;</div>
 					</div>
 
 					<div class="pf-group" style="width:280px !important;margin-left:5px !important;float:left;margin-right:60px !important;">
-						<span>Total Initial Finance Charges: <span style="float:right;"><?php echo '$'.htmlspecialchars($this->entity->total_interest_sum_original); ?></span></span><br/>
-						<span>Total Fees & Adjustments: <span style="float:right;"><?php echo (isset($this->entity->total_fees_adjustments)) ? '$'.htmlspecialchars($this->entity->total_fees_adjustments) : '$0.00'; ?></span></span><br/>
-						<span>Total Finance Charges: <span style="float:right;"><?php echo '$'.htmlspecialchars($this->entity->total_interest_sum); ?></span></span><br/>
-						<span>Est. Interest Savings: <span style="float:right;"><?php echo '$'.htmlspecialchars($pines->com_sales->round($this->entity->est_interest_savings, true)); ?></span></span><br/><br/>
+						<span>Total Initial Finance Charges: <span style="float:right;"><?php echo '$'.h($this->entity->total_interest_sum_original); ?></span></span><br/>
+						<span>Total Fees & Adjustments: <span style="float:right;"><?php echo (isset($this->entity->total_fees_adjustments)) ? '$'.h($this->entity->total_fees_adjustments) : '$0.00'; ?></span></span><br/>
+						<span>Total Finance Charges: <span style="float:right;"><?php echo '$'.h($this->entity->total_interest_sum); ?></span></span><br/>
+						<span>Est. Interest Savings: <span style="float:right;"><?php echo '$'.h($pines->com_sales->round($this->entity->est_interest_savings, true)); ?></span></span><br/><br/>
 
-						<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;"><?php echo $payment_frequency; ?> Payment: <span style="float:right;"><?php echo '$'.htmlspecialchars($this->entity->frequency_payment); ?></span></span></div><br/>
-						<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;">Remaining Balance: <span style="float:right;"><?php echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? '$'.htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['remaining_balance'], true)) : "$".htmlspecialchars($pines->com_sales->round($this->entity->principal, true)); ?></span></span></div><br/>
+						<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;"><?php echo $payment_frequency; ?> Payment: <span style="float:right;"><?php echo '$'.h($this->entity->frequency_payment); ?></span></span></div><br/>
+						<div style="border:1px solid #ccc; padding:3px;"><span style="font-weight:bold;font-size:1.1em;">Remaining Balance: <span style="float:right;"><?php echo (!empty($this->entity->paid) || isset($this->entity->missed_first_payment)) ? '$'.h($pines->com_sales->round($this->entity->payments[0]['remaining_balance'], true)) : "$".h($pines->com_sales->round($this->entity->principal, true)); ?></span></span></div><br/>
 
 						<div>
 							<span style="font-weight:bold;font-size:1.1em;">
@@ -2180,7 +2180,7 @@ switch ($this->entity->payment_frequency) {
 									* Short Amount:
 									<span style="float:right;">
 										<?php
-											echo "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['sum_payment_short'], true));
+											echo "$".h($pines->com_sales->round($this->entity->payments[0]['sum_payment_short'], true));
 										?>
 									</span>
 								</span>
@@ -2192,7 +2192,7 @@ switch ($this->entity->payment_frequency) {
 								<span style="font-size:.9em;">Unpaid Balance: </span>
 								<span style="float:right;font-size:.9em;">
 									<?php
-										echo "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['unpaid_balance'], true));
+										echo "$".h($pines->com_sales->round($this->entity->payments[0]['unpaid_balance'], true));
 									?>
 								</span>
 								<?php
@@ -2204,7 +2204,7 @@ switch ($this->entity->payment_frequency) {
 								<span style="font-size:.9em;"><br/>Unpaid Interest:</span>
 								<span style="float:right;font-size:.9em;">
 									<?php
-										echo "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['unpaid_interest'], true));
+										echo "$".h($pines->com_sales->round($this->entity->payments[0]['unpaid_interest'], true));
 									?>
 								</span>
 								<?php
@@ -2217,7 +2217,7 @@ switch ($this->entity->payment_frequency) {
 								<span style="color:#b30909;">Past Due:</span>
 								<span style="float:right;color:#b30909;">
 									<?php
-										echo "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['past_due'], true));
+										echo "$".h($pines->com_sales->round($this->entity->payments[0]['past_due'], true));
 									?>
 								</span>
 								<?php
@@ -2233,19 +2233,19 @@ switch ($this->entity->payment_frequency) {
 													pines(function(){
 														$("#p_muid_next_payment2").popover({
 															trigger: 'hover',
-															title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars((string) ($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $pines->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
-															content: 'Past Due: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['past_due'], true)));?>+'</span><br/>'+<?php echo json_encode(htmlspecialchars($payment_frequency));?>+' Payment: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true))); ?>+'</span><br/><span style="font-size:.8em;">Past Due Amount is due immediately.</span>',
+															title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(h((string) ($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $pines->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
+															content: 'Past Due: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($this->entity->payments[0]['past_due'], true)));?>+'</span><br/>'+<?php echo json_encode(h($payment_frequency));?>+' Payment: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true))); ?>+'</span><br/><span style="font-size:.8em;">Past Due Amount is due immediately.</span>',
 															placement: 'right'
 														});
 													});
 												</script>
 												<?php
 											}
-											echo ($this->entity->payments[0]['past_due'] >= 0.01) ? '<span style="cursor:pointer;" id="p_muid_next_payment2">$'.(htmlspecialchars($pines->com_sales->round(($this->entity->payments[0]['next_payment_due_amount'] + $pines->com_sales->round($this->entity->payments[0]['past_due'])), true))).'</span>' : "$".htmlspecialchars($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true));
+											echo ($this->entity->payments[0]['past_due'] >= 0.01) ? '<span style="cursor:pointer;" id="p_muid_next_payment2">$'.(h($pines->com_sales->round(($this->entity->payments[0]['next_payment_due_amount'] + $pines->com_sales->round($this->entity->payments[0]['past_due'])), true))).'</span>' : "$".h($pines->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true));
 										?>
 									</span><br/>
 									<span style="float:left;background:none; border:none;font-size:.8em;">Due:</span>
-									<span style="float:right;background:none; border:none;font-size:.8em;"> <?php echo (isset($this->entity->payments[0]['next_payment_due'])) ? htmlspecialchars(format_date($this->entity->payments[0]['next_payment_due'], "date_short")) : htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></span>
+									<span style="float:right;background:none; border:none;font-size:.8em;"> <?php echo (isset($this->entity->payments[0]['next_payment_due'])) ? h(format_date($this->entity->payments[0]['next_payment_due'], "date_short")) : h(format_date($this->entity->first_payment_date, "date_short")); ?></span>
 									<span style="clear:both;float:left;background:none; border:none;font-size:.6em;"> <?php echo ($this->entity->payments[0]['past_due'] >= 0.01) ? "Past Due Amount is due immediately." : ""; ?></span>
 								</div>
 							</span>
@@ -2274,7 +2274,7 @@ switch ($this->entity->payment_frequency) {
 						<tbody>
 							<tr>
 								<td colspan="9">Principal Balance</td>
-								<td>$<?php echo htmlspecialchars($pines->com_sales->round($this->entity->principal, true)); ?></td>
+								<td>$<?php e($pines->com_sales->round($this->entity->principal, true)); ?></td>
 							</tr>
 							<?php
 							$first_one = false;
@@ -2320,27 +2320,27 @@ switch ($this->entity->payment_frequency) {
 											echo '<span>Scheduled</span>';
 											break;
 										default:
-											echo htmlspecialchars(ucwords($payment['payment_type']));
+											e(ucwords($payment['payment_type']));
 									}
 									?>
 								</td>
-								<td><?php echo (isset($payment['payment_date_expected'])) ? htmlspecialchars(format_date($payment['payment_date_expected'], "date_short")) : htmlspecialchars(format_date($payment['scheduled_date_expected'], "date_short")); ?></td>
+								<td><?php echo (isset($payment['payment_date_expected'])) ? h(format_date($payment['payment_date_expected'], "date_short")) : h(format_date($payment['scheduled_date_expected'], "date_short")); ?></td>
 								<td>
 									<?php
 									if (isset($payment['payment_date_received'])) {
 										if ($payment['extra_payments']) {
-											echo htmlspecialchars(format_date($payment['payment_date_received'], "date_short"));
+											e(format_date($payment['payment_date_received'], "date_short"));
 											foreach ($payment['extra_payments'] as $extra_payment) {
-												echo "<br/>".htmlspecialchars(format_date($extra_payment['payment_date_received'], "date_short"));
+												echo "<br/>".h(format_date($extra_payment['payment_date_received'], "date_short"));
 											}
 										} else
-											echo htmlspecialchars(format_date($payment['payment_date_received'], "date_short"))."<br/>";
+											e(format_date($payment['payment_date_received'], "date_short"))."<br/>";
 									}
 									?>
 								</td>
 								<td>
 									<?php
-									switch (htmlspecialchars($payment['payment_status'])) {
+									switch (h($payment['payment_status'])) {
 										case "not due yet":
 											echo '<span class="picon-view-calendar-day" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Not Due Yet</span>';
 											break;
@@ -2348,16 +2348,16 @@ switch ($this->entity->payment_frequency) {
 											echo '<span class="picon-task-complete" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span>';
 											break;
 										case "paid_late":
-											echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($payment['payment_days_late']); echo ($payment['payment_days_late'] > 1 ? " days late" : " day late")."</span>";
+											echo '<span class="picon-task-accepted" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Paid</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($payment['payment_days_late']); echo ($payment['payment_days_late'] > 1 ? " days late" : " day late")."</span>";
 											break;
 										case "partial_not_due":
 											echo '<span class="picon-task-recurring" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span>';
 											break;
 										case "partial":
-											echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($payment['payment_days_late']); echo ($payment['payment_days_late'] > 1 ? " days late" : " day late")."</span>";
+											echo '<span class="picon-task-attempt" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Partial Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($payment['payment_days_late']); echo ($payment['payment_days_late'] > 1 ? " days late" : " day late")."</span>";
 											break;
 										case "missed":
-											echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.htmlspecialchars($payment['payment_days_late']); echo ($payment['payment_days_late'] > 1 ? " days late" : " day late")."</span>";
+											echo '<span class="picon-task-reject" style="white-space:nowrap;text-align:right;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Missed Payment</span><br/><span style="display:inline-block;padding-left:18px;text-align:left">'.h($payment['payment_days_late']); echo ($payment['payment_days_late'] > 1 ? " days late" : " day late")."</span>";
 											break;
 									}
 									?>
@@ -2365,71 +2365,71 @@ switch ($this->entity->payment_frequency) {
 								<td style="text-align:right;">
 									<?php
 									if (!empty($payment['extra_payments'])) {
-										echo "$".htmlspecialchars($pines->com_sales->round($payment['payment_amount_paid_orig'], true));
+										echo "$".h($pines->com_sales->round($payment['payment_amount_paid_orig'], true));
 										foreach ($payment['extra_payments'] as $extra_payment) {
-											echo "<br/>$".htmlspecialchars($pines->com_sales->round(($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional']), true));
+											echo "<br/>$".h($pines->com_sales->round(($extra_payment['payment_interest_paid'] + $extra_payment['payment_principal_paid'] + $extra_payment['payment_additional']), true));
 										}
 									} elseif ($payment['payment_status'] != "not due yet" && $payment['payment_short'] >= 0.01)
-										echo '$'.htmlspecialchars($pines->com_sales->round($payment['payment_amount_paid'], true)).'<span style="padding-left:3px;">*</span>';
+										echo '$'.h($pines->com_sales->round($payment['payment_amount_paid'], true)).'<span style="padding-left:3px;">*</span>';
 									else
-										echo "$".htmlspecialchars($pines->com_sales->round($payment['payment_amount_paid'], true));
+										echo "$".h($pines->com_sales->round($payment['payment_amount_paid'], true));
 									?>
 								</td>
 								<td>
 									<?php
 									if (!empty($payment['extra_payments'])) {
-										echo ($pines->com_sales->round($payment['payment_additional_orig']) >= 0.01) ? "$".htmlspecialchars($pines->com_sales->round($payment['payment_additional_orig'], true)) : "&nbsp;";
+										echo ($pines->com_sales->round($payment['payment_additional_orig']) >= 0.01) ? "$".h($pines->com_sales->round($payment['payment_additional_orig'], true)) : "&nbsp;";
 										foreach ($payment['extra_payments'] as $extra_payment) {
-											echo ($pines->com_sales->round($extra_payment['payment_additional']) >= 0.01) ? "<br/>$".htmlspecialchars($pines->com_sales->round(($extra_payment['payment_additional']), true)) : "<br/>&nbsp;";
+											echo ($pines->com_sales->round($extra_payment['payment_additional']) >= 0.01) ? "<br/>$".h($pines->com_sales->round(($extra_payment['payment_additional']), true)) : "<br/>&nbsp;";
 										}
 									} elseif ($payment['payment_status'] != "not due yet" && ($payment['payment_principal_expected'] + $payment['payment_interest_expected']) < $pines->com_sales->round($payment['payment_amount_paid']))
-										echo ($pines->com_sales->round($payment['payment_additional']) >= 0.01) ? '$'.htmlspecialchars($pines->com_sales->round($payment['payment_additional'], true)) : "&nbsp;";
+										echo ($pines->com_sales->round($payment['payment_additional']) >= 0.01) ? '$'.h($pines->com_sales->round($payment['payment_additional'], true)) : "&nbsp;";
 									?>
 								</td>
 								<td>
 									<?php
 									if ((($payment['payment_interest_unpaid_expected'] - $payment['payment_interest_paid']) >= 0.01 && $payment['payment_status'] != 'not due yet' && $payment['payment_status'] != 'partial_not_due')) {
 										// I need a tooltip to show unpaid interest and expected interest.
-										$uniq2 = htmlspecialchars(uniqid());
+										$uniq2 = h(uniqid());
 										?>
 										<script type="text/javascript">
 											pines(function(){
 												$("#p_muid_tooltip_<?php echo ($uniq2); ?>").popover({
 													trigger: 'hover',
-													title: 'Unpaid Interest: $'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($payment['payment_interest_unpaid_expected'] - $payment['payment_interest_paid'], true))); ?>,
-													content: 'Expected Interest: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($payment['payment_interest_unpaid_expected'], true)));?>+'</span><br/>Interest Paid: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($payment['payment_interest_paid'], true))); ?>+'</span><br/><span style="font-size:.8em;">Interest is calculated based on the terms of the loan at the time of payment.</span>',
+													title: 'Unpaid Interest: $'+<?php echo json_encode(h($pines->com_sales->round($payment['payment_interest_unpaid_expected'] - $payment['payment_interest_paid'], true))); ?>,
+													content: 'Expected Interest: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['payment_interest_unpaid_expected'], true)));?>+'</span><br/>Interest Paid: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['payment_interest_paid'], true))); ?>+'</span><br/><span style="font-size:.8em;">Interest is calculated based on the terms of the loan at the time of payment.</span>',
 													placement: "right"
 												});
 											});
 										</script>
 										<?php
 										if (!empty($payment['extra_payments'])) {
-											echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.htmlspecialchars($uniq2).'">$'.htmlspecialchars($pines->com_sales->round($payment['payment_interest_paid_orig'], true)).'</span>';
+											echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.h($uniq2).'">$'.h($pines->com_sales->round($payment['payment_interest_paid_orig'], true)).'</span>';
 											foreach ($payment['extra_payments'] as $extra_payment) {
-												echo ($pines->com_sales->round($extra_payment['payment_interest_paid']) >= 0.01) ? "<br/>$".htmlspecialchars($pines->com_sales->round($extra_payment['payment_interest_paid'], true)) : "<br/>-";
+												echo ($pines->com_sales->round($extra_payment['payment_interest_paid']) >= 0.01) ? "<br/>$".h($pines->com_sales->round($extra_payment['payment_interest_paid'], true)) : "<br/>-";
 											}
 										} else
-											echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.htmlspecialchars($uniq2).'">$'.htmlspecialchars($pines->com_sales->round($payment['payment_interest_paid'], true)).'</span>';
+											echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.h($uniq2).'">$'.h($pines->com_sales->round($payment['payment_interest_paid'], true)).'</span>';
 									} else {
 										if (!empty($payment['extra_payments'])) {
-											echo '$'.htmlspecialchars($pines->com_sales->round($payment['payment_interest_paid_orig'], true));
+											echo '$'.h($pines->com_sales->round($payment['payment_interest_paid_orig'], true));
 											foreach ($payment['extra_payments'] as $extra_payment) {
-												echo ($pines->com_sales->round($extra_payment['payment_interest_paid']) >= 0.01) ? "<br/>$".htmlspecialchars($pines->com_sales->round($extra_payment['payment_interest_paid'], true)) : "<br/>-";
+												echo ($pines->com_sales->round($extra_payment['payment_interest_paid']) >= 0.01) ? "<br/>$".h($pines->com_sales->round($extra_payment['payment_interest_paid'], true)) : "<br/>-";
 											}
 										} else
-											echo '$'.htmlspecialchars($pines->com_sales->round($payment['payment_interest_paid'], true));
+											echo '$'.h($pines->com_sales->round($payment['payment_interest_paid'], true));
 									}
 									?>
 								</td>
 								<td>
 									<?php
 									if (!empty($payment['extra_payments'])) {
-										echo '$'.htmlspecialchars($pines->com_sales->round($payment['payment_principal_paid_orig'], true));
+										echo '$'.h($pines->com_sales->round($payment['payment_principal_paid_orig'], true));
 										foreach ($payment['extra_payments'] as $extra_payment) {
-											echo "<br/>$".htmlspecialchars($pines->com_sales->round($extra_payment['payment_principal_paid'], true));
+											echo "<br/>$".h($pines->com_sales->round($extra_payment['payment_principal_paid'], true));
 										}
 									} else
-										echo '$'.htmlspecialchars($pines->com_sales->round($payment['payment_principal_paid'], true));
+										echo '$'.h($pines->com_sales->round($payment['payment_principal_paid'], true));
 									?>
 								</td>
 
@@ -2439,29 +2439,29 @@ switch ($this->entity->payment_frequency) {
 									if ($payment['payment_balance_unpaid'] >= 0.01 && $payment['payment_status'] != 'partial_not_due') {
 										// showing tooltip to show unpaid balance specific to this payment.
 										// javascript to control tooltip:
-										$uniq = htmlspecialchars(uniqid());
+										$uniq = h(uniqid());
 										?>
 										<script type="text/javascript">
 											pines(function(){
 												$("#p_muid_tooltip_<?php echo $uniq; ?>").popover({
 													trigger: 'hover',
-													title: 'Unpaid Balance: $'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($payment['remaining_balance'] - $payment['scheduled_balance'], true))); ?>,
-													content: 'Previous Remaining Balance: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($payment['remaining_balance'], true))); ?>+'</span><br/>Expected Balance: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($payment['scheduled_balance'], true))); ?>+'</span><br/><hr style="margin: 10px 0;"/>Unpaid Payment Principal: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($payment['payment_principal_expected'], true))); ?>+'</span><br/>Accumulated Unpaid Principal: <span style="float:right;">$'+<?php echo json_encode(htmlspecialchars($pines->com_sales->round($payment['remaining_balance'] - $payment['scheduled_balance'], true))); ?>+'</span><br/><br/><span style="font-size:.8em;">Calculated unpaid balance based on the terms of the loan at the time of payment.</span>',
+													title: 'Unpaid Balance: $'+<?php echo json_encode(h($pines->com_sales->round($payment['remaining_balance'] - $payment['scheduled_balance'], true))); ?>,
+													content: 'Previous Remaining Balance: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['remaining_balance'], true))); ?>+'</span><br/>Expected Balance: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['scheduled_balance'], true))); ?>+'</span><br/><hr style="margin: 10px 0;"/>Unpaid Payment Principal: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['payment_principal_expected'], true))); ?>+'</span><br/>Accumulated Unpaid Principal: <span style="float:right;">$'+<?php echo json_encode(h($pines->com_sales->round($payment['remaining_balance'] - $payment['scheduled_balance'], true))); ?>+'</span><br/><br/><span style="font-size:.8em;">Calculated unpaid balance based on the terms of the loan at the time of payment.</span>',
 													placement: "right"
 												});
 											});
 										</script>
 										<?php
-										echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.htmlspecialchars($uniq).'">$'.htmlspecialchars($pines->com_sales->round($payment['remaining_balance'], true))."</span>";
+										echo '<span style="cursor:pointer;color:#b30909" id="p_muid_tooltip_'.h($uniq).'">$'.h($pines->com_sales->round($payment['remaining_balance'], true))."</span>";
 									} elseif (isset($payment['remaining_balance'])) {
-										echo '$'.htmlspecialchars($pines->com_sales->round($payment['remaining_balance'], true));
+										echo '$'.h($pines->com_sales->round($payment['remaining_balance'], true));
 									}
 									?>
 								</td>
-								<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($payment['scheduled_balance'], true)); ?></td>
+								<td><?php echo '$'.h($pines->com_sales->round($payment['scheduled_balance'], true)); ?></td>
 								<?php } else { ?>
 								<td></td>
-								<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($payment['scheduled_balance'], true)); ?></td>
+								<td><?php echo '$'.h($pines->com_sales->round($payment['scheduled_balance'], true)); ?></td>
 								<?php } ?>
 							</tr>
 						<?php } ?>
@@ -2485,15 +2485,15 @@ switch ($this->entity->payment_frequency) {
 						<tbody>
 							<tr>
 								<td colspan="4">Principal Balance</td>
-								<td>$<?php echo htmlspecialchars($pines->com_sales->round($this->entity->principal, true)); ?></td>
+								<td>$<?php e($pines->com_sales->round($this->entity->principal, true)); ?></td>
 							</tr>
 							<?php foreach ($this->entity->schedule as $schedule) { ?>
 							<tr>
-								<td><?php echo htmlspecialchars(format_date($schedule['scheduled_date_expected'], "date_short")); ?></td>
-								<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($schedule['payment_amount_expected'], true)); ?></td>
-								<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($schedule['payment_interest_expected'], true)); ?></td>
-								<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($schedule['payment_principal_expected'], true)); ?></td>
-								<td><?php echo '$'.htmlspecialchars($pines->com_sales->round($schedule['scheduled_balance'], true)); ?></td>
+								<td><?php e(format_date($schedule['scheduled_date_expected'], "date_short")); ?></td>
+								<td><?php echo '$'.h($pines->com_sales->round($schedule['payment_amount_expected'], true)); ?></td>
+								<td><?php echo '$'.h($pines->com_sales->round($schedule['payment_interest_expected'], true)); ?></td>
+								<td><?php echo '$'.h($pines->com_sales->round($schedule['payment_principal_expected'], true)); ?></td>
+								<td><?php echo '$'.h($pines->com_sales->round($schedule['scheduled_balance'], true)); ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>

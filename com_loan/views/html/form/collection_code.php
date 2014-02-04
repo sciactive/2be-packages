@@ -105,7 +105,7 @@ defined('P_RUN') or die('Direct access prohibited');
 </script>
 <div class="pf-form" id="p_muid_form">
 	<div class="item clearfix">
-		<h4><?php echo htmlspecialchars($this->entity->customer->name); ?> <span class="loan-label pull-right">Loan ID: <?php echo htmlspecialchars($this->entity->id); ?></span></h4>
+		<h4><?php e($this->entity->customer->name); ?> <span class="loan-label pull-right">Loan ID: <?php e($this->entity->id); ?></span></h4>
 		<div class="name row-fluid">
 			<div class="span8">
 				<select class="span12" name="collection_code">
@@ -115,7 +115,7 @@ defined('P_RUN') or die('Direct access prohibited');
 				asort($codes);
 				foreach ($codes as $cur_code) {
 					$cur_code = explode(':', $cur_code);
-					echo '<option value="'.htmlspecialchars($cur_code[0]).'" '.(($this->entity->collection_code == $cur_code[0]) ? 'selected=selected' : '').'>'.htmlspecialchars($cur_code[0]).' - '.htmlspecialchars($cur_code[1]).'</option>';
+					echo '<option value="'.h($cur_code[0]).'" '.(($this->entity->collection_code == $cur_code[0]) ? 'selected=selected' : '').'>'.h($cur_code[0]).' - '.h($cur_code[1]).'</option>';
 				} ?>
 				</select>
 			</div>

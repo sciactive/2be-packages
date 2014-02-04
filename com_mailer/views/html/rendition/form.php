@@ -10,11 +10,11 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Editing New Rendition' : 'Editing ['.htmlspecialchars($this->entity->name).']';
+$this->title = (!isset($this->entity->guid)) ? 'Editing New Rendition' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide rendition details in this form.';
 $pines->editor->load();
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_mailer', 'rendition/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_mailer', 'rendition/save')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			// Mail Definitions
@@ -83,16 +83,16 @@ $pines->editor->load();
 			<?php if (isset($this->entity->guid)) { ?>
 			<div class="date_info" style="float: right; text-align: right;">
 				<?php if (isset($this->entity->user)) { ?>
-				<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-				<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Name</span>
-					<input class="pf-field" type="text" name="name" size="24" value="<?php echo htmlspecialchars($this->entity->name); ?>" /></label>
+					<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Enabled</span>
@@ -107,18 +107,18 @@ $pines->editor->load();
 			foreach ($defs as $cur_component => $cur_defs) { $i++; ?>
 			<div class="pf-element pf-full-width mail_definitions">
 				<div style="padding: .5em;" class="ui-helper-clearfix<?php echo ($i % 2) ? '' : ' alert-info'; ?>">
-					<strong class="pf-label" style="font-size: 1.1em;"><?php echo htmlspecialchars($pines->info->$cur_component->name); ?></strong>
+					<strong class="pf-label" style="font-size: 1.1em;"><?php e($pines->info->$cur_component->name); ?></strong>
 					<div class="pf-group">
 						<?php foreach ($cur_defs as $cur_defname => $cur_definition) { ?>
 						<div class="pf-field">
 							<label>
-								<input type="radio" name="type" value="<?php echo htmlspecialchars("$cur_component/$cur_defname"); ?>"<?php echo ($this->entity->type == "$cur_component/$cur_defname") ? ' checked="checked"': ''; ?> />
+								<input type="radio" name="type" value="<?php e("$cur_component/$cur_defname"); ?>"<?php echo ($this->entity->type == "$cur_component/$cur_defname") ? ' checked="checked"': ''; ?> />
 								<?php if ($cur_definition['has_recipient']) { ?>
 								<span class="has_recipient hide">&nbsp;</span>
 								<?php } ?>
-								<strong><?php echo htmlspecialchars($cur_definition['cname']); ?></strong>
+								<strong><?php e($cur_definition['cname']); ?></strong>
 								<span style="display: block; padding: 0 0 0 1.8em;">
-									<?php echo htmlspecialchars($cur_definition['description']); ?>
+									<?php e($cur_definition['description']); ?>
 								</span>
 							</label>
 							<?php if ($cur_definition['macros']) { ?>
@@ -133,8 +133,8 @@ $pines->editor->load();
 									<tbody>
 										<?php foreach ($cur_definition['macros'] as $cur_name => $cur_description) { ?>
 										<tr>
-											<td>#<?php echo htmlspecialchars($cur_name); ?>#</td>
-											<td><?php echo htmlspecialchars($cur_description); ?></td>
+											<td>#<?php e($cur_name); ?>#</td>
+											<td><?php e($cur_description); ?></td>
 										</tr>
 										<?php } ?>
 									</tbody>
@@ -176,25 +176,25 @@ $pines->editor->load();
 			<div class="pf-element">
 				<label><span class="pf-label">Sender (From Address)</span>
 					<span class="pf-note">Leave blank to use the default address (see config).</span>
-					<input class="pf-field" type="text" name="from" size="40" value="<?php echo htmlspecialchars($this->entity->from); ?>" />
+					<input class="pf-field" type="text" name="from" size="40" value="<?php e($this->entity->from); ?>" />
 					<span class="label label-important hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element" id="p_muid_recipient" style="display: none;">
 				<label><strong class="pf-label">Recipient (To Address)</strong>
 					<span class="pf-note"><strong>This mailing doesn't have a To address specified.</strong> Leave blank to use the master address (see config).</span>
-					<input class="pf-field" type="text" name="to" size="40" value="<?php echo htmlspecialchars($this->entity->to); ?>" />
+					<input class="pf-field" type="text" name="to" size="40" value="<?php e($this->entity->to); ?>" />
 					<span class="label label-important hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Carbon Copy (CC Address)</span>
 					<span class="pf-note">The email is copied to these addresses. This <strong>will</strong> be visible to the recipient.</span>
-					<input class="pf-field" type="text" name="cc" size="40" value="<?php echo htmlspecialchars($this->entity->cc); ?>" />
+					<input class="pf-field" type="text" name="cc" size="40" value="<?php e($this->entity->cc); ?>" />
 					<span class="label label-important hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Blind Carbon Copy (BCC Address)</span>
 					<span class="pf-note">The email is copied to these addresses. This <strong>will not</strong> be visible to the recipient.</span>
-					<input class="pf-field" type="text" name="bcc" size="40" value="<?php echo htmlspecialchars($this->entity->bcc); ?>" />
+					<input class="pf-field" type="text" name="bcc" size="40" value="<?php e($this->entity->bcc); ?>" />
 					<span class="label label-important hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element pf-heading">
@@ -202,10 +202,10 @@ $pines->editor->load();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Subject</span>
-					<input class="pf-field" type="text" name="subject" size="40" value="<?php echo htmlspecialchars($this->entity->subject); ?>" /></label>
+					<input class="pf-field" type="text" name="subject" size="40" value="<?php e($this->entity->subject); ?>" /></label>
 			</div>
 			<div class="pf-element pf-full-width">
-				<textarea rows="20" cols="35" class="peditor-email" style="width: 100%;" name="content"><?php echo htmlspecialchars($this->entity->content); ?></textarea>
+				<textarea rows="20" cols="35" class="peditor-email" style="width: 100%;" name="content"><?php e($this->entity->content); ?></textarea>
 			</div>
 			<div class="pf-element">
 				Macros let you replace a string with a value that can change. To
@@ -245,7 +245,7 @@ $pines->editor->load();
 									<td rowspan="2">Links</td>
 									<td>#site_link#</td>
 									<td>The URL of the site, to be used in a link.</td>
-									<td><?php echo htmlspecialchars($pines->config->full_location); ?></td>
+									<td><?php e($pines->config->full_location); ?></td>
 								</tr>
 								<tr>
 									<td>#unsubscribe_link#</td>
@@ -282,69 +282,69 @@ $pines->editor->load();
 									<td rowspan="5">Current User</td>
 									<td>#username#</td>
 									<td>The current user's username.</td>
-									<td><?php echo htmlspecialchars($_SESSION['user']->username); ?></td>
+									<td><?php e($_SESSION['user']->username); ?></td>
 								</tr>
 								<tr>
 									<td>#name#</td>
 									<td>The current user's full name.</td>
-									<td><?php echo htmlspecialchars($_SESSION['user']->name); ?></td>
+									<td><?php e($_SESSION['user']->name); ?></td>
 								</tr>
 								<tr>
 									<td>#first_name#</td>
 									<td>The current user's first name.</td>
-									<td><?php echo htmlspecialchars($_SESSION['user']->name_first); ?></td>
+									<td><?php e($_SESSION['user']->name_first); ?></td>
 								</tr>
 								<tr>
 									<td>#last_name#</td>
 									<td>The current user's last name.</td>
-									<td><?php echo htmlspecialchars($_SESSION['user']->name_last); ?></td>
+									<td><?php e($_SESSION['user']->name_last); ?></td>
 								</tr>
 								<tr>
 									<td>#email#</td>
 									<td>The current user's email.</td>
-									<td><?php echo htmlspecialchars($_SESSION['user']->email); ?></td>
+									<td><?php e($_SESSION['user']->email); ?></td>
 								</tr>
 								<tr>
 									<td rowspan="6">Date/Time</td>
 									<td>#date_short#</td>
 									<td>The date. (Short)</td>
-									<td><?php echo htmlspecialchars(format_date(time(), 'date_short')); ?></td>
+									<td><?php e(format_date(time(), 'date_short')); ?></td>
 								</tr>
 								<tr>
 									<td>#date_med#</td>
 									<td>The date. (Medium)</td>
-									<td><?php echo htmlspecialchars(format_date(time(), 'date_med')); ?></td>
+									<td><?php e(format_date(time(), 'date_med')); ?></td>
 								</tr>
 								<tr>
 									<td>#date_long#</td>
 									<td>The date. (Long)</td>
-									<td><?php echo htmlspecialchars(format_date(time(), 'date_long')); ?></td>
+									<td><?php e(format_date(time(), 'date_long')); ?></td>
 								</tr>
 								<tr>
 									<td>#time_short#</td>
 									<td>The time of day. (Short)</td>
-									<td><?php echo htmlspecialchars(format_date(time(), 'time_short')); ?></td>
+									<td><?php e(format_date(time(), 'time_short')); ?></td>
 								</tr>
 								<tr>
 									<td>#time_med#</td>
 									<td>The time of day. (Medium)</td>
-									<td><?php echo htmlspecialchars(format_date(time(), 'time_med')); ?></td>
+									<td><?php e(format_date(time(), 'time_med')); ?></td>
 								</tr>
 								<tr>
 									<td>#time_long#</td>
 									<td>The time of day. (Long)</td>
-									<td><?php echo htmlspecialchars(format_date(time(), 'time_long')); ?></td>
+									<td><?php e(format_date(time(), 'time_long')); ?></td>
 								</tr>
 								<tr>
 									<td rowspan="2">System</td>
 									<td>#system_name#</td>
 									<td>The system name.</td>
-									<td><?php echo htmlspecialchars($pines->config->system_name); ?></td>
+									<td><?php e($pines->config->system_name); ?></td>
 								</tr>
 								<tr>
 									<td>#page_title#</td>
 									<td>The page title.</td>
-									<td><?php echo htmlspecialchars($pines->config->page_title); ?></td>
+									<td><?php e($pines->config->page_title); ?></td>
 								</tr>
 							</tbody>
 						</table>
@@ -373,9 +373,9 @@ $pines->editor->load();
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_mailer', 'rendition/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_mailer', 'rendition/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

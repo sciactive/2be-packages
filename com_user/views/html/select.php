@@ -12,6 +12,6 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_user/includes/jquery.userselect.js");
+	pines.loadjs("<?php e($pines->config->location); ?>components/com_user/includes/jquery.userselect.js");
 	pines.com_user_autouser_url = <?php echo json_encode(pines_url('com_user', 'search')); ?>;
 </script>

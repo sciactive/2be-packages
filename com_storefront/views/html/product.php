@@ -10,11 +10,11 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = htmlspecialchars($this->entity->name);
+$this->title = h($this->entity->name);
 //$this->note = '';
 //if (!empty($this->entity->manufacturer_sku))
-//	$this->note = '<strong>Model:</strong> '.format_content(htmlspecialchars($this->entity->manufacturer_sku)).' | ';
-//$this->note .= '<strong>SKU:</strong> '.format_content(htmlspecialchars($this->entity->sku));
+//	$this->note = '<strong>Model:</strong> '.format_content(h($this->entity->manufacturer_sku)).' | ';
+//$this->note .= '<strong>SKU:</strong> '.format_content(h($this->entity->sku));
 
 if ($this->entity->images)
 	$pines->com_popeye->load();
@@ -86,8 +86,8 @@ $pines->com_sales->sort_specs($specs);
 		<ul class="ppy-imglist">
 			<?php $first = true; foreach ($this->entity->images as $cur_image) { ?>
 			<li style="<?php if (!$first) { ?>display: none;<?php } $first = false; ?>">
-				<a href="<?php echo htmlspecialchars($pines->config->location.$cur_image['file']); ?>"><img src="<?php echo htmlspecialchars($pines->config->location.$cur_image['thumbnail']); ?>" alt="" /></a>
-				<span class="ppy-extcaption"><span style="white-space: pre-wrap;"><?php echo str_replace("\n", '<br />', htmlspecialchars($cur_image['alt'])); ?></span></span>
+				<a href="<?php e($pines->config->location.$cur_image['file']); ?>"><img src="<?php e($pines->config->location.$cur_image['thumbnail']); ?>" alt="" /></a>
+				<span class="ppy-extcaption"><span style="white-space: pre-wrap;"><?php echo str_replace("\n", '<br />', h($cur_image['alt'])); ?></span></span>
 			</li>
 			<?php } ?>
 		</ul>
@@ -107,7 +107,7 @@ $pines->com_sales->sort_specs($specs);
 			<div class="ppy-counter">
 				Image <strong class="ppy-current"></strong> of <strong class="ppy-total"></strong>
 			</div>
-			<strong><?php echo htmlspecialchars($this->entity->name); ?></strong><br />
+			<strong><?php e($this->entity->name); ?></strong><br />
 			<span class="ppy-text"></span>
 		</div>
 	</div>
@@ -117,9 +117,9 @@ $pines->com_sales->sort_specs($specs);
 			<div class="price"><?php echo $pines->com_storefront->format_price($this->entity->unit_price); ?></div>
 			<div class="info">
 				<?php if (!empty($this->entity->manufacturer_sku)) { ?>
-				<strong>Model:</strong> <?php echo format_content(htmlspecialchars($this->entity->manufacturer_sku)); ?><br />
+				<strong>Model:</strong> <?php echo format_content(h($this->entity->manufacturer_sku)); ?><br />
 				<?php } ?>
-				<strong>SKU:</strong> <?php echo format_content(htmlspecialchars($this->entity->sku)); ?>
+				<strong>SKU:</strong> <?php echo format_content(h($this->entity->sku)); ?>
 			</div>
 			<?php if (!$pines->config->com_storefront->catalog_mode) { ?>
 			<div><button class="add_cart btn btn-large btn-primary"><i class="icon-shopping-cart icon-white"></i> Add to Cart</button></div>
@@ -144,7 +144,7 @@ $pines->com_sales->sort_specs($specs);
 			foreach ($specs as $key => $cur_spec) {
 				if ($cur_spec['type'] == 'heading') {
 					?><div class="pf-element pf-heading">
-						<h4><?php echo htmlspecialchars($cur_spec['name']); ?></h4>
+						<h4><?php e($cur_spec['name']); ?></h4>
 					</div><?php
 				} else {
 					switch ($cur_spec['type']) {
@@ -157,8 +157,8 @@ $pines->com_sales->sort_specs($specs);
 							break;
 					}
 					?><div class="pf-element">
-						<span class="pf-label"><?php echo htmlspecialchars($cur_spec['name']); ?></span>
-						<div class="pf-group"><div class="pf-field"><?php echo htmlspecialchars($value); ?></div></div>
+						<span class="pf-label"><?php e($cur_spec['name']); ?></span>
+						<div class="pf-group"><div class="pf-field"><?php e($value); ?></div></div>
 					</div><?php
 				}
 			}

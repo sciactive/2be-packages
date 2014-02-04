@@ -207,13 +207,13 @@ $pines->editor->load();
 	<div class="pf-element pf-full-width">
 		<label>
 			<span class="pf-label">Page Tag</span><br />
-			<input class="pf-field" type="text" name="tag" value="<?php echo htmlspecialchars($this->tag); ?>"/>
+			<input class="pf-field" type="text" name="tag" value="<?php e($this->tag); ?>"/>
 		</label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<label>
 			<span class="pf-label">Sub Menu Position</span><br />
-			<input class="pf-field" type="text" name="sub_position" value="<?php echo htmlspecialchars($this->sub_position); ?>"/>
+			<input class="pf-field" type="text" name="sub_position" value="<?php e($this->sub_position); ?>"/>
 		</label>
 	</div>
 	<div class="preview-menu">

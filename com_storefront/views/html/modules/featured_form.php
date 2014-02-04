@@ -25,14 +25,14 @@ $pines->entity_manager->sort($products, 'name');
 			<select class="pf-field" name="id">
 				<option value="random"<?php echo $this->id == 'random' ? ' selected="selected"' : ''; ?>>-- Random --</option>
 				<?php foreach ($products as $cur_product) { ?>
-				<option value="<?php echo htmlspecialchars($cur_product->guid); ?>"<?php echo $this->id == "$cur_product->guid" ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_product->name); ?></option>
+				<option value="<?php e($cur_product->guid); ?>"<?php echo $this->id == "$cur_product->guid" ? ' selected="selected"' : ''; ?>><?php e($cur_product->name); ?></option>
 				<?php } ?>
 			</select></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Alt Text</span>
 			<span class="pf-note">Leave blank to use product name.</span>
-			<input class="pf-field" type="text" name="alt_text" size="24" value="<?php echo htmlspecialchars($this->alt_text); ?>" /></label>
+			<input class="pf-field" type="text" name="alt_text" size="24" value="<?php e($this->alt_text); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Show Name</span>

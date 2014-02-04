@@ -440,13 +440,13 @@ Only continue if you are fully aware of the results of changing a product."))
 	</thead>
 	<tbody>
 	<?php foreach($this->sales as $sale) { ?>
-		<tr title="<?php echo htmlspecialchars($sale->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($sale->guid); ?>" data-entity-context="com_sales_sale"><?php echo htmlspecialchars($sale->id); ?></a></td>
-			<td><?php echo htmlspecialchars(format_date($sale->p_cdate)); ?></td>
-			<td><?php echo htmlspecialchars(ucwords($sale->status)); ?></td>
-			<td><?php if (isset($sale->user->guid)) { ?><a data-entity="<?php echo htmlspecialchars($sale->user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars("{$sale->user->name} [{$sale->user->username}]"); ?></a><?php } ?></td>
+		<tr title="<?php e($sale->guid); ?>">
+			<td><a data-entity="<?php e($sale->guid); ?>" data-entity-context="com_sales_sale"><?php e($sale->id); ?></a></td>
+			<td><?php e(format_date($sale->p_cdate)); ?></td>
+			<td><?php e(ucwords($sale->status)); ?></td>
+			<td><?php if (isset($sale->user->guid)) { ?><a data-entity="<?php e($sale->user->guid); ?>" data-entity-context="user"><?php e("{$sale->user->name} [{$sale->user->username}]"); ?></a><?php } ?></td>
 			<?php if ($pines->config->com_sales->com_customer) { ?>
-			<td><a data-entity="<?php echo htmlspecialchars($sale->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo $sale->customer->guid ? htmlspecialchars($sale->customer->name) : ''; ?></a></td>
+			<td><a data-entity="<?php e($sale->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo $sale->customer->guid ? h($sale->customer->name) : ''; ?></a></td>
 			<?php } ?>
 			<td><?php
 			$number = 0;
@@ -454,13 +454,13 @@ Only continue if you are fully aware of the results of changing a product."))
 				$number += (int) $cur_product['quantity'];
 			}
 			echo $number; ?></td>
-			<td><?php echo isset($sale->subtotal) ? '$'.htmlspecialchars(number_format($sale->subtotal, 2)) : ''; ?></td>
-			<td><?php echo isset($sale->total_specials) ? '$'.htmlspecialchars(number_format($sale->total_specials, 2)) : ''; ?></td>
-			<td><?php echo isset($sale->item_fees) ? '$'.htmlspecialchars(number_format($sale->item_fees, 2)) : ''; ?></td>
-			<td><?php echo isset($sale->taxes) ? '$'.htmlspecialchars(number_format($sale->taxes, 2)) : ''; ?></td>
-			<td><?php echo isset($sale->total) ? '$'.htmlspecialchars(number_format($sale->total, 2)) : ''; ?></td>
-			<td><?php echo isset($sale->amount_tendered) ? '$'.htmlspecialchars(number_format($sale->amount_tendered, 2)) : ''; ?></td>
-			<td><?php echo isset($sale->change) ? '$'.htmlspecialchars(number_format($sale->change, 2)) : ''; ?></td>
+			<td><?php echo isset($sale->subtotal) ? '$'.h(number_format($sale->subtotal, 2)) : ''; ?></td>
+			<td><?php echo isset($sale->total_specials) ? '$'.h(number_format($sale->total_specials, 2)) : ''; ?></td>
+			<td><?php echo isset($sale->item_fees) ? '$'.h(number_format($sale->item_fees, 2)) : ''; ?></td>
+			<td><?php echo isset($sale->taxes) ? '$'.h(number_format($sale->taxes, 2)) : ''; ?></td>
+			<td><?php echo isset($sale->total) ? '$'.h(number_format($sale->total, 2)) : ''; ?></td>
+			<td><?php echo isset($sale->amount_tendered) ? '$'.h(number_format($sale->amount_tendered, 2)) : ''; ?></td>
+			<td><?php echo isset($sale->change) ? '$'.h(number_format($sale->change, 2)) : ''; ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

@@ -13,9 +13,9 @@ defined('P_RUN') or die('Direct access prohibited');
 $pines->icons->load();
 ?>
 <script type="text/javascript">
-pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.css");
-pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.icons.css");
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_pnotify/includes/<?php echo $pines->config->debug_mode ? 'jquery.pnotify.js' : 'jquery.pnotify.min.js'; ?>");
+pines.loadcss("<?php e($pines->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.css");
+pines.loadcss("<?php e($pines->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.icons.css");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_pnotify/includes/<?php echo $pines->config->debug_mode ? 'jquery.pnotify.js' : 'jquery.pnotify.min.js'; ?>");
 pines.pnotify_alert_defaults = {nonblock: true};
 pines.pnotify_notice_defaults = {nonblock: true};
 pines.pnotify_error_defaults = {type: "error", hide: false, nonblock: false};

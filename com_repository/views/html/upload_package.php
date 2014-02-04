@@ -45,13 +45,13 @@ switch($last) {
 $max = ($val1 < $val2) ? $upload_max : $post_max;
 
 ?>
-<form enctype="multipart/form-data" class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_repository', 'savepackage')); ?>">
+<form enctype="multipart/form-data" class="pf-form" method="post" action="<?php e(pines_url('com_repository', 'savepackage')); ?>">
 	<div class="pf-element pf-heading">
 		<p>Select the Slim archive to add to the repository.</p>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Upload Package File(s)</span>
-			<span class="pf-note">Max Size: <?php echo htmlspecialchars($max); ?></span>
+			<span class="pf-note">Max Size: <?php e($max); ?></span>
 			<input class="pf-field puploader puploader-temp puploader-multiple" type="text" name="package" /></label>
 	</div>
 	<div class="pf-element pf-buttons">

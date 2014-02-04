@@ -89,11 +89,11 @@ foreach ($goals as $goal) {
 	<div id="p_muid_err" style="font-size:.7em; display:none;">Impossible # of Days Entered</div>
 	<div id="p_muid_days_passed" style="padding:5px; margin-bottom:2px;" class="alert-info clearfix">
 		<label style="margin-bottom:0;"><span style="float:left;">Days Passed</span></label>
-		<span style="float:right;"><input name="days_passed" style="text-align:right;" type="text" size="2" value="<?php echo htmlspecialchars($dayspassed); ?>" /></span>
+		<span style="float:right;"><input name="days_passed" style="text-align:right;" type="text" size="2" value="<?php e($dayspassed); ?>" /></span>
 	</div>
 	<div style="padding:5px; margin-bottom:2px;" class="alert-success clearfix">
 		<label style="margin-bottom:0;"><span style="float:left;">% of Month Passed</span></label>
-		<span id="p_muid_percent_passed" style="float:right;"><?php echo htmlspecialchars((int) ($percentmonth * 100)); ?>%</span>
+		<span id="p_muid_percent_passed" style="float:right;"><?php e((int) ($percentmonth * 100)); ?>%</span>
 	</div>
 	<div style="padding:5px; margin-bottom:2px;" class="clearfix">
 		<table class="table table-condensed" style="margin-bottom:0;">
@@ -108,9 +108,9 @@ foreach ($goals as $goal) {
 			<tbody>
 				<?php foreach ($trends as $trend) { ?>
 				<tr>
-					<td class="goal"><span><?php echo htmlspecialchars($trend['goal']); ?></span></td>
-					<td class="alert-success goal_green"><?php echo htmlspecialchars($pines->com_sales->round($trend['green'], true)); ?></td>
-					<td class="alert goal_yellow"><?php echo htmlspecialchars($pines->com_sales->round($trend['yellow'], true)); ?></td>
+					<td class="goal"><span><?php e($trend['goal']); ?></span></td>
+					<td class="alert-success goal_green"><?php e($pines->com_sales->round($trend['green'], true)); ?></td>
+					<td class="alert goal_yellow"><?php e($pines->com_sales->round($trend['yellow'], true)); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>

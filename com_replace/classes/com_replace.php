@@ -61,59 +61,59 @@ class com_replace extends component {
 					$replace = array();
 					if (strpos($cur_string['replace'], '#username#') !== false) {
 						$search[] = '#username#';
-						$replace[] = htmlspecialchars($_SESSION['user']->username);
+						$replace[] = h($_SESSION['user']->username);
 					}
 					if (strpos($cur_string['replace'], '#name#') !== false) {
 						$search[] = '#name#';
-						$replace[] = htmlspecialchars($_SESSION['user']->name);
+						$replace[] = h($_SESSION['user']->name);
 					}
 					if (strpos($cur_string['replace'], '#first_name#') !== false) {
 						$search[] = '#first_name#';
-						$replace[] = htmlspecialchars($_SESSION['user']->first_name);
+						$replace[] = h($_SESSION['user']->first_name);
 					}
 					if (strpos($cur_string['replace'], '#last_name#') !== false) {
 						$search[] = '#last_name#';
-						$replace[] = htmlspecialchars($_SESSION['user']->last_name);
+						$replace[] = h($_SESSION['user']->last_name);
 					}
 					if (strpos($cur_string['replace'], '#email#') !== false) {
 						$search[] = '#email#';
-						$replace[] = htmlspecialchars($_SESSION['user']->email);
+						$replace[] = h($_SESSION['user']->email);
 					}
 					if (strpos($cur_string['replace'], '#date_short#') !== false) {
 						$search[] = '#date_short#';
-						$replace[] = htmlspecialchars(format_date(time(), 'date_short'));
+						$replace[] = h(format_date(time(), 'date_short'));
 					}
 					if (strpos($cur_string['replace'], '#date_med#') !== false) {
 						$search[] = '#date_med#';
-						$replace[] = htmlspecialchars(format_date(time(), 'date_med'));
+						$replace[] = h(format_date(time(), 'date_med'));
 					}
 					if (strpos($cur_string['replace'], '#date_long#') !== false) {
 						$search[] = '#date_long#';
-						$replace[] = htmlspecialchars(format_date(time(), 'date_long'));
+						$replace[] = h(format_date(time(), 'date_long'));
 					}
 					if (strpos($cur_string['replace'], '#time_short#') !== false) {
 						$search[] = '#time_short#';
-						$replace[] = htmlspecialchars(format_date(time(), 'time_short'));
+						$replace[] = h(format_date(time(), 'time_short'));
 					}
 					if (strpos($cur_string['replace'], '#time_med#') !== false) {
 						$search[] = '#time_med#';
-						$replace[] = htmlspecialchars(format_date(time(), 'time_med'));
+						$replace[] = h(format_date(time(), 'time_med'));
 					}
 					if (strpos($cur_string['replace'], '#time_long#') !== false) {
 						$search[] = '#time_long#';
-						$replace[] = htmlspecialchars(format_date(time(), 'time_long'));
+						$replace[] = h(format_date(time(), 'time_long'));
 					}
 					if (strpos($cur_string['replace'], '#system_name#') !== false) {
 						$search[] = '#system_name#';
-						$replace[] = htmlspecialchars($pines->config->system_name);
+						$replace[] = h($pines->config->system_name);
 					}
 					if (strpos($cur_string['replace'], '#page_title#') !== false) {
 						$search[] = '#page_title#';
-						$replace[] = htmlspecialchars($pines->config->page_title);
+						$replace[] = h($pines->config->page_title);
 					}
 					if (strpos($cur_string['replace'], '#full_page_title#') !== false) {
 						$search[] = '#full_page_title#';
-						$replace[] = htmlspecialchars($pines->page->get_title());
+						$replace[] = h($pines->page->get_title());
 					}
 					$cur_string['replace'] = str_replace($search, $replace, $cur_string['replace']);
 				}

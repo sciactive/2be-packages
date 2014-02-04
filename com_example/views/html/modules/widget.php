@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 
 if (isset($this->id)) {
 	$this->entity = com_example_foobar::factory((int) $this->id);
-	$this->title = htmlspecialchars($this->entity->name);
+	$this->title = h($this->entity->name);
 } else {
 	$this->title = 'Foobar Widget';
 }

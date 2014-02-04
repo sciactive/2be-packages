@@ -15,7 +15,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	pines(function(){
 		var display_editor_window;
 		var current_holder;
-		var pdf_file = "<?php echo htmlspecialchars($this->entity->pdf_file); ?>";
+		var pdf_file = "<?php e($this->entity->pdf_file); ?>";
 		var pages = <?php echo json_encode($this->entity->pdf_pages); ?>;
 		var display_jsons = <?php echo json_encode($this->entity->displays); ?>;
 

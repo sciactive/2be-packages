@@ -12,5 +12,5 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_psteps/includes/<?php echo $pines->config->debug_mode ? 'jquery.psteps.js' : 'jquery.psteps.min.js'; ?>");
+	pines.loadjs("<?php e($pines->config->location); ?>components/com_psteps/includes/<?php echo $pines->config->debug_mode ? 'jquery.psteps.js' : 'jquery.psteps.min.js'; ?>");
 </script>

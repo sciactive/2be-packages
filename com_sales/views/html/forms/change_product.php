@@ -25,7 +25,7 @@ defined('P_RUN') or die('Direct access prohibited');
 			}
 			$items_shown = true;
 			?>
-		<input class="pf-field ui-widget-content" type="radio" name="product" value="<?php echo htmlspecialchars($key); ?>" /> <?php echo htmlspecialchars($cur_product['entity']->name).' <small>x '.htmlspecialchars($cur_product['quantity']).'</small>'; ?><br/>
+		<input class="pf-field ui-widget-content" type="radio" name="product" value="<?php e($key); ?>" /> <?php e($cur_product['entity']->name).' <small>x '.h($cur_product['quantity']).'</small>'; ?><br/>
 		<?php } if (!$items_shown) { ?>
 		This sale has no warehouse items that haven't been fulfilled.
 		<?php } ?>

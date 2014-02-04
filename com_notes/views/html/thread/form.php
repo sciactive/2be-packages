@@ -10,10 +10,10 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Editing Thread ['.htmlspecialchars($this->entity->guid).']';
-$this->note = 'For the entity '.htmlspecialchars($this->entity->entities[0]->guid.' with the tags '.implode(', ', $this->entity->entities[0]->tags)).'.';
+$this->title = 'Editing Thread ['.h($this->entity->guid).']';
+$this->note = 'For the entity '.h($this->entity->entities[0]->guid.' with the tags '.implode(', ', $this->entity->entities[0]->tags)).'.';
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_notes', 'thread/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_notes', 'thread/save')); ?>">
 	<div class="pf-element pf-heading">
 		<h3>Options</h3>
 	</div>
@@ -60,21 +60,21 @@ $this->note = 'For the entity '.htmlspecialchars($this->entity->entities[0]->gui
 		<?php foreach ($this->entity->notes as $key => $cur_note) { ?>
 		<div class="note ui-helper-clearfix">
 			<div class="pf-element pf-full-width">
-				<span class="pf-label"><?php echo htmlspecialchars($cur_note['user']->name); ?></span>
-				<span class="pf-note"><?php echo htmlspecialchars(format_date($cur_note['date'], 'full_med')); ?></span>
+				<span class="pf-label"><?php e($cur_note['user']->name); ?></span>
+				<span class="pf-note"><?php e(format_date($cur_note['date'], 'full_med')); ?></span>
 				<span class="pf-note">
-					<label><input type="checkbox" name="delete_note[]" value="<?php echo htmlspecialchars($key); ?>" /> Delete this note.</label>
+					<label><input type="checkbox" name="delete_note[]" value="<?php e($key); ?>" /> Delete this note.</label>
 				</span>
 				<div class="pf-group" style="overflow: auto;">
-					<div class="pf-field"><?php echo htmlspecialchars($cur_note['text']); ?></div>
+					<div class="pf-field"><?php e($cur_note['text']); ?></div>
 				</div>
 			</div>
 		</div>
 		<?php } ?>
 	</div>
 	<div class="pf-element pf-buttons">
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_notes', 'thread/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_notes', 'thread/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

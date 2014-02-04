@@ -144,11 +144,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->applications as $cur_application) { ?>
-		<tr title="<?php echo htmlspecialchars($cur_application->guid); ?>">
-			<td><?php echo htmlspecialchars(format_date($cur_application->p_cdate)); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($cur_application->guid); ?>" data-entity-context="com_hrm_application"><?php echo htmlspecialchars($cur_application->name); ?></a></td>
-			<td><?php echo htmlspecialchars($cur_application->position); ?></td>
-			<td><?php echo htmlspecialchars(ucwords($cur_application->status)); ?></td>
+		<tr title="<?php e($cur_application->guid); ?>">
+			<td><?php e(format_date($cur_application->p_cdate)); ?></td>
+			<td><a data-entity="<?php e($cur_application->guid); ?>" data-entity-context="com_hrm_application"><?php e($cur_application->name); ?></a></td>
+			<td><?php e($cur_application->position); ?></td>
+			<td><?php e(ucwords($cur_application->status)); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>
@@ -158,7 +158,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element">
 			<div class="pf-element dialog_info"></div>
 			<label><span class="pf-label">Effective Date</span>
-			<input class="pf-field" type="text" size="24" name="effective_date" value="<?php echo htmlspecialchars(format_date(time(), 'date_sort')); ?>" /></label>
+			<input class="pf-field" type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 	</form>
 	<br />

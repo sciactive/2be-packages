@@ -42,17 +42,17 @@ $pines->com_pgrid->load();
 		$("#p_muid_group_grid").pgrid_expand_rows($("#p_muid_group_grid").pgrid_get_all_rows());
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_reports', 'savewarboard')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_reports', 'savewarboard')); ?>">
 	<div class="pf-element">
 		<span class="pf-label">Company Name</span>
-		<input class="pf-field form_date" type="text" name="company_name" size="24" value="<?php echo htmlspecialchars($this->entity->company_name); ?>" />
+		<input class="pf-field form_date" type="text" name="company_name" size="24" value="<?php e($this->entity->company_name); ?>" />
 	</div>
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Employee Positions</span>
 		<span class="pf-note">Show all employees with these Job Titles</span>
 		<div class="pf-group">
 			<?php foreach ($pines->config->com_hrm->employee_departments as $cur_dept) { $cur_dept = explode(':', $cur_dept); ?>
-			<label class="pf-field"><input type="checkbox" name="titles[]" value="<?php echo htmlspecialchars($cur_dept[0]); ?>" <?php echo in_array($cur_dept[0], $this->entity->positions) ? 'checked="checked" ' : ''; ?>/> <?php echo htmlspecialchars($cur_dept[0]); ?></label>
+			<label class="pf-field"><input type="checkbox" name="titles[]" value="<?php e($cur_dept[0]); ?>" <?php echo in_array($cur_dept[0], $this->entity->positions) ? 'checked="checked" ' : ''; ?>/> <?php e($cur_dept[0]); ?></label>
 			<?php } ?>
 		</div>
 	</div>
@@ -85,20 +85,20 @@ $pines->com_pgrid->load();
 			</thead>
 			<tbody>
 			<?php foreach($this->groups as $cur_group) { ?>
-				<tr title="<?php echo htmlspecialchars($cur_group->guid); ?>">
-					<td class="location_label"><input type="checkbox" name="locations[]" value="<?php echo htmlspecialchars($cur_group->guid); ?>" <?php echo $cur_group->in_array($this->entity->locations) ? 'checked="checked" ' : ''; ?>/></td>
-					<td class="important_label"><input type="checkbox" name="important[]" value="<?php echo htmlspecialchars($cur_group->guid); ?>" <?php echo $cur_group->in_array($this->entity->important) ? 'checked="checked" ' : ''; ?>/></td>
-					<td class="hq_label"><input type="radio" name="hq" value="<?php echo htmlspecialchars($cur_group->guid); ?>" <?php echo $cur_group->is($this->entity->hq) ? 'checked="checked" ' : ''; ?>/></td>
-					<td><a data-entity="<?php echo htmlspecialchars($cur_group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($cur_group->name); ?></a></td>
-					<td><a data-entity="<?php echo htmlspecialchars($cur_group->parent->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($cur_group->parent->name); ?></a></td>
+				<tr title="<?php e($cur_group->guid); ?>">
+					<td class="location_label"><input type="checkbox" name="locations[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->in_array($this->entity->locations) ? 'checked="checked" ' : ''; ?>/></td>
+					<td class="important_label"><input type="checkbox" name="important[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->in_array($this->entity->important) ? 'checked="checked" ' : ''; ?>/></td>
+					<td class="hq_label"><input type="radio" name="hq" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->is($this->entity->hq) ? 'checked="checked" ' : ''; ?>/></td>
+					<td><a data-entity="<?php e($cur_group->guid); ?>" data-entity-context="group"><?php e($cur_group->name); ?></a></td>
+					<td><a data-entity="<?php e($cur_group->parent->guid); ?>" data-entity-context="group"><?php e($cur_group->parent->name); ?></a></td>
 				</tr>
 			<?php } ?>
 			</tbody>
 		</table>
 	</div>
 	<div class="pf-element pf-buttons">
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Save" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_reports', 'warboard'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_reports', 'warboard'))); ?>);" value="Cancel" />
 	</div>
 </form>

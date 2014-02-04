@@ -12,10 +12,10 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_elfinder/includes/js/elfinder.min.js");
-pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_elfinder/includes/css/elfinder.min.css");
+pines.loadjs("<?php e($pines->config->location); ?>components/com_elfinder/includes/js/elfinder.min.js");
+pines.loadcss("<?php e($pines->config->location); ?>components/com_elfinder/includes/css/elfinder.min.css");
 <?php if ($pines->config->com_elfinder->theme) { ?>
-pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_elfinder/includes/css/theme.css");
+pines.loadcss("<?php e($pines->config->location); ?>components/com_elfinder/includes/css/theme.css");
 <?php } ?>
 pines(function(){
 elFinder.prototype._options.cookie = {expires: <?php $params = session_get_cookie_params(); echo (int) $params['lifetime']; ?>, domain: '', path: <?php echo json_encode($pines->config->rela_location); ?>, secure: false};

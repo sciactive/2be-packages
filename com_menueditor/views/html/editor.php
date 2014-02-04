@@ -15,7 +15,7 @@ $pines->com_pgrid->load();
 $pines->com_jstree->load();
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php echo htmlspecialchars($pines->config->location); ?>components/com_menueditor/includes/jquery.menueditor.css");
-	pines.loadjs("<?php echo htmlspecialchars($pines->config->location); ?>components/com_menueditor/includes/jquery.menueditor.js");
+	pines.loadcss("<?php e($pines->config->location); ?>components/com_menueditor/includes/jquery.menueditor.css");
+	pines.loadjs("<?php e($pines->config->location); ?>components/com_menueditor/includes/jquery.menueditor.js");
 	pines.com_menueditor_dialog_url = <?php echo json_encode(pines_url('com_menueditor', 'entry/dialog')); ?>;
 </script>

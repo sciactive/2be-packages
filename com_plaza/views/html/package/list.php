@@ -187,10 +187,10 @@ if (isset($pines->com_fancybox))
 		<tbody>
 			<?php foreach ($this->db['packages'] as $key => $package) { ?>
 			<tr>
-				<td><?php echo htmlspecialchars($package['name']); ?></td>
-				<td><?php echo htmlspecialchars($key); ?></td>
-				<td><?php echo htmlspecialchars($package['author']); ?></td>
-				<td><?php echo htmlspecialchars($package['version']); ?></td>
+				<td><?php e($package['name']); ?></td>
+				<td><?php e($key); ?></td>
+				<td><?php e($package['author']); ?></td>
+				<td><?php e($package['version']); ?></td>
 				<td><?php switch($package['type']) {
 					case 'component':
 						echo 'Component Package';

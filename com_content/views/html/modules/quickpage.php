@@ -142,7 +142,7 @@ margin-left: 125px;
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Tags</span>
 		<div class="pf-group">
-			<input class="pf-field" type="text" name="content_tags" size="10" value="<?php echo htmlspecialchars(implode(',', (array) $this->content_tags)); ?>" />
+			<input class="pf-field" type="text" name="content_tags" size="10" value="<?php e(implode(',', (array) $this->content_tags)); ?>" />
 			<script type="text/javascript">
 				pines(function(){
 					$("#p_muid_form [name=content_tags]").ptags({
@@ -156,25 +156,25 @@ margin-left: 125px;
 		</div>
 	</div>
 	<input type="hidden" name="com_menueditor_entries" value="[]" />
-	<input type="hidden" name="title_position" value="<?php echo htmlspecialchars(isset($this->title_position) ? $this->title_position : 'null'); ?>" />
-	<input type="hidden" name="show_front_page" value="<?php echo htmlspecialchars(isset($this->show_front_page) ? $this->show_front_page : 'null'); ?>" />
-	<input type="hidden" name="meta_tags" value="<?php echo htmlspecialchars(isset($this->meta_tags) ? $this->meta_tags : '[]'); ?>" />
-	<input type="hidden" name="enable_custom_head" value="<?php echo htmlspecialchars($this->enable_custom_head); ?>" />
-	<input type="hidden" name="custom_head" value="<?php echo htmlspecialchars($this->custom_head); ?>" />
-	<input type="hidden" name="conditions" value="<?php echo htmlspecialchars(isset($this->conditions) ? $this->conditions : '[]'); ?>" />
-	<input type="hidden" name="p_cdate" value="<?php echo htmlspecialchars($this->p_cdate); ?>" />
-	<input type="hidden" name="p_mdate" value="<?php echo htmlspecialchars($this->p_mdate); ?>" />
-	<input type="hidden" name="publish_begin" value="<?php echo htmlspecialchars(!empty($this->publish_begin) ? $this->publish_begin : format_date(time(), 'full_med')); ?>" />
-	<input type="hidden" name="publish_end" value="<?php echo htmlspecialchars($this->publish_end); ?>" />
-	<input type="hidden" name="show_title" value="<?php echo htmlspecialchars(isset($this->show_title_save) ? $this->show_title_save : 'null'); ?>" />
-	<input type="hidden" name="show_author_info" value="<?php echo htmlspecialchars(isset($this->show_author_info) ? $this->show_author_info : 'null'); ?>" />
-	<input type="hidden" name="show_content_in_list" value="<?php echo htmlspecialchars(isset($this->show_content_in_list) ? $this->show_content_in_list : 'null'); ?>" />
-	<input type="hidden" name="show_intro" value="<?php echo htmlspecialchars(isset($this->show_intro) ? $this->show_intro : 'null'); ?>" />
-	<input type="hidden" name="show_breadcrumbs" value="<?php echo htmlspecialchars(isset($this->show_breadcrumbs) ? $this->show_breadcrumbs : 'null'); ?>" />
+	<input type="hidden" name="title_position" value="<?php e(isset($this->title_position) ? $this->title_position : 'null'); ?>" />
+	<input type="hidden" name="show_front_page" value="<?php e(isset($this->show_front_page) ? $this->show_front_page : 'null'); ?>" />
+	<input type="hidden" name="meta_tags" value="<?php e(isset($this->meta_tags) ? $this->meta_tags : '[]'); ?>" />
+	<input type="hidden" name="enable_custom_head" value="<?php e($this->enable_custom_head); ?>" />
+	<input type="hidden" name="custom_head" value="<?php e($this->custom_head); ?>" />
+	<input type="hidden" name="conditions" value="<?php e(isset($this->conditions) ? $this->conditions : '[]'); ?>" />
+	<input type="hidden" name="p_cdate" value="<?php e($this->p_cdate); ?>" />
+	<input type="hidden" name="p_mdate" value="<?php e($this->p_mdate); ?>" />
+	<input type="hidden" name="publish_begin" value="<?php e(!empty($this->publish_begin) ? $this->publish_begin : format_date(time(), 'full_med')); ?>" />
+	<input type="hidden" name="publish_end" value="<?php e($this->publish_end); ?>" />
+	<input type="hidden" name="show_title" value="<?php e(isset($this->show_title_save) ? $this->show_title_save : 'null'); ?>" />
+	<input type="hidden" name="show_author_info" value="<?php e(isset($this->show_author_info) ? $this->show_author_info : 'null'); ?>" />
+	<input type="hidden" name="show_content_in_list" value="<?php e(isset($this->show_content_in_list) ? $this->show_content_in_list : 'null'); ?>" />
+	<input type="hidden" name="show_intro" value="<?php e(isset($this->show_intro) ? $this->show_intro : 'null'); ?>" />
+	<input type="hidden" name="show_breadcrumbs" value="<?php e(isset($this->show_breadcrumbs) ? $this->show_breadcrumbs : 'null'); ?>" />
 	<?php foreach ((array) $this->variants as $cur_variant) { if (empty($cur_variant)) continue; ?>
-	<input type="hidden" name="variants[]" value="<?php echo htmlspecialchars($cur_variant); ?>" />
+	<input type="hidden" name="variants[]" value="<?php e($cur_variant); ?>" />
 	<?php } foreach ((array) $this->categories as $cur_guid) { if (empty($cur_guid)) continue; ?>
-	<input type="hidden" name="categories[]" value="<?php echo htmlspecialchars($cur_guid); ?>" />
+	<input type="hidden" name="categories[]" value="<?php e($cur_guid); ?>" />
 	<?php } ?>
 	<input type="hidden" name="ajax" value="true" />
 	<div class="pf-element pf-full-width">

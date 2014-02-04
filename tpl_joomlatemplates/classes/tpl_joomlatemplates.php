@@ -76,10 +76,10 @@ class tpl_joomlatemplates extends template {
 		$count = count($menu);
 		// TODO: Remove target attribute. It's not XHTML 1.0 Strict.
 		$return = '<li><a class="'.$top_class.($count > 1 ? ' dir' : '').'" href="'.
-			(isset($menu[0]['href']) ? htmlspecialchars($menu[0]['href']) : 'javascript:void(0);').'"'.
+			(isset($menu[0]['href']) ? h($menu[0]['href']) : 'javascript:void(0);').'"'.
 			(isset($menu[0]['onclick']) ? " onclick=\"{$menu[0]['onclick']}\"" : '').
 			(isset($menu[0]['target']) ? " target=\"{$menu[0]['target']}\"" : '')
-			.'>'.htmlspecialchars($menu[0]['text']).'</a>';
+			.'>'.h($menu[0]['text']).'</a>';
 		if ($count > 1) {
 			$return .= '<ul>';
 			foreach ($menu as $key => &$value) {

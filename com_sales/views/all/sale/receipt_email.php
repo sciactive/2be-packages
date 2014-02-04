@@ -46,11 +46,11 @@ switch ($this->entity->status) {
 	<table width="100%" cellspacing="0" cellpadding="0">
 		<tr>
 			<td valign="top" align="left">
-				<span><img src="<?php echo htmlspecialchars($group_logo); ?>" alt="<?php echo htmlspecialchars($pines->config->system_name); ?>" /></span>
+				<span><img src="<?php e($group_logo); ?>" alt="<?php e($pines->config->system_name); ?>" /></span>
 			</td>
 			<td valign="top" align="right">
-				<span><?php echo htmlspecialchars($this->doc_title); ?></span><br />
-				<img src="<?php echo htmlspecialchars(pines_url('com_barcode', 'image', array('code' => $doc_id, 'height' => '60', 'width' => '300', 'style' => '850'), true)); ?>" alt="<?php echo htmlspecialchars($doc_id); ?>" />
+				<span><?php e($this->doc_title); ?></span><br />
+				<img src="<?php e(pines_url('com_barcode', 'image', array('code' => $doc_id, 'height' => '60', 'width' => '300', 'style' => '850'), true)); ?>" alt="<?php e($doc_id); ?>" />
 			</td>
 		</tr>
 	</table>
@@ -60,40 +60,40 @@ switch ($this->entity->status) {
 			<?php if (isset($sales_rep->guid)) { ?>
 			<td width="50%" valign="top" align="left">
 				<h3>Location:</h3>
-				<?php echo htmlspecialchars($sales_group->name); ?><br />
+				<?php e($sales_group->name); ?><br />
 				<?php if ($sales_group->address_type == 'us') { ?>
-				<?php echo htmlspecialchars($sales_group->address_1).'<br />'.htmlspecialchars($sales_group->address_2); ?><br />
-				<?php echo htmlspecialchars($sales_group->city); ?>, <?php echo htmlspecialchars($sales_group->state); ?> <?php echo htmlspecialchars($sales_group->zip); ?>
+				<?php e($sales_group->address_1).'<br />'.h($sales_group->address_2); ?><br />
+				<?php e($sales_group->city); ?>, <?php e($sales_group->state); ?> <?php e($sales_group->zip); ?>
 				<?php } else { ?>
-				<pre><?php echo htmlspecialchars($sales_group->address_international); ?></pre>
+				<pre><?php e($sales_group->address_international); ?></pre>
 				<?php } ?>
 				<br />
-				<?php echo htmlspecialchars(format_phone($sales_group->phone)); ?>
+				<?php e(format_phone($sales_group->phone)); ?>
 			</td>
 			<?php } ?>
 			<td width="50%" valign="top" align="right">
 				<table cellspacing="4" cellpadding="">
 					<tr>
 						<td align="right" valign="top" style="text-align: right;"><?php echo $sale ? 'Sale' : 'Return'; ?> #:</td>
-						<td><?php echo htmlspecialchars($this->entity->id); ?></td>
+						<td><?php e($this->entity->id); ?></td>
 					</tr>
 					<tr>
 						<td align="right" valign="top" style="text-align: right;">Date:</td>
 						<td><?php switch($this->entity->status) {
 							case 'invoiced':
-								echo '<span>'.htmlspecialchars(format_date($this->entity->invoice_date, 'date_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->invoice_date, 'date_short')).'</span>';
 								break;
 							case 'paid':
-								echo '<span>'.htmlspecialchars(format_date($this->entity->tender_date, 'date_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->tender_date, 'date_short')).'</span>';
 								break;
 							case 'processed':
-								echo '<span>'.htmlspecialchars(format_date($this->entity->process_date, 'date_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->process_date, 'date_short')).'</span>';
 								break;
 							case 'voided':
-								echo '<span>'.htmlspecialchars(format_date($this->entity->void_date, 'date_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->void_date, 'date_short')).'</span>';
 								break;
 							default:
-								echo '<span>'.htmlspecialchars(format_date($this->entity->p_cdate, 'date_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->p_cdate, 'date_short')).'</span>';
 								break;
 						} ?></td>
 					</tr>
@@ -101,33 +101,33 @@ switch ($this->entity->status) {
 						<td align="right" valign="top" style="text-align: right;">Time:</td>
 						<td><?php switch($this->entity->status) {
 							case 'invoiced':
-								echo '<span>'.htmlspecialchars(format_date($this->entity->invoice_date, 'time_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->invoice_date, 'time_short')).'</span>';
 								break;
 							case 'paid':
-								echo '<span>'.htmlspecialchars(format_date($this->entity->tender_date, 'time_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->tender_date, 'time_short')).'</span>';
 								break;
 							case 'processed':
-								echo '<span>'.htmlspecialchars(format_date($this->entity->process_date, 'time_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->process_date, 'time_short')).'</span>';
 								break;
 							case 'voided':
-								echo '<span>'.htmlspecialchars(format_date($this->entity->void_date, 'time_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->void_date, 'time_short')).'</span>';
 								break;
 							default:
-								echo '<span>'.htmlspecialchars(format_date($this->entity->p_cdate, 'time_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->p_cdate, 'time_short')).'</span>';
 								break;
 						} ?></td>
 					</tr>
 					<?php if (!$sale && isset($this->entity->sale)) { ?>
 					<tr>
 						<td align="right" valign="top" style="text-align: right;">Sale:</td>
-						<td><?php echo htmlspecialchars($this->entity->sale->id); ?></td>
+						<td><?php e($this->entity->sale->id); ?></td>
 					</tr>
 					<?php } if (isset($sales_rep->guid)) { ?>
 					<tr>
 						<td align="right" valign="top" style="text-align: right;">Sales Rep:</td>
 						<td>
-							<span style="display: block; margin-right: .5em; float: left; border: 1px solid #DDDDDD; border-radius: 4px 4px 4px 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075); line-height: 1; padding: 4px;"><img src="<?php echo htmlspecialchars($sales_rep->info('avatar')); ?>" alt="Avatar" title="Avatar by Gravatar" /></span>
-							<?php echo htmlspecialchars($sales_rep->name); ?>
+							<span style="display: block; margin-right: .5em; float: left; border: 1px solid #DDDDDD; border-radius: 4px 4px 4px 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075); line-height: 1; padding: 4px;"><img src="<?php e($sales_rep->info('avatar')); ?>" alt="Avatar" title="Avatar by Gravatar" /></span>
+							<?php e($sales_rep->name); ?>
 						</td>
 					</tr>
 					<?php } ?>
@@ -141,12 +141,12 @@ switch ($this->entity->status) {
 			<?php if (isset($this->entity->shipping_address) && ($this->entity->has_tag('shipping_pending') || $this->entity->has_tag('shipping_shipped') || $this->entity->warehouse)) { ?>
 			<td width="50%" valign="top" align="left">
 				<h3>Ship To:</h3>
-				<strong><?php echo htmlspecialchars($this->entity->shipping_address->name); ?></strong><br />
+				<strong><?php e($this->entity->shipping_address->name); ?></strong><br />
 				<?php if ($this->entity->shipping_address->address_type == 'us') { if (!empty($this->entity->shipping_address->address_1)) { ?>
-				<?php echo htmlspecialchars($this->entity->shipping_address->address_1).'<br />'.htmlspecialchars($this->entity->shipping_address->address_2); ?><br />
-				<?php echo htmlspecialchars($this->entity->shipping_address->city); ?>, <?php echo htmlspecialchars($this->entity->shipping_address->state); ?> <?php echo htmlspecialchars($this->entity->shipping_address->zip); ?>
+				<?php e($this->entity->shipping_address->address_1).'<br />'.h($this->entity->shipping_address->address_2); ?><br />
+				<?php e($this->entity->shipping_address->city); ?>, <?php e($this->entity->shipping_address->state); ?> <?php e($this->entity->shipping_address->zip); ?>
 				<?php } } else {?>
-				<pre><?php echo htmlspecialchars($this->entity->shipping_address->address_international); ?></pre>
+				<pre><?php e($this->entity->shipping_address->address_international); ?></pre>
 				<?php } ?>
 			</td>
 			<?php } if ($pines->config->com_sales->com_customer && isset($this->entity->customer)) { ?>
@@ -155,19 +155,19 @@ switch ($this->entity->status) {
 				<table>
 					<tr>
 						<td valign="top" style="padding-right: .5em;">
-							<span style="display: block; float: left; border: 1px solid #DDDDDD; border-radius: 4px 4px 4px 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075); line-height: 1; padding: 4px;"><img src="<?php echo htmlspecialchars($this->entity->customer->info('avatar')); ?>" alt="Avatar" title="Avatar by Gravatar" /></span>
+							<span style="display: block; float: left; border: 1px solid #DDDDDD; border-radius: 4px 4px 4px 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075); line-height: 1; padding: 4px;"><img src="<?php e($this->entity->customer->info('avatar')); ?>" alt="Avatar" title="Avatar by Gravatar" /></span>
 						</td>
 						<td>
 							<strong>
-								<?php echo htmlspecialchars($this->entity->customer->name);
+								<?php e($this->entity->customer->name);
 								if (isset($this->entity->customer->company->name))
-									echo htmlspecialchars(" ( {$this->entity->customer->company->name} )"); ?>
+									e(" ( {$this->entity->customer->company->name} )"); ?>
 							</strong><br />
 							<?php if ($this->entity->customer->address_type == 'us') { if (!empty($this->entity->customer->address_1)) { ?>
-							<?php echo htmlspecialchars($this->entity->customer->address_1).'<br />'.htmlspecialchars($this->entity->customer->address_2); ?><br />
-							<?php echo htmlspecialchars($this->entity->customer->city); ?>, <?php echo htmlspecialchars($this->entity->customer->state); ?> <?php echo htmlspecialchars($this->entity->customer->zip); ?>
+							<?php e($this->entity->customer->address_1).'<br />'.h($this->entity->customer->address_2); ?><br />
+							<?php e($this->entity->customer->city); ?>, <?php e($this->entity->customer->state); ?> <?php e($this->entity->customer->zip); ?>
 							<?php } } else {?>
-							<pre><?php echo htmlspecialchars($this->entity->customer->address_international); ?></pre>
+							<pre><?php e($this->entity->customer->address_international); ?></pre>
 							<?php } ?>
 						</td>
 					</tr>
@@ -197,8 +197,8 @@ switch ($this->entity->status) {
 				continue;
 			?>
 		<tr>
-			<td valign="top" style="text-align: left;"><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-			<td valign="top" style="text-align: left;"><?php echo htmlspecialchars($cur_product['entity']->name); ?></td>
+			<td valign="top" style="text-align: left;"><?php e($cur_product['entity']->sku); ?></td>
+			<td valign="top" style="text-align: left;"><?php e($cur_product['entity']->name); ?></td>
 			<td valign="top" style="text-align: left;"><?php
 			$text = array();
 			if (isset($cur_product['serial']))
@@ -227,10 +227,10 @@ switch ($this->entity->status) {
 						$text[] = "($unfulfilled to fulfill)";
 				}
 			}
-			echo htmlspecialchars(implode(' ', $text));
+			e(implode(' ', $text));
 			?>&nbsp;</td>
-			<td valign="top" style="text-align: right;"><?php echo htmlspecialchars($cur_product['quantity']); ?></td>
-			<td valign="top" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : htmlspecialchars(" - {$cur_product['discount']}"); ?></td>
+			<td valign="top" style="text-align: right;"><?php e($cur_product['quantity']); ?></td>
+			<td valign="top" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
 			<?php if (!$sale) { ?>
 			<td valign="top" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['return_fee'], true); ?></td>
 			<?php } ?>
@@ -248,7 +248,7 @@ switch ($this->entity->status) {
 		</tr>
 		<?php foreach ($this->entity->specials as $cur_special) { ?>
 		<tr>
-			<td valign="top" style="text-align: left; width: 80%;"><?php echo htmlspecialchars(($cur_special['entity']->hide_code ? '' : "{$cur_special['code']} - ").$cur_special['name']); ?></td>
+			<td valign="top" style="text-align: left; width: 80%;"><?php e(($cur_special['entity']->hide_code ? '' : "{$cur_special['code']} - ").$cur_special['name']); ?></td>
 			<td valign="top" style="text-align: left; white-space: pre;"><?php echo $cur_special['before_tax'] ? 'Before Tax' : 'After Tax'; ?></td>
 			<td valign="top" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_special['discount'], true); ?></td>
 		</tr>
@@ -299,7 +299,7 @@ switch ($this->entity->status) {
 	<table cellpadding="4" cellspacing="0">
 		<?php foreach ($this->entity->payments as $cur_payment) { ?>
 		<tr>
-			<td><?php echo htmlspecialchars($cur_payment['label']); ?>:</td>
+			<td><?php e($cur_payment['label']); ?>:</td>
 			<td align="right" style="text-align: right;">$<?php echo $pines->com_sales->round($cur_payment['amount'], true); ?></td>
 		</tr>
 		<?php } ?>
@@ -316,7 +316,7 @@ switch ($this->entity->status) {
 	</table>
 	<?php } if (!empty($this->entity->comments)) { ?>
 	<h3>Comments</h3>
-	<p style="font-size: .85em;"><?php echo htmlspecialchars($this->entity->comments); ?></p>
+	<p style="font-size: .85em;"><?php e($this->entity->comments); ?></p>
 	<?php }
 	switch ($this->entity->status) {
 		case 'quoted':
@@ -340,7 +340,7 @@ switch ($this->entity->status) {
 			$text = null;
 	}
 	if (!empty($text)) { ?>
-	<h3><?php echo htmlspecialchars($label); ?></h3>
-	<p style="font-size: .85em;"><?php echo htmlspecialchars($text); ?></p>
+	<h3><?php e($label); ?></h3>
+	<p style="font-size: .85em;"><?php e($text); ?></p>
 	<?php } ?>
 </div>

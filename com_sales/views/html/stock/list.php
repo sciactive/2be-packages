@@ -14,9 +14,9 @@ if ($this->removed) {
 	$this->title = 'Removed Stock';
 } else {
 	if (!empty($this->stock)) {
-		$this->title = htmlspecialchars("Stock at {$this->location->name} [{$this->location->groupname}]");
+		$this->title = h("Stock at {$this->location->name} [{$this->location->groupname}]");
 		if ($this->descendants)
-			$this->note = htmlspecialchars("Stock for all locations below {$this->location->name} is also included.");
+			$this->note = h("Stock for all locations below {$this->location->name} is also included.");
 	} else {
 		$this->title = 'Stock [No Location]';
 		$this->note = 'This list is empty by default. Please select a location to view the inventory.';
@@ -162,16 +162,16 @@ $pines->com_jstree->load();
 	</thead>
 	<tbody>
 	<?php foreach($this->stock as $stock) { ?>
-		<tr title="<?php echo htmlspecialchars($stock->guid); ?>">
-			<td><a data-entity="<?php echo htmlspecialchars($stock->guid); ?>" data-entity-context="com_sales_stock"><?php echo htmlspecialchars($stock->guid); ?></a></td>
-			<td><?php echo htmlspecialchars($stock->product->sku); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($stock->product->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($stock->product->name); ?></a></td>
-			<td><?php echo htmlspecialchars($stock->serial); ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($stock->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php echo htmlspecialchars($stock->vendor->name); ?></a></td>
+		<tr title="<?php e($stock->guid); ?>">
+			<td><a data-entity="<?php e($stock->guid); ?>" data-entity-context="com_sales_stock"><?php e($stock->guid); ?></a></td>
+			<td><?php e($stock->product->sku); ?></td>
+			<td><a data-entity="<?php e($stock->product->guid); ?>" data-entity-context="com_sales_product"><?php e($stock->product->name); ?></a></td>
+			<td><?php e($stock->serial); ?></td>
+			<td><a data-entity="<?php e($stock->vendor->guid); ?>" data-entity-context="com_sales_vendor"><?php e($stock->vendor->name); ?></a></td>
 			<?php if (!$this->removed) { ?>
-			<td><a data-entity="<?php echo htmlspecialchars($stock->location->guid); ?>" data-entity-context="group"><?php echo $stock->location->guid ? htmlspecialchars($stock->location->info('name')) : ''; ?></a></td>
+			<td><a data-entity="<?php e($stock->location->guid); ?>" data-entity-context="group"><?php echo $stock->location->guid ? h($stock->location->info('name')) : ''; ?></a></td>
 			<?php } ?>
-			<td><?php echo isset($stock->cost) ? '$'.htmlspecialchars(number_format($stock->cost, 2)) : ''; ?></td>
+			<td><?php echo isset($stock->cost) ? '$'.h(number_format($stock->cost, 2)) : ''; ?></td>
 			<td><?php echo $stock->available ? 'Yes' : 'No'; ?></td>
 			<?php if (gatekeeper('com_sales/managestock')) { ?>
 			<td></td>

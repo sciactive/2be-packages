@@ -87,7 +87,7 @@ $loan_ids = $this->loan_ids;
 		?>
 				<div class="accordion-group">
 					<a class="accordion-heading" data-parent="#p_muid_accordion_parent" data-toggle="collapse" href="#p_muid_collapse<?php echo $c;?>">
-						<big class="accordion-toggle label-info" style="color:#fff;"><?php echo htmlspecialchars($customer->name); ?></big>
+						<big class="accordion-toggle label-info" style="color:#fff;"><?php e($customer->name); ?></big>
 					</a>
 					<div id="p_muid_collapse<?php echo $c;?>" class="accordion-body collapse">
 						<div class="accordion-inner clearfix">
@@ -108,14 +108,14 @@ $loan_ids = $this->loan_ids;
 								</thead>
 								<tbody>
 						<?php foreach ($interactions as $cur_interaction) { ?>
-									<tr title="<?php echo htmlspecialchars($cur_interaction->guid); ?>">
-										<td><a data-entity="<?php echo htmlspecialchars($cur_interaction->guid); ?>" data-entity-context="com_customer_interaction"><?php echo htmlspecialchars($cur_interaction->guid); ?></a></td>
-										<td><?php echo htmlspecialchars(format_date($cur_interaction->p_cdate, 'date_sort')); ?></td>
-										<td><?php echo htmlspecialchars(format_date($cur_interaction->action_date, 'date_sort')); ?></td>
-										<td><a data-entity="<?php echo htmlspecialchars($cur_interaction->employee->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($cur_interaction->employee->name); ?></a></td>
-										<td><?php echo htmlspecialchars($cur_interaction->type); ?></td>
+									<tr title="<?php e($cur_interaction->guid); ?>">
+										<td><a data-entity="<?php e($cur_interaction->guid); ?>" data-entity-context="com_customer_interaction"><?php e($cur_interaction->guid); ?></a></td>
+										<td><?php e(format_date($cur_interaction->p_cdate, 'date_sort')); ?></td>
+										<td><?php e(format_date($cur_interaction->action_date, 'date_sort')); ?></td>
+										<td><a data-entity="<?php e($cur_interaction->employee->guid); ?>" data-entity-context="user"><?php e($cur_interaction->employee->name); ?></a></td>
+										<td><?php e($cur_interaction->type); ?></td>
 										<td><?php echo ucwords($cur_interaction->status); ?></td>
-										<td><?php echo htmlspecialchars($cur_interaction->comments); ?></td>
+										<td><?php e($cur_interaction->comments); ?></td>
 									</tr>
 						<?php } ?>
 								</tbody>
@@ -146,7 +146,7 @@ $loan_ids = $this->loan_ids;
 			<div class="accordion">
 				<div class="accordion-group">
 					<a class="accordion-heading" data-toggle="collapse" href="javascript:void(0);">
-						<big class="accordion-toggle label-info" style="color:#fff;"><?php echo htmlspecialchars($customer->name); ?></big>
+						<big class="accordion-toggle label-info" style="color:#fff;"><?php e($customer->name); ?></big>
 					</a>
 					<div class="accordion-body in collapse">
 						<div class="accordion-inner clearfix">
@@ -169,14 +169,14 @@ $loan_ids = $this->loan_ids;
 									</thead>
 									<tbody>
 							<?php foreach ($interactions as $cur_interaction) { ?>
-										<tr title="<?php echo htmlspecialchars($cur_interaction->guid); ?>">
-											<td><a data-entity="<?php echo htmlspecialchars($cur_interaction->guid); ?>" data-entity-context="com_customer_interaction"><?php echo htmlspecialchars($cur_interaction->guid); ?></a></td>
-											<td><?php echo htmlspecialchars(format_date($cur_interaction->p_cdate, 'date_sort')); ?></td>
-											<td><?php echo htmlspecialchars(format_date($cur_interaction->action_date, 'date_sort')); ?></td>
-											<td><a data-entity="<?php echo htmlspecialchars($cur_interaction->employee->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($cur_interaction->employee->name); ?></a></td>
-											<td><?php echo htmlspecialchars($cur_interaction->type); ?></td>
+										<tr title="<?php e($cur_interaction->guid); ?>">
+											<td><a data-entity="<?php e($cur_interaction->guid); ?>" data-entity-context="com_customer_interaction"><?php e($cur_interaction->guid); ?></a></td>
+											<td><?php e(format_date($cur_interaction->p_cdate, 'date_sort')); ?></td>
+											<td><?php e(format_date($cur_interaction->action_date, 'date_sort')); ?></td>
+											<td><a data-entity="<?php e($cur_interaction->employee->guid); ?>" data-entity-context="user"><?php e($cur_interaction->employee->name); ?></a></td>
+											<td><?php e($cur_interaction->type); ?></td>
 											<td><?php echo ucwords($cur_interaction->status); ?></td>
-											<td><?php echo htmlspecialchars($cur_interaction->comments); ?></td>
+											<td><?php e($cur_interaction->comments); ?></td>
 										</tr>
 							<?php } ?>
 									</tbody>

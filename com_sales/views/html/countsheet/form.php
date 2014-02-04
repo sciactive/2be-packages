@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'New Countsheet' : (($this->entity->final) ? 'Viewing' : 'Editing').' Countsheet ['.htmlspecialchars($this->entity->guid).']';
+$this->title = (!isset($this->entity->guid)) ? 'New Countsheet' : (($this->entity->final) ? 'Viewing' : 'Editing').' Countsheet ['.h($this->entity->guid).']';
 $pines->com_pgrid->load();
 ?>
 <script type="text/javascript">
@@ -135,15 +135,15 @@ $pines->com_pgrid->load();
 		update_entries();
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'countsheet/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'countsheet/save')); ?>">
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } if ($this->entity->missing) { ?>
 	<div class="pf-element pf-heading">
@@ -166,9 +166,9 @@ $pines->com_pgrid->load();
 					$missing_counted[$cur_entry->product->guid] = true;
 					?>
 				<tr class="ui-state-error">
-					<td><?php echo htmlspecialchars($cur_entry->product->name); ?></td>
-					<td><?php echo htmlspecialchars($this->entity->missing_count[$cur_entry->product->guid]); ?></td>
-					<td><?php echo htmlspecialchars($cur_entry->product->sku); ?></td>
+					<td><?php e($cur_entry->product->name); ?></td>
+					<td><?php e($this->entity->missing_count[$cur_entry->product->guid]); ?></td>
+					<td><?php e($cur_entry->product->sku); ?></td>
 					<td><?php echo $cur_entry->product->serialized ? '?????' : 'No Serial'; ?></td>
 				</tr>
 				<?php } ?>
@@ -189,7 +189,7 @@ $pines->com_pgrid->load();
 			<tbody>
 				<?php foreach ($this->entity->invalid as $cur_entry) { ?>
 				<tr>
-					<td><?php echo htmlspecialchars($cur_entry); ?></td>
+					<td><?php e($cur_entry); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>
@@ -200,7 +200,7 @@ $pines->com_pgrid->load();
 		<h3>Reviewer Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-field"><?php echo htmlspecialchars($this->entity->review_comments); ?></div>
+		<div class="pf-field"><?php e($this->entity->review_comments); ?></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-heading">
@@ -221,8 +221,8 @@ $pines->com_pgrid->load();
 			<tbody>
 				<?php foreach ($this->entity->entries as $cur_entry) { ?>
 				<tr>
-					<td><?php echo htmlspecialchars($cur_entry->code); ?></td>
-					<td><?php echo htmlspecialchars($cur_entry->qty); ?></td>
+					<td><?php e($cur_entry->code); ?></td>
+					<td><?php e($cur_entry->qty); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>
@@ -232,19 +232,19 @@ $pines->com_pgrid->load();
 		<h3>Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php echo htmlspecialchars($this->entity->comments); ?></textarea></div>
+		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments"><?php e($this->entity->comments); ?></textarea></div>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } if (!$this->entity->final) { ?>
 		<input type="hidden" name="entries" value="" />
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Commit" onclick="$('#p_muid_save').val('commit');" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
-		<input class="pf-button btn btn-primary" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="&laquo; Close" />
+		<input class="pf-button btn btn-primary" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="&laquo; Close" />
 		<?php } ?>
 	</div>
 </form>

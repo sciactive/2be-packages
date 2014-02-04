@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Packages';
 if (isset($this->user))
-	$this->title .= ' from Publisher '.htmlspecialchars($this->user->username);
+	$this->title .= ' from Publisher '.h($this->user->username);
 $pines->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_repository/list_packages']);
@@ -73,12 +73,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->index as $package) { ?>
-		<tr title="<?php echo htmlspecialchars($package['package']); ?>">
-			<td><?php echo htmlspecialchars($package['package']); ?></td>
-			<td><?php echo htmlspecialchars($package['publisher']); ?></td>
-			<td><?php echo htmlspecialchars($package['name']); ?></td>
-			<td><?php echo htmlspecialchars($package['author']); ?></td>
-			<td><?php echo htmlspecialchars($package['version']); ?></td>
+		<tr title="<?php e($package['package']); ?>">
+			<td><?php e($package['package']); ?></td>
+			<td><?php e($package['publisher']); ?></td>
+			<td><?php e($package['name']); ?></td>
+			<td><?php e($package['author']); ?></td>
+			<td><?php e($package['version']); ?></td>
 			<td><?php switch($package['type']) {
 				case 'component':
 					echo 'Component Package';
@@ -93,7 +93,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					echo 'Meta Package';
 					break;
 			} ?></td>
-			<td><?php echo htmlspecialchars($package['md5']); ?></td>
+			<td><?php e($package['md5']); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

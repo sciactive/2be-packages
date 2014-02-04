@@ -21,76 +21,76 @@ echo $module->render();
 	<hr />
 	<h3 style="margin:10px 0;">
 		Properties
-		<img style="float: right;" src="<?php echo htmlspecialchars(pines_url('com_barcode', 'image', array('code' => "RE{$this->entity->id}", 'height' => '60', 'width' => '300', 'style' => '850'), true)); ?>" alt="Barcode" />
+		<img style="float: right;" src="<?php e(pines_url('com_barcode', 'image', array('code' => "RE{$this->entity->id}", 'height' => '60', 'width' => '300', 'style' => '850'), true)); ?>" alt="Barcode" />
 	</h3>
 	<table class="table table-bordered" style="clear:both;">
 		<tbody>
 			<tr>
 				<td style="font-weight:bold;">GUID</td>
-				<td><?php echo htmlspecialchars($this->entity->guid); ?></td>
+				<td><?php e($this->entity->guid); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Return ID</td>
-				<td><?php echo htmlspecialchars($this->entity->id); ?></td>
+				<td><?php e($this->entity->id); ?></td>
 			</tr>
 			<?php if (isset($this->entity->sale->guid)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Attached Sale</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->sale->guid); ?>" data-entity-context="com_sales_sale"><?php echo htmlspecialchars($this->entity->sale->id); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->sale->guid); ?>" data-entity-context="com_sales_sale"><?php e($this->entity->sale->id); ?></a></td>
 			</tr>
 			<?php } ?>
 			<tr>
 				<td style="font-weight:bold;">Status</td>
-				<td><?php echo htmlspecialchars(ucwords($this->entity->status)); ?></td>
+				<td><?php e(ucwords($this->entity->status)); ?></td>
 			</tr>
 			<?php if (!empty($this->entity->process_date)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Process Date</td>
-				<td><?php echo htmlspecialchars(format_date($this->entity->process_date, 'full_short')); ?></td>
+				<td><?php e(format_date($this->entity->process_date, 'full_short')); ?></td>
 			</tr>
 			<?php } if (!empty($this->entity->void_date)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Void Date</td>
-				<td><?php echo htmlspecialchars(format_date($this->entity->void_date, 'full_short')); ?></td>
+				<td><?php e(format_date($this->entity->void_date, 'full_short')); ?></td>
 			</tr>
 			<?php } if ($pines->config->com_sales->com_customer && isset($this->entity->customer->guid)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Customer</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($this->entity->customer->name); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($this->entity->customer->name); ?></a></td>
 			</tr>
 			<?php } ?>
 			<tr>
 				<td style="font-weight:bold;">Subtotal</td>
-				<td><?php echo isset($this->entity->subtotal) ? '$'.htmlspecialchars(number_format($this->entity->subtotal, 2)) : ''; ?></td>
+				<td><?php echo isset($this->entity->subtotal) ? '$'.h(number_format($this->entity->subtotal, 2)) : ''; ?></td>
 			</tr>
 			<?php if (!empty($this->entity->total_specials)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Specials</td>
-				<td><?php echo '$'.htmlspecialchars(number_format($this->entity->total_specials, 2)); ?></td>
+				<td><?php echo '$'.h(number_format($this->entity->total_specials, 2)); ?></td>
 			</tr>
 			<?php } if (!empty($this->entity->item_fees)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Item Fees</td>
-				<td><?php echo '$'.htmlspecialchars(number_format($this->entity->item_fees, 2)); ?></td>
+				<td><?php echo '$'.h(number_format($this->entity->item_fees, 2)); ?></td>
 			</tr>
 			<?php } ?>
 			<tr>
 				<td style="font-weight:bold;">Tax</td>
-				<td><?php echo isset($this->entity->taxes) ? '$'.htmlspecialchars(number_format($this->entity->taxes, 2)) : ''; ?></td>
+				<td><?php echo isset($this->entity->taxes) ? '$'.h(number_format($this->entity->taxes, 2)) : ''; ?></td>
 			</tr>
 			<?php if (!empty($this->entity->return_fees)) { ?>
 			<tr>
 				<td style="font-weight:bold;">Return Fees</td>
-				<td><?php echo '$'.htmlspecialchars(number_format($this->entity->return_fees, 2)); ?></td>
+				<td><?php echo '$'.h(number_format($this->entity->return_fees, 2)); ?></td>
 			</tr>
 			<?php } ?>
 			<tr>
 				<td style="font-weight:bold;">Total</td>
-				<td><?php echo isset($this->entity->total) ? '$'.htmlspecialchars(number_format($this->entity->total, 2)) : ''; ?></td>
+				<td><?php echo isset($this->entity->total) ? '$'.h(number_format($this->entity->total, 2)) : ''; ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Refunded</td>
-				<td><?php echo isset($this->entity->amount_tendered) ? '$'.htmlspecialchars(number_format($this->entity->amount_tendered, 2)) : ''; ?></td>
+				<td><?php echo isset($this->entity->amount_tendered) ? '$'.h(number_format($this->entity->amount_tendered, 2)) : ''; ?></td>
 			</tr>
 		</tbody>
 	</table>
@@ -119,17 +119,17 @@ echo $module->render();
 		<tbody>
 			<?php foreach ((array) $this->entity->products as $cur_product) { ?>
 			<tr>
-				<td><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_product['entity']->name); ?></a></td>
-				<td><?php echo htmlspecialchars(ucwords(str_replace('-', ' ', $cur_product['delivery']))); ?></td>
+				<td><?php e($cur_product['entity']->sku); ?></td>
+				<td><a data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_product['entity']->name); ?></a></td>
+				<td><?php e(ucwords(str_replace('-', ' ', $cur_product['delivery']))); ?></td>
 				<td><?php
 				$text = array();
 				if (isset($cur_product['serial']))
 					$text[] = $cur_product['serial'];
-				echo htmlspecialchars(implode(' ', $text));
+				e(implode(' ', $text));
 				?></td>
-				<td style="text-align: right;"><?php echo htmlspecialchars($cur_product['quantity']); ?></td>
-				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : htmlspecialchars(" - {$cur_product['discount']}"); ?></td>
+				<td style="text-align: right;"><?php e($cur_product['quantity']); ?></td>
+				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
 				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['return_fee'], true); ?></td>
 				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_product['line_total'] - (float) $cur_product['return_fee'], true); ?></td>
 			</tr>
@@ -138,7 +138,7 @@ echo $module->render();
 			foreach ((array) $cur_product['stock_entities'] as $cur_stock) {
 				if (!isset($cur_stock->guid) || $cur_stock->in_array((array) $cur_product['returned_stock_entities']))
 					continue;
-				$stock_entities[] = '<a data-entity="'.htmlspecialchars($cur_stock->guid).'" data-entity-context="com_sales_stock">'.htmlspecialchars($cur_stock->guid.($cur_stock->in_array((array) $cur_product['shipped_entities']) ? ' (Shipped)' : '')).'</a>';
+				$stock_entities[] = '<a data-entity="'.h($cur_stock->guid).'" data-entity-context="com_sales_stock">'.h($cur_stock->guid.($cur_stock->in_array((array) $cur_product['shipped_entities']) ? ' (Shipped)' : '')).'</a>';
 			}
 			if ($stock_entities) { ?>
 			<tr>
@@ -164,7 +164,7 @@ echo $module->render();
 		<tbody>
 			<?php foreach ($this->entity->specials as $cur_special) { ?>
 			<tr>
-				<td style="width: 80%;"><a data-entity="<?php echo htmlspecialchars($cur_special['entity']->guid); ?>" data-entity-context="com_sales_special"><?php echo htmlspecialchars(($cur_special['entity']->hide_code ? '' : "{$cur_special['code']} - ").$cur_special['name']); ?></a></td>
+				<td style="width: 80%;"><a data-entity="<?php e($cur_special['entity']->guid); ?>" data-entity-context="com_sales_special"><?php e(($cur_special['entity']->hide_code ? '' : "{$cur_special['code']} - ").$cur_special['name']); ?></a></td>
 				<td style="white-space: pre;"><?php echo $cur_special['before_tax'] ? 'Before Tax' : 'After Tax'; ?></td>
 				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_special['discount'], true); ?></td>
 			</tr>
@@ -186,7 +186,7 @@ echo $module->render();
 		<tbody>
 			<?php foreach ($this->entity->payments as $cur_payment) { ?>
 			<tr>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_payment['entity']->guid); ?>" data-entity-context="com_sales_payment_type"><?php echo htmlspecialchars($cur_payment['label']); ?></a></td>
+				<td><a data-entity="<?php e($cur_payment['entity']->guid); ?>" data-entity-context="com_sales_payment_type"><?php e($cur_payment['label']); ?></a></td>
 				<td style="text-align: right;">$<?php echo $pines->com_sales->round($cur_payment['amount'], true); ?></td>
 			</tr>
 			<?php } ?>
@@ -197,7 +197,7 @@ echo $module->render();
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Comments</h3>
-	<div style="font-size: 75%;"><?php echo htmlspecialchars($this->entity->comments); ?></div>
+	<div style="font-size: 75%;"><?php e($this->entity->comments); ?></div>
 </div>
 <?php } ?>
 <div style="clear:both;">
@@ -228,11 +228,11 @@ echo $module->render();
 			foreach ($txs as $cur_tx) {
 				$ref = isset($cur_tx->item->guid) ? $cur_tx->item : $cur_tx->ref; ?>
 			<tr>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_tx->guid); ?>" data-entity-context="com_sales_tx"><?php echo htmlspecialchars($cur_tx->guid); ?></a></td>
-				<td><?php echo htmlspecialchars(ucwords(str_replace('_', ' ', $cur_tx->type))); ?></td>
-				<td><?php echo htmlspecialchars(format_date($cur_tx->p_cdate, 'full_short')); ?></td>
-				<td><a data-entity="<?php echo htmlspecialchars($cur_tx->user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($cur_tx->user->name); ?></a></td>
-				<td><a data-entity="<?php echo htmlspecialchars($ref->guid); ?>" data-entity-context="<?php echo isset($ref) ? htmlspecialchars(str_replace('hook_override_', '', get_class($ref))) : ''; ?>"><?php echo isset($ref) ? htmlspecialchars($ref->info('name')) : ''; ?></a></td>
+				<td><a data-entity="<?php e($cur_tx->guid); ?>" data-entity-context="com_sales_tx"><?php e($cur_tx->guid); ?></a></td>
+				<td><?php e(ucwords(str_replace('_', ' ', $cur_tx->type))); ?></td>
+				<td><?php e(format_date($cur_tx->p_cdate, 'full_short')); ?></td>
+				<td><a data-entity="<?php e($cur_tx->user->guid); ?>" data-entity-context="user"><?php e($cur_tx->user->name); ?></a></td>
+				<td><a data-entity="<?php e($ref->guid); ?>" data-entity-context="<?php echo isset($ref) ? h(str_replace('hook_override_', '', get_class($ref))) : ''; ?>"><?php echo isset($ref) ? h($ref->info('name')) : ''; ?></a></td>
 			</tr>
 			<?php if (isset($cur_tx->amount)) { ?>
 			<tr>
@@ -244,9 +244,9 @@ echo $module->render();
 	</table>
 </div>
 <?php } elseif ($this->render == 'footer') { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_sales', 'return/receipt', array('id' => $this->entity->guid))); ?>" class="btn">Receipt</a>
+<a href="<?php e(pines_url('com_sales', 'return/receipt', array('id' => $this->entity->guid))); ?>" class="btn">Receipt</a>
 <?php if (gatekeeper('com_sales/listreturns')) { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_sales', 'return/list', array('location' => $this->entity->group->guid, 'descendants' => 'false', 'all_time' => 'false', 'start_date' => format_date($this->entity->p_cdate, 'custom', 'Y-m-d'), 'end_date' => format_date(strtotime('+1 day', $this->entity->p_cdate), 'custom', 'Y-m-d')))); ?>" class="btn">View in List</a>
+<a href="<?php e(pines_url('com_sales', 'return/list', array('location' => $this->entity->group->guid, 'descendants' => 'false', 'all_time' => 'false', 'start_date' => format_date($this->entity->p_cdate, 'custom', 'Y-m-d'), 'end_date' => format_date(strtotime('+1 day', $this->entity->p_cdate), 'custom', 'Y-m-d')))); ?>" class="btn">View in List</a>
 <?php } if (gatekeeper('com_sales/editreturn')) { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_sales', 'return/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
+<a href="<?php e(pines_url('com_sales', 'return/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
 <?php } }

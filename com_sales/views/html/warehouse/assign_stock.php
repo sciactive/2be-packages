@@ -15,7 +15,7 @@ $this->note = 'Provide stock selection in this form.';
 $pines->com_jstree->load();
 $warehouse = group::factory($pines->config->com_sales->warehouse_group);
 ?>
-<form class="pf-form" id="p_muid_form" method="post" action="<?php echo htmlspecialchars(pines_url('com_sales', 'warehouse/assignstocksave')); ?>">
+<form class="pf-form" id="p_muid_form" method="post" action="<?php e(pines_url('com_sales', 'warehouse/assignstocksave')); ?>">
 	<style type="text/css">
 		#p_muid_form .products .entry {
 			float: left;
@@ -228,12 +228,12 @@ $warehouse = group::factory($pines->config->com_sales->warehouse_group);
 	</script>
 	<?php foreach ($this->items as $cur_item) { ?>
 	<div class="pf-element pf-heading">
-		<h3><a data-entity="<?php echo htmlspecialchars($cur_item['sale']->guid); ?>" data-entity-context="com_sales_sale">Sale <?php echo htmlspecialchars($cur_item['sale']->id); ?></a></h3>
+		<h3><a data-entity="<?php e($cur_item['sale']->guid); ?>" data-entity-context="com_sales_sale">Sale <?php e($cur_item['sale']->id); ?></a></h3>
 		<p>
-			<span style="float: left; clear: left; padding-right: 2em;">Tendered: <?php echo htmlspecialchars(format_date($cur_item['sale']->tender_date, 'full_long')); ?>.</span>
-			<span style="float: left; padding-right: 2em;">Location: <a data-entity="<?php echo htmlspecialchars($cur_item['sale']->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars("{$cur_item['sale']->group->name} [{$cur_item['sale']->group->groupname}]"); ?></a>.</span>
-			<span style="float: left; padding-right: 2em;">Salesperson: <a data-entity="<?php echo htmlspecialchars($cur_item['sale']->user->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars("{$cur_item['sale']->user->name} [{$cur_item['sale']->user->username}]"); ?></a>.</span>
-			<span style="float: left;">Customer: <a data-entity="<?php echo htmlspecialchars($cur_item['sale']->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($cur_item['sale']->customer->name); ?></a>.</span>
+			<span style="float: left; clear: left; padding-right: 2em;">Tendered: <?php e(format_date($cur_item['sale']->tender_date, 'full_long')); ?>.</span>
+			<span style="float: left; padding-right: 2em;">Location: <a data-entity="<?php e($cur_item['sale']->group->guid); ?>" data-entity-context="group"><?php e("{$cur_item['sale']->group->name} [{$cur_item['sale']->group->groupname}]"); ?></a>.</span>
+			<span style="float: left; padding-right: 2em;">Salesperson: <a data-entity="<?php e($cur_item['sale']->user->guid); ?>" data-entity-context="user"><?php e("{$cur_item['sale']->user->name} [{$cur_item['sale']->user->username}]"); ?></a>.</span>
+			<span style="float: left;">Customer: <a data-entity="<?php e($cur_item['sale']->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($cur_item['sale']->customer->name); ?></a>.</span>
 		</p>
 	</div>
 	<div class="ui-helper-clearfix products">
@@ -250,15 +250,15 @@ $warehouse = group::factory($pines->config->com_sales->warehouse_group);
 			?>
 		<div class="pf-element pf-full-width product_entry <?php echo $cur_product['entity']->serialized ? 'serial' : 'nonserial'; ?>">
 			<span class="pf-label">
-				<a data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_product['entity']->name); ?></a> [SKU: <?php echo htmlspecialchars($cur_product['entity']->sku); ?>]
-				<span class="pf-note"><small>x <span class="qty"><?php echo htmlspecialchars($quantity); ?></span><span class="qty_left" style="display: none;"><?php echo $quantity - $assigned; ?></span> (<span class="qty_done"><?php echo $assigned; ?></span> already assigned)</small></span>
+				<a data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_product['entity']->name); ?></a> [SKU: <?php e($cur_product['entity']->sku); ?>]
+				<span class="pf-note"><small>x <span class="qty"><?php e($quantity); ?></span><span class="qty_left" style="display: none;"><?php echo $quantity - $assigned; ?></span> (<span class="qty_done"><?php echo $assigned; ?></span> already assigned)</small></span>
 			</span>
 			<a href="javascript:void(0);" class="pf-field assign">Assign</a>
 			<div class="pf-field pf-full-width ui-helper-clearfix entries"></div>
 			<br class="pf-clearing" />
-			<div class="product" style="display: none;"><?php echo htmlspecialchars($cur_product['entity']->guid); ?></div>
-			<div class="sale" style="display: none;"><?php echo htmlspecialchars($cur_item['sale']->guid); ?></div>
-			<div class="key" style="display: none;"><?php echo htmlspecialchars($cur_key); ?></div>
+			<div class="product" style="display: none;"><?php e($cur_product['entity']->guid); ?></div>
+			<div class="sale" style="display: none;"><?php e($cur_item['sale']->guid); ?></div>
+			<div class="key" style="display: none;"><?php e($cur_key); ?></div>
 		</div>
 		<?php } ?>
 	</div>
@@ -284,13 +284,13 @@ $warehouse = group::factory($pines->config->com_sales->warehouse_group);
 				<label><span class="pf-label">Quantity</span>
 					<input class="pf-field" type="text" id="p_muid_quantity" name="quantity" size="5" value="" /></label>
 			</div>
-			<input type="hidden" name="location" value="<?php echo htmlspecialchars($warehouse->guid); ?>" />
+			<input type="hidden" name="location" value="<?php e($warehouse->guid); ?>" />
 		</div>
 		<br />
 	</div>
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="items" id="p_muid_items" value="[]" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
 	</div>
 </form>

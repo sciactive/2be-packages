@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = ($this->ordered ? 'Ordered' : 'New').' Pending Warehouse Orders';
 if (isset($this->location)) {
-	$this->title .= htmlspecialchars(" at {$this->location->name} [{$this->location->groupname}]");
+	$this->title .= h(" at {$this->location->name} [{$this->location->groupname}]");
 	if ($this->descendants)
 		$this->title .= ' and Below';
 }
@@ -20,11 +20,11 @@ if ($this->all_time) {
 	$this->note = 'All time included.';
 } elseif (isset($this->start_date) || isset($this->end_date)) {
 	if (isset($this->start_date))
-		$this->note = htmlspecialchars(format_date($this->start_date, 'date_short')).' - ';
+		$this->note = h(format_date($this->start_date, 'date_short')).' - ';
 	else
 		$this->note = 'Up to and including ';
 	if (isset($this->end_date))
-		$this->note .= htmlspecialchars(format_date($this->end_date - 1, 'date_short')).'.';
+		$this->note .= h(format_date($this->end_date - 1, 'date_short')).'.';
 	else
 		$this->note .= ' and beyond.';
 }
@@ -283,38 +283,38 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				continue;
 			$styles = array();
 			if (isset($cur_product['flag_bgcolor']))
-				$styles[] = 'background-color: '.htmlspecialchars($cur_product['flag_bgcolor']).';';
+				$styles[] = 'background-color: '.h($cur_product['flag_bgcolor']).';';
 			if (isset($cur_product['flag_textcolor']))
-				$styles[] = 'color: '.htmlspecialchars($cur_product['flag_textcolor']).';';
+				$styles[] = 'color: '.h($cur_product['flag_textcolor']).';';
 			if ($styles)
 				$style = ' style="'.implode (' ', $styles).'"';
 			else
 				$style = '';
 		?>
 		<tr title="<?php echo $sale->guid.'_'.$key; ?>">
-			<td<?php echo $style; ?>><?php echo htmlspecialchars(format_date($sale->tender_date, 'date_sort')); ?></td>
-			<td<?php echo $style; ?>><a<?php echo $style; ?> data-entity="<?php echo htmlspecialchars($sale->guid); ?>" data-entity-context="com_sales_sale"><?php echo htmlspecialchars($sale->id); ?></a></td>
-			<td<?php echo $style; ?>><a data-entity="<?php echo htmlspecialchars($sale->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($sale->group->name); ?></a></td>
-			<td<?php echo $style; ?>><a data-entity="<?php echo htmlspecialchars($cur_product['salesperson']->guid); ?>" data-entity-context="user"><?php echo htmlspecialchars($cur_product['salesperson']->name); ?></a></td>
-			<td<?php echo $style; ?>><a<?php echo $style; ?> data-entity="<?php echo htmlspecialchars($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php echo htmlspecialchars($cur_product['entity']->name); ?></a></td>
-			<td<?php echo $style; ?>><?php echo htmlspecialchars(($cur_product['quantity'] - (int) $cur_product['returned_quantity']) - (count($cur_product['stock_entities']) - count($cur_product['returned_stock_entities']))); ?></td>
-			<td<?php echo $style; ?>><a<?php echo $style; ?> data-entity="<?php echo htmlspecialchars($sale->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($sale->customer->name); ?></a></td>
-			<td<?php echo $style; ?>><?php if (isset($cur_product['po'])) { ?><a<?php echo $style; ?> data-entity="<?php echo htmlspecialchars($cur_product['po']->guid); ?>" data-entity-context="com_sales_po"><?php echo htmlspecialchars($cur_product['po']->po_number); ?></a><?php } ?></td>
+			<td<?php echo $style; ?>><?php e(format_date($sale->tender_date, 'date_sort')); ?></td>
+			<td<?php echo $style; ?>><a<?php echo $style; ?> data-entity="<?php e($sale->guid); ?>" data-entity-context="com_sales_sale"><?php e($sale->id); ?></a></td>
+			<td<?php echo $style; ?>><a data-entity="<?php e($sale->group->guid); ?>" data-entity-context="group"><?php e($sale->group->name); ?></a></td>
+			<td<?php echo $style; ?>><a data-entity="<?php e($cur_product['salesperson']->guid); ?>" data-entity-context="user"><?php e($cur_product['salesperson']->name); ?></a></td>
+			<td<?php echo $style; ?>><a<?php echo $style; ?> data-entity="<?php e($cur_product['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_product['entity']->name); ?></a></td>
+			<td<?php echo $style; ?>><?php e(($cur_product['quantity'] - (int) $cur_product['returned_quantity']) - (count($cur_product['stock_entities']) - count($cur_product['returned_stock_entities']))); ?></td>
+			<td<?php echo $style; ?>><a<?php echo $style; ?> data-entity="<?php e($sale->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($sale->customer->name); ?></a></td>
+			<td<?php echo $style; ?>><?php if (isset($cur_product['po'])) { ?><a<?php echo $style; ?> data-entity="<?php e($cur_product['po']->guid); ?>" data-entity-context="com_sales_po"><?php e($cur_product['po']->po_number); ?></a><?php } ?></td>
 			<td<?php echo $style; ?>>
 				<?php
 				$vendors = array(); 
 				foreach ($cur_product['entity']->vendors as $cur_vendor) {
 					$cur_string = '';
-					$cur_string .= '<a'.$style.' data-entity="'.htmlspecialchars($cur_vendor['entity']->guid).'" data-entity-context="com_sales_vendor">'.htmlspecialchars($cur_vendor['entity']->name).'</a>';
+					$cur_string .= '<a'.$style.' data-entity="'.h($cur_vendor['entity']->guid).'" data-entity-context="com_sales_vendor">'.h($cur_vendor['entity']->name).'</a>';
 					if (!empty($cur_vendor['link']))
-						$cur_string .= ' [<a'.$style.' href="'.htmlspecialchars($cur_vendor['link']).'" target="_blank">Vendor Link</a>]';
+						$cur_string .= ' [<a'.$style.' href="'.h($cur_vendor['link']).'" target="_blank">Vendor Link</a>]';
 					$vendors[] = $cur_string;
 				}
 				echo implode(', ', $vendors);
 				?>
 			</td>
-			<td<?php echo $style; ?>><?php echo htmlspecialchars($cur_product['flag_comments']); ?></td>
-			<td<?php echo $style; ?>><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
+			<td<?php echo $style; ?>><?php e($cur_product['flag_comments']); ?></td>
+			<td<?php echo $style; ?>><?php e($cur_product['entity']->sku); ?></td>
 		</tr>
 	<?php } } ?>
 	</tbody>

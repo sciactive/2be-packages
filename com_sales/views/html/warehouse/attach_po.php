@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Attach a PO';
 $pines->com_pgrid->load();
 ?>
-<form class="pf-form" method="post" action="<?php echo htmlspecialchars(pines_url('com_sales', 'warehouse/attachposave')); ?>">
+<form class="pf-form" method="post" action="<?php e(pines_url('com_sales', 'warehouse/attachposave')); ?>">
 	<script type="text/javascript">
 		pines(function(){
 			$("#p_muid_po_grid").pgrid({
@@ -35,7 +35,7 @@ $pines->com_pgrid->load();
 		The following is a list of POs which contain all of these items:
 		<ul>
 			<?php foreach ($this->products as $cur_product) { ?>
-			<li><?php echo htmlspecialchars("{$cur_product->sku}: $cur_product->name"); ?></li>
+			<li><?php e("{$cur_product->sku}: $cur_product->name"); ?></li>
 			<?php } ?>
 		</ul>
 		Please select one, and it will be attached to the selected warehouse
@@ -54,12 +54,12 @@ $pines->com_pgrid->load();
 			</thead>
 			<tbody>
 				<?php foreach ($this->pos as $cur_po) { ?>
-				<tr title="<?php echo htmlspecialchars($cur_po->guid); ?>">
-					<td><?php echo htmlspecialchars($cur_po->po_number); ?></td>
-					<td><?php echo htmlspecialchars($cur_po->reference_number); ?></td>
-					<td><?php echo htmlspecialchars("{$cur_po->destination->name} [{$cur_po->destination->groupname}]"); ?></td>
-					<td><?php echo htmlspecialchars($cur_po->shipper->name); ?></td>
-					<td><?php echo htmlspecialchars(format_date($cur_po->eta, 'date_sort')); ?></td>
+				<tr title="<?php e($cur_po->guid); ?>">
+					<td><?php e($cur_po->po_number); ?></td>
+					<td><?php e($cur_po->reference_number); ?></td>
+					<td><?php e("{$cur_po->destination->name} [{$cur_po->destination->groupname}]"); ?></td>
+					<td><?php e($cur_po->shipper->name); ?></td>
+					<td><?php e(format_date($cur_po->eta, 'date_sort')); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>
@@ -70,8 +70,8 @@ $pines->com_pgrid->load();
 		<input type="hidden" name="po" id="p_muid_po" value="" />
 	</div>
 	<div class="pf-element pf-buttons">
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->id); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->id); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
 	</div>
 </form>

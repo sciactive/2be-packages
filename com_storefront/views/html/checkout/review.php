@@ -27,18 +27,18 @@ $this->title = 'Review Your Order';
 		text-align: right;
 	}
 </style>
-<form id="p_muid_review" class="pf-form pf-form-twocol" method="POST" action="<?php echo htmlspecialchars(pines_url('com_storefront', 'checkout/reviewsave')); ?>">
+<form id="p_muid_review" class="pf-form pf-form-twocol" method="POST" action="<?php e(pines_url('com_storefront', 'checkout/reviewsave')); ?>">
 	<div class="pf-element">
 		<span class="pf-label" style="text-align: right;">Ship To&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-		<span class="pf-note" style="text-align: right;"><a href="<?php echo htmlspecialchars(pines_url('com_storefront', 'checkout/shipping', array('noskip' => 'true'))); ?>">Edit Address</a><span style="font-size: 143%; line-height: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+		<span class="pf-note" style="text-align: right;"><a href="<?php e(pines_url('com_storefront', 'checkout/shipping', array('noskip' => 'true'))); ?>">Edit Address</a><span style="font-size: 143%; line-height: 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
 		<div class="pf-group">
 			<div class="pf-field">
-				<strong><?php echo htmlspecialchars($this->entity->shipping_address->name); ?></strong><br />
+				<strong><?php e($this->entity->shipping_address->name); ?></strong><br />
 				<?php if ($this->entity->shipping_address->address_type == 'us') { ?>
-				<?php echo htmlspecialchars("{$this->entity->shipping_address->address_1}\n{$this->entity->shipping_address->address_2}"); ?><br />
-				<?php echo htmlspecialchars($this->entity->shipping_address->city); ?>, <?php echo htmlspecialchars($this->entity->shipping_address->state); ?> <?php echo htmlspecialchars($this->entity->shipping_address->zip); ?>
+				<?php e("{$this->entity->shipping_address->address_1}\n{$this->entity->shipping_address->address_2}"); ?><br />
+				<?php e($this->entity->shipping_address->city); ?>, <?php e($this->entity->shipping_address->state); ?> <?php e($this->entity->shipping_address->zip); ?>
 				<?php } else { ?>
-				<?php echo str_replace("\n", '<br />', htmlspecialchars($this->entity->shipping_address->address_international)); ?>
+				<?php echo str_replace("\n", '<br />', h($this->entity->shipping_address->address_international)); ?>
 				<?php } ?>
 			</div>
 		</div>
@@ -48,18 +48,18 @@ $this->title = 'Review Your Order';
 		<div class="pf-group">
 			<div class="pf-field">
 				<strong>
-					<?php echo htmlspecialchars($this->entity->customer->name); ?>
+					<?php e($this->entity->customer->name); ?>
 					<?php if (isset($this->entity->customer->company->name)) {
-						echo htmlspecialchars(" ( {$this->entity->customer->company->name} )");
+						e(" ( {$this->entity->customer->company->name} )");
 					} ?>
 				</strong><br />
 				<?php if ($this->entity->customer->address_type == 'us') { if (!empty($this->entity->customer->address_1)) { ?>
-				<?php echo htmlspecialchars($this->entity->customer->address_1.' '.$this->entity->customer->address_2); ?><br />
-				<?php echo htmlspecialchars($this->entity->customer->city); ?>, <?php echo htmlspecialchars($this->entity->customer->state); ?> <?php echo htmlspecialchars($this->entity->customer->zip); ?><br />
+				<?php e($this->entity->customer->address_1.' '.$this->entity->customer->address_2); ?><br />
+				<?php e($this->entity->customer->city); ?>, <?php e($this->entity->customer->state); ?> <?php e($this->entity->customer->zip); ?><br />
 				<?php } } else {?>
-				<?php echo str_replace("\n", '<br />', htmlspecialchars($this->entity->customer->address_international)); ?><br />
+				<?php echo str_replace("\n", '<br />', h($this->entity->customer->address_international)); ?><br />
 				<?php } ?>
-				<?php echo htmlspecialchars(format_phone($this->entity->customer->phone)); ?>
+				<?php e(format_phone($this->entity->customer->phone)); ?>
 			</div>
 		</div>
 	</div>
@@ -84,11 +84,11 @@ $this->title = 'Review Your Order';
 						continue;
 					?>
 				<tr>
-					<td><?php echo htmlspecialchars($cur_product['entity']->sku); ?></td>
-					<td><?php echo htmlspecialchars($cur_product['entity']->name); ?></td>
+					<td><?php e($cur_product['entity']->sku); ?></td>
+					<td><?php e($cur_product['entity']->name); ?></td>
 					<td><?php echo !empty($cur_product['entity']->receipt_description) ? $cur_product['entity']->receipt_description : $cur_product['entity']->short_description; ?></td>
-					<td class="right_text"><?php echo htmlspecialchars($cur_product['quantity']); ?></td>
-					<td class="right_text">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : htmlspecialchars(" - {$cur_product['discount']}"); ?></td>
+					<td class="right_text"><?php e($cur_product['quantity']); ?></td>
+					<td class="right_text">$<?php echo $pines->com_sales->round($cur_product['price'], true); ?><?php echo empty($cur_product['discount']) ? '' : h(" - {$cur_product['discount']}"); ?></td>
 					<td class="right_text">$<?php echo $pines->com_sales->round($cur_product['line_total'], true); ?></td>
 				</tr>
 				<?php } } ?>
@@ -122,13 +122,13 @@ $this->title = 'Review Your Order';
 	</div>
 	<?php if (is_array($this->entity->payments)) { foreach ($this->entity->payments as $cur_payment) { ?>
 	<div class="pf-element">
-		<span class="pf-label"><?php echo htmlspecialchars($cur_payment['type']); ?></span>
+		<span class="pf-label"><?php e($cur_payment['type']); ?></span>
 		<span class="pf-field">$<?php echo $pines->com_sales->round($cur_payment['amount'], true); ?></span>
 	</div>
 	<?php } } ?>
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Order Comments</span>
-		<textarea class="pf-field" rows="1" cols="35" name="comments"><?php echo htmlspecialchars($this->entity->comments); ?></textarea>
+		<textarea class="pf-field" rows="1" cols="35" name="comments"><?php e($this->entity->comments); ?></textarea>
 	</div>
 	<div class="pf-element pf-buttons">
 		<script type="text/javascript">
@@ -138,7 +138,7 @@ $this->title = 'Review Your Order';
 				});
 			});
 		</script>
-		<input class="pf-button btn btn-primary" type="submit" value="<?php echo htmlspecialchars($pines->config->com_storefront->complete_order_text); ?>" />
+		<input class="pf-button btn btn-primary" type="submit" value="<?php e($pines->config->com_storefront->complete_order_text); ?>" />
 	</div>
 	<?php } ?>
 </form>

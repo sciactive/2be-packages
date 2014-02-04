@@ -11,8 +11,8 @@
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$this->title = 'Daily Attendance: '.htmlspecialchars($this->location->name);
-$this->note = htmlspecialchars(format_date($this->date, 'date_short'));
+$this->title = 'Daily Attendance: '.h($this->location->name);
+$this->note = h(format_date($this->date, 'date_short'));
 
 $pines->com_jstree->load();
 $pines->com_pgrid->load();
@@ -159,19 +159,19 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 		<?php foreach($this->attendance as $cur_attendance) { $timezone = $cur_attendance['employee']->get_timezone(); ?>
-		<tr title="<?php echo htmlspecialchars($cur_attendance['employee']->guid); ?>">
-			<td><?php echo htmlspecialchars(format_date($this->date, 'date_sort')); ?></td>
-			<td><?php echo htmlspecialchars($cur_attendance['employee']->name); ?></td>
-			<td><?php echo htmlspecialchars($cur_attendance['employee']->group->name); ?></td>
-			<td><?php if ($cur_attendance['scheduled_in']) echo htmlspecialchars(format_date($cur_attendance['scheduled_in'], 'time_short', '', $timezone)); ?></td>
-			<td><?php if ($cur_attendance['scheduled_out']) echo htmlspecialchars(format_date($cur_attendance['scheduled_out'], 'time_short', '', $timezone)); ?></td>
-			<td><?php if ($cur_attendance['clocked_in']) echo htmlspecialchars(format_date($cur_attendance['clocked_in'], 'time_short', '', $timezone)); ?></td>
-			<td><?php if ($cur_attendance['clocked_out']) echo htmlspecialchars(format_date($cur_attendance['clocked_out'], 'time_short', '', $timezone)); ?></td>
-			<td><?php if ($cur_attendance['scheduled_in'] && $cur_attendance['clocked_in']) echo htmlspecialchars(format_date_range($cur_attendance['scheduled_in'], $cur_attendance['clocked_in'], '#minutes# minutes', $timezone)); ?></td>
-			<td><?php if ($cur_attendance['scheduled_out'] && $cur_attendance['clocked_out']) echo htmlspecialchars(format_date_range($cur_attendance['scheduled_out'], $cur_attendance['clocked_out'], '#minutes# minutes', $timezone)); ?></td>
-			<td><?php if ($cur_attendance['scheduled_total']) echo htmlspecialchars(format_date_range(0, $cur_attendance['scheduled_total'], '{#hours# hours}{#hour# hour} {#minutes# minutes}{#minute# minute}', $timezone)); ?></td>
-			<td><?php if ($cur_attendance['clocked_total']) echo htmlspecialchars(format_date_range(0, $cur_attendance['clocked_total'], '{#hours# hours}{#hour# hour} {#minutes# minutes}{#minute# minute}', $timezone)); ?></td>
-			<td><?php echo htmlspecialchars(implode(', ', $cur_attendance['clocked_ips'])); ?></td>
+		<tr title="<?php e($cur_attendance['employee']->guid); ?>">
+			<td><?php e(format_date($this->date, 'date_sort')); ?></td>
+			<td><?php e($cur_attendance['employee']->name); ?></td>
+			<td><?php e($cur_attendance['employee']->group->name); ?></td>
+			<td><?php if ($cur_attendance['scheduled_in']) e(format_date($cur_attendance['scheduled_in'], 'time_short', '', $timezone)); ?></td>
+			<td><?php if ($cur_attendance['scheduled_out']) e(format_date($cur_attendance['scheduled_out'], 'time_short', '', $timezone)); ?></td>
+			<td><?php if ($cur_attendance['clocked_in']) e(format_date($cur_attendance['clocked_in'], 'time_short', '', $timezone)); ?></td>
+			<td><?php if ($cur_attendance['clocked_out']) e(format_date($cur_attendance['clocked_out'], 'time_short', '', $timezone)); ?></td>
+			<td><?php if ($cur_attendance['scheduled_in'] && $cur_attendance['clocked_in']) e(format_date_range($cur_attendance['scheduled_in'], $cur_attendance['clocked_in'], '#minutes# minutes', $timezone)); ?></td>
+			<td><?php if ($cur_attendance['scheduled_out'] && $cur_attendance['clocked_out']) e(format_date_range($cur_attendance['scheduled_out'], $cur_attendance['clocked_out'], '#minutes# minutes', $timezone)); ?></td>
+			<td><?php if ($cur_attendance['scheduled_total']) e(format_date_range(0, $cur_attendance['scheduled_total'], '{#hours# hours}{#hour# hour} {#minutes# minutes}{#minute# minute}', $timezone)); ?></td>
+			<td><?php if ($cur_attendance['clocked_total']) e(format_date_range(0, $cur_attendance['clocked_total'], '{#hours# hours}{#hour# hour} {#minutes# minutes}{#minute# minute}', $timezone)); ?></td>
+			<td><?php e(implode(', ', $cur_attendance['clocked_ips'])); ?></td>
 		</tr>
 		<?php } ?>
 	</tbody>
@@ -201,7 +201,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="timespan">
 			<div class="pf-element">
 				<label><span class="pf-label">Pick a Date</span>
-					<input class="pf-field form_date" type="text" id="p_muid_date" name="date" value="<?php echo isset($this->date) ? htmlspecialchars(format_date($this->date, 'date_sort')) : ''; ?>" /></label>
+					<input class="pf-field form_date" type="text" id="p_muid_date" name="date" value="<?php echo isset($this->date) ? h(format_date($this->date, 'date_sort')) : ''; ?>" /></label>
 			</div>
 		</div>
 	</div>

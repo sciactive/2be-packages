@@ -61,42 +61,42 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 		<tbody>
 			<tr>
 				<td style="font-weight:bold;">GUID</td>
-				<td><?php echo htmlspecialchars($this->entity->guid); ?></td>
+				<td><?php e($this->entity->guid); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Loan ID</td>
-				<td><?php echo htmlspecialchars($this->entity->id); ?></td>
+				<td><?php e($this->entity->id); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Customer</td>
 				<td>
-					<a data-entity="<?php echo htmlspecialchars($this->entity->customer->guid); ?>" data-entity-context="com_customer_customer"><?php echo htmlspecialchars($this->entity->customer->name); ?></a>
+					<a data-entity="<?php e($this->entity->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($this->entity->customer->name); ?></a>
 				</td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Customer Phone</td>
 				<td>
-					<?php if (isset($this->entity->customer->phone)) { ?> <div>Phone: <?php echo htmlspecialchars(format_phone($this->entity->customer->phone)); ?></div>
-					<?php } if (isset($this->entity->customer->phone_cell)) { ?> <div>Cell: <?php echo htmlspecialchars(format_phone($this->entity->customer->phone_cell)); ?></div>
-					<?php } if (isset($this->entity->customer->phone_work)) { ?> <div>Work: <?php echo htmlspecialchars(format_phone($this->entity->customer->phone_work)); ?></div>
-					<?php } if (isset($this->entity->customer->phone_home)) { ?> <div>Home: <?php echo htmlspecialchars(format_phone($this->entity->customer->phone_home)); ?></div><?php } ?>
+					<?php if (isset($this->entity->customer->phone)) { ?> <div>Phone: <?php e(format_phone($this->entity->customer->phone)); ?></div>
+					<?php } if (isset($this->entity->customer->phone_cell)) { ?> <div>Cell: <?php e(format_phone($this->entity->customer->phone_cell)); ?></div>
+					<?php } if (isset($this->entity->customer->phone_work)) { ?> <div>Work: <?php e(format_phone($this->entity->customer->phone_work)); ?></div>
+					<?php } if (isset($this->entity->customer->phone_home)) { ?> <div>Home: <?php e(format_phone($this->entity->customer->phone_home)); ?></div><?php } ?>
 				</td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Location</td>
-				<td><a data-entity="<?php echo htmlspecialchars($this->entity->group->guid); ?>" data-entity-context="group"><?php echo htmlspecialchars($this->entity->group->name); ?></a></td>
+				<td><a data-entity="<?php e($this->entity->group->guid); ?>" data-entity-context="group"><?php e($this->entity->group->name); ?></a></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Loan Creation Date (Date of Service)</td>
-				<td><?php echo htmlspecialchars(format_date($this->entity->creation_date, 'date_sort')); ?></td>
+				<td><?php e(format_date($this->entity->creation_date, 'date_sort')); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Date Loan Added</td>
-				<td><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'date_sort')); ?></td>
+				<td><?php e(format_date($this->entity->p_cdate, 'date_sort')); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Status</td>
-				<td><?php echo htmlspecialchars(ucwords($this->entity->status)); ?></td>
+				<td><?php e(ucwords($this->entity->status)); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Code</td>
@@ -110,27 +110,27 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 				} ?>
 				<td><?php 
 					if (isset($code_description)) { ?>
-						<abbr title="<?php echo htmlspecialchars($code_description); ?>"><?php echo htmlspecialchars($this->entity->collection_code); ?></abbr>
+						<abbr title="<?php e($code_description); ?>"><?php e($this->entity->collection_code); ?></abbr>
 					<?php } else { ?>
-						<span><?php echo htmlspecialchars($this->entity->collection_code); ?></span>
+						<span><?php e($this->entity->collection_code); ?></span>
 					<?php } ?>
 				</td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Principal</td>
-				<td><?php echo htmlspecialchars('$'.number_format($this->entity->principal, 2, '.', '')); ?></td>
+				<td><?php e('$'.number_format($this->entity->principal, 2, '.', '')); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Rate</td>
-				<td><?php echo htmlspecialchars(($this->entity->apr).'%'); ?></td>
+				<td><?php e(($this->entity->apr).'%'); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Term</td>
-				<td><?php echo htmlspecialchars($this->entity->term).' '.$this->entity->term_type; ?></td>
+				<td><?php e($this->entity->term).' '.$this->entity->term_type; ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;"><?php echo $frequency;?> Payment</td>
-				<td><?php echo htmlspecialchars('$'.number_format($this->entity->frequency_payment, 2, '.', '')); ?></td>
+				<td><?php e('$'.number_format($this->entity->frequency_payment, 2, '.', '')); ?></td>
 			</tr>
 			<?php 
 			$tag_status = $this->entity->get_loan_status(true);
@@ -151,7 +151,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 		<tbody>
 			<tr>
 				<td style="font-weight:bold;">First Payment Due</td>
-				<td><?php echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short")); ?></td>
+				<td><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></td>
 			</tr>
 			<?php 
 			$past_due = ($this->entity->payments[0]['past_due'] > 0) ? true: false;
@@ -169,13 +169,13 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 			<tr>
 				<td style="font-weight:bold;">First Payment <?php echo $missed_or_made; ?></td>
 				<td <?php echo ($missed_or_made == 'Missed' || $past_due) ? 'class="text-error" style="font-weight:bold;"': ''; ?>>
-					<?php echo (isset($missed_or_made_date)) ? htmlspecialchars(format_date($missed_or_made_date, "date_short")) : 'Not Due'; ?>
+					<?php echo (isset($missed_or_made_date)) ? h(format_date($missed_or_made_date, "date_short")) : 'Not Due'; ?>
 				</td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Last Payment Made</td>
 				<td <?php echo ($missed_or_made == 'Missed' || $past_due) ? 'class="text-error" style="font-weight:bold;"': ''; ?>>
-					<?php echo (!empty($this->entity->paid)) ? htmlspecialchars(format_date($this->entity->payments[0]['last_payment_made'], "date_short")) : 'No Payments Made'; ?>
+					<?php echo (!empty($this->entity->paid)) ? h(format_date($this->entity->payments[0]['last_payment_made'], "date_short")) : 'No Payments Made'; ?>
 				</td>
 			</tr>
 			<tr>
@@ -185,9 +185,9 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 					if ($this->entity->status == 'paid off') {
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
 					} else if (isset($this->entity->payments[0]['next_payment_due'])) {
-						echo htmlspecialchars(format_date($this->entity->payments[0]['next_payment_due'], "date_short"));
+						e(format_date($this->entity->payments[0]['next_payment_due'], "date_short"));
 					} else {
-						echo htmlspecialchars(format_date($this->entity->first_payment_date, "date_short"));
+						e(format_date($this->entity->first_payment_date, "date_short"));
 					} ?>
 				</td>
 			</tr>
@@ -202,9 +202,9 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 					<?php if ($this->entity->status == 'paid off') {
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
 					} else if (isset($this->entity->payments[0]['next_payment_due_amount'])) {
-						echo htmlspecialchars('$'.number_format($this->entity->payments[0]['next_payment_due_amount'], 2, '.', ''));
+						e('$'.number_format($this->entity->payments[0]['next_payment_due_amount'], 2, '.', ''));
 					} else {
-						echo htmlspecialchars('$'.number_format($this->entity->payments[0]['next_payment_due_amount'], 2, '.', ''));
+						e('$'.number_format($this->entity->payments[0]['next_payment_due_amount'], 2, '.', ''));
 					} ?>
 				</td>
 			</tr>
@@ -214,11 +214,11 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 					<?php if ($this->entity->status == 'paid off') {
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
 					} else if ($past_due) { 
-						echo htmlspecialchars('$'.number_format($this->entity->payments[0]['past_due'], 2, '.', ''));
+						e('$'.number_format($this->entity->payments[0]['past_due'], 2, '.', ''));
 					} else if ($missed_or_made == 'Missed') {
-						echo htmlspecialchars('$'.number_format($this->entity->payments[0]['sum_payment_short'], 2, '.', ''));
+						e('$'.number_format($this->entity->payments[0]['sum_payment_short'], 2, '.', ''));
 					} else {
-						echo htmlspecialchars('$'.number_format($this->entity->payments[0]['past_due'], 2, '.', ''));
+						e('$'.number_format($this->entity->payments[0]['past_due'], 2, '.', ''));
 					} ?>
 				</td>
 			</tr>
@@ -229,9 +229,9 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 					if ($this->entity->status == 'paid off') 
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
 					else if ($missed_or_made == 'Missed')
-						echo htmlspecialchars('$'.number_format($this->entity->balance + $this->entity->payments[0]['sum_payment_short'], 2, '.', ''));
+						e('$'.number_format($this->entity->balance + $this->entity->payments[0]['sum_payment_short'], 2, '.', ''));
 					else
-						echo htmlspecialchars('$'.number_format($this->entity->balance, 2, '.', ''));
+						e('$'.number_format($this->entity->balance, 2, '.', ''));
 					?>
 				</td>
 			</tr>
@@ -241,7 +241,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 					<?php if (!empty($this->entity->paid)) {
 						$count = $this->entity->paid[0]['num_payments_paid'];
 						$add = $this->entity->paid[$count]['payment_interest_paid'] + $this->entity->paid[$count]['payment_principal_paid'] + $this->entity->paid[$count]['payment_additional'];
-						echo htmlspecialchars('$'.number_format($add, 2, '.', ''));
+						e('$'.number_format($add, 2, '.', ''));
 					} else {
 						echo 'None Made';
 					} ?>
@@ -255,7 +255,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 			<tr>
 				<td style="font-weight:bold;">Original Balance (Principal)</td>
 				<td>
-					<?php echo htmlspecialchars('$'.number_format($this->entity->principal, 2, '.', '')); ?>
+					<?php e('$'.number_format($this->entity->principal, 2, '.', '')); ?>
 				</td>
 			</tr>
 			<tr>
@@ -263,7 +263,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 				<td>
 					<?php if (!empty($this->entity->paid)) {
 						$total_paid = $this->entity->payments[0]['total_principal_paid'] + $this->entity->payments[0]['total_interest_paid'];
-						echo htmlspecialchars('$'.number_format($total_paid, 2, '.', ''));
+						e('$'.number_format($total_paid, 2, '.', ''));
 					} else
 						echo 'No Payments Made';
 					?>
@@ -273,7 +273,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 				<td style="font-weight:bold;">Total Principal Paid</td>
 				<td>
 					<?php if (!empty($this->entity->paid))
-						echo htmlspecialchars('$'.number_format($this->entity->payments[0]['total_principal_paid'], 2, '.', ''));
+						e('$'.number_format($this->entity->payments[0]['total_principal_paid'], 2, '.', ''));
 					else
 						echo 'No Payments Made';
 					?>
@@ -283,7 +283,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 				<td style="font-weight:bold;">Total Interest Paid</td>
 				<td>
 					<?php if (!empty($this->entity->paid))
-						echo htmlspecialchars('$'.number_format($this->entity->payments[0]['total_interest_paid'], 2, '.', ''));
+						e('$'.number_format($this->entity->payments[0]['total_interest_paid'], 2, '.', ''));
 					else
 						echo 'No Payments Made';
 					?>
@@ -293,7 +293,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 				<td style="font-weight:bold;">Remaining Balance (Principal Only)</td>
 				<td>
 					<?php if (!empty($this->entity->paid))
-						echo htmlspecialchars('$'.number_format($this->entity->payments[0]['remaining_balance'], 2, '.', ''));
+						e('$'.number_format($this->entity->payments[0]['remaining_balance'], 2, '.', ''));
 					else
 						echo 'No Payments Made';
 					?>
@@ -306,7 +306,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 					if ($this->entity->status == 'paid off') 
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
 					else
-						echo '$'.htmlspecialchars($pines->com_sales->round($this->entity->payoff_amount, true)); 
+						echo '$'.h($pines->com_sales->round($this->entity->payoff_amount, true)); 
 					?>
 				</td>
 			</tr>
@@ -314,9 +314,9 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 	</table>
 </div>
 <?php } elseif ($this->render == 'footer') { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/list', array('id' => $this->entity->id))); ?>" class="btn">View in List</a>
+<a href="<?php e(pines_url('com_loan', 'loan/list', array('id' => $this->entity->id))); ?>" class="btn">View in List</a>
 <?php if (gatekeeper('com_loan/viewloan')) { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/overview', array('id' => $this->entity->guid))); ?>" class="btn">Overview</a>
+<a href="<?php e(pines_url('com_loan', 'loan/overview', array('id' => $this->entity->guid))); ?>" class="btn">Overview</a>
 <?php } if (gatekeeper('com_loan/editpayments')) { ?>
-<a href="<?php echo htmlspecialchars(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>" class="btn">Edit Payments</a>
+<a href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>" class="btn">Edit Payments</a>
 <?php } } ?>

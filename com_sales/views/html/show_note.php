@@ -16,7 +16,7 @@ defined('P_RUN') or die('Direct access prohibited');
 		<span class="pf-label">
 		<?php
 			if (isset($this->link))
-				$this->header = '<a href="'.htmlspecialchars($this->link).'">'.htmlspecialchars($this->header).' &raquo;</a>';
+				$this->header = '<a href="'.h($this->link).'">'.h($this->header).' &raquo;</a>';
 			echo $this->header;
 		?>
 		</span>

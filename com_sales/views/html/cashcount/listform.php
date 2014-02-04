@@ -58,15 +58,15 @@ $pines->com_jstree->load();
 		});
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'cashcount/list')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'cashcount/list')); ?>">
 	<div class="pf-element location_tree" style="padding-bottom: 0px;"></div>
 	<div class="pf-element" style="padding-bottom: 0px;">
 		<span class="pf-note">Start</span>
-		<input class="pf-field form_date" type="text" name="start_date" value="<?php echo ($this->start_date) ? htmlspecialchars(format_date($this->start_date, 'date_sort')) : htmlspecialchars(format_date(time(), 'date_sort')); ?>" />
+		<input class="pf-field form_date" type="text" name="start_date" value="<?php ($this->start_date) ? e(format_date($this->start_date, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
 	</div>
 	<div class="pf-element">
 		<span class="pf-note">End</span>
-		<input class="pf-field form_date" type="text" name="end_date" value="<?php echo ($this->end_date) ? htmlspecialchars(format_date($this->end_date - 1, 'date_sort')) : htmlspecialchars(format_date(time(), 'date_sort')); ?>" />
+		<input class="pf-field form_date" type="text" name="end_date" value="<?php ($this->end_date) ? e(format_date($this->end_date - 1, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
 	</div>
 	<div class="pf-element">
 		<input type="hidden" name="location" />

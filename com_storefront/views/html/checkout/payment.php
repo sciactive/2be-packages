@@ -41,7 +41,7 @@ $this->title = 'Payment Options';
 	</div>
 	<?php } if (count($this->payment_types) == 1) { $cur_payment_type = $this->payment_types[0]; ?>
 	<div class="pf-element pf-heading">
-		<h3><?php echo htmlspecialchars($cur_payment_type->name); ?></h3>
+		<h3><?php e($cur_payment_type->name); ?></h3>
 	</div>
 	<?php if (!empty($this->payment)) { ?>
 	<script type="text/javascript">
@@ -61,7 +61,7 @@ $this->title = 'Payment Options';
 		});
 	</script>
 	<?php } ?>
-	<form id="p_muid_form" method="POST" action="<?php echo htmlspecialchars(pines_url('com_storefront', 'checkout/paymentsave')); ?>">
+	<form id="p_muid_form" method="POST" action="<?php e(pines_url('com_storefront', 'checkout/paymentsave')); ?>">
 		<br class="pf-clearing" />
 		<?php
 		$pines->com_sales->call_payment_process(array(
@@ -76,12 +76,12 @@ $this->title = 'Payment Options';
 		<?php if ($this->review_form) { ?>
 		<div class="pf-element pf-full-width">
 			<span class="pf-label">Order Comments</span>
-			<textarea class="pf-field" rows="1" cols="35" name="comments"><?php echo htmlspecialchars($this->entity->comments); ?></textarea>
+			<textarea class="pf-field" rows="1" cols="35" name="comments"><?php e($this->entity->comments); ?></textarea>
 		</div>
 		<?php } ?>
 		<div class="pf-element pf-buttons">
-			<input type="hidden" name="com_storefront_payment_id" value="<?php echo htmlspecialchars($cur_payment_type->guid); ?>" />
-			<input class="pf-button btn btn-primary" type="submit" value="<?php echo $this->review_form ? htmlspecialchars($pines->config->com_storefront->complete_order_text) : 'Continue'; ?>" />
+			<input type="hidden" name="com_storefront_payment_id" value="<?php e($cur_payment_type->guid); ?>" />
+			<input class="pf-button btn btn-primary" type="submit" value="<?php echo $this->review_form ? h($pines->config->com_storefront->complete_order_text) : 'Continue'; ?>" />
 		</div>
 	</form>
 	<?php } else { ?>
@@ -129,21 +129,21 @@ $this->title = 'Payment Options';
 	</script>
 	<div class="pf-element" id="p_muid_payment_types">
 		<?php foreach ($this->payment_types as $cur_payment_type) { ?>
-		<label><input type="radio" name="payment_type" value="<?php echo htmlspecialchars(json_encode(array('guid' => $cur_payment_type->guid, 'processing_type' => $cur_payment_type->processing_type, 'name' => $cur_payment_type->name, 'data' => $cur_payment_type->is($this->payment->entity) ? $this->payment->data : null))); ?>"<?php echo $cur_payment_type->is($this->payment->entity) ? ' checked="checked"' : ''; ?> /> <?php echo htmlspecialchars($cur_payment_type->name); ?></label>
+		<label><input type="radio" name="payment_type" value="<?php e(json_encode(array('guid' => $cur_payment_type->guid, 'processing_type' => $cur_payment_type->processing_type, 'name' => $cur_payment_type->name, 'data' => $cur_payment_type->is($this->payment->entity) ? $this->payment->data : null))); ?>"<?php echo $cur_payment_type->is($this->payment->entity) ? ' checked="checked"' : ''; ?> /> <?php e($cur_payment_type->name); ?></label>
 		<?php } ?>
 	</div>
-	<form id="p_muid_form" method="POST" action="<?php echo htmlspecialchars(pines_url('com_storefront', 'checkout/paymentsave')); ?>">
+	<form id="p_muid_form" method="POST" action="<?php e(pines_url('com_storefront', 'checkout/paymentsave')); ?>">
 		<br class="pf-clearing" />
 		<div id="p_muid_payment_form"></div>
 		<?php if ($this->review_form) { ?>
 		<div class="pf-element pf-full-width">
 			<span class="pf-label">Order Comments</span>
-			<textarea class="pf-field" rows="1" cols="35" name="comments"><?php echo htmlspecialchars($this->entity->comments); ?></textarea>
+			<textarea class="pf-field" rows="1" cols="35" name="comments"><?php e($this->entity->comments); ?></textarea>
 		</div>
 		<?php } ?>
 		<div class="pf-element pf-buttons">
 			<input type="hidden" name="com_storefront_payment_id" value="" />
-			<input class="pf-button btn btn-primary" type="submit" value="<?php echo $this->review_form ? htmlspecialchars($pines->config->com_storefront->complete_order_text) : 'Continue'; ?>" />
+			<input class="pf-button btn btn-primary" type="submit" value="<?php echo $this->review_form ? h($pines->config->com_storefront->complete_order_text) : 'Continue'; ?>" />
 		</div>
 	</form>
 	<?php } ?>

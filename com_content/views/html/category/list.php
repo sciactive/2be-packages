@@ -84,16 +84,16 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	</thead>
 	<tbody>
 	<?php foreach($this->categories as $category) { ?>
-		<tr title="<?php echo htmlspecialchars($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? htmlspecialchars("child ch_{$category->parent->guid} ") : ''; ?>">
-			<td><?php echo isset($category->parent) ? htmlspecialchars($category->array_search($category->parent->children) + 1) : '0' ; ?></td>
-			<td><a data-entity="<?php echo htmlspecialchars($category->guid); ?>" data-entity-context="com_content_category"><?php echo htmlspecialchars($category->name); ?></a></td>
-			<td><?php echo htmlspecialchars($category->alias); ?></td>
+		<tr title="<?php e($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? h("child ch_{$category->parent->guid} ") : ''; ?>">
+			<td><?php echo isset($category->parent) ? h($category->array_search($category->parent->children) + 1) : '0' ; ?></td>
+			<td><a data-entity="<?php e($category->guid); ?>" data-entity-context="com_content_category"><?php e($category->name); ?></a></td>
+			<td><?php e($category->alias); ?></td>
 			<td><?php echo ($category->enabled ? 'Yes' : 'No'); ?></td>
 			<td><?php echo count($category->pages); ?></td>
 			<td><?php echo count($category->com_menueditor_entries); ?></td>
-			<td><?php echo htmlspecialchars(format_date($category->p_cdate)); ?></td>
-			<td><?php echo htmlspecialchars(format_date($category->p_mdate)); ?></td>
-			<td><?php echo htmlspecialchars(implode(', ', $category->content_tags)); ?></td>
+			<td><?php e(format_date($category->p_cdate)); ?></td>
+			<td><?php e(format_date($category->p_mdate)); ?></td>
+			<td><?php e(implode(', ', $category->content_tags)); ?></td>
 		</tr>
 	<?php } ?>
 	</tbody>

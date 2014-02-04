@@ -10,7 +10,7 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Employment Application ['.htmlspecialchars($this->entity->name).']';
+$this->title = 'Employment Application ['.h($this->entity->name).']';
 ?>
 <style type="text/css">
 	#p_muid_offer .employee_app_style .pf-label, #p_muid_offer .employee_app_style .pf-note {
@@ -22,7 +22,7 @@ $this->title = 'Employment Application ['.htmlspecialchars($this->entity->name).
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Status:</span>
 		<span class="pf-field">
-			<strong><?php echo htmlspecialchars(ucwords($this->entity->status)); ?></strong>
+			<strong><?php e(ucwords($this->entity->status)); ?></strong>
 		</span>
 	</div>
 	<?php if (!empty($this->entity->notes)) { ?>
@@ -31,9 +31,9 @@ $this->title = 'Employment Application ['.htmlspecialchars($this->entity->name).
 		</div>
 		<?php foreach ($this->entity->notes as $cur_note) { ?>
 		<div class="pf-element pf-full-width">
-			<span class="pf-label"><?php echo htmlspecialchars($cur_note['user']->name); ?></span>
-			<span class="pf-note"><?php echo htmlspecialchars(format_date($cur_note['date'])); ?></span>
-			<span class="pf-field"><?php echo htmlspecialchars($cur_note['note']); ?></span>
+			<span class="pf-label"><?php e($cur_note['user']->name); ?></span>
+			<span class="pf-note"><?php e(format_date($cur_note['date'])); ?></span>
+			<span class="pf-field"><?php e($cur_note['note']); ?></span>
 		</div>
 		<?php }
 	} ?>
@@ -43,24 +43,24 @@ $this->title = 'Employment Application ['.htmlspecialchars($this->entity->name).
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Name:</span>
-			<span class="pf-field"><?php echo htmlspecialchars($this->entity->name); ?></span>
+			<span class="pf-field"><?php e($this->entity->name); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Email:</span>
 			<span class="pf-field">
-				<?php echo htmlspecialchars($this->entity->email); ?>
+				<?php e($this->entity->email); ?>
 			</span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Phone:</span>
 			<span class="pf-field">
-				<?php echo htmlspecialchars(format_phone($this->entity->phone)); ?>
+				<?php e(format_phone($this->entity->phone)); ?>
 			</span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">SSN:</span>
 			<span class="pf-field">
-				<?php echo htmlspecialchars($this->entity->ssn); ?>
+				<?php e($this->entity->ssn); ?>
 			</span>
 		</div>
 		<div class="pf-element pf-heading">
@@ -69,11 +69,11 @@ $this->title = 'Employment Application ['.htmlspecialchars($this->entity->name).
 		<?php foreach ($this->entity->education as $cur_school) { ?>
 		<div class="pf-element">
 			<span class="pf-label">Name of Institution:</span>
-			<span class="pf-field"><?php echo htmlspecialchars($cur_school['name'].' ('.$cur_school['type'].')'); ?></span>
+			<span class="pf-field"><?php e($cur_school['name'].' ('.$cur_school['type'].')'); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Area of Interest:</span>
-			<span class="pf-field"><?php echo htmlspecialchars($cur_school['major']); ?></span>
+			<span class="pf-field"><?php e($cur_school['major']); ?></span>
 		</div>
 		<br class="pf-clearing" />
 		<?php } ?>
@@ -83,23 +83,23 @@ $this->title = 'Employment Application ['.htmlspecialchars($this->entity->name).
 		<?php foreach ($this->entity->employment as $cur_employer) { ?>
 		<div class="pf-element">
 			<span class="pf-label">Position:</span>
-			<span class="pf-field"><?php echo htmlspecialchars(ucwords($cur_employer['position'])); ?></span>
+			<span class="pf-field"><?php e(ucwords($cur_employer['position'])); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Timeline:</span>
-			<span class="pf-field"><?php echo htmlspecialchars(format_date($cur_employer['start'], 'date_short')).' - '.htmlspecialchars(format_date($cur_employer['end'], 'date_short')); ?></span>
+			<span class="pf-field"><?php e(format_date($cur_employer['start'], 'date_short')).' - '.h(format_date($cur_employer['end'], 'date_short')); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Company:</span>
-			<span class="pf-field"><?php echo htmlspecialchars($cur_employer['company']); ?></span>
+			<span class="pf-field"><?php e($cur_employer['company']); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Phone:</span>
-			<span class="pf-field"><?php echo htmlspecialchars(format_phone($cur_employer['phone'])); ?></span>
+			<span class="pf-field"><?php e(format_phone($cur_employer['phone'])); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Reason for Leaving:</span>
-			<span class="pf-field"><?php echo htmlspecialchars($cur_employer['reason']); ?></span>
+			<span class="pf-field"><?php e($cur_employer['reason']); ?></span>
 		</div>
 		<br class="pf-clearing" />
 		<br class="pf-clearing" />
@@ -110,19 +110,19 @@ $this->title = 'Employment Application ['.htmlspecialchars($this->entity->name).
 		<?php foreach ($this->entity->references as $cur_reference) { ?>
 		<div class="pf-element">
 			<span class="pf-label">Name:</span>
-			<span class="pf-field"><?php echo htmlspecialchars(ucwords($cur_reference['name'])); ?></span>
+			<span class="pf-field"><?php e(ucwords($cur_reference['name'])); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Phone:</span>
-			<span class="pf-field"><?php echo htmlspecialchars(format_phone($cur_reference['phone'])); ?></span>
+			<span class="pf-field"><?php e(format_phone($cur_reference['phone'])); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Company:</span>
-			<span class="pf-field"><?php echo htmlspecialchars($cur_reference['company']); ?></span>
+			<span class="pf-field"><?php e($cur_reference['company']); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Occupation:</span>
-			<span class="pf-field"><?php echo htmlspecialchars($cur_reference['occupation']); ?></span>
+			<span class="pf-field"><?php e($cur_reference['occupation']); ?></span>
 		</div>
 		<br class="pf-clearing" />
 		<br class="pf-clearing" />
@@ -132,7 +132,7 @@ $this->title = 'Employment Application ['.htmlspecialchars($this->entity->name).
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">File Location:</span>
-			<span class="pf-field"><?php echo htmlspecialchars($this->entity->resume['path']); ?></span>
+			<span class="pf-field"><?php e($this->entity->resume['path']); ?></span>
 		</div>
 	</div>
 </div>

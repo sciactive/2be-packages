@@ -10,9 +10,9 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = 'Cash-Out of Cash Count ['.htmlspecialchars($this->entity->guid).']';
+$this->title = 'Cash-Out of Cash Count ['.h($this->entity->guid).']';
 if (isset($this->entity->guid))
-	$this->note = 'Created by ' . htmlspecialchars($this->entity->user->name) . ' on ' . htmlspecialchars(format_date($this->entity->p_cdate, 'date_short')) . ' - Last Modified on ' . htmlspecialchars(format_date($this->entity->p_mdate, 'date_short'));
+	$this->note = 'Created by ' . h($this->entity->user->name) . ' on ' . h(format_date($this->entity->p_cdate, 'date_short')) . ' - Last Modified on ' . h(format_date($this->entity->p_mdate, 'date_short'));
 ?>
 <style type="text/css" >
 	#p_muid_form .amount {
@@ -97,13 +97,13 @@ if (isset($this->entity->guid))
 		update_total();
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'cashcount/savecashout')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'cashcount/savecashout')); ?>">
 	<?php if (!empty($this->entity->review_comments)) {?>
 	<div class="pf-element pf-heading">
 		<h3>Reviewer Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-field"><?php echo htmlspecialchars($this->entity->review_comments); ?></div>
+		<div class="pf-field"><?php e($this->entity->review_comments); ?></div>
 	</div>
 	<?php } if (!$this->entity->cashed_out) { ?>
 	<div class="pf-element pf-heading">
@@ -113,8 +113,8 @@ if (isset($this->entity->guid))
 	<div class="pf-element pf-full-width" style="position: relative;">
 		<?php foreach ($this->entity->currency as $key => $cur_denom) { ?>
 		<div class="pf-element">
-			<input class="pf-field entry" type="text" name="count_<?php echo htmlspecialchars($key); ?>" title="<?php echo htmlspecialchars($cur_denom); ?>" value="0" <?php echo $this->entity->final ? 'readonly="readonly"' : ''; ?> />
-			x <span class="amount"><?php echo htmlspecialchars($this->entity->currency_symbol . $cur_denom); ?></span>
+			<input class="pf-field entry" type="text" name="count_<?php e($key); ?>" title="<?php e($cur_denom); ?>" value="0" <?php echo $this->entity->final ? 'readonly="readonly"' : ''; ?> />
+			x <span class="amount"><?php e($this->entity->currency_symbol . $cur_denom); ?></span>
 			<button class="pf-field btn btn-success add_btn" type="button"><i class="icon-plus icon-white"></i></button>
 			<button class="pf-field btn btn-danger remove_btn" type="button"><i class="icon-minus icon-white"></i></button>
 		</div>
@@ -134,16 +134,16 @@ if (isset($this->entity->guid))
 	?>
 	<div class="pf-element">
 		<span class="pf-label">Expected Count</span>
-		<span class="pf-field">$<?php echo htmlspecialchars($this->entity->total); ?></span>
+		<span class="pf-field">$<?php e($this->entity->total); ?></span>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">- Actual Count</span>
-		<span class="pf-field">$<?php echo htmlspecialchars($this->entity->total_out); ?></span>
+		<span class="pf-field">$<?php e($this->entity->total_out); ?></span>
 		<hr />
 	</div>
 	<div class="pf-element alert <?php echo $class; ?>" style="padding: .2em .5em;">
 		<span class="pf-label">Error</span>
-		<span class="pf-field">$<?php echo htmlspecialchars($this->entity->total - $this->entity->total_out); ?></span>
+		<span class="pf-field">$<?php e($this->entity->total - $this->entity->total_out); ?></span>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Totals</h3>
@@ -151,20 +151,20 @@ if (isset($this->entity->guid))
 	<div class="pf-element pf-full-width" style="position: relative; padding-bottom: 75px;">
 		<div class="pf-element">
 			<span class="pf-label">Actual Count</span>
-			<span class="pf-field">$<?php echo htmlspecialchars($this->entity->total_out); ?></span>
+			<span class="pf-field">$<?php e($this->entity->total_out); ?></span>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">- Float</span>
-			<span class="pf-field">$<?php echo htmlspecialchars($this->entity->float); ?></span>
+			<span class="pf-field">$<?php e($this->entity->float); ?></span>
 			<hr />
 		</div>
 		<div class="pf-element alert alert-info" style="padding: .2em .5em;">
 			<span class="pf-label">Total Received Cash</span>
-			<span class="pf-field">$<?php echo htmlspecialchars($variance); ?></span>
+			<span class="pf-field">$<?php e($variance); ?></span>
 		</div>
 		<div class="alert alert-info total">
 			<div class="alert-heading">Cash Received</div>
-			<div>$<?php echo htmlspecialchars($variance); ?></div>
+			<div>$<?php e($variance); ?></div>
 		</div>
 	</div>
 	<?php } ?>
@@ -172,17 +172,17 @@ if (isset($this->entity->guid))
 		<h3>Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments" <?php echo $this->entity->cashed_out ? 'readonly="readonly"' : ''; ?>><?php echo htmlspecialchars($this->entity->comments); ?></textarea></div>
+		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments" <?php echo $this->entity->cashed_out ? 'readonly="readonly"' : ''; ?>><?php e($this->entity->comments); ?></textarea></div>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } if (!$this->entity->cashed_out) { ?>
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Cash Out" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
-		<input class="pf-button btn btn-primary" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="&laquo; Close" />
+		<input class="pf-button btn btn-primary" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="&laquo; Close" />
 		<?php } ?>
 	</div>
 </form>

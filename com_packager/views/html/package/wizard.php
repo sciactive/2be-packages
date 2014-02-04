@@ -43,7 +43,7 @@ $pines->com_pgrid->load();
 		});
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_packager', 'package/wizardsave')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_packager', 'package/wizardsave')); ?>">
 	<div class="pf-element pf-heading">
 		<h3>Choose Packages</h3>
 	</div>
@@ -60,16 +60,16 @@ $pines->com_pgrid->load();
 			</thead>
 			<tbody style="">
 				<?php foreach ($this->components as $cur_component => $cur_info) { ?>
-				<tr class="type_<?php echo htmlspecialchars($cur_info->type); ?>" title="<?php echo ($cur_info->already_exists ? 'This package already exists.' : ($cur_info->disabled ? 'This component is disabled.' : '')); ?>">
+				<tr class="type_<?php e($cur_info->type); ?>" title="<?php echo ($cur_info->already_exists ? 'This package already exists.' : ($cur_info->disabled ? 'This component is disabled.' : '')); ?>">
 					<td>
 						<?php if (!$cur_info->already_exists && !$cur_info->disabled) { ?>
-						<input type="checkbox" name="packages[]" id="p_muid_<?php echo htmlspecialchars($cur_component); ?>" value="<?php echo htmlspecialchars($cur_component); ?>" />
+						<input type="checkbox" name="packages[]" id="p_muid_<?php e($cur_component); ?>" value="<?php e($cur_component); ?>" />
 						<?php } ?>
 					</td>
-					<td><label for="p_muid_<?php echo htmlspecialchars($cur_component); ?>"><?php echo htmlspecialchars($cur_component); ?></label></td>
-					<td><label for="p_muid_<?php echo htmlspecialchars($cur_component); ?>"><?php echo htmlspecialchars($cur_info->name); ?></label></td>
-					<td><label for="p_muid_<?php echo htmlspecialchars($cur_component); ?>"><?php echo htmlspecialchars($cur_info->author); ?></label></td>
-					<td><label for="p_muid_<?php echo htmlspecialchars($cur_component); ?>"><?php echo htmlspecialchars($cur_info->version); ?></label></td>
+					<td><label for="p_muid_<?php e($cur_component); ?>"><?php e($cur_component); ?></label></td>
+					<td><label for="p_muid_<?php e($cur_component); ?>"><?php e($cur_info->name); ?></label></td>
+					<td><label for="p_muid_<?php e($cur_component); ?>"><?php e($cur_info->author); ?></label></td>
+					<td><label for="p_muid_<?php e($cur_component); ?>"><?php e($cur_info->version); ?></label></td>
 				</tr>
 				<?php } ?>
 			</tbody>
@@ -77,6 +77,6 @@ $pines->com_pgrid->load();
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" value="Create Packages" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_packager', 'package/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_packager', 'package/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

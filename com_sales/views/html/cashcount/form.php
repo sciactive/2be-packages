@@ -10,9 +10,9 @@
  */
 /* @var $pines pines *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = (!isset($this->entity->guid)) ? 'Cash-In' : (($this->entity->final) ? 'Viewing' : 'Editing').' Float for Cash-In ['.htmlspecialchars($this->entity->guid).']';
+$this->title = (!isset($this->entity->guid)) ? 'Cash-In' : (($this->entity->final) ? 'Viewing' : 'Editing').' Float for Cash-In ['.h($this->entity->guid).']';
 if (isset($this->entity->guid))
-	$this->note = 'Created by ' . htmlspecialchars($this->entity->user->name) . ' on ' . htmlspecialchars(format_date($this->entity->p_cdate, 'date_short')) . ' - Last Modified on ' .  htmlspecialchars(format_date($this->entity->p_mdate, 'date_short'));
+	$this->note = 'Created by ' . h($this->entity->user->name) . ' on ' . h(format_date($this->entity->p_cdate, 'date_short')) . ' - Last Modified on ' .  h(format_date($this->entity->p_mdate, 'date_short'));
 ?>
 <style type="text/css" >
 	#p_muid_form .amount {
@@ -97,13 +97,13 @@ if (isset($this->entity->guid))
 		update_total();
 	});
 </script>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php echo htmlspecialchars(pines_url('com_sales', 'cashcount/save')); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'cashcount/save')); ?>">
 	<?php if (!empty($this->entity->review_comments)) {?>
 	<div class="pf-element pf-heading">
 		<h3>Reviewer Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-field"><?php echo htmlspecialchars($this->entity->review_comments); ?></div>
+		<div class="pf-field"><?php e($this->entity->review_comments); ?></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-heading">
@@ -113,8 +113,8 @@ if (isset($this->entity->guid))
 	<div class="pf-element pf-full-width" style="position: relative;">
 		<?php foreach ($this->entity->currency as $key => $cur_denom) { ?>
 		<div class="pf-element">
-			<input class="pf-field entry" type="text" name="count_<?php echo htmlspecialchars($key); ?>" title="<?php echo htmlspecialchars($cur_denom); ?>" value="<?php echo (int) $this->entity->count[$key]; ?>" <?php echo $this->entity->final ? 'readonly="readonly"' : ''; ?>/>
-			x <span class="amount"><?php echo htmlspecialchars($this->entity->currency_symbol . $cur_denom); ?></span>
+			<input class="pf-field entry" type="text" name="count_<?php e($key); ?>" title="<?php e($cur_denom); ?>" value="<?php echo (int) $this->entity->count[$key]; ?>" <?php echo $this->entity->final ? 'readonly="readonly"' : ''; ?>/>
+			x <span class="amount"><?php e($this->entity->currency_symbol . $cur_denom); ?></span>
 			<?php if (!$this->entity->final) { ?>
 			<button class="pf-field btn btn-success add_btn" type="button"><i class="icon-plus icon-white"></i></button>
 			<button class="pf-field btn btn-danger remove_btn" type="button"><i class="icon-minus icon-white"></i></button>
@@ -130,18 +130,18 @@ if (isset($this->entity->guid))
 		<h3>Comments</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments" <?php echo $this->entity->final ? 'readonly="readonly"' : ''; ?>><?php echo htmlspecialchars($this->entity->comments); ?></textarea></div>
+		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea style="width: 100%;" rows="3" cols="35" name="comments" <?php echo $this->entity->final ? 'readonly="readonly"' : ''; ?>><?php e($this->entity->comments); ?></textarea></div>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } if (!$this->entity->final) { ?>
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Cash In" onclick="$('#p_muid_save').val('commit');" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
-		<input class="pf-button btn btn-primary" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="&laquo; Close" />
+		<input class="pf-button btn btn-primary" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="&laquo; Close" />
 		<?php } ?>
 	</div>
 </form>

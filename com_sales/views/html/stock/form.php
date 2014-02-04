@@ -13,11 +13,11 @@ defined('P_RUN') or die('Direct access prohibited');
 if (is_array($this->entities)) {
 	$this->title = 'Editing Multiple Stock Entries';
 } else {
-	$this->title = htmlspecialchars("Editing Stock Entry of \"{$this->entity->product->name}\"");
+	$this->title = h("Editing Stock Entry of \"{$this->entity->product->name}\"");
 	if (isset($this->entity->serial))
-		$this->title .= htmlspecialchars(" (Serial: {$this->entity->serial})");
+		$this->title .= h(" (Serial: {$this->entity->serial})");
 	if (isset($this->entity->location)) {
-		$this->title .= htmlspecialchars(" at \"{$this->entity->location->name}\"");
+		$this->title .= h(" at \"{$this->entity->location->name}\"");
 	} else {
 		$this->title .= ' Not in Inventory';
 	}
@@ -25,47 +25,47 @@ if (is_array($this->entities)) {
 $this->note = 'Provide stock entry details in this form.';
 $pines->com_jstree->load();
 ?>
-<form class="pf-form" id="p_muid_form" method="post" action="<?php echo htmlspecialchars(pines_url('com_sales', 'stock/save')); ?>">
+<form class="pf-form" id="p_muid_form" method="post" action="<?php e(pines_url('com_sales', 'stock/save')); ?>">
 	<?php if (isset($this->entity->guid)) { ?>
 	<div class="date_info" style="float: right; text-align: right;">
 		<?php if (isset($this->entity->user)) { ?>
-		<div>User: <span class="date"><?php echo htmlspecialchars("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
-		<div>Group: <span class="date"><?php echo htmlspecialchars("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
+		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
+		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php echo htmlspecialchars(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
 		<span class="pf-label">Product</span>
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<span class="pf-field"><?php echo htmlspecialchars($this->entity->product->name); ?></span>
+		<span class="pf-field"><?php e($this->entity->product->name); ?></span>
 		<?php } elseif ( is_array($this->entities) ) {
 			$names = array();
 			foreach ($this->entities as $cur_entity) {
 				$names[] = $cur_entity->product->name;
 			}
 			?>
-		<span class="pf-field"><?php echo htmlspecialchars(implode(', ', $names)); ?></span>
+		<span class="pf-field"><?php e(implode(', ', $names)); ?></span>
 		<?php } ?>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Product Sku</span>
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<span class="pf-field"><?php echo htmlspecialchars($this->entity->product->sku); ?></span>
+		<span class="pf-field"><?php e($this->entity->product->sku); ?></span>
 		<?php } elseif ( is_array($this->entities) ) {
 			$skus = array();
 			foreach ($this->entities as $cur_entity) {
 				$skus[] = $cur_entity->product->sku;
 			}
 			?>
-		<span class="pf-field"><?php echo htmlspecialchars(implode(', ', $skus)); ?></span>
+		<span class="pf-field"><?php e(implode(', ', $skus)); ?></span>
 		<?php } ?>
 	</div>
 	<?php if ( isset($this->entity->guid) ) { ?>
 	<div class="pf-element">
 		<span class="pf-label">Last Transaction</span>
-		<span class="pf-field"><?php echo isset($this->entity) ? htmlspecialchars($this->entity->last_reason()) : ''; ?></span>
+		<span class="pf-field"><?php echo isset($this->entity) ? h($this->entity->last_reason()) : ''; ?></span>
 	</div>
 	<?php } ?>
 	<script type="text/javascript">
@@ -176,7 +176,7 @@ $pines->com_jstree->load();
 					<input class="p_muid_change_this" type="hidden" name="serial_change" value="" />
 					<div class="pf-element">
 						<label><span class="pf-label">Serial</span>
-							<input class="pf-field" type="text" name="serial" size="24" value="<?php echo htmlspecialchars($this->entity->serial); ?>" /></label>
+							<input class="pf-field" type="text" name="serial" size="24" value="<?php e($this->entity->serial); ?>" /></label>
 					</div>
 					<div class="pf-element">
 						<label>
@@ -274,7 +274,7 @@ $pines->com_jstree->load();
 								<?php
 								$pines->entity_manager->sort($this->vendors, 'name');
 								foreach ($this->vendors as $cur_vendor) { ?>
-								<option value="<?php echo htmlspecialchars($cur_vendor->guid); ?>"<?php echo $this->entity->vendor->guid == $cur_vendor->guid ? ' selected="selected"' : ''; ?>><?php echo htmlspecialchars($cur_vendor->name); ?></option>
+								<option value="<?php e($cur_vendor->guid); ?>"<?php echo $this->entity->vendor->guid == $cur_vendor->guid ? ' selected="selected"' : ''; ?>><?php e($cur_vendor->name); ?></option>
 								<?php } ?>
 							</select>
 						</label>
@@ -304,7 +304,7 @@ $pines->com_jstree->load();
 					<input class="p_muid_change_this" type="hidden" name="cost_change" value="" />
 					<div class="pf-element">
 						<label><span class="pf-label">Cost</span>
-							<span class="pf-field">$</span><input class="pf-field" style="text-align: right;" type="text" name="cost" size="10" value="<?php echo htmlspecialchars($this->entity->cost); ?>" /></label>
+							<span class="pf-field">$</span><input class="pf-field" style="text-align: right;" type="text" name="cost" size="10" value="<?php e($this->entity->cost); ?>" /></label>
 					</div>
 					<div class="pf-element">
 						<label>
@@ -324,16 +324,16 @@ $pines->com_jstree->load();
 	<br class="pf-clearing" />
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->entity->guid); ?>" />
+		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } elseif ( is_array($this->entities) ) {
 			$guids = array();
 			foreach ($this->entities as $cur_entity) {
 				$guids[] = $cur_entity->guid;
 			}
 			?>
-		<input type="hidden" name="id" value="<?php echo htmlspecialchars(implode(',', $guids)); ?>" />
+		<input type="hidden" name="id" value="<?php e(implode(',', $guids)); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php echo htmlspecialchars(json_encode(pines_url('com_sales', 'stock/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'stock/list'))); ?>);" value="Cancel" />
 	</div>
 </form>
