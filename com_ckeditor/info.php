@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -21,7 +21,7 @@ return array(
 	'short_description' => 'CKEditor editor widget',
 	'description' => 'CKEditor based editor widget.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_jquery&com_bootstrap&com_pform'
 	),
 	'recommend' => array(

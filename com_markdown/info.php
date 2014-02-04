@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,6 +20,6 @@ return array(
 	'short_description' => 'Markdown processor',
 	'description' => "Provides a Markdown to HTML converter.\n\nFor markdown syntax, see http://daringfireball.net/projects/markdown/syntax\nFor extra features in this version, see http://michelf.ca/projects/php-markdown/extra",
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 	),
 );

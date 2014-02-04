@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Production and workflow reports',
 	'description' => 'Reports for sales totals, inventory and employee reports.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'icons',
 		'component' => 'com_jquery&com_bootstrap&com_pgrid&com_jstree&com_pform&(com_hrm|com_sales|com_calendar)'
 	),

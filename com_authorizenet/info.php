@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Payment gateway interface',
 	'description' => 'Processes credit transactions through the Authorize.Net payment gateway.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_sales&com_jquery&com_bootstrap&com_pform'
 	),
 );

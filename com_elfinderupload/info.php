@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -21,7 +21,7 @@ return array(
 	'short_description' => 'elFinder file upload widget',
 	'description' => 'A standard file upload widget using the elFinder jQuery plugin.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_elfinder&com_jquery&com_bootstrap&com_pform'
 	),
 );

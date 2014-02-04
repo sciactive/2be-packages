@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines *//* @var $this module */
+/* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Purchase Order' : 'Editing PO ['.h($this->entity->po_number).']';
 $this->note = 'Provide PO details in this form.';

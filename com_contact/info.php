@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'A simple contact form',
 	'description' => 'A contact form used to send messages from the website.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_bootstrap&com_pform'
 	),
 );

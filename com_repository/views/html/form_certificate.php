@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines *//* @var $this module */
+/* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Generate a Certificate';
 $this->note = 'All packages will be signed against this new certificate. Any current signatures will become invalid.';

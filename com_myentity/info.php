@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -21,7 +21,7 @@ return array(
 	'short_description' => 'MySQL based entity manager',
 	'description' => 'Provides an object relational mapper, which conforms to the WonderPHP entity manager service standard and uses MySQL as its backend.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_mysql'
 	),
 );

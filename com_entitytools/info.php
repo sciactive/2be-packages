@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Tools for testing and maintaining your entity manager',
 	'description' => 'Includes the following tools: test, benchmark, export, import.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'entity_manager',
 		'component' => 'com_jquery&com_bootstrap&com_pform'
 	),

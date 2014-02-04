@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'jsTree jQuery plugin',
 	'description' => 'A JavaScript tree jQuery component. Includes the context menu plugin.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_jquery'
 	),
 );

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Generate PDFs from templates',
 	'description' => 'Easily insert information into a PDF template. Also allows users to format their own PDFs.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'class' => 'Imagick',
 		'component' => 'com_jquery&com_pform',
 		'package' => 'com_pdf-data'

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -25,7 +25,7 @@ return array(
 	'short_description' => 'Simple template suitable for printing',
 	'description' => 'This template only shows the content modules. It\'s suitable for letting the user print the page without any excess information.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_jquery&com_bootstrap'
 	),
 );

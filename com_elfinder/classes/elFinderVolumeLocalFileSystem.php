@@ -6,7 +6,7 @@
  * @author Dmitry (dio) Levashov
  * @author Troex Nevelin
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**

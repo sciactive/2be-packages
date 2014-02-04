@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,6 +20,6 @@ return array(
 	'short_description' => 'Daily fortune',
 	'description' => 'Reminiscent of the "fortune" program in Unix, this prints a daily adage from a database of fortunes, quotes, riddles, etc.',
 	'depend' => array(
-		'pines' => '<3'
+		'core' => '<3'
 	),
 );

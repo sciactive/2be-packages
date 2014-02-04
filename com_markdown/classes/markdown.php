@@ -17,7 +17,7 @@
  * @copyright Michel Fortin
  * @link http://michelf.com/projects/php-markdown/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 //

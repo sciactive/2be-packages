@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines *//* @var $this module */
+/* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Editing Thread ['.h($this->entity->guid).']';
 $this->note = 'For the entity '.h($this->entity->entities[0]->guid.' with the tags '.implode(', ', $this->entity->entities[0]->tags)).'.';

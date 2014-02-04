@@ -3,7 +3,7 @@
  * CSS for tpl_bootstrap
  *
  * Had to use a component so that a link via index.php could be used
- * so that the pines object could be utilized for configuration.
+ * so that the core object could be utilized for configuration.
  *
  * @package Components\bootstrap
  * @license http://www.gnu.org/licenses/agpl-3.0.html
@@ -11,7 +11,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 
 header('Content-Type: text/css');
 

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'An instant messenger',
 	'description' => 'An instant messenger that works within the website. Designed to use an XMPP (Jabber) server. Includes a script to authenticate users for the ejabberd server.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'user_manager&entity_manager&icons',
 		'component' => 'com_jquery&com_bootstrap&com_pform&com_soundmanager',
 	),

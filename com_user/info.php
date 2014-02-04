@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -21,7 +21,7 @@ return array(
 	'short_description' => 'Entity based user manager',
 	'description' => 'Provides and manages users, groups, and abilities (access control). Uses an entity manager as a storage backend.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'entity_manager&uploader&icons',
 		'component' => 'com_mailer&com_jquery&com_bootstrap&com_pgrid&com_markdown&com_pnotify&com_pform', //&com_jstree
 		'package' => 'com_user-data'

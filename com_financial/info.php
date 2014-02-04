@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,6 +20,6 @@ return array(
 	'short_description' => 'Financial function library',
 	'description' => 'A library of financial functions with identical names and arguments as those used in Microsoft Excel. Entirely based on work by Enrique Garcia.',
 	'depend' => array(
-		'pines' => '<3'
+		'core' => '<3'
 	),
 );

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines *//* @var $this module */
+/* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
 $bg_lightest = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->review_background)) ? $_->config->com_testimonials->review_background : '#eeeeee';

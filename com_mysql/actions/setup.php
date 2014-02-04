@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 if (isset($_SESSION['user']) || $_->config->com_mysql->host != 'localhost' || $_->config->com_mysql->user != 'pines' || $_->config->com_mysql->password != 'password' || $_->config->com_mysql->database != 'pines' || $_->config->com_mysql->prefix != 'pin_')

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'PSteps jQuery plugin',
 	'description' => 'A JavaScript Steps jQuery component. Allows for linear navigation similar to tabs, but with progress indication and validation.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_jquery&com_bootstrap'
 	),
 );

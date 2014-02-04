@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,6 +20,6 @@ return array(
 	'short_description' => 'Provides browser specific options',
 	'description' => 'Uses the client\'s user agent string to determine what browser they\'re using. You can provide browser specific configuration, including configuration for mobile browsers.',
 	'depend' => array(
-		'pines' => '<3'
+		'core' => '<3'
 	),
 );

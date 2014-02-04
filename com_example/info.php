@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'An example component design',
 	'description' => 'This component functions as an example of how to use various features of WonderPHP.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'entity_manager&editor',
 		'component' => 'com_jquery&com_bootstrap&com_pgrid&com_pform'
 	),

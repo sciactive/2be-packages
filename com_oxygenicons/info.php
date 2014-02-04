@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -21,6 +21,6 @@ return array(
 	'short_description' => 'WonderPHP Icon theme using Oxygen icons',
 	'description' => 'A WonderPHP Icon theme using the Oxygen icon library.',
 	'depend' => array(
-		'pines' => '<3'
+		'core' => '<3'
 	),
 );

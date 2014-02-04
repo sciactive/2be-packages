@@ -10,7 +10,7 @@
  *
  * @todo Finish the benchmarking utility.
  */
-/* @var $_ pines *//* @var $this module */
+/* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Entity Manager Benchmark';
 ?>

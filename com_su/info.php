@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Switch to a different user',
 	'description' => 'Allow users to login as a different user quickly, without having to logout first.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'user_manager',
 		'component' => 'com_jquery&com_pnotify&com_pform'
 	),

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines *//* @var $this module */
+/* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $categories = $_->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category')));
 $_->entity_manager->sort($categories, 'name');

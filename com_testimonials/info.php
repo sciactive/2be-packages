@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Users can provide feedback displayed as testimonials.',
 	'description' => 'Takes user feedback and allows approval of that feedback to be displayed as testimonials.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'entity_manager&user_manager',
 		'component' => 'com_customer&com_jquery&com_bootstrap&com_pgrid&com_pform'
 	),

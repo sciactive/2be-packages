@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Extended service plan manager',
 	'description' => 'Used to track and manage warranties on products.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'entity_manager&icons',
 		'component' => 'com_customer&com_jquery&com_bootstrap&com_pgrid&com_pnotify&com_pform&com_sales'
 	),

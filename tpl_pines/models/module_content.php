@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <div class="module <?php if (!in_array('content_pagination', $this->classes)) { ?>ui-widget-content<?php } ?> <?php e(implode(' ', $this->classes)); ?>">

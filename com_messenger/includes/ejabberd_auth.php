@@ -71,7 +71,7 @@ if (preg_match('/components\/com_messenger\/includes\/ejabberd_auth\.php$/', $_S
 else
 	chdir('../../../');
 // Check that we're in the WonderPHP dir...
-if (!file_exists('system/classes/pines.php'))
+if (!file_exists('system/classes/core.php'))
 	die('I have no idea where the WonderPHP dir is, so I\'m cowardly refusing to proceed.');
 // Set up constants...
 define('P_EXEC_TIME', microtime(true));

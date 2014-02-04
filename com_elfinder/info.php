@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'elFinder file manager and widget',
 	'description' => 'A file manager using the elFinder jQuery plugin. See the readme in the includes folder for elFinder\'s license information.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_jquery'
 	),
 	'abilities' => array(

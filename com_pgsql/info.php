@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'PostgreSQL link manager',
 	'description' => 'Provides an easy way to manage links to one or more databases, and the ability to keep more than one data set in those databases.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'configurator',
 		'component' => 'com_pform',
 		'function' => 'pg_connect'

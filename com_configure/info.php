@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -21,7 +21,7 @@ return array(
 	'short_description' => 'Manages system configuration',
 	'description' => 'Allows you to edit your system\'s configuration and the configuration of any installed components.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_jquery&com_bootstrap&com_ptags&com_pgrid&com_markdown&com_pform'
 	),
 	'recommend' => array(

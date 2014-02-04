@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -35,7 +35,7 @@ return array(
 	'short_description' => 'A nice default template for websites.',
 	'description' => 'This is the template used on pinescms.org and pinesframework.org. It\'s a good template for websites, and is a good starting point for other templates.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_jquery&com_bootstrap'
 	),
 	'recommend' => array(

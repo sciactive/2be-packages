@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Users can export csv to Google Drive',
 	'description' => 'Exports rows in a grid to Google Drive as a spreadsheet',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
                 'component' => 'com_pnotify'
 	),
 	

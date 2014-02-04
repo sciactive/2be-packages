@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,6 +20,6 @@ return array(
 	'short_description' => 'CSS style inline module',
 	'description' => 'An inline module to allow CSS styles. Many editors will filter CSS style elements, so this component can be used to create them.',
 	'depend' => array(
-		'pines' => '<3'
+		'core' => '<3'
 	),
 );

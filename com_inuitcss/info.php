@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,6 +20,6 @@ return array(
 	'short_description' => 'Inuit CSS framework',
 	'description' => "A CSS framework, featuring mobile and tablet support, grid layout, typography enhancements, and plugin support.\n\nSee the Inuit website at http://csswizardry.com/inuitcss/",
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 	),
 );

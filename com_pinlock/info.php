@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'PIN based security',
 	'description' => 'Provides a PIN based security measure to both prevent unauthorized use of accounts and securely allow users to switch accounts quickly.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'user_manager',
 		'component' => 'com_pform'
 	),

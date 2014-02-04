@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -32,7 +32,7 @@ return array(
 	'short_description' => 'A pretty bamboo style template',
 	'description' => 'An pretty bamboo style template.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'component' => 'com_jquery'
 	),
 	'recommend' => array(

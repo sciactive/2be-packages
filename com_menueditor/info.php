@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Edit menus and associate menu entries with various items',
 	'description' => 'A menu editor that allows you to edit menu entries. It also lets other components provide user managed menu entries for any of their items.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'entity_manager&icons',
 		'component' => 'com_jquery&com_bootstrap&com_pgrid&com_markdown&com_pform&com_jstree'
 	),

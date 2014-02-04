@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,6 +20,6 @@ return array(
 	'short_description' => 'IFrame inline module',
 	'description' => 'An iframe inline module. Many editors will filter iframes, so this component can be used to create them, even though they\'re not XHTML 1.0 Strict.',
 	'depend' => array(
-		'pines' => '<3'
+		'core' => '<3'
 	),
 );

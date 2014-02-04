@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Customer relationship manager',
 	'description' => 'Manage your customers using accounts. Features include membership and point tracking.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'entity_manager&editor',
 		'component' => 'com_user&com_jquery&com_bootstrap&com_pgrid&com_pnotify&com_pform'
 	),

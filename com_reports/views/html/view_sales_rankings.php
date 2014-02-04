@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines *//* @var $this module */
+/* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Sales Rankings: '.h($this->entity->name).' ('.h(format_date($this->entity->start_date, 'date_sort')).' - '.h(format_date($this->entity->end_date - 1, 'date_sort')).')';
 if ($this->entity->final)

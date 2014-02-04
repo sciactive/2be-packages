@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,6 +20,6 @@ return array(
 	'short_description' => 'PForm CSS styling',
 	'description' => 'A standards compliant, clean, sensible CSS form styling system.',
 	'depend' => array(
-		'pines' => '<3'
+		'core' => '<3'
 	),
 );

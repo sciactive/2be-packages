@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,6 +20,6 @@ return array(
 	'short_description' => 'An inline module parsing system',
 	'description' => 'An inline module system, which allows you to place modules directly in content.',
 	'depend' => array(
-		'pines' => '<3'
+		'core' => '<3'
 	),
 );

@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Company Calendar',
 	'description' => 'The company calendar can be used to manage employees and customers.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'user_manager&entity_manager&editor',
 		'component' => 'com_jquery&com_bootstrap&com_pnotify&com_jstree&com_ptags&com_hrm&com_pform'
 	),

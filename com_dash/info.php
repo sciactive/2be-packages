@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Configurable dashboard',
 	'description' => 'Provides a dashboard with quick links and widgets.',
 	'depend' => array(
-		'pines' => '>=1.0.4&<3',
+		'core' => '>=1.0.4&<3',
 		'service' => 'entity_manager&user_manager',
 		'component' => 'com_jquery&com_bootstrap&com_pform'
 	),

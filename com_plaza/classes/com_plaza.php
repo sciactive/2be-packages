@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
@@ -210,7 +210,7 @@ class com_plaza extends component {
 							do {
 								if (!($pass = $_->depend->check($cur_type, $cur_value))) {
 									switch ($cur_type) {
-										case 'pines':
+										case 'core':
 											// TODO: Look for system package.
 											$possible = false;
 											break;
@@ -266,7 +266,7 @@ class com_plaza extends component {
 							do {
 								if (!($pass = !$_->depend->check($cur_type, $cur_value))) {
 									switch ($cur_type) {
-										case 'pines':
+										case 'core':
 											// TODO: Look for system package.
 											$possible = false;
 											break;
@@ -481,7 +481,7 @@ class com_plaza extends component {
 	/**
 	 * Override component checker.
 	 *
-	 * @uses pines::components
+	 * @uses core::components
 	 * @param string $value The value to check.
 	 * @return bool The result of the component check.
 	 */
@@ -547,7 +547,7 @@ class com_plaza extends component {
 	/**
 	 * Override service checker.
 	 *
-	 * @uses pines::services
+	 * @uses core::services
 	 * @param string $value The value to check.
 	 * @return bool The result of the service check.
 	 */

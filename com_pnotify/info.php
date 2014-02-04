@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'PNotify jQuery plugin',
 	'description' => 'A JavaScript notification jQuery component. Supports many features, and fully themeable using jQuery UI.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'icons',
 		'component' => 'com_jquery&com_bootstrap'
 	),

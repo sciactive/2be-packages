@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'eCommerce storefront based on com_sales',
 	'description' => 'Sell or display your products from com_sales online through a virtual storefront or catalog.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'entity_manager&user_manager&icons&uploader',
 		'component' => 'com_customer&com_sales&com_jquery&com_bootstrap&com_pgrid&com_pnotify&com_popeye&com_pform'
 	),

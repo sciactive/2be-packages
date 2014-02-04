@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'Human resource manager',
 	'description' => 'Manage your employees. Includes a timeclock to track your employees\' working hours.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'user_manager&entity_manager&editor',
 		'component' => 'com_jquery&com_bootstrap&com_datetimepicker&com_pgrid&com_pnotify&com_pform&com_user'
 	),

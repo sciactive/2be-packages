@@ -8,7 +8,7 @@
  * @copyright SciActive.com
  * @link http://sciactive.com/
  */
-/* @var $_ pines */
+/* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
@@ -20,7 +20,7 @@ return array(
 	'short_description' => 'WonderPHP package creator',
 	'description' => 'Package your components and templates into a WonderPHP repository ready Slim archive. You can use these packages to distribute your component to other WonderPHP users.',
 	'depend' => array(
-		'pines' => '<3',
+		'core' => '<3',
 		'service' => 'entity_manager&uploader&editor&configurator',
 		'component' => 'com_slim&com_jquery&com_bootstrap&com_pgrid&com_ptags&com_pform',
 		'package' => 'com_packager-data'
