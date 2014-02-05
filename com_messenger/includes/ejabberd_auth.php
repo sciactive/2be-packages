@@ -11,7 +11,7 @@
  * In the authentication section, set the method to external authentication
  * and the program to this script, like so:
  *  {auth_method, external}.
- *  {extauth_program, "/path/to/pines/components/com_messenger/includes/ejabberd_auth.php"}.
+ *  {extauth_program, "/path/to/wonder/components/com_messenger/includes/ejabberd_auth.php"}.
  *  {extauth_cache, false}.
  * 
  * Note that the 3rd line turns caching off. This is necessary if you use the

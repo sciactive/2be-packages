@@ -32,7 +32,7 @@ return array(
 		'name' => 'user',
 		'cname' => 'User',
 		'description' => 'The default PostgreSQL user.',
-		'value' => 'pines',
+		'value' => 'wonder',
 	),
 	array(
 		'name' => 'password',
@@ -44,13 +44,13 @@ return array(
 		'name' => 'database',
 		'cname' => 'Database',
 		'description' => 'The default PostgreSQL database.',
-		'value' => 'pines',
+		'value' => 'wonder',
 	),
 	array(
 		'name' => 'prefix',
 		'cname' => 'Table Prefix',
 		'description' => 'The default PostgreSQL table name prefix.',
-		'value' => 'pin_',
+		'value' => 'wdr_',
 	),
 	array(
 		'name' => 'allow_persistent',

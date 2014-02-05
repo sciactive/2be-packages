@@ -26,6 +26,6 @@ return array(
 	),
 	'abilities' => array(
 		array('view', 'View Log', 'Let the user view the WonderPHP log.'),
-		array('clear', 'Clear Log', 'Let the user clear (delete) the pines log.')
+		array('clear', 'Clear Log', 'Let the user clear (delete) the wonder log.')
 	),
 );
