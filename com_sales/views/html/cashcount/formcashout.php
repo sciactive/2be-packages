@@ -46,7 +46,7 @@ if (isset($this->entity->guid))
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var cash_symbol = <?php echo json_encode($this->entity->currency_symbol); ?>;
 
 		// Update the cash count as money is counted.
@@ -70,7 +70,7 @@ if (isset($this->entity->guid))
 					total_count += subtotal;
 				cur_entry.removeClass("added removed");
 			});
-			$("#p_muid_total_cashcount").html(pines.safe(cash_symbol+total_count.toFixed(2)));
+			$("#p_muid_total_cashcount").html($_.safe(cash_symbol+total_count.toFixed(2)));
 		};
 
 		$("button.clear_btn", "#p_muid_form").click(function(){
@@ -180,9 +180,9 @@ if (isset($this->entity->guid))
 		<?php } if (!$this->entity->cashed_out) { ?>
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Cash Out" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
-		<input class="pf-button btn btn-primary" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="&laquo; Close" />
+		<input class="pf-button btn btn-primary" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="&laquo; Close" />
 		<?php } ?>
 	</div>
 </form>

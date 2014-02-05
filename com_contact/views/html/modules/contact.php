@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Contact Us';
 ?>
 <script type="text/javascript">
-	pines.com_contact_send_message = function(){
+	$_.com_contact_send_message = function(){
 		var name	= $("#p_muid_form [name=author_name]").val();
 		var phone	= $("#p_muid_form [name=author_phone]").val();
 		var email	= $("#p_muid_form [name=author_email]").val();
@@ -67,6 +67,6 @@ $this->title = 'Contact Us';
 	</div>
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="send_to" value="<?php e($this->send_to); ?>">
-		<input class="pf-button btn btn-primary" type="button" value="Send Message" onclick="pines.com_contact_send_message();" />
+		<input class="pf-button btn btn-primary" type="button" value="Send Message" onclick="$_.com_contact_send_message();" />
 	</div>
 </form>

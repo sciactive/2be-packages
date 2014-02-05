@@ -81,7 +81,7 @@ unset($cur_child);
 	}
 </style>
 <script type='text/javascript'>
-	pines(function(){
+	$_(function(){
 		// Position box.
 		$(".combobox", "#p_muid_form").each(function(){
 			var box = $(this);
@@ -125,11 +125,11 @@ unset($cur_child);
 				var data = cur_item.data();
 				location.val(data.path);
 				if (typeof data.path != "undefined")
-					sel_path.show().find(".text").html(pines.safe(data.path));
+					sel_path.show().find(".text").html($_.safe(data.path));
 				else
 					sel_path.hide();
 				if (typeof data.position != "undefined")
-					sel_position.show().find(".text").html(pines.safe(data.position));
+					sel_position.show().find(".text").html($_.safe(data.position));
 				else
 					sel_position.hide();
 				if (typeof data.sort != "undefined")
@@ -137,22 +137,22 @@ unset($cur_child);
 				else
 					sel_sort.find(".text").html("No");
 				if (typeof data.text != "undefined")
-					sel_text.show().find(".text").html(pines.safe(data.text));
+					sel_text.show().find(".text").html($_.safe(data.text));
 				else
 					sel_text.hide();
 				if (typeof data.href != "undefined")
-					sel_href.show().find(".text").html(pines.safe(data.href));
+					sel_href.show().find(".text").html($_.safe(data.href));
 				else
 					sel_href.hide();
 				if (typeof data.onclick != "undefined")
-					sel_onclick.show().find(".text").html(pines.safe(data.onclick));
+					sel_onclick.show().find(".text").html($_.safe(data.onclick));
 				else
 					sel_onclick.hide();
 				if (typeof data.depend != "undefined" && !$.isEmptyObject(data.depend)) {
 					// Format the dependencies.
 					var depend_ul = $("<ul></ul>");
 					$.each(data.depend, function(key, val){
-						depend_ul.append("<li><strong>"+pines.safe(key)+"</strong>: "+pines.safe(val)+"</li>");
+						depend_ul.append("<li><strong>"+$_.safe(key)+"</strong>: "+$_.safe(val)+"</li>");
 					});
 					sel_depend.show().children("ul").remove().end().append(depend_ul);
 				} else
@@ -307,7 +307,7 @@ unset($cur_child);
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_menueditor', 'entry/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_menueditor', 'entry/list'))); ?>);" value="Cancel" />
 	</div>
 	<?php } ?>
 </form>

@@ -52,7 +52,7 @@ $width = ($_->config->template->width == 'fluid') ? '-fluid' : '';
 	<meta name="HandheldFriendly" content="true" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<script type="text/javascript" src="<?php e($_->config->rela_location); ?>system/includes/js.php"></script>
-	<script type="text/javascript">pines(function(){if ($.pnotify) {
+	<script type="text/javascript">$_(function(){if ($.pnotify) {
 		$.pnotify.defaults.opacity = .9;
 		$.pnotify.defaults.delay = 15000;
 	}});</script>
@@ -234,13 +234,13 @@ $width = ($_->config->template->width == 'fluid') ? '-fluid' : '';
 		$notice = $_->page->get_notice();
 		if ( $error || $notice ) { ?>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				<?php
 				if ( $error ) { foreach ($error as $cur_item) {
-					echo 'pines.error('.json_encode(h($cur_item)).", \"Error\");\n";
+					echo '$_.error('.json_encode(h($cur_item)).", \"Error\");\n";
 				} }
 				if ( $notice ) { foreach ($notice as $cur_item) {
-					echo 'pines.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
+					echo '$_.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
 				} }
 				?>
 			});

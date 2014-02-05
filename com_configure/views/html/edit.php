@@ -36,7 +36,7 @@ $_->com_ptags->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$(".p_muid_do_tags", "#p_muid_form").ptags({ptags_delimiter: ';;', ptags_sortable: true});
 		$("#p_muid_form").delegate(".p_muid_default_checkbox", "change", function(){
 			var checkbox = $(this);

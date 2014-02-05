@@ -15,7 +15,7 @@ $_->com_pgrid->load();
 ?>
 <form class="pf-form" method="post" action="<?php e(pines_url('com_sales', 'warehouse/attachposave')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$("#p_muid_po_grid").pgrid({
 				pgrid_view_height: "300px",
 				pgrid_multi_select: false,
@@ -25,7 +25,7 @@ $_->com_pgrid->load();
 						$("#p_muid_po").val("");
 						return;
 					}
-					$("#p_muid_selected").html("PO "+pines.safe(rows.pgrid_get_value(1))+" is selected.");
+					$("#p_muid_selected").html("PO "+$_.safe(rows.pgrid_get_value(1))+" is selected.");
 					$("#p_muid_po").val(rows.attr("title"));
 				}
 			});
@@ -72,6 +72,6 @@ $_->com_pgrid->load();
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="id" value="<?php e($this->id); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -12,6 +12,6 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadjs("<?php e($_->config->location); ?>components/com_customer/includes/jquery.customerselect.js");
-	pines.com_customer_autocustomer_url = <?php echo json_encode(pines_url('com_customer', 'customer/search')); ?>;
+	$_.loadjs("<?php e($_->config->location); ?>components/com_customer/includes/jquery.customerselect.js");
+	$_.com_customer_autocustomer_url = <?php echo json_encode(pines_url('com_customer', 'customer/search')); ?>;
 </script>

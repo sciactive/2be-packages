@@ -22,7 +22,7 @@ if ($_->config->com_sales->com_storefront) {
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'category/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			<?php if ($_->config->com_sales->com_storefront) { ?>
 			$("#p_muid_spec_options").ptags({ptags_delimiter: ';;', ptags_sortable: null});
 			$("#p_muid_spec_do_sort").click(function(){
@@ -92,12 +92,12 @@ if ($_->config->com_sales->com_storefront) {
 								return;
 							}
 							cur_spec = rows;
-							spec_dialog.find("input[name=cur_spec_order]").val(pines.unsafe(rows.pgrid_get_value(1)));
-							spec_dialog.find("input[name=cur_spec_name]").val(pines.unsafe(rows.pgrid_get_value(2)));
-							spec_dialog.find("select[name=cur_spec_type]").val(pines.unsafe(rows.pgrid_get_value(3))).change();
+							spec_dialog.find("input[name=cur_spec_order]").val($_.unsafe(rows.pgrid_get_value(1)));
+							spec_dialog.find("input[name=cur_spec_name]").val($_.unsafe(rows.pgrid_get_value(2)));
+							spec_dialog.find("select[name=cur_spec_type]").val($_.unsafe(rows.pgrid_get_value(3))).change();
 							spec_dialog.find("input[name=cur_spec_show_filter]").attr("checked", rows.pgrid_get_value(4) == "Yes");
 							spec_dialog.find("input[name=cur_spec_restricted]").attr("checked", rows.pgrid_get_value(5) == "Yes");
-							spec_dialog.find("input[name=cur_spec_options]").val(pines.unsafe(rows.pgrid_get_value(6)));
+							spec_dialog.find("input[name=cur_spec_options]").val($_.unsafe(rows.pgrid_get_value(6)));
 							spec_dialog.dialog('open');
 						}
 					},
@@ -140,22 +140,22 @@ if ($_->config->com_sales->com_storefront) {
 							var new_spec = [{
 								key: null,
 								values: [
-									pines.safe(cur_spec_order),
-									pines.safe(cur_spec_name),
-									pines.safe(cur_spec_type),
+									$_.safe(cur_spec_order),
+									$_.safe(cur_spec_name),
+									$_.safe(cur_spec_type),
 									(cur_spec_type == "heading") ? '' : (cur_spec_show_filter ? 'Yes' : 'No'),
 									(cur_spec_type == "bool" || cur_spec_type == "heading") ? '' : (cur_spec_restricted ? 'Yes' : 'No'),
-									(cur_spec_type == "bool" || cur_spec_type == "heading") ? '' : pines.safe(cur_spec_options)
+									(cur_spec_type == "bool" || cur_spec_type == "heading") ? '' : $_.safe(cur_spec_options)
 								]
 							}];
 							specs_table.pgrid_add(new_spec);
 						} else {
-							cur_spec.pgrid_set_value(1, pines.safe(cur_spec_order));
-							cur_spec.pgrid_set_value(2, pines.safe(cur_spec_name));
-							cur_spec.pgrid_set_value(3, pines.safe(cur_spec_type));
+							cur_spec.pgrid_set_value(1, $_.safe(cur_spec_order));
+							cur_spec.pgrid_set_value(2, $_.safe(cur_spec_name));
+							cur_spec.pgrid_set_value(3, $_.safe(cur_spec_type));
 							cur_spec.pgrid_set_value(4, (cur_spec_type == "heading") ? '' : (cur_spec_show_filter ? 'Yes' : 'No'));
 							cur_spec.pgrid_set_value(5, (cur_spec_type == "bool" || cur_spec_type == "heading") ? '' : (cur_spec_restricted ? 'Yes' : 'No'));
-							cur_spec.pgrid_set_value(6, (cur_spec_type == "bool" || cur_spec_type == "heading") ? '' : pines.safe(cur_spec_options));
+							cur_spec.pgrid_set_value(6, (cur_spec_type == "bool" || cur_spec_type == "heading") ? '' : $_.safe(cur_spec_options));
 						}
 						$(this).dialog('close');
 					}
@@ -290,7 +290,7 @@ if ($_->config->com_sales->com_storefront) {
 		<div class="tab-pane" id="p_muid_tab_storefront">
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						var alias = $("#p_muid_form [name=alias]");
 						$("#p_muid_form [name=name]").change(function(){
 							if (alias.val() == "")
@@ -347,12 +347,12 @@ if ($_->config->com_sales->com_storefront) {
 			<div class="pf-element">
 				<script type="text/javascript">
 					// <[CDATA[
-					pines(function(){
+					$_(function(){
 						$("#p_muid_add_show_page").click(function(){
 							var guid = $("#p_muid_show_page_selector").val();
 							var name = $("#p_muid_show_page_selector option:selected").html();
 
-							$("<div class=\"pf-field well\">"+pines.safe(name)+"<input type=\"hidden\" name=\"show_pages[]\" value=\""+pines.safe(guid)+"\" /> <a href=\"javascript:void(0);\" class=\"remove_page close\" style=\"float: right;\">&times;</a></div>").appendTo($("#p_muid_show_pages"));
+							$("<div class=\"pf-field well\">"+$_.safe(name)+"<input type=\"hidden\" name=\"show_pages[]\" value=\""+$_.safe(guid)+"\" /> <a href=\"javascript:void(0);\" class=\"remove_page close\" style=\"float: right;\">&times;</a></div>").appendTo($("#p_muid_show_pages"));
 						});
 						
 						$("#p_muid_show_pages").delegate("a.remove_page", "click", function(){
@@ -434,7 +434,7 @@ if ($_->config->com_sales->com_storefront) {
 			<div id="p_muid_spec_dialog" style="display: none;" title="Add a Spec">
 				<div class="pf-form">
 					<script type="text/javascript">
-						pines(function(){
+						$_(function(){
 							$("#p_muid_spec_type").change(function(){
 								$("#p_muid_spec_forms").children().hide().filter("."+$(this).val()).show();
 							}).change();
@@ -491,7 +491,7 @@ if ($_->config->com_sales->com_storefront) {
 		<div class="tab-pane" id="p_muid_tab_head">
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						$("#p_muid_use_name").change(function(){
 							if ($(this).is(":checked"))
 								$("#p_muid_title").attr("disabled", "disabled");
@@ -520,7 +520,7 @@ if ($_->config->com_sales->com_storefront) {
 				<h3>Meta Tags</h3>
 			</div>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					// Meta Tags
 					var meta_tags = $("#p_muid_form [name=meta_tags]");
 					var meta_tags_table = $("#p_muid_form .meta_tags_table");
@@ -548,8 +548,8 @@ if ($_->config->com_sales->com_storefront) {
 								double_click: true,
 								click: function(e, rows){
 									cur_meta_tag = rows;
-									meta_tag_dialog.find("input[name=cur_meta_tag_name]").val(pines.unsafe(rows.pgrid_get_value(1)));
-									meta_tag_dialog.find("input[name=cur_meta_tag_value]").val(pines.unsafe(rows.pgrid_get_value(2)));
+									meta_tag_dialog.find("input[name=cur_meta_tag_name]").val($_.unsafe(rows.pgrid_get_value(1)));
+									meta_tag_dialog.find("input[name=cur_meta_tag_value]").val($_.unsafe(rows.pgrid_get_value(2)));
 									meta_tag_dialog.dialog('open');
 								}
 							},
@@ -584,14 +584,14 @@ if ($_->config->com_sales->com_storefront) {
 									var new_meta_tag = [{
 										key: null,
 										values: [
-											pines.safe(cur_meta_tag_name),
-											pines.safe(cur_meta_tag_value)
+											$_.safe(cur_meta_tag_name),
+											$_.safe(cur_meta_tag_value)
 										]
 									}];
 									meta_tags_table.pgrid_add(new_meta_tag);
 								} else {
-									cur_meta_tag.pgrid_set_value(1, pines.safe(cur_meta_tag_name));
-									cur_meta_tag.pgrid_set_value(2, pines.safe(cur_meta_tag_value));
+									cur_meta_tag.pgrid_set_value(1, $_.safe(cur_meta_tag_name));
+									cur_meta_tag.pgrid_set_value(2, $_.safe(cur_meta_tag_value));
 								}
 								$(this).dialog('close');
 							}
@@ -670,6 +670,6 @@ if ($_->config->com_sales->com_storefront) {
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'category/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'category/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

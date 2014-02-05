@@ -18,7 +18,7 @@ $_->com_jstree->load();
 		<h3>Parameters</h3>
 	</div>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var location = <?php echo json_encode("{$_SESSION['user']->group->guid}"); ?>;
 			var date_start = $("#p_muid_date_start");
 			var date_end = $("#p_muid_date_end");
@@ -87,68 +87,68 @@ $_->com_jstree->load();
 						loader.pnotify_remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to retrieve totals:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to retrieve totals:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
 							alert("No sales data was returned.");
 							return;
 						}
-						$("#p_muid_total_location").html(pines.safe(data.location));
-						$("#p_muid_total_date").html(data.date_start == data.date_end ? pines.safe(data.date_start) : pines.safe(data.date_start+" - "+data.date_end));
+						$("#p_muid_total_location").html($_.safe(data.location));
+						$("#p_muid_total_date").html(data.date_start == data.date_end ? $_.safe(data.date_start) : $_.safe(data.date_start+" - "+data.date_end));
 
 						// Invoices
-						$("#p_muid_total_invoice_count").html(pines.safe(data.invoices.count));
-						$("#p_muid_total_invoice_subtotal").html(pines.safe(data.invoices.subtotal));
-						$("#p_muid_total_invoice_total").html(pines.safe(data.invoices.total));
+						$("#p_muid_total_invoice_count").html($_.safe(data.invoices.count));
+						$("#p_muid_total_invoice_subtotal").html($_.safe(data.invoices.subtotal));
+						$("#p_muid_total_invoice_total").html($_.safe(data.invoices.total));
 
 						// Sales
-						$("#p_muid_total_sale_count").html(pines.safe(data.sales.count));
-						$("#p_muid_total_sale_subtotal").html(pines.safe(data.sales.subtotal));
-						$("#p_muid_total_sale_total").html(pines.safe(data.sales.total));
+						$("#p_muid_total_sale_count").html($_.safe(data.sales.count));
+						$("#p_muid_total_sale_subtotal").html($_.safe(data.sales.subtotal));
+						$("#p_muid_total_sale_total").html($_.safe(data.sales.total));
 						$("#p_muid_total_sale_users").empty().each(function(){
 							var total_users = $(this);
 							$.each(data.sales_user, function(i, val){
-								total_users.append("<div class=\"pf-element\"><span class=\"pf-label\">"+pines.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Count: </span><span class=\"pf-field\">"+pines.safe(val.count)+"</span><br /><span class=\"pf-field\">Subtotal: </span><span class=\"pf-field\">$"+pines.safe(val.subtotal)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+pines.safe(val.total)+"</span></div></div>");
+								total_users.append("<div class=\"pf-element\"><span class=\"pf-label\">"+$_.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Count: </span><span class=\"pf-field\">"+$_.safe(val.count)+"</span><br /><span class=\"pf-field\">Subtotal: </span><span class=\"pf-field\">$"+$_.safe(val.subtotal)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+$_.safe(val.total)+"</span></div></div>");
 							});
 						});
 						$("#p_muid_total_sales_payments").empty().each(function(){
 							var total_payments = $(this);
 							$.each(data.payments, function(i, val){
-								total_payments.append("<div class=\"pf-element\"><span class=\"pf-label\">"+pines.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Count: </span><span class=\"pf-field\">"+pines.safe(val.count)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+pines.safe(val.total)+"</span>"+(val.change_given ? "<br /><span class=\"pf-field\">Change Given: </span><span class=\"pf-field\">$"+pines.safe(val.change_given)+"</span><br /><span class=\"pf-field\">Net Total: </span><span class=\"pf-field\">$"+pines.safe(val.net_total)+"</span>" : "")+"</div></div>");
+								total_payments.append("<div class=\"pf-element\"><span class=\"pf-label\">"+$_.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Count: </span><span class=\"pf-field\">"+$_.safe(val.count)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+$_.safe(val.total)+"</span>"+(val.change_given ? "<br /><span class=\"pf-field\">Change Given: </span><span class=\"pf-field\">$"+$_.safe(val.change_given)+"</span><br /><span class=\"pf-field\">Net Total: </span><span class=\"pf-field\">$"+$_.safe(val.net_total)+"</span>" : "")+"</div></div>");
 							});
 						});
 
 						// Returns
-						$("#p_muid_total_return_count").html(pines.safe(data.returns.count));
-						$("#p_muid_total_return_subtotal").html(pines.safe(data.returns.subtotal));
-						$("#p_muid_total_return_total").html(pines.safe(data.returns.total));
+						$("#p_muid_total_return_count").html($_.safe(data.returns.count));
+						$("#p_muid_total_return_subtotal").html($_.safe(data.returns.subtotal));
+						$("#p_muid_total_return_total").html($_.safe(data.returns.total));
 						$("#p_muid_total_return_users").empty().each(function(){
 							var total_users = $(this);
 							$.each(data.returns_user, function(i, val){
-								total_users.append("<div class=\"pf-element\"><span class=\"pf-label\">"+pines.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Count: </span><span class=\"pf-field\">"+pines.safe(val.count)+"</span><br /><span class=\"pf-field\">Subtotal: </span><span class=\"pf-field\">$"+pines.safe(val.subtotal)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+pines.safe(val.total)+"</span></div></div>");
+								total_users.append("<div class=\"pf-element\"><span class=\"pf-label\">"+$_.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Count: </span><span class=\"pf-field\">"+$_.safe(val.count)+"</span><br /><span class=\"pf-field\">Subtotal: </span><span class=\"pf-field\">$"+$_.safe(val.subtotal)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+$_.safe(val.total)+"</span></div></div>");
 							});
 						});
 						$("#p_muid_total_return_payments").empty().each(function(){
 							var total_payments = $(this);
 							$.each(data.returns_payments, function(i, val){
-								total_payments.append("<div class=\"pf-element\"><span class=\"pf-label\">"+pines.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Count: </span><span class=\"pf-field\">"+pines.safe(val.count)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+pines.safe(val.total)+"</span>"+(val.change_given ? "<br /><span class=\"pf-field\">Change Given: </span><span class=\"pf-field\">$"+pines.safe(val.change_given)+"</span><br /><span class=\"pf-field\">Net Total: </span><span class=\"pf-field\">$"+pines.safe(val.net_total)+"</span>" : "")+"</div></div>");
+								total_payments.append("<div class=\"pf-element\"><span class=\"pf-label\">"+$_.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Count: </span><span class=\"pf-field\">"+$_.safe(val.count)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+$_.safe(val.total)+"</span>"+(val.change_given ? "<br /><span class=\"pf-field\">Change Given: </span><span class=\"pf-field\">$"+$_.safe(val.change_given)+"</span><br /><span class=\"pf-field\">Net Total: </span><span class=\"pf-field\">$"+$_.safe(val.net_total)+"</span>" : "")+"</div></div>");
 							});
 						});
 
 						// Totals
-						$("#p_muid_total_subtotal").html(pines.safe(data.totals.subtotal));
-						$("#p_muid_total_total").html(pines.safe(data.totals.total));
+						$("#p_muid_total_subtotal").html($_.safe(data.totals.subtotal));
+						$("#p_muid_total_total").html($_.safe(data.totals.total));
 						$("#p_muid_total_users").empty().each(function(){
 							var total_users = $(this);
 							$.each(data.totals_user, function(i, val){
-								total_users.append("<div class=\"pf-element\"><span class=\"pf-label\">"+pines.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Subtotal: </span><span class=\"pf-field\">$"+pines.safe(val.subtotal)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+pines.safe(val.total)+"</span></div></div>");
+								total_users.append("<div class=\"pf-element\"><span class=\"pf-label\">"+$_.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">Subtotal: </span><span class=\"pf-field\">$"+$_.safe(val.subtotal)+"</span><br /><span class=\"pf-field\">Total: </span><span class=\"pf-field\">$"+$_.safe(val.total)+"</span></div></div>");
 							});
 						});
 						$("#p_muid_total_payments").empty().each(function(){
 							var total_payments = $(this);
 							$.each(data.totals_payments, function(i, val){
-								total_payments.append("<div class=\"pf-element\"><span class=\"pf-label\">"+pines.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">$"+pines.safe(val.total)+"</span></div></div>");
+								total_payments.append("<div class=\"pf-element\"><span class=\"pf-label\">"+$_.safe(i)+"</span><div class=\"pf-group\"><span class=\"pf-field\">$"+$_.safe(val.total)+"</span></div></div>");
 							});
 						});
 

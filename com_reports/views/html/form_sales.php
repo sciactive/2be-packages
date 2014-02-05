@@ -21,7 +21,7 @@ $_->com_jstree->load();
 	}
 </style>
 <script type='text/javascript'>
-	pines(function(){
+	$_(function(){
 		$("#p_muid_form [name=start], #p_muid_form [name=end]").datepicker({
 			dateFormat: "yy-mm-dd",
 			changeMonth: true,

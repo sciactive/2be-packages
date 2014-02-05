@@ -63,8 +63,8 @@ if (empty($this->theme))
 <div class="slider-wrapper theme-<?php e($this->theme); ?>">
 	<div class="ribbon"></div>
 	<script type="text/javascript">
-		pines.loadcss("<?php e($_->config->location); ?>components/com_nivoslider/includes/themes/<?php e(clean_filename($this->theme)); ?>/<?php e(clean_filename($this->theme)); ?>.css");
-		pines(function(){
+		$_.loadcss("<?php e($_->config->location); ?>components/com_nivoslider/includes/themes/<?php e(clean_filename($this->theme)); ?>/<?php e(clean_filename($this->theme)); ?>.css");
+		$_(function(){
 			$('#p_muid_slider').nivoSlider(<?php echo json_encode($options); ?>);
 		});
 	</script>

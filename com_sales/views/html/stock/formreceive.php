@@ -20,11 +20,11 @@ if ($_->config->com_sales->autocomplete_product)
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'stock/receive')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var products = $("#p_muid_products");
 			var products_table = $("#p_muid_products_table");
 
-			pines.com_sales_add_product = function(data){
+			$_.com_sales_add_product = function(data){
 				var serial = "";
 				if (data.serialized) {
 					while (!serial) {
@@ -40,21 +40,21 @@ if ($_->config->com_sales->autocomplete_product)
 						var cur_row = $(this);
 						if (cur_row.pgrid_get_value(1) == data.sku) {
 							cur_row.pgrid_set_value(3, parseInt(cur_row.pgrid_get_value(3)) + 1);
-							pines.com_sales_update_products();
+							$_.com_sales_update_products();
 							match = true;
 						}
 					});
 					if (match)
 						return;
 				}
-				products_table.pgrid_add([{values: [pines.safe(data.sku), pines.safe(serial), 1]}], function(){
+				products_table.pgrid_add([{values: [$_.safe(data.sku), $_.safe(serial), 1]}], function(){
 					var cur_row = $(this);
 					cur_row.data("product", data);
 				});
-				pines.com_sales_update_products();
+				$_.com_sales_update_products();
 			};
 
-			pines.com_sales_update_products = function(){
+			$_.com_sales_update_products = function(){
 				var all_rows = products_table.pgrid_get_all_rows().pgrid_export_rows();
 				products.val(JSON.stringify(all_rows));
 			};
@@ -88,7 +88,7 @@ if ($_->config->com_sales->autocomplete_product)
 						loader.pnotify_remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to lookup the shipment:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to lookup the shipment:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -98,7 +98,7 @@ if ($_->config->com_sales->autocomplete_product)
 						cur_row.addClass('pending_receiving ui-state-highlight');
 						$.each(data, function(){
 							for (var i = 0; i < this.quantity; i++)
-								pines.com_sales_add_product(this);
+								$_.com_sales_add_product(this);
 						});
 						var guids = shipment_table.find(".pending_receiving").map(function(){return $(this).attr('title')}).get();
 						$("#p_muid_shipments").val(JSON.stringify(guids));
@@ -175,14 +175,14 @@ if ($_->config->com_sales->autocomplete_product)
 										loader.pnotify_remove();
 									},
 									error: function(XMLHttpRequest, textStatus){
-										pines.error("An error occured while trying to lookup the product code:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+										$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(data){
 										if (!data) {
 											alert("No product was found with the code "+code+".");
 											return;
 										}
-										pines.com_sales_add_product(data);
+										$_.com_sales_add_product(data);
 									}
 								});
 							};
@@ -212,8 +212,8 @@ if ($_->config->com_sales->autocomplete_product)
 								serial = prompt("This item is serialized. Please provide the serial:", serial);
 							} while (!serial && serial != null);
 							if (serial != null) {
-								rows.pgrid_set_value(2, pines.safe(serial));
-								pines.com_sales_update_products();
+								rows.pgrid_set_value(2, $_.safe(serial));
+								$_.com_sales_update_products();
 							}
 						}
 					},
@@ -234,7 +234,7 @@ if ($_->config->com_sales->autocomplete_product)
 							} while ((parseInt(qty) < 1 || isNaN(parseInt(qty))) && qty != null);
 							if (qty != null) {
 								rows.pgrid_set_value(3, parseInt(qty));
-								pines.com_sales_update_products();
+								$_.com_sales_update_products();
 							}
 						}
 					},
@@ -246,7 +246,7 @@ if ($_->config->com_sales->autocomplete_product)
 						multi_select: true,
 						click: function(e, rows){
 							rows.pgrid_delete();
-							pines.com_sales_update_products();
+							$_.com_sales_update_products();
 						}
 					}
 				]
@@ -283,7 +283,7 @@ if ($_->config->com_sales->autocomplete_product)
 							loader.pnotify_remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured while trying to lookup the product code:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (!data || !data[0]) {
@@ -292,7 +292,7 @@ if ($_->config->com_sales->autocomplete_product)
 							}
 							$.each(data, function(){
 								var product = this;
-								category_products_grid.pgrid_add([{key: this.guid, values: ['<a data-entity="'+pines.safe(this.guid)+'" data-entity-context="com_sales_product">'+pines.safe(this.name)+'</a>', pines.safe(this.sku)]}], function(){
+								category_products_grid.pgrid_add([{key: this.guid, values: ['<a data-entity="'+$_.safe(this.guid)+'" data-entity-context="com_sales_product">'+$_.safe(this.name)+'</a>', $_.safe(this.sku)]}], function(){
 									$(this).data("product", product);
 								});
 							});
@@ -337,14 +337,14 @@ if ($_->config->com_sales->autocomplete_product)
 							alert("Please select a product.");
 							return;
 						}
-						pines.com_sales_add_product(data);
+						$_.com_sales_add_product(data);
 						category_products_dialog.dialog('close');
 						category_dialog.dialog('close');
 					}
 				}
 			});
 
-			pines.com_sales_update_products();
+			$_.com_sales_update_products();
 
 			<?php if (isset($this->shipments)) { foreach ((array) $this->shipments as $cur_id) { ?>
 			(function(){
@@ -357,7 +357,7 @@ if ($_->config->com_sales->autocomplete_product)
 	</script>
 	<?php if (gatekeeper('com_sales/receivelocation')) { ?>
 	<script type='text/javascript'>
-		pines(function(){
+		$_(function(){
 			// Location Tree
 			var location = $("#p_muid_form [name=location]");
 			$("#p_muid_form .location_tree")
@@ -514,6 +514,6 @@ if ($_->config->com_sales->autocomplete_product)
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="button" onclick="if (confirm('Are all of the product serials correct?')) $('#p_muid_form').submit();" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

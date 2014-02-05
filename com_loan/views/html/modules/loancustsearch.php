@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Search Loan By Customer'
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var loan_search = $('#loan-widget-search');
 		var loan_button = loan_search.find('.widget-search');
 		var loan_input = loan_search.find('[name=q]');
@@ -30,23 +30,23 @@ $this->title = 'Search Loan By Customer'
 		var loan_nav_buttons = loan_nav.find('.widget-nav-button');
 		var per_page = 2;
 		var make_row = function(row, data){
-			row.append('<td><a data-entity="'+pines.safe(data.guid)+'" data-entity-context="com_loan_loan">Loan '+pines.safe(data.id)+'</a>'+'</td>');
-			row.append('<td><a data-entity="'+pines.safe(data.customer_guid)+'" data-entity-context="com_customer_customer">'+pines.safe(data.customer_name)+'</a></td>');
+			row.append('<td><a data-entity="'+$_.safe(data.guid)+'" data-entity-context="com_loan_loan">Loan '+$_.safe(data.id)+'</a>'+'</td>');
+			row.append('<td><a data-entity="'+$_.safe(data.customer_guid)+'" data-entity-context="com_customer_customer">'+$_.safe(data.customer_name)+'</a></td>');
 			if (data.balance == '$0.00') {
 				row.append('<td><span class="text-success">Paid Off</span></td>');
-				row.append('<td style="text-align:right;"><span class="text-success"><strong>'+pines.safe(data.total_payments_made)+'</strong></span></td>');
+				row.append('<td style="text-align:right;"><span class="text-success"><strong>'+$_.safe(data.total_payments_made)+'</strong></span></td>');
 			} else if (data.archived) {
 				row.append('<td><span class="text-warning">Archived</span></td>');
-				row.append('<td style="text-align:right;"><span class="text-warning"><strong>'+pines.safe(data.archived)+'</strong></span></td>');
+				row.append('<td style="text-align:right;"><span class="text-warning"><strong>'+$_.safe(data.archived)+'</strong></span></td>');
 			} else if (data.current_past_due != '$0.00') {
 				row.append('<td><span class="text-error">Past Due</span></td>');
-				row.append('<td style="text-align:right;"><span class="text-error"><strong>'+pines.safe(data.current_past_due)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="icon-refresh"></i></span></span></td>');
+				row.append('<td style="text-align:right;"><span class="text-error"><strong>'+$_.safe(data.current_past_due)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="icon-refresh"></i></span></span></td>');
 			} else if (data.missed_first_payment) {
-				row.append('<td><span class="text-error widget-tooltip" title="'+pines.safe(data.missed_first_payment)+' days late" >Missed 1st</span></td>');
-				row.append('<td style="text-align:right;"><span class="text-error"><strong>'+pines.safe(data.next_payment_amount)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="icon-refresh"></i></span></span></td>');
+				row.append('<td><span class="text-error widget-tooltip" title="'+$_.safe(data.missed_first_payment)+' days late" >Missed 1st</span></td>');
+				row.append('<td style="text-align:right;"><span class="text-error"><strong>'+$_.safe(data.next_payment_amount)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="icon-refresh"></i></span></span></td>');
 			} else {
-				row.append('<td><span class="text-info">'+pines.safe(data.next_payment_due)+'</span></td>');
-				row.append('<td style="text-align:right;"><span class="text-info"><strong>'+pines.safe(data.next_payment_amount)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="icon-refresh"></i></span></span></td>');
+				row.append('<td><span class="text-info">'+$_.safe(data.next_payment_due)+'</span></td>');
+				row.append('<td style="text-align:right;"><span class="text-info"><strong>'+$_.safe(data.next_payment_amount)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="icon-refresh"></i></span></span></td>');
 			}
 			return row;
 		};
@@ -75,8 +75,8 @@ $this->title = 'Search Loan By Customer'
 						return;
 					loan_status.removeClass('alert-success alert-info').addClass('alert-danger');
 					status_icon.removeClass('icon-ok icon-spin icon-spinner').addClass('icon-remove');
-					status_msg.text(pines.safe(XMLHttpRequest.status)+': '+pines.safe(textStatus));
-					pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					status_msg.text($_.safe(XMLHttpRequest.status)+': '+$_.safe(textStatus));
+					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					var count = data.length;

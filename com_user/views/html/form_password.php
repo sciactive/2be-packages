@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Change Your Password';
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var password = $("#p_muid_form [name=new1]"),
 			password2 = $("#p_muid_form [name=new2]");
 		$("#p_muid_form").submit(function(){
@@ -46,6 +46,6 @@ $this->title = 'Change Your Password';
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

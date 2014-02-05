@@ -16,7 +16,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_hrm/employee/timeclock/list']);
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var state_xhr;
 		var cur_state = <?php echo (isset($this->pgrid_state) ? json_encode($this->pgrid_state) : '{}');?>;
 		var cur_defaults = {
@@ -73,7 +73,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								loader.pnotify_remove();
 							},
 							error: function(XMLHttpRequest, textStatus){
-								pines.error("An error occured while communicating with the server:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+								$_.error("An error occured while communicating with the server:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 							},
 							success: function(data){
 								if (data === undefined) {
@@ -81,11 +81,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 									return;
 								}
 								if (data === false) {
-									pines.error("There was an error saving the change to the database.");
+									$_.error("There was an error saving the change to the database.");
 									return;
 								}
 								cur_row.pgrid_set_value(4, data ? 'In' : 'Out');
-								//cur_row.pgrid_set_value(5, pines.safe(data[1].time));
+								//cur_row.pgrid_set_value(5, $_.safe(data[1].time));
 							}
 						});
 					});
@@ -96,7 +96,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'timeclock',
 						content: rows
 					});

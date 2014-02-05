@@ -27,7 +27,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		<?php if ($this->editable) { ?>
 		var allow_update = false;
 		$("#p_muid_tab .column").sortable({
@@ -67,11 +67,11 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 					dataType: "json",
 					data: {"key": <?php echo json_encode($this->key); ?>, "order": JSON.stringify(struct)},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to save the sort order:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to save the sort order:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
-							pines.error("Sort order could not be saved.");
+							$_.error("Sort order could not be saved.");
 							return;
 						}
 					}
@@ -103,14 +103,14 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 				dataType: "json",
 				data: {"key": widget.children(".key").text()},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
 						alert("This widget has no options.");
 						return;
 					}
-					pines.pause();
+					$_.pause();
 					if (typeof data.head !== "undefined")
 						$("head").append(data.head);
 					var form = $("<div title=\"Widget Options\"></div>")
@@ -139,13 +139,13 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 										value: cur_value
 									});
 								});
-								widget.children(".options").html(pines.safe(JSON.stringify(options)));
+								widget.children(".options").html($_.safe(JSON.stringify(options)));
 								save_options(widget);
 								form.dialog('close');
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		}).on("click", ".edit_widget_menu .widget_remove", function(){
@@ -162,11 +162,11 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 					widget.find("> .widget_header > .title").text("Deleting...");
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to remove the widget:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to remove the widget:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
-						pines.error("The widget could not be removed.");
+						$_.error("The widget could not be removed.");
 						return;
 					}
 					widget.remove();
@@ -180,14 +180,14 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 				dataType: "html",
 				data: {"key": <?php echo json_encode($this->key); ?>},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "false") {
 						alert("The list of buttons could not be retrieved.");
 						return;
 					}
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Edit Buttons\"></div>")
 					.html('<form method="post" action="">'+data+"</form>");
 					form.find("form").submit(function(){
@@ -228,11 +228,11 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 									dataType: "json",
 									data: {"key": <?php echo json_encode($this->key); ?>, "buttons": JSON.stringify(struct), "buttons_size": form.find("[name=buttons_size]:checked").val()},
 									error: function(XMLHttpRequest, textStatus){
-										pines.error("An error occured while trying to save buttons:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+										$_.error("An error occured while trying to save buttons:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(data){
 										if (!data) {
-											pines.error("Error saving buttons.");
+											$_.error("Error saving buttons.");
 											return;
 										}
 										$("#p_muid_tab").closest(".tab-pane").data("tab_loaded", false).data("trigger_link").trigger("show");
@@ -242,7 +242,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		});
@@ -254,11 +254,11 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 				dataType: "json",
 				data: {"key": widget.children(".key").text(), "options": widget.children(".options").text()},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to save options:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to save options:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
-						pines.error("Error saving options.");
+						$_.error("Error saving options.");
 						return;
 					}
 					reload_widget(widget);
@@ -274,14 +274,14 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 				dataType: "html",
 				data: {},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "false") {
 						alert("The list of widgets could not be retrieved.");
 						return;
 					}
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Add Widgets\"></div>")
 					.html('<form method="post" action="">'+data+"</form><br />");
 					form.find("form").submit(function(){
@@ -312,11 +312,11 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 									dataType: "json",
 									data: {"key": <?php echo json_encode($this->key); ?>, "widgets": JSON.stringify(struct)},
 									error: function(XMLHttpRequest, textStatus){
-										pines.error("An error occured while trying to add widgets:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+										$_.error("An error occured while trying to add widgets:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(data){
 										if (!data) {
-											pines.error("Error adding widgets.");
+											$_.error("Error adding widgets.");
 											return;
 										}
 										$("#p_muid_tab").closest(".tab-pane").data("tab_loaded", false).data("trigger_link").trigger("show");
@@ -326,7 +326,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		});
@@ -342,17 +342,17 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 					widget.find("> .widget_header .title").text("Loading...").end().children(".content").html("<div class=\"p_muid_loading picon picon-32 picon-throbber\"></div>");
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to load the widget:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
-					widget.find("> .widget_header .title").text("Error").end().children(".content").html("An error occured while trying to load the widget:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to load the widget:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
+					widget.find("> .widget_header .title").text("Error").end().children(".content").html("An error occured while trying to load the widget:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data)
 						return;
-					pines.pause();
+					$_.pause();
 					if (typeof data.head !== "undefined")
 						$("head").append(data.head);
 					widget.find("> .widget_header .title").html(data.title == "" ? "Untitled Widget" : data.title).end().children(".content").html(data.content);
-					pines.play();
+					$_.play();
 				}
 			});
 		};

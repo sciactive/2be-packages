@@ -17,7 +17,7 @@ $_->com_pgrid->load();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_mailer', 'template/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			// Strings
 			var strings = $("#p_muid_form [name=replacements]"),
 				strings_table = $("#p_muid_form .strings_table"),
@@ -45,8 +45,8 @@ $_->com_pgrid->load();
 						double_click: true,
 						click: function(e, rows){
 							cur_string = rows;
-							string_dialog.find("[name=cur_string_search]").val(pines.unsafe(rows.pgrid_get_value(2)));
-							string_dialog.find("[name=cur_string_replace]").val(pines.unsafe(rows.pgrid_get_value(3)));
+							string_dialog.find("[name=cur_string_search]").val($_.unsafe(rows.pgrid_get_value(2)));
+							string_dialog.find("[name=cur_string_replace]").val($_.unsafe(rows.pgrid_get_value(3)));
 							if (rows.pgrid_get_value(4) == "Yes")
 								string_dialog.find("[name=cur_string_macros]").attr("checked", true);
 							else
@@ -111,22 +111,22 @@ $_->com_pgrid->load();
 									dupe = true;
 							});
 							if (dupe) {
-								pines.notice('There is already a string just like this.');
+								$_.notice('There is already a string just like this.');
 								return;
 							}
 							var new_string = [{
 								key: null,
 								values: [
-									pines.safe(index),
-									pines.safe(cur_string_search),
-									pines.safe(cur_string_replace),
+									$_.safe(index),
+									$_.safe(cur_string_search),
+									$_.safe(cur_string_replace),
 									(cur_string_macros ? "Yes" : "No")
 								]
 							}];
 							strings_table.pgrid_add(new_string);
 						} else {
-							cur_string.pgrid_set_value(2, pines.safe(cur_string_search));
-							cur_string.pgrid_set_value(3, pines.safe(cur_string_replace));
+							cur_string.pgrid_set_value(2, $_.safe(cur_string_search));
+							cur_string.pgrid_set_value(3, $_.safe(cur_string_replace));
 							cur_string.pgrid_set_value(4, (cur_string_macros ? "Yes" : "No"));
 						}
 						$(this).dialog('close');
@@ -140,7 +140,7 @@ $_->com_pgrid->load();
 			var update_strings = function(){
 				strings_table.pgrid_import_state({pgrid_sort_col: 1, pgrid_sort_ord: 'asc'});
 				strings_table.pgrid_get_all_rows().each(function(i){
-					$(this).pgrid_set_value(1, pines.safe(i));
+					$(this).pgrid_set_value(1, $_.safe(i));
 				});
 				string_dialog.find("[name=cur_string_search]").val("");
 				string_dialog.find("[name=cur_string_replace]").val("");
@@ -411,6 +411,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_mailer', 'template/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_mailer', 'template/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

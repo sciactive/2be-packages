@@ -72,7 +72,7 @@ $multiplier = $_->config->com_reports->use_points ? $_->config->com_reports->poi
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$(".p_muid_grid").each(function(){
 			var cur_grid = $(this);
 			cur_grid.pgrid({
@@ -84,7 +84,7 @@ $multiplier = $_->config->com_reports->use_points ? $_->config->com_reports->poi
 					{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+						$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 							filename: 'sales_rankings',
 							content: rows
 						});

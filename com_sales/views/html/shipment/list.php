@@ -20,11 +20,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 $_->com_jstree->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var submit_url = <?php echo json_encode(pines_url('com_sales', 'shipment/list')); ?>;
 		var submit_search = function(){
 			// Submit the form with all of the fields.
-			pines.get(submit_url, {
+			$_.get(submit_url, {
 				"location": location,
 				"descendants": descendants
 			});
@@ -58,7 +58,7 @@ $_->com_jstree->load();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'shipments',
 						content: rows
 					});
@@ -83,12 +83,12 @@ $_->com_jstree->load();
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -108,7 +108,7 @@ $_->com_jstree->load();
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

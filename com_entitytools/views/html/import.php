@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Entity Manager Import';
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$("#p_muid_form").on("submit", function(){
 			if ($("[name=reset_entities]", "#p_muid_form").is(":checked"))
 				if (!confirm("Choosing to reset entities will PERMANENTLY DELETE all entities. Are you sure?"))

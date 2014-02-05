@@ -67,11 +67,11 @@ if ($_->config->com_calendar->com_customer)
 	}
 </style>
 <script type='text/javascript'>
-	pines(function(){
+	$_(function(){
 		var change_counter = 0;
 		$("#p_muid_employee").change(function(){
 			if (change_counter > 0)
-				pines.get(<?php echo json_encode(pines_url('com_calendar', 'editcalendar')); ?>, {
+				$_.get(<?php echo json_encode(pines_url('com_calendar', 'editcalendar')); ?>, {
 					"view_type": <?php echo json_encode($this->view_type); ?>,
 					"start": <?php echo json_encode(format_date($this->date[0], 'date_sort', '', $this->timezone)); ?>,
 					"end": <?php echo json_encode(format_date($this->date[1] - 1, 'date_sort', '', $this->timezone)); ?>,
@@ -101,7 +101,7 @@ if ($_->config->com_calendar->com_customer)
 		});
 
 		$("#p_muid_filter").delegate("button", "click", function() {
-			pines.get(<?php echo json_encode(pines_url('com_calendar', 'editcalendar')); ?>, {
+			$_.get(<?php echo json_encode(pines_url('com_calendar', 'editcalendar')); ?>, {
 				view_type: <?php echo json_encode($this->view_type); ?>,
 				start: <?php echo json_encode(format_date($this->date[0], 'date_sort', '', $this->timezone)); ?>,
 				end: <?php echo json_encode(format_date($this->date[1] - 1, 'date_sort', '', $this->timezone)); ?>,
@@ -125,7 +125,7 @@ if ($_->config->com_calendar->com_customer)
 	});
 
 	// Change the location / division within the company.
-	pines.<?php echo $this->cal_muid; ?>_select_location = function(){
+	$_.<?php echo $this->cal_muid; ?>_select_location = function(){
 		var descendants = <?php echo $this->descendants ? 'true' : 'false'; ?>;
 		$.ajax({
 			url: <?php echo json_encode(pines_url('com_calendar', 'locationselect')); ?>,
@@ -136,12 +136,12 @@ if ($_->config->com_calendar->com_customer)
 				"descendants": descendants ? "true" : "false"
 			},
 			error: function(XMLHttpRequest, textStatus){
-				pines.error("An error occured while trying to retrieve the company schedule form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+				$_.error("An error occured while trying to retrieve the company schedule form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 			},
 			success: function(data){
 				if (data == "")
 					return;
-				pines.pause();
+				$_.pause();
 				var form = $("<div title=\"Choose Location\"></div>").html(data+"<br />").dialog({
 					bgiframe: true,
 					autoOpen: true,
@@ -154,7 +154,7 @@ if ($_->config->com_calendar->com_customer)
 							form.dialog('close');
 							var schedule_location = form.find(":input[name=location]").val();
 							descendants = form.find(":input[name=descendants]").attr('checked');
-							pines.get(<?php echo json_encode(pines_url('com_calendar', 'editcalendar')); ?>, {
+							$_.get(<?php echo json_encode(pines_url('com_calendar', 'editcalendar')); ?>, {
 								"view_type": <?php echo json_encode($this->view_type); ?>,
 								"start": <?php echo json_encode(format_date($this->date[0], 'date_sort', '', $this->timezone)); ?>,
 								"end": <?php echo json_encode(format_date($this->date[1] - 1, 'date_sort', '', $this->timezone)); ?>,
@@ -165,13 +165,13 @@ if ($_->config->com_calendar->com_customer)
 						}
 					}
 				});
-				pines.play();
+				$_.play();
 			}
 		});
 	};
 
 	// Create a new event.
-	pines.<?php echo $this->cal_muid; ?>_new_event = function(start, end, all_day){
+	$_.<?php echo $this->cal_muid; ?>_new_event = function(start, end, all_day){
 		$.ajax({
 			url: <?php echo json_encode(pines_url('com_calendar', 'editevent')); ?>,
 			type: "POST",
@@ -184,12 +184,12 @@ if ($_->config->com_calendar->com_customer)
 				"timezone": <?php echo json_encode($this->timezone); ?>
 			},
 			error: function(XMLHttpRequest, textStatus){
-				pines.error("An error occured while trying to retrieve the new event form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+				$_.error("An error occured while trying to retrieve the new event form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 			},
 			success: function(data){
 				if (data == "")
 					return;
-				pines.pause();
+				$_.pause();
 				var form = $("<div title=\"Add a New Event\"></div>").html(data+"<br />").dialog({
 					bgiframe: true,
 					autoOpen: true,
@@ -223,11 +223,11 @@ if ($_->config->com_calendar->com_customer)
 									timezone: form.find(":input[name=timezone]").val()
 								},
 								error: function(){
-									pines.error("An error occured while trying to save the event.");
+									$_.error("An error occured while trying to save the event.");
 								},
 								success: function(data) {
 									if (!data.result)
-										pines.error("Couldn't save the event.");
+										$_.error("Couldn't save the event.");
 									if (data.message)
 										alert(data.message);
 									form.dialog('close');
@@ -239,36 +239,36 @@ if ($_->config->com_calendar->com_customer)
 							$("#p_muid_new_interaction [name=interaction_date]").val(form.find(":input[name=start]").val());
 							$("#p_muid_new_interaction [name=interaction_time]").val(form.find(":input[name=time_start]").val());
 							form.dialog('close');
-							pines.<?php echo $this->cal_muid; ?>_new_appointment();
+							$_.<?php echo $this->cal_muid; ?>_new_appointment();
 						}
 					}
 				});
-				pines.play();
+				$_.play();
 			}
 		});
 	};
 	// Edit an existing event.
-	pines.<?php echo $this->cal_muid; ?>_edit_event = function(event_id){
+	$_.<?php echo $this->cal_muid; ?>_edit_event = function(event_id){
 		$.ajax({
 			url: <?php echo json_encode(pines_url('com_calendar', 'editevent')); ?>,
 			type: "POST",
 			dataType: "html",
 			data: {"id": event_id, "timezone": <?php echo json_encode($this->timezone); ?>},
 			error: function(XMLHttpRequest, textStatus){
-				pines.error("An error occured while trying to retrieve the event form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+				$_.error("An error occured while trying to retrieve the event form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 			},
 			success: function(data){
 				if (data == "")
 					return;
-				pines.pause();
-				var form = $("<div title=\"Editing Event ["+pines.safe(event_id)+"]\"></div>").html(data+"<br />").dialog({
+				$_.pause();
+				var form = $("<div title=\"Editing Event ["+$_.safe(event_id)+"]\"></div>").html(data+"<br />").dialog({
 					bgiframe: true,
 					autoOpen: true,
 					modal: true,
 					width: 550,
 					close: function(){
 						form.remove();
-						pines.selected_event.removeClass('ui-state-disabled');
+						$_.selected_event.removeClass('ui-state-disabled');
 					},
 					buttons: {
 						"Save Event": function(){
@@ -296,11 +296,11 @@ if ($_->config->com_calendar->com_customer)
 									timezone: form.find(":input[name=timezone]").val()
 								},
 								error: function(){
-									pines.error("An error occured while trying to save the event.");
+									$_.error("An error occured while trying to save the event.");
 								},
 								success: function(data) {
 									if (!data.result)
-										pines.error("Couldn't save the event.");
+										$_.error("Couldn't save the event.");
 									if (data.message)
 										alert(data.message);
 									form.dialog('close');
@@ -317,11 +317,11 @@ if ($_->config->com_calendar->com_customer)
 								dataType: "json",
 								data: {"events": Array(form.find(":input[name=id]").val())},
 								error: function(){
-									pines.error("An error occured while trying to delete the event.");
+									$_.error("An error occured while trying to delete the event.");
 								},
 								success: function(data) {
 									if (data)
-										pines.error("Couldn't delete "+pines.safe(data));
+										$_.error("Couldn't delete "+$_.safe(data));
 									$(<?php echo json_encode("#{$this->cal_muid}_calendar"); ?>).fullCalendar('removeEvents', form.find(":input[name=id]").val());
 									form.dialog('close');
 								}
@@ -329,25 +329,25 @@ if ($_->config->com_calendar->com_customer)
 						}
 					}
 				});
-				pines.play();
+				$_.play();
 			}
 		});
 	};
 	<?php if (gatekeeper('com_calendar/managecalendar')) { ?>
 	// Create a quick work schedule for an entire location.
-	pines.<?php echo $this->cal_muid; ?>_quick_schedule = function(){
+	$_.<?php echo $this->cal_muid; ?>_quick_schedule = function(){
 		$.ajax({
 			url: <?php echo json_encode(pines_url('com_calendar', 'editlineup')); ?>,
 			type: "POST",
 			dataType: "html",
 			data: {"location": <?php echo json_encode((string) $this->location->guid); ?>},
 			error: function(XMLHttpRequest, textStatus){
-				pines.error("An error occured while trying to retrieve the quick schedule form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+				$_.error("An error occured while trying to retrieve the quick schedule form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 			},
 			success: function(data){
 				if (data == "")
 					return;
-				pines.pause();
+				$_.pause();
 				var form = $("<div title=\"Quick Schedule for <?php e($this->location->name); ?>\"></div>").html(data+"<br />").dialog({
 					bgiframe: true,
 					autoOpen: true,
@@ -358,21 +358,21 @@ if ($_->config->com_calendar->com_customer)
 					buttons: {
 						"Add to Schedule": function(){
 							form.dialog('close');
-							pines.post(<?php echo json_encode(pines_url('com_calendar', 'savelineup')); ?>, {
+							$_.post(<?php echo json_encode(pines_url('com_calendar', 'savelineup')); ?>, {
 								location: form.find(":input[name=location]").val(),
 								shifts: form.find(":input[name=shifts]").val()
 							});
 						}
 					}
 				});
-				pines.play();
+				$_.play();
 				// Have to position again because of datepicker.
 				form.dialog("option", "position", "center");
 			}
 		});
 	};
 	// Create an employee work schedule.
-	pines.<?php echo $this->cal_muid; ?>_new_schedule = function(){
+	$_.<?php echo $this->cal_muid; ?>_new_schedule = function(){
 		<?php if (isset($this->employee)) { ?>
 		$.ajax({
 			url: <?php echo json_encode(pines_url('com_calendar', 'editschedule')); ?>,
@@ -380,12 +380,12 @@ if ($_->config->com_calendar->com_customer)
 			dataType: "html",
 			data: {"employee": <?php echo json_encode((string) $this->employee->guid); ?>},
 			error: function(XMLHttpRequest, textStatus){
-				pines.error("An error occured while trying to retrieve the schedule form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+				$_.error("An error occured while trying to retrieve the schedule form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 			},
 			success: function(data){
 				if (data == "")
 					return;
-				pines.pause();
+				$_.pause();
 				var form = $("<div title=\"Schedule Work for <?php e($this->employee->name); ?>\"></div>").html(data+"<br />").dialog({
 					bgiframe: true,
 					autoOpen: true,
@@ -396,7 +396,7 @@ if ($_->config->com_calendar->com_customer)
 					buttons: {
 						"Add to Schedule": function(){
 							form.dialog('close');
-							pines.post(<?php echo json_encode(pines_url('com_calendar', 'saveschedule')); ?>, {
+							$_.post(<?php echo json_encode(pines_url('com_calendar', 'saveschedule')); ?>, {
 								employee: form.find(":input[name=employee]").val(),
 								all_day: !!form.find(":input[name=all_day]").attr('checked'),
 								time_start_hour: form.find(":input[name=time_start_hour]").val(),
@@ -410,7 +410,7 @@ if ($_->config->com_calendar->com_customer)
 						}
 					}
 				});
-				pines.play();
+				$_.play();
 				// Have to position again because of datepicker.
 				form.dialog("option", "position", "center");
 			}
@@ -422,7 +422,7 @@ if ($_->config->com_calendar->com_customer)
 	<?php } ?>
 	<?php if ($_->config->com_calendar->com_customer) { ?>
 	// Create an appointment.
-	pines.<?php echo $this->cal_muid; ?>_new_appointment = function(){
+	$_.<?php echo $this->cal_muid; ?>_new_appointment = function(){
 		var interaction_dialog = $("#p_muid_new_interaction");
 
 		// Interaction Dialog
@@ -462,7 +462,7 @@ if ($_->config->com_calendar->com_customer)
 							loader.pnotify_remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (!data) {
@@ -487,7 +487,7 @@ if ($_->config->com_calendar->com_customer)
 	};
 
 	// Edit an appointment.
-	pines.<?php echo $this->cal_muid; ?>_edit_appointment = function(appointment_id){
+	$_.<?php echo $this->cal_muid; ?>_edit_appointment = function(appointment_id){
 		var interaction_dialog = $("#p_muid_interaction_dialog");
 
 		// Interaction Dialog
@@ -497,7 +497,7 @@ if ($_->config->com_calendar->com_customer)
 			modal: true,
 			width: 400,
 			close: function(){
-				pines.selected_event.removeClass('ui-state-disabled');
+				$_.selected_event.removeClass('ui-state-disabled');
 			},
 			buttons: {
 				"Update": function(){
@@ -525,7 +525,7 @@ if ($_->config->com_calendar->com_customer)
 							loader.pnotify_remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (!data) {
@@ -541,7 +541,7 @@ if ($_->config->com_calendar->com_customer)
 							alert("Successfully updated the interaction.");
 							$("#p_muid_interaction_dialog [name=review_comments]").val('');
 							interaction_dialog.dialog("close");
-							pines.selected_event.removeClass('ui-state-disabled');
+							$_.selected_event.removeClass('ui-state-disabled');
 							window.location.reload();
 						}
 					});
@@ -554,7 +554,7 @@ if ($_->config->com_calendar->com_customer)
 			dataType: "json",
 			data: {id: appointment_id, timezone: <?php echo json_encode($this->timezone); ?>},
 			error: function(XMLHttpRequest, textStatus){
-				pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+				$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 			},
 			success: function(data){
 				if (!data) {
@@ -562,18 +562,18 @@ if ($_->config->com_calendar->com_customer)
 					return;
 				}
 				$("#p_muid_interaction_dialog [name=id]").val(appointment_id);
-				$("#p_muid_interaction_customer").empty().append('<a data-entity="'+pines.safe(data.customer_guid)+'" data-entity-context="com_customer_customer">'+pines.safe(data.customer)+'</a>');
+				$("#p_muid_interaction_customer").empty().append('<a data-entity="'+$_.safe(data.customer_guid)+'" data-entity-context="com_customer_customer">'+$_.safe(data.customer)+'</a>');
 				if (data.sale_url != '') {
-					$("#p_muid_interaction_sale").empty().append('<a data-entity="'+pines.safe(data.sale_guid)+'" data-entity-context="com_sales_sale">'+pines.safe(data.sale)+'</a>');
+					$("#p_muid_interaction_sale").empty().append('<a data-entity="'+$_.safe(data.sale_guid)+'" data-entity-context="com_sales_sale">'+$_.safe(data.sale)+'</a>');
 					$("#p_muid_sale_info").show();
 				} else
 					$("#p_muid_sale_info").hide();
-				$("#p_muid_interaction_type").empty().append(pines.safe(data.type)+' - '+pines.safe(data.contact_info));
-				$("#p_muid_interaction_employee").empty().append(pines.safe(data.employee));
-				$("#p_muid_interaction_created_date").empty().append(pines.safe(data.created_date));
-				$("#p_muid_interaction_date").empty().append(pines.safe(data.date));
-				$("#p_muid_interaction_comments").empty().append(pines.safe(data.comments));
-				$("#p_muid_interaction_notes").empty().append((data.review_comments.length > 0) ? "<li>"+$.map(data.review_comments, pines.safe).join("</li><li>")+"</li>" : "");
+				$("#p_muid_interaction_type").empty().append($_.safe(data.type)+' - '+$_.safe(data.contact_info));
+				$("#p_muid_interaction_employee").empty().append($_.safe(data.employee));
+				$("#p_muid_interaction_created_date").empty().append($_.safe(data.created_date));
+				$("#p_muid_interaction_date").empty().append($_.safe(data.date));
+				$("#p_muid_interaction_comments").empty().append($_.safe(data.comments));
+				$("#p_muid_interaction_notes").empty().append((data.review_comments.length > 0) ? "<li>"+$.map(data.review_comments, $_.safe).join("</li><li>")+"</li>" : "");
 				$("#p_muid_interaction_dialog [name=status]").val(data.status);
 
 				interaction_dialog.dialog('open');
@@ -593,13 +593,13 @@ if ($_->config->com_calendar->com_customer)
 <?php } if (!$this->is_widget || gatekeeper('com_calendar/managecalendar') || gatekeeper('com_calendar/editcalendar')) { ?>
 <div style="margin: 0.75em 0;" id="p_muid_actions">
 	<?php if (!$this->is_widget) { ?>
-	<button class="btn btn-mini" type="button" onclick="pines.<?php echo $this->cal_muid; ?>_select_location();" title="Select Location"><span class="p_muid_btn picon picon-applications-internet"></span></button>
+	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_select_location();" title="Select Location"><span class="p_muid_btn picon picon-applications-internet"></span></button>
 	<?php } if (gatekeeper('com_calendar/managecalendar') || gatekeeper('com_calendar/editcalendar')) { ?>
-	<button class="btn btn-mini" type="button" onclick="pines.<?php echo $this->cal_muid; ?>_new_appointment();" title="New Appointment"><span class="p_muid_btn picon picon-appointment-new"></span></button>
-	<button class="btn btn-mini" type="button" onclick="pines.<?php echo $this->cal_muid; ?>_new_event();" title="New Event"><span class="p_muid_btn picon picon-resource-calendar-insert"></span></button>
+	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_new_appointment();" title="New Appointment"><span class="p_muid_btn picon picon-appointment-new"></span></button>
+	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_new_event();" title="New Event"><span class="p_muid_btn picon picon-resource-calendar-insert"></span></button>
 	<?php if (gatekeeper('com_calendar/managecalendar')) { ?>
-	<button class="btn btn-mini" type="button" onclick="pines.<?php echo $this->cal_muid; ?>_quick_schedule();" title="Quick Schedule"><span class="p_muid_btn picon picon-view-calendar-workweek"></span></button>
-	<button class="btn btn-mini" type="button" onclick="pines.<?php echo $this->cal_muid; ?>_new_schedule();" title="Personal Schedule" <?php echo !isset($this->employee) ? 'disabled="disabled"' : '';?>><span class="p_muid_btn picon picon-list-resource-add"></span></button>
+	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_quick_schedule();" title="Quick Schedule"><span class="p_muid_btn picon picon-view-calendar-workweek"></span></button>
+	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_new_schedule();" title="Personal Schedule" <?php echo !isset($this->employee) ? 'disabled="disabled"' : '';?>><span class="p_muid_btn picon picon-list-resource-add"></span></button>
 	<?php }
 	} ?>
 </div>

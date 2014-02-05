@@ -89,7 +89,7 @@ if ($_->config->com_sales->com_esp) {
 	</div>
 	<?php } ?>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var products = $("#p_muid_products"),
 				products_table = $("#p_muid_products_table"),
 				payments_table = $("#p_muid_payments_table"),
@@ -282,7 +282,7 @@ if ($_->config->com_sales->com_esp) {
 										loader.pnotify_remove();
 									},
 									error: function(XMLHttpRequest, textStatus){
-										pines.error("An error occured while trying to lookup the product code:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+										$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(data){
 										if (!data) {
@@ -322,7 +322,7 @@ if ($_->config->com_sales->com_esp) {
 								return;
 							}
 							var serial = rows.pgrid_get_value(3);
-							serial_box.val(pines.unsafe(serial));
+							serial_box.val($_.unsafe(serial));
 							var buttons = {
 								"Done": function(){
 									serial = serial_box.val();
@@ -330,7 +330,7 @@ if ($_->config->com_sales->com_esp) {
 										alert("Please provide a serial number.");
 										return;
 									}
-									rows.pgrid_set_value(3, pines.safe(serial));
+									rows.pgrid_set_value(3, $_.safe(serial));
 									update_products();
 									serial_dialog.dialog("close");
 								}
@@ -429,7 +429,7 @@ if ($_->config->com_sales->com_esp) {
 								discount = prompt("Enter an amount($#.##) or a percent (#.##%) to discount each unit:", discount);
 							} while ((!discount.match(/^(\$-?\d+(\.\d+)?)|(-?\d+(\.\d+)?%)$/)) && discount != null);
 							if (discount != null) {
-								rows.pgrid_set_value(7, pines.safe(discount));
+								rows.pgrid_set_value(7, $_.safe(discount));
 								update_products();
 							}
 						}
@@ -472,7 +472,7 @@ if ($_->config->com_sales->com_esp) {
 								} 
 								
 								<?php if (!empty($_->config->com_esp->product_min_price)) { ?>
-									var product_min = pines.safe(<?php echo $_->config->com_esp->product_min_price; ?>);
+									var product_min = $_.safe(<?php echo $_->config->com_esp->product_min_price; ?>);
 									var insured_item_price = insured_item.pgrid_get_value(6);
 									if (parseInt(insured_item_price) < parseInt(product_min)) {
 										alert('An ESP can only be applied to a product price of $'+product_min+' or more.');
@@ -552,7 +552,7 @@ if ($_->config->com_sales->com_esp) {
 								product_data.unit_price = esp_price;
 								product_data.esp = esp_id;
 								add_product(product_data, function(){
-									insured_item.pgrid_set_value(10, pines.safe(esp_id));
+									insured_item.pgrid_set_value(10, $_.safe(esp_id));
 									update_products();
 								});
 							});
@@ -634,7 +634,7 @@ if ($_->config->com_sales->com_esp) {
 								alert("Please provide a serial number.");
 								return;
 							}
-							products_table.pgrid_add([{key: data.guid, values: [pines.safe(data.sku), pines.safe(data.name), pines.safe(serial), 'in-store', 1, pines.safe(data.unit_price), "", "", "", pines.safe(data.esp), pines.safe(data.salesperson)]}], function(){
+							products_table.pgrid_add([{key: data.guid, values: [$_.safe(data.sku), $_.safe(data.name), $_.safe(serial), 'in-store', 1, $_.safe(data.unit_price), "", "", "", $_.safe(data.esp), $_.safe(data.salesperson)]}], function(){
 								cur_row = $(this);
 								cur_row.data("product", data);
 							});
@@ -645,7 +645,7 @@ if ($_->config->com_sales->com_esp) {
 								success();
 						},
 						"Warehouse Item": function(){
-							products_table.pgrid_add([{key: data.guid, values: [pines.safe(data.sku), pines.safe(data.name), pines.safe(serial), 'warehouse', 1, pines.safe(data.unit_price), "", "", "", pines.safe(data.esp), pines.safe(data.salesperson)]}], function(){
+							products_table.pgrid_add([{key: data.guid, values: [$_.safe(data.sku), $_.safe(data.name), $_.safe(serial), 'warehouse', 1, $_.safe(data.unit_price), "", "", "", $_.safe(data.esp), $_.safe(data.salesperson)]}], function(){
 								cur_row = $(this);
 								cur_row.data("product", data);
 							});
@@ -661,17 +661,17 @@ if ($_->config->com_sales->com_esp) {
 						buttons = {"Done": buttons.Done};
 						$("#p_muid_serial_dialog_warehouse").hide();
 					}
-					serial_dialog.dialog("option", "title", "Provide Serial for "+pines.safe(data.name))
+					serial_dialog.dialog("option", "title", "Provide Serial for "+$_.safe(data.name))
 					.dialog("option", "buttons", buttons)
 					.dialog("open");
 					serial_box.val("");
 					if (data.serials.length) {
 						var serial_list = $("#p_muid_available_serials").show().find(".serials").empty();
-						serial_list.append("<a href=\"javascript:void(0);\" class=\"serial\">"+$.map(data.serials, pines.safe).join("</a> | <a href=\"javascript:void(0);\" class=\"serial\">")+"</a>");
+						serial_list.append("<a href=\"javascript:void(0);\" class=\"serial\">"+$.map(data.serials, $_.safe).join("</a> | <a href=\"javascript:void(0);\" class=\"serial\">")+"</a>");
 					}
 					return;
 				}
-				products_table.pgrid_add([{key: data.guid, values: [pines.safe(data.sku), pines.safe(data.name), pines.safe(serial), 'in-store', 1, pines.safe(data.unit_price), "", "", "", pines.safe(data.esp), pines.safe(data.salesperson)]}], function(){
+				products_table.pgrid_add([{key: data.guid, values: [$_.safe(data.sku), $_.safe(data.name), $_.safe(serial), 'in-store', 1, $_.safe(data.unit_price), "", "", "", $_.safe(data.esp), $_.safe(data.salesperson)]}], function(){
 					cur_row = $(this);
 					cur_row.data("product", data);
 				});
@@ -695,7 +695,7 @@ if ($_->config->com_sales->com_esp) {
 							return;
 						}
 						cur_row.pgrid_set_value(3, "");
-						cur_row.pgrid_set_value(4, pines.safe(delivery));
+						cur_row.pgrid_set_value(4, $_.safe(delivery));
 					});
 				} else {
 					rows.each(function(){
@@ -709,8 +709,8 @@ if ($_->config->com_sales->com_esp) {
 									return;
 							}
 						}
-						cur_row.pgrid_set_value(3, pines.safe(serial));
-						cur_row.pgrid_set_value(4, pines.safe(delivery));
+						cur_row.pgrid_set_value(3, $_.safe(serial));
+						cur_row.pgrid_set_value(4, $_.safe(delivery));
 					});
 				}
 				update_products();
@@ -798,7 +798,7 @@ if ($_->config->com_sales->com_esp) {
 								loader.pnotify_remove();
 							},
 							error: function(XMLHttpRequest, textStatus){
-								pines.error("An error occured while trying to lookup the products:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+								$_.error("An error occured while trying to lookup the products:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 							},
 							success: function(data){
 								if (!data || !data[0]) {
@@ -807,7 +807,7 @@ if ($_->config->com_sales->com_esp) {
 								}
 								$.each(data, function(){
 									var product = this;
-									category_products_grid.pgrid_add([{key: this.guid, values: [pines.safe(this.name), pines.safe(this.sku)]}], function(){
+									category_products_grid.pgrid_add([{key: this.guid, values: [$_.safe(this.name), $_.safe(this.sku)]}], function(){
 										$(this).data("product", product);
 									});
 								});
@@ -870,7 +870,7 @@ if ($_->config->com_sales->com_esp) {
 							alert("Please select a salesperson using the dropdown menu.");
 							return;
 						}
-						row.pgrid_set_value(11, pines.safe(salesperson));
+						row.pgrid_set_value(11, $_.safe(salesperson));
 						row.pgrid_deselect_rows();
 						salesperson_dialog.dialog('close');
 						update_products();
@@ -896,7 +896,7 @@ if ($_->config->com_sales->com_esp) {
 								dataType: "json",
 								data: {"code": code},
 								error: function(XMLHttpRequest, textStatus){
-									pines.error("An error occured while trying to look up special:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+									$_.error("An error occured while trying to look up special:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 								},
 								success: function(data){
 									if (!data) {
@@ -924,7 +924,7 @@ if ($_->config->com_sales->com_esp) {
 				}
 				var form = $("<div title=\"Remove a Special Code\"></div>");
 				$.each(added_specials, function(i, cur_special){
-					form.append($("<button type=\"button\" class=\"btn btn-danger\"><i class=\"icon-minus icon-white\"></i>"+pines.safe(cur_special.name)+"</button>").click(function(){
+					form.append($("<button type=\"button\" class=\"btn btn-danger\"><i class=\"icon-minus icon-white\"></i>"+$_.safe(cur_special.name)+"</button>").click(function(){
 						added_specials.splice(i, 1);
 						update_products();
 						form.dialog("close").remove();
@@ -963,7 +963,7 @@ if ($_->config->com_sales->com_esp) {
 					dataType: "json",
 					data: {"code": cur_guid, "useguid": true},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to lookup a product:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to lookup a product:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -1015,7 +1015,7 @@ if ($_->config->com_sales->com_esp) {
 										alert("Payments cannot be changed if they have been approved, declined, or tendered.");
 										return;
 									}
-									cur_row.pgrid_set_value(2, pines.safe(amount));
+									cur_row.pgrid_set_value(2, $_.safe(amount));
 								});
 								update_payments();
 							});
@@ -1064,12 +1064,12 @@ if ($_->config->com_sales->com_esp) {
 						$(".p_muid_payment_data_throbber").addClass("hide");
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to retrieve the data form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to retrieve the data form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (data == "")
 							return;
-						var form = $("<div title=\"Data for "+pines.safe(row.pgrid_get_value(1))+" Payment\"></div>");
+						var form = $("<div title=\"Data for "+$_.safe(row.pgrid_get_value(1))+" Payment\"></div>");
 						form.dialog({
 							bgiframe: true,
 							autoOpen: true,
@@ -1117,8 +1117,8 @@ if ($_->config->com_sales->com_esp) {
 				// TODO: Minimums, maximums
 				get_amount(function(amount){
 					payments_table.pgrid_add([{key: payment_type.guid, values: [
-						pines.safe(payment_type.name),
-						pines.safe(amount),
+						$_.safe(payment_type.name),
+						$_.safe(amount),
 						"pending"
 					]}], function(){
 						var row = $(this);
@@ -1295,8 +1295,8 @@ if ($_->config->com_sales->com_esp) {
 					});
 					item_fees += round_to_dec(cur_item_fees);
 					subtotal += round_to_dec(line_total);
-					cur_row.pgrid_set_value(8, pines.safe(round_to_dec(line_total, true)));
-					cur_row.pgrid_set_value(9, pines.safe(round_to_dec(cur_item_fees, true)));
+					cur_row.pgrid_set_value(8, $_.safe(round_to_dec(line_total, true)));
+					cur_row.pgrid_set_value(9, $_.safe(round_to_dec(cur_item_fees, true)));
 				});
 				$("#p_muid_subtotal").html(round_to_dec(subtotal, true));
 				// Now that we know the subtotal, we can use it for specials.
@@ -1480,7 +1480,7 @@ if ($_->config->com_sales->com_esp) {
 				// Now add all the specials to the specials section.
 				var special_box = $("#p_muid_specials").empty();
 				$.each(specials, function(i, cur_special){
-					special_box.append("<div class=\"special well\"><div class=\"special_name\">"+pines.safe(cur_special.name)+"</div><div class=\"special_discount\">"+(cur_special.before_tax ? "<small>(before tax)</small> " : "")+"$"+round_to_dec(cur_special.discount, true)+"</div></div>");
+					special_box.append("<div class=\"special well\"><div class=\"special_name\">"+$_.safe(cur_special.name)+"</div><div class=\"special_discount\">"+(cur_special.before_tax ? "<small>(before tax)</small> " : "")+"$"+round_to_dec(cur_special.discount, true)+"</div></div>");
 				});
 				// Update the specials input box.
 				$("#p_muid_specials_input").val(JSON.stringify(added_specials));
@@ -1536,7 +1536,7 @@ if ($_->config->com_sales->com_esp) {
 				payments.val(JSON.stringify(submit_val));
 			};
 
-			pines.com_sales_run_check = function(use_drawer){
+			$_.com_sales_run_check = function(use_drawer){
 				if (require_customer && !$("#p_muid_customer").val().match(/^\d+/)) {
 					alert("One of the products on this sale requires a customer. Please select a customer before continuing.");
 					return;
@@ -1572,11 +1572,11 @@ if ($_->config->com_sales->com_esp) {
 						modal.dialog("option", "close", null).dialog("close").remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to check products:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to check products:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
-							pines.error("An error occured while trying to check products.");
+							$_.error("An error occured while trying to check products.");
 							return;
 						}
 						if (!data.result) {
@@ -1586,27 +1586,27 @@ if ($_->config->com_sales->com_esp) {
 							return;
 						}
 						if (use_drawer)
-							pines.com_sales_run_drawer();
+							$_.com_sales_run_drawer();
 						else
-							pines.com_sales_run_submit();
+							$_.com_sales_run_submit();
 					}
 				});
 				<?php } else { ?>
 				if (use_drawer)
-					pines.com_sales_run_drawer();
+					$_.com_sales_run_drawer();
 				else
-					pines.com_sales_run_submit();
+					$_.com_sales_run_submit();
 				<?php } ?>
 			};
 
 			<?php if ($_->config->com_sales->cash_drawer) { ?>
-			pines.com_sales_run_drawer = function(){
+			$_.com_sales_run_drawer = function(){
 				var keep_checking = function(status){
 					switch (status) {
 						case "is_open":
 							break;
 						case "is_closed":
-							pines.com_sales_run_submit();
+							$_.com_sales_run_submit();
 							return;
 							break;
 						case "not_supported":
@@ -1623,7 +1623,7 @@ if ($_->config->com_sales->com_esp) {
 							break;
 					}
 					setTimeout(function(){
-						pines.drawer_check(keep_checking);
+						$_.drawer_check(keep_checking);
 					}, 500);
 				};
 
@@ -1649,17 +1649,17 @@ if ($_->config->com_sales->com_esp) {
 				}
 
 				if (kicked)
-					pines.drawer_open(keep_checking, message);
+					$_.drawer_open(keep_checking, message);
 				else
 					$("#p_muid_form").submit();
 			};
 			<?php } else { ?>
-			pines.com_sales_run_drawer = function(){
-				pines.com_sales_run_submit();
+			$_.com_sales_run_drawer = function(){
+				$_.com_sales_run_submit();
 			};
 			<?php } ?>
 
-			pines.com_sales_run_submit = function(){
+			$_.com_sales_run_submit = function(){
 				$(":button, :submit, :reset", "#p_muid_form .pf-buttons").attr("disabled", "disabled").addClass("disabled");
 				$("#p_muid_form").submit();
 			};
@@ -1894,7 +1894,7 @@ if ($_->config->com_sales->com_esp) {
 		<div class="pf-form">
 			<?php if ($_->config->com_sales->com_customer) { ?>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					$("#p_muid_ship_use_cust").change(function(){
 						if ($(this).is(":checked"))
 							$("#p_muid_shipping_form").hide();
@@ -1915,7 +1915,7 @@ if ($_->config->com_sales->com_esp) {
 				</div>
 				<div class="pf-element">
 					<script type="text/javascript">
-						pines(function(){
+						$_(function(){
 							var address_us = $("#p_muid_address_us");
 							var address_international = $("#p_muid_address_international");
 							$("#p_muid_shipping_dialog [name=shipping_address_type]").change(function(){
@@ -2053,19 +2053,19 @@ if ($_->config->com_sales->com_esp) {
 		<input type="hidden" id="p_muid_sale_process_type" name="process" value="quote" />
 
 		<?php if ($this->entity->status != 'voided' && $this->entity->status != 'paid') { ?>
-		<input class="pf-button btn btn-primary" type="button" value="Tender" onclick="$('#p_muid_sale_process_type').val('tender'); pines.com_sales_run_check(true);" />
+		<input class="pf-button btn btn-primary" type="button" value="Tender" onclick="$('#p_muid_sale_process_type').val('tender'); $_.com_sales_run_check(true);" />
 		<?php } ?>
 
 		<?php if ( $_->config->com_sales->allow_invoicing && ($this->entity->status != 'voided' && $this->entity->status != 'paid' && $this->entity->status != 'invoiced') ) { ?>
-		<input class="pf-button btn btn-primary" type="button" value="Invoice" onclick="$('#p_muid_sale_process_type').val('invoice'); pines.com_sales_run_check();" />
+		<input class="pf-button btn btn-primary" type="button" value="Invoice" onclick="$('#p_muid_sale_process_type').val('invoice'); $_.com_sales_run_check();" />
 		<?php } ?>
 
 		<?php if ($this->entity->status != 'voided' && $this->entity->status != 'paid' && $this->entity->status != 'invoiced' && $this->entity->status != 'quoted') { if ($_->config->com_sales->allow_quoting) { ?>
-		<input class="pf-button btn btn-primary" type="button" value="Quote" onclick="$('#p_muid_sale_process_type').val('quote'); pines.com_sales_run_check();" />
+		<input class="pf-button btn btn-primary" type="button" value="Quote" onclick="$('#p_muid_sale_process_type').val('quote'); $_.com_sales_run_check();" />
 		<?php } } else { ?>
-		<input class="pf-button btn btn-primary" type="button" value="Save" onclick="$('#p_muid_sale_process_type').val('save'); pines.com_sales_run_check();" />
+		<input class="pf-button btn btn-primary" type="button" value="Save" onclick="$('#p_muid_sale_process_type').val('save'); $_.com_sales_run_check();" />
 		<?php } ?>
 
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'sale/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'sale/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

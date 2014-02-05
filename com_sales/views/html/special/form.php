@@ -40,7 +40,7 @@ $_->entity_manager->sort($specials, 'name');
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'special/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$(".p_muid_product_select", "#p_muid_form").productselect();
 			$(".p_muid_date_select", "#p_muid_form").datepicker({
 				dateFormat: "yy-mm-dd",
@@ -77,11 +77,11 @@ $_->entity_manager->sort($specials, 'name');
 						double_click: true,
 						click: function(e, rows){
 							cur_discount = rows;
-							discount_dialog.find("select[name=cur_discount_type]").val(pines.unsafe(rows.pgrid_get_value(1))).change();
-							discount_dialog.find("input[name=cur_discount_value]").val(pines.unsafe(rows.pgrid_get_value(3))).change();
+							discount_dialog.find("select[name=cur_discount_type]").val($_.unsafe(rows.pgrid_get_value(1))).change();
+							discount_dialog.find("input[name=cur_discount_value]").val($_.unsafe(rows.pgrid_get_value(3))).change();
 							discount_dialog.dialog('open');
 							// This has to come after the dialog opens.
-							discount_dialog.find("#p_muid_dis_forms .dis_form:visible :input").val(pines.unsafe(rows.pgrid_get_value(2)));
+							discount_dialog.find("#p_muid_dis_forms .dis_form:visible :input").val($_.unsafe(rows.pgrid_get_value(2)));
 						}
 					},
 					{
@@ -120,16 +120,16 @@ $_->entity_manager->sort($specials, 'name');
 							var new_discount = [{
 								key: null,
 								values: [
-									pines.safe(cur_discount_type),
-									pines.safe(cur_discount_qualifier),
-									pines.safe(cur_discount_value)
+									$_.safe(cur_discount_type),
+									$_.safe(cur_discount_qualifier),
+									$_.safe(cur_discount_value)
 								]
 							}];
 							discounts_table.pgrid_add(new_discount);
 						} else {
-							cur_discount.pgrid_set_value(1, pines.safe(cur_discount_type));
-							cur_discount.pgrid_set_value(2, pines.safe(cur_discount_qualifier));
-							cur_discount.pgrid_set_value(3, pines.safe(cur_discount_value));
+							cur_discount.pgrid_set_value(1, $_.safe(cur_discount_type));
+							cur_discount.pgrid_set_value(2, $_.safe(cur_discount_qualifier));
+							cur_discount.pgrid_set_value(3, $_.safe(cur_discount_value));
 						}
 						$(this).dialog('close');
 					}
@@ -180,10 +180,10 @@ $_->entity_manager->sort($specials, 'name');
 						double_click: true,
 						click: function(e, rows){
 							cur_requirement = rows;
-							requirement_dialog.find("select[name=cur_requirement_type]").val(pines.unsafe(rows.pgrid_get_value(1))).change();
+							requirement_dialog.find("select[name=cur_requirement_type]").val($_.unsafe(rows.pgrid_get_value(1))).change();
 							requirement_dialog.dialog('open');
 							// This has to come after the dialog opens.
-							requirement_dialog.find("#p_muid_req_forms .req_form:visible :input").val(pines.unsafe(rows.pgrid_get_value(2)));
+							requirement_dialog.find("#p_muid_req_forms .req_form:visible :input").val($_.unsafe(rows.pgrid_get_value(2)));
 						}
 					},
 					{
@@ -217,14 +217,14 @@ $_->entity_manager->sort($specials, 'name');
 							var new_requirement = [{
 								key: null,
 								values: [
-									pines.safe(cur_requirement_type),
-									pines.safe(cur_requirement_value)
+									$_.safe(cur_requirement_type),
+									$_.safe(cur_requirement_value)
 								]
 							}];
 							requirements_table.pgrid_add(new_requirement);
 						} else {
-							cur_requirement.pgrid_set_value(1, pines.safe(cur_requirement_type));
-							cur_requirement.pgrid_set_value(2, pines.safe(cur_requirement_value));
+							cur_requirement.pgrid_set_value(1, $_.safe(cur_requirement_type));
+							cur_requirement.pgrid_set_value(2, $_.safe(cur_requirement_value));
 						}
 						$(this).dialog('close');
 					}
@@ -511,6 +511,6 @@ $_->entity_manager->sort($specials, 'name');
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'special/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'special/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

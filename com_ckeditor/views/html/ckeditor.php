@@ -15,13 +15,13 @@ if (isset($_->com_elfinder))
 $content_css = array_merge($_->editor->get_css(), array(h($_->config->location . $_->template->editor_css)));
 ?>
 <script type="text/javascript">
-pines.loadjs("<?php e($_->config->location); ?>components/com_ckeditor/includes/ckeditor/ckeditor.js");
-pines.load(function(){
+$_.loadjs("<?php e($_->config->location); ?>components/com_ckeditor/includes/ckeditor/ckeditor.js");
+$_.load(function(){
 	CKEDITOR.config.jqueryOverrideVal = true;
 });
-pines.loadjs("<?php e($_->config->location); ?>components/com_ckeditor/includes/ckeditor/adapters/jquery.js");
+$_.loadjs("<?php e($_->config->location); ?>components/com_ckeditor/includes/ckeditor/adapters/jquery.js");
 
-pines(function(){
+$_(function(){
 // Stop CKEditor from adding new lines and indents to HTML source.
 CKEDITOR.on('instanceReady', function(ev){
 	var writer = ev.editor.dataProcessor.writer;
@@ -77,7 +77,7 @@ $("textarea.peditor").ckeditor(function(){}, {
 	<?php } ?>
 	extraPlugins: 'autogrow,stylesheetparser,MediaEmbed',
 	removePlugins: 'resize',
-	baseHref: pines.rela_location,
+	baseHref: $_.rela_location,
 	autoGrow_minHeight: 200,
 	autoGrow_maxHeight: 600,
 	autoGrow_onStartup: true
@@ -98,7 +98,7 @@ $("textarea.peditor-simple").ckeditor(function(){}, {
 	<?php } ?>
 	toolbar: 'Basic',
 	extraPlugins: 'stylesheetparser',
-	baseHref: pines.rela_location,
+	baseHref: $_.rela_location,
 	toolbarCanCollapse: false
 });
 $("textarea.peditor-email").ckeditor(function(){}, {

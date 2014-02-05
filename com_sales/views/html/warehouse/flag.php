@@ -14,9 +14,9 @@ $this->title = 'Flag Warehouse Items';
 $_->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($_->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.css");
-	pines.loadjs("<?php e($_->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.js");
-	pines(function(){
+	$_.loadcss("<?php e($_->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.css");
+	$_.loadjs("<?php e($_->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.js");
+	$_(function(){
 		var bgcolor_picker = $.farbtastic("#p_muid_bgcolor_picker", "#p_muid_bgcolor_input");
 		var textcolor_picker = $.farbtastic("#p_muid_textcolor_picker", "#p_muid_textcolor_input");
 		var color_dialog = $("#p_muid_color_dialog")
@@ -156,6 +156,6 @@ $_->com_pgrid->load();
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="id" value="<?php e($this->id); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
 	</div>
 </form>

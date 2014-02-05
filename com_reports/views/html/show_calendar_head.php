@@ -18,6 +18,6 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($_->config->location); ?>components/com_reports/includes/fullcalendar.css");
-	pines.loadjs("<?php e($_->config->location); ?>components/com_reports/includes/fullcalendar.min.js");
+	$_.loadcss("<?php e($_->config->location); ?>components/com_reports/includes/fullcalendar.css");
+	$_.loadjs("<?php e($_->config->location); ?>components/com_reports/includes/fullcalendar.min.js");
 </script>

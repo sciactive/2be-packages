@@ -36,7 +36,7 @@ $_->com_pgrid->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Options
 		var options = $("input[name=options]", "#p_muid_tab_options"),
 			options_table = $(".options_table", "#p_muid_tab_options");
@@ -70,7 +70,7 @@ $_->com_pgrid->load();
 								var cur_row = $(this);
 								module_data.push({
 									name: cur_row.pgrid_get_value(1),
-									value: pines.unsafe(cur_row.pgrid_get_value(2))
+									value: $_.unsafe(cur_row.pgrid_get_value(2))
 								});
 							});
 						}
@@ -80,12 +80,12 @@ $_->com_pgrid->load();
 							dataType: "json",
 							data: {"type": type, "data": JSON.stringify(module_data)},
 							error: function(XMLHttpRequest, textStatus){
-								pines.error("An error occured while trying to retrieve the form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+								$_.error("An error occured while trying to retrieve the form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 							},
 							success: function(data){
 								if (!data)
 									return;
-								pines.pause();
+								$_.pause();
 								if (typeof data.head !== "undefined")
 									$("head").append(data.head);
 								var form = $("<div title=\"Module Options\"></div>")
@@ -111,8 +111,8 @@ $_->com_pgrid->load();
 													cur_value = "";
 												options_table.pgrid_add([{
 													values: [
-														pines.safe(cur_input.attr("name")),
-														pines.safe(cur_value)
+														$_.safe(cur_input.attr("name")),
+														$_.safe(cur_value)
 													]
 												}]);
 											});
@@ -121,7 +121,7 @@ $_->com_pgrid->load();
 										}
 									}
 								});
-								pines.play();
+								$_.play();
 							}
 						});
 					}
@@ -143,7 +143,7 @@ $_->com_pgrid->load();
 					inline = "["+type;
 					var icontent = false;
 					cur_data.each(function(){
-						var cur_row = $(this), name = cur_row.pgrid_get_value(1), value = pines.unsafe(cur_row.pgrid_get_value(2)), delin = '"';
+						var cur_row = $(this), name = cur_row.pgrid_get_value(1), value = $_.unsafe(cur_row.pgrid_get_value(2)), delin = '"';
 						if (value.match(/"/)) {
 							delin = "'";
 							if (value.match(/'/))
@@ -336,6 +336,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_modules', 'module/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_modules', 'module/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

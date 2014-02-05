@@ -24,7 +24,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	}
 </style>
 <script type='text/javascript'>
-	pines(function(){
+	$_(function(){
 		$("#p_muid_start").datepicker({
 			dateFormat: "yy-mm-dd",
 			changeMonth: true,

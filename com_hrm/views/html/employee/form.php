@@ -24,7 +24,7 @@ $_->com_pgrid->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$("#p_muid_form [name=hire_date], #p_muid_form [name=training_completion_date]").datepicker({
 			dateFormat: "yy-mm-dd",
 			changeMonth: true,
@@ -81,8 +81,8 @@ $_->com_pgrid->load();
 					var new_attribute = [{
 						key: null,
 						values: [
-							pines.safe(cur_attribute_name),
-							pines.safe(cur_attribute_value)
+							$_.safe(cur_attribute_name),
+							$_.safe(cur_attribute_value)
 						]
 					}];
 					attributes_table.pgrid_add(new_attribute);
@@ -277,7 +277,7 @@ $_->com_pgrid->load();
 		</div>
 		<?php if ($_->config->com_hrm->com_sales) { ?>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				// Commissions
 				var commissions_table = $("#p_muid_form .commissions_table");
 
@@ -289,7 +289,7 @@ $_->com_pgrid->load();
 						{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 						{type: 'separator'},
 						{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-							pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+							$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 								filename: "commissions-"+<?php echo json_encode((string) $this->entity->username); ?>,
 								content: rows
 							});
@@ -340,6 +340,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="Cancel" />
 	</div>
 </form>

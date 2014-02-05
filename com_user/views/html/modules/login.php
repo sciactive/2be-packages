@@ -38,9 +38,9 @@ $this->sawasc = $_->com_user->activate_sawasc();
 <?php } if ($this->sawasc || ($this->style != 'compact' && $this->style != 'small')) { ?>
 <script type="text/javascript">
 	<?php if ($this->sawasc) { ?>
-	pines.loadjs("<?php e($_->config->location); ?>components/com_user/includes/hash.js");
+	$_.loadjs("<?php e($_->config->location); ?>components/com_user/includes/hash.js");
 	<?php } ?>
-	pines(function(){
+	$_(function(){
 		<?php if ($this->style != 'compact' && $this->style != 'small') { ?>
 		$("input[name=username]", "#p_muid_form").focus();
 		<?php } if ($this->sawasc) { ?>
@@ -68,7 +68,7 @@ $this->sawasc = $_->com_user->activate_sawasc();
 		<?php if ($_->config->com_user->allow_registration) { ?>
 		<div class="pf-element">
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					var new_account = false,
 						username = $("[name=username]", "#p_muid_form"),
 						password = $("[name=password]", "#p_muid_form"),
@@ -118,11 +118,11 @@ $this->sawasc = $_->com_user->activate_sawasc();
 								}
 								if (data.result) {
 									username.removeClass("ui-state-error");
-									un_message.addClass("picon-task-complete").html(pines.safe(data.message)).show();
+									un_message.addClass("picon-task-complete").html($_.safe(data.message)).show();
 									return;
 								}
 								username.addClass("ui-state-error");
-								un_message.addClass("picon-task-attempt").html(pines.safe(data.message)).show();
+								un_message.addClass("picon-task-attempt").html($_.safe(data.message)).show();
 							}
 						});
 					}).blur(function(){
@@ -245,7 +245,7 @@ $this->sawasc = $_->com_user->activate_sawasc();
 			<?php } if (in_array('address', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						var address_us = $("#p_muid_address_us");
 						var address_international = $("#p_muid_address_international");
 						$("#p_muid_form [name=address_type]").change(function(){
@@ -384,7 +384,7 @@ $this->sawasc = $_->com_user->activate_sawasc();
 </div>
 <?php if ($this->style == 'compact') { ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var notice = $.pnotify({
 			type: 'info',
 			title: <?php echo json_encode($this->title); ?>,

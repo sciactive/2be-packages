@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Verify Access';
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		if ($) $("#p_muid_form input[name=pin]").focus();
 	});
 </script>

@@ -38,7 +38,7 @@ $_->com_pgrid->load();
 			<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->enabled ? ' checked="checked"' : ''; ?> /></label>
 	</div>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			// Conditions
 			var conditions = $("#p_muid_form [name=conditions]"),
 				conditions_table = $("#p_muid_form .conditions_table"),
@@ -66,9 +66,9 @@ $_->com_pgrid->load();
 						double_click: true,
 						click: function(e, rows){
 							cur_condition = rows;
-							condition_dialog.find("input[name=cur_condition_condition]").val(pines.unsafe(rows.pgrid_get_value(1)));
-							condition_dialog.find("select[name=cur_condition_type]").val(pines.unsafe(rows.pgrid_get_value(2)));
-							condition_dialog.find("input[name=cur_condition_amount]").val(pines.unsafe(rows.pgrid_get_value(3)));
+							condition_dialog.find("input[name=cur_condition_condition]").val($_.unsafe(rows.pgrid_get_value(1)));
+							condition_dialog.find("select[name=cur_condition_type]").val($_.unsafe(rows.pgrid_get_value(2)));
+							condition_dialog.find("input[name=cur_condition_amount]").val($_.unsafe(rows.pgrid_get_value(3)));
 							if (rows.pgrid_get_value(4) == "Yes")
 								condition_dialog.find("input[name=cur_condition_always]").attr("checked", true);
 							else
@@ -110,17 +110,17 @@ $_->com_pgrid->load();
 							var new_condition = [{
 								key: null,
 								values: [
-									pines.safe(cur_condition_condition),
-									pines.safe(cur_condition_type),
-									pines.safe(cur_condition_amount),
+									$_.safe(cur_condition_condition),
+									$_.safe(cur_condition_type),
+									$_.safe(cur_condition_amount),
 									cur_condition_always ? 'Yes' : 'No'
 								]
 							}];
 							conditions_table.pgrid_add(new_condition);
 						} else {
-							cur_condition.pgrid_set_value(1, pines.safe(cur_condition_condition));
-							cur_condition.pgrid_set_value(2, pines.safe(cur_condition_type));
-							cur_condition.pgrid_set_value(3, pines.safe(cur_condition_amount));
+							cur_condition.pgrid_set_value(1, $_.safe(cur_condition_condition));
+							cur_condition.pgrid_set_value(2, $_.safe(cur_condition_type));
+							cur_condition.pgrid_set_value(3, $_.safe(cur_condition_amount));
 							cur_condition.pgrid_set_value(4, cur_condition_always ? 'Yes' : 'No');
 						}
 						$(this).dialog('close');
@@ -202,6 +202,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'returnchecklist/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'returnchecklist/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

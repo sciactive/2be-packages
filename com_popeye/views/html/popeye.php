@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($_->config->location); ?>components/com_popeye/includes/jquery.popeye.css");
-	pines.loadcss("<?php e($_->config->location); ?>components/com_popeye/includes/jquery.popeye.style.css");
-	pines.loadjs("<?php e($_->config->location); ?>components/com_popeye/includes/<?php echo $_->config->debug_mode ? 'jquery.popeye.js' : 'jquery.popeye.min.js'; ?>");
+	$_.loadcss("<?php e($_->config->location); ?>components/com_popeye/includes/jquery.popeye.css");
+	$_.loadcss("<?php e($_->config->location); ?>components/com_popeye/includes/jquery.popeye.style.css");
+	$_.loadjs("<?php e($_->config->location); ?>components/com_popeye/includes/<?php echo $_->config->debug_mode ? 'jquery.popeye.js' : 'jquery.popeye.min.js'; ?>");
 </script>

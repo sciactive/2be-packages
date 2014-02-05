@@ -43,7 +43,7 @@ $_->uploader->load();
 	</div>
 	<div class="pf-element">
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				var address_us = $("#p_muid_address_us");
 				var address_international = $("#p_muid_address_international");
 				$("#p_muid_form [name=address_type]").change(function(){
@@ -236,6 +236,6 @@ $_->uploader->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'vendor/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'vendor/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -24,7 +24,7 @@ $this->title = 'Class Check';
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$("#p_muid_classes").on("change keyup", "input[name=filter]", function(){
 			var filter = $(this).val(), rows = $("table tbody tr", "#p_muid_classes");
 			if (filter == "")

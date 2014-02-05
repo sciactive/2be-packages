@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $_->icons->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$("#p_muid_button button").one("click", function(){
 			$.ajax({
 				url: <?php echo json_encode(pines_url('com_dash', 'quick_dash')); ?>,
@@ -21,7 +21,7 @@ $_->icons->load();
 				dataType: "html",
 				data: {},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the quick dash:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the quick dash:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					var jwin = $(window);

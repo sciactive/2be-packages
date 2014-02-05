@@ -13,8 +13,8 @@ defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
 	window.SM2_DEFER = true;
-	pines.loadjs("<?php e($_->config->location); ?>components/com_soundmanager/includes/soundmanager/script/<?php echo $_->config->debug_mode ? 'soundmanager2.js' : 'soundmanager2-nodebug-jsmin.js'; ?>");
-	pines.load(function(){
+	$_.loadjs("<?php e($_->config->location); ?>components/com_soundmanager/includes/soundmanager/script/<?php echo $_->config->debug_mode ? 'soundmanager2.js' : 'soundmanager2-nodebug-jsmin.js'; ?>");
+	$_.load(function(){
 		window.soundManager = new SoundManager();
 		soundManager.url = "<?php e($_->config->rela_location); ?>components/com_soundmanager/includes/soundmanager/swf/";
 		soundManager.flashVersion = 9;

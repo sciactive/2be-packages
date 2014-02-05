@@ -50,7 +50,7 @@ $this->title = 'Customer Timer Status';
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var customer_status = $("#p_muid_customer_status");
 
 		var update_status = function(){
@@ -62,7 +62,7 @@ $this->title = 'Customer Timer Status';
 					setTimeout(update_status, 30000);
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to refresh the status:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to refresh the status:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					switch (data) {

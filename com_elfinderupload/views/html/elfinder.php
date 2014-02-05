@@ -15,7 +15,7 @@ defined('P_RUN') or die('Direct access prohibited');
 .ui-selectable-helper {z-index: 410000;}
 </style>
 <script type="text/javascript">
-pines(function(){$(".puploader").each(function(){
+$_(function(){$(".puploader").each(function(){
 	var pfile = $(this),
 		unique_id = pfile.data("elfinder_unique_id"),
 		dialog_open = false, oi;
@@ -62,17 +62,17 @@ pines(function(){$(".puploader").each(function(){
 				if ($.isArray(file)) {
 					title = "Multiple Selections";
 					$.each(file, function(i, file){
-						content += '<h4'+(i > 0 ? ' style="margin-top: 2em;"' : '')+'>'+(file.mime == "directory" ? "Folder" : "File")+": "+pines.safe(file.name)+'</h4>';
+						content += '<h4'+(i > 0 ? ' style="margin-top: 2em;"' : '')+'>'+(file.mime == "directory" ? "Folder" : "File")+": "+$_.safe(file.name)+'</h4>';
 						if (file.tmb)
-							content += '<div style="text-align: center; margin-bottom: 1em;"><span class="thumbnail" style="display: inline-block;"><img alt="Thumbnail" src="'+pines.safe(file.tmb)+'" /></span></div>';
-						content += '<div style="margin-bottom: .5em;">Type: '+pines.safe(file.mime)+'</div><div style="margin-bottom: .5em;">Path: <tt>'+pines.safe(file.path)+'</tt></div><div>URL: <tt>'+pines.safe(file.url)+'</tt></div>';
+							content += '<div style="text-align: center; margin-bottom: 1em;"><span class="thumbnail" style="display: inline-block;"><img alt="Thumbnail" src="'+$_.safe(file.tmb)+'" /></span></div>';
+						content += '<div style="margin-bottom: .5em;">Type: '+$_.safe(file.mime)+'</div><div style="margin-bottom: .5em;">Path: <tt>'+$_.safe(file.path)+'</tt></div><div>URL: <tt>'+$_.safe(file.url)+'</tt></div>';
 						value += (value ? "//" : "")+file.url;
 					});
 				} else {
-					title = "Selected "+(file.mime == "directory" ? "Folder" : "File")+": "+pines.safe(file.name);
+					title = "Selected "+(file.mime == "directory" ? "Folder" : "File")+": "+$_.safe(file.name);
 					if (file.tmb && !pfile.hasClass("puploader-temp"))
-						content = '<div style="text-align: center; margin-bottom: 1em;"><span class="thumbnail" style="display: inline-block;"><img alt="Thumbnail" src="'+pines.safe(file.tmb)+'" /></span></div>';
-					content += '<div style="margin-bottom: .5em;">Type: '+pines.safe(file.mime)+'</div><div style="margin-bottom: .5em;">Path: <tt>'+pines.safe(file.path)+'</tt></div><div>URL: <tt>'+pines.safe(file.url)+'</tt></div>';
+						content = '<div style="text-align: center; margin-bottom: 1em;"><span class="thumbnail" style="display: inline-block;"><img alt="Thumbnail" src="'+$_.safe(file.tmb)+'" /></span></div>';
+					content += '<div style="margin-bottom: .5em;">Type: '+$_.safe(file.mime)+'</div><div style="margin-bottom: .5em;">Path: <tt>'+$_.safe(file.path)+'</tt></div><div>URL: <tt>'+$_.safe(file.url)+'</tt></div>';
 					value = file.url;
 				}
 				pfile.val(value).attr({

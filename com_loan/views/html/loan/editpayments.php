@@ -42,7 +42,7 @@ switch ($this->entity->payment_frequency) {
 
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var width;
 		$(window).on('resize', function(){
 			var thewindow = $(this);
@@ -155,13 +155,13 @@ switch ($this->entity->payment_frequency) {
 				dataType: "html",
 				data: {"ids": loan_id},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the make payments form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the make payments form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "") {
 						return;
 					}
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Make Payment(s)\"></div>").html(data+"<br />");
 					form.dialog({
 						bgiframe: true,
@@ -177,7 +177,7 @@ switch ($this->entity->payment_frequency) {
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		});
@@ -328,7 +328,7 @@ switch ($this->entity->payment_frequency) {
 									if ($this->entity->payments[0]['past_due'] >= 0.01) {
 										?>
 										<script type="text/javascript">
-											pines(function(){
+											$_(function(){
 												$("#p_muid_next_payment").popover({
 													trigger: 'hover',
 													title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(h((string) ($_->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $_->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
@@ -444,7 +444,7 @@ switch ($this->entity->payment_frequency) {
 										$edit_unique_id = h(uniqid());
 									?>
 									<script type="text/javascript">
-										pines(function(){
+										$_(function(){
 											// Define variables
 											var edit_button = $("[name='edit_button_<?php echo $edit_unique_id; ?>']");
 											var reset_button = $("[name='reset_button_<?php echo $edit_unique_id; ?>']");
@@ -763,7 +763,7 @@ switch ($this->entity->payment_frequency) {
 								?>
 								<td style="text-align:right;">
 									<script type="text/javascript">
-										pines(function(){
+										$_(function(){
 											$("#p_muid_button<?php echo '_'.$uniqueID2; ?>").click(function(){
 												var dialog = $('#p_muid_details<?php echo '_'.$uniqueID2; ?>').dialog({
 													width: 800,
@@ -1490,7 +1490,7 @@ switch ($this->entity->payment_frequency) {
 												$uniqueID = uniqid();
 											?>
 											<script type="text/javascript">
-												pines(function(){
+												$_(function(){
 													$("#p_muid_button<?php echo '_'.$uniqueID; ?>").click(function(){
 														var dialog = $('#p_muid_details<?php echo '_'.$uniqueID; ?>').dialog({
 															width: 800,
@@ -2230,7 +2230,7 @@ switch ($this->entity->payment_frequency) {
 											if ($this->entity->payments[0]['past_due'] >= 0.01) {
 												?>
 												<script type="text/javascript">
-													pines(function(){
+													$_(function(){
 														$("#p_muid_next_payment2").popover({
 															trigger: 'hover',
 															title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(h((string) ($_->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $_->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
@@ -2393,7 +2393,7 @@ switch ($this->entity->payment_frequency) {
 										$uniq2 = h(uniqid());
 										?>
 										<script type="text/javascript">
-											pines(function(){
+											$_(function(){
 												$("#p_muid_tooltip_<?php echo ($uniq2); ?>").popover({
 													trigger: 'hover',
 													title: 'Unpaid Interest: $'+<?php echo json_encode(h($_->com_sales->round($payment['payment_interest_unpaid_expected'] - $payment['payment_interest_paid'], true))); ?>,
@@ -2442,7 +2442,7 @@ switch ($this->entity->payment_frequency) {
 										$uniq = h(uniqid());
 										?>
 										<script type="text/javascript">
-											pines(function(){
+											$_(function(){
 												$("#p_muid_tooltip_<?php echo $uniq; ?>").popover({
 													trigger: 'hover',
 													title: 'Unpaid Balance: $'+<?php echo json_encode(h($_->com_sales->round($payment['remaining_balance'] - $payment['scheduled_balance'], true))); ?>,

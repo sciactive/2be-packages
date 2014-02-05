@@ -54,7 +54,7 @@ header('Content-Type: text/html');
 
 	<script type="text/javascript" src="<?php e($_->config->rela_location); ?>system/includes/js.php"></script>
 	<?php if ($_->config->tpl_pines->menu_delay) { ?>
-	<script type="text/javascript">pines.tpl_pines_menu_delay = true;</script>
+	<script type="text/javascript">$_.tpl_pines_menu_delay = true;</script>
 	<?php } ?>
 	<script type="text/javascript" src="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/js/template.js"></script>
 	<?php if ($_->config->tpl_pines->ajax) { ?>
@@ -77,13 +77,13 @@ header('Content-Type: text/html');
 		$notice = $_->page->get_notice();
 		if ( $error || $notice ) { ?>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				<?php
 				if ( $error ) { foreach ($error as $cur_item) {
-					echo 'pines.error('.json_encode(h($cur_item)).", \"Error\");\n";
+					echo '$_.error('.json_encode(h($cur_item)).", \"Error\");\n";
 				} }
 				if ( $notice ) { foreach ($notice as $cur_item) {
-					echo 'pines.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
+					echo '$_.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
 				} }
 				?>
 			});

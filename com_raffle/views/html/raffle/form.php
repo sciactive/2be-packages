@@ -15,7 +15,7 @@ $this->note = 'Provide raffle details in this form.';
 $_->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Contestants
 		var contestants = $("#p_muid_form [name=contestants]");
 		var contestants_table = $("#p_muid_form .contestants_table");
@@ -44,10 +44,10 @@ $_->com_pgrid->load();
 					double_click: true,
 					click: function(e, rows){
 						cur_contestant = rows;
-						contestant_dialog.find("input[name=cur_contestant_first_name]").val(pines.unsafe(rows.pgrid_get_value(1)));
-						contestant_dialog.find("input[name=cur_contestant_last_name]").val(pines.unsafe(rows.pgrid_get_value(2)));
-						contestant_dialog.find("input[name=cur_contestant_email]").val(pines.unsafe(rows.pgrid_get_value(3)));
-						contestant_dialog.find("input[name=cur_contestant_phone]").val(pines.unsafe(rows.pgrid_get_value(4)));
+						contestant_dialog.find("input[name=cur_contestant_first_name]").val($_.unsafe(rows.pgrid_get_value(1)));
+						contestant_dialog.find("input[name=cur_contestant_last_name]").val($_.unsafe(rows.pgrid_get_value(2)));
+						contestant_dialog.find("input[name=cur_contestant_email]").val($_.unsafe(rows.pgrid_get_value(3)));
+						contestant_dialog.find("input[name=cur_contestant_phone]").val($_.unsafe(rows.pgrid_get_value(4)));
 						contestant_dialog.dialog('open');
 					}
 				},
@@ -84,18 +84,18 @@ $_->com_pgrid->load();
 						var new_contestant = [{
 							key: null,
 							values: [
-								pines.safe(cur_contestant_first_name),
-								pines.safe(cur_contestant_last_name),
-								pines.safe(cur_contestant_email),
-								pines.safe(cur_contestant_phone)
+								$_.safe(cur_contestant_first_name),
+								$_.safe(cur_contestant_last_name),
+								$_.safe(cur_contestant_email),
+								$_.safe(cur_contestant_phone)
 							]
 						}];
 						contestants_table.pgrid_add(new_contestant);
 					} else {
-						cur_contestant.pgrid_set_value(1, pines.safe(cur_contestant_first_name));
-						cur_contestant.pgrid_set_value(2, pines.safe(cur_contestant_last_name));
-						cur_contestant.pgrid_set_value(3, pines.safe(cur_contestant_email));
-						cur_contestant.pgrid_set_value(4, pines.safe(cur_contestant_phone));
+						cur_contestant.pgrid_set_value(1, $_.safe(cur_contestant_first_name));
+						cur_contestant.pgrid_set_value(2, $_.safe(cur_contestant_last_name));
+						cur_contestant.pgrid_set_value(3, $_.safe(cur_contestant_email));
+						cur_contestant.pgrid_set_value(4, $_.safe(cur_contestant_phone));
 					}
 					$(this).dialog('close');
 				}
@@ -247,6 +247,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_raffle', 'raffle/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_raffle', 'raffle/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

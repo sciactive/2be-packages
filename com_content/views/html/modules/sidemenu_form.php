@@ -57,7 +57,7 @@ $_->editor->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Define Variables
 		var form = $('#p_muid_form');
 		var preview_menu_content = form.find('.preview-menu-content');
@@ -137,7 +137,7 @@ $_->editor->load();
 				dataType: "json",
 				data: {"tag": tag},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to create the menu:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to create the menu:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data != false) {
@@ -175,7 +175,7 @@ $_->editor->load();
 				dataType: "json",
 				data: {"guid_order": guid_order, "tag": tag},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to save the menu:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to save the menu:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == true) {

@@ -33,7 +33,7 @@ if (isset($_->com_fancybox))
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var state_xhr;
 		var cur_state = <?php echo (isset($this->pgrid_state) ? json_encode($this->pgrid_state) : '{}');?>;
 		var cur_defaults = {
@@ -48,7 +48,7 @@ if (isset($_->com_fancybox))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'packages',
 						content: rows
 					});
@@ -68,18 +68,18 @@ if (isset($_->com_fancybox))
 		var buttons_new = {
 			"Install": function(){
 				var name = $(".package", this).text();
-				pines.com_plaza.ajax_show();
+				$_.com_plaza.ajax_show();
 				$.ajax({
 					url: <?php echo json_encode(pines_url('com_plaza', 'package/changes')); ?>,
 					type: "POST",
 					dataType: "json",
 					data: {"name": name, "do": "install"},
 					complete: function(){
-						pines.com_plaza.ajax_hide();
+						$_.com_plaza.ajax_hide();
 						info_dialog.dialog("enable");
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to calculate changes:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to calculate changes:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -90,31 +90,31 @@ if (isset($_->com_fancybox))
 							alert("It is not possible to install this package. Check its dependencies to see if there are any PHP extenstions you need to install to provide any required functions or classes.");
 							return;
 						}
-						pines.com_plaza.confirm_changes({
+						$_.com_plaza.confirm_changes({
 							"changes": "The following changes are required to install the package '"+name+"'.",
 							"nochanges": "Are you sure you want to install the package '"+name+"'?"
 						}, data, function(){
 							info_dialog.dialog("disable");
-							pines.com_plaza.ajax_show();
+							$_.com_plaza.ajax_show();
 							$.ajax({
 								url: <?php echo json_encode(pines_url('com_plaza', 'package/do')); ?>,
 								type: "POST",
 								dataType: "json",
 								data: {"name": name, "do": "install"},
 								complete: function(){
-									pines.com_plaza.ajax_hide();
+									$_.com_plaza.ajax_hide();
 									info_dialog.dialog("enable");
 								},
 								error: function(XMLHttpRequest, textStatus){
-									pines.error("An error occured while trying to perform action:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+									$_.error("An error occured while trying to perform action:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 								},
 								success: function(data){
 									info_dialog.dialog("close");
 									if (data) {
-										pines.notice("Successfully installed the package '"+pines.safe(name)+"'.");
+										$_.notice("Successfully installed the package '"+$_.safe(name)+"'.");
 										location.reload(true);
 									} else
-										pines.notice("The package '"+pines.safe(name)+"' could not be installed.");
+										$_.notice("The package '"+$_.safe(name)+"' could not be installed.");
 								}
 							});
 						});
@@ -128,43 +128,43 @@ if (isset($_->com_fancybox))
 				if (!confirm("Are you sure you want to reinstall the package '"+name+"'?"))
 					return;
 				info_dialog.dialog("disable");
-				pines.com_plaza.ajax_show();
+				$_.com_plaza.ajax_show();
 				$.ajax({
 					url: <?php echo json_encode(pines_url('com_plaza', 'package/do')); ?>,
 					type: "POST",
 					dataType: "json",
 					data: {"name": name, "local": "true", "do": "reinstall"},
 					complete: function(){
-						pines.com_plaza.ajax_hide();
+						$_.com_plaza.ajax_hide();
 						info_dialog.dialog("enable");
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to perform action:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to perform action:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						info_dialog.dialog("close");
 						if (data) {
-							pines.notice("Successfully reinstalled the package '"+pines.safe(name)+"'.");
+							$_.notice("Successfully reinstalled the package '"+$_.safe(name)+"'.");
 							location.reload(true);
 						} else
-							pines.notice("The package '"+pines.safe(name)+"' could not be reinstalled. Is the same version still in the repository?");
+							$_.notice("The package '"+$_.safe(name)+"' could not be reinstalled. Is the same version still in the repository?");
 					}
 				});
 			},
 			"Remove": function(){
 				var name = $(".package", this).text();
-				pines.com_plaza.ajax_show();
+				$_.com_plaza.ajax_show();
 				$.ajax({
 					url: <?php echo json_encode(pines_url('com_plaza', 'package/changes')); ?>,
 					type: "POST",
 					dataType: "json",
 					data: {"name": name, "local": "true", "do": "remove"},
 					complete: function(){
-						pines.com_plaza.ajax_hide();
+						$_.com_plaza.ajax_hide();
 						info_dialog.dialog("enable");
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to calculate changes:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to calculate changes:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -175,31 +175,31 @@ if (isset($_->com_fancybox))
 							alert("It is not possible to remove this package.");
 							return;
 						}
-						pines.com_plaza.confirm_changes({
+						$_.com_plaza.confirm_changes({
 							"changes": "The following changes are required to remove the package '"+name+"'.",
 							"nochanges": "Are you sure you want to remove the package '"+name+"'?"
 						}, data, function(){
 							info_dialog.dialog("disable");
-							pines.com_plaza.ajax_show();
+							$_.com_plaza.ajax_show();
 							$.ajax({
 								url: <?php echo json_encode(pines_url('com_plaza', 'package/do')); ?>,
 								type: "POST",
 								dataType: "json",
 								data: {"name": name, "local": "true", "do": "remove"},
 								complete: function(){
-									pines.com_plaza.ajax_hide();
+									$_.com_plaza.ajax_hide();
 									info_dialog.dialog("enable");
 								},
 								error: function(XMLHttpRequest, textStatus){
-									pines.error("An error occured while trying to perform action:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+									$_.error("An error occured while trying to perform action:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 								},
 								success: function(data){
 									info_dialog.dialog("close");
 									if (data) {
-										pines.notice("Successfully removed the package '"+pines.safe(name)+"'.");
+										$_.notice("Successfully removed the package '"+$_.safe(name)+"'.");
 										location.reload(true);
 									} else
-										pines.notice("The package '"+pines.safe(name)+"' could not be removed.");
+										$_.notice("The package '"+$_.safe(name)+"' could not be removed.");
 								}
 							});
 						});
@@ -210,18 +210,18 @@ if (isset($_->com_fancybox))
 		var buttons_upgradable = {
 			"Upgrade": function(){
 				var name = $(".package", this).text();
-				pines.com_plaza.ajax_show();
+				$_.com_plaza.ajax_show();
 				$.ajax({
 					url: <?php echo json_encode(pines_url('com_plaza', 'package/changes')); ?>,
 					type: "POST",
 					dataType: "json",
 					data: {"name": name, "do": "upgrade"},
 					complete: function(){
-						pines.com_plaza.ajax_hide();
+						$_.com_plaza.ajax_hide();
 						info_dialog.dialog("enable");
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to calculate changes:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to calculate changes:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -232,31 +232,31 @@ if (isset($_->com_fancybox))
 							alert("It is not possible to upgrade this package. Check its dependencies to see if there are any PHP extenstions you need to install to provide any required functions or classes.");
 							return;
 						}
-						pines.com_plaza.confirm_changes({
+						$_.com_plaza.confirm_changes({
 							"changes": "The following changes are required to upgrade the package '"+name+"'.",
 							"nochanges": "Are you sure you want to upgrade the package '"+name+"'?"
 						}, data, function(){
 							info_dialog.dialog("disable");
-							pines.com_plaza.ajax_show();
+							$_.com_plaza.ajax_show();
 							$.ajax({
 								url: <?php echo json_encode(pines_url('com_plaza', 'package/do')); ?>,
 								type: "POST",
 								dataType: "json",
 								data: {"name": name, "do": "upgrade"},
 								complete: function(){
-									pines.com_plaza.ajax_hide();
+									$_.com_plaza.ajax_hide();
 									info_dialog.dialog("enable");
 								},
 								error: function(XMLHttpRequest, textStatus){
-									pines.error("An error occured while trying to perform action:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+									$_.error("An error occured while trying to perform action:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 								},
 								success: function(data){
 									info_dialog.dialog("close");
 									if (data) {
-										pines.notice("Successfully upgraded the package '"+pines.safe(name)+"'.");
+										$_.notice("Successfully upgraded the package '"+$_.safe(name)+"'.");
 										location.reload(true);
 									} else
-										pines.notice("The package '"+pines.safe(name)+"' could not be upgraded.");
+										$_.notice("The package '"+$_.safe(name)+"' could not be upgraded.");
 								}
 							});
 						});
@@ -279,20 +279,20 @@ if (isset($_->com_fancybox))
 				dataType: "html",
 				data: {"name": name, "local": "false", "publisher": publisher},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve info:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve info:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
-						pines.error("The server returned an unexpected value.");
+						$_.error("The server returned an unexpected value.");
 						return;
 					}
-					pines.pause();
-					info_dialog = $("<div title=\"Package Info for "+pines.safe(name)+"\"></div>").html(data).dialog({
+					$_.pause();
+					info_dialog = $("<div title=\"Package Info for "+$_.safe(name)+"\"></div>").html(data).dialog({
 						modal: true,
 						width: "600px",
 						buttons: (installed ? (upgradable ? buttons_upgradable : buttons_installed) : buttons_new)
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		});

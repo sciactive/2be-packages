@@ -1,4 +1,4 @@
-pines(function(){
+$_(function(){
 	if ($.browser.msie)
 		return;
 	var callbacks = [];
@@ -13,25 +13,25 @@ pines(function(){
 		width: 600
 	});
 
-	pines.drawer_not_supported = function(event){
+	$_.drawer_not_supported = function(event){
 		var current = callbacks.slice();
 		callbacks = [];
 		$.each(current, function(index, value){
 			value("not_supported");
 		});
-		setTimeout(pines.drawer_check, 5000);
+		setTimeout($_.drawer_check, 5000);
 	};
-	window.addEventListener("pines_cash_drawer_not_supported", pines.drawer_not_supported, false);
-	pines.drawer_error = function(event){
+	window.addEventListener("pines_cash_drawer_not_supported", $_.drawer_not_supported, false);
+	$_.drawer_error = function(event){
 		var current = callbacks.slice();
 		callbacks = [];
 		$.each(current, function(index, value){
 			value("error");
 		});
-		setTimeout(pines.drawer_check, 5000);
+		setTimeout($_.drawer_check, 5000);
 	};
-	window.addEventListener("pines_cash_drawer_error", pines.drawer_error, false);
-	pines.drawer_is_closed = function(event){
+	window.addEventListener("pines_cash_drawer_error", $_.drawer_error, false);
+	$_.drawer_is_closed = function(event){
 		if (dialog.dialog("isOpen")) {
 			dialog.dialog("close");
 			drawer_message = null;
@@ -42,16 +42,16 @@ pines(function(){
 		$.each(current, function(index, value){
 			value("is_closed");
 		});
-		setTimeout(pines.drawer_check, 5000);
+		setTimeout($_.drawer_check, 5000);
 	};
-	window.addEventListener("pines_cash_drawer_is_closed", pines.drawer_is_closed, false);
-	pines.drawer_is_open = function(event){
+	window.addEventListener("pines_cash_drawer_is_closed", $_.drawer_is_closed, false);
+	$_.drawer_is_open = function(event){
 		if (!dialog.dialog("isOpen")) {
 			if (drawer_message == null)
 				drawer_message = "Close the cash drawer when you are finished in order to continue.";
 			dialog.find("p.dialog_text").html(
 				drawer_opened_properly ?
-					"<span style=\"font-size: 2em;\">"+pines.safe(drawer_message)+"</span>" :
+					"<span style=\"font-size: 2em;\">"+$_.safe(drawer_message)+"</span>" :
 					"<span style=\"font-size: 2em; color: red;\">The cash drawer has been opened without authorization. Close the cash drawer immediately. Corporate has been notified and the incident has been logged.</span>"
 			);
 			if (!drawer_opened_properly) {
@@ -64,10 +64,10 @@ pines(function(){
 		$.each(current, function(index, value){
 			value("is_open");
 		});
-		setTimeout(pines.drawer_check, 5000);
+		setTimeout($_.drawer_check, 5000);
 	};
-	window.addEventListener("pines_cash_drawer_is_open", pines.drawer_is_open, false);
-	pines.drawer_not_found = function(event){
+	window.addEventListener("pines_cash_drawer_is_open", $_.drawer_is_open, false);
+	$_.drawer_not_found = function(event){
 		if (!dialog.dialog("isOpen")) {
 			dialog.find("p.dialog_text").html(
 				"<span style=\"font-size: 2em; color: red;\">The cash drawer has been disconnected. Reconnect the cash drawer immediately. Corporate has been notified and the incident has been logged.</span>"
@@ -82,26 +82,26 @@ pines(function(){
 		$.each(current, function(index, value){
 			value("not_found");
 		});
-		setTimeout(pines.drawer_check, 5000);
+		setTimeout($_.drawer_check, 5000);
 	};
-	window.addEventListener("pines_cash_drawer_not_found", pines.drawer_not_found, false);
-	pines.drawer_misconfigured = function(event){
+	window.addEventListener("pines_cash_drawer_not_found", $_.drawer_not_found, false);
+	$_.drawer_misconfigured = function(event){
 		var current = callbacks.slice();
 		callbacks = [];
 		$.each(current, function(index, value){
 			value("misconfigured");
 		});
-		setTimeout(pines.drawer_check, 5000);
+		setTimeout($_.drawer_check, 5000);
 	};
-	window.addEventListener("pines_cash_drawer_misconfigured", pines.drawer_misconfigured, false);
-	pines.drawer_check = function(callback){
+	window.addEventListener("pines_cash_drawer_misconfigured", $_.drawer_misconfigured, false);
+	$_.drawer_check = function(callback){
 		if ($.isFunction(callback))
 			$.merge(callbacks, [callback]);
 		var evt = document.createEvent("Events");
 		evt.initEvent("pines_cash_drawer_check", true, false);
 		window.dispatchEvent(evt);
 	};
-	pines.drawer_open = function(callback, message){
+	$_.drawer_open = function(callback, message){
 		drawer_opened_properly = true;
 		if (message != undefined)
 			drawer_message = message;
@@ -112,5 +112,5 @@ pines(function(){
 		window.dispatchEvent(evt);
 	};
 
-	setTimeout(pines.drawer_check, 5000);
+	setTimeout($_.drawer_check, 5000);
 });

@@ -25,7 +25,7 @@ $switched = ($_COOKIE['com_uasniffer_switch'] == 'true');
 ?>
 <div id="p_muid_links"<?php echo ($this->center ? ' style="text-align: center;"' : ''); ?>>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var values = function(){
 				var cookies = document.cookie.split(';'), c, date = new Date();
 				date.setTime(date.getTime()-1);

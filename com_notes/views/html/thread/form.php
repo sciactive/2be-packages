@@ -47,7 +47,7 @@ $this->note = 'For the entity '.h($this->entity->entities[0]->guid.' with the ta
 			}
 		</style>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				$("#p_muid_notes").delegate(":checkbox", "click", function(){
 					var checkbox = $(this);
 					if (checkbox.is(":checked"))
@@ -75,6 +75,6 @@ $this->note = 'For the entity '.h($this->entity->entities[0]->guid.' with the ta
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_notes', 'thread/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_notes', 'thread/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

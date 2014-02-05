@@ -19,7 +19,7 @@ $_->com_jstree->load();
 	}
 </style>
 <script type='text/javascript'>
-	pines(function(){
+	$_(function(){
 		// Location Tree
 		var location = $("#p_muid_form [name=location]");
 		var location_tree = $("#p_muid_form div.location_tree");

@@ -35,7 +35,7 @@ $_->com_sales->load_jcrop();
 </style>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'product/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			// Check usernames.
 			$("[name=sku]", "#p_muid_form").change(function(){
 				var sku = $(this),
@@ -69,7 +69,7 @@ $_->com_sales->load_jcrop();
 							return;
 						}
 						sku.addClass("ui-state-error");
-						$("#p_muid_sku_message").addClass("picon-task-attempt").html('That SKU belongs to <a data-entity="'+pines.safe(data.guid)+'" data-entity-context="com_sales_product">'+pines.safe(data.name)+'</a>.');
+						$("#p_muid_sku_message").addClass("picon-task-attempt").html('That SKU belongs to <a data-entity="'+$_.safe(data.guid)+'" data-entity-context="com_sales_product">'+$_.safe(data.name)+'</a>.');
 					}
 				});
 			}).blur(function(){
@@ -104,9 +104,9 @@ $_->com_sales->load_jcrop();
 						click: function(e, rows){
 							cur_vendor = rows;
 							available_vendors_table.pgrid_get_all_rows().filter('[title='+cur_vendor.attr('title')+']').pgrid_select_rows();
-							vendor_dialog.find("input[name=cur_vendor_sku]").val(pines.unsafe(cur_vendor.pgrid_get_value(2)));
-							vendor_dialog.find("input[name=cur_vendor_cost]").val(pines.unsafe(cur_vendor.pgrid_get_value(3)));
-							vendor_dialog.find("input[name=cur_vendor_link]").val(pines.unsafe(cur_vendor.pgrid_get_value(4).replace(/.*?>(.*)?<.*/i, '$1')));
+							vendor_dialog.find("input[name=cur_vendor_sku]").val($_.unsafe(cur_vendor.pgrid_get_value(2)));
+							vendor_dialog.find("input[name=cur_vendor_cost]").val($_.unsafe(cur_vendor.pgrid_get_value(3)));
+							vendor_dialog.find("input[name=cur_vendor_link]").val($_.unsafe(cur_vendor.pgrid_get_value(4).replace(/.*?>(.*)?<.*/i, '$1')));
 							vendor_dialog.dialog('open');
 						}
 					},
@@ -150,23 +150,23 @@ $_->com_sales->load_jcrop();
 							alert("Please provide both a SKU and a cost for this vendor.");
 							return;
 						}
-						cur_vendor_link = '<a href="'+pines.safe(cur_vendor_link)+'" target="_blank">'+pines.safe(cur_vendor_link)+'</a>';
+						cur_vendor_link = '<a href="'+$_.safe(cur_vendor_link)+'" target="_blank">'+$_.safe(cur_vendor_link)+'</a>';
 						if (cur_vendor == null) {
 							var new_vendor = [{
 								key: cur_vendor_entity[0].key,
 								values: [
-									pines.safe(cur_vendor_entity[0].values[0]),
-									pines.safe(cur_vendor_sku),
-									pines.safe(cur_vendor_cost),
+									$_.safe(cur_vendor_entity[0].values[0]),
+									$_.safe(cur_vendor_sku),
+									$_.safe(cur_vendor_cost),
 									cur_vendor_link
 								]
 							}];
 							vendors_table.pgrid_add(new_vendor);
 						} else {
 							cur_vendor.attr('title', cur_vendor_entity[0].key);
-							cur_vendor.pgrid_set_value(1, pines.safe(cur_vendor_entity[0].values[0]));
-							cur_vendor.pgrid_set_value(2, pines.safe(cur_vendor_sku));
-							cur_vendor.pgrid_set_value(3, pines.safe(cur_vendor_cost));
+							cur_vendor.pgrid_set_value(1, $_.safe(cur_vendor_entity[0].values[0]));
+							cur_vendor.pgrid_set_value(2, $_.safe(cur_vendor_sku));
+							cur_vendor.pgrid_set_value(3, $_.safe(cur_vendor_cost));
 							cur_vendor.pgrid_set_value(4, cur_vendor_link);
 						}
 						$(this).dialog('close');
@@ -275,7 +275,7 @@ $_->com_sales->load_jcrop();
 		<div class="tab-pane" id="p_muid_tab_categories">
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						// Category Grid
 						$("#p_muid_category_grid").pgrid({
 							pgrid_toolbar: true,
@@ -341,7 +341,7 @@ $_->com_sales->load_jcrop();
 		<div class="tab-pane" id="p_muid_tab_purchasing">
 			<div class="pf-element">
 				<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					var stock_type = $("#p_muid_form [name=stock_type]");
 					var pricing_method = $("#p_muid_form [name=pricing_method]");
 					var vendors_field = $("#p_muid_vendors_field");
@@ -375,7 +375,7 @@ $_->com_sales->load_jcrop();
 			</div>
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						$("#p_muid_form").on("change", "input[name=custom_item], input[name=show_in_storefront]", function(){
 							var custom_item = $("#p_muid_form input[name=custom_item]"),
 								show_in_storefront = $("#p_muid_form input[name=show_in_storefront]");
@@ -473,7 +473,7 @@ $_->com_sales->load_jcrop();
 		<div class="tab-pane" id="p_muid_tab_pricing">
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						var pricing_method = $("#p_muid_form [name=pricing_method]");
 						var unit_price = $("#p_muid_form [name=unit_price]");
 						var margin = $("#p_muid_form [name=margin]");
@@ -497,7 +497,7 @@ $_->com_sales->load_jcrop();
 			</div>
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						$("#p_muid_product_exp").datepicker({
 							dateFormat: "yy-mm-dd",
 							showOtherMonths: true,
@@ -611,7 +611,7 @@ $_->com_sales->load_jcrop();
 				<div class="pf-group">
 					<input class="pf-field" type="text" name="additional_barcodes" size="24" value="<?php e(implode(',', $this->entity->additional_barcodes)); ?>" />
 					<script type="text/javascript">
-						pines(function(){
+						$_(function(){
 							$("#p_muid_form [name=additional_barcodes]").ptags({
 								ptags_sortable: {
 									tolerance: 'pointer',
@@ -636,7 +636,7 @@ $_->com_sales->load_jcrop();
 		</div>
 		<?php if ($_->config->com_sales->com_hrm) { ?>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				// Commissions
 				var commissions = $("#p_muid_form [name=commissions]");
 				var commissions_table = $("#p_muid_form .commissions_table");
@@ -664,9 +664,9 @@ $_->com_sales->load_jcrop();
 							double_click: true,
 							click: function(e, rows){
 								cur_commission = rows;
-								commission_dialog.find("select[name=cur_commission_group]").val(pines.unsafe(rows.pgrid_get_value(1)));
-								commission_dialog.find("select[name=cur_commission_type]").val(pines.unsafe(rows.pgrid_get_value(2)));
-								commission_dialog.find("input[name=cur_commission_amount]").val(pines.unsafe(rows.pgrid_get_value(3)));
+								commission_dialog.find("select[name=cur_commission_group]").val($_.unsafe(rows.pgrid_get_value(1)));
+								commission_dialog.find("select[name=cur_commission_type]").val($_.unsafe(rows.pgrid_get_value(2)));
+								commission_dialog.find("input[name=cur_commission_amount]").val($_.unsafe(rows.pgrid_get_value(3)));
 								commission_dialog.dialog('open');
 							}
 						},
@@ -702,16 +702,16 @@ $_->com_sales->load_jcrop();
 								var new_commission = [{
 									key: null,
 									values: [
-										pines.safe(cur_commission_group),
-										pines.safe(cur_commission_type),
-										pines.safe(cur_commission_amount)
+										$_.safe(cur_commission_group),
+										$_.safe(cur_commission_type),
+										$_.safe(cur_commission_amount)
 									]
 								}];
 								commissions_table.pgrid_add(new_commission);
 							} else {
-								cur_commission.pgrid_set_value(1, pines.safe(cur_commission_group));
-								cur_commission.pgrid_set_value(2, pines.safe(cur_commission_type));
-								cur_commission.pgrid_set_value(3, pines.safe(cur_commission_amount));
+								cur_commission.pgrid_set_value(1, $_.safe(cur_commission_group));
+								cur_commission.pgrid_set_value(2, $_.safe(cur_commission_type));
+								cur_commission.pgrid_set_value(3, $_.safe(cur_commission_amount));
 							}
 							$(this).dialog('close');
 						}
@@ -834,7 +834,7 @@ $_->com_sales->load_jcrop();
 				}
 			</style>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					var tmp_url = <?php echo json_encode(pines_url('com_sales', 'product/temp_image', array('image' => '__image__', 'type' => '__type__', 'source' => '__source__', 'options' => '__options__'))); ?>;
 					var update_images = function(){
 						var images = [];
@@ -859,7 +859,7 @@ $_->com_sales->load_jcrop();
 					update_images();
 
 					var add_image = function(image){
-						$('<li class="thumbnail" data-source="temp"><button type="button" style="display: none;" class="remove btn btn-mini btn-danger"><i class="icon-remove"></i></button><a href="'+pines.safe(image.img_url)+'" target="_blank"><img alt="'+pines.safe(image.img.replace(/.*\//, ''))+'" src="'+pines.safe(image.tmb_url)+'" /></a><p>Click to add description...</p></li>')
+						$('<li class="thumbnail" data-source="temp"><button type="button" style="display: none;" class="remove btn btn-mini btn-danger"><i class="icon-remove"></i></button><a href="'+$_.safe(image.img_url)+'" target="_blank"><img alt="'+$_.safe(image.img.replace(/.*\//, ''))+'" src="'+$_.safe(image.tmb_url)+'" /></a><p>Click to add description...</p></li>')
 						.attr("data-image", image.img).attr("data-thumbnail", image.tmb).appendTo("#p_muid_sortable");
 					};
 
@@ -882,11 +882,11 @@ $_->com_sales->load_jcrop();
 					$("#p_muid_sortable").on("click", "li p", function(){
 						var cur_alt = $(this),
 							desc = cur_alt.html(),
-							ta = $('<textarea cols="4" rows="3" style="width: 100%">'+pines.safe(desc)+'</textarea>')
+							ta = $('<textarea cols="4" rows="3" style="width: 100%">'+$_.safe(desc)+'</textarea>')
 						.insertAfter(cur_alt)
 						.focusin(function(){
 							$(this).focusout(function(){
-								cur_alt.insertAfter(this).html(pines.safe($(this).remove().val()));
+								cur_alt.insertAfter(this).html($_.safe($(this).remove().val()));
 								update_images();
 							});
 						});
@@ -1046,7 +1046,7 @@ $_->com_sales->load_jcrop();
 			}
 		</style>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				var category_grid = $("#p_muid_category_grid");
 				var show_specs = function(){
 					$("div.spec", "#p_muid_tab_storefront").hide();
@@ -1091,7 +1091,7 @@ $_->com_sales->load_jcrop();
 			</div>
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						var alias = $("#p_muid_form [name=alias]");
 						$("#p_muid_form [name=name]").change(function(){
 							if (alias.val() == "")
@@ -1187,7 +1187,7 @@ $_->com_sales->load_jcrop();
 		<div class="tab-pane" id="p_muid_tab_head">
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						$("#p_muid_use_name").change(function(){
 							if ($(this).is(":checked"))
 								$("#p_muid_title").attr("disabled", "disabled");
@@ -1216,7 +1216,7 @@ $_->com_sales->load_jcrop();
 				<h3>Meta Tags</h3>
 			</div>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					// Meta Tags
 					var meta_tags = $("#p_muid_form [name=meta_tags]");
 					var meta_tags_table = $("#p_muid_form .meta_tags_table");
@@ -1244,8 +1244,8 @@ $_->com_sales->load_jcrop();
 								double_click: true,
 								click: function(e, rows){
 									cur_meta_tag = rows;
-									meta_tag_dialog.find("input[name=cur_meta_tag_name]").val(pines.unsafe(rows.pgrid_get_value(1)));
-									meta_tag_dialog.find("input[name=cur_meta_tag_value]").val(pines.unsafe(rows.pgrid_get_value(2)));
+									meta_tag_dialog.find("input[name=cur_meta_tag_name]").val($_.unsafe(rows.pgrid_get_value(1)));
+									meta_tag_dialog.find("input[name=cur_meta_tag_value]").val($_.unsafe(rows.pgrid_get_value(2)));
 									meta_tag_dialog.dialog('open');
 								}
 							},
@@ -1280,14 +1280,14 @@ $_->com_sales->load_jcrop();
 									var new_meta_tag = [{
 										key: null,
 										values: [
-											pines.safe(cur_meta_tag_name),
-											pines.safe(cur_meta_tag_value)
+											$_.safe(cur_meta_tag_name),
+											$_.safe(cur_meta_tag_value)
 										]
 									}];
 									meta_tags_table.pgrid_add(new_meta_tag);
 								} else {
-									cur_meta_tag.pgrid_set_value(1, pines.safe(cur_meta_tag_name));
-									cur_meta_tag.pgrid_set_value(2, pines.safe(cur_meta_tag_value));
+									cur_meta_tag.pgrid_set_value(1, $_.safe(cur_meta_tag_name));
+									cur_meta_tag.pgrid_set_value(2, $_.safe(cur_meta_tag_value));
 								}
 								$(this).dialog('close');
 							}
@@ -1366,6 +1366,6 @@ $_->com_sales->load_jcrop();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'product/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'product/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

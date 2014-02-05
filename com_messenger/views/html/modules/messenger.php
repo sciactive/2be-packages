@@ -47,7 +47,7 @@ if ($this->interface == 'floating') {
 }
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		<?php if ($this->status_url == 'true') { ?>
 		var status = <?php echo json_encode('URL: '.$_SERVER['REQUEST_URI']); ?>;
 		localStorage.setItem("pchat-presence-status", status);
@@ -85,7 +85,7 @@ if ($this->interface == 'floating') {
 			},
 			//show_log: true,
 			<?php if ($this->interface == 'floating') { ?>
-			title: pines.safe(<?php echo json_encode($this->title); ?>),
+			title: $_.safe(<?php echo json_encode($this->title); ?>),
 			<?php } elseif ($this->interface == 'inline') { ?>
 			interface_container: false,
 			widget_box: false,

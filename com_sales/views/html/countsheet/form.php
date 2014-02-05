@@ -14,7 +14,7 @@ $this->title = (!isset($this->entity->guid)) ? 'New Countsheet' : (($this->entit
 $_->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var options = {
 			pgrid_view_height: "auto",
 			pgrid_paginate: false,
@@ -56,7 +56,7 @@ $_->com_pgrid->load();
 				});
 				if (item_count == 0) {
 					entry_counter++;
-					entries_table.pgrid_add([{key: entry_counter, values: [pines.safe(code), 1]}]);
+					entries_table.pgrid_add([{key: entry_counter, values: [$_.safe(code), 1]}]);
 				}
 			});
 			update_entries();
@@ -93,7 +93,7 @@ $_->com_pgrid->load();
 								loader.pnotify_remove();
 							},
 							error: function(XMLHttpRequest, textStatus){
-								pines.error("An error occured while trying to lookup the product code:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+								$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 							},
 							success: function(data){
 								if (!data) {
@@ -106,7 +106,7 @@ $_->com_pgrid->load();
 								if (qty == null)
 									qty = rows.pgrid_get_value(2);
 								// Update the quantity of the item.
-								rows.pgrid_set_value(2, pines.safe(qty));
+								rows.pgrid_set_value(2, $_.safe(qty));
 								update_entries();
 							}
 						});
@@ -242,9 +242,9 @@ $_->com_pgrid->load();
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Commit" onclick="$('#p_muid_save').val('commit');" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
-		<input class="pf-button btn btn-primary" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="&laquo; Close" />
+		<input class="pf-button btn btn-primary" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="&laquo; Close" />
 		<?php } ?>
 	</div>
 </form>

@@ -129,7 +129,7 @@ $_->com_bootstrap->load();
 		}
 	</style>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			<?php if ($this->editable) { ?>
 			$("#p_muid_page_nav").sortable({
 				axis: "x",
@@ -145,11 +145,11 @@ $_->com_bootstrap->load();
 						dataType: "json",
 						data: {"order": JSON.stringify(struct)},
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured while trying to save the sort order:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured while trying to save the sort order:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (data == "false") {
-								pines.error("Sort order could not be saved.")
+								$_.error("Sort order could not be saved.")
 								return;
 							}
 						}
@@ -190,7 +190,7 @@ $_->com_bootstrap->load();
 		<div class="tab-pane <?php echo ($cur_key === $this->selected_tab || (!isset($this->selected_tab) && $first)) ? 'active' : ''; ?>" id="<?php e($cur_key); ?>" data-url="<?php e(pines_url('com_dash', 'dashboard/tab', array('id' => (string) $this->entity->guid, 'key' => $cur_key, 'editable' => ($this->editable ? 'true' : 'false')))); ?>">
 			<?php if ($cur_key === $this->selected_tab || (!isset($this->selected_tab) && $first)) { ?>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					$("#<?php e($cur_key); ?>").data("tab_loaded", true);
 				});
 			</script>

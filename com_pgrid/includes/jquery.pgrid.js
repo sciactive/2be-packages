@@ -1136,8 +1136,8 @@
 									return window.open(parsed_url, target);
 								} else {
 									// If WonderPHP is loaded, use its get method instead of setting location.
-									if (typeof pines != "undefined" && pines.get)
-										return pines.get(parsed_url);
+									if (typeof $_ != "undefined" && $_.get)
+										return $_.get(parsed_url);
 									return (window.location = parsed_url);
 								}
 							}

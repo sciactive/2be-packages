@@ -41,10 +41,10 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 <script type="text/javascript">
 	var p_muid_notice;
 
-	pines(function(){
-		pines.search_issues = function(){
+	$_(function(){
+		$_.search_issues = function(){
 			// Submit the form with all of the fields.
-			pines.get(<?php echo json_encode(pines_url('com_reports', 'reportissues')); ?>, {
+			$_.get(<?php echo json_encode(pines_url('com_reports', 'reportissues')); ?>, {
 				"location": location,
 				"descendants": descendants,
 				"all_time": all_time,
@@ -76,7 +76,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'employee_issues',
 						content: rows
 					});
@@ -115,12 +115,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"all_time": all_time, "start_date": start_date, "end_date": end_date},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the date form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the date form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Date Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -138,11 +138,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 									end_date = form.find(":input[name=end_date]").val();
 								}
 								form.dialog('close');
-								pines.search_issues();
+								$_.search_issues();
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -153,12 +153,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -174,11 +174,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								else
 									descendants = false;
 								form.dialog('close');
-								pines.search_issues();
+								$_.search_issues();
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -226,7 +226,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		};
 		<?php if (gatekeeper('com_hrm/resolveissue')) { ?>
 		// Mark an employee issue as resolved, unresolved or remove it altogther.
-		pines.com_reports_process_issue = function(id, status){
+		$_.com_reports_process_issue = function(id, status){
 			var comments;
 			if (status == 'delete') {
 				if (!confirm('Delete Employee Issue?'))
@@ -242,11 +242,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"id": id, "status": status, "comments": comments},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to process this issue:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to process this issue:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == 'Error') {
-						pines.error("An error occured while trying to process this issue.");
+						$_.error("An error occured while trying to process this issue.");
 					} else {
 						location.reload(true);
 					}
@@ -284,11 +284,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<td><div class="p_muid_issue_actions">
 				<?php if (gatekeeper('com_hrm/resolveissue')) {
 					if ($cur_issue->status != 'resolved') { ?>
-					<button class="btn" type="button" onclick="pines.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'resolved');" title="Resolve"><span class="p_muid_btn picon picon-flag-yellow"></span></button>
+					<button class="btn" type="button" onclick="$_.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'resolved');" title="Resolve"><span class="p_muid_btn picon picon-flag-yellow"></span></button>
 					<?php } else { ?>
-					<button class="btn" type="button" onclick="pines.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'unresolved');" title="Unresolved"><span class="p_muid_btn picon picon-flag-red"></span></button>
+					<button class="btn" type="button" onclick="$_.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'unresolved');" title="Unresolved"><span class="p_muid_btn picon picon-flag-red"></span></button>
 					<?php } ?>
-					<button class="btn" type="button" onclick="pines.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'delete');" title="Remove"><span class="p_muid_btn picon picon-edit-delete"></span></button>
+					<button class="btn" type="button" onclick="$_.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'delete');" title="Remove"><span class="p_muid_btn picon picon-edit-delete"></span></button>
 				<?php } ?>
 				</div></td>
 		</tr>

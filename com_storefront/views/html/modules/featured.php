@@ -52,9 +52,9 @@ if (empty($this->title))
 </style>
 <span id="p_muid_product" class="com_storefront_featured_item">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$("button.add_cart", "#p_muid_product").click(function(){
-				pines.com_storefront_add_to_cart(<?php echo json_encode($this->entity->guid); ?>, <?php echo json_encode($this->entity->name); ?>, <?php echo (float) $this->entity->unit_price; ?>, $("#p_muid_product"));
+				$_.com_storefront_add_to_cart(<?php echo json_encode($this->entity->guid); ?>, <?php echo json_encode($this->entity->name); ?>, <?php echo (float) $this->entity->unit_price; ?>, $("#p_muid_product"));
 			});
 		});
 	</script>

@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Shipping Address';
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Address type toggle.
 		var address_us = $("#p_muid_address_us");
 		var address_international = $("#p_muid_address_international");

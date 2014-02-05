@@ -12,14 +12,14 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-pines.loadcss("<?php e($_->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($_->config->com_bootstrap->theme)); ?>/css/<?php echo $_->config->debug_mode ? 'bootstrap.css' : 'bootstrap.min.css'; ?>");
+$_.loadcss("<?php e($_->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($_->config->com_bootstrap->theme)); ?>/css/<?php echo $_->config->debug_mode ? 'bootstrap.css' : 'bootstrap.min.css'; ?>");
 <?php if ($_->config->com_bootstrap->responsive && file_exists('components/com_bootstrap/includes/themes/'.clean_filename($_->config->com_bootstrap->theme).'/css/'.($_->config->debug_mode ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css'))) { ?>
-pines.loadcss("<?php e($_->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($_->config->com_bootstrap->theme)); ?>/css/<?php echo $_->config->debug_mode ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css'; ?>");
+$_.loadcss("<?php e($_->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($_->config->com_bootstrap->theme)); ?>/css/<?php echo $_->config->debug_mode ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css'; ?>");
 <?php } ?>
-pines.loadcss("<?php e($_->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome.css");
-pines.loadjs("<?php e($_->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($_->config->com_bootstrap->theme)); ?>/js/<?php echo $_->config->debug_mode ? 'bootstrap.js' : 'bootstrap.min.js'; ?>");
+$_.loadcss("<?php e($_->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome.css");
+$_.loadjs("<?php e($_->config->location); ?>components/com_bootstrap/includes/themes/<?php e(clean_filename($_->config->com_bootstrap->theme)); ?>/js/<?php echo $_->config->debug_mode ? 'bootstrap.js' : 'bootstrap.min.js'; ?>");
 // Get the current number of columns in the CSS grid.
-pines.com_bootstrap_get_columns = function(){
+$_.com_bootstrap_get_columns = function(){
 	var cur_grid = 0, cur_test;
 	do {
 		cur_grid++;
@@ -29,8 +29,8 @@ pines.com_bootstrap_get_columns = function(){
 	return cur_grid;
 };
 <?php /* Example:
-pines(function(){
-	alert(pines.com_bootstrap_get_columns());
+$_(function(){
+	alert($_.com_bootstrap_get_columns());
 });
 */ ?>
 </script>
@@ -43,7 +43,7 @@ pines(function(){
 </noscript>
 <!--[if IE 7]>
 <script type="text/javascript">
-pines.loadcss("<?php e($_->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome-ie7.min.css");
+$_.loadcss("<?php e($_->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome-ie7.min.css");
 </script>
 <![endif]-->
 <style type="text/css">

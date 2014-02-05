@@ -15,7 +15,7 @@ $this->note = 'This wizard will create packages from enabled components and temp
 $_->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$("#p_muid_form table").pgrid({
 			pgrid_paginate: false,
 			pgrid_select: false,
@@ -77,6 +77,6 @@ $_->com_pgrid->load();
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" value="Create Packages" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_packager', 'package/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_packager', 'package/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

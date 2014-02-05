@@ -77,7 +77,7 @@ $_->icons->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var dec = <?php echo (int) $_->config->com_sales->dec; ?>;
 		var round_to_dec = function(value){
 			var rnd = Math.pow(10, dec);
@@ -122,10 +122,10 @@ $_->icons->load();
 				var qty = parseInt(product.find("> div.qty").text());
 
 				var price = unit_price * qty;
-				product.find("> div.price").html(pines.safe("$"+round_to_dec(price)));
+				product.find("> div.price").html($_.safe("$"+round_to_dec(price)));
 				subtotal += price;
 			});
-			$("div.subtotal", "#com_storefront_cart_controls").html(pines.safe("$"+round_to_dec(subtotal)));
+			$("div.subtotal", "#com_storefront_cart_controls").html($_.safe("$"+round_to_dec(subtotal)));
 		};
 		check_products();
 
@@ -138,11 +138,11 @@ $_->icons->load();
 				dataType: "json",
 				data: {option: "com_storefront", action: "cart/remove", id: guid},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to remove the product from your cart:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to remove the product from your cart:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
-						pines.error("The product could not be removed from your cart.");
+						$_.error("The product could not be removed from your cart.");
 						return;
 					}
 					product.fadeOut("reg", function(){
@@ -175,12 +175,12 @@ $_->icons->load();
 				input.remove();
 				if (new_val < 1)
 					new_val = 1;
-				qty.html(pines.safe(new_val)).show();
-				pines.com_storefront_adjust_quantity(parseInt(qty.siblings("div.guid").text()), old_val, new_val);
+				qty.html($_.safe(new_val)).show();
+				$_.com_storefront_adjust_quantity(parseInt(qty.siblings("div.guid").text()), old_val, new_val);
 			})
 			.keyup(function(){
 				var input = $(this);
-				qty.html(pines.safe(input.val())+"_");
+				qty.html($_.safe(input.val())+"_");
 				input.css("width", qty.width());
 			}).keyup()
 			.insertAfter(qty)
@@ -198,11 +198,11 @@ $_->icons->load();
 				dataType: "json",
 				data: {option: "com_storefront", action: "cart/empty"},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to empty your cart:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to empty your cart:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
-						pines.error("Your cart could not be emptied.");
+						$_.error("Your cart could not be emptied.");
 						return;
 					}
 					$("> div.product", "#com_storefront_cart").fadeOut("reg", function(){
@@ -215,7 +215,7 @@ $_->icons->load();
 			});
 		});
 
-		pines.com_storefront_adjust_quantity = function(guid, old_qty, new_qty){
+		$_.com_storefront_adjust_quantity = function(guid, old_qty, new_qty){
 			var qty = $("> div.product.guid_"+guid+" div.qty", "#com_storefront_cart");
 			if (!qty.length) return;
 			$.ajax({
@@ -224,7 +224,7 @@ $_->icons->load();
 				dataType: "json",
 				data: {option: "com_storefront", action: "cart/qty", id: guid, qty: new_qty},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to adjust quantity:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to adjust quantity:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					qty.html(old_qty);
 				},
 				success: function(data){
@@ -232,7 +232,7 @@ $_->icons->load();
 						if (data == "one_per")
 							alert("Only one of this item is allowed per ticket.");
 						else
-							pines.error("The quantity could not be adjusted.");
+							$_.error("The quantity could not be adjusted.");
 						qty.html(old_qty);
 						return;
 					}
@@ -242,7 +242,7 @@ $_->icons->load();
 			});
 		};
 
-		pines.com_storefront_add_to_cart = function(guid, name, unit_price, element){
+		$_.com_storefront_add_to_cart = function(guid, name, unit_price, element){
 			if (isNaN(guid))
 				return false;
 			$.ajax({
@@ -251,14 +251,14 @@ $_->icons->load();
 				dataType: "json",
 				data: {option: "com_storefront", action: "cart/add", id: guid},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to add the product to your cart:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to add the product to your cart:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data || data == "one_per") {
 						if (data == "one_per")
 							alert("Only one of this item is allowed per ticket.");
 						else
-							pines.error("The product could not be added to your cart.");
+							$_.error("The product could not be added to your cart.");
 						return;
 					}
 					var product_elem = $("> div.product.guid_"+guid, "#com_storefront_cart");
@@ -270,10 +270,10 @@ $_->icons->load();
 						product_elem
 						.removeClass("template")
 						.addClass("product guid_"+guid)
-						.find("div.guid").html(pines.safe(guid)).end()
-						.find("div.unit_price").html(pines.safe(unit_price)).end()
-						.find("div.name").html(pines.safe(name)).end()
-						.find("div.price").html(pines.safe("$"+round_to_dec(unit_price))).end()
+						.find("div.guid").html($_.safe(guid)).end()
+						.find("div.unit_price").html($_.safe(unit_price)).end()
+						.find("div.name").html($_.safe(name)).end()
+						.find("div.price").html($_.safe("$"+round_to_dec(unit_price))).end()
 						.appendTo("#com_storefront_cart")
 						.fadeIn();
 					}
@@ -321,7 +321,7 @@ $_->icons->load();
 		<br style="clear: both; height: 0;" />
 		<?php } ?>
 		<button type="button" class="empty_cart btn btn-danger" title="Empty Cart"><i class="icon-trash icon-white"></i></button>
-		<button type="button" class="checkout btn btn-primary" onclick="pines.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);"><i class="icon-ok icon-white"></i> Check-Out</button>
+		<button type="button" class="checkout btn btn-primary" onclick="$_.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);"><i class="icon-ok icon-white"></i> Check-Out</button>
 		<br style="clear: both; height: 0;" />
 	</div>
 	<div class="no_items"<?php echo $_->com_storefront->cart() ? ' style="display: none;"' : ''; ?>>

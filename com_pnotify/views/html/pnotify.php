@@ -13,25 +13,25 @@ defined('P_RUN') or die('Direct access prohibited');
 $_->icons->load();
 ?>
 <script type="text/javascript">
-pines.loadcss("<?php e($_->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.css");
-pines.loadcss("<?php e($_->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.icons.css");
-pines.loadjs("<?php e($_->config->location); ?>components/com_pnotify/includes/<?php echo $_->config->debug_mode ? 'jquery.pnotify.js' : 'jquery.pnotify.min.js'; ?>");
-pines.pnotify_alert_defaults = {nonblock: true};
-pines.pnotify_notice_defaults = {nonblock: true};
-pines.pnotify_error_defaults = {type: "error", hide: false, nonblock: false};
-pines.load(function(){
+$_.loadcss("<?php e($_->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.css");
+$_.loadcss("<?php e($_->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.icons.css");
+$_.loadjs("<?php e($_->config->location); ?>components/com_pnotify/includes/<?php echo $_->config->debug_mode ? 'jquery.pnotify.js' : 'jquery.pnotify.min.js'; ?>");
+$_.pnotify_alert_defaults = {nonblock: true};
+$_.pnotify_notice_defaults = {nonblock: true};
+$_.pnotify_error_defaults = {type: "error", hide: false, nonblock: false};
+$_.load(function(){
 	if (!window._alert) {
 		window._alert = window.alert;
 		window.alert = function(message){
-			var options = $.extend({title: "Alert", text: pines.safe(message)}, pines.pnotify_alert_defaults);
+			var options = $.extend({title: "Alert", text: $_.safe(message)}, $_.pnotify_alert_defaults);
 			return $.pnotify(options);
 		};
-		pines.notice = function(message, title){
-			var options = $.extend({title: title ? title : "Notice", text: String(message)}, pines.pnotify_notice_defaults);
+		$_.notice = function(message, title){
+			var options = $.extend({title: title ? title : "Notice", text: String(message)}, $_.pnotify_notice_defaults);
 			return $.pnotify(options);
 		};
-		pines.error = function(message, title){
-			var options = $.extend({title: title ? title : "Error", text: String(message)}, pines.pnotify_error_defaults);
+		$_.error = function(message, title){
+			var options = $.extend({title: title ? title : "Error", text: String(message)}, $_.pnotify_error_defaults);
 			return $.pnotify(options);
 		};
 	}

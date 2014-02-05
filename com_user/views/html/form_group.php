@@ -17,7 +17,7 @@ $_->com_pgrid->load();
 $_->uploader->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Attributes
 		var attributes = $("#p_muid_tab_attributes input[name=attributes]");
 		var attributes_table = $("#p_muid_tab_attributes .attributes_table");
@@ -66,8 +66,8 @@ $_->uploader->load();
 					var new_attribute = [{
 						key: null,
 						values: [
-							pines.safe(cur_attribute_name),
-							pines.safe(cur_attribute_value)
+							$_.safe(cur_attribute_name),
+							$_.safe(cur_attribute_value)
 						]
 					}];
 					attributes_table.pgrid_add(new_attribute);
@@ -213,7 +213,7 @@ $_->uploader->load();
 		<div class="tab-pane" id="p_muid_tab_location">
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						var address_us = $("#p_muid_address_us");
 						var address_international = $("#p_muid_address_international");
 						$("#p_muid_form [name=address_type]").change(function(){
@@ -334,7 +334,7 @@ $_->uploader->load();
 				}
 			</style>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					var sections = $("#p_muid_tab_abilities .abilities_accordion .collapse");
 					$("#p_muid_tab_abilities button.expand_all").click(function(){
 						sections.collapse("show");
@@ -433,6 +433,6 @@ $_->uploader->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_user', 'listgroups'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_user', 'listgroups'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -22,7 +22,7 @@ all.each(function(){
 		minLength: 2,
 		source: function(request, response) {
 			$.ajax({
-				url: pines.com_customer_autocompany_url,
+				url: $_.com_customer_autocompany_url,
 				dataType: "json",
 				data: {"q": request.term},
 				success: function(data) {
@@ -32,12 +32,12 @@ all.each(function(){
 					}
 					response($.map(data, function(item) {
 						return {
-							"id": pines.safe(item.guid),
-							"label": pines.safe(item.name),
+							"id": $_.safe(item.guid),
+							"label": $_.safe(item.name),
 							"value": item.guid+": "+item.name,
-							"desc": "<em><pre>"+(item.email ? " "+pines.safe(item.email) : "")+
-								(item.phone ? " "+pines.safe(item.phone) : "")+
-								(item.website ? " "+pines.safe(item.website) : "")+"</pre></em>"
+							"desc": "<em><pre>"+(item.email ? " "+$_.safe(item.email) : "")+
+								(item.phone ? " "+$_.safe(item.phone) : "")+
+								(item.website ? " "+$_.safe(item.website) : "")+"</pre></em>"
 						};
 					}));
 				}

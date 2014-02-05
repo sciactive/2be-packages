@@ -20,7 +20,7 @@ $grid_thirds = floor($_->config->com_bootstrap->grid_columns / 3);
 		}
 	</style>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$("#p_muid_form").selectable({
 				filter: ".widget_type",
 				selected: function(e, ui){

@@ -26,10 +26,10 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_loan/loan/list']);
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Time and location variables.
 		var all_time = true, start_date = "", end_date = "", location = "", descendants = false;
-		pines.status_tags = "<?php echo (isset($this->pgrid_state->status_tags)) ? implode(',',$this->pgrid_state->status_tags) : ''; ?>";
+		$_.status_tags = "<?php echo (isset($this->pgrid_state->status_tags)) ? implode(',',$this->pgrid_state->status_tags) : ''; ?>";
 		var customer_search_box;
 		var search_loan = <?php echo json_encode($_REQUEST['id']); ?>;
 		
@@ -63,7 +63,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				url: <?php echo json_encode(pines_url('com_loan', 'loan/search')); ?>,
 				type: "POST",
 				dataType: "json",
-				data: {"q": search_string, "status_tags" : pines.status_tags, "location": location, "descendants": descendants, "all_time": all_time, "start_date": start_date, "end_date": end_date},
+				data: {"q": search_string, "status_tags" : $_.status_tags, "location": location, "descendants": descendants, "all_time": all_time, "start_date": start_date, "end_date": end_date},
 				beforeSend: function(){
 					loader = $.pnotify({
 						title: 'Search',
@@ -78,7 +78,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					loader.pnotify_remove();
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
@@ -91,22 +91,22 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						struct.push({
 							"key": this.guid,
 							"values": [
-								'<a data-entity="'+pines.safe(this.guid)+'" data-entity-context="com_loan_loan">'+pines.safe(this.id)+'</a>',
-								'<a data-entity="'+pines.safe(this.customer_guid)+'" data-entity-context="com_customer_customer">'+pines.safe(this.customer_name)+'</a>',
-								'<a data-entity="'+pines.safe(this.employee_guid)+'" data-entity-context="com_hrm_employee">'+pines.safe(this.employee)+'</a>',
-								pines.safe(this.location),
-								pines.safe(this.creation_date),
-								pines.safe(this.collection_code),
-								pines.safe(this.status),
-								pines.safe(this.principal),
-								pines.safe(this.apr),
-								pines.safe(this.term),
-								pines.safe(this.balance),
-								pines.safe(this.payment),
-								pines.safe(this.current_past_due),
-								pines.safe(this.total_payments_made),
-								pines.safe(this.total_principal_paid),
-								pines.safe(this.total_interest_paid)
+								'<a data-entity="'+$_.safe(this.guid)+'" data-entity-context="com_loan_loan">'+$_.safe(this.id)+'</a>',
+								'<a data-entity="'+$_.safe(this.customer_guid)+'" data-entity-context="com_customer_customer">'+$_.safe(this.customer_name)+'</a>',
+								'<a data-entity="'+$_.safe(this.employee_guid)+'" data-entity-context="com_hrm_employee">'+$_.safe(this.employee)+'</a>',
+								$_.safe(this.location),
+								$_.safe(this.creation_date),
+								$_.safe(this.collection_code),
+								$_.safe(this.status),
+								$_.safe(this.principal),
+								$_.safe(this.apr),
+								$_.safe(this.term),
+								$_.safe(this.balance),
+								$_.safe(this.payment),
+								$_.safe(this.current_past_due),
+								$_.safe(this.total_payments_made),
+								$_.safe(this.total_principal_paid),
+								$_.safe(this.total_interest_paid)
 							]
 						});
 					});
@@ -200,7 +200,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'applications',
 						content: rows
 					});
@@ -225,7 +225,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			pgrid_state_change: function(state) {
 				if (typeof state_xhr == "object")
 					state_xhr.abort();
-				var tags = pines.status_tags.split(',');
+				var tags = $_.status_tags.split(',');
 				state.status_tags = tags;
 				cur_state = JSON.stringify(state);
 				state_xhr = $.post(<?php echo json_encode(pines_url('com_pgrid', 'save_state')); ?>, {view: "com_loan/loan/list", state: cur_state});
@@ -244,12 +244,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"all_time": all_time, "start_date": start_date, "end_date": end_date},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the date form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the date form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Date Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -272,7 +272,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -283,12 +283,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -306,7 +306,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -318,12 +318,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {'cur_state': cur_state},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the loan status form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the loan status form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Search Loan Status\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -334,9 +334,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						},
 						buttons: {
 							"Update": function(){
-								pines.status_tags = form.find(":input[name=status_tags]").val(); // is a string separated by commas
-								if (pines.status_tags != '')
-									var tags = pines.status_tags.split(','); // make it into an array
+								$_.status_tags = form.find(":input[name=status_tags]").val(); // is a string separated by commas
+								if ($_.status_tags != '')
+									var tags = $_.status_tags.split(','); // make it into an array
 								else
 									var tags = ''; // make it an empty string
 								cur_state = JSON.parse(cur_state); // read json as object
@@ -348,7 +348,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -364,7 +364,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			}
 			var payments_limit = <?php echo $_->config->com_loan->payments_limit; ?>;
 			if (rows.length > payments_limit) {
-				alert('You do not have permission to make more than '+pines.safe(payments_limit)+' different customer payments, therefore you cannot make payments for the selected '+rows.length+' customers.');
+				alert('You do not have permission to make more than '+$_.safe(payments_limit)+' different customer payments, therefore you cannot make payments for the selected '+rows.length+' customers.');
 			} else {
 				$.ajax({
 					url: <?php echo json_encode(pines_url('com_loan', 'forms/makepayments')); ?>,
@@ -372,13 +372,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					dataType: "html",
 					data: {"ids": row_ids},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to retrieve the make payments form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to retrieve the make payments form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (data == "") {
 							return;
 						}
-						pines.pause();
+						$_.pause();
 						var form = $("<div title=\"Make Payment(s)\"></div>").html(data+"<br />");
 						form.dialog({
 							bgiframe: true,
@@ -394,7 +394,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								}
 							}
 						});
-						pines.play();
+						$_.play();
 					}
 				});
 			}
@@ -407,12 +407,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"id": loan_id},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the collection code form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the collection code form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Change Collection Code\"></div>").html(data+"<br />");
 					form.dialog({
 						bgiframe: true,
@@ -428,7 +428,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -444,7 +444,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			}
 			var status_limit = <?php echo $_->config->com_loan->status_limit; ?>;
 			if (rows.length > status_limit) {
-				alert('You do not have permission to change loan status on more than '+pines.safe(status_limit)+' different customers, therefore you cannot change the status for the selected '+rows.length+' customers.');
+				alert('You do not have permission to change loan status on more than '+$_.safe(status_limit)+' different customers, therefore you cannot change the status for the selected '+rows.length+' customers.');
 			} else {
 				$.ajax({
 					url: <?php echo json_encode(pines_url('com_loan', 'forms/loan_status')); ?>,
@@ -452,13 +452,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					dataType: "html",
 					data: {"ids": row_ids},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to retrieve the loan status form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to retrieve the loan status form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (data == "") {
 							return;
 						}
-						pines.pause();
+						$_.pause();
 						var form = $("<div title=\"Change status of Loan(s)\"></div>").html(data+"<br />");
 						form.dialog({
 							bgiframe: true,
@@ -474,7 +474,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								}
 							}
 						});
-						pines.play();
+						$_.play();
 					}
 				});
 			}
@@ -491,7 +491,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			}
 			var hist_limit = <?php echo $_->config->com_loan->cust_hist_limit; ?>;
 			if (rows.length > hist_limit) {
-				alert('You do not have permission to view more than '+pines.safe(hist_limit)+' different customer histories, therefore you cannot view the history for the selected '+rows.length+' customers.');
+				alert('You do not have permission to view more than '+$_.safe(hist_limit)+' different customer histories, therefore you cannot view the history for the selected '+rows.length+' customers.');
 			} else {
 				$.ajax({
 					url: <?php echo json_encode(pines_url('com_loan', 'forms/cust_history')); ?>,
@@ -499,13 +499,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					dataType: "html",
 					data: {"ids": row_ids},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to retrieve the customer history dialog:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to retrieve the customer history dialog:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (data == "") {
 							return;
 						}
-						pines.pause();
+						$_.pause();
 						var form = $("<div title=\"View Customer History\"></div>").html(data+"<br />");
 						form.dialog({
 							bgiframe: true,
@@ -524,7 +524,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						if (rows.length > 1)
 							form.find(".history_status").html('<div class="alert alert-info" style="margin-bottom: 8px;"><i class="icon-info-sign"></i> You are viewing '+rows.length+' customers.</div>');
 						
-						pines.play();
+						$_.play();
 					}
 				});
 			}
@@ -542,7 +542,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			
 			var limit = <?php echo $_->config->com_loan->add_interaction_limit; ?>;
 			if (rows.length > limit) {
-				alert('You do not have permission to add more than '+pines.safe(limit)+' interactions, therefore you cannot add interactions to the selected '+rows.length+' customers.');
+				alert('You do not have permission to add more than '+$_.safe(limit)+' interactions, therefore you cannot add interactions to the selected '+rows.length+' customers.');
 			} else {
 				$.ajax({
 					url: <?php echo json_encode(pines_url('com_loan', 'forms/add_interaction')); ?>,
@@ -550,13 +550,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					dataType: "html",
 					data: {"id": row_ids},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to retrieve the interaction form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to retrieve the interaction form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (data == "") {
 							return;
 						}
-						pines.pause();
+						$_.pause();
 						var form = $("<div title=\"Add Customer Interaction\"></div>").html(data+"<br />");
 						if (rows.length > 1)
 							form.find(".interaction_status").html('<div class="alert alert-info" style="padding-bottom: 10px;"><i class="icon-info-sign"></i> You are adding interactions to '+rows.length+' customers.</div>');
@@ -600,7 +600,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 											status_bar.html('<div class="alert alert-success" style="padding-bottom: 10px;"><i class="picon picon-throbber"></i> Processing...</div>');
 										},
 										error: function(XMLHttpRequest, textStatus){
-											pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+											$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 											success.val('false');
 										},
 										success: function(data){
@@ -619,7 +619,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								}
 							}
 						});
-						pines.play();
+						$_.play();
 					}
 				});
 			}
@@ -633,12 +633,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"id": loan_id},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the make payment form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the make payment form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Pay off Loan\"></div>").html(data+"<br />");
 					form.dialog({
 						bgiframe: true,
@@ -662,7 +662,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								} else {
 									form.dialog('close');
 									// Submit the request status change.
-									pines.post(<?php echo json_encode(pines_url('com_loan', 'loan/makepayment')); ?>, {
+									$_.post(<?php echo json_encode(pines_url('com_loan', 'loan/makepayment')); ?>, {
 										"loan_id": loan_id,
 										"page": page,
 										"payment_amount": payment_amount,
@@ -672,7 +672,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

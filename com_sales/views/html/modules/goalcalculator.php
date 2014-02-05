@@ -53,7 +53,7 @@ foreach ($goals as $goal) {
 		}
 	</style>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var calc = function(){
 				var days_this_month = <?php echo json_encode($daysthismonth); ?>,
 					yellow_multiplier = <?php echo json_encode($yellow_multiplier); ?>,

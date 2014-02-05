@@ -82,7 +82,7 @@ $this->title = 'Edit Buttons';
 		}
 	</style>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$("#p_muid_cur_buttons").sortable({
 				tolerance: "pointer",
 				placeholder: "btn btn-warning placeholder",

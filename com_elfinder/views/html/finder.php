@@ -14,7 +14,7 @@ $this->title = 'File Manager';
 $_->com_elfinder->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		<?php if (!$this->ckeditor) { ?>
 		$(".com_elfinder_finder").elfinder({
 			url: <?php echo json_encode(pines_url('com_elfinder', 'connector')); ?>,

@@ -16,7 +16,7 @@ if ($_->config->com_user->email_usernames)
 	$this->note = 'If you\'ve forgotten your password, you can use this form to recover your account.';
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var form = $("#p_muid_form");
 		$("input[name=type]", "#p_muid_form").change(function(){
 			var box = $(this);
@@ -48,6 +48,6 @@ if ($_->config->com_user->email_usernames)
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

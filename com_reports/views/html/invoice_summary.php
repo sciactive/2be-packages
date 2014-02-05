@@ -53,10 +53,10 @@ if (isset($_->com_googledrive)) {
 </style>
 <script type="text/javascript">
 	var p_muid_notice;
-	pines(function(){
+	$_(function(){
 		search_invoices = function(){
 			// Submit the form with all of the fields.
-			pines.get(<?php echo json_encode(pines_url('com_reports', 'invoicesummary')); ?>, {
+			$_.get(<?php echo json_encode(pines_url('com_reports', 'invoicesummary')); ?>, {
 				"location": location,
 				"descendants": descendants,
 				"all_time": all_time,
@@ -86,7 +86,7 @@ if (isset($_->com_googledrive)) {
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'invoice_summary',
 						content: rows
 					});
@@ -115,12 +115,12 @@ if (isset($_->com_googledrive)) {
 				dataType: "html",
 				data: {"all_time": all_time, "start_date": start_date, "end_date": end_date},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the date form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the date form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Date Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -142,7 +142,7 @@ if (isset($_->com_googledrive)) {
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -153,12 +153,12 @@ if (isset($_->com_googledrive)) {
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -178,7 +178,7 @@ if (isset($_->com_googledrive)) {
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

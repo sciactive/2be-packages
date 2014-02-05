@@ -20,9 +20,9 @@ if (!isset($this->entity->customer->email) && !$_->config->com_sales->receipt_pr
 $sale = $this->entity->has_tag('sale');
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$("#p_muid_email").click(function(){
-			pines.get(<?php echo json_encode(pines_url('com_sales', $sale ? 'sale/sendreceipt' : 'return/sendreceipt', array('id' => $this->entity->guid))); ?>);
+			$_.get(<?php echo json_encode(pines_url('com_sales', $sale ? 'sale/sendreceipt' : 'return/sendreceipt', array('id' => $this->entity->guid))); ?>);
 		});
 		<?php if ($_->config->com_sales->receipt_printer) { ?>
 		$("#p_muid_print").click(function(){

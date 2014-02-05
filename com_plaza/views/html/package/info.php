@@ -87,7 +87,7 @@ $this->title = 'Package Info for '.h($this->package['package']);
 			</div>
 		</div>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				$("#p_muid_fancybox > a").fancybox({titleShow: true, titlePosition: "inside"});
 			});
 		</script>

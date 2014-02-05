@@ -93,11 +93,11 @@ $_->icons->load();
 					thread_box.removeClass("picon picon-throbber");
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to get the attached notes:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to get the attached notes:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
-						pines.error("An error occured while trying to get the attached notes.");
+						$_.error("An error occured while trying to get the attached notes.");
 						return;
 					}
 					thread_box.empty();
@@ -125,8 +125,8 @@ $_->icons->load();
 		function p_muid_format_thread(thread) {
 			var html = $('<div class="thread ui-widget-content"></div>').data("thread", thread);
 			html.append('<div class="ui-widget-header"><div class="privacy"><i class="'+(thread.privacy == "everyone" ? "icon-globe" : (thread.privacy == "my-group" ? "icon-lock" : "icon-user"))+'" title="'+(thread.privacy == "everyone" ? "This thread is viewable to everyone." : (thread.privacy == "my-group" ? "This thread is viewable to the author's group." : "This thread is only viewable to the author."))+'"></i></div>\n\
-			<div class="date">'+pines.safe(thread.date)+'</div>\n\
-			<div class="user">'+pines.safe(thread.user)+'</div></div>');
+			<div class="date">'+$_.safe(thread.date)+'</div>\n\
+			<div class="user">'+$_.safe(thread.user)+'</div></div>');
 			var note_div = $('<div class="notes"></div>'),
 				notes = thread.notes;
 			if (notes.length > 4) {
@@ -151,7 +151,7 @@ $_->icons->load();
 
 		function p_muid_format_note(note) {
 			var html = $('<div class="note"></div>'),
-				text = pines.safe(note.text).replace(/\n/g, '<br />')
+				text = $_.safe(note.text).replace(/\n/g, '<br />')
 				// Match URLs with a protocol. (http://example.com/wow)
 				.replace(
 					/\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%]))(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi,
@@ -173,11 +173,11 @@ $_->icons->load();
 					'<a href="mailto://$1" target="_blank">$1<i class="icon-envelope" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
 				);
 			html.append('<div class="note-text">'+text+'</div>\n\
-			<div class="footer">- <strong>'+pines.safe(note.user)+'</strong> on <span title="'+pines.safe(note.time)+'">'+pines.safe(note.date)+'</span></div>');
+			<div class="footer">- <strong>'+$_.safe(note.user)+'</strong> on <span title="'+$_.safe(note.time)+'">'+$_.safe(note.date)+'</span></div>');
 			return html;
 		}
 
-		pines(function(){
+		$_(function(){
 			var thread_box = $("#p_muid_current_threads").delegate("textarea", "keydown keyup change", function(){
 				var textarea = $(this);
 				if (textarea.prop("scrollHeight"))
@@ -219,7 +219,7 @@ $_->icons->load();
 						thread_box.removeClass("picon picon-throbber");
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to save the note:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to save the note:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -238,7 +238,7 @@ $_->icons->load();
 	<?php if (gatekeeper('com_notes/newthread')) { ?>
 	<hr />
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			// New thread box.
 			var new_thread = $("#p_muid_new_thread");
 			new_thread.focus(function(){
@@ -284,7 +284,7 @@ $_->icons->load();
 						thread_buttons.show();
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to save the note:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to save the note:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {

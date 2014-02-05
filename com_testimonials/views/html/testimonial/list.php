@@ -18,7 +18,7 @@ $_->com_ptags->load();
 $this->show = $_REQUEST['show'];
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		
 		var testimonial_type = <?php echo json_encode(ucwords($this->testimonial_type)); ?>;
 		var search_box;
@@ -49,7 +49,7 @@ $this->show = $_REQUEST['show'];
 					loader.pnotify_remove();
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
@@ -61,20 +61,20 @@ $this->show = $_REQUEST['show'];
 						struct.push({
 							"key": this.guid,
 							"values": [
-								'<a data-entity="'+pines.safe(this.guid)+'" data-entity-context="com_testimonials_testimonial">'+pines.safe(this.id)+'</a>',
-								'<a data-entity="'+pines.safe(this.customer_guid)+'" data-entity-context="com_customer_customer">'+pines.safe(this.customer_name)+'</a>',
-								'<a href="mailto:'+pines.safe(this.email)+'">'+pines.safe(this.email)+'</a>',
-								'<a data-entity="'+pines.safe(this.user_guid)+'" data-entity-context="user">'+pines.safe(this.user_name)+'</a>',
-								pines.safe(this.location),
-								pines.safe(this.city),
-								pines.safe(this.state),
-								pines.safe(this.creation_date),
-								pines.safe(this.status),
-								pines.safe(this.rating),
-								pines.safe(this.share_allowed),
-								pines.safe(this.share_anon),
-								pines.safe(this.original),
-								pines.safe(this.quotes)
+								'<a data-entity="'+$_.safe(this.guid)+'" data-entity-context="com_testimonials_testimonial">'+$_.safe(this.id)+'</a>',
+								'<a data-entity="'+$_.safe(this.customer_guid)+'" data-entity-context="com_customer_customer">'+$_.safe(this.customer_name)+'</a>',
+								'<a href="mailto:'+$_.safe(this.email)+'">'+$_.safe(this.email)+'</a>',
+								'<a data-entity="'+$_.safe(this.user_guid)+'" data-entity-context="user">'+$_.safe(this.user_name)+'</a>',
+								$_.safe(this.location),
+								$_.safe(this.city),
+								$_.safe(this.state),
+								$_.safe(this.creation_date),
+								$_.safe(this.status),
+								$_.safe(this.rating),
+								$_.safe(this.share_allowed),
+								$_.safe(this.share_anon),
+								$_.safe(this.original),
+								$_.safe(this.quotes)
 							]
 						});
 					});
@@ -123,7 +123,7 @@ $this->show = $_REQUEST['show'];
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'loans',
 						content: rows
 					});
@@ -154,12 +154,12 @@ $this->show = $_REQUEST['show'];
 				dataType: "html",
 				data: {"id": testimonial_id},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the change status form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the change status form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Update Testimonial Status\"></div>").html(data+"<br />");
 					form.dialog({
 						bgiframe: true,
@@ -179,7 +179,7 @@ $this->show = $_REQUEST['show'];
 								} else {
 									form.dialog('close');
 									// Submit the request status change.
-									pines.post(<?php echo json_encode(pines_url('com_testimonials', 'testimonial/changestatus')); ?>, {
+									$_.post(<?php echo json_encode(pines_url('com_testimonials', 'testimonial/changestatus')); ?>, {
 										"id": testimonial_id,
 										"quotefeedback": quotefeedback,
 										"tags": tags,
@@ -189,7 +189,7 @@ $this->show = $_REQUEST['show'];
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

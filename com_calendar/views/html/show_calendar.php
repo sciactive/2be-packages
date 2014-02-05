@@ -54,12 +54,12 @@ if ($this->is_widget) {
 <script type='text/javascript'>
 	<?php if ($this->is_widget) { ?>
 	// Calendar
-	pines.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/fullcalendar.css");
-	pines.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/customcolors.css");
-	pines.loadjs("<?php e($_->config->location); ?>components/com_calendar/includes/<?php echo $_->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
+	$_.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/fullcalendar.css");
+	$_.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/customcolors.css");
+	$_.loadjs("<?php e($_->config->location); ?>components/com_calendar/includes/<?php echo $_->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
 	<?php } ?>
-	pines(function(){
-		pines.selected_event = '';
+	$_(function(){
+		$_.selected_event = '';
 		// Create the calendar object.
 		$('#p_muid_calendar').fullCalendar({
 			<?php if ($this->is_widget) { ?>
@@ -122,11 +122,11 @@ if ($this->is_widget) {
 				if (event.allDay)
 					header = "<div><strong>All Day</strong></div>";
 				else
-					header = "<div><strong>Start:</strong> <span>"+pines.safe($.fullCalendar.formatDate(event.start, "ddd MMM dS, yyyy h:mm tt"))+"</span></div><div><strong>End:</strong> <span>"+pines.safe($.fullCalendar.formatDate(event.end, "ddd MMM dS, yyyy h:mm tt"))+"</span></div>";
+					header = "<div><strong>Start:</strong> <span>"+$_.safe($.fullCalendar.formatDate(event.start, "ddd MMM dS, yyyy h:mm tt"))+"</span></div><div><strong>End:</strong> <span>"+$_.safe($.fullCalendar.formatDate(event.end, "ddd MMM dS, yyyy h:mm tt"))+"</span></div>";
 				element.popover({
 					trigger: 'hover',
-					title: pines.safe(event.title),
-					content: header+"<p>"+pines.safe(event.info)+"</p>",
+					title: $_.safe(event.title),
+					content: header+"<p>"+$_.safe(event.info)+"</p>",
 					placement: "top"
 				});
 			},
@@ -137,7 +137,7 @@ if ($this->is_widget) {
 					$("#p_muid_loading").hide();
 			},
 			select: function(start, end, allDay) {
-				pines.p_muid_new_event(start.toString(), end.toString(), allDay);
+				$_.p_muid_new_event(start.toString(), end.toString(), allDay);
 			},
 			eventClick: function(event,jsEvent,view) {
 				if (event.editable == false && event.appointment == '') {
@@ -145,15 +145,15 @@ if ($this->is_widget) {
 					return;
 				}
 				if (event.appointment != '')
-					pines.p_muid_edit_appointment(event.appointment);
+					$_.p_muid_edit_appointment(event.appointment);
 				else
-					pines.p_muid_edit_event(event.id);
-				pines.selected_event = $(this);
-				pines.selected_event.addClass('ui-state-disabled');
+					$_.p_muid_edit_event(event.id);
+				$_.selected_event = $(this);
+				$_.selected_event.addClass('ui-state-disabled');
 			},
 			eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
 				event.selected = false;
-				pines.p_muid_save_calendar([event], false, revertFunc);
+				$_.p_muid_save_calendar([event], false, revertFunc);
 			},
 			eventDragStart: function(event, jsEvent, ui, view) {
 				view.element.find(".fc-event").popover('hide');
@@ -167,7 +167,7 @@ if ($this->is_widget) {
 			},
 			eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
 				event.selected = false;
-				pines.p_muid_save_calendar([event], false, revertFunc);
+				$_.p_muid_save_calendar([event], false, revertFunc);
 			},
 			eventResizeStart: function(event, jsEvent, ui, view) {
 				view.element.find(".fc-event").popover('hide');
@@ -181,14 +181,14 @@ if ($this->is_widget) {
 	});
 
 	// Add new events to the calendar, mostly for duplicating events.
-	pines.p_muid_add_events = function(events){
+	$_.p_muid_add_events = function(events){
 		$.ajax({
 			url: <?php echo json_encode(pines_url('com_calendar', 'addevents')); ?>,
 			type: "POST",
 			dataType: "html",
 			data: {"events": events},
 			error: function(){
-				pines.error("An error occured while trying to add events to the calendar.");
+				$_.error("An error occured while trying to add events to the calendar.");
 			},
 			success: function(){
 				$('#p_muid_calendar').fullCalendar('refetchEvents');
@@ -198,7 +198,7 @@ if ($this->is_widget) {
 
 	// Save all of the calendar events (or just the ones specified) by exporting
 	// the data to their entities.
-	pines.p_muid_save_calendar = function(events, refresh, revertFunc){
+	$_.p_muid_save_calendar = function(events, refresh, revertFunc){
 		var struct = [];
 		if (!events)
 			events = $("#p_muid_calendar").fullCalendar('clientEvents');
@@ -222,7 +222,7 @@ if ($this->is_widget) {
 			dataType: "html",
 			data: {"events": JSON.stringify(struct), "timezone": <?php echo json_encode($this->timezone); ?>},
 			error: function(){
-				pines.error("An error occured while trying to save the calendar.");
+				$_.error("An error occured while trying to save the calendar.");
 			},
 			success: function(data){
 				if (data) {
@@ -237,7 +237,7 @@ if ($this->is_widget) {
 	};
 
 	// Duplicate Event(s)
-	pines.p_muid_copy_event = function(){
+	$_.p_muid_copy_event = function(){
 		var events = $("#p_muid_calendar").fullCalendar('clientEvents', function(e){
 			if (e.selected && e.editable == false) {
 				alert(e.title+' cannot be copied, because it is not editable.');
@@ -253,11 +253,11 @@ if ($this->is_widget) {
 		if (!copy_events.length)
 			alert('Please select at least one event to duplicate.');
 		else
-			pines.p_muid_add_events(copy_events);
+			$_.p_muid_add_events(copy_events);
 	};
 
 	// Delete Event(s)
-	pines.p_muid_delete_events = function(){
+	$_.p_muid_delete_events = function(){
 		var events = $("#p_muid_calendar").fullCalendar('clientEvents', function(e){
 			if (e.selected && !e.editable) {
 				alert(e.title+' cannot be deleted, because it is not editable.');
@@ -291,7 +291,7 @@ if ($this->is_widget) {
 			dataType: "json",
 			data: {"events": event_guids},
 			error: function(){
-				pines.error("An error occured while trying to delete events from the calendar.");
+				$_.error("An error occured while trying to delete events from the calendar.");
 			},
 			success: function(data) {
 				$.each(remove_events, function(r, remove_event) {
@@ -300,7 +300,7 @@ if ($this->is_widget) {
 					$("#p_muid_calendar").fullCalendar('removeEvents', remove_event);
 				});
 				if (data)
-					pines.error('Some events could not be deleted.');
+					$_.error('Some events could not be deleted.');
 				else
 					alert('Deleted Event(s).');
 			}
@@ -308,7 +308,7 @@ if ($this->is_widget) {
 	};
 
 	// Clear Calendar
-	pines.p_muid_clear_calendar = function(){
+	$_.p_muid_clear_calendar = function(){
 		if (!confirm('Clear the entire calendar? This will remove all events for this location/employee.'))
 			return;
 		var events = $("#p_muid_calendar").fullCalendar('clientEvents'),
@@ -327,12 +327,12 @@ if ($this->is_widget) {
 			dataType: "json",
 			data: {"events": event_guids},
 			error: function(){
-				pines.error("An error occured while trying to delete events from the calendar.");
+				$_.error("An error occured while trying to delete events from the calendar.");
 			},
 			success: function(data) {
 				$('#p_muid_calendar').fullCalendar('refetchEvents');
 				if (data)
-					pines.error('Some events could not be deleted.');
+					$_.error('Some events could not be deleted.');
 				else
 					alert('Cleared the calendar.');
 			}
@@ -340,7 +340,7 @@ if ($this->is_widget) {
 	};
 
 	// Unlink Event(s)
-	pines.p_muid_unlink_events = function(){
+	$_.p_muid_unlink_events = function(){
 		var events = $("#p_muid_calendar").fullCalendar('clientEvents', function(e){
 			if (e.selected && e.group && !e.editable) {
 				alert(e.title+' cannot be unlinked, because it is not editable.');
@@ -356,7 +356,7 @@ if ($this->is_widget) {
 		if (!events.length)
 			alert('Please select at least one bound event to unlink.');
 		else
-			pines.p_muid_save_calendar(null, true);
+			$_.p_muid_save_calendar(null, true);
 	};
 </script>
 <div id="p_muid_calendar" style="position: relative;">

@@ -132,7 +132,7 @@ $this->title = 'Review Your Order';
 	</div>
 	<div class="pf-element pf-buttons">
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				var buttons = $(":button, :submit, :reset", "#p_muid_review .pf-buttons").click(function(){
 					buttons.attr("disabled", "disabled").addClass("disabled");
 				});

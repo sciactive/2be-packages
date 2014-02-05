@@ -36,7 +36,7 @@ else
 </style>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'shipment/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var packing_list = $("#p_muid_packing_list");
 			var packing_list_input = packing_list.children("input[name=packing_list]");
 
@@ -114,7 +114,7 @@ else
 	</div>
 	<div class="pf-element">
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				$("#p_muid_eta").datepicker({
 					dateFormat: "yy-mm-dd",
 					showOtherMonths: true,
@@ -189,6 +189,6 @@ else
 		<input type="hidden" name="ref_id" value="<?php e($this->entity->ref->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'shipment/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'shipment/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

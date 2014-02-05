@@ -31,7 +31,7 @@ $_->icons->load();
 		}
 	</style>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$("[name=serial]", "#p_muid_controls").keypress(function(e){
 				if (e.keyCode == 13)
 					$("#p_muid_search").click();
@@ -54,7 +54,7 @@ $_->icons->load();
 					error: function(XMLHttpRequest, textStatus){
 						stock_results.hide();
 						status_bar.html("An error occured.");
-						pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						var stock_container = stock_results.children("div");
@@ -68,19 +68,19 @@ $_->icons->load();
 						// Build the stock results:
 						var stock_struct = [];
 						$.each(data.stock_entries, function(){
-							var cur_stock_link = '<a data-entity="'+pines.safe(this.guid)+'" data-entity-context="com_sales_stock">'+pines.safe(this.serial)+'</a>',
-							cur_product_link = '<a data-entity="'+pines.safe(this.product_guid)+'" data-entity-context="com_sales_product">'+pines.safe(this.product_name)+'</a>';
+							var cur_stock_link = '<a data-entity="'+$_.safe(this.guid)+'" data-entity-context="com_sales_stock">'+$_.safe(this.serial)+'</a>',
+							cur_product_link = '<a data-entity="'+$_.safe(this.product_guid)+'" data-entity-context="com_sales_product">'+$_.safe(this.product_name)+'</a>';
 
-							var content = "<p><strong>Serial:</strong> "+pines.safe(this.serial)+"</p>"+
-								"<p><strong>Location:</strong> "+(this.location_name ? pines.safe(this.location_name) : "Not in Inventory")+"</p>"+
-								"<p><strong>Product:</strong> "+pines.safe(this.product_name)+"</p>"+
-								"<p><strong>Product ID:</strong> "+pines.safe(this.product_guid)+"</p>"+
-								"<p><strong>Product SKU:</strong> "+pines.safe(this.product_sku)+"</p>"+
-								"<p><strong>Manufacturer:</strong> "+pines.safe(this.manufacturer)+"</p>"+
-								"<p><strong>Manufacturer SKU:</strong> "+pines.safe(this.manufacturer_sku)+"</p>";
-							stock_struct.push($("<div class=\"entry clearfix alert alert-success\">"+cur_stock_link+" | "+cur_product_link+"<br/>Last Transaction: "+pines.safe(this.last_transaction)+"</div>").popover({
+							var content = "<p><strong>Serial:</strong> "+$_.safe(this.serial)+"</p>"+
+								"<p><strong>Location:</strong> "+(this.location_name ? $_.safe(this.location_name) : "Not in Inventory")+"</p>"+
+								"<p><strong>Product:</strong> "+$_.safe(this.product_name)+"</p>"+
+								"<p><strong>Product ID:</strong> "+$_.safe(this.product_guid)+"</p>"+
+								"<p><strong>Product SKU:</strong> "+$_.safe(this.product_sku)+"</p>"+
+								"<p><strong>Manufacturer:</strong> "+$_.safe(this.manufacturer)+"</p>"+
+								"<p><strong>Manufacturer SKU:</strong> "+$_.safe(this.manufacturer_sku)+"</p>";
+							stock_struct.push($("<div class=\"entry clearfix alert alert-success\">"+cur_stock_link+" | "+cur_product_link+"<br/>Last Transaction: "+$_.safe(this.last_transaction)+"</div>").popover({
 								trigger: 'hover',
-								title: "Stock Entry "+pines.safe(this.guid),
+								title: "Stock Entry "+$_.safe(this.guid),
 								content: content
 							}));
 						});

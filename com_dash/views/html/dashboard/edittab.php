@@ -24,7 +24,7 @@ $default_column = h(floor($max_columns / 3));
 		}
 	</style>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var col_input = $("#p_muid_form [name=columns]");
 			var columns = $("#p_muid_cols").sortable({
 				axis: "x",
@@ -49,7 +49,7 @@ $default_column = h(floor($max_columns / 3));
 					update_columns();
 				}
 			}).delegate(".grow_column", "click", function(){
-				var max_columns = pines.com_bootstrap_get_columns();
+				var max_columns = $_.com_bootstrap_get_columns();
 				// Check to make sure we aren't growing too big.
 				var total_cols = 0;
 				columns.children().each(function(){
@@ -80,7 +80,7 @@ $default_column = h(floor($max_columns / 3));
 				col.removeClass("span"+cur_size).attr("class", "span"+(cur_size+1)+" "+col.attr("class"));
 				update_columns();
 			}).delegate(".shrink_column", "click", function(){
-				var max_columns = pines.com_bootstrap_get_columns();
+				var max_columns = $_.com_bootstrap_get_columns();
 				var col = $(this).closest(".new_column"), cur_size = 1;
 				// Get the column's size.
 				for (var i=1; i<=max_columns; i++) {
@@ -97,7 +97,7 @@ $default_column = h(floor($max_columns / 3));
 			});
 			$("#p_muid_add_column").click(function(){
 				// Add a new column.
-				var max_columns = pines.com_bootstrap_get_columns(), all_columns = columns.children();
+				var max_columns = $_.com_bootstrap_get_columns(), all_columns = columns.children();
 				if (all_columns.length >= max_columns) {
 					alert("You have the maximum number of columns.");
 					return;
@@ -108,13 +108,13 @@ $default_column = h(floor($max_columns / 3));
 			});
 			var size_columns = function(){
 				// Fit the columns into the width evenly.
-				var max_columns = pines.com_bootstrap_get_columns(), all_columns = columns.children();
+				var max_columns = $_.com_bootstrap_get_columns(), all_columns = columns.children();
 				for (var i=1; i<=max_columns; i++)
 					all_columns.removeClass("span"+i);
 				all_columns.attr("class", "span"+(Math.floor(max_columns/all_columns.length))+" "+all_columns.eq(0).attr("class"));
 			};
 			var update_columns = function(){
-				var col_struct = [], max_columns = pines.com_bootstrap_get_columns();
+				var col_struct = [], max_columns = $_.com_bootstrap_get_columns();
 				columns.children().each(function(){
 					var cur_col_struct = {}, col = $(this);
 					// Get the column's size.
@@ -146,7 +146,7 @@ $default_column = h(floor($max_columns / 3));
 						$(this).text("Deleting...");
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to delete the tab:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to delete the tab:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						$(this).text("Delete Tab");
@@ -154,7 +154,7 @@ $default_column = h(floor($max_columns / 3));
 							alert("This is the only tab, so it can't be deleted.");
 							return;
 						} else if (!data) {
-							pines.error("The tab could not be deleted.");
+							$_.error("The tab could not be deleted.");
 							return;
 						}
 						var tab_pane = $("#p_muid_form").closest(".tab-pane"),

@@ -87,7 +87,7 @@ if (!is_array($loan_ids))
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Vars
 		var form = $('#p_muid_form');
 		var date_inputs = form.find('[name=date_received]');

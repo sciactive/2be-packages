@@ -1,4 +1,4 @@
-pines(function(){
+$_(function(){
 if ($.pnotify) {
 	$.pnotify.defaults.opacity = .9;
 	$.pnotify.defaults.delay = 15000;
@@ -6,8 +6,8 @@ if ($.pnotify) {
 
 // Get the loaded page ready. (Styling, etc.)
 // This needs to be called after Ajax page loads.
-pines.tpl_pines_page_ready = function(){
-	if (pines.tpl_pines_menu_delay) {
+$_.tpl_pines_page_ready = function(){
+	if ($_.tpl_pines_menu_delay) {
 		// Menu close delay.
 		$("li", "ul.dropdown").bind("mouseenter", function(){
 			$(this).siblings().removeClass("hover");
@@ -33,5 +33,5 @@ pines.tpl_pines_page_ready = function(){
 	});
 };
 
-pines.tpl_pines_page_ready();
+$_.tpl_pines_page_ready();
 });

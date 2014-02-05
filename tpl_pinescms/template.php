@@ -37,11 +37,11 @@ elseif (substr($_->config->tpl_pinescms->variant, -6) === 'noside')
 	<link href="<?php e($_->config->location); ?>templates/tpl_pinescms/css/dropdown/default.css" media="all" rel="stylesheet" type="text/css" />
 	<link href="<?php e($_->config->location); ?>templates/tpl_pinescms/css/dropdown/default.pines.css" media="all" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="<?php e($_->config->rela_location); ?>system/includes/js.php"></script>
-	<script type="text/javascript">pines(function(){if($.pnotify){
+	<script type="text/javascript">$_(function(){if($.pnotify){
 		$.pnotify.defaults.opacity = .9;
 		$.pnotify.defaults.delay = 15000;
-		pines.pnotify_notice_defaults.nonblock = false;
-		pines.pnotify_alert_defaults.nonblock = false;
+		$_.pnotify_notice_defaults.nonblock = false;
+		$_.pnotify_alert_defaults.nonblock = false;
 	}});</script>
 	<?php echo $_->page->render_modules('head', 'module_head'); ?>
 	<link href="<?php e($_->config->location); ?>templates/tpl_pinescms/css/style.css" media="all" rel="stylesheet" type="text/css" />
@@ -53,13 +53,13 @@ elseif (substr($_->config->tpl_pinescms->variant, -6) === 'noside')
 		$notice = $_->page->get_notice();
 		if ( $error || $notice ) { ?>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				<?php
 				if ( $error ) { foreach ($error as $cur_item) {
-					echo 'pines.error('.json_encode(h($cur_item)).", \"Error\");\n";
+					echo '$_.error('.json_encode(h($cur_item)).", \"Error\");\n";
 				} }
 				if ( $notice ) { foreach ($notice as $cur_item) {
-					echo 'pines.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
+					echo '$_.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
 				} }
 				?>
 			});

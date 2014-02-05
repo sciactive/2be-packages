@@ -16,7 +16,7 @@ $_->editor->load();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_mailer', 'rendition/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			// Mail Definitions
 			$("#p_muid_form").on("change", "[name=type]", function(e, loading){
 				var type = $(this);
@@ -41,7 +41,7 @@ $_->editor->load();
 					dataType: "json",
 					data: {"type": type.val()},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to retrieve the definition content:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to retrieve the definition content:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data)
@@ -376,6 +376,6 @@ $_->editor->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_mailer', 'rendition/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_mailer', 'rendition/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

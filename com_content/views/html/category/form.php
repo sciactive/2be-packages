@@ -28,7 +28,7 @@ $_->com_ptags->load();
 </style>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_content', 'category/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$("#p_muid_menu_entries").menueditor({
 				disabled_fields: ['link'],
 				defaults: {
@@ -79,7 +79,7 @@ $_->com_ptags->load();
 		<div class="tab-pane active" id="p_muid_tab_general">
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						var alias = $("#p_muid_form [name=alias]");
 						$("#p_muid_form [name=name]").change(function(){
 							if (alias.val() == "")
@@ -113,7 +113,7 @@ $_->com_ptags->load();
 			</div>
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						$("#p_muid_use_name").change(function(){
 							if ($(this).is(":checked"))
 								$("#p_muid_title").attr("disabled", "disabled");
@@ -167,7 +167,7 @@ $_->com_ptags->load();
 				<div class="pf-group">
 					<input class="pf-field" type="text" name="content_tags" size="24" value="<?php echo isset($this->entity->content_tags) ? h(implode(',', $this->entity->content_tags)) : ''; ?>" />
 					<script type="text/javascript">
-						pines(function(){
+						$_(function(){
 							$("#p_muid_form [name=content_tags]").ptags({
 								ptags_sortable: {
 									tolerance: 'pointer',
@@ -238,7 +238,7 @@ $_->com_ptags->load();
 				<h3>Meta Tags</h3>
 			</div>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					// Meta Tags
 					var meta_tags = $("#p_muid_form [name=meta_tags]"),
 						meta_tags_table = $("#p_muid_form .meta_tags_table"),
@@ -266,8 +266,8 @@ $_->com_ptags->load();
 								double_click: true,
 								click: function(e, rows){
 									cur_meta_tag = rows;
-									meta_tag_dialog.find("input[name=cur_meta_tag_name]").val(pines.unsafe(rows.pgrid_get_value(1)));
-									meta_tag_dialog.find("input[name=cur_meta_tag_value]").val(pines.unsafe(rows.pgrid_get_value(2)));
+									meta_tag_dialog.find("input[name=cur_meta_tag_name]").val($_.unsafe(rows.pgrid_get_value(1)));
+									meta_tag_dialog.find("input[name=cur_meta_tag_value]").val($_.unsafe(rows.pgrid_get_value(2)));
 									meta_tag_dialog.dialog('open');
 								}
 							},
@@ -302,14 +302,14 @@ $_->com_ptags->load();
 									var new_meta_tag = [{
 										key: null,
 										values: [
-											pines.safe(cur_meta_tag_name),
-											pines.safe(cur_meta_tag_value)
+											$_.safe(cur_meta_tag_name),
+											$_.safe(cur_meta_tag_value)
 										]
 									}];
 									meta_tags_table.pgrid_add(new_meta_tag);
 								} else {
-									cur_meta_tag.pgrid_set_value(1, pines.safe(cur_meta_tag_name));
-									cur_meta_tag.pgrid_set_value(2, pines.safe(cur_meta_tag_value));
+									cur_meta_tag.pgrid_set_value(1, $_.safe(cur_meta_tag_name));
+									cur_meta_tag.pgrid_set_value(2, $_.safe(cur_meta_tag_value));
 								}
 								$(this).dialog('close');
 							}
@@ -490,13 +490,13 @@ $_->com_ptags->load();
 							<?php
 /* pygmentize -l html -f html -o /dev/stdout pygments.html
 <script type="text/javascript">
-	pines.loadcss(pines.rela_location+"path/to/css/file.css");
+	$_.loadcss($_.rela_location+"path/to/css/file.css");
 </script>
 */
 							?>
 							<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
 	<span class="c1">// &lt;![CDATA[</span>
-	<span class="nx">pines</span><span class="p">.</span><span class="nx">loadcss</span><span class="p">(</span><span class="nx">pines</span><span class="p">.</span><span class="nx">rela_location</span><span class="o">+</span><span class="s2">&quot;path/to/css/file.css&quot;</span><span class="p">);</span>
+	<span class="nx">$_</span><span class="p">.</span><span class="nx">loadcss</span><span class="p">(</span><span class="nx">$_</span><span class="p">.</span><span class="nx">rela_location</span><span class="o">+</span><span class="s2">&quot;path/to/css/file.css&quot;</span><span class="p">);</span>
 	<span class="c1">// ]]&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
@@ -508,13 +508,13 @@ $_->com_ptags->load();
 							<?php
 /* pygmentize -l html -f html -o /dev/stdout pygments.html
 <script type="text/javascript">
-	pines.loadcss("http://example.com/path/to/css/file.css");
+	$_.loadcss("http://example.com/path/to/css/file.css");
 </script>
 */
 							?>
 							<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
 	<span class="c1">// &lt;![CDATA[</span>
-	<span class="nx">pines</span><span class="p">.</span><span class="nx">loadcss</span><span class="p">(</span><span class="s2">&quot;http://example.com/path/to/css/file.css&quot;</span><span class="p">);</span>
+	<span class="nx">$_</span><span class="p">.</span><span class="nx">loadcss</span><span class="p">(</span><span class="s2">&quot;http://example.com/path/to/css/file.css&quot;</span><span class="p">);</span>
 	<span class="c1">// ]]&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
@@ -530,13 +530,13 @@ $_->com_ptags->load();
 							<?php
 /* pygmentize -l html -f html -o /dev/stdout pygments.html
 <script type="text/javascript">
-	pines.loadjs(pines.rela_location+"path/to/js/file.js");
+	$_.loadjs($_.rela_location+"path/to/js/file.js");
 </script>
 */
 							?>
 							<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
 	<span class="c1">// &lt;![CDATA[</span>
-	<span class="nx">pines</span><span class="p">.</span><span class="nx">loadjs</span><span class="p">(</span><span class="nx">pines</span><span class="p">.</span><span class="nx">rela_location</span><span class="o">+</span><span class="s2">&quot;path/to/js/file.js&quot;</span><span class="p">);</span>
+	<span class="nx">$_</span><span class="p">.</span><span class="nx">loadjs</span><span class="p">(</span><span class="nx">$_</span><span class="p">.</span><span class="nx">rela_location</span><span class="o">+</span><span class="s2">&quot;path/to/js/file.js&quot;</span><span class="p">);</span>
 	<span class="c1">// ]]&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
@@ -548,13 +548,13 @@ $_->com_ptags->load();
 							<?php
 /* pygmentize -l html -f html -o /dev/stdout pygments.html
 <script type="text/javascript">
-	pines.loadjs("http://example.com/path/to/js/file.js");
+	$_.loadjs("http://example.com/path/to/js/file.js");
 </script>
 */
 							?>
 							<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
 	<span class="c1">// &lt;![CDATA[</span>
-	<span class="nx">pines</span><span class="p">.</span><span class="nx">loadjs</span><span class="p">(</span><span class="s2">&quot;http://example.com/path/to/js/file.js&quot;</span><span class="p">);</span>
+	<span class="nx">$_</span><span class="p">.</span><span class="nx">loadjs</span><span class="p">(</span><span class="s2">&quot;http://example.com/path/to/js/file.js&quot;</span><span class="p">);</span>
 	<span class="c1">// ]]&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
@@ -566,7 +566,7 @@ $_->com_ptags->load();
 							<?php
 /* pygmentize -l html -f html -o /dev/stdout pygments.html
 <script type="text/javascript">
-	pines.load(function(){
+	$_.load(function(){
 		// This code will run before all files have
 		// been loaded and before the page is ready.
 		... code ...
@@ -576,7 +576,7 @@ $_->com_ptags->load();
 							?>
 							<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
 	<span class="c1">// &lt;![CDATA[</span>
-	<span class="nx">pines</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+	<span class="nx">$_</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
 		<span class="c1">// This code will run before all files have</span>
 		<span class="c1">// been loaded and before the page is ready.</span>
 		<span class="p">...</span> <span class="nx">code</span> <span class="p">...</span>
@@ -592,7 +592,7 @@ $_->com_ptags->load();
 							<?php
 /* pygmentize -l html -f html -o /dev/stdout pygments.html
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// This code will run after all files have 
 		// been loaded and after the page is ready.
 		... code ...
@@ -602,7 +602,7 @@ $_->com_ptags->load();
 							?>
 							<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
 	<span class="c1">// &lt;![CDATA[</span>
-	<span class="nx">pines</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+	<span class="nx">$_</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
 		<span class="c1">// This code will run after all files have </span>
 		<span class="c1">// been loaded and after the page is ready.</span>
 		<span class="p">...</span> <span class="nx">code</span> <span class="p">...</span>
@@ -691,7 +691,7 @@ $_->com_ptags->load();
 				<h3>Page Variants</h3>
 			</div>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					$("#p_muid_variant_template").change(function(){
 						var cur_template = $(this).val();
 						var show_this = $("option", "#p_muid_variant_variant").hide().filter("."+cur_template).show().eq(0).attr("value");
@@ -705,11 +705,11 @@ $_->com_ptags->load();
 						}
 						var cur_template_name = $("option:selected", "#p_muid_variant_template").text();
 						var cur_variant = $("#p_muid_variant_variant").val();
-						var new_html = '<div class="pf-element pf-full-width '+pines.safe(cur_template)+'">\
+						var new_html = '<div class="pf-element pf-full-width '+$_.safe(cur_template)+'">\
 							<button class="pf-field btn btn-danger remove" style="float: right;" type="button">Remove</button>\
-							<span class="pf-label">'+pines.safe(cur_template_name)+'</span>\
-							<span class="pf-field">'+pines.safe(cur_variant)+'</span>\
-							<input type="hidden" name="variants[]" value="'+pines.safe(cur_template)+'::'+pines.safe(cur_variant)+'" />\
+							<span class="pf-label">'+$_.safe(cur_template_name)+'</span>\
+							<span class="pf-field">'+$_.safe(cur_variant)+'</span>\
+							<input type="hidden" name="variants[]" value="'+$_.safe(cur_template)+'::'+$_.safe(cur_variant)+'" />\
 						</div>';
 						$("#p_muid_variants").append(new_html);
 					});
@@ -794,6 +794,6 @@ $_->com_ptags->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_content', 'category/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_content', 'category/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

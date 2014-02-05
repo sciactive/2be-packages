@@ -54,7 +54,7 @@ $_->com_customer->load_company_select();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		<?php if (in_array('address', $_->config->com_customer->shown_fields_customer)) { ?>
 		var addresses = $("#p_muid_addresses");
 		var addresses_table = $("#p_muid_addresses_table");
@@ -106,12 +106,12 @@ $_->com_customer->load_company_select();
 					var new_address = [{
 						key: null,
 						values: [
-							pines.safe(cur_address_type),
-							pines.safe(cur_address_addr1),
-							pines.safe(cur_address_addr2),
-							pines.safe(cur_address_city),
-							pines.safe(cur_address_state),
-							pines.safe(cur_address_zip)
+							$_.safe(cur_address_type),
+							$_.safe(cur_address_addr1),
+							$_.safe(cur_address_addr2),
+							$_.safe(cur_address_city),
+							$_.safe(cur_address_state),
+							$_.safe(cur_address_zip)
 						]
 					}];
 					addresses_table.pgrid_add(new_address);
@@ -179,8 +179,8 @@ $_->com_customer->load_company_select();
 					var new_attribute = [{
 						key: null,
 						values: [
-							pines.safe(cur_attribute_name),
-							pines.safe(cur_attribute_value)
+							$_.safe(cur_attribute_name),
+							$_.safe(cur_attribute_value)
 						]
 					}];
 					attributes_table.pgrid_add(new_attribute);
@@ -234,19 +234,19 @@ $_->com_customer->load_company_select();
 							loader.pnotify_remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (!data) {
 								alert("No entry was found that matched the selected interaction.");
 								return;
 							}
-							$("#p_muid_interaction_customer").empty().append('<a data-entity="'+pines.safe(data.customer_guid)+'" data-entity-context="com_customer_customer">'+pines.safe(data.customer)+'</a>');
-							$("#p_muid_interaction_type").empty().append(pines.safe(data.type));
-							$("#p_muid_interaction_employee").empty().append('<a data-entity="'+pines.safe(data.employee_guid)+'" data-entity-context="user">'+pines.safe(data.employee)+'</a>');
-							$("#p_muid_interaction_date").empty().append(pines.safe(data.date));
-							$("#p_muid_interaction_comments").empty().append(pines.safe(data.comments));
-							$("#p_muid_interaction_notes").empty().append((data.review_comments.length > 0) ? "<li>"+$.map(data.review_comments, pines.safe).join("</li><li>")+"</li>" : "");
+							$("#p_muid_interaction_customer").empty().append('<a data-entity="'+$_.safe(data.customer_guid)+'" data-entity-context="com_customer_customer">'+$_.safe(data.customer)+'</a>');
+							$("#p_muid_interaction_type").empty().append($_.safe(data.type));
+							$("#p_muid_interaction_employee").empty().append('<a data-entity="'+$_.safe(data.employee_guid)+'" data-entity-context="user">'+$_.safe(data.employee)+'</a>');
+							$("#p_muid_interaction_date").empty().append($_.safe(data.date));
+							$("#p_muid_interaction_comments").empty().append($_.safe(data.comments));
+							$("#p_muid_interaction_notes").empty().append((data.review_comments.length > 0) ? "<li>"+$.map(data.review_comments, $_.safe).join("</li><li>")+"</li>" : "");
 							$("#p_muid_interaction_dialog [name=status]").val(data.status);
 
 							interaction_dialog.dialog('open');
@@ -259,7 +259,7 @@ $_->com_customer->load_company_select();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'customer_interaction_'+<?php echo json_encode("{$this->entity->guid}"); ?>,
 						content: rows
 					});
@@ -315,7 +315,7 @@ $_->com_customer->load_company_select();
 							loader.pnotify_remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (data == 'conflict') {
@@ -366,7 +366,7 @@ $_->com_customer->load_company_select();
 							loader.pnotify_remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (!data) {
@@ -463,7 +463,7 @@ $_->com_customer->load_company_select();
 			<?php } if (in_array('dob', $_->config->com_customer->shown_fields_customer) && (!in_array('dob', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->dob))) { ?>
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						$("#p_muid_form [name=dob]").datepicker({
 							dateFormat: "yy-mm-dd",
 							changeMonth: true,
@@ -607,7 +607,7 @@ $_->com_customer->load_company_select();
 			<?php } ?>
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						$("#p_muid_form [name=member_exp]").datepicker({
 							dateFormat: "yy-mm-dd",
 							changeMonth: true,
@@ -630,7 +630,7 @@ $_->com_customer->load_company_select();
 			</div>
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						var address_us = $("#p_muid_address_us");
 						var address_international = $("#p_muid_address_international");
 						$("#p_muid_form [name=address_type]").change(function(){
@@ -1070,6 +1070,6 @@ $_->com_customer->load_company_select();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_customer', 'customer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_customer', 'customer/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

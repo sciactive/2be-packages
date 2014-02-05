@@ -32,7 +32,7 @@ margin-left: 125px;
 }
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var form = $("#p_muid_form").on("click", ":button.page-save", function(){
 			$(":button.page-save", "#p_muid_form").attr("disabled", "disabled");
 			var enabled = $(this).hasClass("page-publish"),
@@ -48,17 +48,17 @@ margin-left: 125px;
 					$(":button.page-save", "#p_muid_form").removeAttr("disabled");
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to save the page:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to save the page:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
-						pines.error("Page could not be saved.");
+						$_.error("Page could not be saved.");
 						return;
 					}
 					if (data.notice.length)
-						$.each(data.notice, function(i, e){pines.notice(pines.safe(e))});
+						$.each(data.notice, function(i, e){$_.notice($_.safe(e))});
 					if (data.error.length)
-						$.each(data.error, function(i, e){pines.error(pines.safe(e))});
+						$.each(data.error, function(i, e){$_.error($_.safe(e))});
 					if (data.result) {
 						// Clear the form.
 						form.closest(".object").find(".widget_refresh").click();
@@ -71,7 +71,7 @@ margin-left: 125px;
 <div class="pf-form" id="p_muid_form">
 	<div class="pf-element pf-full-width">
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				var alias = $("#p_muid_form [name=alias]");
 				$("#p_muid_form [name=name]").change(function(){
 					if (alias.val() == "")
@@ -109,7 +109,7 @@ margin-left: 125px;
 		</div>
 		<div class="pf-element pf-full-width">
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					$("#p_muid_use_name").change(function(){
 						if ($(this).is(":checked"))
 							$("#p_muid_title").attr("disabled", "disabled");
@@ -144,7 +144,7 @@ margin-left: 125px;
 		<div class="pf-group">
 			<input class="pf-field" type="text" name="content_tags" size="10" value="<?php e(implode(',', (array) $this->content_tags)); ?>" />
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					$("#p_muid_form [name=content_tags]").ptags({
 						ptags_sortable: {
 							tolerance: 'pointer',

@@ -14,7 +14,7 @@ $this->title = 'Employee Issue Types';
 $_->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var issue_dialog = $("#p_muid_issue_dialog");
 		var issue_id;
 
@@ -29,7 +29,7 @@ $_->com_pgrid->load();
 			width: 300,
 			buttons: {
 				'Save': function(){
-					pines.post(<?php echo json_encode(pines_url('com_hrm', 'issue/save')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_hrm', 'issue/save')); ?>, {
 						id: issue_id,
 						penalty: $("#p_muid_issue_dialog [name=penalty]").val(),
 						name: $("#p_muid_issue_dialog [name=name]").val(),
@@ -52,9 +52,9 @@ $_->com_pgrid->load();
 				}},
 				{type: 'button', text: 'Edit', extra_class: 'picon picon-document-edit', double_click: true, click: function(e, row){
 					issue_id = row.attr("title");
-					$("#p_muid_issue_dialog [name=name]").val(pines.unsafe(row.pgrid_get_value(1)));
-					$("#p_muid_issue_dialog [name=description]").val(pines.unsafe(row.pgrid_get_value(3)));
-					$("#p_muid_issue_dialog [name=penalty]").val(pines.unsafe(row.pgrid_get_value(2)).replace('$',''));
+					$("#p_muid_issue_dialog [name=name]").val($_.unsafe(row.pgrid_get_value(1)));
+					$("#p_muid_issue_dialog [name=description]").val($_.unsafe(row.pgrid_get_value(3)));
+					$("#p_muid_issue_dialog [name=penalty]").val($_.unsafe(row.pgrid_get_value(2)).replace('$',''));
 					issue_dialog.dialog("open");
 				}},
 				{type: 'button', text: 'Remove', extra_class: 'picon picon-document-close', confirm: true, multi_select: true, url: <?php echo json_encode(pines_url('com_hrm', 'issue/delete', array('id' => '__title__'))); ?>},
@@ -64,7 +64,7 @@ $_->com_pgrid->load();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'issue types',
 						content: rows
 					});

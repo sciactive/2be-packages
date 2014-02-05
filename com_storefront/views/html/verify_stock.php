@@ -17,7 +17,7 @@ $_->com_pgrid->load();
 <p>All storefront products appear to be valid.</p>
 <?php } else { ?>
 <script type="text/javascript">
-	pines(function() {
+	$_(function() {
 		var options = {
 			pgrid_view_height: "200px",
 			pgrid_paginate: false,
@@ -36,7 +36,7 @@ $_->com_pgrid->load();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'problematic_products',
 						content: rows
 					});

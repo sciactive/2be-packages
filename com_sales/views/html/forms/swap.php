@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 ?>
 <form class="pf-form" id="p_muid_form" action="">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$("#p_muid_action").on("click", ".btn", function(){
 				if ($(this).hasClass('item-swap')) {
 					$("#p_muid_swap").show();
@@ -85,7 +85,7 @@ defined('P_RUN') or die('Direct access prohibited');
 						display.children('.picon-throbber').remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to lookup the stock:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to lookup the stock:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -97,7 +97,7 @@ defined('P_RUN') or die('Direct access prohibited');
 							return;
 						}
 						$.each(data, function(i, entry){
-							display.html('<div class="well entry"><div>Stock Entry: <a data-entity="'+pines.safe(entry.guid)+'" data-entity-context="com_sales_stock" class="guid">'+pines.safe(entry.guid)+'</a></div><div>Location: <a data-entity="'+pines.safe(entry.location)+'" data-entity-context="group">'+pines.safe(entry.location_name)+'</a></div><div'+(entry.serial ? '' : ' style="display: none"')+'>Serial: <span class="serial">'+(entry.serial ? pines.safe(entry.serial) : '')+'</span></div></div>');
+							display.html('<div class="well entry"><div>Stock Entry: <a data-entity="'+$_.safe(entry.guid)+'" data-entity-context="com_sales_stock" class="guid">'+$_.safe(entry.guid)+'</a></div><div>Location: <a data-entity="'+$_.safe(entry.location)+'" data-entity-context="group">'+$_.safe(entry.location_name)+'</a></div><div'+(entry.serial ? '' : ' style="display: none"')+'>Serial: <span class="serial">'+(entry.serial ? $_.safe(entry.serial) : '')+'</span></div></div>');
 							input.val(entry.guid);
 						});
 					}

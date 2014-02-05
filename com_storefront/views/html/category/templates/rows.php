@@ -28,13 +28,13 @@ defined('P_RUN') or die('Direct access prohibited');
 #p_muid_products .price .value {display: none;}
 </style>
 <script type="text/javascript">
-pines(function(){
+$_(function(){
 	$("#p_muid_products").on("click", ".product", function(){
-		pines.get(<?php echo json_encode(pines_url('com_storefront', 'product', array('a' => '__alias__'))); ?>.replace("__alias__", $(this).children(".product_alias").text()));
+		$_.get(<?php echo json_encode(pines_url('com_storefront', 'product', array('a' => '__alias__'))); ?>.replace("__alias__", $(this).children(".product_alias").text()));
 	}).on("click", "button.add_cart", function(e){
 		<?php if (!$_->config->com_storefront->catalog_mode) { ?>
 		var button = $(this), product = button.closest(".product"), guid = parseInt(product.find(".product_guid").text());
-		pines.com_storefront_add_to_cart(guid, product.find(".name").text(), parseFloat(product.find(".price > .value").text()), product);
+		$_.com_storefront_add_to_cart(guid, product.find(".name").text(), parseFloat(product.find(".price > .value").text()), product);
 		e.stopPropagation();
 		<?php } ?>
 		e.preventDefault();

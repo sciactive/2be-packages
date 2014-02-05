@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Payment Options';
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var buttons = $(":button, :submit, :reset", "#p_muid_form .pf-buttons").click(function(){
 			buttons.attr("disabled", "disabled").addClass("disabled");
 		});
@@ -45,7 +45,7 @@ $this->title = 'Payment Options';
 	</div>
 	<?php if (!empty($this->payment)) { ?>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var form = $("#p_muid_form");
 			var data = <?php echo json_encode($this->payment->data); ?>;
 			if (data) {
@@ -86,7 +86,7 @@ $this->title = 'Payment Options';
 	</form>
 	<?php } else { ?>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var get_form = function(payment_data){
 				$.ajax({
 					url: <?php echo json_encode(pines_url('com_storefront', 'checkout/paymentform')); ?>,
@@ -94,7 +94,7 @@ $this->title = 'Payment Options';
 					dataType: "html",
 					data: {"name": payment_data.processing_type},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to retrieve the data form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to retrieve the data form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (data == null)

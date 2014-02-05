@@ -21,7 +21,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 
 	var p_muid_notice;
 
-	pines(function(){
+	$_(function(){
 		var state_xhr;
 		var cur_state = <?php echo (isset($this->pgrid_state) ? json_encode($this->pgrid_state) : '{}');?>;
 		var cur_defaults = {
@@ -73,7 +73,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			if (comments == "") {
 				p_muid_notice.pnotify_remove();
 			} else {
-				p_muid_notice.pnotify({text: pines.safe(comments)});
+				p_muid_notice.pnotify({text: $_.safe(comments)});
 				if (!p_muid_notice.is(":visible"))
 					p_muid_notice.pnotify_display();
 			}
@@ -201,6 +201,6 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input name="approve" class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -47,7 +47,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Time and location variables.
 		var all_time = true, start_date = "", end_date = "", location = "", descendants = false;
 		// Customer search function for the pgrid toolbar.
@@ -79,7 +79,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					loader.pnotify_remove();
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
@@ -91,22 +91,22 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						struct.push({
 							"key": this.guid,
 							"values": [
-								pines.safe(this.guid),
-								'<a data-entity="'+pines.safe(this.guid)+'" data-entity-context="com_customer_customer">'+pines.safe(this.username)+'</a>',
-								pines.safe(this.name),
-								pines.safe(this.location),
-								'<a href="mailto:'+pines.safe(this.email)+'">'+pines.safe(this.email)+'</a>',
-								pines.safe(this.company),
-								pines.safe(this.phone_home),
-								pines.safe(this.phone_work),
-								pines.safe(this.phone_cell),
-								pines.safe(this.fax),
-								pines.safe(this.cdate),
+								$_.safe(this.guid),
+								'<a data-entity="'+$_.safe(this.guid)+'" data-entity-context="com_customer_customer">'+$_.safe(this.username)+'</a>',
+								$_.safe(this.name),
+								$_.safe(this.location),
+								'<a href="mailto:'+$_.safe(this.email)+'">'+$_.safe(this.email)+'</a>',
+								$_.safe(this.company),
+								$_.safe(this.phone_home),
+								$_.safe(this.phone_work),
+								$_.safe(this.phone_cell),
+								$_.safe(this.fax),
+								$_.safe(this.cdate),
 								this.enabled ? "Yes" : "No",
 								this.member ? (this.valid_member ? "Yes" : "Expired") : "No",
-								pines.safe(this.member_exp),
-								pines.safe(this.points),
-								pines.safe(this.referral)
+								$_.safe(this.member_exp),
+								$_.safe(this.points),
+								$_.safe(this.referral)
 							]
 						});
 					});
@@ -152,7 +152,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							loader.pnotify_remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (!data) {
@@ -210,7 +210,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'customers',
 						content: rows
 					});
@@ -261,12 +261,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"all_time": all_time, "start_date": start_date, "end_date": end_date},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the date form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the date form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Date Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -288,7 +288,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -299,12 +299,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -321,7 +321,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

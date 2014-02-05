@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-pines.loadcss("<?php e($_->config->location); ?>components/com_fancybox/includes/jquery.fancybox.css");
-pines.loadjs("<?php e($_->config->location); ?>components/com_fancybox/includes/<?php echo $_->config->debug_mode ? 'jquery.fancybox.js' : 'jquery.fancybox.pack.js'; ?>");
-pines.loadjs("<?php e($_->config->location); ?>components/com_fancybox/includes/jquery.mousewheel-3.0.6.pack.js");
+$_.loadcss("<?php e($_->config->location); ?>components/com_fancybox/includes/jquery.fancybox.css");
+$_.loadjs("<?php e($_->config->location); ?>components/com_fancybox/includes/<?php echo $_->config->debug_mode ? 'jquery.fancybox.js' : 'jquery.fancybox.pack.js'; ?>");
+$_.loadjs("<?php e($_->config->location); ?>components/com_fancybox/includes/jquery.mousewheel-3.0.6.pack.js");
 </script>

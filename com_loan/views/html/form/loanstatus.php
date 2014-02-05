@@ -49,7 +49,7 @@ if (!is_array($loan_ids))
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var statii = $('#p_muid_form').find('[name=loan_status]');
 		var customer_search_button = $('.ui-pgrid-toolbar .picon-system-search').closest('button');
 		var change_status = function(item) {
@@ -66,7 +66,7 @@ if (!is_array($loan_ids))
 				},
 				error: function(XMLHttpRequest, textStatus){
 					results.addClass('text-error').removeClass('text-info text-success').html('<i class="icon-remove"></i> Error');
-					item.append('<div class="text-error error-message">An error occurred: </div>\n'+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					item.append('<div class="text-error error-message">An error occurred: </div>\n'+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data.no_loan) {

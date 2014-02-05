@@ -46,7 +46,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var item = $('#p_muid_form').find('.item');
 		var collection_code = $('#p_muid_form').find('[name=collection_code]');
 		var code_status = $('#p_muid_form').find('.code-status');
@@ -65,7 +65,7 @@ defined('P_RUN') or die('Direct access prohibited');
 				},
 				error: function(XMLHttpRequest, textStatus){
 					code_status.addClass('text-error').removeClass('text-info text-success').html('<i class="icon-remove"></i> Error');
-					item.append('<div class="text-error error-message">An error occurred: </div>\n'+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					item.append('<div class="text-error error-message">An error occurred: </div>\n'+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data.no_loan) {

@@ -29,7 +29,7 @@ $_->com_pgrid->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Location Grid
 		$("#p_muid_group_grid").pgrid({
 			pgrid_sort_col: 5,
@@ -99,6 +99,6 @@ $_->com_pgrid->load();
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Save" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_reports', 'warboard'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_reports', 'warboard'))); ?>);" value="Cancel" />
 	</div>
 </form>

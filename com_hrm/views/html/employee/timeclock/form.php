@@ -50,7 +50,7 @@ $_->com_datetimepicker->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var cur_entry;
 		var new_entry;
 		var timezone = <?php echo json_encode($this->entity->user->get_timezone()); ?>;
@@ -174,7 +174,7 @@ $_->com_datetimepicker->load();
 						dataType: "text",
 						data: {"date": $("#p_muid_cur_time_in").val(), "timezone": timezone},
 						error: function(){
-							pines.error("Couldn't get a timestamp from the server.");
+							$_.error("Couldn't get a timestamp from the server.");
 							date_time_dialog.dialog('close');
 						},
 						success: function(data_in){
@@ -184,14 +184,14 @@ $_->com_datetimepicker->load();
 								dataType: "text",
 								data: {"date": $("#p_muid_cur_time_out").val(), "timezone": timezone},
 								error: function(){
-									pines.error("Couldn't get a timestamp from the server.");
+									$_.error("Couldn't get a timestamp from the server.");
 									date_time_dialog.dialog('close');
 								},
 								success: function(data_out){
 									date_time_dialog.dialog('close');
-									cur_entry.find(".comments").html(pines.safe($("#p_muid_cur_comments").val()));
-									cur_entry.find(".timestamp_in").html(pines.safe(data_in));
-									cur_entry.find(".timestamp_out").html(pines.safe(data_out));
+									cur_entry.find(".comments").html($_.safe($("#p_muid_cur_comments").val()));
+									cur_entry.find(".timestamp_in").html($_.safe(data_in));
+									cur_entry.find(".timestamp_out").html($_.safe(data_out));
 									format_time(cur_entry.find(".time_in"), data_in);
 									format_time(cur_entry.find(".time_out"), data_out);
 									format_time_range(cur_entry.find(".time_range"), data_in, data_out);
@@ -218,7 +218,7 @@ $_->com_datetimepicker->load();
 						dataType: "text",
 						data: {"date": $("#p_muid_new_time_in").val(), "timezone": timezone},
 						error: function(){
-							pines.error("Couldn't get a timestamp from the server.");
+							$_.error("Couldn't get a timestamp from the server.");
 							add_time_dialog.dialog('close');
 						},
 						success: function(data_in){
@@ -228,7 +228,7 @@ $_->com_datetimepicker->load();
 								dataType: "text",
 								data: {"date": $("#p_muid_new_time_out").val(), "timezone": timezone},
 								error: function(){
-									pines.error("Couldn't get a timestamp from the server.");
+									$_.error("Couldn't get a timestamp from the server.");
 									add_time_dialog.dialog('close');
 								},
 								success: function(data_out){
@@ -281,7 +281,7 @@ $_->com_datetimepicker->load();
 			},
 			buttons: {
 				"Go": function(){
-					pines.get(<?php echo json_encode(pines_url('com_hrm', 'employee/timeclock/edit', array('id' => $this->entity->user->guid))); ?>, {
+					$_.get(<?php echo json_encode(pines_url('com_hrm', 'employee/timeclock/edit', array('id' => $this->entity->user->guid))); ?>, {
 						"time_start": $("#p_muid_time_start").val(),
 						"time_end": $("#p_muid_time_end").val()
 					});
@@ -360,7 +360,7 @@ $_->com_datetimepicker->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->user->guid); ?>" />
 		<div class="pf-element pf-buttons">
 			<input class="pf-button btn btn-primary" id="p_muid_submit" type="submit" value="Submit" />
-			<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_hrm', 'employee/timeclock/list'))); ?>);" value="Cancel" />
+			<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'employee/timeclock/list'))); ?>);" value="Cancel" />
 		</div>
 	</form>
 </div>

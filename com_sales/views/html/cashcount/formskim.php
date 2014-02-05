@@ -45,7 +45,7 @@ $this->note = 'Count the cash as you take it out of the drawer.';
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var cash_symbol = <?php echo json_encode($this->entity->cashcount->currency_symbol); ?>;
 
 		// Update the cash count as money is counted.
@@ -69,7 +69,7 @@ $this->note = 'Count the cash as you take it out of the drawer.';
 					total_count += subtotal;
 				cur_entry.removeClass("added removed");
 			});
-			$("#p_muid_total_skim").html(pines.safe(cash_symbol+total_count.toFixed(2)));
+			$("#p_muid_total_skim").html($_.safe(cash_symbol+total_count.toFixed(2)));
 		};
 
 		$("button.clear_btn", "#p_muid_form").click(function(){
@@ -93,7 +93,7 @@ $this->note = 'Count the cash as you take it out of the drawer.';
 			cur_button.blur();
 		});
 
-		pines.com_sales_verify = function(){
+		$_.com_sales_verify = function(){
 			if (confirm("You will not be able to change this information, are you sure?"))
 				$("#p_muid_form").submit();
 		};
@@ -136,7 +136,7 @@ $this->note = 'Count the cash as you take it out of the drawer.';
 	</div>
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="id" value="<?php e($this->entity->cashcount->guid); ?>" />
-		<input class="pf-button btn btn-primary submit_button" type="button" value="Finish Skim" onclick="pines.com_sales_verify();" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-primary submit_button" type="button" value="Finish Skim" onclick="$_.com_sales_verify();" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

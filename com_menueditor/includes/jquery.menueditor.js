@@ -63,16 +63,16 @@ all.each(function(){
 		if (cur_entry)
 			data.values = cur_entry.children(".ui-menu-editor-entry-values").html();
 		$.ajax({
-			url: pines.com_menueditor_dialog_url,
+			url: $_.com_menueditor_dialog_url,
 			method: "GET",
 			dataType: "html",
 			data: data,
 			error: function(XMLHttpRequest, textStatus){
 				menu_dialog.dialog("close").remove();
-				pines.error("An error occured while trying to load the menu editor form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+				$_.error("An error occured while trying to load the menu editor form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 			},
 			success: function(data){
-				pines.pause();
+				$_.pause();
 				menu_dialog.html(data).dialog("option", "buttons", {
 					"Done": function(){
 						var values = {};
@@ -90,7 +90,7 @@ all.each(function(){
 						menu_dialog.dialog("close").remove();
 					}
 				});
-				pines.play();
+				$_.play();
 			}
 		});
 	};
@@ -111,9 +111,9 @@ all.each(function(){
 		.append($("<button type=\"button\" class=\"btn\">Edit</button>").click(function(){
 			edit_entry($(this).closest(".ui-menu-editor-entry"));
 		}))
-		.append("<div class=\"ui-menu-editor-entry-name\">"+pines.safe(values.text)+" ["+pines.safe(values.name)+"]</div>")
-		.append("<div class=\"ui-menu-editor-entry-path\">"+(values.location ? pines.safe(values.location+"/") : "")+pines.safe(values.name)+"</div>")
-		.append("<div class=\"ui-menu-editor-entry-values\" style=\"display: none;\">"+pines.safe(JSON.stringify(values))+"</div>");
+		.append("<div class=\"ui-menu-editor-entry-name\">"+$_.safe(values.text)+" ["+$_.safe(values.name)+"]</div>")
+		.append("<div class=\"ui-menu-editor-entry-path\">"+(values.location ? $_.safe(values.location+"/") : "")+$_.safe(values.name)+"</div>")
+		.append("<div class=\"ui-menu-editor-entry-values\" style=\"display: none;\">"+$_.safe(JSON.stringify(values))+"</div>");
 		if (update_entries) // This prevents calling while adding the original entries.
 			update_entries();
 	};

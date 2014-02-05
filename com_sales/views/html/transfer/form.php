@@ -26,7 +26,7 @@ $missing_stock = array();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'transfer/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var products = $("#p_muid_products");
 			var products_table = $("#p_muid_products_table");
 
@@ -75,7 +75,7 @@ $missing_stock = array();
 										loader.pnotify_remove();
 									},
 									error: function(XMLHttpRequest, textStatus){
-										pines.error("An error occured while trying to lookup the product code:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+										$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(data){
 										if (!data) {
@@ -181,7 +181,7 @@ $missing_stock = array();
 								loader.pnotify_remove();
 							},
 							error: function(XMLHttpRequest, textStatus){
-								pines.error("An error occured while trying to lookup the products:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+								$_.error("An error occured while trying to lookup the products:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 							},
 							success: function(data){
 								if (!data || !data[0]) {
@@ -190,7 +190,7 @@ $missing_stock = array();
 								}
 								$.each(data, function(){
 									var product = this;
-									category_products_grid.pgrid_add([{key: this.guid, values: [pines.safe(this.name), pines.safe(this.sku)]}], function(){
+									category_products_grid.pgrid_add([{key: this.guid, values: [$_.safe(this.name), $_.safe(this.sku)]}], function(){
 										$(this).data("product", product);
 									});
 								});
@@ -233,7 +233,7 @@ $missing_stock = array();
 				}
 			});
 			var add_product = function(data){
-				products_table.pgrid_add([{key: "", values: [pines.safe(data.guid), pines.safe(data.sku), pines.safe(data.name), (data.serialized) ? "pending" : ""]}], function(){
+				products_table.pgrid_add([{key: "", values: [$_.safe(data.guid), $_.safe(data.sku), $_.safe(data.name), (data.serialized) ? "pending" : ""]}], function(){
 					var cur_row = $(this);
 					cur_row.data("product", data);
 				});
@@ -259,7 +259,7 @@ $missing_stock = array();
 					{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+						$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 							filename: 'PO <?php e($this->entity->po_number); ?> - Received',
 							content: rows
 						});
@@ -275,7 +275,7 @@ $missing_stock = array();
 					{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+						$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 							filename: 'PO <?php e($this->entity->po_number); ?> - Not Received',
 							content: rows
 						});
@@ -421,7 +421,7 @@ $missing_stock = array();
 	</div>
 	<div class="pf-element">
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				$("#p_muid_eta").datepicker({
 					dateFormat: "yy-mm-dd",
 					showOtherMonths: true,
@@ -581,10 +581,10 @@ $missing_stock = array();
 		<?php } if (!$this->entity->final) { ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Commit" onclick="$('#p_muid_save').val('commit');" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
 		<?php } ?>
 	</div>
 </form>

@@ -41,7 +41,7 @@ $this->title = 'Shopping Cart';
 	<br />
 	<div style="padding: .5em;">Subtotal <small>(before tax/fees)</small><div style="float: right; text-align: right;"><?php echo $_->com_storefront->format_price($subtotal, 'long'); ?></div></div>
 	<br style="clear: both;" /><br />
-	<button type="button" class="checkout btn btn-primary" style="float: right; clear: right;" onclick="pines.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);">Check-Out</button>
+	<button type="button" class="checkout btn btn-primary" style="float: right; clear: right;" onclick="$_.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);">Check-Out</button>
 	<br style="height: 0; clear: both;" />
 </div>
 <?php } else { ?>

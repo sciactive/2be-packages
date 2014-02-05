@@ -33,7 +33,7 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 		}
 	</style>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var current_item;
 
 			$("#p_muid_form").delegate(".products div.serial a.assign", "click", function(){
@@ -73,7 +73,7 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 						loader.pnotify_remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to lookup the stock:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to lookup the stock:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -88,7 +88,7 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 							alert("Only "+data.length+" items were found that matched your query.");
 						var entries = current_item.find(".entries");
 						$.each(data, function(i, entry){
-							entries.append('<div class="well entry"><a href="javascript:void(0);" class="remove btn btn-mini btn-danger">&nbsp;X&nbsp;</a><div>Stock Entry: <a data-entity="'+pines.safe(entry.guid)+'" data-entity-context="com_sales_stock" class="guid">'+pines.safe(entry.guid)+'</a></div><div>Location: <a data-entity="'+pines.safe(entry.location)+'" data-entity-context="group">'+pines.safe(entry.location_name)+'</a></div><span class="location" style="display: none">'+pines.safe(entry.location)+'</span><span class="product" style="display: none">'+pines.safe(entry.product)+'</span><div'+(entry.serial ? '' : ' style="display: none"')+'>Serial: <span class="serial">'+(entry.serial ? pines.safe(entry.serial) : '')+'</span></div></div>');
+							entries.append('<div class="well entry"><a href="javascript:void(0);" class="remove btn btn-mini btn-danger">&nbsp;X&nbsp;</a><div>Stock Entry: <a data-entity="'+$_.safe(entry.guid)+'" data-entity-context="com_sales_stock" class="guid">'+$_.safe(entry.guid)+'</a></div><div>Location: <a data-entity="'+$_.safe(entry.location)+'" data-entity-context="group">'+$_.safe(entry.location_name)+'</a></div><span class="location" style="display: none">'+$_.safe(entry.location)+'</span><span class="product" style="display: none">'+$_.safe(entry.product)+'</span><div'+(entry.serial ? '' : ' style="display: none"')+'>Serial: <span class="serial">'+(entry.serial ? $_.safe(entry.serial) : '')+'</span></div></div>');
 						});
 						refresh_entries();
 					}
@@ -291,6 +291,6 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="items" id="p_muid_items" value="[]" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
 	</div>
 </form>

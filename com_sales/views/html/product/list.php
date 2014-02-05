@@ -16,7 +16,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/product/list']);
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Product search function for the pgrid toolbar.
 		var product_search_box;
 		var submit_search = function(){
@@ -45,7 +45,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					loader.pnotify_remove();
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
@@ -56,38 +56,38 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					var struct = [];
 					$.each(data, function(){
 						if (typeof this.manufacturer_name != "undefined" && this.manufacturer_name !== null)
-							this.manufacturer = '<a data-entity="'+pines.safe(this.manufacturer_guid)+'" data-entity-context="com_sales_manufacturer">'+pines.safe(this.manufacturer_name)+'</a>';
+							this.manufacturer = '<a data-entity="'+$_.safe(this.manufacturer_guid)+'" data-entity-context="com_sales_manufacturer">'+$_.safe(this.manufacturer_name)+'</a>';
 						else
 							this.manufacturer = '';
 						var vendors = [],
 							links = [],
 							costs = [];
 						$.each(this.vendors, function(i, vendor){
-							vendors.push('<a data-entity="'+pines.safe(vendor.guid)+'" data-entity-context="com_sales_vendor">'+pines.safe(vendor.name)+'</a>');
+							vendors.push('<a data-entity="'+$_.safe(vendor.guid)+'" data-entity-context="com_sales_vendor">'+$_.safe(vendor.name)+'</a>');
 							costs.push(vendor.cost);
 							if (typeof vendor.link != "undefined" && vendor.link !== null && vendor.link !== "")
-								links.push('<a href="'+pines.safe(vendor.link)+'" target="_blank">'+pines.safe(vendor.link)+'</a>');
+								links.push('<a href="'+$_.safe(vendor.link)+'" target="_blank">'+$_.safe(vendor.link)+'</a>');
 						});
 						struct.push({
 							"key": this.guid,
 							"values": [
-								pines.safe(this.sku),
-								'<a data-entity="'+pines.safe(this.guid)+'" data-entity-context="com_sales_product">'+pines.safe(this.name)+'</a>',
-								pines.safe('$'+this.price),
-								pines.safe(costs.join(', ')),
+								$_.safe(this.sku),
+								'<a data-entity="'+$_.safe(this.guid)+'" data-entity-context="com_sales_product">'+$_.safe(this.name)+'</a>',
+								$_.safe('$'+this.price),
+								$_.safe(costs.join(', ')),
 								vendors.join(', '),
 								this.manufacturer,
-								pines.safe(this.manufacturer_sku),
-								pines.safe(this.stock_type),
+								$_.safe(this.manufacturer_sku),
+								$_.safe(this.stock_type),
 								this.custom_item ? 'Yes' : 'No',
 								this.serialized ? 'Yes' : 'No',
 								this.discountable ? 'Yes' : 'No',
-								pines.safe(this.additional_barcodes),
-								pines.safe(this.images),
-								pines.safe(this.receipt_description),
-								pines.safe(this.created),
-								pines.safe(this.modified),
-								pines.safe(this.expiration),
+								$_.safe(this.additional_barcodes),
+								$_.safe(this.images),
+								$_.safe(this.receipt_description),
+								$_.safe(this.created),
+								$_.safe(this.modified),
+								$_.safe(this.expiration),
 								links.join(', ')
 								<?php if ($_->config->com_sales->com_storefront) { ?>,
 								this.storefront ? 'Yes' : 'No',
@@ -142,7 +142,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'products',
 						content: rows
 					});

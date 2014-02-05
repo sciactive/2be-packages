@@ -219,7 +219,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 							if ($this->entity->payments[0]['past_due'] >= 0.01) {
 								?>
 								<script type="text/javascript">
-									pines(function(){
+									$_(function(){
 										$("#p_muid_next_payment").popover({
 											trigger: 'hover',
 											title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(h((string) ($_->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $_->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
@@ -376,7 +376,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 							$uniq2 = uniqid();
 							?>
 							<script type="text/javascript">
-								pines(function(){
+								$_(function(){
 									$("#p_muid_tooltip_<?php e($uniq2); ?>").popover({
 										trigger: 'hover',
 										title: 'Unpaid Interest: $'+<?php echo json_encode(h($_->com_sales->round($payment['payment_interest_unpaid'], true))); ?>,
@@ -427,7 +427,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 							$uniq = uniqid();
 							?>
 							<script type="text/javascript">
-								pines(function(){
+								$_(function(){
 									$("#p_muid_tooltip_<?php e($uniq); ?>").popover({
 										trigger: 'hover',
 										title: 'Unpaid Balance: $'+<?php echo json_encode(h($_->com_sales->round($payment['payment_balance_unpaid'], true))); ?>,

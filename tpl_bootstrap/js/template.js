@@ -152,25 +152,25 @@ var get_text_shadow = function(color) {
 }
 // Let the template load up to 4 style sheets that use the pines relative location.
 if (load_css1.length)
-	pines.loadcss(pines.rela_location+load_css1);
+	$_.loadcss($_.rela_location+load_css1);
 if (load_css2.length)
-	pines.loadcss(pines.rela_location+load_css2);
+	$_.loadcss($_.rela_location+load_css2);
 if (load_css3.length)
-	pines.loadcss(pines.rela_location+load_css3);
+	$_.loadcss($_.rela_location+load_css3);
 if (load_css4.length)
-	pines.loadcss(pines.rela_location+load_css4);
+	$_.loadcss($_.rela_location+load_css4);
 // Let the template load up to 4 style sheets that use the pines relative location.
 if (load_js1.length)
-	pines.loadjs(pines.rela_location+load_js1);
+	$_.loadjs($_.rela_location+load_js1);
 if (load_js2.length)
-	pines.loadjs(pines.rela_location+load_js2);
+	$_.loadjs($_.rela_location+load_js2);
 if (load_js3.length)
-	pines.loadjs(pines.rela_location+load_js3);
+	$_.loadjs($_.rela_location+load_js3);
 if (load_js4.length)
-	pines.loadjs(pines.rela_location+load_js4);
+	$_.loadjs($_.rela_location+load_js4);
 
 if (navbar_trigger == 'hover') {
-	pines(function(){
+	$_(function(){
         $('#nav').on('mouseenter', 'ul.nav > li.dropdown > a', function(){
                 var item = $(this);
                 item.siblings('ul.dropdown-menu').addClass('dropdown-opened');
@@ -214,7 +214,7 @@ if (navbar_trigger == 'hover') {
 	});
 }
 if (mobile_menu == 'adjusted') {
-	pines(function(){
+	$_(function(){
         $(window).resize(function(){
                 if ($(this).width() < 800) {
                         $('ul.nav li ul', '#nav').hide();
@@ -264,7 +264,7 @@ if (footer_height == 'adjusted' && footer_type == 'fixed') {
         }, 2000);
 }
 
-pines(function(){
+$_(function(){
         if (verified_brand_colors) {
 			// Get brand color text shadow.
 			var text_shadow = get_text_shadow(brand_color);

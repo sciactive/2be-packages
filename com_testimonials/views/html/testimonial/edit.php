@@ -17,7 +17,7 @@ $_->com_ptags->load();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_testimonials', 'testimonial/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			// Customer Autocomplete.
 			$("#p_muid_customer").customerselect();
 			var stars = $('#rating-container .star');
@@ -191,6 +191,6 @@ $_->com_ptags->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_testimonials', 'testimonial/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_testimonials', 'testimonial/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

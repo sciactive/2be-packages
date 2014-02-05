@@ -1,4 +1,4 @@
-pines.entity_helper = function(e) {
+$_.entity_helper = function(e) {
 	var elem = $(e),
 		guid = elem.attr("data-entity"),
 		context = elem.attr("data-entity-context"),
@@ -8,28 +8,28 @@ pines.entity_helper = function(e) {
 		body = modal.find(".modal-body"),
 		footer = modal.find(".modal-footer");
 	$.ajax({
-		url: pines.entity_helper_url,
+		url: $_.entity_helper_url,
 		type: "POST",
 		dataType: "json",
 		data: {"id": guid, "context": context},
 		error: function(XMLHttpRequest, textStatus){
 			modal.modal('hide');
-			pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+			$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 		},
 		success: function(data){
 			if (!data) {
 				modal.modal('hide');
-				pines.error("An error occured.");
+				$_.error("An error occured.");
 				return;
 			}
-			pines.pause();
+			$_.pause();
 			if (data.title)
 				header.find("h3").text(data.title);
 			else
-				header.find("h3").text("Entity "+pines.safe(guid)+" ("+pines.safe(context)+")");
+				header.find("h3").text("Entity "+$_.safe(guid)+" ("+$_.safe(context)+")");
 			body.html(data.body);
 			footer.html(data.footer);
-			pines.play();
+			$_.play();
 		}
 	});
 };

@@ -56,7 +56,7 @@ $_->com_ptags->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Conditions
 		var conditions = $("#p_muid_form [name=meta_conditions]");
 		var conditions_table = $("#p_muid_form .conditions_table");
@@ -84,9 +84,9 @@ $_->com_ptags->load();
 					double_click: true,
 					click: function(e, rows){
 						cur_condition = rows;
-						condition_dialog.find("select[name=cur_condition_class]").val(pines.unsafe(rows.pgrid_get_value(1)));
-						condition_dialog.find("input[name=cur_condition_type]").val(pines.unsafe(rows.pgrid_get_value(2)));
-						condition_dialog.find("input[name=cur_condition_value]").val(pines.unsafe(rows.pgrid_get_value(3)));
+						condition_dialog.find("select[name=cur_condition_class]").val($_.unsafe(rows.pgrid_get_value(1)));
+						condition_dialog.find("input[name=cur_condition_type]").val($_.unsafe(rows.pgrid_get_value(2)));
+						condition_dialog.find("input[name=cur_condition_value]").val($_.unsafe(rows.pgrid_get_value(3)));
 						condition_dialog.dialog('open');
 					}
 				},
@@ -130,23 +130,23 @@ $_->com_ptags->load();
 						}
 					});
 					if (dupe) {
-						pines.notice('There is already a condition of that type for this class.');
+						$_.notice('There is already a condition of that type for this class.');
 						return;
 					}
 					if (!cur_condition) {
 						var new_condition = [{
 							key: null,
 							values: [
-								pines.safe(cur_condition_class),
-								pines.safe(cur_condition_type),
-								pines.safe(cur_condition_value)
+								$_.safe(cur_condition_class),
+								$_.safe(cur_condition_type),
+								$_.safe(cur_condition_value)
 							]
 						}];
 						conditions_table.pgrid_add(new_condition);
 					} else {
-						cur_condition.pgrid_set_value(1, pines.safe(cur_condition_class));
-						cur_condition.pgrid_set_value(2, pines.safe(cur_condition_type));
-						cur_condition.pgrid_set_value(3, pines.safe(cur_condition_value));
+						cur_condition.pgrid_set_value(1, $_.safe(cur_condition_class));
+						cur_condition.pgrid_set_value(2, $_.safe(cur_condition_type));
+						cur_condition.pgrid_set_value(3, $_.safe(cur_condition_value));
 					}
 					$(this).dialog('close');
 				}
@@ -186,7 +186,7 @@ $_->com_ptags->load();
 			<?php } ?>
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						$("#p_muid_type").on("click", "button", function(){
 							var class_name = $(this).attr("data-value");
 							$("#p_muid_form div.package_type").hide();
@@ -402,7 +402,7 @@ $_->com_ptags->load();
 		</div>
 		<div class="tab-pane" id="p_muid_tab_files">
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					$("#p_muid_additional, #p_muid_exclude").autocomplete({
 						source: function(request, response){
 							var type = $("#p_muid_form input[name=type]:checked").val();
@@ -424,7 +424,7 @@ $_->com_ptags->load();
 					$("[name=additional_files], [name=exclude_files]", "#p_muid_form").ptags({ptags_input_box: false, ptags_editable: false});
 
 					// Additional files.
-					pines.com_packager_add_file = function(message){
+					$_.com_packager_add_file = function(message){
 						$("#p_muid_form [name=additional_files]").ptags_add(message);
 						$("#p_muid_additional").val("");
 					};
@@ -432,12 +432,12 @@ $_->com_ptags->load();
 					$("#p_muid_additional").keydown(function(e){
 						if (e.keyCode == '13') {
 							e.preventDefault();
-							pines.com_packager_add_file($(this).val());
+							$_.com_packager_add_file($(this).val());
 						}
 					});
 
 					// Exclude files.
-					pines.com_packager_exc_file = function(message){
+					$_.com_packager_exc_file = function(message){
 						$("#p_muid_form [name=exclude_files]").ptags_add(message);
 						$("#p_muid_exclude").val("");
 					};
@@ -445,7 +445,7 @@ $_->com_ptags->load();
 					$("#p_muid_exclude").keydown(function(e){
 						if (e.keyCode == '13') {
 							e.preventDefault();
-							pines.com_packager_exc_file($(this).val());
+							$_.com_packager_exc_file($(this).val());
 						}
 					});
 				});
@@ -457,7 +457,7 @@ $_->com_ptags->load();
 			<div class="pf-element">
 				<span class="pf-label">Search: </span>
 				<input class="pf-field" id="p_muid_additional" type="text" size="24" />
-				<button class="pf-button btn btn-primary" type="button" onclick="pines.com_packager_add_file($('#p_muid_additional').val());">Add</button>
+				<button class="pf-button btn btn-primary" type="button" onclick="$_.com_packager_add_file($('#p_muid_additional').val());">Add</button>
 			</div>
 			<div class="pf-element">
 				<div class="pf-group">
@@ -473,7 +473,7 @@ $_->com_ptags->load();
 			<div class="pf-element">
 				<span class="pf-label">Search: </span>
 				<input class="pf-field" id="p_muid_exclude" type="text" size="24" />
-				<button class="pf-button btn btn-primary" type="button" onclick="pines.com_packager_exc_file($('#p_muid_exclude').val());">Add</button>
+				<button class="pf-button btn btn-primary" type="button" onclick="$_.com_packager_exc_file($('#p_muid_exclude').val());">Add</button>
 			</div>
 			<div class="pf-element">
 				<div class="pf-group">
@@ -486,7 +486,7 @@ $_->com_ptags->load();
 		</div>
 		<div class="tab-pane" id="p_muid_tab_images">
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					var image_count = 0;
 
 					var update_images = function(){
@@ -510,7 +510,7 @@ $_->com_ptags->load();
 					update_images();
 
 					var add_image = function(image){
-						$("<li class=\"ui-state-default ui-corner-all\"><img alt=\""+pines.safe(image.replace(/.*\//, ''))+"\" src=\""+pines.safe(image)+"\" /><p>Click to edit description...</p></li>").appendTo($("#p_muid_sortable"));
+						$("<li class=\"ui-state-default ui-corner-all\"><img alt=\""+$_.safe(image.replace(/.*\//, ''))+"\" src=\""+$_.safe(image)+"\" /><p>Click to edit description...</p></li>").appendTo($("#p_muid_sortable"));
 						update_images();
 					};
 
@@ -522,11 +522,11 @@ $_->com_ptags->load();
 					.delegate("li p", "click", function(){
 						var cur_alt = $(this);
 						var desc = cur_alt.html();
-						var ta = $("<textarea cols=\"4\" rows=\"3\" style=\"width: 100%\">"+pines.safe(desc)+"</textarea>")
+						var ta = $("<textarea cols=\"4\" rows=\"3\" style=\"width: 100%\">"+$_.safe(desc)+"</textarea>")
 						.insertAfter(cur_alt)
 						.focusin(function(){
 							$(this).focusout(function(){
-								cur_alt.insertAfter(this).html(pines.safe($(this).remove().val()));
+								cur_alt.insertAfter(this).html($_.safe($(this).remove().val()));
 								update_images();
 							});
 						});
@@ -612,6 +612,6 @@ $_->com_ptags->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_packager', 'package/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_packager', 'package/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

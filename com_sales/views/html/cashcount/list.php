@@ -17,7 +17,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 $_->com_jstree->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Group Tree
 		var location = $("#p_muid_assign_dialog [name=location]");
 		$("#p_muid_location_tree")
@@ -64,7 +64,7 @@ $_->com_jstree->load();
 					if (assign_to == "") {
 						alert("Please select a group");
 					} else {
-						pines.post(<?php echo json_encode(pines_url('com_sales', 'cashcount/assign')); ?>, {
+						$_.post(<?php echo json_encode(pines_url('com_sales', 'cashcount/assign')); ?>, {
 							count_type: assign_type,
 							location: assign_to
 						});
@@ -111,7 +111,7 @@ $_->com_jstree->load();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'cash_counts',
 						content: rows
 					});

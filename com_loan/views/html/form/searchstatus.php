@@ -48,7 +48,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	}
 </style>
 <script type='text/javascript'>
-	pines(function(){
+	$_(function(){
 		var cur_state = <?php echo (isset($this->cur_state) ? json_encode($this->cur_state) : '{}');?>;
 		var form = $('#p_muid_form');
 		var items = form.find('.item');

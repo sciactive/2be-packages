@@ -1,8 +1,8 @@
-pines(function(){
+$_(function(){
 	var login_page = function(){
 		var notice;
 		$.ajax({
-			url: pines.com_timeoutnotice.loginpage_url,
+			url: $_.com_timeoutnotice.loginpage_url,
 			type: "GET",
 			dataType: "html",
 			beforeSend: function(){
@@ -16,11 +16,11 @@ pines(function(){
 			},
 			error: function(XMLHttpRequest, textStatus){
 				notice.pnotify_remove();
-				pines.error("An error occured while trying to load login page:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+				$_.error("An error occured while trying to load login page:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 			},
 			success: function(data){
 				notice.pnotify_remove();
-				pines.pause();
+				$_.pause();
 				var login_dialog = $("<div />").html(data+"<br />").dialog({
 					modal: true,
 					resizable: false,
@@ -33,12 +33,12 @@ pines(function(){
 					buttons: {
 						"Login": function(){
 							$.ajax({
-								url: pines.com_timeoutnotice.login_url,
+								url: $_.com_timeoutnotice.login_url,
 								type: "POST",
 								dataType: "json",
 								data: login_dialog.find(".com_timeoutnotice_login_form").serialize(),
 								error: function(XMLHttpRequest, textStatus){
-									pines.error("An error occured while trying to login:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+									$_.error("An error occured while trying to login:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 								},
 								success: function(data){
 									if (!data) {
@@ -51,7 +51,7 @@ pines(function(){
 						}
 					}
 				});
-				pines.play();
+				$_.play();
 				login_dialog.find(".already_loggedin").click(function(){
 					login_dialog.dialog("close").remove();
 				}).end().find(".com_timeoutnotice_login_form").submit(function(){
@@ -71,7 +71,7 @@ pines(function(){
 		else
 			return;
 		interval = false;
-		switch (pines.com_timeoutnotice.action) {
+		switch ($_.com_timeoutnotice.action) {
 			case "dialog":
 			default:
 				login_page();
@@ -80,7 +80,7 @@ pines(function(){
 				location.reload(true);
 				break;
 			case "redirect":
-				pines.get(pines.com_timeoutnotice.redirect_url);
+				$_.get($_.com_timeoutnotice.redirect_url);
 				break;
 		}
 	}
@@ -89,7 +89,7 @@ pines(function(){
 	var timeout;
 	var check_timeout = function(){
 		$.ajax({
-			url: pines.com_timeoutnotice.check_url,
+			url: $_.com_timeoutnotice.check_url,
 			type: "GET",
 			dataType: "json",
 			success: function(data){
@@ -124,11 +124,11 @@ pines(function(){
 							});
 							session_notice.find("a.extend_session").click(function(){
 								$.ajax({
-									url: pines.com_timeoutnotice.extend_url,
+									url: $_.com_timeoutnotice.extend_url,
 									type: "GET",
 									dataType: "json",
 									error: function(XMLHttpRequest, textStatus){
-										pines.error("An error occured while trying to extend your session:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+										$_.error("An error occured while trying to extend your session:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(data){
 										session_notice.pnotify_remove();

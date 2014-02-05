@@ -42,7 +42,7 @@ $_->uploader->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var station_layout = $("#p_muid_floor_tabs .station_layout");
 		var station_floor = $(".station_floor", station_layout);
 		var station_input = $("#p_muid_floor_tabs input[name=stations]");
@@ -250,7 +250,7 @@ $_->uploader->load();
 			</div>
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						$("#p_muid_form input[name=background]").change(function(){
 							$("#p_muid_form img.station_layout_bg").attr("src", $(this).val());
 						});
@@ -306,6 +306,6 @@ $_->uploader->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_customertimer', 'listfloors'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_customertimer', 'listfloors'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -38,7 +38,7 @@ $loan_ids = $this->loan_ids;
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		setTimeout(function(){
 			var form = $('#p_muid_form');
 			

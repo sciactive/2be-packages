@@ -17,7 +17,7 @@ $_->com_pgrid->load();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_example', 'foobar/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			// Attributes
 			var attributes = $("#p_muid_tab_attributes input[name=attributes]");
 			var attributes_table = $("#p_muid_tab_attributes .attributes_table");
@@ -66,8 +66,8 @@ $_->com_pgrid->load();
 						var new_attribute = [{
 							key: null,
 							values: [
-								pines.safe(cur_attribute_name),
-								pines.safe(cur_attribute_value)
+								$_.safe(cur_attribute_name),
+								$_.safe(cur_attribute_value)
 							]
 						}];
 						attributes_table.pgrid_add(new_attribute);
@@ -167,6 +167,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_example', 'foobar/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_example', 'foobar/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

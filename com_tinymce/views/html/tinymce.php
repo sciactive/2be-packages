@@ -15,8 +15,8 @@ if (isset($_->com_elfinder))
 $content_css = array_merge($_->editor->get_css(), array(h($_->config->location . $_->template->editor_css)));
 ?>
 <script type="text/javascript">
-pines.loadjs("<?php e($_->config->location); ?>components/com_tinymce/includes/tiny_mce/jquery.tinymce.js");
-pines(function(){
+$_.loadjs("<?php e($_->config->location); ?>components/com_tinymce/includes/tiny_mce/jquery.tinymce.js");
+$_(function(){
 $("textarea.peditor").tinymce({
 	// Location of TinyMCE script
 	script_url: '<?php e($_->config->rela_location); ?>components/com_tinymce/includes/tiny_mce/tiny_mce.js',

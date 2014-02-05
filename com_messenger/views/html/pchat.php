@@ -19,14 +19,14 @@ $remote_server = !$_->config->com_messenger->use_proxy && substr($_->config->com
 ?>
 <script type="text/javascript">
 <?php if ($remote_server) { ?>
-pines.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/flxhr/flXHR.js");
+$_.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/flxhr/flXHR.js");
 <?php } ?>
-pines.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/strophejs-latest/strophe.js");
+$_.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/strophejs-latest/strophe.js");
 <?php if ($remote_server) { ?>
-pines.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.flxhr.js");
+$_.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.flxhr.js");
 <?php } ?>
-pines.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.roster.js");
-pines.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.blocking.js");
-pines.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/pchat/jquery.pchat.js");
-pines.loadcss("<?php e($_->config->location); ?>components/com_messenger/includes/pchat/jquery.pchat.default.css");
+$_.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.roster.js");
+$_.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/strophejs-latest/plugins/strophe.blocking.js");
+$_.loadjs("<?php e($_->config->location); ?>components/com_messenger/includes/pchat/jquery.pchat.js");
+$_.loadcss("<?php e($_->config->location); ?>components/com_messenger/includes/pchat/jquery.pchat.default.css");
 </script>

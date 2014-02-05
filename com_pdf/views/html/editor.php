@@ -18,7 +18,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	var displayelem;
 	var getting_values = false;
 
-	pines(function(){
+	$_(function(){
 		$("body *:not(#p_muid_editor, #p_muid_editor *)")
 		.not($("#p_muid_editor").parents())
 		.hide();

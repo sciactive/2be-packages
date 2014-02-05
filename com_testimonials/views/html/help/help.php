@@ -203,7 +203,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var help_container = $('.p_muid_help');
 		var help_list = help_container.find('.help-list');
 		var help_list_li = help_list.find('li');

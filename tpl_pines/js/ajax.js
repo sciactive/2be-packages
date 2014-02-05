@@ -1,5 +1,5 @@
 // Experimental AJAX code.
-pines(function(){
+$_(function(){
 var current_hash, changing_hash = false, loader, j_window = $(window),
 pos_head = $("head"),
 main_menu = $("#main_menu"),
@@ -56,17 +56,17 @@ var load_page_ajax = function(url, type, data){
 			loader.pnotify_remove();
 		},
 		error: function(xhr, textStatus){
-			pines.error("An error occured while communicating with the server:\n\n"+pines.safe(xhr.status)+": "+pines.safe(textStatus));
+			$_.error("An error occured while communicating with the server:\n\n"+$_.safe(xhr.status)+": "+$_.safe(textStatus));
 		},
 		success: function(data){
 			if (window.location != url) {
-				current_hash = "#!"+url.slice(pines.rela_location.length);
+				current_hash = "#!"+url.slice($_.rela_location.length);
 				changing_hash = true;
 				window.location.hash = current_hash;
 			} else
 				current_hash = "";
 			// Pause DOM ready script execution.
-			pines.pause();
+			$_.pause();
 			pos_head.append(data.pos_head);
 			main_menu.html(data.main_menu);
 			pos_top.html(data.pos_top);
@@ -85,14 +85,14 @@ var load_page_ajax = function(url, type, data){
 			pos_footer.html(data.pos_footer);
 			pos_bottom.html(data.pos_bottom);
 			$.each(data.errors, function(){
-				pines.error(pines.safe(this), "Error");
+				$_.error($_.safe(this), "Error");
 			});
 			$.each(data.notices, function(){
-				pines.notice(pines.safe(this), "Notice");
+				$_.notice($_.safe(this), "Notice");
 			});
-			pines.tpl_pines_page_ready();
+			$_.tpl_pines_page_ready();
 			// Now run DOM ready scripts.
-			pines.play();
+			$_.play();
 		}
 	});
 };
@@ -106,7 +106,7 @@ $("body").on("click", "a", function(e){
 		return true;
 	if (url == "#")
 		return false;
-	if (url.indexOf(pines.rela_location) != 0)
+	if (url.indexOf($_.rela_location) != 0)
 		return true;
 	e.preventDefault();
 	load_page_ajax(url, "GET");
@@ -115,13 +115,13 @@ $("body").on("click", "a", function(e){
 	// TODO: Check for file elements.
 	var cur_elem = $(this);
 	var url = cur_elem.attr("action");
-	if (url.indexOf(pines.rela_location) != 0)
+	if (url.indexOf($_.rela_location) != 0)
 		return true;
 	var data = cur_elem.serialize();
 	load_page_ajax(url, "POST", data);
 	return false;
 });
-pines.get = function(url, params, target){
+$_.get = function(url, params, target){
 	if (!target || target == "_self") {
 		if (params)
 			params.tpl_pines_ajax = 1;
@@ -142,7 +142,7 @@ pines.get = function(url, params, target){
 		url += parray.join("&");
 	}
 	if (!target || target == "_self") {
-		if (url.indexOf(pines.rela_location) != 0) {
+		if (url.indexOf($_.rela_location) != 0) {
 			window.location = url;
 			return;
 		}
@@ -156,11 +156,11 @@ pines.get = function(url, params, target){
 	else
 		window.open(url, target);
 };
-// TODO: Handle pines.post through Ajax.
+// TODO: Handle $_.post through Ajax.
 
 // Load any page found on the hash.
 if (typeof window.location.hash == "string" && window.location.hash != "" && window.location.hash.indexOf("!") == 1)
-	load_page_ajax(pines.rela_location + window.location.hash.slice(2), "GET");
+	load_page_ajax($_.rela_location + window.location.hash.slice(2), "GET");
 
 // When the hash changes (like the back button) load the new page.
 var hashchange = function(){
@@ -174,7 +174,7 @@ var hashchange = function(){
 	// Load the new hash.
 	if (typeof window.location.hash == "string" && window.location.hash != "") {
 		if (window.location.hash.indexOf("!") == 1)
-			load_page_ajax(pines.rela_location + window.location.hash.slice(2), "GET");
+			load_page_ajax($_.rela_location + window.location.hash.slice(2), "GET");
 	} else
 		load_page_ajax(window.location, "GET");
 };

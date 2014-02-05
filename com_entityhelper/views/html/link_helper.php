@@ -17,12 +17,12 @@ cursor: help;
 }
 </style>
 <script type="text/javascript">
-pines.entity_helper_url = <?php echo json_encode(pines_url('com_entityhelper', 'helper')); ?>;
-pines(function(){
+$_.entity_helper_url = <?php echo json_encode(pines_url('com_entityhelper', 'helper')); ?>;
+$_(function(){
 $("body").on("click", "a[data-entity]", function(){
 var e = this;
-pines.loadjs("<?php e($_->config->location); ?>components/com_entityhelper/includes/entityhelper.js");
-pines(function(){pines.entity_helper(e);});
+$_.loadjs("<?php e($_->config->location); ?>components/com_entityhelper/includes/entityhelper.js");
+$_(function(){$_.entity_helper(e);});
 });
 });
 </script>

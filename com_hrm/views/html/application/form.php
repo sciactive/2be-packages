@@ -13,16 +13,16 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing ['.h($this->entity->name).']';
 ?>
 <script language="JavaScript" type="text/javascript">
-	pines(function(){
-		pines.com_hrm_form_clear = function(){
+	$_(function(){
+		$_.com_hrm_form_clear = function(){
 			$('#p_muid_employment').children().remove();
 		};
 
-		pines.com_hrm_add_school = function(){
+		$_.com_hrm_add_school = function(){
 			$('#p_muid_education').append($('#p_muid_school_skel').html().replace(/tmp_/g, ''));
 		};
 
-		pines.com_hrm_add_employer = function(){
+		$_.com_hrm_add_employer = function(){
 			$('#p_muid_employment').append($('#p_muid_employer_skel').html().replace(/tmp_/g, ''));
 			$('#p_muid_employment .p_muid_date').datepicker({
 				dateFormat: "yy-mm-dd",
@@ -34,10 +34,10 @@ $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing
 		};
 
 		if ($("#p_muid_education").children().size() == 0)
-			pines.com_hrm_add_school();
+			$_.com_hrm_add_school();
 
 		if ($("#p_muid_employment").children().size() == 0)
-			pines.com_hrm_add_employer();
+			$_.com_hrm_add_employer();
 
 		$(".p_muid_clear input").live('click', function(){
 			if (this.value == this.defaultValue)
@@ -102,7 +102,7 @@ $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing
 	</div>
 	<div class="pf-element">
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				var address_us = $("#p_muid_address_us");
 				var address_international = $("#p_muid_address_international");
 				$("#p_muid_form [name=address_type]").change(function(){
@@ -211,7 +211,7 @@ $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing
 		</div>
 	</div>
 	<div class="pf-element pf-heading">
-		<h3 style="display: inline;">Education<span style="font-size: 10pt; float: right;"><button class="btn btn-success" type="button" onclick="pines.com_hrm_add_school();"><i class="icon-plus icon-white"></i> School</button></span></h3>
+		<h3 style="display: inline;">Education<span style="font-size: 10pt; float: right;"><button class="btn btn-success" type="button" onclick="$_.com_hrm_add_school();"><i class="icon-plus icon-white"></i> School</button></span></h3>
 	</div>
 	<div id="p_muid_education">
 		<?php foreach ($this->entity->education as $cur_education) { ?>
@@ -246,7 +246,7 @@ $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing
 		</div>
 	</div>
 	<div class="pf-element pf-heading">
-		<h3 style="display: inline;">Previous Employment<span style="font-size: 10pt; float: right;"><button class="btn btn-success" type="button" onclick="pines.com_hrm_add_employer();"><i class="icon-plus icon-white"></i> Employer</button></span></h3>
+		<h3 style="display: inline;">Previous Employment<span style="font-size: 10pt; float: right;"><button class="btn btn-success" type="button" onclick="$_.com_hrm_add_employer();"><i class="icon-plus icon-white"></i> Employer</button></span></h3>
 	</div>
 	<div id="p_muid_employment">
 		<?php foreach ($this->entity->employment as $cur_employer) { ?>
@@ -304,7 +304,7 @@ $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing
 	<?php if (isset($this->entity->resume)) { ?>
 	<div class="pf-element">
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				$("#p_muid_form [name=update_resume]").change(function(){
 					if ($(this).is(":checked"))
 						$("#p_muid_form [name=uploadedfile]").removeAttr('disabled');
@@ -327,9 +327,9 @@ $this->title = (!isset($this->entity->guid)) ? 'Apply for Employment' : 'Editing
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
 		<?php if (gatekeeper('com_hrm/editapplication')) { ?>
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_hrm', 'application/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'application/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 		<?php } ?>
 	</div>
 </form>

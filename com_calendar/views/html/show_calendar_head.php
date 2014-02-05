@@ -16,7 +16,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/fullcalendar.css");
-	pines.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/customcolors.css");
-	pines.loadjs("<?php e($_->config->location); ?>components/com_calendar/includes/<?php echo $_->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
+	$_.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/fullcalendar.css");
+	$_.loadcss("<?php e($_->config->location); ?>components/com_calendar/includes/customcolors.css");
+	$_.loadjs("<?php e($_->config->location); ?>components/com_calendar/includes/<?php echo $_->config->debug_mode ? 'fullcalendar.js' : 'fullcalendar.min.js'; ?>");
 </script>

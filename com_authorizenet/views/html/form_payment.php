@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 ?>
 <div class="pf-form">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var form = $("#p_muid_swipe_form").closest("form");
 			var card_swipe = $("#p_muid_card_swipe");
 			var name_first = $("#p_muid_name_first");

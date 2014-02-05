@@ -39,7 +39,7 @@ switch ($this->entity->payment_frequency) {
 }
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Creation date Date Picker.
 		var form = $('#p_muid_form');
 		var payment_amount_input = form.find('[name=payment_amount]');

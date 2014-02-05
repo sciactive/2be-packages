@@ -14,7 +14,7 @@ $this->title = 'Default Customer Groups';
 $_->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Group Grid
 		$("#p_muid_group_grid").pgrid({
 			pgrid_toolbar: true,

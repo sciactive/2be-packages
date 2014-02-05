@@ -44,16 +44,16 @@ if (isset($_->com_googledrive)) {
 <script type="text/javascript">
 	var p_muid_notice;
 
-	pines(function(){
+	$_(function(){
 		entire_company = function(){
 			// Submit the form with all of the fields.
-			pines.get(<?php echo json_encode(pines_url('com_reports', 'reportpayroll')); ?>, {
+			$_.get(<?php echo json_encode(pines_url('com_reports', 'reportpayroll')); ?>, {
 				"entire_company": true
 			});
 		};
 		search_employees = function(){
 			// Submit the form with all of the fields.
-			pines.get(<?php echo json_encode(pines_url('com_reports', 'reportpayroll')); ?>, {
+			$_.get(<?php echo json_encode(pines_url('com_reports', 'reportpayroll')); ?>, {
 				"location": location,
 				"descendants": descendants
 			});
@@ -70,7 +70,7 @@ if (isset($_->com_googledrive)) {
 			pgrid_sort_ord: 'asc',
 			pgrid_toolbar_contents: [
 				<?php if ($this->entire_company) { ?>
-				{type: 'button', title: 'Finalize', extra_class: 'picon picon-document-save', selection_optional: true, confirm: true, click: function(){pines.finalize();}},
+				{type: 'button', title: 'Finalize', extra_class: 'picon picon-document-save', selection_optional: true, confirm: true, click: function(){$_.finalize();}},
 				<?php } else { ?>
 				{type: 'button', title: 'Entire Company', extra_class: 'picon picon-view-process-all', selection_optional: true, click: function(){entire_company();}},
 				<?php } ?>
@@ -80,7 +80,7 @@ if (isset($_->com_googledrive)) {
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'payroll_report',
 						content: rows
 					});
@@ -108,12 +108,12 @@ if (isset($_->com_googledrive)) {
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -133,7 +133,7 @@ if (isset($_->com_googledrive)) {
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -329,12 +329,12 @@ if (isset($_->com_googledrive)) {
 	</tbody>
 </table>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var rows = $("#p_muid_grid").pgrid_get_all_rows();
 		var totals = JSON.stringify(rows.pgrid_export_rows());
-		pines.finalize = function() {
+		$_.finalize = function() {
 			// Finalize the paystub.
-			pines.get(<?php echo json_encode(pines_url('com_reports', 'savepaystub')); ?>, {
+			$_.get(<?php echo json_encode(pines_url('com_reports', 'savepaystub')); ?>, {
 				"start": <?php echo json_encode(format_date($this->start_date)); ?>,
 				"end": <?php echo json_encode(format_date($this->end_date)); ?>,
 				"totals": totals

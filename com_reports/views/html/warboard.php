@@ -115,7 +115,7 @@ $this->title = h($this->entity->company_name).' Warboard';
 					if ($empty) {
 						$location_count[$cur_location->guid]--; ?>
 					<script type="text/javascript">
-						pines(function(){
+						$_(function(){
 							$(".<?php echo strtolower(str_replace(' ', '_', $cur_location->guid.$cur_title)); ?>").hide();
 						});
 					</script>
@@ -197,7 +197,7 @@ $this->title = h($this->entity->company_name).' Warboard';
 	</tr>
 </table>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 <?php
 foreach ($this->entity->locations as $cur_location) {
 	$add_rows = $location_rows - $location_count[$cur_location->guid];

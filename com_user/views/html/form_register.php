@@ -71,7 +71,7 @@ $this->note = 'Please fill in your account details.';
 		<div class="tab-pane" id="p_muid_tab_location">
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						var address_us = $("#p_muid_address_us");
 						var address_international = $("#p_muid_address_international");
 						$("#p_muid_form [name=address_type]").change(function(){
@@ -188,6 +188,6 @@ $this->note = 'Please fill in your account details.';
 		<input type="hidden" name="url" value="<?php e($this->url); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

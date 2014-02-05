@@ -22,7 +22,7 @@ if (isset($this->employee->guid))
 
 ?>
 <script type='text/javascript'>
-	pines(function() {
+	$_(function() {
 		var view_changes = 0;
 		// Create the calendar object.
 		$('#p_muid_calendar').fullCalendar({
@@ -102,7 +102,7 @@ if (isset($this->employee->guid))
 					view_changes++;
 				} else {
 					alert('Loading Relevant Sales');
-					pines.get(<?php echo json_encode(pines_url('com_reports', 'reportsales')); ?>, {
+					$_.get(<?php echo json_encode(pines_url('com_reports', 'reportsales')); ?>, {
 						start: view.start.toString().replace(/[A-Za-z]+\s([A-Za-z\s\d]+)\s\d{2}\:.*/, '$1'),
 						end: view.end.toString().replace(/[A-Za-z]+\s([A-Za-z\s\d]+)\s\d{2}\:.*/, '$1'),
 						location: <?php echo $this->all ? '"all"' : json_encode($this->location); ?>,

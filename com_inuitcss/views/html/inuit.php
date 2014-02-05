@@ -12,10 +12,10 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadcss("<?php e($_->config->location); ?>components/com_inuitcss/includes/core/css/inuit.css");
-	pines.loadcss("<?php e($_->config->location); ?>components/com_inuitcss/includes/<?php e(clean_filename($_->config->com_inuitcss->grid_layout)); ?>");
+	$_.loadcss("<?php e($_->config->location); ?>components/com_inuitcss/includes/core/css/inuit.css");
+	$_.loadcss("<?php e($_->config->location); ?>components/com_inuitcss/includes/<?php e(clean_filename($_->config->com_inuitcss->grid_layout)); ?>");
 	// Get the current number of columns in the CSS grid.
-	pines.com_inuitcss_get_columns = function(){
+	$_.com_inuitcss_get_columns = function(){
 		var cur_grid = 0, cur_test;
 		do {
 			cur_grid++;
@@ -25,8 +25,8 @@ defined('P_RUN') or die('Direct access prohibited');
 		return cur_grid;
 	};
 	<?php /* Example:
-	pines(function(){
-		alert(pines.com_inuitcss_get_columns());
+	$_(function(){
+		alert($_.com_inuitcss_get_columns());
 	});
 	*/ ?>
 </script>

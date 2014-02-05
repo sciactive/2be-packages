@@ -13,15 +13,15 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Shipment Actions';
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$("#p_muid_email").click(function(){
-			pines.get(<?php echo json_encode(pines_url('com_sales', 'shipment/sendemail', array('id' => $this->entity->guid))); ?>);
+			$_.get(<?php echo json_encode(pines_url('com_sales', 'shipment/sendemail', array('id' => $this->entity->guid))); ?>);
 		});
 		$("#p_muid_print").click(function(){
 			window.print();
 		});
 		$("#p_muid_delivered").click(function(){
-			pines.get(<?php echo json_encode(pines_url('com_sales', 'shipment/delivered', array('id' => $this->entity->guid))); ?>);
+			$_.get(<?php echo json_encode(pines_url('com_sales', 'shipment/delivered', array('id' => $this->entity->guid))); ?>);
 		});
 	});
 </script>

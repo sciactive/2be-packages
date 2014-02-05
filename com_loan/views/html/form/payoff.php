@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Creation date Date Picker.
 		$("#p_muid_date_input").datepicker({
 			changeMonth: true,

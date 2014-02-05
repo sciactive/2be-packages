@@ -17,11 +17,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/countsheet/list']);
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var submit_url = <?php echo json_encode(pines_url('com_sales', 'countsheet/list')); ?>;
 		var submit_search = function(){
 			// Submit the form with all of the fields.
-			pines.get(submit_url, {
+			$_.get(submit_url, {
 				"location": location,
 				"descendants": descendants,
 				"all_time": all_time,
@@ -83,7 +83,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					if (assign_to == "") {
 						alert("Please select a group");
 					} else {
-						pines.post(<?php echo json_encode(pines_url('com_sales', 'countsheet/assign')); ?>, {
+						$_.post(<?php echo json_encode(pines_url('com_sales', 'countsheet/assign')); ?>, {
 							location: assign_to
 						});
 						assign_dialog.dialog("close");
@@ -133,7 +133,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							},
 							error: function(XMLHttpRequest, textStatus){
 								loader.pnotify_remove();
-								pines.error("An error occured while trying to uncommit the countsheet:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+								$_.error("An error occured while trying to uncommit the countsheet:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 							},
 							success: function(data){
 								if (!data)
@@ -141,7 +141,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								if (!data[0]) {
 									loader.pnotify({
 										type: 'error',
-										text: pines.safe(data[1]),
+										text: $_.safe(data[1]),
 										hide: true,
 										history: true
 									});
@@ -149,7 +149,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								}
 								loader.pnotify({
 									icon: 'picon picon-task-complete',
-									text: pines.safe(data[1]),
+									text: $_.safe(data[1]),
 									hide: true,
 									history: true
 								});
@@ -167,7 +167,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'countsheets',
 						content: rows
 					});
@@ -192,12 +192,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"all_time": all_time, "start_date": start_date, "end_date": end_date},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the date form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the date form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Date Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -219,7 +219,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -230,12 +230,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -255,7 +255,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

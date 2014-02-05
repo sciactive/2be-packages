@@ -1,7 +1,7 @@
-pines(function(){
+$_(function(){
 	var notice;
 	$.ajax({
-		url: pines.com_su_loginpage_url,
+		url: $_.com_su_loginpage_url,
 		type: "GET",
 		dataType: "html",
 		beforeSend: function(){
@@ -15,7 +15,7 @@ pines(function(){
 		},
 		error: function(XMLHttpRequest, textStatus){
 			notice.pnotify_remove();
-			pines.error("An error occured while trying to load login page:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+			$_.error("An error occured while trying to load login page:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 		},
 		success: function(data){
 			notice.pnotify({

@@ -51,7 +51,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		$('#p_muid_tags').ptags();
 	});
 </script>

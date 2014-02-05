@@ -16,7 +16,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_hrm/employee/list']);
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var employees;
 		<?php if (gatekeeper('com_hrm/editbonus')) { ?>
 		var bonus_dialog = $("#p_muid_bonus_dialog");
@@ -39,7 +39,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			modal: true,
 			buttons: {
 				"Grant Bonus": function(){
-					pines.post(<?php echo json_encode(pines_url('com_hrm', 'bonus/add')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_hrm', 'bonus/add')); ?>, {
 						employees: employees,
 						name: bonus_dialog.find("[name=name]").val(),
 						date: bonus_dialog.find("[name=effective_date]").val(),
@@ -71,7 +71,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			modal: true,
 			buttons: {
 				"Grant Adjustment": function(){
-					pines.post(<?php echo json_encode(pines_url('com_hrm', 'adjustment/add')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_hrm', 'adjustment/add')); ?>, {
 						employees: employees,
 						name: adjustment_dialog.find("[name=name]").val(),
 						date: adjustment_dialog.find("[name=effective_date]").val(),
@@ -103,7 +103,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			modal: true,
 			buttons: {
 				"File Issue": function(){
-					pines.post(<?php echo json_encode(pines_url('com_hrm', 'issue/file')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_hrm', 'issue/file')); ?>, {
 						items: employees,
 						issue_type: issue_dialog.find(":input[name=issue_type]").val(),
 						date: $("#p_muid_issue_dialog [name=effective_date]").val(),
@@ -128,7 +128,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			buttons: {
 				"Terminate": function(){
 					var dispose_as = terminate_dialog.find(":input[name=reason]").val();
-					pines.post(<?php echo json_encode(pines_url('com_hrm', 'employee/terminate')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_hrm', 'employee/terminate')); ?>, {
 						items: employees,
 						date: $("#p_muid_terminate_dialog [name=effective_date]").val(),
 						reason: dispose_as,
@@ -152,7 +152,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			modal: true,
 			buttons: {
 				"Rehire": function(){
-					pines.post(<?php echo json_encode(pines_url('com_hrm', 'employee/terminate')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_hrm', 'employee/terminate')); ?>, {
 						items: employees,
 						date: $("#p_muid_rehire_dialog [name=effective_date]").val(),
 						reason: 'rehired',
@@ -178,9 +178,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						employees += this.key;
 					});
 					if (rows.length == 1)
-						rehire_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.pgrid_get_value(3))+'</h3>');
+						rehire_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.pgrid_get_value(3))+'</h3>');
 					else
-						rehire_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.length)+' Employees</h3>');
+						rehire_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.length)+' Employees</h3>');
 					rehire_dialog.dialog("open");
 					}},
 				<?php } else { ?>
@@ -190,12 +190,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						type: "POST",
 						dataType: "html",
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured while trying to retrieve the user select form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured while trying to retrieve the user select form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (data == "")
 								return;
-							pines.pause();
+							$_.pause();
 							var form = $("<div title=\"Select User(s)\"></div>").html(data+"<br />").dialog({
 								bgiframe: true,
 								autoOpen: true,
@@ -207,11 +207,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 									"Make Employee": function(){
 										form.dialog('close');
 										var users = form.find(":input[name=users]").val();
-										pines.post(<?php echo json_encode(pines_url('com_hrm', 'employee/add')); ?>, { "id": users });
+										$_.post(<?php echo json_encode(pines_url('com_hrm', 'employee/add')); ?>, { "id": users });
 									}
 								}
 							});
-							pines.play();
+							$_.play();
 						}
 					});
 				}},
@@ -230,9 +230,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						employees += this.key;
 					});
 					if (rows.length == 1)
-						bonus_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.pgrid_get_value(3))+'</h3>');
+						bonus_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.pgrid_get_value(3))+'</h3>');
 					else
-						bonus_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.length)+' Employees</h3>');
+						bonus_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.length)+' Employees</h3>');
 					bonus_dialog.dialog("open");
 				}},
 				<?php } if (gatekeeper('com_hrm/editadjustment')) { ?>
@@ -244,9 +244,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						employees += this.key;
 					});
 					if (rows.length == 1)
-						adjustment_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.pgrid_get_value(3))+'</h3>');
+						adjustment_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.pgrid_get_value(3))+'</h3>');
 					else
-						adjustment_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.length)+' Employees</h3>');
+						adjustment_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.length)+' Employees</h3>');
 					adjustment_dialog.dialog("open");
 				}},
 				<?php } if (gatekeeper('com_hrm/fileissue')) { ?>
@@ -258,9 +258,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						employees += this.key;
 					});
 					if (rows.length == 1)
-						issue_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.pgrid_get_value(3))+'</h3>');
+						issue_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.pgrid_get_value(3))+'</h3>');
 					else
-						issue_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.length)+' Employees</h3>');
+						issue_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.length)+' Employees</h3>');
 					issue_dialog.dialog("open");
 				}},
 				<?php } if (gatekeeper('com_hrm/removeemployee') && $this->employed) { ?>
@@ -272,9 +272,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						employees += this.key;
 					});
 					if (rows.length == 1)
-						terminate_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.pgrid_get_value(3))+'</h3>');
+						terminate_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.pgrid_get_value(3))+'</h3>');
 					else
-						terminate_dialog.find("div.dialog_title").html('<h3>'+pines.safe(rows.length)+' Employees</h3>');
+						terminate_dialog.find("div.dialog_title").html('<h3>'+$_.safe(rows.length)+' Employees</h3>');
 					terminate_dialog.dialog("open");
 				}},
 				<?php } if (gatekeeper('com_hrm/editbonus')) { ?>
@@ -291,12 +291,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						type: "POST",
 						dataType: "html",
 						error: function(XMLHttpRequest, textStatus){
-							pines.error("An error occured while trying to retrieve the time off form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+							$_.error("An error occured while trying to retrieve the time off form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						},
 						success: function(data){
 							if (data == "")
 								return;
-							pines.pause();
+							$_.pause();
 							var form = $("<div title=\"Pending Requests for Time Off\"></div>").html(data+"<br />").dialog({
 								bgiframe: true,
 								autoOpen: true,
@@ -306,7 +306,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 									form.remove();
 								}
 							});
-							pines.play();
+							$_.play();
 							// Need to center again because of PGrid.
 							form.dialog("option", "position", "center");
 						}
@@ -324,7 +324,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'employees',
 						content: rows
 					});

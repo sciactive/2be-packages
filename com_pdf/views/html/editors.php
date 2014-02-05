@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var display_editor_window;
 		var current_holder;
 		var pdf_file = "<?php e($this->entity->pdf_file); ?>";

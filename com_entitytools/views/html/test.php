@@ -36,7 +36,7 @@ have bugs.</p>
 			<pre style="width: 100%; height: 100%; overflow: auto;"><?php var_dump($cur_test[3]); ?></pre>
 		</div>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				var dialog = $("#p_muid_<?php e($key); ?>_details")
 				.dialog({
 					modal: true,

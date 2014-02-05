@@ -14,7 +14,7 @@ $this->title = 'Sending '.h($this->mail->name);
 $_->com_jstree->load();
 ?>
 <script type='text/javascript'>
-	pines(function(){
+	$_(function(){
 		// Location Tree
 		var location = $("#p_muid_form [name=location]");
 		$("#p_muid_form .location_tree")
@@ -75,6 +75,6 @@ $_->com_jstree->load();
 		<input type="hidden" name="mail_id" value="<?php e($_REQUEST['mail_id']); ?>" />
 		<input type="hidden" name="location" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_newsletter', 'list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_newsletter', 'list'))); ?>);" value="Cancel" />
 	</div>
 </form>

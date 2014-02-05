@@ -53,13 +53,13 @@ Released   : 20090820
 		$notice = $_->page->get_notice();
 		if ( $error || $notice ) { ?>
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				<?php
 				if ( $error ) { foreach ($error as $cur_item) {
-					echo 'pines.error('.json_encode(h($cur_item)).", \"Error\");\n";
+					echo '$_.error('.json_encode(h($cur_item)).", \"Error\");\n";
 				} }
 				if ( $notice ) { foreach ($notice as $cur_item) {
-					echo 'pines.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
+					echo '$_.notice('.json_encode(h($cur_item)).", \"Notice\");\n";
 				} }
 				?>
 			});

@@ -37,17 +37,17 @@ $_->com_pgrid->load();
 <script type="text/javascript">
 	var p_muid_notice;
 
-	pines(function(){
+	$_(function(){
 		entire_company = function(){
 			// Submit the form with all of the fields.
-			pines.get(<?php echo json_encode(pines_url('com_reports', 'reportpayroll')); ?>, {
+			$_.get(<?php echo json_encode(pines_url('com_reports', 'reportpayroll')); ?>, {
 				"id": paystub,
 				"entire_company": true
 			});
 		};
 		search_employees = function(){
 			// Submit the form with all of the fields.
-			pines.get(<?php echo json_encode(pines_url('com_reports', 'reportpayroll')); ?>, {
+			$_.get(<?php echo json_encode(pines_url('com_reports', 'reportpayroll')); ?>, {
 				"id": paystub,
 				"location": location,
 				"descendants": descendants
@@ -75,7 +75,7 @@ $_->com_pgrid->load();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'payroll_report',
 						content: rows
 					});
@@ -89,12 +89,12 @@ $_->com_pgrid->load();
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -114,7 +114,7 @@ $_->com_pgrid->load();
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

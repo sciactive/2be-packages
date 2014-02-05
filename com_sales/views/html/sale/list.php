@@ -21,11 +21,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/sale/list']);
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var submit_url = <?php echo json_encode(pines_url('com_sales', 'sale/list')); ?>;
 		var submit_search = function(){
 			// Submit the form with all of the fields.
-			pines.get(submit_url, {
+			$_.get(submit_url, {
 				"location": location,
 				"descendants": descendants,
 				"all_time": all_time,
@@ -87,7 +87,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'sales',
 						content: rows
 					});
@@ -112,12 +112,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"all_time": all_time, "start_date": start_date, "end_date": end_date},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the date form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the date form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Date Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -139,7 +139,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -150,12 +150,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -175,7 +175,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -186,12 +186,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"id": sale_id},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the override form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the override form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Override Sale\"></div>").html(data+"<br />");
 					form.dialog({
 						bgiframe: true,
@@ -218,14 +218,14 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 										"user": form.find(":input[name=user]").val()
 									},
 									error: function(XMLHttpRequest, textStatus){
-										pines.error("An error occured while trying to override the sale:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+										$_.error("An error occured while trying to override the sale:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(data){
 										if (data == "false")
 											alert("Could not override the sale.");
 										else {
 											alert("The sale has been overridden.");
-											pines.get(submit_url, {
+											$_.get(submit_url, {
 												"location": location,
 												"descendants": descendants,
 												"all_time": all_time,
@@ -238,7 +238,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -252,13 +252,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					"type": "sale"
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the salesrep form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the salesrep form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
-					var form = $("<div title=\"Swap Salesperson [Sale: "+pines.safe(sale_id)+"]\"></div>").html(data+"<br />");
+					$_.pause();
+					var form = $("<div title=\"Swap Salesperson [Sale: "+$_.safe(sale_id)+"]\"></div>").html(data+"<br />");
 					form.dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -292,7 +292,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 											"salesperson": salesperson
 										},
 										error: function(XMLHttpRequest, textStatus){
-											pines.error("An error occured while trying to swap the salesperson:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+											$_.error("An error occured while trying to swap the salesperson:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 										},
 										success: function(data){
 											if (data == "false")
@@ -305,7 +305,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -316,12 +316,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"id": sale_id},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the swap form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the swap form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $('<div title="Swap/Remove Item"></div>').html(data+"<br />");
 					form.dialog({
 						bgiframe: true,
@@ -343,7 +343,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								} else {
 									form.dialog('close');
 									// Submit the swap request.
-									pines.post(<?php echo json_encode(pines_url('com_sales', 'sale/swap')); ?>, {
+									$_.post(<?php echo json_encode(pines_url('com_sales', 'sale/swap')); ?>, {
 										"id": sale_id,
 										"swap_item": swap_item,
 										"item_action": item_action,
@@ -356,7 +356,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -374,13 +374,13 @@ Only continue if you are fully aware of the results of changing a product."))
 				dataType: "html",
 				data: {"id": guid},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the change product form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the change product form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
-					var form = $("<div title=\"Change Product [Sale: "+pines.safe(sale_id)+"]\"></div>").html(data+"<br />");
+					$_.pause();
+					var form = $("<div title=\"Change Product [Sale: "+$_.safe(sale_id)+"]\"></div>").html(data+"<br />");
 					form.dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -403,7 +403,7 @@ Only continue if you are fully aware of the results of changing a product."))
 								} else {
 									form.dialog('close');
 									// Submit the product change request.
-									pines.post(<?php echo json_encode(pines_url('com_sales', 'sale/changeproduct')); ?>, {
+									$_.post(<?php echo json_encode(pines_url('com_sales', 'sale/changeproduct')); ?>, {
 										"id": guid,
 										"product": product,
 										"new_product": new_product
@@ -412,7 +412,7 @@ Only continue if you are fully aware of the results of changing a product."))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

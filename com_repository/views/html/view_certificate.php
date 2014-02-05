@@ -15,7 +15,7 @@ $this->note = 'All new packages are signed against this certificate.';
 ?>
 <div class="pf-form">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$.ajax({
 				type: "GET",
 				url: <?php echo json_encode("{$_->config->location}{$_->config->com_repository->repository_path}private/cert.key"); ?>,

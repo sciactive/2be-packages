@@ -12,8 +12,8 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadjs("<?php e($_->config->location); ?>components/com_jstree/includes/<?php echo $_->config->debug_mode ? 'jquery.jstree.js' : 'jquery.jstree.min.js'; ?>");
-	pines(function(){
+	$_.loadjs("<?php e($_->config->location); ?>components/com_jstree/includes/<?php echo $_->config->debug_mode ? 'jquery.jstree.js' : 'jquery.jstree.min.js'; ?>");
+	$_(function(){
 		$.jstree.defaults.core.animation = 100;
 		$.jstree._themes = "<?php e($_->config->location); ?>components/com_jstree/includes/themes/";
 		<?php if ($_->depend->check('component', 'com_uasniffer') && $_->depend->check('browser', 'mobile')) { ?>

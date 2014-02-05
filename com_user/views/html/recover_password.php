@@ -14,7 +14,7 @@ $this->title = 'Account Recovery';
 $this->note = 'You can now set a new password for your user account.';
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var password = $("[name=password]", "#p_muid_form");
 		var password2 = $("[name=password2]", "#p_muid_form");
 		$("#p_muid_form").submit(function(){
@@ -43,6 +43,6 @@ $this->note = 'You can now set a new password for your user account.';
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<input type="hidden" name="secret" value="<?php e($this->secret); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

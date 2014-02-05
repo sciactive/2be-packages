@@ -22,7 +22,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var selected_ids;
 		var hire_dialog = $("#p_muid_hire_dialog");
 		var reject_dialog = $("#p_muid_reject_dialog");
@@ -37,7 +37,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			modal: true,
 			buttons: {
 				"Hire": function(){
-					pines.post(<?php echo json_encode(pines_url('com_hrm', 'application/hire')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_hrm', 'application/hire')); ?>, {
 						items: selected_ids,
 						date: $("#p_muid_hire_dialog [name=effective_date]").val()
 					});
@@ -56,7 +56,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			modal: true,
 			buttons: {
 				"Reject": function(){
-					pines.post(<?php echo json_encode(pines_url('com_hrm', 'application/reject')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_hrm', 'application/reject')); ?>, {
 						items: selected_ids
 					});
 					hire_dialog.dialog("close");
@@ -86,7 +86,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						if (selected_ids != "")
 							selected_ids += ",";
 						selected_ids += $(this).attr('title');
-						list += '<li>'+pines.safe($(this).pgrid_get_value(2))+'</li>';
+						list += '<li>'+$_.safe($(this).pgrid_get_value(2))+'</li>';
 					});
 					list += '</ul>';
 					hire_dialog.find("div.dialog_info").html(list);
@@ -99,7 +99,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						if (selected_ids != "")
 							selected_ids += ",";
 						selected_ids += $(this).attr('title');
-						list += '<li>'+pines.safe($(this).pgrid_get_value(2))+'</li>';
+						list += '<li>'+$_.safe($(this).pgrid_get_value(2))+'</li>';
 					});
 					list += '</ul>';
 					reject_dialog.find("div.dialog_info").html(list);
@@ -114,7 +114,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'employment_applications',
 						content: rows
 					});

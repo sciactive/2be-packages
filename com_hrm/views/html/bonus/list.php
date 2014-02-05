@@ -16,7 +16,7 @@ $_->com_hrm->load_employee_select();
 ?>
 <script type="text/javascript">
 
-	pines(function(){
+	$_(function(){
 		var bonus_id;
 		var bonus_dialog = $("#p_muid_bonus_dialog");
 
@@ -38,7 +38,7 @@ $_->com_hrm->load_employee_select();
 			width: 300,
 			buttons: {
 				'Save': function(){
-					pines.post(<?php echo json_encode(pines_url('com_hrm', 'bonus/save')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_hrm', 'bonus/save')); ?>, {
 						id: bonus_id,
 						name: $("#p_muid_bonus_dialog [name=name]").val(),
 						employee: $("#p_muid_bonus_dialog [name=employee]").val(),
@@ -68,11 +68,11 @@ $_->com_hrm->load_employee_select();
 				}},
 				{type: 'button', text: 'Edit', extra_class: 'picon picon-document-edit', double_click: true, click: function(e, row){
 					bonus_id = row.attr("title");
-					$("#p_muid_bonus_dialog [name=effective_date]").val(pines.unsafe(row.pgrid_get_value(1)));
-					$("#p_muid_bonus_dialog [name=name]").val(pines.unsafe(row.pgrid_get_value(2)));
-					$("#p_muid_bonus_dialog [name=employee]").val(pines.unsafe(row.pgrid_get_value(3)));
-					$("#p_muid_bonus_dialog [name=amount]").val(pines.unsafe(row.pgrid_get_value(4)).replace('$',''));
-					$("#p_muid_bonus_dialog [name=comments]").val(pines.unsafe(row.pgrid_get_value(5)));
+					$("#p_muid_bonus_dialog [name=effective_date]").val($_.unsafe(row.pgrid_get_value(1)));
+					$("#p_muid_bonus_dialog [name=name]").val($_.unsafe(row.pgrid_get_value(2)));
+					$("#p_muid_bonus_dialog [name=employee]").val($_.unsafe(row.pgrid_get_value(3)));
+					$("#p_muid_bonus_dialog [name=amount]").val($_.unsafe(row.pgrid_get_value(4)).replace('$',''));
+					$("#p_muid_bonus_dialog [name=comments]").val($_.unsafe(row.pgrid_get_value(5)));
 					bonus_dialog.dialog("open");
 				}},
 				{type: 'button', text: 'Remove', extra_class: 'picon picon-document-close', confirm: true, multi_select: true, url: <?php echo json_encode(pines_url('com_hrm', 'bonus/delete', array('id' => '__title__'))); ?>},
@@ -82,7 +82,7 @@ $_->com_hrm->load_employee_select();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'employee_bonuses',
 						content: rows
 					});

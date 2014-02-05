@@ -69,7 +69,7 @@ $_->com_jstree->load();
 	</div>
 	<?php } ?>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$(".p_muid_option_accordian", "#p_muid_form").on("shown", function(){
 				$(this).find(".p_muid_change_this").val("1").end()
 				.find(".accordion-toggle").removeClass("alert-info").addClass("alert-success");
@@ -207,7 +207,7 @@ $_->com_jstree->load();
 					<div class="pf-element">
 						<span class="pf-label">Location</span>
 						<script type="text/javascript">
-							pines(function(){
+							$_(function(){
 								$("#p_muid_location_null").change(function(){
 									if ($(this).is(":checked"))
 										$("#p_muid_location").slideUp();
@@ -334,6 +334,6 @@ $_->com_jstree->load();
 		<input type="hidden" name="id" value="<?php e(implode(',', $guids)); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'stock/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'stock/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

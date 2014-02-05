@@ -16,9 +16,9 @@ $this->note = 'That is, <em>enabled</em> products without <em>enabled</em> categ
 $_->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		<?php if ($this->fix_cat_count) { ?>
-		pines.notice("Also, while this report was running, I took the liberty of fixing <?php echo (int) $this->fix_cat_count; ?> broken product references I found.", "Cleanup");
+		$_.notice("Also, while this report was running, I took the liberty of fixing <?php echo (int) $this->fix_cat_count; ?> broken product references I found.", "Cleanup");
 		<?php } ?>
 		$("#p_muid_grid").pgrid({
 			pgrid_toolbar: true,
@@ -37,7 +37,7 @@ $_->com_pgrid->load();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'products_without_categories',
 						content: rows
 					});

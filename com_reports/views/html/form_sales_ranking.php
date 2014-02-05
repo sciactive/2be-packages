@@ -16,7 +16,7 @@ $_->com_jstree->load();
 $_->com_pgrid->load();
 ?>
 <script type='text/javascript'>
-	pines(function(){
+	$_(function(){
 		var top_location = <?php echo json_encode("{$this->entity->top_location->guid}"); ?>;
 		$("#p_muid_form [name=start], #p_muid_form [name=end]").datepicker({
 			dateFormat: "yy-mm-dd",
@@ -121,7 +121,7 @@ $_->com_pgrid->load();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'sales ranking',
 						content: rows
 					});
@@ -151,7 +151,7 @@ $_->com_pgrid->load();
 					loader.pnotify_remove();
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
@@ -162,9 +162,9 @@ $_->com_pgrid->load();
 					$.each(data, function(){
 						struct.push({
 							"key": this.guid,
-							"classes": (this.parent ? "parent" : "")+(this.child ? " child ch_"+pines.safe(this.parent_id) : ""),
+							"classes": (this.parent ? "parent" : "")+(this.child ? " child ch_"+$_.safe(this.parent_id) : ""),
 							"values": [
-								pines.safe(this.name),
+								$_.safe(this.name),
 								this.type == "location" ? "Location" : (this.type == "employee" ? "Employee" : "Unknown"),
 								"0.00",
 								""
@@ -181,13 +181,13 @@ $_->com_pgrid->load();
 		var update_goal = function(new_goal){
 			var new_value = parseFloat(new_goal);
 			new_value = isNaN(new_value) ? "0.00" : String(new_value.toFixed(2));
-			goal_grid.pgrid_get_selected_rows().pgrid_set_value(3, pines.safe(new_value));
+			goal_grid.pgrid_get_selected_rows().pgrid_set_value(3, $_.safe(new_value));
 			save_grid();
 		};
 		var update_rank = function(new_rank){
 			var new_value = parseInt(new_rank);
 			new_value = isNaN(new_value) ? "" : String(new_value);
-			goal_grid.pgrid_get_selected_rows().pgrid_set_value(4, pines.safe(new_value));
+			goal_grid.pgrid_get_selected_rows().pgrid_set_value(4, $_.safe(new_value));
 			save_grid();
 		};
 
@@ -211,11 +211,11 @@ $_->com_pgrid->load();
 				var cur_row = $(this);
 				if (typeof sales_goals[cur_row.attr("title")] != "undefined") {
 					if (typeof sales_goals[cur_row.attr("title")] == "object") {
-						cur_row.pgrid_set_value(3, pines.safe(String(parseFloat(sales_goals[cur_row.attr("title")].goal).toFixed(2))));
+						cur_row.pgrid_set_value(3, $_.safe(String(parseFloat(sales_goals[cur_row.attr("title")].goal).toFixed(2))));
 						if (typeof sales_goals[cur_row.attr("title")].rank == "number")
-							cur_row.pgrid_set_value(4, pines.safe(sales_goals[cur_row.attr("title")].rank));
+							cur_row.pgrid_set_value(4, $_.safe(sales_goals[cur_row.attr("title")].rank));
 					} else
-						cur_row.pgrid_set_value(3, pines.safe(String(parseFloat(sales_goals[cur_row.attr("title")]).toFixed(2))));
+						cur_row.pgrid_set_value(3, $_.safe(String(parseFloat(sales_goals[cur_row.attr("title")]).toFixed(2))));
 				}
 			});
 		}
@@ -283,6 +283,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="top_location" />
 		<input type="hidden" name="sales_goals" value="<?php e(json_encode($this->entity->sales_goals)); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Save" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_reports', 'salesrankings'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_reports', 'salesrankings'))); ?>);" value="Cancel" />
 	</div>
 </form>

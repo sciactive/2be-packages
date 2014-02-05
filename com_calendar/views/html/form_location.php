@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type='text/javascript'>
-	pines(function(){
+	$_(function(){
 		// Location Tree
 		var location = $("#p_muid_form [name=location]");
 		$("#p_muid_form .location_tree")

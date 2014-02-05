@@ -18,7 +18,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 ?>
 <script type="text/javascript">
 	var dispo_count = 0;
-	pines(function(){
+	$_(function(){
 		var dispo_counter = 0;
 		var disposal_id;
 		var disposal_dialog = $("#p_muid_disposal_dialog");
@@ -37,7 +37,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			buttons: {
 				"Done": function(){
 					var dispose_as = disposal_dialog.find(":input[name=dispose]").val();
-					pines.post(<?php echo json_encode(pines_url('com_esp', 'dispose')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_esp', 'dispose')); ?>, {
 						items: disposal_id,
 						dispose: dispose_as
 					});
@@ -84,7 +84,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						});
 					}
 					cur_options.pgrid_state_change(plan_grid.pgrid_export_state());
-					pines.post(<?php echo json_encode(pines_url('com_esp', 'list')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('com_esp', 'list')); ?>, {
 						show: disposition
 					});
 					disposition_dialog.dialog("close");
@@ -102,7 +102,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					click: function(e, row){
 						var comments = prompt("Please give a description of the claim filed:");
 						if (comments != null) {
-							pines.post(<?php echo json_encode(pines_url('com_esp', 'claim')); ?>, {
+							$_.post(<?php echo json_encode(pines_url('com_esp', 'claim')); ?>, {
 								id: row.pgrid_export_rows()[0].key,
 								comments: comments
 							});
@@ -120,9 +120,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						disposal_id += this.key;
 					});
 					if (rows.length == 1)
-						disposal_dialog.find("div.disposal_title").html('<h3>['+pines.safe(rows.pgrid_get_value(1))+']</h3>');
+						disposal_dialog.find("div.disposal_title").html('<h3>['+$_.safe(rows.pgrid_get_value(1))+']</h3>');
 					else
-						disposal_dialog.find("div.disposal_title").html('<h3>'+pines.safe(rows.length)+' ESPs</h3>');
+						disposal_dialog.find("div.disposal_title").html('<h3>'+$_.safe(rows.length)+' ESPs</h3>');
 					disposal_dialog.dialog("open");
 				}},
 				<?php } if (gatekeeper('com_esp/printplan')) { ?>
@@ -145,7 +145,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'ESPs',
 						content: rows
 					});
@@ -172,13 +172,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "html",
 				data: {"id": esp_id},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the swap form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the swap form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
-					var form = $("<div title=\"Swap Item [ESP: "+pines.safe(esp_id)+"]\"></div>").html(data+"<br />").dialog({
+					$_.pause();
+					var form = $("<div title=\"Swap Item [ESP: "+$_.safe(esp_id)+"]\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
 						width: 425,
@@ -197,7 +197,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								} else {
 									form.dialog('close');
 									// Submit the swap request.
-									pines.post(<?php echo json_encode(pines_url('com_esp', 'swap')); ?>, {
+									$_.post(<?php echo json_encode(pines_url('com_esp', 'swap')); ?>, {
 										"id": esp_id,
 										"swap_item": swap_item,
 										"new_serial": new_serial.trim()
@@ -206,7 +206,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

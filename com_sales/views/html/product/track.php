@@ -23,7 +23,7 @@ $_->com_jstree->load();
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var submit_url = <?php echo json_encode(pines_url('com_sales', 'product/track')); ?>;
 		var submit_search = function(){
 			if ($("#p_muid_types_dialog [name=types_invoice]").attr('checked'))
@@ -39,7 +39,7 @@ $_->com_jstree->load();
 			if ($("#p_muid_types_dialog [name=types_countsheet]").attr('checked'))
 				types.push('countsheet');
 			// Submit the form with all of the fields.
-			pines.get(submit_url, {
+			$_.get(submit_url, {
 				"serial": serial_box.val(),
 				"sku": sku_box.val(),
 				"types": types,
@@ -111,12 +111,12 @@ $_->com_jstree->load();
 				dataType: "html",
 				data: {"all_time": all_time, "start_date": start_date, "end_date": end_date},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the date form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the date form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Date Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -137,7 +137,7 @@ $_->com_jstree->load();
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -148,12 +148,12 @@ $_->com_jstree->load();
 				dataType: "html",
 				data: {"location": location, "descendants": descendants},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the location form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the location form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					var form = $("<div title=\"Location Selector\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -172,7 +172,7 @@ $_->com_jstree->load();
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};

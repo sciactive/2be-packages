@@ -12,5 +12,5 @@
 defined('P_RUN') or die('Direct access prohibited');
 ?>
 <script type="text/javascript">
-	pines.loadjs("<?php e($_->config->location); ?>components/com_sales/includes/cash_drawer.js");
+	$_.loadjs("<?php e($_->config->location); ?>components/com_sales/includes/cash_drawer.js");
 </script>

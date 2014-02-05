@@ -11,7 +11,7 @@
  *	  http://www.mozilla.org/MPL/MPL-1.1.html
  */
 
-pines(function(){
+$_(function(){
 		
 		var create_testimonial_module = function(parent) {
 			var testimonials_container = parent.find('.testimonials-module'),
@@ -211,7 +211,7 @@ pines(function(){
 								share_again.css('visibility', 'hidden');
 							}, 
 							error: function(XMLHttpRequest, textStatus){
-								pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+								$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 								status_icon.removeClass('icon-spin icon-spinner').removeClass('icon-remove');
 								status_words.text('Error. Not Submitted.');
 								share_again.hide().text('Try Again?').css('visibility', 'visible').fadeIn();
@@ -329,7 +329,7 @@ pines(function(){
 					loaded_testimonial.hide();
 					average_rating_box.hide();
 					if (check_value(review_item_name) != '')
-						no_average_rating_box.text(pines.safe(review_item_name.val()));
+						no_average_rating_box.text($_.safe(review_item_name.val()));
 					no_average_rating_box.show();
 					testimonial_box.hide();
 					testimonial_box.css('visibility', 'visible');
@@ -438,7 +438,7 @@ pines(function(){
 						}
 					}, 
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 						if (display == 'list') {
 							list_more.find('i').remove();
 							list_more.text('Error Loading...');

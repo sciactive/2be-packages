@@ -44,7 +44,7 @@ $_->icons->load();
 </style>
 <div class="pf-form" id="p_muid_timeclock">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var do_clock = function(pin){
 				var loader;
 				$.ajax({
@@ -66,7 +66,7 @@ $_->icons->load();
 						loader.pnotify_remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while communicating with the server:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while communicating with the server:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (data === undefined) {
@@ -78,7 +78,7 @@ $_->icons->load();
 							return;
 						}
 						if (data === false) {
-							pines.error("There was an error saving the change to the database.");
+							$_.error("There was an error saving the change to the database.");
 							return;
 						}
 						if (data) {
@@ -128,7 +128,7 @@ $_->icons->load();
 
 		var p_muid_rto_form;
 		// Request time off.
-		pines.com_hrm_time_off_form = function(rto_id){
+		$_.com_hrm_time_off_form = function(rto_id){
 			if (rto_id > 0)
 				p_muid_rto_form.remove();
 			$.ajax({
@@ -137,12 +137,12 @@ $_->icons->load();
 				dataType: "html",
 				data: {id: rto_id},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to retrieve the time off form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to retrieve the time off form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == "")
 						return;
-					pines.pause();
+					$_.pause();
 					p_muid_rto_form = $("<div title=\"Time Off Request for <?php e($_SESSION['user']->name); ?>\"></div>").html(data+"<br />").dialog({
 						bgiframe: true,
 						autoOpen: true,
@@ -168,11 +168,11 @@ $_->icons->load();
 										time_end: p_muid_rto_form.find(":input[name=time_end]").val()
 									},
 									error: function(XMLHttpRequest, textStatus){
-										pines.error("An error occured while trying to submit the time off request:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+										$_.error("An error occured while trying to submit the time off request:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(successful){
 										if (!successful) {
-											pines.error("Your time off request was unsuccessful");
+											$_.error("Your time off request was unsuccessful");
 											return;
 										}
 										alert("Time Off Request Submitted");
@@ -181,7 +181,7 @@ $_->icons->load();
 							}
 						}
 					});
-					pines.play();
+					$_.play();
 				}
 			});
 		};
@@ -197,7 +197,7 @@ $_->icons->load();
 	<div class="pf-element pf-full-width">
 		<div class="btn-group" style="float: right;">
 			<button class="btn" id="p_muid_button" type="button"><span class="p_muid_button_text"><?php echo $this->entity->clocked_in_time() ? 'Clock Out' : 'Clock In'; ?></span></button>
-			<button class="btn" type="button" onclick="pines.com_hrm_time_off_form();" title="Request Time Off"><span class="p_muid_btn picon picon-view-calendar-upcoming-events"></span></button>
+			<button class="btn" type="button" onclick="$_.com_hrm_time_off_form();" title="Request Time Off"><span class="p_muid_btn picon picon-view-calendar-upcoming-events"></span></button>
 		</div>
 	</div>
 </div>

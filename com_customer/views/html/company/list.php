@@ -17,7 +17,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_customer/company/list']);
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		// Company search function for the pgrid toolbar.
 		var company_search_box;
 		var submit_search = function(){
@@ -47,7 +47,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					loader.pnotify_remove();
 				},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (!data) {
@@ -59,17 +59,17 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						struct.push({
 							"key": this.guid,
 							"values": [
-								pines.safe(this.guid),
-								'<a data-entity="'+pines.safe(this.guid)+'" data-entity-context="com_customer_company">'+pines.safe(this.name)+'</a>',
+								$_.safe(this.guid),
+								'<a data-entity="'+$_.safe(this.guid)+'" data-entity-context="com_customer_company">'+$_.safe(this.name)+'</a>',
 								this.address_type == 'us' ? 'US' : 'Intl',
-								pines.safe(this.address),
-								pines.safe(this.city),
-								pines.safe(this.state),
-								pines.safe(this.zip),
-								pines.safe(this.email),
-								pines.safe(this.phone),
-								pines.safe(this.fax),
-								pines.safe(this.website)
+								$_.safe(this.address),
+								$_.safe(this.city),
+								$_.safe(this.state),
+								$_.safe(this.zip),
+								$_.safe(this.email),
+								$_.safe(this.phone),
+								$_.safe(this.fax),
+								$_.safe(this.website)
 							]
 						});
 					});
@@ -108,7 +108,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'companies',
 						content: rows
 					});

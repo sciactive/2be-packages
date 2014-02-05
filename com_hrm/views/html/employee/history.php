@@ -26,7 +26,7 @@ $_->com_pgrid->load();
 <script type="text/javascript">
 	var p_muid_notice;
 
-	pines(function(){
+	$_(function(){
 		<?php if (!empty($this->sales)) { ?>
 		var cur_defaults = {
 			pgrid_sort_col: 1,
@@ -38,7 +38,7 @@ $_->com_pgrid->load();
 				{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 				{type: 'separator'},
 				{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-					pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+					$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 						filename: 'sale_history',
 						content: rows
 					});
@@ -98,7 +98,7 @@ $_->com_pgrid->load();
 		};
 		<?php if (gatekeeper('com_hrm/resolveissue')) { ?>
 		// Mark an employee issue as resolved, unresolved or remove it altogether.
-		pines.com_hrm_process_issue = function(id, status){
+		$_.com_hrm_process_issue = function(id, status){
 			var comments;
 			if (status == 'delete') {
 				if (!confirm('Delete Employee Issue?'))
@@ -114,11 +114,11 @@ $_->com_pgrid->load();
 				dataType: "html",
 				data: {"id": id, "status": status, "comments": comments},
 				error: function(XMLHttpRequest, textStatus){
-					pines.error("An error occured while trying to process this issue:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+					$_.error("An error occured while trying to process this issue:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data == 'Error') {
-						pines.error("An error occured while trying to process this issue.");
+						$_.error("An error occured while trying to process this issue.");
 					} else {
 						location.reload(true);
 					}
@@ -189,11 +189,11 @@ $_->com_pgrid->load();
 								<?php if (gatekeeper('com_hrm/resolveissue')) { ?>
 								<td><div class="p_muid_issue_actions">
 									<?php if ($cur_issue->status != 'resolved') { ?>
-									<button class="btn btn-mini" type="button" onclick="pines.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'resolved');" title="Resolve"><span class="p_muid_btn picon picon-flag-yellow"></span></button>
+									<button class="btn btn-mini" type="button" onclick="$_.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'resolved');" title="Resolve"><span class="p_muid_btn picon picon-flag-yellow"></span></button>
 									<?php } else { ?>
-									<button class="btn btn-mini" type="button" onclick="pines.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'unresolved');" title="Reissue"><span class="p_muid_btn picon picon-flag-red"></span></button>
+									<button class="btn btn-mini" type="button" onclick="$_.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'unresolved');" title="Reissue"><span class="p_muid_btn picon picon-flag-red"></span></button>
 									<?php } ?>
-									<button class="btn btn-mini" type="button" onclick="pines.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'delete');" title="Remove"><span class="p_muid_btn picon picon-edit-delete"></span></button>
+									<button class="btn btn-mini" type="button" onclick="$_.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'delete');" title="Remove"><span class="p_muid_btn picon picon-edit-delete"></span></button>
 								</div></td>
 								<?php } ?>
 							</tr>
@@ -319,5 +319,5 @@ $_->com_pgrid->load();
 	</div>
 </div>
 <?php if (gatekeeper('com_hrm/listemployees')) { ?>
-<input class="btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="&laquo; Employees" />
+<input class="btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="&laquo; Employees" />
 <?php }

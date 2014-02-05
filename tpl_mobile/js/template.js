@@ -1,4 +1,4 @@
-pines(function(){
+$_(function(){
 	if ($.pnotify) {
 		$.pnotify.defaults.opacity = 1;
 		$.pnotify.defaults.nonblock = false;

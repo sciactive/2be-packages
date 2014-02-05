@@ -34,7 +34,7 @@ if ($_->config->com_user->check_username) { ?>
 </style>
 <?php } ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		<?php if (($_->config->com_user->email_usernames || $this->display_username) && $_->config->com_user->check_username) { ?>
 		// Check usernames.
 		$("[name=<?php echo $_->config->com_user->email_usernames ? 'email' : 'username'; ?>]", "#p_muid_form").change(function(){
@@ -65,11 +65,11 @@ if ($_->config->com_user->check_username) { ?>
 					}
 					if (data.result) {
 						username.removeClass("ui-state-error");
-						$("#p_muid_username_message").addClass("picon-task-complete").html(pines.safe(data.message));
+						$("#p_muid_username_message").addClass("picon-task-complete").html($_.safe(data.message));
 						return;
 					}
 					username.addClass("ui-state-error");
-					$("#p_muid_username_message").addClass("picon-task-attempt").html(pines.safe(data.message));
+					$("#p_muid_username_message").addClass("picon-task-attempt").html($_.safe(data.message));
 				}
 			});
 		}).blur(function(){
@@ -258,7 +258,7 @@ if ($_->config->com_user->check_username) { ?>
 				<?php } else { ?>
 				<div class="pf-element pf-full-width">
 					<script type="text/javascript">
-						pines(function(){
+						$_(function(){
 							// Group Grid
 							$("#p_muid_group_grid").pgrid({
 								pgrid_toolbar: true,
@@ -322,7 +322,7 @@ if ($_->config->com_user->check_username) { ?>
 			<?php } ?>
 			<div class="pf-element">
 				<script type="text/javascript">
-					pines(function(){
+					$_(function(){
 						var address_us = $("#p_muid_address_us");
 						var address_international = $("#p_muid_address_international");
 						$("#p_muid_form [name=address_type]").change(function(){
@@ -437,7 +437,7 @@ if ($_->config->com_user->check_username) { ?>
 			</div>
 			<?php } ?>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					// Addresses
 					var addresses = $("#p_muid_addresses"),
 						addresses_table = $("#p_muid_addresses_table"),
@@ -490,12 +490,12 @@ if ($_->config->com_user->check_username) { ?>
 								var new_address = [{
 									key: null,
 									values: [
-										pines.safe(cur_address_type),
-										pines.safe(cur_address_addr1),
-										pines.safe(cur_address_addr2),
-										pines.safe(cur_address_city),
-										pines.safe(cur_address_state),
-										pines.safe(cur_address_zip)
+										$_.safe(cur_address_type),
+										$_.safe(cur_address_addr1),
+										$_.safe(cur_address_addr2),
+										$_.safe(cur_address_city),
+										$_.safe(cur_address_state),
+										$_.safe(cur_address_zip)
 									]
 								}];
 								addresses_table.pgrid_add(new_address);
@@ -579,7 +579,7 @@ if ($_->config->com_user->check_username) { ?>
 				}
 			</style>
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					var sections = $("#p_muid_tab_abilities .abilities_accordion .collapse");
 					$("#p_muid_tab_abilities button.expand_all").click(function(){
 						sections.collapse("show");
@@ -633,7 +633,7 @@ if ($_->config->com_user->check_username) { ?>
 		<?php } if (in_array('attributes', $_->config->com_user->user_fields)) { ?>
 		<div class="tab-pane" id="p_muid_tab_attributes">
 			<script type="text/javascript">
-				pines(function(){
+				$_(function(){
 					// Attributes
 					var attributes = $("#p_muid_tab_attributes input[name=attributes]"),
 						attributes_table = $("#p_muid_tab_attributes .attributes_table"),
@@ -682,8 +682,8 @@ if ($_->config->com_user->check_username) { ?>
 								var new_attribute = [{
 									key: null,
 									values: [
-										pines.safe(cur_attribute_name),
-										pines.safe(cur_attribute_value)
+										$_.safe(cur_attribute_name),
+										$_.safe(cur_attribute_value)
 									]
 								}];
 								attributes_table.pgrid_add(new_attribute);
@@ -740,9 +740,9 @@ if ($_->config->com_user->check_username) { ?>
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
 		<?php if (gatekeeper('com_user/listusers')) { ?>
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_user', 'listusers'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_user', 'listusers'))); ?>);" value="Cancel" />
 		<?php } else { ?>
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 		<?php } ?>
 	</div>
 </form>

@@ -70,10 +70,10 @@ $_->com_sales->sort_specs($specs);
 	}
 </style>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		<?php if (!$_->config->com_storefront->catalog_mode) { ?>
 		$("button.add_cart", "#p_muid_product").click(function(){
-			pines.com_storefront_add_to_cart(<?php echo json_encode($this->entity->guid); ?>, <?php echo json_encode($this->entity->name); ?>, <?php echo (float) $this->entity->unit_price; ?>, $("#p_muid_product"));
+			$_.com_storefront_add_to_cart(<?php echo json_encode($this->entity->guid); ?>, <?php echo json_encode($this->entity->name); ?>, <?php echo (float) $this->entity->unit_price; ?>, $("#p_muid_product"));
 		});
 		<?php } if ($this->entity->images) { ?>
 		$(".ppy", "#p_muid_product").popeye();

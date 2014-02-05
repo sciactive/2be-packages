@@ -59,7 +59,7 @@ if ($_->config->com_sales->autocomplete_product)
 	</div>
 	<?php } ?>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var products = $("#p_muid_products"),
 				products_table = $("#p_muid_products_table"),
 				payments_table = $("#p_muid_payments_table"),
@@ -195,7 +195,7 @@ if ($_->config->com_sales->autocomplete_product)
 										loader.pnotify_remove();
 									},
 									error: function(XMLHttpRequest, textStatus){
-										pines.error("An error occured while trying to lookup the product code:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+										$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(data){
 										if (!data) {
@@ -231,7 +231,7 @@ if ($_->config->com_sales->autocomplete_product)
 								return;
 							}
 							var serial = rows.pgrid_get_value(3);
-							serial_box.val(pines.unsafe(serial));
+							serial_box.val($_.unsafe(serial));
 							var buttons = {
 								"Done": function(){
 									serial = serial_box.val();
@@ -239,7 +239,7 @@ if ($_->config->com_sales->autocomplete_product)
 										alert("Please provide a serial number.");
 										return;
 									}
-									rows.pgrid_set_value(3, pines.safe(serial));
+									rows.pgrid_set_value(3, $_.safe(serial));
 									update_products();
 									serial_dialog.dialog("close");
 								}
@@ -315,7 +315,7 @@ if ($_->config->com_sales->autocomplete_product)
 								discount = prompt("Enter an amount($#.##) or a percent (#.##%) to discount each unit:", discount);
 							} while ((!discount.match(/^(\$-?\d+(\.\d+)?)|(-?\d+(\.\d+)?%)$/)) && discount != null);
 							if (discount != null) {
-								rows.pgrid_set_value(7, pines.safe(discount));
+								rows.pgrid_set_value(7, $_.safe(discount));
 								update_products();
 							}
 						}
@@ -367,7 +367,7 @@ if ($_->config->com_sales->autocomplete_product)
 								alert("Please provide a serial number.");
 								return;
 							}
-							products_table.pgrid_add([{key: data.guid, values: [pines.safe(data.sku), pines.safe(data.name), pines.safe(serial), '', 1, pines.safe(data.unit_price), "", "", "", "", pines.safe(data.salesperson)]}], function(){
+							products_table.pgrid_add([{key: data.guid, values: [$_.safe(data.sku), $_.safe(data.name), $_.safe(serial), '', 1, $_.safe(data.unit_price), "", "", "", "", $_.safe(data.salesperson)]}], function(){
 								var cur_row = $(this);
 								cur_row.data("product", data);
 							});
@@ -383,7 +383,7 @@ if ($_->config->com_sales->autocomplete_product)
 					serial_box.val("");
 					return;
 				}
-				products_table.pgrid_add([{key: data.guid, values: [pines.safe(data.sku), pines.safe(data.name), pines.safe(serial), "", 1, pines.safe(data.unit_price), "", "", "", "", pines.safe(data.salesperson)]}], function(){
+				products_table.pgrid_add([{key: data.guid, values: [$_.safe(data.sku), $_.safe(data.name), $_.safe(serial), "", 1, $_.safe(data.unit_price), "", "", "", "", $_.safe(data.salesperson)]}], function(){
 					var cur_row = $(this);
 					cur_row.data("product", data);
 				});
@@ -460,7 +460,7 @@ if ($_->config->com_sales->autocomplete_product)
 								loader.pnotify_remove();
 							},
 							error: function(XMLHttpRequest, textStatus){
-								pines.error("An error occured while trying to lookup the products:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+								$_.error("An error occured while trying to lookup the products:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 							},
 							success: function(data){
 								if (!data || !data[0]) {
@@ -469,7 +469,7 @@ if ($_->config->com_sales->autocomplete_product)
 								}
 								$.each(data, function(){
 									var product = this;
-									category_products_grid.pgrid_add([{key: this.guid, values: [pines.safe(this.name), pines.safe(this.sku)]}], function(){
+									category_products_grid.pgrid_add([{key: this.guid, values: [$_.safe(this.name), $_.safe(this.sku)]}], function(){
 										$(this).data("product", product);
 									});
 								});
@@ -535,26 +535,26 @@ if ($_->config->com_sales->autocomplete_product)
 					return;
 				}
 				$.each(product.return_checklists, function(i, cur_checklist){
-					checklist_form.append('<div class="pf-element pf-heading"><h3>'+pines.safe(cur_checklist.label)+'</h3></div>');
+					checklist_form.append('<div class="pf-element pf-heading"><h3>'+$_.safe(cur_checklist.label)+'</h3></div>');
 					$.each(cur_checklist.conditions, function(i, cur_condition){
-						var cur_element = $('<div class="pf-element pf-full-width condition"><span class="pf-label">'+pines.safe(cur_condition.condition)+'</span></div>');
+						var cur_element = $('<div class="pf-element pf-full-width condition"><span class="pf-label">'+$_.safe(cur_condition.condition)+'</span></div>');
 						// Make checkboxes.
 						if (cur_condition.always)
 							cur_element.append('<span class="pf-field">Always Charged</span>')
 						else
-							cur_element.append('<input class="pf-field" type="checkbox" name="'+pines.safe(cur_condition.condition)+'" value="ON"'+((checklists["G"+cur_checklist.guid] && checklists["G"+cur_checklist.guid]["C"+cur_condition.condition]) ? ' checked="checked"' : '')+' />')
+							cur_element.append('<input class="pf-field" type="checkbox" name="'+$_.safe(cur_condition.condition)+'" value="ON"'+((checklists["G"+cur_checklist.guid] && checklists["G"+cur_checklist.guid]["C"+cur_condition.condition]) ? ' checked="checked"' : '')+' />')
 						var amount;
 						// Calculate return fee.
 						switch (cur_condition.type) {
 							case "flat_rate":
 							default:
-								amount = "$"+pines.safe(cur_condition.amount)+" x "+pines.safe(qty)+" ($"+pines.safe(round_to_dec(cur_condition.amount * qty, true))+")";
+								amount = "$"+$_.safe(cur_condition.amount)+" x "+$_.safe(qty)+" ($"+$_.safe(round_to_dec(cur_condition.amount * qty, true))+")";
 								break;
 							case "percentage":
-								amount = pines.safe(cur_condition.amount)+"% ($"+pines.safe(round_to_dec(round_to_dec(price * (cur_condition.amount / 100)) * qty, true))+")";
+								amount = $_.safe(cur_condition.amount)+"% ($"+$_.safe(round_to_dec(round_to_dec(price * (cur_condition.amount / 100)) * qty, true))+")";
 								break;
 						}
-						cur_element.append('<div style="float: right;">'+pines.safe(amount)+'</div>').data("guid", cur_checklist.guid).appendTo(checklist_form);
+						cur_element.append('<div style="float: right;">'+$_.safe(amount)+'</div>').data("guid", cur_checklist.guid).appendTo(checklist_form);
 					});
 				});
 				checklist_dialog.dialog("option", "buttons", {
@@ -600,7 +600,7 @@ if ($_->config->com_sales->autocomplete_product)
 							alert("Please select a salesperson using the dropdown menu.");
 							return;
 						}
-						row.pgrid_set_value(11, pines.safe(salesperson));
+						row.pgrid_set_value(11, $_.safe(salesperson));
 						row.pgrid_deselect_rows();
 						salesperson_dialog.dialog('close');
 						update_products();
@@ -637,7 +637,7 @@ if ($_->config->com_sales->autocomplete_product)
 					dataType: "json",
 					data: {"code": cur_guid, "useguid": true},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to lookup a product:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to lookup a product:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -689,7 +689,7 @@ if ($_->config->com_sales->autocomplete_product)
 										alert("Payments cannot be changed if they have been approved, declined, or tendered.");
 										return;
 									}
-									cur_row.pgrid_set_value(2, pines.safe(amount));
+									cur_row.pgrid_set_value(2, $_.safe(amount));
 								});
 								update_payments();
 							});
@@ -738,12 +738,12 @@ if ($_->config->com_sales->autocomplete_product)
 						$(".p_muid_payment_data_throbber").addClass("hide");
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured while trying to retrieve the data form:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured while trying to retrieve the data form:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (data == "")
 							return;
-						var form = $("<div title=\"Data for "+pines.safe(row.pgrid_get_value(1))+" Payment\"></div>");
+						var form = $("<div title=\"Data for "+$_.safe(row.pgrid_get_value(1))+" Payment\"></div>");
 						form.dialog({
 							bgiframe: true,
 							autoOpen: true,
@@ -791,8 +791,8 @@ if ($_->config->com_sales->autocomplete_product)
 				// TODO: Minimums, maximums
 				get_amount(function(amount){
 					payments_table.pgrid_add([{key: payment_type.guid, values: [
-						pines.safe(payment_type.name),
-						pines.safe(amount),
+						$_.safe(payment_type.name),
+						$_.safe(amount),
 						"pending"
 					]}], function(){
 						var row = $(this);
@@ -980,9 +980,9 @@ if ($_->config->com_sales->autocomplete_product)
 					item_fees += round_to_dec(cur_item_fees);
 					subtotal += round_to_dec(line_total);
 					return_fees += round_to_dec(cur_return_fee);
-					cur_row.pgrid_set_value(8, pines.safe(round_to_dec(line_total, true)));
-					cur_row.pgrid_set_value(9, pines.safe(round_to_dec(cur_item_fees, true)));
-					cur_row.pgrid_set_value(10, pines.safe(round_to_dec(cur_return_fee, true)));
+					cur_row.pgrid_set_value(8, $_.safe(round_to_dec(line_total, true)));
+					cur_row.pgrid_set_value(9, $_.safe(round_to_dec(cur_item_fees, true)));
+					cur_row.pgrid_set_value(10, $_.safe(round_to_dec(cur_return_fee, true)));
 					var cur_row_export = cur_row.pgrid_export_rows()[0];
 					cur_row_export.return_checklists = checklists;
 					row_export.push(cur_row_export);
@@ -1006,7 +1006,7 @@ if ($_->config->com_sales->autocomplete_product)
 				// Now add all the specials to the specials section.
 				var special_box = $("#p_muid_specials").empty();
 				$.each(specials, function(i, cur_special){
-					special_box.append("<div class=\"special well\"><div class=\"special_name\">"+pines.safe(cur_special.name)+"</div><div class=\"special_discount\">"+(cur_special.before_tax ? "<small>(before tax)</small> " : "")+"$"+round_to_dec(cur_special.discount, true)+"</div></div>");
+					special_box.append("<div class=\"special well\"><div class=\"special_name\">"+$_.safe(cur_special.name)+"</div><div class=\"special_discount\">"+(cur_special.before_tax ? "<small>(before tax)</small> " : "")+"$"+round_to_dec(cur_special.discount, true)+"</div></div>");
 				});
 				$("#p_muid_specials_total").html(round_to_dec(total_specials, true));
 				if (round_to_dec(total_specials) > 0)
@@ -1063,7 +1063,7 @@ if ($_->config->com_sales->autocomplete_product)
 					$("#p_muid_overpaid").hide();
 			};
 
-			pines.com_sales_run_check = function(use_drawer){
+			$_.com_sales_run_check = function(use_drawer){
 				if (require_customer && !$("#p_muid_customer").val().match(/^\d+/)) {
 					alert("One of the products on this return requires a customer. Please select a customer before continuing.");
 					return;
@@ -1074,20 +1074,20 @@ if ($_->config->com_sales->autocomplete_product)
 					return;
 				}
 				if (use_drawer)
-					pines.com_sales_run_drawer();
+					$_.com_sales_run_drawer();
 				else
-					pines.com_sales_run_submit();
+					$_.com_sales_run_submit();
 			};
 
 			<?php if ($_->config->com_sales->cash_drawer) { ?>
-			pines.com_sales_run_drawer = function(){
+			$_.com_sales_run_drawer = function(){
 				if (!check_return_total()) return false;
 				var keep_checking = function(status){
 					switch (status) {
 						case "is_open":
 							break;
 						case "is_closed":
-							pines.com_sales_run_submit();
+							$_.com_sales_run_submit();
 							return;
 							break;
 						case "not_supported":
@@ -1104,7 +1104,7 @@ if ($_->config->com_sales->autocomplete_product)
 							break;
 					}
 					setTimeout(function(){
-						pines.drawer_check(keep_checking);
+						$_.drawer_check(keep_checking);
 					}, 500);
 				};
 
@@ -1124,18 +1124,18 @@ if ($_->config->com_sales->autocomplete_product)
 					message += "<br /><div style=\"float: right; clear: right;\">Change Due: <strong>$"+round_to_dec(total_cash, true)+"</strong></div><br style=\"clear: both;\" />";
 
 				if (kicked)
-					pines.drawer_open(keep_checking, message);
+					$_.drawer_open(keep_checking, message);
 				else
 					$("#p_muid_form").submit();
 			};
 			<?php } else { ?>
-			pines.com_sales_run_drawer = function(){
+			$_.com_sales_run_drawer = function(){
 				if (!check_return_total()) return false;
-				pines.com_sales_run_submit();
+				$_.com_sales_run_submit();
 			};
 			<?php } ?>
 
-			pines.com_sales_run_submit = function(){
+			$_.com_sales_run_submit = function(){
 				if (!check_return_total()) return false;
 				$(":button, :submit, :reset", "#p_muid_form .pf-buttons").attr("disabled", "disabled").addClass("disabled");
 				$("#p_muid_form").submit();
@@ -1230,7 +1230,7 @@ if ($_->config->com_sales->autocomplete_product)
 					<td><?php e($cur_product['entity']->name); ?></td>
 					<td><?php e($cur_product['serial']); ?></td>
 					<td>NA<script type="text/javascript">
-						pines(function(){
+						$_(function(){
 							$("#p_muid_tr_<?php e($cur_id); ?>").data("return_checklists", <?php echo json_encode((array) $cur_product['return_checklists']); ?>);
 						});
 					</script></td>
@@ -1374,15 +1374,15 @@ if ($_->config->com_sales->autocomplete_product)
 		<input type="hidden" id="p_muid_return_process_type" name="process" value="quote" />
 
 		<?php if ($this->entity->status != 'voided' && $this->entity->status != 'processed') { ?>
-		<input class="pf-button btn btn-primary" type="button" value="Process" onclick="$('#p_muid_return_process_type').val('process'); pines.com_sales_run_check(true);" />
+		<input class="pf-button btn btn-primary" type="button" value="Process" onclick="$('#p_muid_return_process_type').val('process'); $_.com_sales_run_check(true);" />
 		<?php } ?>
 
 		<?php if ($this->entity->status != 'voided' && $this->entity->status != 'processed' && $this->entity->status != 'quoted') { ?>
-		<input class="pf-button btn btn-primary" type="button" value="Quote" onclick="$('#p_muid_return_process_type').val('quote'); pines.com_sales_run_check();" />
+		<input class="pf-button btn btn-primary" type="button" value="Quote" onclick="$('#p_muid_return_process_type').val('quote'); $_.com_sales_run_check();" />
 		<?php } else { ?>
-		<input class="pf-button btn btn-primary" type="button" value="Save" onclick="$('#p_muid_return_process_type').val('save'); pines.com_sales_run_check();" />
+		<input class="pf-button btn btn-primary" type="button" value="Save" onclick="$('#p_muid_return_process_type').val('save'); $_.com_sales_run_check();" />
 		<?php } ?>
 
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'return/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'return/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

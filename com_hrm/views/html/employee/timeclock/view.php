@@ -16,7 +16,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_hrm/employee/timeclock/view']);
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var state_xhr;
 		var cur_state = <?php echo (isset($this->pgrid_state) ? json_encode($this->pgrid_state) : '{}');?>;
 		var cur_defaults = {

@@ -29,7 +29,7 @@ echo $module->render();
 		}
 	</style>
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			$("#p_muid_customer_name").customerselect();
 			$("#p_muid_done").click(function(){
 				var customer_name = $("#p_muid_customer_name"),
@@ -56,11 +56,11 @@ echo $module->render();
 						status_bar.html('');
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (data) {
-							status_bar.html('<div style="padding-bottom: 10px;"><i class="icon-ok-sign"></i> Success!<?php if (gatekeeper('com_customer/editcustomer')) { ?> <a data-entity="'+pines.safe(parseInt(name_id))+'" data-entity-context="com_customer_customer">View Customer</a>.<?php } ?></div>');
+							status_bar.html('<div style="padding-bottom: 10px;"><i class="icon-ok-sign"></i> Success!<?php if (gatekeeper('com_customer/editcustomer')) { ?> <a data-entity="'+$_.safe(parseInt(name_id))+'" data-entity-context="com_customer_customer">View Customer</a>.<?php } ?></div>');
 							comments.val('');
 							customer_name.val('');
 							interaction_type.val('');

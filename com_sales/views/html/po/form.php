@@ -23,7 +23,7 @@ if ($this->entity->final)
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'po/save')); ?>">
 	<script type="text/javascript">
-		pines(function(){
+		$_(function(){
 			var products = $("#p_muid_products"),
 				products_table = $("#p_muid_products_table"),
 				available_products_table = $("#p_muid_available_products_table"),
@@ -54,7 +54,7 @@ if ($this->entity->final)
 				return floored * sign;
 			};
 
-			pines.com_sales_select_vendor = function(vendor_id, loading) {
+			$_.com_sales_select_vendor = function(vendor_id, loading) {
 				if (cur_vendor == vendor_id && !loading) return;
 				available_products_table.pgrid_get_all_rows().pgrid_delete();
 				if (!loading) {
@@ -159,7 +159,7 @@ if ($this->entity->final)
 					{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+						$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 							filename: 'PO <?php e($this->entity->po_number); ?>',
 							content: rows
 						});
@@ -175,7 +175,7 @@ if ($this->entity->final)
 					{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+						$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 							filename: 'PO <?php e($this->entity->po_number); ?> - Received',
 							content: rows
 						});
@@ -191,7 +191,7 @@ if ($this->entity->final)
 					{type: 'button', title: 'Select None', extra_class: 'picon picon-document-close', select_none: true},
 					{type: 'separator'},
 					{type: 'button', title: 'Make a Spreadsheet', extra_class: 'picon picon-x-office-spreadsheet', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-						pines.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
+						$_.post(<?php echo json_encode(pines_url('system', 'csv')); ?>, {
 							filename: 'PO <?php e($this->entity->po_number); ?> - Not Received',
 							content: rows
 						});
@@ -229,7 +229,7 @@ if ($this->entity->final)
 						loader.pnotify_remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
-						pines.error("An error occured:\n"+pines.safe(XMLHttpRequest.status)+": "+pines.safe(textStatus));
+						$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 					},
 					success: function(data){
 						if (!data) {
@@ -242,7 +242,7 @@ if ($this->entity->final)
 							if (this.stock_type == "non_stocked")
 								return;
 							if (typeof this.manufacturer_name != "undefined" && this.manufacturer_name !== null)
-								this.manufacturer = '<a data-entity="'+pines.safe(this.manufacturer_guid)+'" data-entity-context="com_sales_manufacturer">'+pines.safe(this.manufacturer_name)+'</a>';
+								this.manufacturer = '<a data-entity="'+$_.safe(this.manufacturer_guid)+'" data-entity-context="com_sales_manufacturer">'+$_.safe(this.manufacturer_name)+'</a>';
 							else
 								this.manufacturer = '';
 							var sku = "",
@@ -257,7 +257,7 @@ if ($this->entity->final)
 								sku = vendor.sku;
 								cost = vendor.cost;
 								if (typeof vendor.link != "undefined" && vendor.link !== null && vendor.link !== "")
-									link = '<a href="'+pines.safe(vendor.link)+'" target="_blank">'+pines.safe(vendor.link)+'</a>';
+									link = '<a href="'+$_.safe(vendor.link)+'" target="_blank">'+$_.safe(vendor.link)+'</a>';
 								pass = true;
 							});
 							if (!pass)
@@ -265,15 +265,15 @@ if ($this->entity->final)
 							struct.push({
 								"key": this.guid,
 								"values": [
-									pines.safe(this.sku),
-									'<a data-entity="'+pines.safe(this.guid)+'" data-entity-context="com_sales_product">'+pines.safe(this.name)+'</a>',
+									$_.safe(this.sku),
+									'<a data-entity="'+$_.safe(this.guid)+'" data-entity-context="com_sales_product">'+$_.safe(this.name)+'</a>',
 									this.manufacturer,
-									pines.safe(this.manufacturer_sku),
-									pines.safe(sku),
-									pines.safe(cost),
-									pines.safe('$'+this.price),
+									$_.safe(this.manufacturer_sku),
+									$_.safe(sku),
+									$_.safe(cost),
+									$_.safe('$'+this.price),
 									link,
-									pines.safe(JSON.stringify(vendors))
+									$_.safe(JSON.stringify(vendors))
 								]
 							});
 						});
@@ -324,12 +324,12 @@ if ($this->entity->final)
 						var new_product = [{
 							key: cur_product[0].key,
 							values: [
-								pines.safe(cur_product[0].values[0]),
-								pines.safe(cur_product[0].values[1]),
-								pines.safe(cur_product_quantity),
-								pines.safe(cur_product_cost),
-								pines.safe(round_to_dec(cur_product_quantity * cur_product_cost)),
-								pines.safe(cur_product[0].values[8]),
+								$_.safe(cur_product[0].values[0]),
+								$_.safe(cur_product[0].values[1]),
+								$_.safe(cur_product_quantity),
+								$_.safe(cur_product_cost),
+								$_.safe(round_to_dec(cur_product_quantity * cur_product_cost)),
+								$_.safe(cur_product[0].values[8]),
 								'0'
 							]
 						}];
@@ -400,10 +400,10 @@ if ($this->entity->final)
 
 			$("#p_muid_vendor").change(function(){
 				var vendor = $(this);
-				if (!pines.com_sales_select_vendor(Number(vendor.val())))
+				if (!$_.com_sales_select_vendor(Number(vendor.val())))
 					vendor.val(cur_vendor);
 			});
-			pines.com_sales_select_vendor(cur_vendor, true);
+			$_.com_sales_select_vendor(cur_vendor, true);
 		});
 	</script>
 	<?php if (isset($this->entity->guid)) { ?>
@@ -491,7 +491,7 @@ if ($this->entity->final)
 	</div>
 	<div class="pf-element">
 		<script type="text/javascript">
-			pines(function(){
+			$_(function(){
 				$("#p_muid_eta").datepicker({
 					dateFormat: "yy-mm-dd",
 					showOtherMonths: true,
@@ -712,6 +712,6 @@ if ($this->entity->final)
 		<?php if (!$this->entity->final) { ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="<?php echo isset($this->item_ids) ? 'Commit and Attach' : 'Commit'; ?>" onclick="$('#p_muid_save').val('commit');" />
 		<?php } ?>
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'po/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'po/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -17,7 +17,7 @@ if (isset($this->entity->run_count_date))
 $_->com_pgrid->load();
 ?>
 <script type="text/javascript">
-	pines(function(){
+	$_(function(){
 		var options = {
 			pgrid_view_height: "auto",
 			pgrid_paginate: false,
@@ -294,6 +294,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input name="approve" class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="pines.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
 	</div>
 </form>
