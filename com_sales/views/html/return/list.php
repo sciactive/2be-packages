@@ -13,6 +13,13 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Returns';
 $_->com_pgrid->load();
 $_->com_jstree->load();
+$google_drive = false;
+if (isset($_->com_googledrive)) {
+    $_->com_googledrive->export_to_drive('csv');
+    $google_drive = true;
+} else {
+    pines_log("Google Drive is not installed", 'notice');
+}
 if (gatekeeper('com_sales/swapsalesrep'))
 	$_->com_hrm->load_employee_select();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
@@ -31,7 +38,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				"end_date": end_date
 			});
 		};
-		
+
 		// Timespan Defaults
 		var all_time = <?php echo $this->all_time ? 'true' : 'false'; ?>;
 		var start_date = <?php echo $this->start_date ? json_encode(format_date($this->start_date, 'date_sort')) : '""'; ?>;
@@ -76,7 +83,17 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						filename: 'returns',
 						content: rows
 					});
-				}}
+				}},
+				<?php if ($google_drive && !empty($_->config->com_googledrive->client_id)) { ?>
+				{type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
+					setRows(rows);
+					checkAuth();
+				}},
+				<?php } elseif ($google_drive && empty($_->config->com_googledrive->client_id)) { ?>
+				{type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
+					alert('You need to set the CLIENT ID before you can export to Google Drive');
+				}},
+				<?php } ?>
 			],
 			pgrid_sort_col: 1,
 			pgrid_sort_ord: 'asc',

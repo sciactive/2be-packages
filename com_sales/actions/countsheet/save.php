@@ -68,8 +68,6 @@ if ($_REQUEST['save'] == 'commit') {
 		$countsheet->status = 'declined';
 }
 
-// Run the count.
-$countsheet->run_count();
 
 if ($countsheet->save()) {
 	if ($countsheet->final) {

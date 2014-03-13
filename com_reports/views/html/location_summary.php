@@ -85,20 +85,20 @@ if (isset($_->com_googledrive)) {
 						content: rows
 					});
 				}},
-                                <?php // Need to check if Google Drive is installed
-                                    if ($google_drive && !empty($_->config->com_googledrive->client_id)) { ?>
-                                        {type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-                                        // First need to set the rows to which we want to export
-                                        setRows(rows);
-                                        // Then we have to check if we have permission to post to user's google drive
-                                        checkAuth();
-                                    }},
-                                    <?php } elseif ($google_drive && empty($_->config->com_googledrive->client_id)) { ?>
-                                        {type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
-                                        // They have com_googledrive installed but didn't set the client id, so alert them on click
-                                        alert('You need to set the CLIENT ID before you can export to Google Drive');
-                                    }},
-                                    <?php } ?>
+				<?php // Need to check if Google Drive is installed
+				if ($google_drive && !empty($_->config->com_googledrive->client_id)) { ?>
+				{type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
+					// First need to set the rows to which we want to export
+					setRows(rows);
+					// Then we have to check if we have permission to post to user's google drive
+					checkAuth();
+				}},
+				<?php } elseif ($google_drive && empty($_->config->com_googledrive->client_id)) { ?>
+				{type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
+					// They have com_googledrive installed but didn't set the client id, so alert them on click
+					alert('You need to set the CLIENT ID before you can export to Google Drive');
+				}},
+				<?php } ?>
 			]
 		});
 
@@ -191,14 +191,15 @@ if (isset($_->com_googledrive)) {
 			<th>Adjustment</th>
 			<th>Cost</th>
 			<th>Profit</th>
+			<?php if ($_->config->com_sales->use_commission) { ?>
 			<th>Commission</th>
+			<?php } ?>
 		</tr>
 	</thead>
 	<tbody>
 		<?php
+		$totals = array();
 		foreach ($this->invoices as $cur_invoice) {
-			if ($cur_sale->status == 'voided')
-				continue;
 			if (!isset($totals[$cur_invoice->group->guid])){
 				$totals[$cur_invoice->group->guid] = array(
 					'location' => $cur_invoice->group,
@@ -223,12 +224,12 @@ if (isset($_->com_googledrive)) {
 				foreach ($cur_invoice->products as $cur_item) {
 					foreach ($cur_item['stock_entities'] as $cur_stock)
 						$totals[$cur_invoice->group->guid]['cost'] += $cur_stock->cost;
-				}
-				foreach ($cur_invoice->products as $cur_product) {
-					foreach ($cur_product['salesperson']->commissions as $cur_commission) {
-						if (!in_array($cur_commission, $commissions) && $cur_commission['ticket']->guid == $cur_invoice->guid) {
-							$totals[$cur_invoice->group->guid]['commission'] += $cur_commission['amount'];
-							$commissions[] = $cur_commission;
+					if ($_->config->com_sales->use_commission) {
+						foreach ($cur_item['salesperson']->commissions as $cur_commission) {
+							if (!in_array($cur_commission, $commissions) && $cur_commission['ticket']->guid == $cur_invoice->guid) {
+								$totals[$cur_invoice->group->guid]['commission'] += $cur_commission['amount'];
+								$commissions[] = $cur_commission;
+							}
 						}
 					}
 				}
@@ -237,11 +238,13 @@ if (isset($_->com_googledrive)) {
 				$totals[$cur_invoice->group->guid]['qty_net']--;
 				$totals[$cur_invoice->group->guid]['total_returned'] += $cur_invoice->subtotal;
 				$totals[$cur_invoice->group->guid]['total_net'] -= $cur_invoice->subtotal;
-				foreach ($cur_invoice->products as $cur_product) {
-					foreach ($cur_product['salesperson']->commissions as $cur_commission) {
-						if (!in_array($cur_commission, $commissions) && $cur_commission['ticket']->guid == $cur_invoice->guid) {
-							$totals[$cur_invoice->group->guid]['commission'] += $cur_commission['amount'];
-							$commissions[] = $cur_commission;
+				if ($_->config->com_sales->use_commission) {
+					foreach ($cur_invoice->products as $cur_product) {
+						foreach ($cur_product['salesperson']->commissions as $cur_commission) {
+							if (!in_array($cur_commission, $commissions) && $cur_commission['ticket']->guid == $cur_invoice->guid) {
+								$totals[$cur_invoice->group->guid]['commission'] += $cur_commission['amount'];
+								$commissions[] = $cur_commission;
+							}
 						}
 					}
 				}
@@ -261,7 +264,9 @@ if (isset($_->com_googledrive)) {
 			<td class="total">$<?php echo number_format($cur_total['adjustment'], 2, '.', ''); ?></td>
 			<td class="total">$<?php echo number_format($cur_total['cost'], 2, '.', ''); ?></td>
 			<td class="total">$<?php echo number_format($cur_total['profit'], 2, '.', ''); ?></td>
+			<?php if ($_->config->com_sales->use_commission) { ?>
 			<td class="total">$<?php echo number_format($cur_total['commission'], 2, '.', ''); ?></td>
+			<?php } ?>
 		</tr>
 		<?php } ?>
 	</tbody>

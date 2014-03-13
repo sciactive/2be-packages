@@ -288,7 +288,7 @@ class com_sales_sale extends entity {
 			// Perform actions.
 			$this->perform_actions();
 		}
-		if (!$this->added_commission) {
+		if (!$this->added_commission && $_->config->com_sales->use_commission) {
 			// Add commission.
 			$this->add_commission();
 		}
@@ -858,9 +858,9 @@ class com_sales_sale extends entity {
 
 	/**
 	 * Remove an item from the sale.
-	 * 
+	 *
 	 * After the stock is removed, the sale is saved.
-	 * 
+	 *
 	 * @param int $key The key of the product entry.
 	 * @param com_sales_stock &$item The stock item to remove.
 	 * @return bool True on success, false on failure.
@@ -1115,9 +1115,9 @@ class com_sales_sale extends entity {
 
 	/**
 	 * Swap an item in the sale.
-	 * 
+	 *
 	 * After the swap is performed, the sale is saved.
-	 * 
+	 *
 	 * @param int $key The key of the product entry.
 	 * @param com_sales_stock &$old_item The old item.
 	 * @param com_sales_stock &$new_item The new item.
@@ -1430,7 +1430,7 @@ class com_sales_sale extends entity {
 
 	/**
 	 * Count how many of a product are on a sale.
-	 * 
+	 *
 	 * @param com_sales_product|int $product The product entity or GUID.
 	 * @return int|bool The product count, or false on error.
 	 */
@@ -1450,7 +1450,7 @@ class com_sales_sale extends entity {
 
 	/**
 	 * Apply a special to a product/products and get the sum of the discounts.
-	 * 
+	 *
 	 * @param string $id A unique ID to keep track of specials applied to a product.
 	 * @param string $discount The discount amount to apply.
 	 * @param com_sales_product|int $product The product or GUID to apply the discount to.
@@ -1497,7 +1497,7 @@ class com_sales_sale extends entity {
 
 	/**
 	 * Remove a special from a product/products.
-	 * 
+	 *
 	 * @param string $id A unique ID to keep track of specials applied to a product.
 	 */
 	private function product_special_remove($id) {
@@ -1510,9 +1510,9 @@ class com_sales_sale extends entity {
 
 	/**
 	 * Get the total of a product on a sale.
-	 * 
+	 *
 	 * Adds the line total of all lines which include the product.
-	 * 
+	 *
 	 * @param com_sales_product|int $product The product entity or GUID.
 	 * @return int|bool The total, or false on error.
 	 */
@@ -1536,7 +1536,7 @@ class com_sales_sale extends entity {
 	 * This process adds "line_total" and "fees" to each product on the sale,
 	 * and adds "specials", "subtotal", "total_specials", "item_fees", "taxes",
 	 * and "total" to the sale itself.
-	 * 
+	 *
 	 * -- Important Note --
 	 * This function must remain functionally identical to the update_products()
 	 * JavaScript function in the sale form view.

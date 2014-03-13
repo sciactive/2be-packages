@@ -30,6 +30,14 @@ if ($this->all_time) {
 }
 $_->com_pgrid->load();
 $_->com_jstree->load();
+$google_drive = false;
+if (isset($_->com_googledrive)) {
+    $_->com_googledrive->export_to_drive('csv');
+    $google_drive = true;
+} else {
+    pines_log("Google Drive is not installed", 'notice');
+}
+
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_sales/warehouse/pending']);
 ?>
@@ -163,7 +171,18 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						filename: 'pending warehouse orders',
 						content: rows
 					});
-				}}
+				}},
+				<?php // Need to check if Google Drive is installed
+					if ($google_drive && !empty($_->config->com_googledrive->client_id)) { ?>
+				{type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
+					setRows(rows);
+					checkAuth();
+				}},
+				<?php } elseif ($google_drive && empty($_->config->com_googledrive->client_id)) { ?>
+				{type: 'button', title: 'Export to Google Drive', extra_class: 'picon drive-icon', multi_select: true, pass_csv_with_headers: true, click: function(e, rows){
+					alert('You need to set the CLIENT ID before you can export to Google Drive');
+				}},
+				<?php } ?>
 			],
 			pgrid_sort_col: 1,
 			pgrid_sort_ord: 'asc',
@@ -302,7 +321,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<td<?php echo $style; ?>><?php if (isset($cur_product['po'])) { ?><a<?php echo $style; ?> data-entity="<?php e($cur_product['po']->guid); ?>" data-entity-context="com_sales_po"><?php e($cur_product['po']->po_number); ?></a><?php } ?></td>
 			<td<?php echo $style; ?>>
 				<?php
-				$vendors = array(); 
+				$vendors = array();
 				foreach ($cur_product['entity']->vendors as $cur_vendor) {
 					$cur_string = '';
 					$cur_string .= '<a'.$style.' data-entity="'.h($cur_vendor['entity']->guid).'" data-entity-context="com_sales_vendor">'.h($cur_vendor['entity']->name).'</a>';

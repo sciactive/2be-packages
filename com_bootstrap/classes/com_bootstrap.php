@@ -30,7 +30,7 @@ class com_bootstrap extends component {
 	 * @var bool $css_loaded
 	 */
 	private $tpl_bootstrap_loaded = false;
-	
+
 	/**
 	 * Load the Bootstrap scripts.
 	 *
@@ -44,7 +44,7 @@ class com_bootstrap extends component {
 			$this->scripts_loaded = true;
 		}
 	}
-	
+
 	/**
 	 * Load the tpl_bootstrap CSS/JS. Use com_template in the future.
 	 *
@@ -58,5 +58,5 @@ class com_bootstrap extends component {
 			$this->tpl_bootstrap_loaded = true;
 		}
 	}
-	
+
 }
