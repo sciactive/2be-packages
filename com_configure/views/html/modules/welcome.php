@@ -1,6 +1,6 @@
 <?php
 /**
- * Welcome to WonderPHP widget.
+ * Welcome to 2be widget.
  *
  * @package Components\configure
  * @license http://www.gnu.org/licenses/agpl-3.0.html
@@ -23,7 +23,7 @@ $this->title = 'Welcome to '.h($_->info->name);
 		<h3>Migrating an Installation</h3>
 	</div>
 	<div class="modal-body">
-		<p>Migrating a WonderPHP installation involves just a few quick steps:</p>
+		<p>Migrating a 2be installation involves just a few quick steps:</p>
 		<div id="p_muid_migrate_steps" class="accordion">
 			<div class="accordion-group">
 				<a class="accordion-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
@@ -35,7 +35,7 @@ $this->title = 'Welcome to '.h($_->info->name);
 					<div class="accordion-inner clearfix">
 						You need to reinstall all the components and templates
 						you had installed on the previous installation. You can
-						do that in the <a href="<?php e(pines_url('com_plaza', 'package/repository')); ?>">WonderPHP Plaza</a>.
+						do that in the <a href="<?php e(pines_url('com_plaza', 'package/repository')); ?>">2be Plaza</a>.
 					</div>
 				</div>
 			</div>
@@ -81,7 +81,7 @@ $this->title = 'Welcome to '.h($_->info->name);
 				</a>
 				<div class="accordion-body collapse">
 					<div class="accordion-inner clearfix">
-						Data in WonderPHP is stored in objects called entities,
+						Data in 2be is stored in objects called entities,
 						which can be migrated using the Entity Tools component,
 						com_entitytools. If you don't already have it installed
 						on the old installation, install it. Now go to System ->
@@ -116,15 +116,15 @@ $this->title = 'Welcome to '.h($_->info->name);
 	</div>
 	<div class="modal-footer">
 		<a href="javascript:void(0);" class="btn btn-primary" data-dismiss="modal">Close</a>
-		<a href="http://pinesframework.org/content/page/a-support/" target="_blank" class="btn">Ask for Help</a>
+		<a href="http://2be.io/content/page/a-support/" target="_blank" class="btn">Ask for Help</a>
 	</div>
 </div>
 <div>
-	To help you get started with WonderPHP, here are some important areas in the
+	To help you get started with 2be, here are some important areas in the
 	<a href="<?php e(pines_url('com_configure', 'list')); ?>">configuration</a>:
 	<h4 style="text-align: center;">Settings and Preferences</h4>
 	<dl style="margin-top: 0;">
-		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'system'))); ?>">WonderPHP Config</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'system'))); ?>">2be Config</a></dt>
 		<dd>Main system config includes things like names, default templates and component, timezone, etc.</dd>
 
 		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_user'))); ?>">User Manager</a></dt>
@@ -141,13 +141,13 @@ $this->title = 'Welcome to '.h($_->info->name);
 	</dl>
 	<h4 style="text-align: center;">Appearance</h4>
 	<dl style="margin-top: 0;">
-		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'system'))); ?>">WonderPHP Config</a></dt>
+		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'system'))); ?>">2be Config</a></dt>
 		<dd>The main system config lets you choose default templates, which change the whole site's appearance.</dd>
 
 		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_bootstrap'))); ?>">Bootstrap</a> and <a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'com_jquery'))); ?>">jQuery</a></dt>
 		<dd>Bootstrap provides theming for most of the form inputs, buttons, and other various elements. jQuery UI provides theming for many of the widgets, like the data grids, and the tpl_pines template. Try different combinations of Bootstrap and jQuery UI themes.</dd>
 
 		<dt><a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'tpl_pinescms'))); ?>">Pines CMS Template</a> and <a href="<?php e(pines_url('com_configure', 'edit', array('component' => 'tpl_pines'))); ?>">Pines Template</a></dt>
-		<dd>These are the default templates for WonderPHP. You can configure a lot of options for each of them, including changing their layout.</dd>
+		<dd>These are the default templates for 2be. You can configure a lot of options for each of them, including changing their layout.</dd>
 	</dl>
 </div>

@@ -1,7 +1,7 @@
 [
 	{
 		"path": "main_menu/system/pinesplaza",
-		"text": "WonderPHP Plaza",
+		"text": "2be Plaza",
 		"depend": {
 			"children": true
 		}

@@ -2,11 +2,11 @@
 <?php
 /*
  * I tinkered with this file and made it much more gooder by giving it that same
- * WonderPHP power I give all my code. (Plus some Mrs. Dash.)
+ * 2be power I give all my code. (Plus some Mrs. Dash.)
  *   -Hunter
  * 
  * - Instructions -
- * To use this script for ejabberd authentication, thus giving WonderPHP users
+ * To use this script for ejabberd authentication, thus giving 2be users
  * access to the service, edit the ejabberd.cfg file.
  * In the authentication section, set the method to external authentication
  * and the program to this script, like so:
@@ -15,7 +15,7 @@
  *  {extauth_cache, false}.
  * 
  * Note that the 3rd line turns caching off. This is necessary if you use the
- * web messaging clients in WonderPHP.
+ * web messaging clients in 2be.
  * 
  * - Permissions - (Read if you have errors.)
  * I'm assuming this file is owned by your web server user (probably www-data).
@@ -64,15 +64,15 @@ error_reporting(0);
 if (isset($_SERVER['REQUEST_METHOD']))
 	die('You can\'t request this file.');
 
-// Before we get into Jabber commands, we need to load up WonderPHP.
-// First switch to the WonderPHP dir.
+// Before we get into Jabber commands, we need to load up 2be.
+// First switch to the 2be dir.
 if (preg_match('/components\/com_messenger\/includes\/ejabberd_auth\.php$/', $_SERVER['PHP_SELF']))
 	chdir(preg_replace('/components\/com_messenger\/includes\/ejabberd_auth\.php$/', '', $_SERVER['PHP_SELF']));
 else
 	chdir('../../../');
-// Check that we're in the WonderPHP dir...
+// Check that we're in the 2be dir...
 if (!file_exists('system/classes/core.php'))
-	die('I have no idea where the WonderPHP dir is, so I\'m cowardly refusing to proceed.');
+	die('I have no idea where the 2be dir is, so I\'m cowardly refusing to proceed.');
 // Set up constants...
 define('P_EXEC_TIME', microtime(true));
 define('P_RUN', true);
@@ -86,7 +86,7 @@ foreach (glob('system/init/i*.php') as $_p_cur_sysinit) {
 		break;
 	require($_p_cur_sysinit);
 }
-// Now WonderPHP is ready to go, so we can authenticate.
+// Now 2be is ready to go, so we can authenticate.
 $auth = new JabberAuth();
 $auth->play(); // We simply start process !
 

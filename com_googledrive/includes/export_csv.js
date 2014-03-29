@@ -1,7 +1,7 @@
 /*!
- * WonderPHP Google Drive JavaScript
+ * 2be Google Drive JavaScript
  * Component/googledrive
- * http://pinesframework.org
+ * http://2be.io
  *
  * Copyright 2013, SciActive
  * http://www.gnu.org/licenses/agpl-3.0.html

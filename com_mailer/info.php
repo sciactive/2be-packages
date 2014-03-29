@@ -18,7 +18,7 @@ return array(
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',
 	'website' => 'http://www.sciactive.com',
 	'short_description' => 'Email interface',
-	'description' => 'Provides a more object oriented interface for creating emails in WonderPHP. Supports attachments.',
+	'description' => 'Provides a more object oriented interface for creating emails in 2be. Supports attachments.',
 	'depend' => array(
 		'core' => '<3',
 		'service' => 'entity_manager&editor',

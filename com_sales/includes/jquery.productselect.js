@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2010 Zak Huber
  *
- * Licensed (along with all of WonderPHP) under the GNU Affero GPL:
+ * Licensed (along with all of 2be) under the GNU Affero GPL:
  *	  http://www.gnu.org/licenses/agpl.html
  */
 

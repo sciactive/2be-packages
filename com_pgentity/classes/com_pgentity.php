@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 /**
  * com_pgentity main class.
  *
- * Provides a PostgreSQL based entity manager for WonderPHP.
+ * Provides a PostgreSQL based entity manager for 2be.
  *
  * @package Components\pgentity
  */
@@ -248,12 +248,12 @@ class com_pgentity extends component implements entity_manager_interface {
 		$filename = clean_filename((string) $filename);
 		if (!$fhandle = fopen($filename, 'w'))
 			return false;
-		fwrite($fhandle, "# WonderPHP Entity Export\n");
+		fwrite($fhandle, "# 2be Entity Export\n");
 		fwrite($fhandle, "# com_pgentity version {$_->info->com_pgentity->version}\n");
 		fwrite($fhandle, "# sciactive.com\n");
 		fwrite($fhandle, "#\n");
 		fwrite($fhandle, "# Generation Time: ".date('r')."\n");
-		fwrite($fhandle, "# WonderPHP Version: {$_->info->version}\n\n");
+		fwrite($fhandle, "# 2be Version: {$_->info->version}\n\n");
 
 		fwrite($fhandle, "#\n");
 		fwrite($fhandle, "# UIDs\n");
@@ -320,12 +320,12 @@ class com_pgentity extends component implements entity_manager_interface {
 		header('Content-Disposition: attachment; filename=entities.pex;');
 		// End all output buffering.
 		while (@ob_end_clean());
-		echo "# WonderPHP Entity Export\n";
+		echo "# 2be Entity Export\n";
 		echo "# com_pgentity version {$_->info->com_pgentity->version}\n";
 		echo "# sciactive.com\n";
 		echo "#\n";
 		echo "# Generation Time: ".date('r')."\n";
-		echo "# WonderPHP Version: {$_->info->version}\n\n";
+		echo "# 2be Version: {$_->info->version}\n\n";
 
 		echo "#\n";
 		echo "# UIDs\n";

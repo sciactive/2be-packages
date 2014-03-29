@@ -1,6 +1,6 @@
 <?php
 /**
- * Test an entity manager for compliance with WonderPHP's entity management standard.
+ * Test an entity manager for compliance with 2be's entity management standard.
  *
  * Add a fourth entry to a test's array to show more detail if it fails. (This
  * entry is var_dump()ed in a dialog.)

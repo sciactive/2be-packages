@@ -14,7 +14,7 @@ $this->title = 'Unsafe File Permissions Detected';
 ?>
 <p>
 	Unsafe file permissions have been detected on the certificate authorities
-	directory. This directory and its contents should not be writable by WonderPHP.
+	directory. This directory and its contents should not be writable by 2be.
 </p>
 <p>
 	The best solution is to set this directory to a different user and group by running:<br />

@@ -15,7 +15,7 @@ return array(
 	array(
 		'name' => 'fetch_method',
 		'cname' => 'URL Fetching Method',
-		'description' => 'The method WonderPHP Plaza will use to fetch files from the internet.',
+		'description' => 'The method 2be Plaza will use to fetch files from the internet.',
 		'value' => 'auto',
 		'options' => array(
 			'Detect Automatically' => 'auto',

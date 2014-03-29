@@ -22,7 +22,7 @@ return array(
 		'name' => 'user',
 		'cname' => 'User',
 		'description' => 'The default MySQL user.',
-		'value' => 'wonder',
+		'value' => '2be',
 	),
 	array(
 		'name' => 'password',
@@ -34,13 +34,13 @@ return array(
 		'name' => 'database',
 		'cname' => 'Database',
 		'description' => 'The default MySQL database.',
-		'value' => 'wonder',
+		'value' => '2be',
 	),
 	array(
 		'name' => 'prefix',
 		'cname' => 'Table Prefix',
 		'description' => 'The default MySQL table name prefix.',
-		'value' => 'wdr_',
+		'value' => '2be_',
 	),
 );
-
+

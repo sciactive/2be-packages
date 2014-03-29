@@ -1,7 +1,7 @@
 /*
- * WonderPHP Bootstrap Template
+ * 2be Bootstrap Template
  *
- * http://pinesframework.org/
+ * http://2be.io/
  * Copyright (c) 2013 SciActive
  * Author: Angela Murrell <angela@sciactive.com>
  *
@@ -150,7 +150,7 @@ var get_text_shadow = function(color) {
         }
         return text_shadow;
 }
-// Let the template load up to 4 style sheets that use the WonderPHP relative location.
+// Let the template load up to 4 style sheets that use the 2be relative location.
 if (load_css1.length)
 	$_.loadcss($_.rela_location+load_css1);
 if (load_css2.length)
@@ -159,7 +159,7 @@ if (load_css3.length)
 	$_.loadcss($_.rela_location+load_css3);
 if (load_css4.length)
 	$_.loadcss($_.rela_location+load_css4);
-// Let the template load up to 4 style sheets that use the WonderPHP relative location.
+// Let the template load up to 4 style sheets that use the 2be relative location.
 if (load_js1.length)
 	$_.loadjs($_.rela_location+load_js1);
 if (load_js2.length)

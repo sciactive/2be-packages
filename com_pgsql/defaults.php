@@ -32,7 +32,7 @@ return array(
 		'name' => 'user',
 		'cname' => 'User',
 		'description' => 'The default PostgreSQL user.',
-		'value' => 'wonder',
+		'value' => '2be',
 	),
 	array(
 		'name' => 'password',
@@ -44,13 +44,13 @@ return array(
 		'name' => 'database',
 		'cname' => 'Database',
 		'description' => 'The default PostgreSQL database.',
-		'value' => 'wonder',
+		'value' => '2be',
 	),
 	array(
 		'name' => 'prefix',
 		'cname' => 'Table Prefix',
 		'description' => 'The default PostgreSQL table name prefix.',
-		'value' => 'wdr_',
+		'value' => '2be_',
 	),
 	array(
 		'name' => 'allow_persistent',
@@ -59,4 +59,4 @@ return array(
 		'value' => true,
 	),
 );
-
+

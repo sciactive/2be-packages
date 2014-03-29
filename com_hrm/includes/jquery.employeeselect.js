@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2010 Hunter Perrin
  *
- * Licensed (along with all of WonderPHP) under the GNU Affero GPL:
+ * Licensed (along with all of 2be) under the GNU Affero GPL:
  *	  http://www.gnu.org/licenses/agpl.html
  */
 
@@ -51,7 +51,7 @@ all.each(function(){
 			.appendTo(ul);
 	};
 	// Save the employeeselect object in the DOM, so we can access it.
-	this.pines_employeeselect = cs;
+	this._employeeselect = cs;
 });
 return all;
 };

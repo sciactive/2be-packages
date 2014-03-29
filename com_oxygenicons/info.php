@@ -18,8 +18,8 @@ return array(
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',
 	'website' => 'http://www.sciactive.com',
 	'services' => array('icons'),
-	'short_description' => 'WonderPHP Icon theme using Oxygen icons',
-	'description' => 'A WonderPHP Icon theme using the Oxygen icon library.',
+	'short_description' => '2be Icon theme using Oxygen icons',
+	'description' => 'A 2be Icon theme using the Oxygen icon library.',
 	'depend' => array(
 		'core' => '<3'
 	),

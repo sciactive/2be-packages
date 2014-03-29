@@ -1,6 +1,6 @@
 <?php
 /**
- * Main page of the Mobile WonderPHP template.
+ * Main page of the Mobile 2be template.
  *
  * The page which is output to the user is built using this file.
  *

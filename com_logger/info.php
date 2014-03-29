@@ -25,7 +25,7 @@ return array(
 		'component' => 'com_jquery&com_pgrid&com_jstree&com_pform'
 	),
 	'abilities' => array(
-		array('view', 'View Log', 'Let the user view the WonderPHP log.'),
+		array('view', 'View Log', 'Let the user view the 2be log.'),
 		array('clear', 'Clear Log', 'Let the user clear (delete) the wonder log.')
 	),
 );

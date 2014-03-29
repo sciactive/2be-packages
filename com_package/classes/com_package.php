@@ -127,11 +127,11 @@ class com_package extends component {
 		}
 		if (!$found_system) {
 			// No system package info was found, so let's make one named "core".
-			pines_log("No info file for the system package could be found in the package cache directory. I will attempt to create one called \"sys_pines.php\". If this is a brand new installation, you can ignore this message.", 'warning');
+			pines_log("No info file for the system package could be found in the package cache directory. I will attempt to create one called \"sys_core.php\". If this is a brand new installation, you can ignore this message.", 'warning');
 			$system = include('system/info.php');
 			$system['package'] = 'core';
 			$system['type'] = 'system';
-			file_put_contents('components/com_package/includes/cache/sys_pines.php', "<?php\ndefined('P_RUN') or die('Direct access prohibited');\nreturn ".var_export($system, true).";\n?>");
+			file_put_contents('components/com_package/includes/cache/sys_core.php', "<?php\ndefined('P_RUN') or die('Direct access prohibited');\nreturn ".var_export($system, true).";\n?>");
 			$db['packages']['core'] = $system;
 		}
 		foreach ($db['packages'] as $cur_package => &$cur_entry) {

@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 /**
  * com_elfinderupload main class.
  *
- * A standard WonderPHP file upload widget built with elFinder.
+ * A standard 2be file upload widget built with elFinder.
  *
  * @package Components\elfinderupload
  */

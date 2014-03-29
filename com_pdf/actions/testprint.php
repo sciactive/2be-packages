@@ -20,7 +20,7 @@ $displays->pdf_file = 'blank.pdf';
 $displays->pdf_dl_filename = 'test.pdf';
 $displays->pdf_title = 'PDF Test';
 $displays->pdf_author = 'Person McAuthor';
-$displays->pdf_creator = 'WonderPHP';
+$displays->pdf_creator = '2be';
 $displays->pdf_subject = 'A PDF generator test.';
 $displays->pdf_keywords = 'test';
 // This reads the display data from the script set up by load_editors().

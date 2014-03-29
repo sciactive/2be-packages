@@ -36,7 +36,7 @@ return array(
 	array(
 		'name' => 'post_url',
 		'cname' => 'Post URL',
-		'description' => 'The URL WonderPHP will use to communicate with Authorize.Net.',
+		'description' => 'The URL 2be will use to communicate with Authorize.Net.',
 		'value' => 'https://secure.authorize.net/gateway/transact.dll',
 		'peruser' => true,
 	),

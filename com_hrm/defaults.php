@@ -36,14 +36,14 @@ return array(
 	array(
 		'name' => 'ssn_field',
 		'cname' => 'SSN Field',
-		'description' => 'Allow WonderPHP to store a Social Security Number for employees.',
+		'description' => 'Allow 2be to store a Social Security Number for employees.',
 		'value' => true,
 		'peruser' => true,
 	),
 	array(
 		'name' => 'ssn_field_require',
 		'cname' => 'Require SSN Field',
-		'description' => 'Require WonderPHP to store a Social Security Number for employees.',
+		'description' => 'Require 2be to store a Social Security Number for employees.',
 		'value' => false,
 		'peruser' => true,
 	),

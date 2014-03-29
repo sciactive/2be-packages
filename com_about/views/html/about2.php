@@ -1,6 +1,6 @@
 <?php
 /**
- * Displays WonderPHP's own "about" information.
+ * Displays 2be's own "about" information.
  *
  * @package Components\about
  * @license http://www.gnu.org/licenses/agpl-3.0.html
@@ -24,7 +24,7 @@ customizable implementation, easy maintenance, and unmatched flexibility.
 New features can be added by downloading new components, and the look and feel
 can be customized by downloading new templates.
 <?php e($_->info->name); ?> uses a package manager
-called WonderPHP Plaza, which automatically installs any dependencies a component
+called 2be Plaza, which automatically installs any dependencies a component
 needs. <?php e($_->info->name); ?> is designed to allow
 maximum flexibility for the developer, and provide more than enough tools and
 libraries to make development of even very complex systems easy.
@@ -33,9 +33,8 @@ by using a database abstraction system called an Entity Manager. Choosing the
 right database is as simple as installing a new component.
 </p>
 <div class="btn-group pull-right">
-	<a class="btn btn-primary" href="http://pinesframework.org/" target="_blank">WonderPHP</a>
-	<a class="btn" href="https://github.com/sciactive" target="_blank">WonderPHP on GitHub</a>
-	<?php /* <a class="btn" href="http://sourceforge.net/projects/pines/" target="_blank">WonderPHP on SourceForge</a> */ ?>
-	<a class="btn" href="http://sourceforge.net/donate/index.php?group_id=264165" target="_blank">Donate</a>
+	<a class="btn btn-primary" href="http://2be.io/" target="_blank">2be.io</a>
+	<a class="btn" href="https://github.com/sciactive" target="_blank">2be on GitHub</a>
+	<a class="btn" href="http://sciactive.com/" target="_blank">SciActive</a>
 </div>
 <br style="clear: both; height: 1px;" />

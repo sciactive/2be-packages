@@ -24,7 +24,7 @@ $this->title = 'Entity Manager Import';
 <form id="p_muid_form" enctype="multipart/form-data" class="pf-form" method="post" action="<?php e(pines_url('com_entitytools', 'import')); ?>">
 	<div class="pf-element pf-heading">
 		<p>
-			Use this feature to import entities from a file made by a WonderPHP
+			Use this feature to import entities from a file made by a 2be
 			Entity Manager.
 		</p>
 	</div>

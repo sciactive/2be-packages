@@ -18,7 +18,7 @@ return array(
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',
 	'website' => 'http://www.sciactive.com',
 	'short_description' => 'Configurable about page',
-	'description' => 'Displays configurable information about WonderPHP and your installation.',
+	'description' => 'Displays configurable information about 2be and your installation.',
 	'depend' => array(
 		'core' => '<3'
 	),
@@ -27,6 +27,6 @@ return array(
 	),
 	'abilities' => array(
 		array('show', 'About Page', 'User can see the about page.'),
-		array('pinesfeed', 'WonderPHP Feed', 'User can see the WonderPHP News Feed widget.')
+		array('newsfeed', '2be Feed', 'User can see the 2be News Feed widget.')
 	),
 );

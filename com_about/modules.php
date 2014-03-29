@@ -12,15 +12,15 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 return array(
-	'pinesfeed' => array(
-		'cname' => 'WonderPHP News Feed',
-		'description' => 'WonderPHP news feed from Twitter.',
-		'view' => 'modules/pinesfeed',
+	'newsfeed' => array(
+		'cname' => '2be News Feed',
+		'description' => '2be.io news feed from Twitter.',
+		'view' => 'modules/newsfeed',
 		'type' => 'widget',
 		'widget' => array(
 			'default' => true,
 			'depends' => array(
-				'ability' => 'com_about/pinesfeed',
+				'ability' => 'com_about/newsfeed',
 			),
 		),
 	),

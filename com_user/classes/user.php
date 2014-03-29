@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 /**
- * WonderPHP system users.
+ * 2be system users.
  *
  * @package Components\user
  * @property int $guid The GUID of the user.

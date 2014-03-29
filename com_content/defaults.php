@@ -56,7 +56,7 @@ return array(
 		'name' => 'global_meta_tags',
 		'cname' => 'Global Meta Tags',
 		'description' => 'Meta tags for every page. The format is name:content.',
-		'value' => array('generator:WonderPHP'),
+		'value' => array('generator:2be.io'),
 		'peruser' => true,
 	),
 	array(

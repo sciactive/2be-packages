@@ -1,7 +1,7 @@
 /*
  * jQuery PGrid (pgrid) Plugin 1.2.0dev
  *
- * http://pinesframework.org/pgrid/
+ * http://sciactive.com/pgrid/
  * Copyright (c) 2009-2013 Hunter Perrin
  *
  * Triple license under the GPL, LGPL, and MPL:
@@ -1135,7 +1135,7 @@
 										return window.open(parsed_url, target, val.window_features);
 									return window.open(parsed_url, target);
 								} else {
-									// If WonderPHP is loaded, use its get method instead of setting location.
+									// If 2be is loaded, use its get method instead of setting location.
 									if (typeof $_ != "undefined" && $_.get)
 										return $_.get(parsed_url);
 									return (window.location = parsed_url);

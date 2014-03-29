@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2010 Hunter Perrin
  *
- * Licensed (along with all of WonderPHP) under the GNU Affero GPL:
+ * Licensed (along with all of 2be) under the GNU Affero GPL:
  *	  http://www.gnu.org/licenses/agpl.html
  */
 
@@ -140,7 +140,7 @@ all.each(function(){
 	};
 	update_entries();
 	// Save the menueditor object in the DOM, so we can access it.
-	this.pines_menueditor = input;
+	this._menueditor = input;
 });
 return all;
 };

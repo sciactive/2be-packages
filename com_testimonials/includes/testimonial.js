@@ -1,7 +1,7 @@
 /*
- * WonderPHP Testimonials JavaScript
+ * 2be Testimonials JavaScript
  *
- * http://pinesframework.org/
+ * http://2be.io/
  * Copyright (c) 2013 SciActive
  * Author: Angela Murrell <angela@sciactive.com>
  *

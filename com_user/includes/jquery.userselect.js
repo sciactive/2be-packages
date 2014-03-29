@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2010 Angela Murrell
  *
- * Licensed (along with all of WonderPHP) under the GNU Affero GPL:
+ * Licensed (along with all of 2be) under the GNU Affero GPL:
  *	  http://www.gnu.org/licenses/agpl.html
  */
 
@@ -52,8 +52,8 @@ all.each(function(){
 			.append("<a><strong>"+item.label+"</strong><br />"+item.desc+"</a>")
 			.appendTo(ul);
 	};
-	// Save the customerselect object in the DOM, so we can access it.
-	this.pines_customerselect = us;
+	// Save the userselect object in the DOM, so we can access it.
+	this._userselect = us;
 });
 return all;
 };

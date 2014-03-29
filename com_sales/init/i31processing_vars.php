@@ -87,7 +87,7 @@ $_->config->com_sales->processing_types = array();
  *
  * - "type" - An array or string of the event(s) the action should be called
  *   for. Out of "received", "adjusted", "sold", "voided", and "returned".
- * - "name" - The name of your action (not a WonderPHP action).
+ * - "name" - The name of your action (not a 2be action).
  *   Ex: 'com_gamephear/create_gamephear_account'
  * - "cname" - The common name of your action. Ex: 'Create GamePhear Account'
  * - "description" - A description of the action.

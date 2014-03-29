@@ -42,7 +42,7 @@ return array(
 	array(
 		'name' => 'content_style',
 		'cname' => 'Content Chrome Style',
-		'description' => 'Pines\' "content" position is placed where Joomla! component content goes, but it has no style associated. You can pick from the default styles here.',
+		'description' => '2be\' "content" position is placed where Joomla! component content goes, but it has no style associated. You can pick from the default styles here.',
 		'value' => 'xhtml',
 		'options' => array(
 			'none',

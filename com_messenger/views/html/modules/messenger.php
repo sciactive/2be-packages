@@ -98,8 +98,8 @@ if ($this->interface == 'floating') {
 		// Remove the module frame.
 		$(<?php echo json_encode(".$frame_class"); ?>).remove();
 		<?php }
-		/*var subscribe = pchat.get(0).pines_chat.pchat_connection.roster.subscribe;
-		pchat.get(0).pines_chat.pchat_connection.roster.subscribe = function(){
+		/*var subscribe = pchat.get(0)._pchat.pchat_connection.roster.subscribe;
+		pchat.get(0)._pchat.pchat_connection.roster.subscribe = function(){
 			alert('You hit subscribe! You win!');
 			subscribe.apply(this, arguments);
 		};*/

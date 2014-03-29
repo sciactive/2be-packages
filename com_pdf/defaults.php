@@ -16,7 +16,7 @@ return array(
 		'name' => 'author',
 		'cname' => 'Default Author',
 		'description' => 'The default author of PDFs created by com_pdf.',
-		'value' => 'WonderPHP',
+		'value' => '2be',
 		'peruser' => true,
 	),
 	array(

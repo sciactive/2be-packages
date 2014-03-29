@@ -17,8 +17,8 @@ return array(
 	'version' => '1.1.0',
 	'license' => 'http://www.gnu.org/licenses/agpl-3.0.html',
 	'website' => 'http://www.sciactive.com',
-	'short_description' => 'WonderPHP package creator',
-	'description' => 'Package your components and templates into a WonderPHP repository ready Slim archive. You can use these packages to distribute your component to other WonderPHP users.',
+	'short_description' => '2be package creator',
+	'description' => 'Package your components and templates into a 2be repository ready Slim archive. You can use these packages to distribute your component to other 2be users.',
 	'depend' => array(
 		'core' => '<3',
 		'service' => 'entity_manager&uploader&editor&configurator',

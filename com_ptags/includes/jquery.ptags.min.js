@@ -1,7 +1,7 @@
 /*
  * jQuery PTags (ptags) Plugin 1.1.2
  *
- * http://pinesframework.org/ptags/
+ * http://sciactive.com/ptags/
  * Copyright (c) 2009-2013 Hunter Perrin
  *
  * Triple license under the GPL, LGPL, and MPL:

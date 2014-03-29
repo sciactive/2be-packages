@@ -1,6 +1,6 @@
 <?php
 /**
- * Main page of the WonderPHP template.
+ * Main page of the 2be template.
  *
  * The page which is output to the user is built using this file.
  *

@@ -1,7 +1,7 @@
 /*
  * jQuery PNotify (pnotify) Plugin 1.2.0
  *
- * http://pinesframework.org/pnotify/
+ * http://sciactive.com/pnotify/
  * Copyright (c) 2009-2013 Hunter Perrin
  *
  * Triple license under the GPL, LGPL, and MPL:

@@ -25,7 +25,7 @@ class tpl_bootstrap extends template {
 	 */
 	public $format = 'html-desktop-5';
 	/**
-	 * The editor CSS location, relative to WonderPHP's directory.
+	 * The editor CSS location, relative to 2be's directory.
 	 * @var string $editor_css
 	 */
 	public $editor_css = 'templates/tpl_bootstrap/css/editor.css';

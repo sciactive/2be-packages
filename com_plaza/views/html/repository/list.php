@@ -11,7 +11,7 @@
 /* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Software Sources';
-$this->note = 'These repositories are where WonderPHP looks for new and updated software.';
+$this->note = 'These repositories are where 2be looks for new and updated software.';
 $_->com_pgrid->load();
 if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	$this->pgrid_state = (object) json_decode($_SESSION['user']->pgrid_saved_states['com_plaza/repository/list']);

@@ -714,7 +714,7 @@ class com_plaza extends component {
 						continue;
 					}
 					$data = $hr->getResponseBody();
-					$sig = $hr->getResponseHeader('X-WonderPHP-Slim-Signature');
+					$sig = $hr->getResponseHeader('X-2be-Slim-Signature');
 					break;
 				case 'curl':
 					$ch = curl_init();
@@ -724,7 +724,7 @@ class com_plaza extends component {
 					list($headers, $data) = explode("\r\n\r\n", curl_exec($ch), 2);
 					foreach (explode("\r\n", $headers) as $cur_header) {
 						list($name, $value) = explode(': ', $cur_header, 2);
-						if ($name == 'X-WonderPHP-Slim-Signature') {
+						if ($name == 'X-2be-Slim-Signature') {
 							$sig = $value;
 							break;
 						}
@@ -736,7 +736,7 @@ class com_plaza extends component {
 					$data = file_get_contents($cur_url);
 					foreach ($http_response_header as $cur_header) {
 						list($name, $value) = explode(': ', $cur_header, 2);
-						if ($name == 'X-WonderPHP-Slim-Signature') {
+						if ($name == 'X-2be-Slim-Signature') {
 							$sig = $value;
 							break;
 						}

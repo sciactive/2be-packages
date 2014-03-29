@@ -31,8 +31,8 @@ class com_mailer_template extends entity {
 		$this->content = <<<EOF
 <div style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3A3A;">
 	<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#ffffff" align="center" border="0">
-		<tr><td valign="top" style="color:#000; font-size:20px; font-weight:bold; text-align: left; line-height:17px; background-repeat:repeat-x; background-position:top left; background-color: #5baa45;" background="{$full_location}templates/tpl_pinescms/images/pines-navbar-bg.png">
-			<div align="left" style="background: url({$full_location}templates/tpl_pinescms/images/pines-navbar-bg.png) repeat-x top left;">
+		<tr><td valign="top" style="color:#000; font-size:20px; font-weight:bold; text-align: left; line-height:17px; background-repeat:repeat-x; background-position:top left; background-color: #5baa45;" background="{$full_location}templates/tpl_pinescms/images/pines-navbar-bg-blue.png">
+			<div align="left" style="background: url({$full_location}templates/tpl_pinescms/images/pines-navbar-bg-blue.png) repeat-x top left;">
 				<table class="table" width="600" cellpadding="0" cellspacing="0" align="center" border="0"><tr><td valign="top" style="text-align: left;">
 					<div align="left" style="padding-top: 7px; padding-bottom: 9px"><a href="#site_link#"><img src="{$full_location}templates/tpl_pinescms/images/default_nav_logo.png" alt="#system_name#" style="display:block; color:#000; font-size:20px; font-weight:bold; line-height:17px; height:17px; text-align: left;" height="17" title="#system_name#" border="0"/></a></div>
 				</td></tr></table>

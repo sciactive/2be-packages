@@ -500,7 +500,7 @@ class JRequest {
 			if ($failed) {
 				die ( 'Illegal variable <b>' . implode( '</b> or <b>', $banned ) . '</b> passed to script.' );
 			}
-			// WonderPHP doesn't do this man..
+			// 2be doesn't do this man..
 			/* if ($globalise) {
 				$GLOBALS[$key] = $value;
 			} */

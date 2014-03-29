@@ -19,7 +19,7 @@ return array(
 	'website' => 'http://www.sciactive.com',
 	'services' => array('entity_manager'),
 	'short_description' => 'PostgreSQL based entity manager',
-	'description' => 'Provides an object relational mapper, which conforms to the WonderPHP entity manager service standard and uses PostgreSQL as its backend.',
+	'description' => 'Provides an object relational mapper, which conforms to the 2be entity manager service standard and uses PostgreSQL as its backend.',
 	'depend' => array(
 		'core' => '<3',
 		'component' => 'com_pgsql'

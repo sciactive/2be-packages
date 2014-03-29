@@ -9,7 +9,7 @@ Author URL:         csswizardry.com
 Project URL:        inuitcss.com
 Version:            3.2
 Date:               24 November 2011
-Modified By:		Hunter Perrin 2012-02-01 (For WonderPHP)
+Modified By:		Hunter Perrin 2012-02-01 (For 2be)
 
 Copyright 2011 Harry Roberts
 
@@ -89,10 +89,10 @@ header,hgroup,menu,nav,section{
 h1,h2,h3,h4,h5,h6{
 	font-size:1em;
 }
-table{ /* (Modified for WonderPHP.) */
+table{ /* (Modified for 2be.) */
 	border-spacing:0;
 }
-table.styled{ /* (Added for WonderPHP.) */
+table.styled{ /* (Added for 2be.) */
 	border-collapse:collapse;
 }
 strong,b,mark{
@@ -110,7 +110,7 @@ abbr[title],dfn[title]{
 ins{
 	border-bottom:1px solid;
 }
-ins{ /* (Modified for WonderPHP) */
+ins{ /* (Modified for 2be) */
 	text-decoration:none;
 }
 del,s{
@@ -170,7 +170,7 @@ input,textarea{
 /*------------------------------------*\
 	$MAIN
 \*------------------------------------*/
-html{ /* (Modified for WonderPHP) */
+html{ /* (Modified for 2be) */
 	font-size:100%; /* Use 16px as per informationarchitects.jp/en/100e2r/ and wilsonminer.com/posts/2008/oct/20/relative-readability/ */
 	line-height:1.5; /* A safe default for type of any size. */
 }
@@ -270,7 +270,7 @@ Based on @stubbornella’s media object: stubbornella.org/content/2010/06/25/the
 
 
 /*------------------------------------*\
-	$LOGO (Removed for WonderPHP)
+	$LOGO (Removed for 2be)
 \*------------------------------------*/
 
 /*------------------------------------*\
@@ -338,7 +338,7 @@ figure img{
 	margin-bottom:0;
 }
 
-/*--- LINKS (Removed for WonderPHP) ---*/
+/*--- LINKS (Removed for 2be) ---*/
 
 /*--- LISTS ---*/
 li > ul,
@@ -449,7 +449,7 @@ fieldset{
 	padding:1.5em;
 	border:1px solid #ccc;
 }
-/* (Label display block removed for WonderPHP.) */
+/* (Label display block removed for 2be.) */
 .text-input{
 	/* With the advent of various HTML5 input types (email, url, etc) input[type=text] is no longer suitable for for styling non-textearea text-inputs. Use .text-input instead. */
 }
@@ -499,23 +499,23 @@ table{
 	width:100%;
 	max-width:100%;
 }
-table.styled thead tr:last-of-type th{ /* (Modified for WonderPHP.) */
+table.styled thead tr:last-of-type th{ /* (Modified for 2be.) */
 	/* Thicker border on the table-headers of the last row in the table head. */
 	border-bottom-width:2px;
 }
-table.styled tbody th{ /* (Modified for WonderPHP.) */
+table.styled tbody th{ /* (Modified for 2be.) */
 	/* Thicker right border on table-headers in the table body. */
 	border-right-width:2px;
 }
-table.styled th:empty{ /* (Modified for WonderPHP.) */
+table.styled th:empty{ /* (Modified for 2be.) */
 	/* Hide the borders on any empty table-headers. */
 	border:none;
 }
 th,td{
 	vertical-align:top;
-	padding:0.75em; /* (Modified for WonderPHP.) */
+	padding:0.75em; /* (Modified for 2be.) */
 }
-table.styled th,table.styled td{ /* (Added for WonderPHP.) */
+table.styled th,table.styled td{ /* (Added for 2be.) */
 	border:1px solid #ccc;
 }
 th{
@@ -538,13 +538,13 @@ See jsfiddle.net/csswizardry/UJJay/
 [rowspan="1"]{
     vertical-align:top;
 }
-table.styled tbody tr:nth-of-type(odd){ /* (Modified for WonderPHP.) */
+table.styled tbody tr:nth-of-type(odd){ /* (Modified for 2be.) */
 	background:rgba(0,0,0,0.05);
 }
 tfoot{
 	text-align:center;
 }
-table.styled tfoot td{ /* (Modified for WonderPHP.) */
+table.styled tfoot td{ /* (Modified for 2be.) */
 	border-top-width:2px;
 }
 
@@ -758,7 +758,7 @@ body{
 
 
 /*------------------------------------*\
-	LOGO (Removed for WonderPHP)
+	LOGO (Removed for 2be)
 \*------------------------------------*/
 
 /*------------------------------------*\
@@ -856,6 +856,6 @@ Display the href of any links.
 a:link:after,a:visited:after{
 	content:" (" attr(href) ")";
 	font-size:smaller;
-} /* (Modified for WonderPHP.) */
+} /* (Modified for 2be.) */
 }
 /*--- END PRINT ---*/

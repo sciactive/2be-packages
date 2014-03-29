@@ -25,7 +25,7 @@ class tpl_mobile extends template {
 	 */
 	public $format = 'html-mobile-5';
 	/**
-	 * The editor CSS location, relative to WonderPHP's directory.
+	 * The editor CSS location, relative to 2be's directory.
 	 * @var string $editor_css
 	 */
 	public $editor_css = 'templates/tpl_mobile/css/editor.css';

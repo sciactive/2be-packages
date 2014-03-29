@@ -44,7 +44,7 @@ if (isset($_REQUEST['host'])) {
 				// Create the user.
 				$pass = $pass && @pg_query($link, 'DROP ROLE IF EXISTS "'.pg_escape_string($link, $user).'";');
 				$pass = $pass && @pg_query($link, 'CREATE ROLE "'.pg_escape_string($link, $user).'" INHERIT LOGIN PASSWORD \''.pg_escape_string($link, $password).'\' VALID UNTIL \'infinity\';');
-				$pass = $pass && @pg_query($link, 'COMMENT ON ROLE "'.pg_escape_string($link, $user).'" IS \'Automatically created by com_pgsql for WonderPHP.\';');
+				$pass = $pass && @pg_query($link, 'COMMENT ON ROLE "'.pg_escape_string($link, $user).'" IS \'Automatically created by com_pgsql for 2be.\';');
 				if (!$pass) {
 					pines_error('User could not be created. Check the log for more details.');
 					pines_log('User could not be created: '.pg_last_error(), 'error');

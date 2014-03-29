@@ -313,7 +313,7 @@ return array(
 	array(
 		'name' => 'cash_drawer',
 		'cname' => 'Cash Drawer',
-		'description' => 'Integrate the POS with a cash drawer. (Requires the WonderPHP Cash Drawer Firefox addon.)',
+		'description' => 'Integrate the POS with a cash drawer. (Requires the 2be Cash Drawer Firefox addon.)',
 		'value' => false,
 		'peruser' => true,
 	),

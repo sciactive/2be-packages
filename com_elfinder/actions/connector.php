@@ -39,7 +39,7 @@ if ($_REQUEST['temp'] == 'true') {
 	$dir = $_SESSION['elfinder_request_id'][$_REQUEST['request_id']];
 	if (!isset($dir)) {
 		pines_session('write');
-		$dir = $_SESSION['elfinder_request_id'][$_REQUEST['request_id']] = uniqid('pines_upload_');
+		$dir = $_SESSION['elfinder_request_id'][$_REQUEST['request_id']] = uniqid('2be_upload_');
 		pines_session('close');
 	}
 	$tmp = sys_get_temp_dir().'/'.$dir.'/';

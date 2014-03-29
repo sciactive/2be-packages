@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 
 return array(
 	'welcome' => array(
-		'cname' => 'Welcome to WonderPHP',
+		'cname' => 'Welcome to 2be',
 		'description' => 'A welcome message and a quick guide to setup.',
 		'view' => 'modules/welcome',
 		'type' => 'widget',
