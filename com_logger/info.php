@@ -26,6 +26,6 @@ return array(
 	),
 	'abilities' => array(
 		array('view', 'View Log', 'Let the user view the 2be log.'),
-		array('clear', 'Clear Log', 'Let the user clear (delete) the wonder log.')
+		array('clear', 'Clear Log', 'Let the user clear (delete) the 2be log.')
 	),
 );

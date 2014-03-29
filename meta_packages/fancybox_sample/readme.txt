@@ -18,8 +18,8 @@ To use fancyBox for a single sample image in an inline module, insert something
 like this into a page's content:
 
 	[com_fancybox/fancybox]
-	<a class="fancybox-elem" href="/wonder/media/fancybox_sample/Flower1.jpg">
-		<img src="/wonder/media/fancybox_sample/Flower1_t.jpg" alt="" />
+	<a class="fancybox-elem" href="/2be/media/fancybox_sample/Flower1.jpg">
+		<img src="/2be/media/fancybox_sample/Flower1_t.jpg" alt="" />
 	</a>
 	[/com_fancybox/fancybox]
 
@@ -27,17 +27,17 @@ like this into a page's content:
 To use fancyBox for the whole sample gallery, something like this:
 
 	[com_fancybox/fancybox]
-	<a class="fancybox-elem" href="/wonder/media/fancybox_sample/Flower1.jpg" rel="gallery1">
-		<img src="/wonder/media/fancybox_sample/Flower1_t.jpg" alt="" />
+	<a class="fancybox-elem" href="/2be/media/fancybox_sample/Flower1.jpg" rel="gallery1">
+		<img src="/2be/media/fancybox_sample/Flower1_t.jpg" alt="" />
 	</a>
-	<a class="fancybox-elem" title="Isn't it green?" href="/wonder/media/fancybox_sample/Greenest.jpg" rel="gallery1">
-		<img src="/wonder/media/fancybox_sample/Greenest_t.jpg" alt="" />
+	<a class="fancybox-elem" title="Isn't it green?" href="/2be/media/fancybox_sample/Greenest.jpg" rel="gallery1">
+		<img src="/2be/media/fancybox_sample/Greenest_t.jpg" alt="" />
 	</a>
-	<a class="fancybox-elem" title="No ducks were harmed in the making of this image." href="/wonder/media/fancybox_sample/PatitoVerde.jpg" rel="gallery1">
-		<img src="/wonder/media/fancybox_sample/PatitoVerde_t.jpg" alt="" />
+	<a class="fancybox-elem" title="No ducks were harmed in the making of this image." href="/2be/media/fancybox_sample/PatitoVerde.jpg" rel="gallery1">
+		<img src="/2be/media/fancybox_sample/PatitoVerde_t.jpg" alt="" />
 	</a>
-	<a class="fancybox-elem" href="/wonder/media/fancybox_sample/Windmill.jpg" rel="gallery1">
-		<img src="/wonder/media/fancybox_sample/Windmill_t.jpg" alt="" />
+	<a class="fancybox-elem" href="/2be/media/fancybox_sample/Windmill.jpg" rel="gallery1">
+		<img src="/2be/media/fancybox_sample/Windmill_t.jpg" alt="" />
 	</a>
 	[/com_fancybox/fancybox]
 
@@ -64,17 +64,17 @@ com_istyle):
 	}
 	[/com_istyle/style]
 	[com_fancybox/fancybox class="fancy_pretty" wrapCSS="fancy_custom" padding="0" closeBtn="false" openEffect="elastic" closeEffect="fade" nextEffect="fade" prevEffect="fade" openOpacity="true"]
-	<a class="fancybox-elem" href="/wonder/media/fancybox_sample/Flower1.jpg" rel="gallery1">
-		<img src="/wonder/media/fancybox_sample/Flower1_t.jpg" alt="" />
+	<a class="fancybox-elem" href="/2be/media/fancybox_sample/Flower1.jpg" rel="gallery1">
+		<img src="/2be/media/fancybox_sample/Flower1_t.jpg" alt="" />
 	</a>
-	<a class="fancybox-elem" title="Isn't it green?" href="/wonder/media/fancybox_sample/Greenest.jpg" rel="gallery1">
-		<img src="/wonder/media/fancybox_sample/Greenest_t.jpg" alt="" />
+	<a class="fancybox-elem" title="Isn't it green?" href="/2be/media/fancybox_sample/Greenest.jpg" rel="gallery1">
+		<img src="/2be/media/fancybox_sample/Greenest_t.jpg" alt="" />
 	</a>
-	<a class="fancybox-elem" title="No ducks were harmed in the making of this image." href="/wonder/media/fancybox_sample/PatitoVerde.jpg" rel="gallery1">
-		<img src="/wonder/media/fancybox_sample/PatitoVerde_t.jpg" alt="" />
+	<a class="fancybox-elem" title="No ducks were harmed in the making of this image." href="/2be/media/fancybox_sample/PatitoVerde.jpg" rel="gallery1">
+		<img src="/2be/media/fancybox_sample/PatitoVerde_t.jpg" alt="" />
 	</a>
-	<a class="fancybox-elem" href="/wonder/media/fancybox_sample/Windmill.jpg" rel="gallery1">
-		<img src="/wonder/media/fancybox_sample/Windmill_t.jpg" alt="" />
+	<a class="fancybox-elem" href="/2be/media/fancybox_sample/Windmill.jpg" rel="gallery1">
+		<img src="/2be/media/fancybox_sample/Windmill_t.jpg" alt="" />
 	</a>
 	[/com_fancybox/fancybox]
 

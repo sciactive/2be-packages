@@ -41,7 +41,7 @@ $this->note = 'All packages will be signed against this new certificate. Any cur
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Common Name</span>
-			<span class="pf-note">Eg, The Repository (Ex: http://wonder.example.com/repo/)</span>
+			<span class="pf-note">Eg, The Repository (Ex: http://2be.example.com/repo/)</span>
 			<input class="pf-field" type="text" name="commonName" size="24" value="<?php e($_->config->full_location); ?>" /></label>
 	</div>
 	<div class="pf-element">

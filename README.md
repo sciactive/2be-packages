@@ -1,4 +1,4 @@
-![2be](https://raw.github.com/sciactive/wonder-extras/master/logo/header-large.png)
+![2be](https://raw.github.com/sciactive/2be-extras/master/logo/header-large.png)
 =========================================================================================
 
 2be is an Enterprise PHP Application Framework, including a free **Content
@@ -25,7 +25,7 @@ components and templates.
 --------------
 
 To see information relating to the core of 2be, see the [2be Core
-Repository](http://github.com/sciactive/wonder-core).
+Repository](http://github.com/sciactive/2be-core).
 
 
 *Copyright &copy; 2008-2014  [SciActive.com](http://sciactive.com/)*

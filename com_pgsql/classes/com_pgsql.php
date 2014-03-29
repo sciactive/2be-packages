@@ -100,7 +100,7 @@ class com_pgsql extends component {
 				$this->connected = true;
 			} else {
 				$this->connected = false;
-				if (!isset($_SESSION['user']) && $host == 'localhost' && $user == 'wonder' && $password == 'password' && $database == 'wonder' && $connection_type == 'host') {
+				if (!isset($_SESSION['user']) && $host == 'localhost' && $user == '2be' && $password == 'password' && $database == '2be' && $connection_type == 'host') {
 					if ($_->request_component != 'com_pgsql')
 						pines_redirect(pines_url('com_pgsql', 'setup'));
 				} else {

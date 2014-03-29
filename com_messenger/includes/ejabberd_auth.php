@@ -4,19 +4,19 @@
  * I tinkered with this file and made it much more gooder by giving it that same
  * 2be power I give all my code. (Plus some Mrs. Dash.)
  *   -Hunter
- * 
+ *
  * - Instructions -
  * To use this script for ejabberd authentication, thus giving 2be users
  * access to the service, edit the ejabberd.cfg file.
  * In the authentication section, set the method to external authentication
  * and the program to this script, like so:
  *  {auth_method, external}.
- *  {extauth_program, "/path/to/wonder/components/com_messenger/includes/ejabberd_auth.php"}.
+ *  {extauth_program, "/path/to/2be/components/com_messenger/includes/ejabberd_auth.php"}.
  *  {extauth_cache, false}.
- * 
+ *
  * Note that the 3rd line turns caching off. This is necessary if you use the
  * web messaging clients in 2be.
- * 
+ *
  * - Permissions - (Read if you have errors.)
  * I'm assuming this file is owned by your web server user (probably www-data).
  * It needs to be executable by ejabberd. Setting the executable flag is usually
@@ -28,7 +28,7 @@
  * 3. If this file's group is ejabberd, set it executable by group, else you can
  *    set it executable by others, but that's less safe.
  *     $ chmod g+x ejabberd_auth.php
- * 
+ *
  * - Testing -
  * Does user "admin" exist:
  *  $ php -r "echo pack('n', strlen(\$_SERVER['argv'][1])).\$_SERVER['argv'][1];" "isuser:admin" | ./ejabberd_auth.php | od -c

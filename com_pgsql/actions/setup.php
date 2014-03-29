@@ -11,7 +11,7 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (isset($_SESSION['user']) || $_->config->com_pgsql->host != 'localhost' || $_->config->com_pgsql->user != 'wonder' || $_->config->com_pgsql->password != 'password' || $_->config->com_pgsql->database != 'wonder' || $_->config->com_pgsql->prefix != 'wdr_')
+if (isset($_SESSION['user']) || $_->config->com_pgsql->host != 'localhost' || $_->config->com_pgsql->user != '2be' || $_->config->com_pgsql->password != 'password' || $_->config->com_pgsql->database != '2be' || $_->config->com_pgsql->prefix != 'wdr_')
 	return;
 
 // Get the provided or default info.

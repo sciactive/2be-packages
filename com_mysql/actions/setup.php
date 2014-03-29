@@ -11,7 +11,7 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (isset($_SESSION['user']) || $_->config->com_mysql->host != 'localhost' || $_->config->com_mysql->user != 'wonder' || $_->config->com_mysql->password != 'password' || $_->config->com_mysql->database != 'wonder' || $_->config->com_mysql->prefix != 'wdr_')
+if (isset($_SESSION['user']) || $_->config->com_mysql->host != 'localhost' || $_->config->com_mysql->user != '2be' || $_->config->com_mysql->password != 'password' || $_->config->com_mysql->database != '2be' || $_->config->com_mysql->prefix != 'wdr_')
 	return;
 
 // Get the provided or default info.

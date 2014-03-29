@@ -90,7 +90,7 @@ class com_mysql extends component {
 					$this->connected = true;
 				} else {
 					$this->connected = false;
-					if (!isset($_SESSION['user']) && $host == 'localhost' && $user == 'wonder' && $password == 'password' && $database == 'wonder') {
+					if (!isset($_SESSION['user']) && $host == 'localhost' && $user == '2be' && $password == 'password' && $database == '2be') {
 						if ($_->request_component != 'com_mysql')
 							pines_redirect(pines_url('com_mysql', 'setup'));
 					} else {
@@ -100,7 +100,7 @@ class com_mysql extends component {
 				}
 			} else {
 				$this->connected = false;
-				if (!isset($_SESSION['user']) && $host == 'localhost' && $user == 'wonder' && $password == 'password' && $database == 'wonder') {
+				if (!isset($_SESSION['user']) && $host == 'localhost' && $user == '2be' && $password == 'password' && $database == '2be') {
 					if ($_->request_component != 'com_mysql')
 						pines_redirect(pines_url('com_mysql', 'setup'));
 				} else {

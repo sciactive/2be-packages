@@ -16,7 +16,7 @@ if ( !gatekeeper('com_sales/editsale') && !gatekeeper('com_sales/newsale') )
 
 $entity = com_sales_sale::factory((int) $_REQUEST['id']);
 
-header('Content-Type: application/x-wonder-receipt');
+header('Content-Type: application/x-2be-receipt');
 // This makes it impossible to automatically open the file in Firefox because of
 // RFC 2183 -- See bug 331259.
 //header('Content-Disposition: attachment; filename="receipt"');

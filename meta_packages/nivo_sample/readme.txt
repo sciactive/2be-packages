@@ -1,6 +1,6 @@
 To use this sample slider for an inline module, insert something like this:
 
-[com_nivoslider/slider file="/wonder/media/nivo_sample/images.txt" theme="default" width="400px" height="300px" pauseOnHover="true" pauseTime="10000" /]
+[com_nivoslider/slider file="/2be/media/nivo_sample/images.txt" theme="default" width="400px" height="300px" pauseOnHover="true" pauseTime="10000" /]
 
 Try out different themes. These are included:
 

@@ -11,7 +11,7 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$log_file = realpath(sys_get_temp_dir()).'/wonder.log';
+$log_file = realpath(sys_get_temp_dir()).'/2be.log';
 
 return array(
 	array(
@@ -23,7 +23,7 @@ return array(
 	array(
 		'name' => 'read_pattern',
 		'cname' => 'Log Files Pattern',
-		'description' => 'This pattern is used to aggregate rotated log files. Files can be text or gzip encoded. So to match normally rotated files you could use something like "/tmp/wonder.log*".',
+		'description' => 'This pattern is used to aggregate rotated log files. Files can be text or gzip encoded. So to match normally rotated files you could use something like "/tmp/2be.log*".',
 		'value' => $log_file,
 	),
 	array(
