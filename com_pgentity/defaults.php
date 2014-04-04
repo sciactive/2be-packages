@@ -17,6 +17,7 @@ return array(
 		'cname' => 'Use PL/Perl Functions',
 		'description' => 'This speeds up regular expression matching a lot, but requires the Perl Procedural Language to be installed on your Postgres server.',
 		'value' => true,
+		'peruser' => true,
 	),
 	array(
 		'name' => 'cache',
@@ -43,4 +44,4 @@ return array(
 		'value' => false,
 	),
 );
-
+
