@@ -106,7 +106,7 @@ foreach ((array) $this->categories as $cur_guid) {
 			<span class="pf-label">Title</span>
 			<span class="pf-group pf-full-width">
 				<span class="pf-field" style="display: block;">
-					<input style="width: 100%;" type="text" name="widget_title" value="<?php e($this->widget_title); ?>" />
+					<input class="form-control" style="width: 100%;" type="text" name="widget_title" value="<?php e($this->widget_title); ?>" />
 				</span>
 			</span>
 		</label>

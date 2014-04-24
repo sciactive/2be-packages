@@ -158,7 +158,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element">
 			<div class="pf-element dialog_info"></div>
 			<label><span class="pf-label">Effective Date</span>
-			<input class="pf-field" type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+			<input class="pf-field form-control" type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 	</form>
 	<br />

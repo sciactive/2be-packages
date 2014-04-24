@@ -17,13 +17,13 @@ $loan_ids = $this->loan_ids;
 
 ?>
 <style type="text/css">
-	#p_muid_form .accordion-group {
+	#p_muid_form .panel {
 		margin-bottom:10px;
 	}
-	#p_muid_form .accordion-heading {
+	#p_muid_form .panel-heading {
 		opacity: .8;
 	}
-	#p_muid_form .accordion-heading:hover {
+	#p_muid_form .panel-heading:hover {
 		color:#fff;
 	}
 	.p_muid_loading {
@@ -66,13 +66,13 @@ $loan_ids = $this->loan_ids;
 	<?php 
 	if (count($loan_ids) > 1) {
 		$c = 0;
-		?><div class="accordion" id="p_muid_accordion_parent">
+		?><div class="panel-group" id="p_muid_accordion_parent">
 		<?php foreach ($loan_ids as $loan_id) {
 		$loan = com_loan_loan::factory((int) $loan_id);
 		$customer = $loan->customer;
 
 		if (!isset($customer->guid)) { ?>
-			<div class="alert-error accordion-heading" style="margin-bottom: 10px; border: 1px solid #fff;"><big class="accordion-toggle"><i class="icon-exclamation-sign"></i> Error Finding Customer.</big></div>
+			<div class="alert-error panel-heading" style="margin-bottom: 10px; border: 1px solid #fff;"><big class="panel-title"><i class="fa fa-exclamation-circle"></i> Error Finding Customer.</big></div>
 			<?php continue;
 		} 
 		
@@ -85,14 +85,14 @@ $loan_ids = $this->loan_ids;
 			);
 		
 		?>
-				<div class="accordion-group">
-					<a class="accordion-heading" data-parent="#p_muid_accordion_parent" data-toggle="collapse" href="#p_muid_collapse<?php echo $c;?>">
-						<big class="accordion-toggle label-info" style="color:#fff;"><?php e($customer->name); ?></big>
+				<div class="panel panel-default">
+					<a class="panel-heading" data-parent="#p_muid_accordion_parent" data-toggle="collapse" href="#p_muid_collapse<?php echo $c;?>">
+						<big class="panel-title label-info" style="color:#fff;"><?php e($customer->name); ?></big>
 					</a>
-					<div id="p_muid_collapse<?php echo $c;?>" class="accordion-body collapse">
-						<div class="accordion-inner clearfix">
+					<div id="p_muid_collapse<?php echo $c;?>" class="panel-collapse collapse">
+						<div class="panel-body clearfix">
 							<?php if (empty($interactions)) {
-								echo '<i class="icon-info-sign"></i> This customer does not have any customer history.';
+								echo '<i class="fa fa-info-circle"></i> This customer does not have any customer history.';
 							} else { ?>
 							<table class="p_muid_interaction_table">
 								<thead>
@@ -132,7 +132,7 @@ $loan_ids = $this->loan_ids;
 		$loan = com_loan_loan::factory((int) $loan_ids);
 		$customer = $loan->customer;
 		if (!isset($customer->guid)) { ?>
-			<div class="alert-error accordion-heading" style="margin-bottom: 10px; border: 1px solid #fff;"><big class="accordion-toggle"><i class="icon-exclamation-sign"></i> Error Finding Customer.</big></div>
+			<div class="alert-error panel-heading" style="margin-bottom: 10px; border: 1px solid #fff;"><big class="panel-title"><i class="fa fa-exclamation-circle"></i> Error Finding Customer.</big></div>
 			<?php
 		} else { 
 			$interactions = $_->entity_manager->get_entities(
@@ -143,17 +143,17 @@ $loan_ids = $this->loan_ids;
 				)
 			);
 			?>
-			<div class="accordion">
-				<div class="accordion-group">
-					<a class="accordion-heading" data-toggle="collapse" href="javascript:void(0);">
-						<big class="accordion-toggle label-info" style="color:#fff;"><?php e($customer->name); ?></big>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<a class="panel-heading" data-toggle="collapse" href="javascript:void(0);">
+						<big class="panel-title label-info" style="color:#fff;"><?php e($customer->name); ?></big>
 					</a>
-					<div class="accordion-body in collapse">
-						<div class="accordion-inner clearfix">
+					<div class="panel-collapse collapse in">
+						<div class="panel-body clearfix">
 							<?php if (empty($interactions)) {
-								echo '<i class="icon-info-sign"></i> This customer does not have any customer history.';
+								echo '<i class="fa fa-info-circle"></i> This customer does not have any customer history.';
 							} else { ?>
-							<div class="p_muid_loading"><i class="icon-spinner icon-spin"></i> Loading Customer History...</div>
+							<div class="p_muid_loading"><i class="fa fa-spinner fa-spin"></i> Loading Customer History...</div>
 							<div class="p_muid_grid <?php echo (empty($interactions)) ? '' : 'hide'; ?>">
 								<table class="p_muid_interaction_table">
 									<thead>

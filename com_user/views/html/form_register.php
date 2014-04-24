@@ -26,36 +26,36 @@ $this->note = 'Please fill in your account details.';
 			<?php if (in_array('name', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">First Name <span class="pf-required">*</span></span>
-					<input class="pf-field" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Middle Name</span>
-					<input class="pf-field" type="text" name="name_middle" size="24" value="<?php e($this->entity->name_middle); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_middle" size="24" value="<?php e($this->entity->name_middle); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Last Name</span>
-					<input class="pf-field" type="text" name="name_last" size="24" value="<?php e($this->entity->name_last); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_last" size="24" value="<?php e($this->entity->name_last); ?>" /></label>
 			</div>
 			<?php } if (!$_->config->com_user->email_usernames && in_array('email', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Email <span class="pf-required">*</span></span>
-					<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
+					<input class="pf-field form-control" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
 			</div>
 			<?php } if (in_array('phone', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone</span>
-					<input class="pf-field" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<?php } if (in_array('fax', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Fax</span>
-					<input class="pf-field" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<?php } if (in_array('timezone', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Timezone</span>
 					<span class="pf-note">This overrides the primary group's timezone.</span>
-					<select class="pf-field" name="timezone" size="1">
+					<select class="pf-field form-control" name="timezone">
 						<option value="">--Default--</option>
 						<?php $tz = DateTimeZone::listIdentifiers();
 						sort($tz);
@@ -93,16 +93,16 @@ $this->note = 'Please fill in your account details.';
 			<div id="p_muid_address_us" style="display: none;">
 				<div class="pf-element">
 					<label><span class="pf-label">Address 1</span>
-						<input class="pf-field" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Address 2</span>
-						<input class="pf-field" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<span class="pf-label">City, State</span>
-					<input class="pf-field" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
-					<select class="pf-field" name="state">
+					<input class="pf-field form-control" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
+					<select class="pf-field form-control" name="state">
 						<option value="">None</option>
 						<?php foreach (array(
 								'AL' => 'Alabama',
@@ -166,7 +166,7 @@ $this->note = 'Please fill in your account details.';
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Zip</span>
-						<input class="pf-field" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
 				</div>
 			</div>
 			<div id="p_muid_address_international" style="display: none;">
@@ -188,6 +188,6 @@ $this->note = 'Please fill in your account details.';
 		<input type="hidden" name="url" value="<?php e($this->url); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

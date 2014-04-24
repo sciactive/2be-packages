@@ -73,7 +73,7 @@ if (!$this->quickpage_options) {
 					<span class="pf-label">Name</span>
 					<span class="pf-group pf-full-width">
 						<span class="pf-field" style="display: block;">
-							<input style="width: 100%;" type="text" name="name" value="<?php e($this->entity->name); ?>" />
+							<input class="form-control" style="width: 100%;" type="text" name="name" value="<?php e($this->entity->name); ?>" />
 						</span>
 					</span>
 				</label>
@@ -83,7 +83,7 @@ if (!$this->quickpage_options) {
 					<span class="pf-label">Alias</span>
 					<span class="pf-group pf-full-width">
 						<span class="pf-field" style="display: block;">
-							<input style="width: 100%;" type="text" name="alias" value="<?php e($this->entity->alias); ?>" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
+							<input class="form-control" style="width: 100%;" type="text" name="alias" value="<?php e($this->entity->alias); ?>" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
 						</span>
 					</span>
 				</label>
@@ -103,14 +103,14 @@ if (!$this->quickpage_options) {
 				<div class="pf-group pf-full-width">
 					<label><input class="pf-field" type="checkbox" id="p_muid_use_name" name="title_use_name" value="ON"<?php echo $this->entity->title_use_name ? ' checked="checked"' : ''; ?> /> Use name as title.</label><br />
 					<span class="pf-field" style="display: block;">
-						<input style="width: 100%;" type="text" id="p_muid_title" name="title" value="<?php e($this->entity->title); ?>" />
+						<input class="form-control" style="width: 100%;" type="text" id="p_muid_title" name="title" value="<?php e($this->entity->title); ?>" />
 					</span>
 				</div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Title Position</span>
-					<select class="pf-field" name="title_position">
+					<select class="pf-field form-control" name="title_position">
 						<option value="null">Use Default</option>
 						<option value="prepend"<?php echo $this->entity->title_position === 'prepend' ? ' selected="selected"' : ''; ?>>Prepend to Site Title</option>
 						<option value="append"<?php echo $this->entity->title_position === 'append' ? ' selected="selected"' : ''; ?>>Append to Site Title</option>
@@ -134,7 +134,7 @@ if (!$this->quickpage_options) {
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Show on Front Page</span>
-					<select class="pf-field" name="show_front_page">
+					<select class="pf-field form-control" name="show_front_page">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->show_front_page === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->show_front_page === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -143,7 +143,7 @@ if (!$this->quickpage_options) {
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Tags</span>
 				<div class="pf-group">
-					<input class="pf-field" type="text" name="content_tags" size="24" value="<?php e(implode(',', $this->entity->content_tags)); ?>" />
+					<input class="pf-field form-control" type="text" name="content_tags" size="24" value="<?php e(implode(',', $this->entity->content_tags)); ?>" />
 					<script type="text/javascript">
 						$_(function(){
 							$("#p_muid_form [name=content_tags]").ptags({
@@ -311,11 +311,11 @@ if (!$this->quickpage_options) {
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Name</span>
-							<input class="pf-field" type="text" name="cur_meta_tag_name" id="p_muid_cur_meta_tag_name" size="24" /></label>
+							<input class="pf-field form-control" type="text" name="cur_meta_tag_name" id="p_muid_cur_meta_tag_name" size="24" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Content</span>
-							<input class="pf-field" type="text" name="cur_meta_tag_value" size="24" /></label>
+							<input class="pf-field form-control" type="text" name="cur_meta_tag_value" size="24" /></label>
 					</div>
 				</div>
 				<br style="clear: both; height: 1px;" />
@@ -566,7 +566,7 @@ if (!$this->quickpage_options) {
 				<span class="pf-label">Menu Entries</span>
 				<span class="pf-note">It isn't necessary to add the same conditions on menu entries. They will only appear if the Page Conditions are met.</span>
 				<div class="pf-group">
-					<input class="pf-field" type="text" name="com_menueditor_entries" id="p_muid_menu_entries" size="24" value="<?php e(json_encode($this->entity->com_menueditor_entries)); ?>" />
+					<input class="pf-field form-control" type="text" name="com_menueditor_entries" id="p_muid_menu_entries" size="24" value="<?php e(json_encode($this->entity->com_menueditor_entries)); ?>" />
 				</div>
 			</div>
 			<br class="pf-clearing" />
@@ -654,26 +654,26 @@ if (!$this->quickpage_options) {
 			<div class="pf-element">
 				<label><span class="pf-label">Override Created Date</span>
 					<span class="pf-note">This date is used for sorting pages on the front page.</span>
-					<input class="pf-field" type="text" name="p_cdate" value="<?php echo $this->entity->p_cdate ? h(format_date($this->entity->p_cdate, 'full_med')) : ''; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="p_cdate" value="<?php echo $this->entity->p_cdate ? h(format_date($this->entity->p_cdate, 'full_med')) : ''; ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Override Modified Date</span>
-					<input class="pf-field" type="text" name="p_mdate" value="<?php echo $this->entity->p_mdate ? h(format_date($this->entity->p_mdate, 'full_med')) : ''; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="p_mdate" value="<?php echo $this->entity->p_mdate ? h(format_date($this->entity->p_mdate, 'full_med')) : ''; ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Begin Publish Date</span>
-					<input class="pf-field" type="text" name="publish_begin" value="<?php echo $this->entity->publish_begin ? h(format_date($this->entity->publish_begin, 'full_med')) : ($this->quickpage_options ? '' : h(format_date(time(), 'full_med'))); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="publish_begin" value="<?php echo $this->entity->publish_begin ? h(format_date($this->entity->publish_begin, 'full_med')) : ($this->quickpage_options ? '' : h(format_date(time(), 'full_med'))); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">End Publish Date</span>
-					<input class="pf-field" type="text" name="publish_end" value="<?php echo $this->entity->publish_end ? h(format_date($this->entity->publish_end, 'full_med')) : ''; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="publish_end" value="<?php echo $this->entity->publish_end ? h(format_date($this->entity->publish_end, 'full_med')) : ''; ?>" /></label>
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Options</h3>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Show Title</span>
-					<select class="pf-field" name="show_title<?php echo $this->quickpage_options ? '_save' : ''; ?>">
+					<select class="pf-field form-control" name="show_title<?php echo $this->quickpage_options ? '_save' : ''; ?>">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->show_title === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->show_title === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -681,7 +681,7 @@ if (!$this->quickpage_options) {
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Show Author Info</span>
-					<select class="pf-field" name="show_author_info">
+					<select class="pf-field form-control" name="show_author_info">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->show_author_info === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->show_author_info === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -690,7 +690,7 @@ if (!$this->quickpage_options) {
 			<div class="pf-element">
 				<label><span class="pf-label">Show Full Content in List</span>
 					<span class="pf-note">Show both the intro and the content when this page is shown in a page list.</span>
-					<select class="pf-field" name="show_content_in_list">
+					<select class="pf-field form-control" name="show_content_in_list">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->show_content_in_list === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->show_content_in_list === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -698,7 +698,7 @@ if (!$this->quickpage_options) {
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Show Intro on Page</span>
-					<select class="pf-field" name="show_intro">
+					<select class="pf-field form-control" name="show_intro">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->show_intro === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->show_intro === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -706,7 +706,7 @@ if (!$this->quickpage_options) {
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Show Breadcrumbs</span>
-					<select class="pf-field" name="show_breadcrumbs">
+					<select class="pf-field form-control" name="show_breadcrumbs">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->show_breadcrumbs === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->show_breadcrumbs === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -772,12 +772,12 @@ if (!$this->quickpage_options) {
 				?>
 				<span class="pf-field">None of the enabled templates have any page variants.</span>
 				<?php } else { ?>
-				<select class="pf-field" id="p_muid_variant_template" style="max-width: 200px;">
+				<select class="pf-field form-control" id="p_muid_variant_template" style="max-width: 200px;">
 					<?php foreach ($variants as $cur_template => $cur_variants) { ?>
 					<option value="<?php e($cur_template); ?>"<?php echo $cur_template == $_->current_template ? ' selected="selected"' : ''; ?>><?php e("{$_->info->$cur_template->name} ($cur_template)"); ?></option>
 					<?php } ?>
 				</select>
-				<select class="pf-field" id="p_muid_variant_variant" style="max-width: 200px;">
+				<select class="pf-field form-control" id="p_muid_variant_variant" style="max-width: 200px;">
 					<?php foreach ($variants as $cur_template => $cur_variants) {
 						foreach ($cur_variants as $cur_description => $cur_variant) { ?>
 					<option class="<?php e($cur_template); ?>" value="<?php e($cur_variant); ?>"><?php e($cur_description); ?></option>
@@ -807,7 +807,7 @@ if (!$this->quickpage_options) {
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_content', 'page/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_content', 'page/list'))); ?>);" value="Cancel" />
 	</div>
 </form>
 <?php }

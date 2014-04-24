@@ -38,7 +38,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		var cur_options = $.extend(cur_defaults, cur_state);
 		$("#p_muid_grid").pgrid(cur_options);
 
-		p_muid_notice = $.pnotify({
+		p_muid_notice = new PNotify({
 			text: "",
 			hide: false,
 			closer: false,
@@ -182,7 +182,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Update Status</span>
-			<select class="pf-field" name="status" size="1">
+			<select class="pf-field form-control" name="status">
 				<option value="closed" <?php echo ($this->entity->status == 'closed') ? 'selected="selected"' : ''; ?>>Closed (Approved)</option>
 				<option value="flagged" <?php echo ($this->entity->status == 'flagged') ? 'selected="selected"' : ''; ?>>Flagged (Declined)</option>
 				<option value="info_requested" <?php echo ($this->entity->status == 'info_requested') ? 'selected="selected"' : ''; ?>>Info Requested</option>
@@ -201,6 +201,6 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input name="approve" class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

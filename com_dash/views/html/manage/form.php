@@ -25,7 +25,7 @@ $_->com_pgrid->load();
 				<label>
 					<span class="pf-label">User</span>
 					<span class="pf-note">Note that giving a dashboard no user makes it visible to everyone.</span>
-					<select class="pf-field" name="user" size="1">
+					<select class="pf-field form-control" name="user">
 						<option value="none">--No User--</option>
 						<?php foreach ($this->user_array as $cur_user) {
 							?><option value="<?php e($cur_user->guid); ?>"<?php echo $cur_user->is($this->entity->user) ? ' selected="selected"' : ''; ?>><?php e("{$cur_user->name} [{$cur_user->username}]"); ?></option><?php
@@ -36,7 +36,7 @@ $_->com_pgrid->load();
 			<div class="pf-element">
 				<label>
 					<span class="pf-label">Group</span>
-					<select class="pf-field" name="group" size="1">
+					<select class="pf-field form-control" name="group">
 						<option value="none">--No Group--</option>
 						<?php foreach ($this->group_array as $cur_group) {
 							?><option value="<?php e($cur_group->guid); ?>"<?php echo $cur_group->is($this->entity->group) ? ' selected="selected"' : ''; ?>><?php e(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
@@ -52,7 +52,7 @@ $_->com_pgrid->load();
 			<div class="pf-element">
 				<label><span class="pf-label">Group Access</span>
 					<span class="pf-note">Must be set to read or write to allow this to be a group's dashboard.</span>
-					<select class="pf-field" name="group_access">
+					<select class="pf-field form-control" name="group_access">
 						<option value="0"<?php echo $this->entity->ac->group == 0 ? ' selected="selected"' : ''; ?>>No Access</option>
 						<option value="1"<?php echo $this->entity->ac->group == 1 ? ' selected="selected"' : ''; ?>>Read</option>
 						<option value="2"<?php echo $this->entity->ac->group == 2 ? ' selected="selected"' : ''; ?>>Read and Write</option>
@@ -62,7 +62,7 @@ $_->com_pgrid->load();
 			<div class="pf-element">
 				<label><span class="pf-label">Other Access</span>
 					<span class="pf-note">Must be set to read or write to allow this to be the dashboard of a group's descendants.</span>
-					<select class="pf-field" name="other_access">
+					<select class="pf-field form-control" name="other_access">
 						<option value="0"<?php echo $this->entity->ac->other == 0 ? ' selected="selected"' : ''; ?>>No Access</option>
 						<option value="1"<?php echo $this->entity->ac->other == 1 ? ' selected="selected"' : ''; ?>>Read</option>
 						<option value="2"<?php echo $this->entity->ac->other == 2 ? ' selected="selected"' : ''; ?>>Read and Write</option>
@@ -176,6 +176,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_dash', 'manage/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_dash', 'manage/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

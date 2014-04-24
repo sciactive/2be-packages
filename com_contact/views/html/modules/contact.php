@@ -35,27 +35,27 @@ $this->title = 'Contact Us';
 		<label>
 			<span class="pf-label">Name</span>
 			<span class="pf-note">Enter your name here.</span>
-			<input class="pf-field" type="text" name="author_name" size="24" value="<?php e($_SESSION['user']->name); ?>" />
+			<input class="pf-field form-control" type="text" name="author_name" size="24" value="<?php e($_SESSION['user']->name); ?>" />
 		</label>
 	</div>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Phone</span>
 			<span class="pf-note">Enter your phone number.</span>
-			<input class="pf-field" type="tel" name="author_phone" size="24" value="<?php e(format_phone($_SESSION['user']->phone)); ?>"  onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" />
+			<input class="pf-field form-control" type="tel" name="author_phone" size="24" value="<?php e(format_phone($_SESSION['user']->phone)); ?>"  onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" />
 		</label>
 	</div>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">E-mail</span>
 			<span class="pf-note">Enter your e-mail address.</span>
-			<input class="pf-field" type="email" name="author_email" size="24" value="<?php e($_SESSION['user']->email); ?>" />
+			<input class="pf-field form-control" type="email" name="author_email" size="24" value="<?php e($_SESSION['user']->email); ?>" />
 		</label>
 	</div>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Subject</span>
-			<input class="pf-field" type="text" name="subject" size="24" value="" />
+			<input class="pf-field form-control" type="text" name="subject" size="24" value="" />
 		</label>
 	</div>
 	<div class="pf-element">

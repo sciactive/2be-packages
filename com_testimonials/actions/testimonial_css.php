@@ -379,7 +379,7 @@ $misc_css = $_->config->com_testimonials->misc_css;
 	.testimonials-module.small .trigger-feedback {
 		text-align: center;
 	}
-	.testimonials-module.small .share-checkbox .span6 {
+	.testimonials-module.small .share-checkbox .col-sm-6 {
 		margin-left: 0;
 		width: 100%;
 	}

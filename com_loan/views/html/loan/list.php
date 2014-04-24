@@ -65,7 +65,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "json",
 				data: {"q": search_string, "status_tags" : $_.status_tags, "location": location, "descendants": descendants, "all_time": all_time, "start_date": start_date, "end_date": end_date},
 				beforeSend: function(){
-					loader = $.pnotify({
+					loader = new PNotify({
 						title: 'Search',
 						text: 'Searching the database...',
 						icon: 'picon picon-throbber',
@@ -522,7 +522,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							}
 						});
 						if (rows.length > 1)
-							form.find(".history_status").html('<div class="alert alert-info" style="margin-bottom: 8px;"><i class="icon-info-sign"></i> You are viewing '+rows.length+' customers.</div>');
+							form.find(".history_status").html('<div class="alert alert-info" style="margin-bottom: 8px;"><i class="fa fa-info-circle"></i> You are viewing '+rows.length+' customers.</div>');
 						
 						$_.play();
 					}
@@ -559,7 +559,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						$_.pause();
 						var form = $("<div title=\"Add Customer Interaction\"></div>").html(data+"<br />");
 						if (rows.length > 1)
-							form.find(".interaction_status").html('<div class="alert alert-info" style="padding-bottom: 10px;"><i class="icon-info-sign"></i> You are adding interactions to '+rows.length+' customers.</div>');
+							form.find(".interaction_status").html('<div class="alert alert-info" style="padding-bottom: 10px;"><i class="fa fa-info-circle"></i> You are adding interactions to '+rows.length+' customers.</div>');
 						form.dialog({
 							bgiframe: true,
 							autoOpen: true,
@@ -577,12 +577,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 										success = form.find(":input[name=interaction_success]");
 									if (comments.val() == '') {
 										alert('Please provide a description of the interaction.');
-										status_bar.html('<div class="alert alert-error" style="padding-bottom: 10px;"><i class="icon-remove-sign"></i> Provide Interaction Description!</div>');
+										status_bar.html('<div class="alert alert-error" style="padding-bottom: 10px;"><i class="fa fa-times-circle"></i> Provide Interaction Description!</div>');
 										return;
 									}
 									if (status.val() == '') {
 										alert('Please specify whether the interaction is open or closed.');
-										status_bar.html('<div class="alert alert-error" style="padding-bottom: 10px;"><i class="icon-remove-sign"></i> Provide Interaction Status (Open / Closed)</div>');
+										status_bar.html('<div class="alert alert-error" style="padding-bottom: 10px;"><i class="fa fa-times-circle"></i> Provide Interaction Status (Open / Closed)</div>');
 										return;
 									}
 									$.ajax({

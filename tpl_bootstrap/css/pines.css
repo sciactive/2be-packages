@@ -2,13 +2,13 @@
 body {
 	padding-top: 40px;
 }
-.nosidegutters .container, .nosidegutters .container-fluid {
+.nosidegutters .container, .nosidegutters .container {
 	padding-left: 0;
 	padding-right: 0;
 }
 /* Bootstrap Min-height Fix */
-#page > .row-fluid,
-#page > .row-fluid > [class*="span"],
+#page > .row,
+#page > .row > [class*="span"],
 #content_top_left,
 #content_top_right,
 #content_bottom_left,

@@ -35,13 +35,13 @@ $_->com_pgrid->load();
 </script>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'countsheet/savestatus')); ?>">
 	<?php if ($this->entity->missing) { ?>
-	<div class="accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert-error">Missing Items</big>
+	<div class="panel-group">
+		<div class="panel panel-error">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Missing Items</big>
 			</a>
-			<div class="accordion-body collapse in">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse in">
+				<div class="panel-body clearfix">
 					<table id="p_muid_missing_table">
 						<thead>
 							<tr>
@@ -71,13 +71,13 @@ $_->com_pgrid->load();
 		</div>
 	</div>
 	<?php } if ($this->entity->matched) { ?>
-	<div class="accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert-success">Matched Items</big>
+	<div class="panel-group">
+		<div class="panel panel-success">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Matched Items</big>
 			</a>
-			<div class="accordion-body collapse in">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse in">
+				<div class="panel-body clearfix">
 					<table id="p_muid_matched_table">
 						<thead>
 							<tr>
@@ -107,13 +107,13 @@ $_->com_pgrid->load();
 		</div>
 	</div>
 	<?php } if ($this->entity->potential) { ?>
-	<div class="accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert-info">Potential Matches</big>
+	<div class="panel-group">
+		<div class="panel panel-info">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Potential Matches</big>
 			</a>
-			<div class="accordion-body collapse in">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse in">
+				<div class="panel-body clearfix">
 					<table id="p_muid_potential_table">
 						<thead>
 							<tr>
@@ -166,13 +166,13 @@ $_->com_pgrid->load();
 		</div>
 	</div>
 	<?php } if ($this->entity->duplicate) { ?>
-	<div class="accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert" style="margin-bottom: 0;">Duplicate Items</big>
+	<div class="panel-group">
+		<div class="panel panel-warning">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title" style="margin-bottom: 0;">Duplicate Items</big>
 			</a>
-			<div class="accordion-body collapse in">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse in">
+				<div class="panel-body clearfix">
 					<table id="p_muid_duplicate_table">
 						<thead>
 							<tr>
@@ -202,13 +202,13 @@ $_->com_pgrid->load();
 		</div>
 	</div>
 	<?php } if ($this->entity->history) { ?>
-	<div class="accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert" style="margin-bottom: 0;">Past Items</big>
+	<div class="panel-group">
+		<div class="panel panel-warning">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title" style="margin-bottom: 0;">Past Items</big>
 			</a>
-			<div class="accordion-body collapse in">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse in">
+				<div class="panel-body clearfix">
 					<table id="p_muid_history_table">
 						<thead>
 							<tr>
@@ -234,13 +234,13 @@ $_->com_pgrid->load();
 		</div>
 	</div>
 	<?php } if ($this->entity->invalid) { ?>
-	<div class="accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle">Invalid/Unknown Entries</big>
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Invalid/Unknown Entries</big>
 			</a>
-			<div class="accordion-body collapse in">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse in">
+				<div class="panel-body clearfix">
 					<table id="p_muid_invalid_table">
 						<thead>
 							<tr>
@@ -271,7 +271,7 @@ $_->com_pgrid->load();
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Update Status</span>
-			<select class="pf-field" name="status" size="1">
+			<select class="pf-field form-control" name="status">
 				<option value="approved" <?php echo ($this->entity->status == 'approved') ? 'selected="selected"' : ''; ?>>Approved</option>
 				<option value="declined" <?php echo ($this->entity->status == 'declined') ? 'selected="selected"' : ''; ?>>Declined</option>
 				<option value="info_requested" <?php echo ($this->entity->status == 'info_requested') ? 'selected="selected"' : ''; ?>>Info Requested</option>
@@ -294,6 +294,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input name="approve" class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

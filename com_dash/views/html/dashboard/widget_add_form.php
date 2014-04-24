@@ -51,15 +51,15 @@ $grid_thirds = floor($_->config->com_bootstrap->grid_columns / 3);
 		</div>
 		<div class="pf-element pf-full-width">
 			<div style="padding-right: .5em;">
-				<div class="row-fluid">
+				<div class="row">
 				<?php
 				$i = 1;
 				foreach ((array) $cur_widget_list as $cur_name => $cur_widget) {
 					if ($i % 3 == 1) { ?>
 				</div>
-				<div class="row-fluid">
+				<div class="row">
 					<?php } ?>
-					<div class="span<?php echo $grid_thirds; ?>" style="margin-bottom: .5em;">
+					<div class="col-sm-<?php echo $grid_thirds; ?>" style="margin-bottom: .5em;">
 						<div class="ui-widget-content ui-corner-all widget_type" style="padding: .5em; cursor: pointer;">
 							<div class="component" style="display: none;"><?php e($cur_component); ?></div>
 							<div class="widget_name" style="display: none;"><?php e($cur_name); ?></div>

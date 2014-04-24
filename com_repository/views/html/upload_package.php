@@ -52,7 +52,7 @@ $max = ($val1 < $val2) ? $upload_max : $post_max;
 	<div class="pf-element">
 		<label><span class="pf-label">Upload Package File(s)</span>
 			<span class="pf-note">Max Size: <?php e($max); ?></span>
-			<input class="pf-field puploader puploader-temp puploader-multiple" type="text" name="package" /></label>
+			<input class="pf-field form-control puploader puploader-temp puploader-multiple" type="text" name="package" /></label>
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />

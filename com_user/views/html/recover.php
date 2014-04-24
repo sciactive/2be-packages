@@ -43,11 +43,11 @@ if ($_->config->com_user->email_usernames)
 		<label>
 			<span class="pf-label toggle password"><?php echo $_->config->com_user->email_usernames ? 'Email Address' : 'Username'; ?></span>
 			<span class="pf-label toggle username" style="display: none;">Email Address</span>
-			<input class="pf-field" type="text" name="account" size="24" value="" />
+			<input class="pf-field form-control" type="text" name="account" size="24" value="" />
 		</label>
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

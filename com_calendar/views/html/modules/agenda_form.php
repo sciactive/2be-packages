@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 <div class="pf-form">
 	<div class="pf-element">
 		<label><span class="pf-label">View</span>
-			<select class="pf-field" name="view_type">
+			<select class="pf-field form-control" name="view_type">
 				<option value="basicDay"<?php echo $this->view_type == 'basicDay' ? ' selected="selected"' : ''; ?>>Basic Day</option>
 				<option value="agendaDay"<?php echo $this->view_type == 'agendaDay' ? ' selected="selected"' : ''; ?>>Agenda Day</option>
 				<option value="basicWeek"<?php echo $this->view_type == 'basicWeek' ? ' selected="selected"' : ''; ?>>Basic Week</option>

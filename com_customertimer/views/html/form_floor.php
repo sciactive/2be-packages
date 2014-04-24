@@ -238,7 +238,7 @@ $_->uploader->load();
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Name</span>
-					<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Enabled</span>
@@ -258,7 +258,7 @@ $_->uploader->load();
 				</script>
 				<label><span class="pf-label">Background</span>
 					<span class="pf-note">See the Station Layout tab to preview the background.</span>
-					<input class="pf-field puploader" type="text" name="background" value="<?php e($this->entity->background); ?>" /></label>
+					<input class="pf-field form-control puploader" type="text" name="background" value="<?php e($this->entity->background); ?>" /></label>
 			</div>
 			<?php /* <div class="pf-element pf-full-width">
 				<span class="pf-label">Background Preview</span>
@@ -271,7 +271,7 @@ $_->uploader->load();
 		</div>
 		<div class="tab-pane" id="p_muid_tab_layout">
 			<div id="p_muid_edit_layout" style="text-align: center; font-size: x-large;">
-				<button type="button" class="btn btn-primary btn-large">Edit Layout</button>
+				<button type="button" class="btn btn-primary btn-lg">Edit Layout</button>
 				<p style="font-size: x-large; line-height: normal;">Be sure to click save when you're done!</p>
 			</div>
 			<div id="p_muid_layout" style="display: none;">
@@ -306,6 +306,6 @@ $_->uploader->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_customertimer', 'listfloors'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_customertimer', 'listfloors'))); ?>);" value="Cancel" />
 	</div>
 </form>

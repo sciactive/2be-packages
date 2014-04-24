@@ -20,7 +20,7 @@ if ($this->entity->per_user) {
 		$this->note = "For {$this->entity->type} <a data-entity=\"".h($this->entity->user->guid)."\" data-entity-context=\"group\">".h("{$this->entity->user->name} [{$this->entity->user->groupname}]").'</a>.';
 }
 ?>
-<div class="hero-unit">
+<div class="jumbotron">
 	<h1><?php e("{$this->entity->info->name} {$this->entity->info->version}"); ?></h1>
 </div>
 <form class="pf-form" action="" method="post">

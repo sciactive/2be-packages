@@ -182,7 +182,7 @@ if (navbar_trigger == 'hover') {
         }).on('mouseleave', 'ul.nav', function(e){
                 var nav = $(this);
                 var mouse_top = e.pageY - $(window).scrollTop();
-                var navbar_height = $('.navbar-inner').height();
+                var navbar_height = $('.container', '#nav').height();
                 if (mouse_top > (navbar_height + 5)) {
                         nav.find('li.dropdown.open > a').dropdown('toggle');
                 }
@@ -225,10 +225,10 @@ if (mobile_menu == 'adjusted') {
                                 var dropdown = $(this).closest('li.dropdown');
                                 if (dropdown.hasClass('helper-show')) {
                                         dropdown.removeClass('helper-show').children('ul').hide();
-                                        $('.nav-collapse', '#nav').css('height', 'auto');
+                                        $('.navbar-collapse', '#nav').css('height', 'auto');
                                 } else {
                                         dropdown.addClass('helper-show').children('ul').show();
-                                        $('.nav-collapse', '#nav').css('height', 'auto');
+                                        $('.navbar-collapse', '#nav').css('height', 'auto');
                                 }
                         });
 
@@ -276,7 +276,7 @@ $_(function(){
                 $('#nav ul.nav > li.dropdown > a').css('text-shadow', text_shadow);
         } if (navbar_menu_height > 0) {
                 var navbar_menu_height = navbar_menu_height;
-                var min_height = $('.navbar-inner').css('min-height');
+                var min_height = $('.container', '#nav').css('min-height');
                 if (navbar_menu_height >= parseInt(min_height)) {
                         // Do stuff
                         var li = $('.navbar .nav > li > a'),
@@ -292,7 +292,7 @@ $_(function(){
                                 'padding-top': leftover+'px',
                                 'padding-bottom': leftover+'px'
                         });
-                        $('.navbar-inner').css('min-height', navbar_menu_height+'px');
+                        $('.container', '#nav').css('min-height', navbar_menu_height+'px');
                 }
         }
 });

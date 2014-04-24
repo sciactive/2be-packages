@@ -170,9 +170,9 @@ if (!empty($this->entity->comments)) { ?>
 	<div style="white-space: pre-wrap; padding-bottom: .5em;"><?php e($this->entity->comments); ?></div>
 </div>
 <?php } } elseif ($this->render == 'footer') { ?>
-<a href="<?php e(pines_url('com_sales', 'po/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
+<a href="<?php e(pines_url('com_sales', 'po/edit', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Edit</a>
 <?php if (!$this->entity->finished && ( (gatekeeper('com_sales/receive') && isset($this->entity->destination->guid) && $this->entity->destination->is($_SESSION['user']->group)) || (gatekeeper('com_sales/receivelocation') && isset($this->entity->destination->guid) && isset($_SESSION['user']->group->guid) && $this->entity->destination->in_array($_SESSION['user']->group->get_descendants(true))) ) ) { ?>
-<a href="<?php e(pines_url('com_sales', 'stock/receive', array('location' => $this->entity->destination->guid, 'shipments' => $this->entity->guid))); ?>" class="btn">Receive</a>
+<a href="<?php e(pines_url('com_sales', 'stock/receive', array('location' => $this->entity->destination->guid, 'shipments' => $this->entity->guid))); ?>" class="btn btn-default">Receive</a>
 <?php } if (gatekeeper('com_sales/listpos')) { ?>
-<a href="<?php e(pines_url('com_sales', 'po/list')); ?>" class="btn">View in List</a>
+<a href="<?php e(pines_url('com_sales', 'po/list')); ?>" class="btn btn-default">View in List</a>
 <?php } }

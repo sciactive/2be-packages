@@ -62,11 +62,11 @@ $_->com_jstree->load();
 	<div class="pf-element location_tree" style="padding-bottom: 0px;"></div>
 	<div class="pf-element" style="padding-bottom: 0px;">
 		<span class="pf-note">Start</span>
-		<input class="pf-field form_date" type="text" name="start_date" value="<?php ($this->start_date) ? e(format_date($this->start_date, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
+		<input class="pf-field form-control form_date" type="text" name="start_date" value="<?php ($this->start_date) ? e(format_date($this->start_date, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
 	</div>
 	<div class="pf-element">
 		<span class="pf-note">End</span>
-		<input class="pf-field form_date" type="text" name="end_date" value="<?php ($this->end_date) ? e(format_date($this->end_date - 1, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
+		<input class="pf-field form-control form_date" type="text" name="end_date" value="<?php ($this->end_date) ? e(format_date($this->end_date - 1, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
 	</div>
 	<div class="pf-element">
 		<input type="hidden" name="location" />

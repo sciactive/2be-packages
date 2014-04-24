@@ -89,7 +89,7 @@ foreach ($goals as $goal) {
 	<div id="p_muid_err" style="font-size:.7em; display:none;">Impossible # of Days Entered</div>
 	<div id="p_muid_days_passed" style="padding:5px; margin-bottom:2px;" class="alert-info clearfix">
 		<label style="margin-bottom:0;"><span style="float:left;">Days Passed</span></label>
-		<span style="float:right;"><input name="days_passed" style="text-align:right;" type="text" size="2" value="<?php e($dayspassed); ?>" /></span>
+		<span style="float:right;"><input class="form-control" name="days_passed" style="text-align:right;" type="text" size="2" value="<?php e($dayspassed); ?>" /></span>
 	</div>
 	<div style="padding:5px; margin-bottom:2px;" class="alert-success clearfix">
 		<label style="margin-bottom:0;"><span style="float:left;">% of Month Passed</span></label>
@@ -110,7 +110,7 @@ foreach ($goals as $goal) {
 				<tr>
 					<td class="goal"><span><?php e($trend['goal']); ?></span></td>
 					<td class="alert-success goal_green"><?php e($_->com_sales->round($trend['green'], true)); ?></td>
-					<td class="alert goal_yellow"><?php e($_->com_sales->round($trend['yellow'], true)); ?></td>
+					<td class="alert-warning goal_yellow"><?php e($_->com_sales->round($trend['yellow'], true)); ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>

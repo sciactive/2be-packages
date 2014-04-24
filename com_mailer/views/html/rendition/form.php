@@ -92,7 +92,7 @@ $_->editor->load();
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Name</span>
-					<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Enabled</span>
@@ -150,51 +150,55 @@ $_->editor->load();
 			<div class="pf-element pf-heading">
 				<h3>Addressing <small><a href="#p_muid_address_help" data-toggle="modal">(?)</a></small></h3>
 			</div>
-			<div class="modal hide" id="p_muid_address_help">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">×</button>
-					<h3>Address Formats</h3>
-				</div>
-				<div class="modal-body">
-					<p>Addresses can use the following formats:</p>
-					<h4>Single Address (Sender must be a single address.)</h4>
-					<ul>
-						<li>email@example.com</li>
-						<li>"John McPerson" &lt;email@example.com&gt;</li>
-					</ul>
-					<h4>Multiple Addresses</h4>
-					<ul>
-						<li>email@example.com, another@example.net</li>
-						<li>"John McPerson" &lt;email@example.com&gt;, another@example.net</li>
-						<li>"John McPerson" &lt;email@example.com&gt;, "Another User" &lt;another@example.net&gt;</li>
-					</ul>
-				</div>
-				<div class="modal-footer">
-					<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+			<div class="modal fade" id="p_muid_address_help">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Address Formats</h4>
+						</div>
+						<div class="modal-body">
+							<p>Addresses can use the following formats:</p>
+							<h4>Single Address (Sender must be a single address.)</h4>
+							<ul>
+								<li>email@example.com</li>
+								<li>"John McPerson" &lt;email@example.com&gt;</li>
+							</ul>
+							<h4>Multiple Addresses</h4>
+							<ul>
+								<li>email@example.com, another@example.net</li>
+								<li>"John McPerson" &lt;email@example.com&gt;, another@example.net</li>
+								<li>"John McPerson" &lt;email@example.com&gt;, "Another User" &lt;another@example.net&gt;</li>
+							</ul>
+						</div>
+						<div class="modal-footer">
+							<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Sender (From Address)</span>
 					<span class="pf-note">Leave blank to use the default address (see config).</span>
-					<input class="pf-field" type="text" name="from" size="40" value="<?php e($this->entity->from); ?>" />
+					<input class="pf-field form-control" type="text" name="from" size="40" value="<?php e($this->entity->from); ?>" />
 					<span class="label label-important hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element" id="p_muid_recipient" style="display: none;">
 				<label><strong class="pf-label">Recipient (To Address)</strong>
 					<span class="pf-note"><strong>This mailing doesn't have a To address specified.</strong> Leave blank to use the master address (see config).</span>
-					<input class="pf-field" type="text" name="to" size="40" value="<?php e($this->entity->to); ?>" />
+					<input class="pf-field form-control" type="text" name="to" size="40" value="<?php e($this->entity->to); ?>" />
 					<span class="label label-important hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Carbon Copy (CC Address)</span>
 					<span class="pf-note">The email is copied to these addresses. This <strong>will</strong> be visible to the recipient.</span>
-					<input class="pf-field" type="text" name="cc" size="40" value="<?php e($this->entity->cc); ?>" />
+					<input class="pf-field form-control" type="text" name="cc" size="40" value="<?php e($this->entity->cc); ?>" />
 					<span class="label label-important hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Blind Carbon Copy (BCC Address)</span>
 					<span class="pf-note">The email is copied to these addresses. This <strong>will not</strong> be visible to the recipient.</span>
-					<input class="pf-field" type="text" name="bcc" size="40" value="<?php e($this->entity->bcc); ?>" />
+					<input class="pf-field form-control" type="text" name="bcc" size="40" value="<?php e($this->entity->bcc); ?>" />
 					<span class="label label-important hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element pf-heading">
@@ -202,7 +206,7 @@ $_->editor->load();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Subject</span>
-					<input class="pf-field" type="text" name="subject" size="40" value="<?php e($this->entity->subject); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="subject" size="40" value="<?php e($this->entity->subject); ?>" /></label>
 			</div>
 			<div class="pf-element pf-full-width">
 				<textarea rows="20" cols="35" class="peditor-email" style="width: 100%;" name="content"><?php e($this->entity->content); ?></textarea>
@@ -376,6 +380,6 @@ $_->editor->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_mailer', 'rendition/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_mailer', 'rendition/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

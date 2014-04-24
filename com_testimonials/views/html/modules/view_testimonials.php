@@ -22,9 +22,9 @@ $_->com_timeago->load();
 $_->com_testimonials->load();
 ?>
 
-<div id="p_muid_testimonials" class="span12 testimonials-module">
-	<div class="row-fluid">
-		<div class="span12">
+<div id="p_muid_testimonials" class="col-sm-12 testimonials-module">
+	<div class="row">
+		<div class="col-sm-12">
 			<div class="frame">
 				<div class="no-average-rating clearfix <?php echo (is_array($aggregate)) ? 'hide': ''; ?>">Reviews</div>
 				<div class="average-rating clearfix <?php echo (is_array($aggregate)) ? '': 'hide'; ?>" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
@@ -36,9 +36,9 @@ $_->com_testimonials->load();
 					$star_rating = round($rating);
 					for ($c = 1; $c <= 5; $c++) { 
 						if ((int) $star_rating >= $c) { ?>
-						<i class="icon-star"></i>
+						<i class="fa fa-star"></i>
 					<?php } else { ?>
-						<i class="icon-star-empty"></i>
+						<i class="fa fa-star-o"></i>
 					<?php } 
 					} ?>
 					</span>
@@ -46,12 +46,12 @@ $_->com_testimonials->load();
 				</div>
 				<div class="testimonials">
 					<div class="list-read-more">Load More</div>
-					<div class="list-up"><i class="icon-caret-up"></i></div>
-					<div class="list-top"><i class="icon-step-backward"></i> Top</div>
+					<div class="list-up"><i class="fa fa-caret-up"></i></div>
+					<div class="list-top"><i class="fa fa-step-backward"></i> Top</div>
 					<div class="testimonial-list-container">
 						<div class="list-placeholder" style="padding: 20px; text-align: center; text-shadow: 1px 1px #fff; color: #aaa;">Scroll Down to Load More</div>
 					</div>
-					<div class="testimonial-loader"><i class="icon-spinner icon-spin"></i><p>Loading</p></div>
+					<div class="testimonial-loader"><i class="fa fa-spinner fa-spin"></i><p>Loading</p></div>
 					<div class="testimonial loaded-testimonial" itemprop="review" itemscope itemtype="http://schema.org/Review">
 						<meta itemprop="name" content="<?php e($_->config->com_testimonials->business_review_name); ?>" />
 						<meta itemprop="about" content="<?php e($_->config->com_testimonials->business_review_name); ?>" />
@@ -77,9 +77,9 @@ $_->com_testimonials->load();
 							<?php 
 							for ($c = 1; $c <= 5; $c++) { 
 								if ((int) $testimonial['rating'] >= $c) { ?>
-								<i class="icon-star"></i>
+								<i class="fa fa-star"></i>
 							<?php } else { ?>
-								<i class="icon-star-empty"></i>
+								<i class="fa fa-star-o"></i>
 							<?php } 
 							}
 							?>
@@ -90,7 +90,7 @@ $_->com_testimonials->load();
 						<?php } else { ?>	
 						<noscript>You must enable JavaScript.</noscript>
 						<p style="text-align:center;">
-							<i class="icon-spinner icon-spin"></i>
+							<i class="fa fa-spinner fa-spin"></i>
 							<br/>
 							<span>Loading...</span>
 						</p>
@@ -103,22 +103,22 @@ $_->com_testimonials->load();
 						<hr class="feedback-hr" />
 						<?php if ($customer) { ?>
 						<div class="form-content">
-							<div class="row-fluid">
-								<div class="span12" style="padding-right: 10px;">
+							<div class="row">
+								<div class="col-sm-12" style="padding-right: 10px;">
 									<label>
 										<span style="font-size:.8em;">Your <span class="story">story</span>:</span>
 										<textarea type="text" name="feedback" style="width: 100%; background-color: #eee;"></textarea>
 									</label>
 								</div>
 							</div>
-							<div class="row-fluid share-checkbox">
-								<div class="span6">
+							<div class="row share-checkbox">
+								<div class="col-sm-6">
 									<label>
 										<span style="font-size:.8em;">Allow us to share your <span class="story">story</span>:</span>
 										<input type="checkbox" checked="checked"  value="ON" name="share" autocomplete="off" style="background-color: #eee;" />
 									</label>
 								</div>
-								<div class="span6 share-checkbox">
+								<div class="col-sm-6 share-checkbox">
 									<label class="right-align">
 										<span style="font-size:.8em;">Share Anonymously:</span>
 										<input type="checkbox" name="anon" value="ON" autocomplete="off" style="background-color: #eee;" />
@@ -126,8 +126,8 @@ $_->com_testimonials->load();
 								</div>
 							</div>
 							<hr class="feedback-hr" style="margin-bottom: 10px;" />
-							<div class="row-fluid">
-								<div class="span12">
+							<div class="row">
+								<div class="col-sm-12">
 									<div class="clearfix" style="margin-bottom: 8px;">
 										<div class="pull-left">
 											<div class="submit-button">Submit</div>
@@ -135,11 +135,11 @@ $_->com_testimonials->load();
 										<div class="pull-right rating-container"> 
 											<span class="rate-us">Rate Us</span>
 											<span class="star-container">
-												<span class="star"><i class="icon-star"></i></span>
-												<span class="star"><i class="icon-star"></i></span>
-												<span class="star"><i class="icon-star"></i></span>
-												<span class="star"><i class="icon-star"></i></span>
-												<span class="star"><i class="icon-star"></i></span>
+												<span class="star"><i class="fa fa-star"></i></span>
+												<span class="star"><i class="fa fa-star"></i></span>
+												<span class="star"><i class="fa fa-star"></i></span>
+												<span class="star"><i class="fa fa-star"></i></span>
+												<span class="star"><i class="fa fa-star"></i></span>
 											</span>
 										</div>
 									</div>
@@ -149,21 +149,21 @@ $_->com_testimonials->load();
 						<div class="form-submit">
 							<div class="feedback-status">
 								<div class="please-rate-us">
-									<span class="star"><i class="icon-star"></i></span>
-									<span class="star"><i class="icon-star"></i></span>
-									<span class="star"><i class="icon-star"></i></span>
-									<span class="star"><i class="icon-star"></i></span>
-									<span class="star"><i class="icon-star"></i></span>
+									<span class="star"><i class="fa fa-star"></i></span>
+									<span class="star"><i class="fa fa-star"></i></span>
+									<span class="star"><i class="fa fa-star"></i></span>
+									<span class="star"><i class="fa fa-star"></i></span>
+									<span class="star"><i class="fa fa-star"></i></span>
 								</div>
-								<i class="icon-spin icon-spinner feedback-status-icon"></i>
+								<i class="fa fa-spinner fa-spin feedback-status-icon"></i>
 								<br/>
 								<span class="feedback-status-words">Submitting</span>
 							</div>
 							<div class="share-again">Share Another <span class="story">Story</span>?</div>
 						</div>
 						<?php } elseif (!gatekeeper()) { ?>
-						<div class="row-fluid">
-							<div class="span12" style="padding-right: 10px; text-align: center;">
+						<div class="row">
+							<div class="col-sm-12" style="padding-right: 10px; text-align: center;">
 								Please sign in to your account to share your story!
 								<hr class="feedback-hr"/>
 							</div>
@@ -187,7 +187,7 @@ $_->com_testimonials->load();
 									}
 								}
 								?>
-								<div style="text-align:center;"><a class="btn btn-success btn-block btn-large signup-button" href="<?php e($_->config->com_testimonials->signup_link); ?>">Sign Up!</a></div>
+								<div style="text-align:center;"><a class="btn btn-success btn-block btn-lg signup-button" href="<?php e($_->config->com_testimonials->signup_link); ?>">Sign Up!</a></div>
 								<?php
 								$login = $_->user_manager->print_login(null, $url);
 								$login->detach();

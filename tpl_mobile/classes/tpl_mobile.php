@@ -58,12 +58,12 @@ class tpl_mobile extends template {
 	public function sub_menu(&$menu) {
 		$count = count($menu);
 		// TODO: Remove target attribute. It's not XHTML 1.0 Strict.
-		$return = '<li><a class="btn" href="'.
+		$return = '<li><a class="btn btn-default" href="'.
 			(isset($menu[0]['href']) ? h($menu[0]['href']) : 'javascript:void(0);').'"'.
 			(isset($menu[0]['onclick']) ? " onclick=\"{$menu[0]['onclick']}\"" : '').
 			(isset($menu[0]['target']) ? " target=\"{$menu[0]['target']}\"" : '').
 			'>'.h($menu[0]['text']).'</a>'.
-			($count > 1 ? '<a class="btn expander" href="javascript:void(0);"><i class="icon-chevron-down"></i></a>' : '');
+			($count > 1 ? '<a class="btn btn-default expander" href="javascript:void(0);"><i class="fa fa-chevron-down"></i></a>' : '');
 		if ($count > 1) {
 			$return .= '<ul>';
 			foreach ($menu as $key => &$value) {

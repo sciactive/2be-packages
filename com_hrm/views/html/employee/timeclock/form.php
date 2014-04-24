@@ -302,7 +302,7 @@ $_->com_datetimepicker->load();
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Current Time Range</span>
 		<div class="pf-group">
-			<div style="float: right;"><button type="button" class="btn" id="p_muid_change_range">Change time range.</button></div>
+			<div style="float: right;"><button type="button" class="btn btn-default" id="p_muid_change_range">Change time range.</button></div>
 			<div class="pf-field" style="font-family: monospace;">
 				<?php e(format_date($this->time_start, 'custom', 'D d M Y h:i:s A T', $this->entity->user->get_timezone())); ?>
 				<br />
@@ -360,7 +360,7 @@ $_->com_datetimepicker->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->user->guid); ?>" />
 		<div class="pf-element pf-buttons">
 			<input class="pf-button btn btn-primary" id="p_muid_submit" type="submit" value="Submit" />
-			<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'employee/timeclock/list'))); ?>);" value="Cancel" />
+			<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'employee/timeclock/list'))); ?>);" value="Cancel" />
 		</div>
 	</form>
 </div>
@@ -368,11 +368,11 @@ $_->com_datetimepicker->load();
 	<div style="width: 100%;">
 		<div style="width: 48%; float: left;">
 			<span>Time In:</span><br />
-			<input id="p_muid_cur_time_in" type="text" size="24" /><br />
+			<input class="form-control" id="p_muid_cur_time_in" type="text" size="24" /><br />
 			<span>Time Out:</span><br />
-			<input id="p_muid_cur_time_out" type="text" size="24" /><br />
+			<input class="form-control" id="p_muid_cur_time_out" type="text" size="24" /><br />
 			<span>Comments:</span><br />
-			<input id="p_muid_cur_comments" type="text" size="24" /><br />
+			<input class="form-control" id="p_muid_cur_comments" type="text" size="24" /><br />
 		</div>
 		<div style="width: 48%; float: left; margin-left: 1%;">
 			<small>All times entered here are interpreted using the employee's timezone.</small><br />
@@ -392,11 +392,11 @@ $_->com_datetimepicker->load();
 	<div style="width: 100%;">
 		<div style="width: 48%; float: left;">
 			<span>Time In:</span><br />
-			<input id="p_muid_new_time_in" type="text" size="24" /><br />
+			<input class="form-control" id="p_muid_new_time_in" type="text" size="24" /><br />
 			<span>Time Out:</span><br />
-			<input id="p_muid_new_time_out" type="text" size="24" /><br />
+			<input class="form-control" id="p_muid_new_time_out" type="text" size="24" /><br />
 			<span>Comments:</span><br />
-			<input id="p_muid_new_comments" type="text" size="24" /><br />
+			<input class="form-control" id="p_muid_new_comments" type="text" size="24" /><br />
 		</div>
 		<div style="width: 48%; float: left; margin-left: 1%;">
 			<small>All times entered here are interpreted using the employee's timezone.</small><br />
@@ -414,7 +414,7 @@ $_->com_datetimepicker->load();
 </div>
 <div id="p_muid_time_select_dialog" title="Select a Time Range" style="display: none;">
 	<span>Start Time:</span><br />
-	<input id="p_muid_time_start" type="text" size="24" /><br />
+	<input class="form-control" id="p_muid_time_start" type="text" size="24" /><br />
 	<span>End Time:</span><br />
-	<input id="p_muid_time_end" type="text" size="24" />
+	<input class="form-control" id="p_muid_time_end" type="text" size="24" />
 </div>

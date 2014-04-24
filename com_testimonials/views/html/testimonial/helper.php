@@ -70,7 +70,7 @@ echo $module->render();
 	</table>
 </div>
 <?php } elseif ($this->render == 'footer') { ?>
-	<a href="<?php e(pines_url('com_testimonials', $action, array('show' => 'id:'.$this->entity->id, 'type' => $status))); ?>" class="btn">View in List</a>
+	<a href="<?php e(pines_url('com_testimonials', $action, array('show' => 'id:'.$this->entity->id, 'type' => $status))); ?>" class="btn btn-default">View in List</a>
 	<?php if (gatekeeper('com_testimonials/edittestimonials')) { ?>
-	<a href="<?php e(pines_url('com_testimonials', 'testimonial/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
+	<a href="<?php e(pines_url('com_testimonials', 'testimonial/edit', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Edit</a>
 <?php } }

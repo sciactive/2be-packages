@@ -75,7 +75,7 @@ if ($_->config->com_sales->autocomplete_product)
 					dataType: "json",
 					data: {"id": cur_row.attr('title')},
 					beforeSend: function(){
-						loader = $.pnotify({
+						loader = new PNotify({
 							title: 'Shipment Search',
 							text: 'Retrieving products...',
 							icon: 'picon picon-throbber',
@@ -162,7 +162,7 @@ if ($_->config->com_sales->autocomplete_product)
 									dataType: "json",
 									data: {"code": code},
 									beforeSend: function(){
-										loader = $.pnotify({
+										loader = new PNotify({
 											title: 'Product Search',
 											text: 'Retrieving product from server...',
 											icon: 'picon picon-throbber',
@@ -270,7 +270,7 @@ if ($_->config->com_sales->autocomplete_product)
 						dataType: "json",
 						data: {"id": $(row).attr("title")},
 						beforeSend: function(){
-							loader = $.pnotify({
+							loader = new PNotify({
 								title: 'Product Search',
 								text: 'Retrieving product from server...',
 								icon: 'picon picon-throbber',
@@ -514,6 +514,6 @@ if ($_->config->com_sales->autocomplete_product)
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="button" onclick="if (confirm('Are all of the product serials correct?')) $('#p_muid_form').submit();" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

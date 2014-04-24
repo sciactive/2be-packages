@@ -48,15 +48,15 @@ $_->com_jstree->load();
 <form class="pf-form" id="p_muid_form" method="post" action="<?php e(pines_url('com_newsletter', 'send')); ?>">
 	<div class="pf-element">
 		<label><span class="pf-label">From Address</span>
-		<input class="pf-field" type="text" name="from" size="24" value="<?php e($_->config->com_newsletter->default_from); ?>" /></label>
+		<input class="pf-field form-control" type="text" name="from" size="24" value="<?php e($_->config->com_newsletter->default_from); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Reply to Address</span>
-		<input class="pf-field" type="text" name="replyto" size="24" value="<?php e($_->config->com_newsletter->default_reply_to); ?>" /></label>
+		<input class="pf-field form-control" type="text" name="replyto" size="24" value="<?php e($_->config->com_newsletter->default_reply_to); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Subject</span>
-		<input class="pf-field" type="text" name="subject" size="24" value="<?php e($this->mail->subject); ?>" /></label>
+		<input class="pf-field form-control" type="text" name="subject" size="24" value="<?php e($this->mail->subject); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Select Groups</span>
@@ -75,6 +75,6 @@ $_->com_jstree->load();
 		<input type="hidden" name="mail_id" value="<?php e($_REQUEST['mail_id']); ?>" />
 		<input type="hidden" name="location" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_newsletter', 'list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_newsletter', 'list'))); ?>);" value="Cancel" />
 	</div>
 </form>

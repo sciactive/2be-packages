@@ -53,7 +53,7 @@ $_->icons->load();
 					dataType: "json",
 					data: {"id": "self", "pin": pin, "comments": $("#p_muid_comments").val()},
 					beforeSend: function(){
-						loader = $.pnotify({
+						loader = new PNotify({
 							title: 'Timeclock',
 							text: 'Communicating with server...',
 							icon: 'picon picon-throbber',
@@ -99,7 +99,7 @@ $_->icons->load();
 				<?php if ($_->config->com_hrm->timeclock_verify_pin && !empty($_SESSION['user']->pin)) { ?>
 				var dialog = $("<div></div>", {
 					"title": "Please Verify Your PIN",
-					"html": '<div class="pf-form"><div class="pf-element"><label><span class="pf-label">PIN</span><input type="password" class="pf-field" /></label></div></div><br />'
+					"html": '<div class="pf-form"><div class="pf-element"><label><span class="pf-label">PIN</span><input type="password" class="pf-field form-control" /></label></div></div><br />'
 				}).dialog({
 					modal: true,
 					open: function(){
@@ -192,12 +192,12 @@ $_->icons->load();
 	</div>
 	<div class="pf-element" id="p_muid_comments" style="display: <?php echo $this->entity->clocked_in_time() ? 'block' : 'none'; ?>;">
 		<label><span class="pf-label">Comments</span>
-			<input class="pf-field" type="text" name="comments" size="7" /></label>
+			<input class="pf-field form-control" type="text" name="comments" size="7" /></label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<div class="btn-group" style="float: right;">
-			<button class="btn" id="p_muid_button" type="button"><span class="p_muid_button_text"><?php echo $this->entity->clocked_in_time() ? 'Clock Out' : 'Clock In'; ?></span></button>
-			<button class="btn" type="button" onclick="$_.com_hrm_time_off_form();" title="Request Time Off"><span class="p_muid_btn picon picon-view-calendar-upcoming-events"></span></button>
+			<button class="btn btn-default" id="p_muid_button" type="button"><span class="p_muid_button_text"><?php echo $this->entity->clocked_in_time() ? 'Clock Out' : 'Clock In'; ?></span></button>
+			<button class="btn btn-default" type="button" onclick="$_.com_hrm_time_off_form();" title="Request Time Off"><span class="p_muid_btn picon picon-view-calendar-upcoming-events"></span></button>
 		</div>
 	</div>
 </div>

@@ -43,7 +43,7 @@ foreach ($specs as $cur_spec) {
 			?>
 <div>
 	<strong><?php e($cur_spec['name']); ?>:</strong>
-	<select name="">
+	<select class="form-control" name="">
 		<option value="">Any</option>
 		<option value="true">Yes</option>
 		<option value="false">No</option>

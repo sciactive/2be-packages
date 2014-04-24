@@ -32,7 +32,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "json",
 				data: {"q": search_string, "enabled": <?php echo json_encode($this->enabled ? 'true' : 'false'); ?>},
 				beforeSend: function(){
-					loader = $.pnotify({
+					loader = new PNotify({
 						title: 'Search',
 						text: 'Searching the database...',
 						icon: 'picon picon-throbber',

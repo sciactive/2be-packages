@@ -42,6 +42,6 @@ $this->title = 'ESP History ['.h($this->entity->guid).']';
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_esp', 'list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_esp', 'list'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -176,13 +176,13 @@ $_->com_bootstrap->load();
 			<a href="#<?php e($cur_key); ?>" data-toggle="tab">
 				<?php e($cur_tab['name']);
 				if ($this->editable) { ?>
-				<span class="edit_tab w_icon icon-cog" title="Edit this Tab" onclick="var link = $(this).closest('a'); $('#<?php e($cur_key); ?>').data('tab_loaded', true).data('trigger_link', link).load(<?php e(json_encode(pines_url('com_dash', 'dashboard/edittab', array('id' => (string) $this->entity->guid, 'key' => $cur_key)))); ?>); link.tab('show');"></span>
+				<span class="edit_tab w_icon fa fa-cog" title="Edit this Tab" onclick="var link = $(this).closest('a'); $('#<?php e($cur_key); ?>').data('tab_loaded', true).data('trigger_link', link).load(<?php e(json_encode(pines_url('com_dash', 'dashboard/edittab', array('id' => (string) $this->entity->guid, 'key' => $cur_key)))); ?>); link.tab('show');"></span>
 				<?php } ?>
 			</a>
 		</li>
 		<?php $first = false; }
 		if ($this->editable) { ?>
-		<li class="new_tab_button"><a href="#p_muid_edit_tab" data-toggle="tab"><span class="icon-plus"></span></a></li>
+		<li class="new_tab_button"><a href="#p_muid_edit_tab" data-toggle="tab"><span class="fa fa-plus"></span></a></li>
 		<?php } ?>
 	</ul>
 	<div class="tab-content" id="p_muid_page_tabs">
@@ -211,7 +211,7 @@ $_->com_bootstrap->load();
 	</div>
 	<?php if (!$this->entity->is($_SESSION['user']->dashboard) && gatekeeper('com_dash/manage')) { ?>
 	<div style="margin-top: 1em;">
-		<a class="btn" href="<?php e(pines_url('com_dash', 'manage/list')); ?>">&laquo; Back to Dashboards</a>
+		<a class="btn btn-default" href="<?php e(pines_url('com_dash', 'manage/list')); ?>">&laquo; Back to Dashboards</a>
 	</div>
 	<?php } ?>
 </div>

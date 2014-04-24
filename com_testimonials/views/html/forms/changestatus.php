@@ -56,17 +56,17 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 	});
 </script>
 <form class="pf-form" id="p_muid_form" action="">
-	<div class="row-fluid">
+	<div class="row">
 		<h4 style="text-align: center;">Approve / Deny Testimonials</h4>
 		<p style="text-align: center;">Used with the testimonial module to display feedback.</p>
 	</div>
 	<?php if (!$this->entity->share) { ?>
-	<div class="row-fluid">
-		<div class="span10 offset1"><div style="text-align: center; background: #aa0000; color: #fff; padding: 3px; font-size: 12px; font-weight:bold;" class="">This customer does not want to share their feedback and therefore cannot be used as a displayed testimonial.</div></div>
+	<div class="row">
+		<div class="col-sm-10 offset1"><div style="text-align: center; background: #aa0000; color: #fff; padding: 3px; font-size: 12px; font-weight:bold;" class="">This customer does not want to share their feedback and therefore cannot be used as a displayed testimonial.</div></div>
 	</div>
 	<?php } ?>
-	<div class="row-fluid">
-		<div class="span10 offset1">
+	<div class="row">
+		<div class="col-sm-10 offset1">
 			<div class="original-feedback-heading">Original Feedback - Cannot be Edited.</div>
 			<blockquote class="clearfix">
 				<p>"<?php e($this->entity->feedback); ?>"</p>
@@ -76,9 +76,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 					<?php if (isset($this->entity->rating)) {
 						for ($c = 1; $c <= 5; $c++) { 
 							if ((int) $this->entity->rating >= $c) { ?>
-							<span class="star"><i class="icon-star"></i></span>
+							<span class="star"><i class="fa fa-star"></i></span>
 						<?php } else { ?>
-							<span class="star"><i class="icon-star-empty"></i></span>
+							<span class="star"><i class="fa fa-star-o"></i></span>
 						<?php } 
 						}
 					} ?>
@@ -88,14 +88,14 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 		</div>
 	</div>
 	<?php if (gatekeeper('com_testimonials/edittags')) { ?>
-	<div class="tags row-fluid" style="margin-bottom: 15px; font-size: 11px;">
-		<div class="span10 offset1">
-			<input id="p_muid_tags" name="tags" type="text" value="<?php echo implode(',', $this->entity->tags);?>" />
+	<div class="tags row" style="margin-bottom: 15px; font-size: 11px;">
+		<div class="col-sm-10 offset1">
+			<input class="form-control" id="p_muid_tags" name="tags" type="text" value="<?php echo implode(',', $this->entity->tags);?>" />
 		</div>
 	</div>
 	<?php } if (!empty($this->entity->quotefeedback)) { ?>
-	<div class="row-fluid">
-		<div class="span10 offset1">
+	<div class="row">
+		<div class="col-sm-10 offset1">
 			<div class="quoted-feedback-heading">Currently Using Quoted Version.</div>
 			<blockquote>
 				<p>"<?php e($this->entity->quotefeedback); ?>"</p>
@@ -105,12 +105,12 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 	</div>
 	<?php } ?>
 	
-	<div class="row-fluid">
-        <div class="span10 offset1">
+	<div class="row">
+        <div class="col-sm-10 offset1">
             <hr style="margin: 5px 0 10px;">
             <div class="clearfix">
 				<span style="width: 35%; display:inline-block; font-weight:bold; text-transform: uppercase;">Approve / Deny</span>
-				<select name="status" style="width: 50%; float:right; box-sizing: border-box; -moz-box-sizing: content-box; height: 20px;">
+				<select class="form-control" name="status" style="width: 50%; float:right; box-sizing: border-box; -moz-box-sizing: content-box; height: 20px;">
 					<option value=""></option>
 					<option value="">Select</option>
 					<option value="approved">Approve</option>

@@ -181,7 +181,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				}
 			});
 		};
-		p_muid_notice = $.pnotify({
+		p_muid_notice = new PNotify({
 			title: "Information",
 			text: "",
 			hide: false,

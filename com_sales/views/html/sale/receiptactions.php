@@ -36,9 +36,9 @@ $sale = $this->entity->has_tag('sale');
 </script>
 <div style="text-align: center;">
 	<?php if (isset($this->entity->customer->email)) { ?>
-	<button id="p_muid_email" class="btn"><i class="icon-envelope"></i> Email Customer</button>
+	<button id="p_muid_email" class="btn btn-default"><i class="fa fa-envelope"></i> Email Customer</button>
 	<br /><br />
 	<?php } if ($_->config->com_sales->receipt_printer) { ?>
-	<button id="p_muid_print" class="btn"><i class="icon-print"></i> Receipt Printer</button>
+	<button id="p_muid_print" class="btn btn-default"><i class="fa fa-print"></i> Receipt Printer</button>
 	<?php } ?>
 </div>

@@ -78,11 +78,11 @@ This system constructs emails using three parts:
 		When you format a macro, edit the macro string as a whole. If you want
 		to bold it, change the whole string, including the hash symbols.
 	</p>
-	<div class="row-fluid">
-		<div class="span6">
+	<div class="row">
+		<div class="col-sm-6">
 			<pre style="font-size: 1.2em; font-weight: normal;"><span class="label label-success">Right</span> <strong>#to_name#</strong>, <em>#old_date#</em></pre>
 		</div>
-		<div class="span6">
+		<div class="col-sm-6">
 			<pre style="font-size: 1.2em; font-weight: normal;"><span class="label label-important">Wrong</span> #<strong>to_name</strong>#, #old_<em>date#</em></pre>
 		</div>
 	</div>

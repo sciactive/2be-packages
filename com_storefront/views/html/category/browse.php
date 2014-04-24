@@ -75,7 +75,7 @@ foreach ((array) $this->show_page_modules as $cur_module) {
 	<?php } ?>
 	<div style="float: right; margin: 1em 0 1em 1em;">
 		Showing <?php echo $offset + 1; ?>-<?php echo $offset + count($products); ?> of <?php echo (int) $count; ?>.
-		Sorted by <select name="sort" onchange="$_.get(<?php e(json_encode(pines_url('com_storefront', 'category/browse', array('a' => $this->entity->alias, 'page' => $this->page)))); ?>, {sort: $(this).val()})">
+		Sorted by <select class="form-control" name="sort" onchange="$_.get(<?php e(json_encode(pines_url('com_storefront', 'category/browse', array('a' => $this->entity->alias, 'page' => $this->page)))); ?>, {sort: $(this).val()})">
 			<option value="name"<?php echo ($this->sort == 'name') ? ' selected="selected"' : '' ?>>Name (A to Z)</option>
 			<option value="name_r"<?php echo ($this->sort == 'name_r') ? ' selected="selected"' : '' ?>>Name (Z to A)</option>
 			<option value="unit_price"<?php echo ($this->sort == 'unit_price') ? ' selected="selected"' : '' ?>>Price (Low to High)</option>

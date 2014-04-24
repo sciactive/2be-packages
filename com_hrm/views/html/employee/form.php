@@ -149,13 +149,13 @@ $_->com_pgrid->load();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Nickname</span>
-					<input class="pf-field" type="text" size="24" name="nickname" value="<?php echo $this->entity->nickname; ?>" /></label>
+					<input class="pf-field form-control" type="text" size="24" name="nickname" value="<?php echo $this->entity->nickname; ?>" /></label>
 			</div>
 			<?php if ($_->config->com_hrm->ssn_field && gatekeeper('com_hrm/showssn')) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">SSN</span>
 					<span class="pf-note">Without dashes.</span>
-					<input class="pf-field" type="text" name="ssn" size="24" value="<?php e($this->entity->ssn); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="ssn" size="24" value="<?php e($this->entity->ssn); ?>" /></label>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
@@ -164,11 +164,11 @@ $_->com_pgrid->load();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Hire Date</span>
-					<input class="pf-field" type="text" size="24" name="hire_date" value="<?php echo empty($this->entity->hire_date) ? '' : h(format_date($this->entity->hire_date, 'date_sort')); ?>" /></label>
+					<input class="pf-field form-control" type="text" size="24" name="hire_date" value="<?php echo empty($this->entity->hire_date) ? '' : h(format_date($this->entity->hire_date, 'date_sort')); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Job Title</span>
-					<select class="pf-field" name="job_title">
+					<select class="pf-field form-control" name="job_title">
 						<?php foreach ($_->config->com_hrm->employee_departments as $cur_dept) { $cur_dept = explode(':', $cur_dept); ?>
 						<option value="<?php e($cur_dept[0]); ?>" <?php echo ($this->entity->job_title == $cur_dept[0]) ? 'selected="selected"' : ''; ?>><?php e($cur_dept[0]); ?></option>
 						<?php } ?>
@@ -176,12 +176,12 @@ $_->com_pgrid->load();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Training Completion Date</span>
-					<input class="pf-field" type="text" size="24" name="training_completion_date" value="<?php echo empty($this->entity->training_completion_date) ? '' : h(format_date($this->entity->training_completion_date, 'date_sort')); ?>" /></label>
+					<input class="pf-field form-control" type="text" size="24" name="training_completion_date" value="<?php echo empty($this->entity->training_completion_date) ? '' : h(format_date($this->entity->training_completion_date, 'date_sort')); ?>" /></label>
 			</div>
 			<?php if ($_->config->com_hrm->com_calendar) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Schedule Color</span>
-					<select class="pf-field" name="color">
+					<select class="pf-field form-control" name="color">
 						<option value="aqua" <?php echo ($this->entity->color == 'aqua') ? 'selected="selected"' : ''; ?>>Aqua</option>
 						<option value="blue" <?php echo ($this->entity->color == 'blue') ? 'selected="selected"' : ''; ?>>Blue</option>
 						<option value="blueviolet" <?php echo ($this->entity->color == 'blueviolet') ? 'selected="selected"' : ''; ?>>Blue Violet</option>
@@ -204,16 +204,16 @@ $_->com_pgrid->load();
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone Extension</span>
-					<input class="pf-field" type="number" name="phone_ext" size="5" value="<?php e($this->entity->phone_ext); ?>" /></label>
+					<input class="pf-field form-control" type="number" name="phone_ext" size="5" value="<?php e($this->entity->phone_ext); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Other Phone</span>
-					<input class="pf-field input-mask" type="tel" name="other_phone" size="14" value="<?php e($this->entity->other_phone); ?>" /></label>
+					<input class="pf-field form-control input-mask" type="tel" name="other_phone" size="14" value="<?php e($this->entity->other_phone); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Compensation</span>
 				<span class="pf-field" style="display: inline-block;">
-					<select name="pay_type">
+					<select class="form-control" name="pay_type">
 						<option value="hourly" <?php echo ($this->entity->pay_type == 'hourly') ? 'selected="selected"' : ''; ?>>Hourly</option>
 						<option value="commission" <?php echo ($this->entity->pay_type == 'commission') ? 'selected="selected"' : ''; ?>>Commission</option>
 						<option value="hourly_commission" <?php echo ($this->entity->pay_type == 'hourly_commission') ? 'selected="selected"' : ''; ?>>Hourly + Commission</option>
@@ -221,14 +221,14 @@ $_->com_pgrid->load();
 						<option value="salary" <?php echo ($this->entity->pay_type == 'salary') ? 'selected="selected"' : ''; ?>>Salary</option>
 						<option value="salary_commission" <?php echo ($this->entity->pay_type == 'salary_commission') ? 'selected="selected"' : ''; ?>>Salary + Commission</option>
 					</select>
-					<label id="p_muid_rate">$<input type="text" name="pay_rate" size="8" value="<?php e($this->entity->pay_rate); ?>" /><span class="comp_label"></span></label>
+					<label id="p_muid_rate">$<input class="form-control" type="text" name="pay_rate" size="8" value="<?php e($this->entity->pay_rate); ?>" /><span class="comp_label"></span></label>
 				</span>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Hours in Full Workday</span>
 					<span class="pf-note">When the employee is scheduled "all day", it will be considered this many hours.</span>
 					<span class="pf-note">Leave blank to use the default.</span>
-					<input class="pf-field" type="text" name="workday_length" size="24" value="<?php e($this->entity->workday_length); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="workday_length" size="24" value="<?php e($this->entity->workday_length); ?>" /></label>
 			</div>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Description</span><br />
@@ -261,13 +261,13 @@ $_->com_pgrid->load();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Name</span>
-							<input class="pf-field" type="text" name="cur_attribute_name" size="24" />
+							<input class="pf-field form-control" type="text" name="cur_attribute_name" size="24" />
 						</label>
 					</div>
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Value</span>
-							<input class="pf-field" type="text" name="cur_attribute_value" size="24" />
+							<input class="pf-field form-control" type="text" name="cur_attribute_value" size="24" />
 						</label>
 					</div>
 				</div>
@@ -340,6 +340,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -111,12 +111,12 @@ $_->uploader->load();
 			<?php if ($this->display_username) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Group Name</span>
-					<input class="pf-field" type="text" name="groupname" size="24" value="<?php e($this->entity->groupname); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="groupname" size="24" value="<?php e($this->entity->groupname); ?>" /></label>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Display Name</span>
-					<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
 			<?php if ($this->display_enable) { ?>
 			<div class="pf-element">
@@ -126,7 +126,7 @@ $_->uploader->load();
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Email</span>
-					<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
+					<input class="pf-field form-control" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
 			</div>
 			<?php if (isset($_->com_mailer)) { ?>
 			<div class="pf-element">
@@ -136,21 +136,21 @@ $_->uploader->load();
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone 1</span>
-					<input class="pf-field" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone 2</span>
-					<input class="pf-field" type="tel" name="phone2" size="24" value="<?php e(format_phone($this->entity->phone2)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="phone2" size="24" value="<?php e(format_phone($this->entity->phone2)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Fax</span>
-					<input class="pf-field" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<div class="pf-element">
 				<label>
 					<span class="pf-label">Timezone</span>
 					<span class="pf-note">Users in this group will inherit this timezone. Primary group has priority over secondary groups.</span>
-					<select class="pf-field" name="timezone" size="1">
+					<select class="pf-field form-control" name="timezone">
 						<option value="">--System Default--</option>
 						<?php
 						$tz = DateTimeZone::listIdentifiers();
@@ -164,7 +164,7 @@ $_->uploader->load();
 			<div class="pf-element">
 				<label>
 					<span class="pf-label">Parent</span>
-					<select class="pf-field" name="parent" size="1">
+					<select class="pf-field form-control" name="parent">
 						<option value="none">--No Parent--</option>
 						<?php
 						$_->user_manager->group_sort($this->group_array, 'name');
@@ -206,7 +206,7 @@ $_->uploader->load();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Change Logo</span>
-					<input class="pf-field puploader" type="text" name="image" /></label>
+					<input class="pf-field form-control puploader" type="text" name="image" /></label>
 			</div>
 			<br class="pf-clearing" />
 		</div>
@@ -235,16 +235,16 @@ $_->uploader->load();
 			<div id="p_muid_address_us" style="display: none;">
 				<div class="pf-element">
 					<label><span class="pf-label">Address 1</span>
-						<input class="pf-field" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Address 2</span>
-						<input class="pf-field" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<span class="pf-label">City, State</span>
-					<input class="pf-field" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
-					<select class="pf-field" name="state">
+					<input class="pf-field form-control" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
+					<select class="pf-field form-control" name="state">
 						<option value="">None</option>
 						<?php foreach (array(
 								'AL' => 'Alabama',
@@ -308,7 +308,7 @@ $_->uploader->load();
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Zip</span>
-						<input class="pf-field" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
 				</div>
 			</div>
 			<div id="p_muid_address_international" style="display: none;">
@@ -329,7 +329,7 @@ $_->uploader->load();
 				#p_muid_tab_abilities .abilities_accordion {
 					margin-bottom: .2em;
 				}
-				#p_muid_tab_abilities .abilities_accordion .accordion-heading .component {
+				#p_muid_tab_abilities .abilities_accordion .panel-heading .component {
 					float: right;
 				}
 			</style>
@@ -346,8 +346,8 @@ $_->uploader->load();
 			</script>
 			<div class="pf-element pf-full-width ui-helper-clearfix">
 				<div class="btn-group" style="float: right; clear: both;">
-					<button type="button" class="expand_all btn">Expand All</button>
-					<button type="button" class="collapse_all btn">Collapse All</button>
+					<button type="button" class="expand_all btn btn-default">Expand All</button>
+					<button type="button" class="collapse_all btn btn-default">Collapse All</button>
 				</div>
 			</div>
 			<br class="pf-clearing" />
@@ -357,13 +357,13 @@ $_->uploader->load();
 				else
 					$section_abilities = (array) $_->info->$cur_section->abilities;
 				if (!$section_abilities) continue; ?>
-			<div class="abilities_accordion accordion">
-				<div class="accordion-group">
-					<a class="accordion-heading ui-helper-clearfix" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-						<big class="accordion-toggle"><?php echo ($cur_section == 'system') ? h($_->info->name) : h($_->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
+			<div class="abilities_accordion panel-group">
+				<div class="panel panel-default">
+					<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+						<big class="panel-title"><?php echo ($cur_section == 'system') ? h($_->info->name) : h($_->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
 					</a>
-					<div class="accordion-body collapse">
-						<div class="accordion-inner clearfix">
+					<div class="panel-collapse collapse">
+						<div class="panel-body clearfix">
 							<div class="pf-element">
 								<?php foreach ($section_abilities as $cur_ability) { ?>
 								<label>
@@ -415,11 +415,11 @@ $_->uploader->load();
 				<div class="pf-form">
 					<div class="pf-element">
 						<label><span class="pf-label">Name</span>
-							<input class="pf-field" type="text" id="p_muid_cur_attribute_name" size="24" /></label>
+							<input class="pf-field form-control" type="text" id="p_muid_cur_attribute_name" size="24" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Value</span>
-							<input class="pf-field" type="text" id="p_muid_cur_attribute_value" size="24" /></label>
+							<input class="pf-field form-control" type="text" id="p_muid_cur_attribute_value" size="24" /></label>
 					</div>
 				</div>
 				<br style="clear: both; height: 1px;" />
@@ -433,6 +433,6 @@ $_->uploader->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_user', 'listgroups'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_user', 'listgroups'))); ?>);" value="Cancel" />
 	</div>
 </form>

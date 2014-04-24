@@ -101,47 +101,47 @@ defined('P_RUN') or die('Direct access prohibited');
 </script>
 <div class="pf-form" id="p_muid_form">
 	<div class="form-btn-container clearfix">
-		<div class="form-btn select-none pull-left"><i class="icon-ban-circle"></i> Select None</div>
-		<div class="form-btn select-all pull-right"><i class="icon-copy"></i> Select All</div>
+		<div class="form-btn select-none pull-left"><i class="fa fa-ban"></i> Select None</div>
+		<div class="form-btn select-all pull-right"><i class="fa fa-file-text"></i> Select All</div>
 	</div>
 	<div class="item clearfix <?php echo (in_array('active',$this->cur_state->status_tags)) ? 'btn-success' : ''; ?>" data-value="active">
-		<div class="name row-fluid">
-			<div class="span8">
+		<div class="name row">
+			<div class="col-sm-8">
 				Active
 			</div>
-            <div class="results text-success span4"></div>
+            <div class="results text-success col-sm-4"></div>
 		</div>
 	</div>
 	<div class="item clearfix <?php echo (in_array('paidoff', $this->cur_state->status_tags)) ? 'btn-success' : ''; ?>" data-value="paidoff">
-		<div class="name row-fluid">
-			<div class="span8">
+		<div class="name row">
+			<div class="col-sm-8">
 				Paid in Full
 			</div>
-            <div class="results text-success span4"></div>
+            <div class="results text-success col-sm-4"></div>
 		</div>
 	</div>
 	<div class="item clearfix <?php echo (in_array('writeoff', $this->cur_state->status_tags)) ? 'btn-success' : ''; ?>" data-value="writeoff">
-		<div class="name row-fluid">
-			<div class="span8">
+		<div class="name row">
+			<div class="col-sm-8">
 				Written Off
 			</div>
-            <div class="results text-success span4"></div>
+            <div class="results text-success col-sm-4"></div>
 		</div>
 	</div>
 	<div class="item clearfix <?php echo (in_array('cancelled', $this->cur_state->status_tags)) ? 'btn-success' : ''; ?>" data-value="cancelled">
-		<div class="name row-fluid">
-			<div class="span8">
+		<div class="name row">
+			<div class="col-sm-8">
 				Cancelled
 			</div>
-            <div class="results text-success span4"></div>
+            <div class="results text-success col-sm-4"></div>
 		</div>
 	</div>
 	<div class="item clearfix <?php echo (in_array('sold', $this->cur_state->status_tags)) ? 'btn-success' : ''; ?>" data-value="sold">
-		<div class="name row-fluid">
-			<div class="span8">
+		<div class="name row">
+			<div class="col-sm-8">
 				Sold
 			</div>
-            <div class="results text-success span4"></div>
+            <div class="results text-success col-sm-4"></div>
 		</div>
 	</div>
 	<input name="status_tags" type="hidden"/>

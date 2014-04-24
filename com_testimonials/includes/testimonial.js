@@ -127,7 +127,7 @@ $_(function(){
 			});
 
 			share_again.click(function(){
-				status_icon.addClass('icon-spin icon-spinner').removeClass('icon-ok');
+				status_icon.addClass('fa-spinner fa-spin').removeClass('fa-check');
 				status_words.text('Submitting');
 				share_again.css('visiblity', 'hidden');
 				if (status_words.text() != 'Error. Not Submitted.')
@@ -157,9 +157,9 @@ $_(function(){
 				stars.hide();
 
 				if (rating > 3)
-					stars_container.append('<span class="remove"><i class="icon-ok"></i> <span>Thanks!</span></span></span>').fadeIn(200);
+					stars_container.append('<span class="remove"><i class="fa fa-check"></i> <span>Thanks!</span></span></span>').fadeIn(200);
 				else
-					stars_container.append('<span class="remove" style="font-size: 14px;"><i class="icon-ok"></i></span>').fadeIn(200);
+					stars_container.append('<span class="remove" style="font-size: 14px;"><i class="fa fa-check"></i></span>').fadeIn(200);
 
 				setTimeout(function(){
 					stars_container.find('.remove').remove();
@@ -206,26 +206,26 @@ $_(function(){
 							dataType: "json",
 							data: values,
 							beforeSend: function() {
-								status_icon.addClass('icon-spin icon-spinner').removeClass('icon-ok');
+								status_icon.addClass('fa-spinner fa-spin').removeClass('fa-check');
 								status_words.text('Submitting');
 								share_again.css('visibility', 'hidden');
 							}, 
 							error: function(XMLHttpRequest, textStatus){
 								$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
-								status_icon.removeClass('icon-spin icon-spinner').removeClass('icon-remove');
+								status_icon.removeClass('fa-spinner fa-spin').removeClass('fa-times');
 								status_words.text('Error. Not Submitted.');
 								share_again.hide().text('Try Again?').css('visibility', 'visible').fadeIn();
 							},
 							success: function(data){
 								if (!data) {
-									status_icon.removeClass('icon-spin icon-spinner icon-warning-sign icon-ok').addClass('icon-remove');
+									status_icon.removeClass('fa-spinner fa-spin fa-exclamation-triangle fa-check').addClass('fa-times');
 									status_words.text('Error. Not Submitted.');
 									share_again.hide().text('Try Again?').css('visibility', 'visible').fadeIn();
 									return false;
 								}
 
 								if (data) {
-									status_icon.removeClass('icon-spin icon-spinner icon-warning icon-remove').addClass('icon-ok');
+									status_icon.removeClass('fa-spinner fa-spin fa-exclamation-triangle fa-times').addClass('fa-check');
 									status_words.text('Success!');
 									if (check_value(review_story_text) != '')
 										var text = review_story_text.val();
@@ -244,7 +244,7 @@ $_(function(){
 								}
 
 								if (!data.result) {
-									status_icon.removeClass('icon-spin icon-spinner icon-ok icon-warning-sign').addClass('icon-remove');
+									status_icon.removeClass('fa-spinner fa-spin fa-check fa-exclamation-triangle').addClass('fa-times');
 									status_words.text(data.message);
 									share_again.hide().text('Try Again?').css('visibility', 'visible').fadeIn();
 									return false;
@@ -263,7 +263,7 @@ $_(function(){
 						form_submit.fadeIn();
 					} else {
 						// Hide the content, show the submit
-						status_icon.removeClass('icon-spin icon-spinner icon-remove').addClass('icon-warning-sign');
+						status_icon.removeClass('fa-spinner fa-spin fa-times').addClass('fa-exclamation-triangle');
 						status_words.text('Incomplete!');
 						share_again.css('visibility', 'hidden');
 											setTimeout(function(){
@@ -273,7 +273,7 @@ $_(function(){
 
 
 						setTimeout(function(){
-							status_icon.addClass('icon-spin icon-spinner').removeClass('icon-ok icon-warning-sign icon-remove');
+							status_icon.addClass('fa-spinner fa-spin').removeClass('fa-check fa-exclamation-triangle fa-times');
 							status_words.text('Submitting');
 							share_again.css('visibility', 'hidden');
 													setTimeout(function(){
@@ -433,7 +433,7 @@ $_(function(){
 						if (display == 'list') {
 							list_more.css('visibility', 'hidden');
 							list_more.find('i').remove();
-							list_more.prepend('<i class="icon-spin icon-spinner"></i> ');
+							list_more.prepend('<i class="fa fa-spinner fa-spin"></i> ');
 							list_more.hide().css('visibility', 'visible').fadeIn();
 						}
 					}, 
@@ -442,13 +442,13 @@ $_(function(){
 						if (display == 'list') {
 							list_more.find('i').remove();
 							list_more.text('Error Loading...');
-							list_more.prepend('<i class="icon-remove"></i> ');
+							list_more.prepend('<i class="fa fa-times"></i> ');
 						}
 						// I don't know what kind of error you want for the carousel.
 						// If we cleared then maybe show error, but if not a clear - leave it
 						if (check_value(review_clear) == 'true') {
 							test_loader.text('An Error Occurred.');
-							test_loader.find('i').removeAttr('class').addClass('icon-remove')
+							test_loader.find('i').removeAttr('class').addClass('fa-times')
 						}
 					},
 					success: function(data){
@@ -459,17 +459,17 @@ $_(function(){
 							
 							if (test_loader.is(':visible')) {
 								test_loader.text('Be the First to Share!');
-								test_loader.find('i').removeAttr('class').addClass('icon-thumbs-up');
+								test_loader.find('i').removeAttr('class').addClass('fa fa-thumbs-up');
 								list_more.find('i').remove();
 								list_more.text('Share yours!');
-								list_more.prepend('<i class="icon-edit"></i> ');
+								list_more.prepend('<i class="fa fa-edit"></i> ');
 								list_more.css('visibility', 'hidden');
 								list_more.hide().css('visibility', 'visible').fadeIn();
 								return;
 							} else {
 								list_more.find('i').remove();
 								list_more.text('No More Reviews. Share yours!');
-								list_more.prepend('<i class="icon-edit"></i> ');
+								list_more.prepend('<i class="fa fa-edit"></i> ');
 								list_more.css('visibility', 'hidden');
 								list_more.hide().css('visibility', 'visible').fadeIn();
 								return;
@@ -521,9 +521,9 @@ $_(function(){
 					var stars = $('<div class="pull-right rating-container"><span itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><meta itemprop="worstRating" content="1"><meta itemprop="bestRating" content="5"><meta itemprop="ratingValue" content="'+object.rating+'"></span></div>');
 					for (var c = 1; c <= 5; c++) {
 						if (object.rating >= c) {
-							stars.find('span').append('<i class="icon-star"></i> ');
+							stars.find('span').append('<i class="fa fa-star"></i> ');
 						} else {
-							stars.find('span').append('<i class="icon-star-empty"></i> ');
+							stars.find('span').append('<i class="fa fa-star-o"></i> ');
 						}
 					}
 					blockquote.append(stars);

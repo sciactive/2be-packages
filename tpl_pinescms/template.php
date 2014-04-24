@@ -14,8 +14,6 @@
 defined('P_RUN') or die('Direct access prohibited');
 header('Content-Type: text/html');
 
-if (strpos($_->config->tpl_pinescms->variant, 'fluid') === 0)
-	$layout_type = 'fluid';
 if (substr($_->config->tpl_pinescms->variant, -4) === 'left')
 	$sidebar = 'left';
 elseif (substr($_->config->tpl_pinescms->variant, -5) === 'right')
@@ -67,17 +65,17 @@ elseif (substr($_->config->tpl_pinescms->variant, -6) === 'noside')
 		<?php
 		}
 	?></div>
-	<div class="navbar navbar-fixed-top <?php echo ($_->config->tpl_pinescms->navigation_fixed) ? '': 'nav_not_fixed' ;?>">
-		<div class="navbar-inner">
-			<div <?php echo ($_->config->tpl_pinescms->navigation_orientation == "nav-right") ? 'id="nav-right"' : '';?> class="container">
-				<?php if ($_->config->tpl_pinescms->use_nav_logo) { ?>
-				<a href="<?php e(pines_url()); ?>"><img id="nav-logo" class="<?php e($_->config->tpl_pinescms->navigation_orientation) ?>" src="<?php e($_->config->tpl_pinescms->nav_logo_image); ?>" alt="<?php e($_->config->page_title); ?>"/></a>
-				<?php } ?>
+	<div id="nav" class="navbar navbar-default navbar-fixed-top <?php echo ($_->config->tpl_pinescms->navigation_fixed) ? '': 'nav_not_fixed' ;?>">
+		<div class="container">
+			<?php if ($_->config->tpl_pinescms->use_nav_logo) { ?>
+			<a href="<?php e(pines_url()); ?>"><img id="nav-logo" class="<?php e($_->config->tpl_pinescms->navigation_orientation) ?>" src="<?php e($_->config->tpl_pinescms->nav_logo_image); ?>" alt="<?php e($_->config->page_title); ?>"/></a>
+			<?php } ?>
+			<div class="navbar-right">
 				<?php echo $_->page->render_modules('main_menu', 'module_head'); ?>
 			</div>
 		</div>
 	</div>
-	<div id="shadow_container" class="container<?php echo ($layout_type) ? '-fluid': ''; ?> <?php echo ($_->config->tpl_pinescms->navigation_fixed) ? 'fixed_nav': '' ;?>">
+	<div id="shadow_container" class="container <?php echo ($_->config->tpl_pinescms->navigation_fixed) ? 'fixed_nav': '' ;?>">
 		<div id="shadow_box">
 			<?php if ($_->config->tpl_pinescms->display_header) { ?>
 			<div id="pines_header" class="clearfix">
@@ -95,30 +93,30 @@ elseif (substr($_->config->tpl_pinescms->variant, -6) === 'noside')
 			<?php } ?>
 			<div id="pines_pre_content"><?php echo $_->page->render_modules('pre_content'); ?></div>
 			<div id="breadcrumbs"><?php echo $_->page->render_modules('breadcrumbs', 'module_simple'); ?></div>
-			<div id="pines_content">
+			<div id="pines_content" class="container">
 				<div class="modules">
 					<?php if ($sidebar) { if ($sidebar == 'left') { ?>
-					<div class="row<?php echo ($layout_type) ? '-fluid': ''; ?>">
-						<div id="sidebar" class="span3">
-							<div class="container-fluid"><?php echo $_->page->render_modules('left'); echo $_->page->render_modules('right'); ?></div>
+					<div class="row">
+						<div id="sidebar" class="col-sm-3">
+							<?php echo $_->page->render_modules('left'); echo $_->page->render_modules('right'); ?>
 						</div>
-						<div id="main_content" class="span9">
-							<div class="container-fluid"><?php echo $_->page->render_modules('content'); ?></div>
+						<div id="main_content" class="col-sm-9">
+							<?php echo $_->page->render_modules('content'); ?>
 						</div>
 					</div>
 					<?php } elseif ($sidebar == 'right') { ?>
-					<div class="row<?php echo ($layout_type) ? '-fluid': ''; ?>">
-						<div id="main_content" class="span9">
-							<div class="container-fluid"><?php echo $_->page->render_modules('content'); ?></div>
+					<div class="row">
+						<div id="main_content" class="col-sm-9">
+							<?php echo $_->page->render_modules('content'); ?>
 						</div>
-						<div id="sidebar" class="span3">
-							<div class="container-fluid"><?php echo $_->page->render_modules('left'); echo $_->page->render_modules('right'); ?></div>
+						<div id="sidebar" class="col-sm-3">
+							<?php echo $_->page->render_modules('left'); echo $_->page->render_modules('right'); ?>
 						</div>
 					</div>
 					<?php } elseif ($sidebar == 'none') { ?>
-					<div class="row<?php echo ($layout_type) ? '-fluid': ''; ?>">
-						<div id="main_content" class="span12">
-							<div class="container-fluid"><?php echo $_->page->render_modules('content'); ?></div>
+					<div class="row">
+						<div id="main_content" class="col-sm-12">
+							<?php echo $_->page->render_modules('content'); ?>
 						</div>
 					</div>
 					<?php } } else {
@@ -137,7 +135,7 @@ elseif (substr($_->config->tpl_pinescms->variant, -6) === 'noside')
 			</div>
 		</div>
 	</div>
-	<div id="copyright-line-container" class="container<?php echo ($layout_type) ? '-fluid': ''; ?>">
+	<div id="copyright-line-container" class="container">
 		<div id="copyright-line-edges"><div id="copyright-line">&nbsp;</div></div>
 	</div>
 	<div id="bottom"><?php echo $_->page->render_modules('bottom'); ?></div>

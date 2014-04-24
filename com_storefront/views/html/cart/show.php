@@ -289,7 +289,7 @@ $_->icons->load();
 	<div class="template" style="display: none;">
 		<div class="guid" style="display: none;"></div>
 		<div class="unit_price" style="display: none;"></div>
-		<button type="button" class="btn" title="Remove"><i class="icon-remove"></i></button>
+		<button type="button" class="btn btn-default" title="Remove"><i class="fa fa-times"></i></button>
 		<div class="name"></div>
 		<?php if ($_->config->com_storefront->cart_prices) { ?>
 		<div class="price"></div>
@@ -301,7 +301,7 @@ $_->icons->load();
 	<div class="product guid_<?php e($cur_item['product']->guid); ?>">
 		<div class="guid" style="display: none;"><?php e($cur_item['product']->guid); ?></div>
 		<div class="unit_price" style="display: none;"><?php e($cur_item['product']->unit_price); ?></div>
-		<button type="button" class="btn" title="Remove"><i class="icon-remove"></i></button>
+		<button type="button" class="btn btn-default" title="Remove"><i class="fa fa-times"></i></button>
 		<div class="name"><?php e($cur_item['product']->name); ?></div>
 		<?php if ($_->config->com_storefront->cart_prices) { ?>
 		<div class="price">$<?php e($_->com_sales->round($cur_item['product']->unit_price * $cur_item['quantity'], true)); ?></div>
@@ -320,8 +320,8 @@ $_->icons->load();
 		<div class="cart_link"><a href="<?php e(pines_url('com_storefront', 'cart/view')); ?>">See Cart</a></div>
 		<br style="clear: both; height: 0;" />
 		<?php } ?>
-		<button type="button" class="empty_cart btn btn-danger" title="Empty Cart"><i class="icon-trash icon-white"></i></button>
-		<button type="button" class="checkout btn btn-primary" onclick="$_.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);"><i class="icon-ok icon-white"></i> Check-Out</button>
+		<button type="button" class="empty_cart btn btn-danger" title="Empty Cart"><i class="fa fa-trash-o"></i></button>
+		<button type="button" class="checkout btn btn-primary" onclick="$_.get(<?php e(json_encode(pines_url('com_storefront', 'checkout/login'))); ?>);"><i class="fa fa-check"></i> Check-Out</button>
 		<br style="clear: both; height: 0;" />
 	</div>
 	<div class="no_items"<?php echo $_->com_storefront->cart() ? ' style="display: none;"' : ''; ?>>

@@ -108,7 +108,7 @@ all.each(function(){
 			$(this).closest(".ui-menu-editor-entry").remove();
 			update_entries();
 		}))
-		.append($("<button type=\"button\" class=\"btn\">Edit</button>").click(function(){
+		.append($("<button type=\"button\" class=\"btn btn-default\">Edit</button>").click(function(){
 			edit_entry($(this).closest(".ui-menu-editor-entry"));
 		}))
 		.append("<div class=\"ui-menu-editor-entry-name\">"+$_.safe(values.text)+" ["+$_.safe(values.name)+"]</div>")

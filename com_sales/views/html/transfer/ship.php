@@ -37,8 +37,8 @@ foreach ($this->entity->products as $cur_product) {
 		<span class="pf-label">Reference #</span>
 		<span class="pf-field"><?php e($this->entity->reference_number); ?></span>
 	</div>
-	<div class="row-fluid" style="clear: both;">
-		<div class="span6">
+	<div class="row" style="clear: both;">
+		<div class="col-sm-6">
 			<div class="pf-element">
 				<strong class="pf-label">Origin</strong>
 				<div class="pf-group">
@@ -58,7 +58,7 @@ foreach ($this->entity->products as $cur_product) {
 				</div>
 			</div>
 		</div>
-		<div class="span6">
+		<div class="col-sm-6">
 			<div class="pf-element">
 				<strong class="pf-label">Destination</strong>
 				<div class="pf-group">
@@ -133,6 +133,6 @@ foreach ($this->entity->products as $cur_product) {
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Ship" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

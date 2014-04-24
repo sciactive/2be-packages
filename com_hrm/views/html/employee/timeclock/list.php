@@ -60,7 +60,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							data: {"id": cur_row.pgrid_export_rows()[0].key},
 							beforeSend: function(){
 								if (!loader)
-									loader = $.pnotify({
+									loader = new PNotify({
 										title: 'Timeclock',
 										text: 'Communicating with server...',
 										icon: 'picon picon-throbber',
@@ -163,11 +163,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		?>
 		<div class="pf-element">
 			<label><span class="pf-label">Start Date</span>
-				<input class="pf-field" name="date_start" type="text" size="24" value="<?php e(format_date($week_start, 'custom', 'Y-m-d')); ?>" /></label>
+				<input class="pf-field form-control" name="date_start" type="text" size="24" value="<?php e(format_date($week_start, 'custom', 'Y-m-d')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">End Date</span>
-				<input class="pf-field" name="date_end" type="text" size="24" value="<?php e(format_date($week_end - 1, 'custom', 'Y-m-d')); ?>" /></label>
+				<input class="pf-field form-control" name="date_end" type="text" size="24" value="<?php e(format_date($week_end - 1, 'custom', 'Y-m-d')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">Local Timezones</span>

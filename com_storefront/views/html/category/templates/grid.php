@@ -36,14 +36,14 @@ $_(function(){
 	});
 });
 </script>
-<div class="row-fluid">
+<div class="row">
 	<?php $i = 0; foreach ($products as $key => $cur_product) {
 		if ($i && !($i % 3)) { ?>
 </div>
 <hr />
-<div class="row-fluid">
+<div class="row">
 	<?php } $i++; ?>
-	<div class="span4 product">
+	<div class="col-sm-4 product">
 		<div class="product_guid" style="display: none;"><?php e($cur_product->guid); ?></div>
 		<div class="product_alias" style="display: none;"><?php e($cur_product->alias); ?></div>
 		<div class="product_main">
@@ -61,7 +61,7 @@ $_(function(){
 			<div class="price_box clearfix">
 				<div class="price"><?php echo $_->com_storefront->format_price($cur_product->unit_price); ?><span class="value"><?php echo isset($cur_product->unit_price) ? round($cur_product->unit_price, 2) : ''; ?></span></div>
 				<?php if (!$_->config->com_storefront->catalog_mode) { ?>
-				<button class="add_cart btn btn-primary"><i class="icon-shopping-cart icon-white"></i> Add to Cart</button>
+				<button class="add_cart btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 				<?php } ?>
 			</div>
 			<div class="desc"><?php echo format_content($cur_product->short_description); ?></div>

@@ -60,12 +60,12 @@ echo $module->render();
 					},
 					success: function(data){
 						if (data) {
-							status_bar.html('<div style="padding-bottom: 10px;"><i class="icon-ok-sign"></i> Success!<?php if (gatekeeper('com_customer/editcustomer')) { ?> <a data-entity="'+$_.safe(parseInt(name_id))+'" data-entity-context="com_customer_customer">View Customer</a>.<?php } ?></div>');
+							status_bar.html('<div style="padding-bottom: 10px;"><i class="fa fa-check-circle"></i> Success!<?php if (gatekeeper('com_customer/editcustomer')) { ?> <a data-entity="'+$_.safe(parseInt(name_id))+'" data-entity-context="com_customer_customer">View Customer</a>.<?php } ?></div>');
 							comments.val('');
 							customer_name.val('');
 							interaction_type.val('');
 						} else
-							status_bar.html('<div style="padding-bottom: 10px;"><i class="icon-remove-sign"></i> Error! Please check input.</div>');
+							status_bar.html('<div style="padding-bottom: 10px;"><i class="fa fa-times-circle"></i> Error! Please check input.</div>');
 					}
 				});
 			});
@@ -75,12 +75,12 @@ echo $module->render();
 	<div id="p_muid_controls" class="clearfix pf-form">
 		<div class="pf-element" style="float: left; margin-right: 1em; max-width:100%">
 			<label><span class="pf-label">Customer</span>
-				<input type="text" style="width:140px;max-width:90%;" name="customer_name" id="p_muid_customer_name" />
+				<input class="form-control" type="text" style="width:140px;max-width:90%;" name="customer_name" id="p_muid_customer_name" />
 			</label>
 		</div>
 		<div class="pf-element" style="clear:left;max-width:100%">
 			<label><span class="pf-label">Interaction Type</span>
-				<select id="p_muid_type" name="interaction_type" style="width:140px; max-width:90%;">
+				<select class="form-control" id="p_muid_type" name="interaction_type" style="width:140px; max-width:90%;">
 					<?php foreach ($_->config->com_customer->interaction_types as $cur_type) {
 						$cur_type = explode(':', $cur_type);
 						echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
@@ -91,7 +91,7 @@ echo $module->render();
 			<textarea rows="3" cols="30" style="width:95%;" id="p_muid_comments" name="interaction_comments"></textarea>
 		</div>
 		<div class="pf-element pf-full-width" style="text-align: right;">
-			<button class="btn" type="button" id="p_muid_done">Add</button><br />
+			<button class="btn btn-default" type="button" id="p_muid_done">Add</button><br />
 		</div>
 	</div>
 </div>

@@ -124,7 +124,7 @@ $_->icons->load();
 
 		function p_muid_format_thread(thread) {
 			var html = $('<div class="thread ui-widget-content"></div>').data("thread", thread);
-			html.append('<div class="ui-widget-header"><div class="privacy"><i class="'+(thread.privacy == "everyone" ? "icon-globe" : (thread.privacy == "my-group" ? "icon-lock" : "icon-user"))+'" title="'+(thread.privacy == "everyone" ? "This thread is viewable to everyone." : (thread.privacy == "my-group" ? "This thread is viewable to the author's group." : "This thread is only viewable to the author."))+'"></i></div>\n\
+			html.append('<div class="ui-widget-header"><div class="privacy"><i class="fa '+(thread.privacy == "everyone" ? "fa-globe" : (thread.privacy == "my-group" ? "fa-group" : "fa-user"))+'" title="'+(thread.privacy == "everyone" ? "This thread is viewable to everyone." : (thread.privacy == "my-group" ? "This thread is viewable to the author's group." : "This thread is only viewable to the author."))+'"></i></div>\n\
 			<div class="date">'+$_.safe(thread.date)+'</div>\n\
 			<div class="user">'+$_.safe(thread.user)+'</div></div>');
 			var note_div = $('<div class="notes"></div>'),
@@ -155,22 +155,22 @@ $_->icons->load();
 				// Match URLs with a protocol. (http://example.com/wow)
 				.replace(
 					/\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%]))(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi,
-					'<a href="$1" target="_blank">$1<i class="icon-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
+					'<a href="$1" target="_blank">$1<i class="fa fa-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
 				)
 				// Match things that look like URLs. (example.co.uk/wow) (No lookbehind support. Grr.)
 				.replace(
 					/(^|[^\/\w.@])\b((?:www\d{0,3}[.]|[a-z0-9.\-]{2,}[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi,
-					'$1<a href="http://$2" target="_blank">$2<i class="icon-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
+					'$1<a href="http://$2" target="_blank">$2<i class="fa fa-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
 				)
 				// Match simple domain names. (example.com) (I didn't use the above one, because things might look like TLDs, so I used only common ones for this.)
 				.replace(
 					/(^|[^\/\w.@])\b([a-z0-9.\-]{2,}[.](com|net|org|edu|gov|mil|info|biz))\b(?!\/)/gi,
-					'$1<a href="http://$2" target="_blank">$2<i class="icon-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
+					'$1<a href="http://$2" target="_blank">$2<i class="fa fa-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
 				)
 				// Match email addresses. (me@example.com)
 				.replace(
 					/\b([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})\b/gi,
-					'<a href="mailto://$1" target="_blank">$1<i class="icon-envelope" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
+					'<a href="mailto://$1" target="_blank">$1<i class="fa fa-envelope" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
 				);
 			html.append('<div class="note-text">'+text+'</div>\n\
 			<div class="footer">- <strong>'+$_.safe(note.user)+'</strong> on <span title="'+$_.safe(note.time)+'">'+$_.safe(note.date)+'</span></div>');
@@ -302,12 +302,12 @@ $_->icons->load();
 	<div style="width: 100%;" class="clearfix">
 		<textarea id="p_muid_new_thread" rows="1" cols="12" style="width: 100%; padding: 0; margin: .5em 0 .1em; font-style: italic;">New Thread</textarea>
 		<div id="p_muid_new_thread_buttons" class="btn-group dropup pull-right" style="font-size: .8em;">
-			<button id="p_muid_new_thread_submit" class="btn">Save</button>
-			<button id="p_muid_new_thread_privacy" class="btn dropdown-toggle" data-toggle="dropdown" title="Everyone."><i class="icon-globe"></i></button>
+			<button id="p_muid_new_thread_submit" class="btn btn-default">Save</button>
+			<button id="p_muid_new_thread_privacy" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Everyone."><i class="fa fa-globe"></i></button>
 			<ul class="dropdown-menu pull-right">
-				<li><a href="javascript:void(0);" onclick="$('#p_muid_new_thread_privacy').data('thread-privacy', 'everyone').html('&lt;i class=&quot;icon-globe&quot;&gt;&lt;/i&gt;').attr('title', 'Everyone.');"><i class="icon-globe"></i> Share with everyone.</a></li>
-				<li><a href="javascript:void(0);" onclick="$('#p_muid_new_thread_privacy').data('thread-privacy', 'my-group').html('&lt;i class=&quot;icon-lock&quot;&gt;&lt;/i&gt;').attr('title', 'My group.');"><i class="icon-lock"></i> Share with my group.</a></li>
-				<li><a href="javascript:void(0);" onclick="$('#p_muid_new_thread_privacy').data('thread-privacy', 'only-me').html('&lt;i class=&quot;icon-user&quot;&gt;&lt;/i&gt;').attr('title', 'Only me.');"><i class="icon-user"></i> Keep private to me.</a></li>
+				<li><a href="javascript:void(0);" onclick="$('#p_muid_new_thread_privacy').data('thread-privacy', 'everyone').html('&lt;i class=&quot;fa fa-globe&quot;&gt;&lt;/i&gt;').attr('title', 'Everyone.');"><i class="fa fa-globe"></i> Share with everyone.</a></li>
+				<li><a href="javascript:void(0);" onclick="$('#p_muid_new_thread_privacy').data('thread-privacy', 'my-group').html('&lt;i class=&quot;fa fa-group&quot;&gt;&lt;/i&gt;').attr('title', 'My group.');"><i class="fa fa-group"></i> Share with my group.</a></li>
+				<li><a href="javascript:void(0);" onclick="$('#p_muid_new_thread_privacy').data('thread-privacy', 'only-me').html('&lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt;').attr('title', 'Only me.');"><i class="fa fa-user"></i> Keep private to me.</a></li>
 			</ul>
 		</div>
 		<div id="p_muid_thread_throbber" class="picon picon-throbber" style="display: none; height: 16px; background-repeat: no-repeat; background-position: top right;"></div>

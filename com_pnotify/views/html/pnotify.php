@@ -24,15 +24,15 @@ $_.load(function(){
 		window._alert = window.alert;
 		window.alert = function(message){
 			var options = $.extend({title: "Alert", text: $_.safe(message)}, $_.pnotify_alert_defaults);
-			return $.pnotify(options);
+			return new PNotify(options);
 		};
 		$_.notice = function(message, title){
 			var options = $.extend({title: title ? title : "Notice", text: String(message)}, $_.pnotify_notice_defaults);
-			return $.pnotify(options);
+			return new PNotify(options);
 		};
 		$_.error = function(message, title){
 			var options = $.extend({title: title ? title : "Error", text: String(message)}, $_.pnotify_error_defaults);
-			return $.pnotify(options);
+			return new PNotify(options);
 		};
 	}
 });

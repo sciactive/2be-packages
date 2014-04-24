@@ -80,7 +80,7 @@ $_->com_pgrid->load();
 							dataType: "json",
 							data: {"code": rows.pgrid_get_value(1)},
 							beforeSend: function(){
-								loader = $.pnotify({
+								loader = new PNotify({
 									title: 'Product Search',
 									text: 'Retrieving product from server...',
 									icon: 'picon picon-throbber',
@@ -242,7 +242,7 @@ $_->com_pgrid->load();
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Commit" onclick="$('#p_muid_save').val('commit');" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
 		<input class="pf-button btn btn-primary" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'countsheet/list'))); ?>);" value="&laquo; Close" />
 		<?php } ?>

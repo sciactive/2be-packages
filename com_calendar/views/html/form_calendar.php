@@ -449,7 +449,7 @@ if ($_->config->com_calendar->com_customer)
 							timezone: <?php echo json_encode($this->timezone); ?>
 						},
 						beforeSend: function(){
-							loader = $.pnotify({
+							loader = new PNotify({
 								title: 'Saving',
 								text: 'Creating customer interaction...',
 								icon: 'picon picon-throbber',
@@ -512,7 +512,7 @@ if ($_->config->com_calendar->com_customer)
 							review_comments: $("#p_muid_interaction_dialog [name=review_comments]").val()
 						},
 						beforeSend: function(){
-							loader = $.pnotify({
+							loader = new PNotify({
 								title: 'Updating',
 								text: 'Processing customer interaction...',
 								icon: 'picon picon-throbber',
@@ -585,21 +585,21 @@ if ($_->config->com_calendar->com_customer)
 </script>
 <?php if (!$this->is_widget) { ?>
 <div id="p_muid_filter" class="btn-group" style="padding: 0; margin: 0;">
-	<button class="btn btn-mini<?php echo ($this->filter == 'all') ? ' active' : ''; ?>" type="button" data-value="all" title="Show all calendar events.">all</button>
-	<button class="btn btn-mini<?php echo ($this->filter == 'shifts') ? ' active' : ''; ?>" type="button" data-value="shifts" title="Show scheduled employee shifts.">shifts</button>
-	<button class="btn btn-mini<?php echo ($this->filter == 'appointments') ? ' active' : ''; ?>" type="button" data-value="appointments" title="Show customer appointments.">appts</button>
-	<button class="btn btn-mini<?php echo ($this->filter == 'events') ? ' active' : ''; ?>" type="button" data-value="events" title="Show calendar events.">events</button>
+	<button class="btn btn-default btn-xs<?php echo ($this->filter == 'all') ? ' active' : ''; ?>" type="button" data-value="all" title="Show all calendar events.">all</button>
+	<button class="btn btn-default btn-xs<?php echo ($this->filter == 'shifts') ? ' active' : ''; ?>" type="button" data-value="shifts" title="Show scheduled employee shifts.">shifts</button>
+	<button class="btn btn-default btn-xs<?php echo ($this->filter == 'appointments') ? ' active' : ''; ?>" type="button" data-value="appointments" title="Show customer appointments.">appts</button>
+	<button class="btn btn-default btn-xs<?php echo ($this->filter == 'events') ? ' active' : ''; ?>" type="button" data-value="events" title="Show calendar events.">events</button>
 </div>
 <?php } if (!$this->is_widget || gatekeeper('com_calendar/managecalendar') || gatekeeper('com_calendar/editcalendar')) { ?>
 <div style="margin: 0.75em 0;" id="p_muid_actions">
 	<?php if (!$this->is_widget) { ?>
-	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_select_location();" title="Select Location"><span class="p_muid_btn picon picon-applications-internet"></span></button>
+	<button class="btn btn-default btn-xs" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_select_location();" title="Select Location"><span class="p_muid_btn picon picon-applications-internet"></span></button>
 	<?php } if (gatekeeper('com_calendar/managecalendar') || gatekeeper('com_calendar/editcalendar')) { ?>
-	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_new_appointment();" title="New Appointment"><span class="p_muid_btn picon picon-appointment-new"></span></button>
-	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_new_event();" title="New Event"><span class="p_muid_btn picon picon-resource-calendar-insert"></span></button>
+	<button class="btn btn-default btn-xs" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_new_appointment();" title="New Appointment"><span class="p_muid_btn picon picon-appointment-new"></span></button>
+	<button class="btn btn-default btn-xs" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_new_event();" title="New Event"><span class="p_muid_btn picon picon-resource-calendar-insert"></span></button>
 	<?php if (gatekeeper('com_calendar/managecalendar')) { ?>
-	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_quick_schedule();" title="Quick Schedule"><span class="p_muid_btn picon picon-view-calendar-workweek"></span></button>
-	<button class="btn btn-mini" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_new_schedule();" title="Personal Schedule" <?php echo !isset($this->employee) ? 'disabled="disabled"' : '';?>><span class="p_muid_btn picon picon-list-resource-add"></span></button>
+	<button class="btn btn-default btn-xs" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_quick_schedule();" title="Quick Schedule"><span class="p_muid_btn picon picon-view-calendar-workweek"></span></button>
+	<button class="btn btn-default btn-xs" type="button" onclick="$_.<?php echo $this->cal_muid; ?>_new_schedule();" title="Personal Schedule" <?php echo !isset($this->employee) ? 'disabled="disabled"' : '';?>><span class="p_muid_btn picon picon-list-resource-add"></span></button>
 	<?php }
 	} ?>
 </div>

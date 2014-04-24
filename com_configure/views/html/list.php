@@ -22,10 +22,10 @@ $this->title = 'Component Configuration';
 	#p_muid_form .user_picker > h3 {
 		margin-bottom: .5em !important;
 	}
-	#p_muid_components .accordion-group {
+	#p_muid_components .panel {
 		margin-top: .5em !important;
 	}
-	#p_muid_components .title {
+	#p_muid_components .panel-title {
 		font-size: 1.3em;
 	}
 	#p_muid_components .label {
@@ -74,7 +74,7 @@ $this->title = 'Component Configuration';
 	<div class="user_picker">
 		<h3>Per User/Group Configuration</h3>
 		<div>
-			<select id="p_muid_user_select" name="user_select">
+			<select class="form-control" id="p_muid_user_select" name="user_select">
 				<option value="null">-- Pick a User/Group --</option>
 				<optgroup label="Groups">
 					<?php foreach ($this->groups as $cur_group) { ?>
@@ -87,7 +87,7 @@ $this->title = 'Component Configuration';
 					<?php } ?>
 				</optgroup>
 			</select>
-			<button class="btn" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
+			<button class="btn btn-default" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
 		</div>
 		<?php if (!$_->config->com_configure->peruser) { ?>
 		<p>
@@ -102,7 +102,7 @@ $this->title = 'Component Configuration';
 		<h3>Per Condition Configuration</h3>
 		<div class="btn-toolbar">
 			<div class="btn-group">
-				<select id="p_muid_user_select" name="user_select" style="float: left;">
+				<select class="form-control" id="p_muid_user_select" name="user_select" style="float: left;">
 					<option value="null">-- Pick a Condition --</option>
 					<?php foreach ($this->conditions as $cur_condition) { ?>
 					<option value="<?php e($cur_condition->guid); ?>"<?php echo $cur_condition->is($this->user) ? ' selected="selected"' : ''; ?>><?php e($cur_condition->name); ?></option>
@@ -110,12 +110,12 @@ $this->title = 'Component Configuration';
 				</select>
 			</div>
 			<div class="btn-group">
-				<button class="btn" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
+				<button class="btn btn-default" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
 			</div>
 			&nbsp;&nbsp;&nbsp;
 			<div class="btn-group">
 				<button class="btn btn-success" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_configure', 'condition/edit'))); ?>)">New</button>
-				<button class="btn" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'condition/edit'))); ?>)">Edit</button>
+				<button class="btn btn-default" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'condition/edit'))); ?>)">Edit</button>
 				<button class="btn btn-danger" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'condition/delete'))); ?>)">Delete</button>
 			</div>
 		</div>
@@ -134,32 +134,32 @@ $this->title = 'Component Configuration';
 			here. Below is a list of installed components and templates. Click
 			on one to see the available actions.
 		</p>
-		<div class="alert">
+		<div class="alert alert-warning">
 			<h4 class="alert-heading">Warning</h4>
 			If you disable a component, any components that depend on it
 			may stop working.
 		</div>
 	</div>
 	<?php } ?>
-	<div id="p_muid_components" class="accordion">
+	<div id="p_muid_components" class="panel-group">
 		<?php foreach($this->components as $cur_component) {
 			if (($this->per_user || $this->per_condition) && !$cur_component->is_configurable()) continue; ?>
-		<div class="accordion-group">
-			<a class="accordion-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_components" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle">
-					<span class="title"><?php e($cur_component->info->name); ?></span>
+		<div class="panel panel-default">
+			<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_components" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">
+					<span class="panel-title"><?php e($cur_component->info->name); ?></span>
 					<?php echo $cur_component->config ? ' <span class="label label-info">Modified</span>' : ''; echo $cur_component->is_disabled() ? ' <span class="label label-important">Disabled</span>' : ''; ?>
 					<span class="version">
 						<span class="version-text"><?php e($cur_component->name); ?> <?php e($cur_component->info->version); ?></span>
 					</span>
 				</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<div class="buttons btn-group">
 						<?php if ($cur_component->is_configurable()) { ?>
-						<input class="btn" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'edit', array('component' => $cur_component->name)))); ?>);" value="Configure" />
-						<input class="btn" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'view', array('component' => $cur_component->name)))); ?>);" value="View Config" />
+						<input class="btn btn-default" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'edit', array('component' => $cur_component->name)))); ?>);" value="Configure" />
+						<input class="btn btn-default" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'view', array('component' => $cur_component->name)))); ?>);" value="View Config" />
 						<?php } if (!$this->per_user && !$this->per_condition) {
 							if ($cur_component->name != 'system') { if ($cur_component->is_disabled()) { ?>
 							<input class="btn btn-success" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_configure', 'enable', array('component' => $cur_component->name)))); ?>);" value="Enable" />

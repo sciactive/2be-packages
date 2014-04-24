@@ -16,7 +16,7 @@ $_->entity_manager->sort($foobars, 'name');
 <div class="pf-form">
 	<div class="pf-element">
 		<label><span class="pf-label">Foobar</span>
-			<select class="pf-field" name="id">
+			<select class="pf-field form-control" name="id">
 				<?php foreach ($foobars as $cur_foobar) { ?>
 				<option value="<?php e($cur_foobar->guid); ?>"<?php echo $this->id == "$cur_foobar->guid" ? ' selected="selected"' : ''; ?>><?php e($cur_foobar->name); ?></option>
 				<?php } ?>

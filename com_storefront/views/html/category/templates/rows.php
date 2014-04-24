@@ -51,7 +51,7 @@ $_(function(){
 			<div class="price"><?php echo $_->com_storefront->format_price($cur_product->unit_price); ?><span class="value"><?php echo isset($cur_product->unit_price) ? round($cur_product->unit_price, 2) : ''; ?></span></div>
 			<?php if (!$_->config->com_storefront->catalog_mode) { ?>
 			<div class="product_button">
-				<button class="add_cart btn btn-primary"><i class="icon-shopping-cart icon-white"></i> Add to Cart</button>
+				<button class="add_cart btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 			</div>
 			<?php } ?>
 		</div>

@@ -113,10 +113,10 @@ if (isset($this->entity->guid))
 	<div class="pf-element pf-full-width" style="position: relative;">
 		<?php foreach ($this->entity->currency as $key => $cur_denom) { ?>
 		<div class="pf-element">
-			<input class="pf-field entry" type="text" name="count_<?php e($key); ?>" title="<?php e($cur_denom); ?>" value="0" <?php echo $this->entity->final ? 'readonly="readonly"' : ''; ?> />
+			<input class="pf-field form-control entry" type="text" name="count_<?php e($key); ?>" title="<?php e($cur_denom); ?>" value="0" <?php echo $this->entity->final ? 'readonly="readonly"' : ''; ?> />
 			x <span class="amount"><?php e($this->entity->currency_symbol . $cur_denom); ?></span>
-			<button class="pf-field btn btn-success add_btn" type="button"><i class="icon-plus icon-white"></i></button>
-			<button class="pf-field btn btn-danger remove_btn" type="button"><i class="icon-minus icon-white"></i></button>
+			<button class="pf-field btn btn-success add_btn" type="button"><i class="fa fa-plus"></i></button>
+			<button class="pf-field btn btn-danger remove_btn" type="button"><i class="fa fa-minus"></i></button>
 		</div>
 		<?php } ?>
 		<div class="alert alert-info total">
@@ -180,7 +180,7 @@ if (isset($this->entity->guid))
 		<?php } if (!$this->entity->cashed_out) { ?>
 		<input type="hidden" id="p_muid_save" name="save" value="" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Cash Out" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
 		<input class="pf-button btn btn-primary" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="&laquo; Close" />
 		<?php } ?>

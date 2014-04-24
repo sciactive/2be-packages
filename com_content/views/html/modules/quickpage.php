@@ -88,7 +88,7 @@ margin-left: 125px;
 			<span class="pf-label">Name</span>
 			<span class="pf-group pf-full-width">
 				<span class="pf-field" style="display: block;">
-					<input style="width: 100%;" type="text" name="name" value="" />
+					<input class="form-control" style="width: 100%;" type="text" name="name" value="" />
 				</span>
 			</span>
 		</label>
@@ -102,7 +102,7 @@ margin-left: 125px;
 				<span class="pf-label">Alias</span>
 				<span class="pf-group pf-full-width">
 					<span class="pf-field" style="display: block;">
-						<input style="width: 100%;" type="text" name="alias" value="" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
+						<input class="form-control" style="width: 100%;" type="text" name="alias" value="" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
 					</span>
 				</span>
 			</label>
@@ -122,7 +122,7 @@ margin-left: 125px;
 			<div class="pf-group pf-full-width">
 				<label><input class="pf-field" type="checkbox" id="p_muid_use_name" name="title_use_name" value="ON" checked="checked" /> Use name as title.</label><br />
 				<span class="pf-field" style="display: block;">
-					<input style="width: 100%;" type="text" id="p_muid_title" name="title" value="" />
+					<input class="form-control" style="width: 100%;" type="text" id="p_muid_title" name="title" value="" />
 				</span>
 			</div>
 		</div>
@@ -142,7 +142,7 @@ margin-left: 125px;
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Tags</span>
 		<div class="pf-group">
-			<input class="pf-field" type="text" name="content_tags" size="10" value="<?php e(implode(',', (array) $this->content_tags)); ?>" />
+			<input class="pf-field form-control" type="text" name="content_tags" size="10" value="<?php e(implode(',', (array) $this->content_tags)); ?>" />
 			<script type="text/javascript">
 				$_(function(){
 					$("#p_muid_form [name=content_tags]").ptags({
@@ -180,7 +180,7 @@ margin-left: 125px;
 	<div class="pf-element pf-full-width">
 		<div class="btn-group" style="float: right;">
 			<input class="pf-button btn btn-success page-save page-publish" type="button" value="Save and Publish" />
-			<input class="pf-button btn page-save" type="button" value="Save" />
+			<input class="pf-button btn btn-default page-save" type="button" value="Save" />
 		</div>
 	</div>
 </div>

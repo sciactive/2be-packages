@@ -54,7 +54,7 @@ $_->icons->load();
 	}
 </style>
 <div id="p_muid_button" style="text-align: center;">
-	<button class="btn" title="See your dashboard in a popup dialog.">
+	<button class="btn btn-default" title="See your dashboard in a popup dialog.">
 		<span class="picon picon-32 picon-dashboard-show">Quick Dash</span>
 	</button>
 </div>

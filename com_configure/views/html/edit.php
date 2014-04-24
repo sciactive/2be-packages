@@ -21,7 +21,7 @@ if ($this->entity->per_user) {
 }
 $_->com_ptags->load();
 ?>
-<div class="hero-unit">
+<div class="jumbotron">
 	<h1><?php e("{$this->entity->info->name} {$this->entity->info->version}"); ?></h1>
 	<p>Check a setting to set it manually, or leave it unchecked to use the <?php echo $this->entity->per_user ? 'system configured' : 'default'; ?> setting.</p>
 </div>
@@ -84,7 +84,11 @@ $_->com_ptags->load();
 			</span>
 		</label>
 		<div class="setting" style="display: none;">
-			<?php if (is_array($cur_var['options'])) { ?>
+			<?php
+			if (is_callable($cur_var['options'])) {
+				$cur_var['options'] = call_user_func($cur_var['options']);
+			}
+			if (is_array($cur_var['options'])) { ?>
 				<?php foreach($cur_var['options'] as $key => $cur_option) {
 					$display = is_string($key) ? $key : $cur_option; ?>
 				<div class="pf-group">
@@ -94,9 +98,9 @@ $_->com_ptags->load();
 			<?php } elseif (is_array($cur_var['value'])) { ?>
 				<div class="pf-group pf-full-width">
 					<?php if (is_int($cur_var['value'][0])) { ?>
-					<input class="pf-field p_muid_do_tags" type="text" name="opt_int_<?php e($cur_var['name']); ?>" value="<?php e(implode(';;', $cur_value)); ?>" />
+					<input class="pf-field form-control p_muid_do_tags" type="text" name="opt_int_<?php e($cur_var['name']); ?>" value="<?php e(implode(';;', $cur_value)); ?>" />
 					<?php } elseif (is_float($cur_var['value'][0])) { ?>
-					<input class="pf-field p_muid_do_tags" type="text" name="opt_float_<?php e($cur_var['name']); ?>" value="<?php e(implode(';;', $cur_value)); ?>" />
+					<input class="pf-field form-control p_muid_do_tags" type="text" name="opt_float_<?php e($cur_var['name']); ?>" value="<?php e(implode(';;', $cur_value)); ?>" />
 					<?php } elseif (is_string($cur_var['value'][0])) { ?>
 					<div class="pf-field"><textarea rows="3" cols="35" class="p_muid_do_tags" style="width: 100%;" name="opt_string_<?php e($cur_var['name']); ?>"><?php e(implode(';;', $cur_value)); ?></textarea></div>
 					<?php } ?>
@@ -105,9 +109,9 @@ $_->com_ptags->load();
 				<?php if (is_bool($cur_var['value'])) { ?>
 				<input class="pf-field" type="checkbox" name="opt_bool_<?php e($cur_var['name']); ?>" value="ON" <?php echo ($cur_value ? 'checked="checked" ' : ''); ?>/>
 				<?php } elseif (is_int($cur_var['value'])) { ?>
-				<input class="pf-field" type="text" name="opt_int_<?php e($cur_var['name']); ?>" value="<?php e($cur_value); ?>" />
+				<input class="pf-field form-control" type="text" name="opt_int_<?php e($cur_var['name']); ?>" value="<?php e($cur_value); ?>" />
 				<?php } elseif (is_float($cur_var['value'])) { ?>
-				<input class="pf-field" type="text" name="opt_float_<?php e($cur_var['name']); ?>" value="<?php e($cur_value); ?>" />
+				<input class="pf-field form-control" type="text" name="opt_float_<?php e($cur_var['name']); ?>" value="<?php e($cur_value); ?>" />
 				<?php } elseif (is_string($cur_var['value'])) { ?>
 				<div class="pf-group pf-full-width">
 					<div class="pf-field"><textarea rows="3" cols="35" class="" style="width: 100%;" name="opt_string_<?php e($cur_var['name']); ?>"><?php e($cur_value); ?></textarea></div>
@@ -143,6 +147,6 @@ $_->com_ptags->load();
 		<?php } ?>
 		<input type="hidden" name="component" value="<?php e($this->entity->name); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Save" name="save" />
-		<input class="pf-button btn" type="reset" value="Reset" name="reset" onclick="window.setTimeout(function(){$('#p_muid_form input.default_checkbox').change()}, 1);" />
+		<input class="pf-button btn btn-default" type="reset" value="Reset" name="reset" onclick="window.setTimeout(function(){$('#p_muid_form input.default_checkbox').change()}, 1);" />
 	</div>
 </form>

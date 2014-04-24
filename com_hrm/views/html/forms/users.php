@@ -16,7 +16,7 @@ defined('P_RUN') or die('Direct access prohibited');
 		<label>
 			<span class="pf-label">User</span>
 			<span class="pf-note">Hold Ctrl to select multiple.</span>
-			<select class="pf-field" name="users" size="8" multiple="multiple">
+			<select class="pf-field form-control" name="users" size="8" multiple="multiple">
 				<?php foreach ($this->users as $cur_user) { ?>
 				<option value="<?php e($cur_user->guid); ?>"><?php e("{$cur_user->name} [{$cur_user->username}]"); ?></option>
 				<?php } ?>

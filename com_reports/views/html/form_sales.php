@@ -82,15 +82,15 @@ $_->com_jstree->load();
 		<div class="pf-element location_tree"></div>
 	</div>
 	<div class="pf-element pf-full-width">
-		<select style="max-width: 100%;" name="employee"></select>
+		<select class="form-control" style="max-width: 100%;" name="employee"></select>
 	</div>
 	<div class="pf-element" style="padding-bottom: 0px;">
 		<span class="pf-note">Start</span>
-		<input class="form_date" type="text" name="start" value="<?php ($this->date[0]) ? e(format_date($this->date[0], 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
+		<input class="form_date form-control" type="text" name="start" value="<?php ($this->date[0]) ? e(format_date($this->date[0], 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
 	</div>
 	<div class="pf-element">
 		<span class="pf-note">End</span>
-		<input class="form_date" type="text" name="end" value="<?php ($this->date[1]) ? e(format_date($this->date[1] - 1, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
+		<input class="form_date form-control" type="text" name="end" value="<?php ($this->date[1]) ? e(format_date($this->date[1] - 1, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" />
 	</div>
 	<div class="pf-element">
 		<input type="hidden" name="location" value="<?php e($this->location); ?>" />

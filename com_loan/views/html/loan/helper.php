@@ -314,9 +314,9 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 	</table>
 </div>
 <?php } elseif ($this->render == 'footer') { ?>
-<a href="<?php e(pines_url('com_loan', 'loan/list', array('id' => $this->entity->id))); ?>" class="btn">View in List</a>
+<a href="<?php e(pines_url('com_loan', 'loan/list', array('id' => $this->entity->id))); ?>" class="btn btn-default">View in List</a>
 <?php if (gatekeeper('com_loan/viewloan')) { ?>
-<a href="<?php e(pines_url('com_loan', 'loan/overview', array('id' => $this->entity->guid))); ?>" class="btn">Overview</a>
+<a href="<?php e(pines_url('com_loan', 'loan/overview', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Overview</a>
 <?php } if (gatekeeper('com_loan/editpayments')) { ?>
-<a href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>" class="btn">Edit Payments</a>
+<a href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Edit Payments</a>
 <?php } } ?>

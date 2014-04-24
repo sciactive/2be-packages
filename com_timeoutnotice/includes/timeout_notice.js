@@ -6,7 +6,7 @@ $_(function(){
 			type: "GET",
 			dataType: "html",
 			beforeSend: function(){
-				notice = $.pnotify({
+				notice = new PNotify({
 					text: "Loading login page...",
 					title: "Login",
 					icon: "picon picon-throbber",
@@ -114,7 +114,7 @@ $_(function(){
 							if (!session_notice.is(":visible"))
 								session_notice.pnotify_display();
 						} else {
-							session_notice = $.pnotify({
+							session_notice = new PNotify({
 								title: "Session Timeout",
 								text: "Your session is about to expire. <a href=\"javascript:void(0)\" class=\"extend_session\">Click here to stay logged in.</a>",
 								icon: "picon picon-user-away",

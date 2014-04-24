@@ -135,6 +135,6 @@ $_->com_jstree->load();
 	<div class="pf-element location_tree"></div>
 	<div class="pf-element pf-layout-block">
 		<span class="pf-label">Selection</span>
-		<input class="pf-field" type="text" name="location" value="" />
+		<input class="pf-field form-control" type="text" name="location" value="" />
 	</div>
 </form>

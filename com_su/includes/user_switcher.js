@@ -5,7 +5,7 @@ $_(function(){
 		type: "GET",
 		dataType: "html",
 		beforeSend: function(){
-			notice = $.pnotify({
+			notice = new PNotify({
 				text: "Loading login page...",
 				title: "Switch User",
 				icon: "picon picon-throbber",

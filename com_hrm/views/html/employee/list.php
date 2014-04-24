@@ -373,19 +373,19 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element pf-heading dialog_title"></div>
 		<div class="pf-element">
 			<label><span class="pf-label">Description</span>
-				<input type="text" size="24" name="name" value="" /></label>
+				<input class="form-control" type="text" size="24" name="name" value="" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Date</span>
-				<input type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+				<input class="form-control" type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Amount</span>
-				$ <input type="text" size="5" name="amount" value="" /></label>
+				$ <input class="form-control" type="text" size="5" name="amount" value="" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Comments</span>
-				<input type="text" size="24" name="comments" value="" /></label>
+				<input class="form-control" type="text" size="24" name="comments" value="" /></label>
 		</div>
 	</form>
 	<br />
@@ -396,19 +396,19 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element pf-heading dialog_title"></div>
 		<div class="pf-element">
 			<label><span class="pf-label">Description</span>
-				<input type="text" size="24" name="name" value="" /></label>
+				<input class="form-control" type="text" size="24" name="name" value="" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Date</span>
-				<input type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+				<input class="form-control" type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Amount</span>
-				$ <input type="text" size="5" name="amount" value="" /></label>
+				$ <input class="form-control" type="text" size="5" name="amount" value="" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Comments</span>
-				<input type="text" size="24" name="comments" value="" /></label>
+				<input class="form-control" type="text" size="24" name="comments" value="" /></label>
 		</div>
 	</form>
 	<br />
@@ -419,7 +419,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element pf-heading dialog_title"></div>
 		<div class="pf-element">
 			<label><span class="pf-label">Issue</span>
-				<select name="issue_type">
+				<select class="form-control" name="issue_type">
 					<?php
 						foreach ($_->com_hrm->get_issue_types() as $cur_issue) {
 							echo '<option value="'.h($cur_issue->guid).'">'.h($cur_issue->name).'</option>';
@@ -429,11 +429,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Occurred on</span>
-				<input type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+				<input class="form-control" type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label"># of Occurrences</span>
-				<select name="quantity">
+				<select class="form-control" name="quantity">
 					<option value="1" selected="selected">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -443,7 +443,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Comments</span>
-				<input type="text" size="24" name="comments" value="" /></label>
+				<input class="form-control" type="text" size="24" name="comments" value="" /></label>
 		</div>
 	</form>
 	<br />
@@ -454,7 +454,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element pf-heading dialog_title"></div>
 		<div class="pf-element">
 			<label><span class="pf-label">Reason for Termination</span>
-			<select name="reason">
+			<select class="form-control" name="reason">
 				<?php 
 					foreach ($_->config->com_hrm->termination_reasons as $cur_dispo) {
 						$dispo_array = explode(':', $cur_dispo);
@@ -465,7 +465,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Effective Date</span>
-			<input type="text" size="16" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+			<input class="form-control" type="text" size="16" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 	</form>
 	<br />
@@ -476,7 +476,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element pf-heading dialog_title"></div>
 		<div class="pf-element">
 			<label><span class="pf-label">Effective Date</span>
-			<input type="text" size="16" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+			<input class="form-control" type="text" size="16" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 	</form>
 	<br />

@@ -60,7 +60,7 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 					dataType: "json",
 					data: {"not_guids": JSON.stringify(guids), "product": current_item.children(".product").text(), "serial": serial, "location": location, "quantity": quantity},
 					beforeSend: function(){
-						loader = $.pnotify({
+						loader = new PNotify({
 							title: 'Stock Search',
 							text: 'Retrieving stock from server...',
 							icon: 'picon picon-throbber',
@@ -88,7 +88,7 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 							alert("Only "+data.length+" items were found that matched your query.");
 						var entries = current_item.find(".entries");
 						$.each(data, function(i, entry){
-							entries.append('<div class="well entry"><a href="javascript:void(0);" class="remove btn btn-mini btn-danger">&nbsp;X&nbsp;</a><div>Stock Entry: <a data-entity="'+$_.safe(entry.guid)+'" data-entity-context="com_sales_stock" class="guid">'+$_.safe(entry.guid)+'</a></div><div>Location: <a data-entity="'+$_.safe(entry.location)+'" data-entity-context="group">'+$_.safe(entry.location_name)+'</a></div><span class="location" style="display: none">'+$_.safe(entry.location)+'</span><span class="product" style="display: none">'+$_.safe(entry.product)+'</span><div'+(entry.serial ? '' : ' style="display: none"')+'>Serial: <span class="serial">'+(entry.serial ? $_.safe(entry.serial) : '')+'</span></div></div>');
+							entries.append('<div class="well entry"><a href="javascript:void(0);" class="remove btn btn-xs btn-danger">&nbsp;X&nbsp;</a><div>Stock Entry: <a data-entity="'+$_.safe(entry.guid)+'" data-entity-context="com_sales_stock" class="guid">'+$_.safe(entry.guid)+'</a></div><div>Location: <a data-entity="'+$_.safe(entry.location)+'" data-entity-context="group">'+$_.safe(entry.location_name)+'</a></div><span class="location" style="display: none">'+$_.safe(entry.location)+'</span><span class="product" style="display: none">'+$_.safe(entry.product)+'</span><div'+(entry.serial ? '' : ' style="display: none"')+'>Serial: <span class="serial">'+(entry.serial ? $_.safe(entry.serial) : '')+'</span></div></div>');
 						});
 						refresh_entries();
 					}
@@ -267,7 +267,7 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 		<div class="pf-form">
 			<div class="pf-element">
 				<label><span class="pf-label">Serial Number</span>
-					<input class="pf-field" type="text" id="p_muid_serial_number" name="serial_number" size="24" value="" /></label>
+					<input class="pf-field form-control" type="text" id="p_muid_serial_number" name="serial_number" size="24" value="" /></label>
 			</div>
 		</div>
 		<br />
@@ -282,7 +282,7 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Quantity</span>
-					<input class="pf-field" type="text" id="p_muid_quantity" name="quantity" size="5" value="" /></label>
+					<input class="pf-field form-control" type="text" id="p_muid_quantity" name="quantity" size="5" value="" /></label>
 			</div>
 			<input type="hidden" name="location" value="<?php e($warehouse->guid); ?>" />
 		</div>
@@ -291,6 +291,6 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="items" id="p_muid_items" value="[]" />
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'warehouse/pending'))); ?>);" value="Cancel" />
 	</div>
 </form>

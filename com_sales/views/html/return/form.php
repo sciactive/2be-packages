@@ -182,7 +182,7 @@ if ($_->config->com_sales->autocomplete_product)
 									dataType: "json",
 									data: {"code": code},
 									beforeSend: function(){
-										loader = $.pnotify({
+										loader = new PNotify({
 											title: 'Product Search',
 											text: 'Retrieving product from server...',
 											icon: 'picon picon-throbber',
@@ -447,7 +447,7 @@ if ($_->config->com_sales->autocomplete_product)
 							dataType: "json",
 							data: {"id": row.attr("title")},
 							beforeSend: function(){
-								loader = $.pnotify({
+								loader = new PNotify({
 									title: 'Product Search',
 									text: 'Retrieving products from server...',
 									icon: 'picon picon-throbber',
@@ -619,7 +619,7 @@ if ($_->config->com_sales->autocomplete_product)
 			var loader;
 			products_table.pgrid_get_all_rows().each(function(){
 				if (!loader)
-					loader = $.pnotify({
+					loader = new PNotify({
 						title: 'Loading Products',
 						text: 'Retrieving product information from server...',
 						icon: 'picon picon-throbber',
@@ -1161,7 +1161,7 @@ if ($_->config->com_sales->autocomplete_product)
 			<?php if ($this->entity->status != 'processed' && $this->entity->status != 'voided' && !isset($this->entity->sale->guid)) { ?>
 			<span class="pf-note">Enter part of a name, company, email, or phone # to search.</span>
 			<?php } ?>
-			<input class="pf-field" type="text" id="p_muid_customer" name="customer" size="24" value="<?php echo $this->entity->customer->guid ? h("{$this->entity->customer->guid}: \"{$this->entity->customer->name}\"") : ''; ?>" <?php if ($this->entity->status == 'processed' || $this->entity->status == 'voided' || isset($this->entity->sale->guid)) echo 'disabled="disabled" '; ?>/>
+			<input class="pf-field form-control" type="text" id="p_muid_customer" name="customer" size="24" value="<?php echo $this->entity->customer->guid ? h("{$this->entity->customer->guid}: \"{$this->entity->customer->name}\"") : ''; ?>" <?php if ($this->entity->status == 'processed' || $this->entity->status == 'voided' || isset($this->entity->sale->guid)) echo 'disabled="disabled" '; ?>/>
 		</label>
 	</div>
 	<?php } ?>
@@ -1251,7 +1251,7 @@ if ($_->config->com_sales->autocomplete_product)
 		<div class="pf-form">
 			<div class="pf-element">
 				<label><span class="pf-label">Serial Number</span>
-					<input class="pf-field" type="text" id="p_muid_serial_number" name="serial_number" size="24" value="" /></label>
+					<input class="pf-field form-control" type="text" id="p_muid_serial_number" name="serial_number" size="24" value="" /></label>
 			</div>
 		</div>
 		<br />
@@ -1268,7 +1268,7 @@ if ($_->config->com_sales->autocomplete_product)
 				<label>
 					<span class="pf-label">Employee</span>
 					<span class="pf-note">Enter part of a name, title, email, or phone # to search.</span>
-					<input class="pf-field" type="text" id="p_muid_salesperson" name="item_salesperson" size="24" value="" />
+					<input class="pf-field form-control" type="text" id="p_muid_salesperson" name="item_salesperson" size="24" value="" />
 				</label>
 			</div>
 		</div>
@@ -1305,7 +1305,7 @@ if ($_->config->com_sales->autocomplete_product)
 		<div class="pf-note">
 			<div style="text-align: left;">
 				<?php foreach ($this->payment_types as $cur_payment_type) { ?>
-				<button id="p_muid_payment_<?php e($cur_payment_type->guid); ?>" class="btn payment-button" type="button" style="margin-bottom: 2px;" value="<?php e(json_encode((object) array('guid' => $cur_payment_type->guid, 'name' => $cur_payment_type->name, 'minimum' => $cur_payment_type->minimum, 'maximum' => $cur_payment_type->maximum, 'processing_type' => $cur_payment_type->processing_type))); ?>">
+				<button id="p_muid_payment_<?php e($cur_payment_type->guid); ?>" class="btn btn-default payment-button" type="button" style="margin-bottom: 2px;" value="<?php e(json_encode((object) array('guid' => $cur_payment_type->guid, 'name' => $cur_payment_type->name, 'minimum' => $cur_payment_type->minimum, 'maximum' => $cur_payment_type->maximum, 'processing_type' => $cur_payment_type->processing_type))); ?>">
 					<span class="picon picon-32 picon-view-financial-payment-mode" style="display: block; padding-top: 32px; min-width: 50px; background-repeat: no-repeat; background-position: top center;"><?php e($cur_payment_type->name); ?></span>
 				</button>
 				<?php } ?>
@@ -1346,7 +1346,7 @@ if ($_->config->com_sales->autocomplete_product)
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Return Information</span>
 		<div class="pf-group">
-			<input class="pf-field btn" type="button" value="Edit Comments" onclick="$('#p_muid_comments_dialog').dialog('open');" />
+			<input class="pf-field btn btn-default" type="button" value="Edit Comments" onclick="$('#p_muid_comments_dialog').dialog('open');" />
 			<hr class="pf-field" style="clear: both; margin-top: 15px;" />
 		</div>
 	</div>
@@ -1383,6 +1383,6 @@ if ($_->config->com_sales->autocomplete_product)
 		<input class="pf-button btn btn-primary" type="button" value="Save" onclick="$('#p_muid_return_process_type').val('save'); $_.com_sales_run_check();" />
 		<?php } ?>
 
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'return/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'return/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

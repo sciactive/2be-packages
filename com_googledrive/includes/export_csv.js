@@ -57,7 +57,7 @@ function handleAuthResult(authResult) {
        * @param {Object} evt Arguments from the file selector.
        */
 function uploadFile(csv) {
-    loader = $.pnotify({
+    loader = new PNotify({
         text: 'Uploading File...',
         icon: 'picon picon-throbber'
     });

@@ -30,24 +30,28 @@ $menu = $_->page->render_modules('main_menu', 'module_head');
 	<link href="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/css/pines.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div id="navbar" class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
-		<div class="container">
+<div id="nav" class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
 			<?php if (!empty($menu)) { ?>
-			<button id="menu_link" type="button" class="btn btn-navbar">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
 			<?php } if ($_->config->tpl_mobile->use_header_image) { ?>
-			<a class="brand brand-image" href="<?php e(pines_url()); ?>">
+			<a class="navbar-brand brand-image" href="<?php e(pines_url()); ?>">
 				<img src="<?php e($_->config->tpl_mobile->header_image); ?>" alt="<?php e($_->config->page_title); ?>" />
 			</a>
 			<?php } else { ?>
-			<a class="brand" href="<?php e(pines_url()); ?>">
+			<a class="navbar-brand" href="<?php e(pines_url()); ?>">
 				<?php e($_->config->page_title); ?>
 			</a>
 			<?php } ?>
+		</div>
+		<div class="collapse navbar-collapse">
+			<?php echo $_->page->render_modules('main_menu', 'module_head'); ?>
 		</div>
 	</div>
 </div>

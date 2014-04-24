@@ -180,7 +180,7 @@ $_->com_jstree->load();
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Count Type</span>
-			<select name="count_type">
+			<select class="form-control" name="count_type">
 				<option value="cash_count">Cash Count</option>
 				<option value="cash_audit">Cash Audit</option>
 				<option value="cash_skim">Cash Skim</option>

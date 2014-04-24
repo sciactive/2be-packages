@@ -30,7 +30,7 @@ $this->title = 'Entity Manager Import';
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Upload File</span>
-			<input class="pf-field" type="file" name="entity_import" /></label>
+			<input class="pf-field form-control" type="file" name="entity_import" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Reset Entities</span>

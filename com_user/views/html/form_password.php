@@ -31,21 +31,21 @@ $this->title = 'Change Your Password';
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Current Password <span class="pf-required">*</span></span>
-			<input class="pf-field" type="password" name="current" size="24" value="" /></label>
+			<input class="pf-field form-control" type="password" name="current" size="24" value="" /></label>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Choose Your New Password</h3>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">New Password <span class="pf-required">*</span></span>
-			<input class="pf-field" type="password" name="new1" size="24" value="" /></label>
+			<input class="pf-field form-control" type="password" name="new1" size="24" value="" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Repeat Password <span class="pf-required">*</span></span>
-			<input class="pf-field" type="password" name="new2" size="24" value="" /></label>
+			<input class="pf-field form-control" type="password" name="new2" size="24" value="" /></label>
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 	</div>
 </form>

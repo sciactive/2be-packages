@@ -115,23 +115,23 @@ $_->com_customer->load_customer_select();
 	</div>
 	<div class="pf-element">
 		<span class="pf-note">Enter part of a name, company, email, or phone # to search.</span>
-		<input id="p_muid_customer" class="pf-field" type="text" name="customer" value="<?php echo (isset($this->entity->customer->guid) ? h("{$this->entity->customer->guid}: {$this->entity->customer->name}") : ''); ?>"/>
+		<input id="p_muid_customer" class="pf-field form-control" type="text" name="customer" value="<?php echo (isset($this->entity->customer->guid) ? h("{$this->entity->customer->guid}: {$this->entity->customer->name}") : ''); ?>"/>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Loan Information</h3>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Creation Date</span>
-		<input id="p_muid_creation_date" class="pf-field" type="text" name="creation_date" value="<?php echo isset($this->entity->creation_date) ? h(format_date($this->entity->creation_date, 'date_sort')) : ''; ?>"/>
+		<input id="p_muid_creation_date" class="pf-field form-control" type="text" name="creation_date" value="<?php echo isset($this->entity->creation_date) ? h(format_date($this->entity->creation_date, 'date_sort')) : ''; ?>"/>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Principal Amount</span>
-		<input id="p_muid_prin" class="pf-field" type="text" name="principal" value="<?php echo (!empty($this->entity->principal) ? h("\${$this->entity->principal}") : ''); ?>"/>
+		<input id="p_muid_prin" class="pf-field form-control" type="text" name="principal" value="<?php echo (!empty($this->entity->principal) ? h("\${$this->entity->principal}") : ''); ?>"/>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">APR</span>
 		<span class="pf-note">Annual Percentage Rate</span>
-		<input id="p_muid_apr" class="pf-field" type="text" name="apr" value="<?php echo (!empty($this->entity->apr) ? h("{$this->entity->apr}%") : ''); ?>"/>
+		<input id="p_muid_apr" class="pf-field form-control" type="text" name="apr" value="<?php echo (!empty($this->entity->apr) ? h("{$this->entity->apr}%") : ''); ?>"/>
 	</div>
 	<div class="pf-element">
 		<label for="p_muid_term">
@@ -139,8 +139,8 @@ $_->com_customer->load_customer_select();
 			<span class="pf-note">Length of loan in years or months.</span>
 		</label>
 		<div class="pf-group">
-			<input id="p_muid_term" class="pf-field" type="text" name="term" value="<?php echo (!empty($this->entity->term) ? h($this->entity->term) : ''); ?>"/>
-			<select class="pf-field" name="term_type">
+			<input id="p_muid_term" class="pf-field form-control" type="text" name="term" value="<?php echo (!empty($this->entity->term) ? h($this->entity->term) : ''); ?>"/>
+			<select class="pf-field form-control" name="term_type">
 				<option value="months"<?php echo $this->entity->term_type == 'months' ? ' selected="selected"' : ''; ?>>Months</option>
 				<option value="years"<?php echo $this->entity->term_type == 'years' ? ' selected="selected"' : ''; ?>>Years</option>
 			</select>
@@ -148,12 +148,12 @@ $_->com_customer->load_customer_select();
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">First Payment Date</span>
-		<input id="p_muid_first_payment_date" class="pf-field" type="text" name="first_payment_date" value="<?php echo isset($this->entity->first_payment_date) ? h(format_date($this->entity->first_payment_date, 'date_sort')) : ''; ?>"/>
+		<input id="p_muid_first_payment_date" class="pf-field form-control" type="text" name="first_payment_date" value="<?php echo isset($this->entity->first_payment_date) ? h(format_date($this->entity->first_payment_date, 'date_sort')) : ''; ?>"/>
 	</div>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Payment Frequency</span>
-			<select class="pf-field" name="payment_frequency">
+			<select class="pf-field form-control" name="payment_frequency">
 				<option value="12"<?php echo $this->entity->payment_frequency == '12' ? ' selected="selected"' : ''; ?>>Monthly</option>
 				<option value="1"<?php echo $this->entity->payment_frequency == '1' ? ' selected="selected"' : ''; ?>>Annually</option>
 				<option value="2"<?php echo $this->entity->payment_frequency == '2' ? ' selected="selected"' : ''; ?>>Semi-Annually</option>
@@ -168,7 +168,7 @@ $_->com_customer->load_customer_select();
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Compound Frequency</span>
-			<select class="pf-field" name="compound_frequency">
+			<select class="pf-field form-control" name="compound_frequency">
 				<option value="12"<?php echo $this->entity->compound_frequency == '12' ? ' selected="selected"' : ''; ?>>Monthly</option>
 				<option value="1"<?php echo $this->entity->compound_frequency == '1' ? ' selected="selected"' : ''; ?>>Annually</option>
 				<option value="2"<?php echo $this->entity->compound_frequency == '2' ? ' selected="selected"' : ''; ?>>Semi-Annually</option>
@@ -185,7 +185,7 @@ $_->com_customer->load_customer_select();
 		<label>
 			<span class="pf-label">Payment Type</span>
 			<span class="pf-note">Default is at the end of the period.</span>
-			<select class="pf-field" name="payment_type">
+			<select class="pf-field form-control" name="payment_type">
 				<option value="ending"<?php echo $this->entity->payment_type == 0 ? ' selected="selected"' : ''; ?>>End of Period</option>
 				<option value="beginning"<?php echo $this->entity->payment_type == 1 ? ' selected="selected"' : ''; ?>>Beginning of Period</option>
 			</select>
@@ -196,6 +196,6 @@ $_->com_customer->load_customer_select();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_loan', 'loan/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_loan', 'loan/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

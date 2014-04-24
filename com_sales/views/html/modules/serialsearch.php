@@ -129,8 +129,8 @@ $_->icons->load();
 	</script>
 	<div id="p_muid_controls" class="clearfix">
 		<div style="float: left; margin-right: 1em;">
-			<input type="text" size="16" name="serial" />
-			<button class="btn" type="button" id="p_muid_search" title="Search"><i class="icon-search"></i></button><br />
+			<input class="form-control" type="text" size="16" name="serial" />
+			<button class="btn btn-default" type="button" id="p_muid_search" title="Search"><i class="fa fa-search"></i></button><br />
 		</div>
 	</div>
 	<div id="p_muid_results">

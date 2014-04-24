@@ -16,7 +16,7 @@ $_->entity_manager->sort($pages, 'name');
 <div class="pf-form">
 	<div class="pf-element">
 		<label><span class="pf-label">Page</span>
-			<select class="pf-field" name="id">
+			<select class="pf-field form-control" name="id">
 				<?php foreach ($pages as $cur_page) { ?>
 				<option value="<?php e($cur_page->guid); ?>"<?php echo $this->id == "$cur_page->guid" ? ' selected="selected"' : ''; ?>><?php e($cur_page->name); ?></option>
 				<?php } ?>

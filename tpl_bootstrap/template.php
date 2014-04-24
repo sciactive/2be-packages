@@ -40,7 +40,6 @@ if ($_->config->tpl_bootstrap->ajax && ($_REQUEST['tpl_bootstrap_ajax'] == 1 && 
 }
 header('Content-Type: text/html');
 $_->com_bootstrap->load_js_css();
-$width = ($_->config->template->width == 'fluid') ? '-fluid' : '';
 
 ?>
 <!DOCTYPE html>
@@ -62,7 +61,7 @@ $width = ($_->config->template->width == 'fluid') ? '-fluid' : '';
 	<?php if ($_->template->verify_color($_->config->tpl_bootstrap->lighter_color) && $_->template->verify_color($_->config->tpl_bootstrap->darker_color) && $_->template->verify_color($_->config->tpl_bootstrap->border_color)) { ?>
 	<!--[if lt IE 8]>
 	<style type="text/css">
-	.navbar-inner {
+	#nav .container {
 		filter: progid:DXImageTransform.Microsoft.gradient(enabled = false) !important;
 	}
 	</style>
@@ -249,20 +248,21 @@ $width = ($_->config->template->width == 'fluid') ? '-fluid' : '';
 		}
 	?></div>
 	<div id="nav-configure" class="<?php echo $nav; ?>">
-		<div id="nav" class="navbar clearfix <?php echo $_->config->tpl_bootstrap->navbar_fixed ? 'navbar-fixed-top' : ''; ?> <?php echo $_->config->tpl_bootstrap->alt_navbar ? 'navbar-inverse' : ''; ?>">
-			<div class="navbar-inner">
-				<div class="container<?php echo $width; ?>">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<div id="nav" class="navbar navbar-default clearfix <?php echo $_->config->tpl_bootstrap->navbar_fixed ? 'navbar-fixed-top' : ''; ?> <?php echo $_->config->tpl_bootstrap->alt_navbar ? 'navbar-inverse' : ''; ?>">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</a>
-					<a class="brand" href="<?php e($_->config->full_location); ?>">
+					<a class="navbar-brand" href="<?php e($_->config->full_location); ?>">
 						<?php if ($_->config->tpl_bootstrap->use_header_image) { ?>
 						<img src="<?php e($_->config->tpl_bootstrap->header_image); ?>" alt="<?php e($_->config->page_title); ?>" />
 						<?php } else { ?>
 							<span>
-						<?php	switch ($_->config->tpl_bootstrap->brand_type) {
+							<?php switch ($_->config->tpl_bootstrap->brand_type) {
 								case "System Name":
 									e($_->config->system_name);
 									break;
@@ -273,70 +273,70 @@ $width = ($_->config->template->width == 'fluid') ? '-fluid' : '';
 									e($_->config->tpl_bootstrap->brand_name);
 									break;
 								} ?>
-							</span>	
-					<?php } ?>
+							</span>
+						<?php } ?>
 					</a>
-					<div class="nav-collapse">
-						<?php echo $_->page->render_modules('main_menu', 'module_head'); ?>
-					</div>
+				</div>
+				<div class="collapse navbar-collapse">
+					<?php echo $_->page->render_modules('main_menu', 'module_head'); ?>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div id="header">
-		<div class="container<?php echo $width; ?>">
-			<div class="row-fluid">
-				<div class="span12 positions">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 positions">
 					<div id="header_position"><?php echo $_->page->render_modules('header', 'module_header'); ?></div>
 					<div id="header_right"><?php echo $_->page->render_modules('header_right', 'module_header_right'); ?></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div id="page" class="container<?php echo $width; ?> <?php echo $page; ?>">
-		<div class="row-fluid">
-			<div id="breadcrumbs" class="span12"><?php echo $_->page->render_modules('breadcrumbs', 'module_header'); ?></div>
+	<div id="page" class="container <?php echo $page; ?>">
+		<div class="row">
+			<div id="breadcrumbs" class="col-sm-12"><?php echo $_->page->render_modules('breadcrumbs', 'module_header'); ?></div>
 		</div>
-		<div class="row-fluid">
-			<div id="pre_content" class="span12"><?php echo $_->page->render_modules('pre_content', 'module_header'); ?></div>
+		<div class="row">
+			<div id="pre_content" class="col-sm-12"><?php echo $_->page->render_modules('pre_content', 'module_header'); ?></div>
 		</div>
 		<div id="column_container">
-			<div class="row-fluid">
+			<div class="row">
 				<?php if (in_array($_->config->tpl_bootstrap->variant, array('threecol', 'twocol-sideleft'))) { ?>
-				<div id="left" class="span3">
+				<div id="left" class="col-sm-3">
 					<?php echo $_->page->render_modules('left', 'module_side'); ?>
 					<?php if ($_->config->tpl_bootstrap->variant == 'twocol-sideleft') { echo $_->page->render_modules('right', 'module_side'); } ?>&nbsp;
 				</div>
 				<?php } ?>
-				<div class="<?php echo $_->config->tpl_bootstrap->variant == 'full-page' ? 'span12' : ($_->config->tpl_bootstrap->variant == 'threecol' ? 'span6' : 'span9'); ?>">
+				<div class="<?php echo $_->config->tpl_bootstrap->variant == 'full-page' ? 'col-sm-12' : ($_->config->tpl_bootstrap->variant == 'threecol' ? 'col-sm-6' : 'col-sm-9'); ?>">
 					<div id="content_container">
-						<div class="row-fluid">
-							<div id="content_top_left" class="span6"><?php echo $_->page->render_modules('content_top_left'); ?></div>
-							<div id="content_top_right" class="span6"><?php echo $_->page->render_modules('content_top_right'); ?></div>
+						<div class="row">
+							<div id="content_top_left" class="col-sm-6"><?php echo $_->page->render_modules('content_top_left'); ?></div>
+							<div id="content_top_right" class="col-sm-6"><?php echo $_->page->render_modules('content_top_right'); ?></div>
 						</div>
 						<div id="content"><?php echo $_->page->render_modules('content', 'module_content'); ?></div>
-						<div class="row-fluid">
-							<div id="content_bottom_left" class="span6"><?php echo $_->page->render_modules('content_bottom_left'); ?></div>
-							<div id="content_bottom_right" class="span6"><?php echo $_->page->render_modules('content_bottom_right'); ?></div>
+						<div class="row">
+							<div id="content_bottom_left" class="col-sm-6"><?php echo $_->page->render_modules('content_bottom_left'); ?></div>
+							<div id="content_bottom_right" class="col-sm-6"><?php echo $_->page->render_modules('content_bottom_right'); ?></div>
 						</div>
 					</div>
 				</div>
 				<?php if (in_array($_->config->tpl_bootstrap->variant, array('threecol', 'twocol-sideright'))) { ?>
-				<div id="right" class="span3">
+				<div id="right" class="col-sm-3">
 					<?php if ($_->config->tpl_bootstrap->variant == 'twocol-sideright') { echo $_->page->render_modules('left', 'module_side'); } ?>
 					<?php echo $_->page->render_modules('right', 'module_side'); ?>&nbsp;
 				</div>
 				<?php } ?>
 			</div>
 		</div>
-		<div class="row-fluid">
-			<div id="post_content" class="span12"><?php echo $_->page->render_modules('post_content', 'module_header'); ?></div>
+		<div class="row">
+			<div id="post_content" class="col-sm-12"><?php echo $_->page->render_modules('post_content', 'module_header'); ?></div>
 		</div>
 	</div>
 	<div id="footer" class="clearfix <?php echo $footer;?>">
-		<div class="container<?php echo $width; ?>">
-			<div class="row-fluid">
-				<div class="span12 positions">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 positions">
 					<div id="footer_position"><?php echo $_->page->render_modules('footer', 'module_header'); ?></div>
 					<p id="copyright"><?php e($_->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
 				</div>

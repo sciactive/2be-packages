@@ -24,6 +24,6 @@ defined('P_RUN') or die('Direct access prohibited');
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Item Serial</span>
-		<input class="pf-field" type="text" name="new_serial" value="" />
+		<input class="pf-field form-control" type="text" name="new_serial" value="" />
 	</div>
 </form>

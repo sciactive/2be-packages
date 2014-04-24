@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 if (isset($this->tags)) {
-	echo '<ul class="breadcrumb"><li><a href="'.h(pines_url()).'" class="breadcrumb_item">Home</a> <span class="divider">&gt;</span></li> <li class="active"><span class="breadcrumb_item">Pages tagged '.h(implode(', ', $this->tags)).'.</span></li></ul>';
+	echo '<ul class="breadcrumb"><li><a href="'.h(pines_url()).'" class="breadcrumb_item">Home</a> <li class="active"><span class="breadcrumb_item">Pages tagged '.h(implode(', ', $this->tags)).'.</span></li></ul>';
 	return;
 }
 
@@ -45,15 +45,15 @@ if ($this->entity->has_tag('page')) {
 
 while (isset($cur_entity)) {
 	if ($cur_entity->get_option('link_menu'))
-		$bc = '<li><a href="'.h(pines_url('com_content', 'category', array('a' => $cur_entity->alias))).'" class="breadcrumb_item">'.h($cur_entity->name).'</a> <span class="divider">&gt;</span></li> ' . $bc;
+		$bc = '<li><a href="'.h(pines_url('com_content', 'category', array('a' => $cur_entity->alias))).'" class="breadcrumb_item">'.h($cur_entity->name).'</a></li> ' . $bc;
 	else
-		$bc = '<li><span class="breadcrumb_item">'.h($cur_entity->name).'</span> <span class="divider">&gt;</span></li> ' . $bc;
+		$bc = '<li><span class="breadcrumb_item">'.h($cur_entity->name).'</span>' . $bc;
 	if ($cur_entity->show_menu)
 		unset($cur_entity);
 	else
 		$cur_entity = $cur_entity->parent;
 }
 
-$bc = '<ul class="breadcrumb"><li><a href="'.h(pines_url()).'" class="breadcrumb_item">Home</a> <span class="divider">&gt;</span></li> ' . $bc . '</ul>';
+$bc = '<ul class="breadcrumb"><li><a href="'.h(pines_url()).'" class="breadcrumb_item">Home</a></li> ' . $bc . '</ul>';
 
 echo $bc;

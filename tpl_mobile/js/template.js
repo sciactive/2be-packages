@@ -41,7 +41,7 @@ $_(function(){
 	});
 	// Menus.
 	$(".menu").delegate("a.expander", "click", function(){
-		$(this).toggleClass("btn-success").children().toggleClass("icon-chevron-down icon-chevron-up").end().closest("li").children("ul").toggle();
+		$(this).toggleClass("btn-success").children().toggleClass("fa-chevron-down fa-chevron-up").end().closest("li").children("ul").toggle();
 	}).delegate("a:not(.expander)[href=javascript:void(0);]", "click", function(){
 		$(this).siblings("a.expander").click();
 	});

@@ -64,7 +64,7 @@ defined('P_RUN') or die('Direct access prohibited');
 </script>
 <form class="pf-form" method="post" id="p_muid_form" action="">
 	<div class="pf-element">
-		<span class="pf-note">Reason for Time Off</span><input class="form_input" type="text" id="p_muid_reason" name="reason" value="<?php e($this->entity->reason); ?>" />
+		<span class="pf-note">Reason for Time Off</span><input class="form_input form-control" type="text" id="p_muid_reason" name="reason" value="<?php e($this->entity->reason); ?>" />
 	</div>
 	<?php
 		if ($this->entity->guid) {
@@ -78,8 +78,8 @@ defined('P_RUN') or die('Direct access prohibited');
 		<label><input class="pf-field" type="checkbox" name="all_day" value="ON" <?php echo $this->entity->all_day ? 'checked="checked" ' : ''; ?>/>All Day</label>
 	</div>
 	<div class="pf-element pf-full-width">
-		<span class="pf-note">Start</span><input class="form_center" type="text" size="12" id="p_muid_start" name="start" value="<?php echo empty($start_date) ? h(format_date(time(), 'date_sort')) : h($start_date); ?>" />
-		<select name="time_start">
+		<span class="pf-note">Start</span><input class="form_center form-control" type="text" size="12" id="p_muid_start" name="start" value="<?php echo empty($start_date) ? h(format_date(time(), 'date_sort')) : h($start_date); ?>" />
+		<select class="form-control" name="time_start">
 			<option value="0" <?php echo ($start_time == '0') ? 'selected="selected"' : ''; ?>>12:00 AM</option>
 			<option value="1" <?php echo ($start_time == '1') ? 'selected="selected"' : ''; ?>>1:00 AM</option>
 			<option value="2" <?php echo ($start_time == '2') ? 'selected="selected"' : ''; ?>>2:00 AM</option>
@@ -107,8 +107,8 @@ defined('P_RUN') or die('Direct access prohibited');
 		</select>
 	</div>
 	<div class="pf-element">
-		<span class="pf-note">End</span><input class="form_center" type="text" size="12" id="p_muid_end" name="end" value="<?php echo empty($end_date) ? h(format_date(time(), 'date_sort')) : h($end_date); ?>" />
-		<select name="time_end">
+		<span class="pf-note">End</span><input class="form_center form-control" type="text" size="12" id="p_muid_end" name="end" value="<?php echo empty($end_date) ? h(format_date(time(), 'date_sort')) : h($end_date); ?>" />
+		<select class="form-control" name="time_end">
 			<option value="0" <?php echo ($end_time == '0') ? 'selected="selected"' : ''; ?>>12:00 AM</option>
 			<option value="1" <?php echo ($end_time == '1') ? 'selected="selected"' : ''; ?>>1:00 AM</option>
 			<option value="2" <?php echo ($end_time == '2') ? 'selected="selected"' : ''; ?>>2:00 AM</option>

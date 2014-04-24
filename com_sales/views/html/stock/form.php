@@ -72,10 +72,10 @@ $_->com_jstree->load();
 		$_(function(){
 			$(".p_muid_option_accordian", "#p_muid_form").on("shown", function(){
 				$(this).find(".p_muid_change_this").val("1").end()
-				.find(".accordion-toggle").removeClass("alert-info").addClass("alert-success");
+				.find(".panel").removeClass("panel-info").addClass("panel-success");
 			}).on("hide", function(){
 				$(this).find(".p_muid_change_this").val("").end()
-				.find(".accordion-toggle").removeClass("alert-success").addClass("alert-info");
+				.find(".panel").removeClass("panel-success").addClass("panel-info");
 			});
 			// Location Tree
 			var location = $("#p_muid_form [name=location]");
@@ -108,13 +108,13 @@ $_->com_jstree->load();
 		});
 	</script>
 	<br class="pf-clearing" />
-	<div class="p_muid_option_accordian accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert-info">Change Availability</big>
+	<div class="p_muid_option_accordian panel-group">
+		<div class="panel panel-info">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Change Availability</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<input class="p_muid_change_this" type="hidden" name="available_change" value="" />
 					<div class="pf-element">
 						<label><span class="pf-label">Available</span>
@@ -123,7 +123,7 @@ $_->com_jstree->load();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Reason</span>
-							<select class="pf-field" name="available_reason">
+							<select class="pf-field form-control" name="available_reason">
 								<?php if (!isset($this->entity) || $this->entity->available) { ?>
 								<option value="unavailable_on_hold">Item is on Hold</option>
 								<option value="unavailable_damaged">Item is Damaged</option>
@@ -166,22 +166,22 @@ $_->com_jstree->load();
 		</div>
 	</div>
 	<?php if (isset($this->entity) && $this->entity->product->serialized) { ?>
-	<div class="p_muid_option_accordian accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert-info">Change Serial</big>
+	<div class="p_muid_option_accordian panel-group">
+		<div class="panel panel-info">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Change Serial</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<input class="p_muid_change_this" type="hidden" name="serial_change" value="" />
 					<div class="pf-element">
 						<label><span class="pf-label">Serial</span>
-							<input class="pf-field" type="text" name="serial" size="24" value="<?php e($this->entity->serial); ?>" /></label>
+							<input class="pf-field form-control" type="text" name="serial" size="24" value="<?php e($this->entity->serial); ?>" /></label>
 					</div>
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Reason</span>
-							<select class="pf-field" name="serial_reason">
+							<select class="pf-field form-control" name="serial_reason">
 								<option value="serial_changed_reserialize">Item is Being Reserialized</option>
 								<option value="serial_changed_damaged">Serial Number is Damaged</option>
 								<option value="serial_changed_error_po">PO Receiving Error</option>
@@ -196,13 +196,13 @@ $_->com_jstree->load();
 		</div>
 	</div>
 	<?php } ?>
-	<div class="p_muid_option_accordian accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert-info">Change Location</big>
+	<div class="p_muid_option_accordian panel-group">
+		<div class="panel panel-info">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Change Location</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<input class="p_muid_change_this" type="hidden" name="location_change" value="" />
 					<div class="pf-element">
 						<span class="pf-label">Location</span>
@@ -230,7 +230,7 @@ $_->com_jstree->load();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Reason</span>
-							<select class="pf-field" name="location_reason">
+							<select class="pf-field form-control" name="location_reason">
 								<?php if (!isset($this->entity) || isset($this->entity->location)) { ?>
 								<option value="location_changed_shipped">Item is Shipped</option>
 								<option value="location_changed_picked_up">Item is Picked Up</option>
@@ -258,18 +258,18 @@ $_->com_jstree->load();
 			</div>
 		</div>
 	</div>
-	<div class="p_muid_option_accordian accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert-info">Change Vendor</big>
+	<div class="p_muid_option_accordian panel-group">
+		<div class="panel panel-info">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Change Vendor</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<input class="p_muid_change_this" type="hidden" name="vendor_change" value="" />
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Vendor</span>
-							<select class="pf-field" name="vendor">
+							<select class="pf-field form-control" name="vendor">
 								<option value="null">-- None --</option>
 								<?php
 								$_->entity_manager->sort($this->vendors, 'name');
@@ -282,7 +282,7 @@ $_->com_jstree->load();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Reason</span>
-							<select class="pf-field" name="vendor_reason">
+							<select class="pf-field form-control" name="vendor_reason">
 								<option value="vendor_changed_error_po">PO Receiving Error</option>
 								<option value="vendor_changed_error_adjustment">Previous Adjustment Error</option>
 								<option value="vendor_changed_error">Other Error</option>
@@ -294,22 +294,22 @@ $_->com_jstree->load();
 			</div>
 		</div>
 	</div>
-	<div class="p_muid_option_accordian accordion">
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle alert-info">Change Cost</big>
+	<div class="p_muid_option_accordian panel-group">
+		<div class="panel panel-info">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Change Cost</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<input class="p_muid_change_this" type="hidden" name="cost_change" value="" />
 					<div class="pf-element">
 						<label><span class="pf-label">Cost</span>
-							<span class="pf-field">$</span><input class="pf-field" style="text-align: right;" type="text" name="cost" size="10" value="<?php e($this->entity->cost); ?>" /></label>
+							<span class="pf-field">$</span><input class="pf-field form-control" style="text-align: right;" type="text" name="cost" size="10" value="<?php e($this->entity->cost); ?>" /></label>
 					</div>
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Reason</span>
-							<select class="pf-field" name="cost_reason">
+							<select class="pf-field form-control" name="cost_reason">
 								<option value="cost_changed_error_po">PO Receiving Error</option>
 								<option value="cost_changed_error_adjustment">Previous Adjustment Error</option>
 								<option value="cost_changed_error">Other Error</option>
@@ -334,6 +334,6 @@ $_->com_jstree->load();
 		<input type="hidden" name="id" value="<?php e(implode(',', $guids)); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'stock/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'stock/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

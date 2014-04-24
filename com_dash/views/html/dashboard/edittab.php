@@ -177,13 +177,13 @@ $default_column = h(floor($max_columns / 3));
 	</script>
 	<div class="pf-element pf-heading">
 		<?php if ( !empty($this->key) ) { ?>
-		<button class="btn" id="p_muid_delete" type="button" style="float: right; margin-bottom: 4px;">Delete Tab</button>
+		<button class="btn btn-default" id="p_muid_delete" type="button" style="float: right; margin-bottom: 4px;">Delete Tab</button>
 		<?php } ?>
 		<h3>Editing <?php echo isset($this->tab) ? 'Tab ['.h($this->tab['name']).']' : 'New Tab'; ?></h3>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->tab['name']); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->tab['name']); ?>" /></label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Layout</span>
@@ -191,46 +191,46 @@ $default_column = h(floor($max_columns / 3));
 			<a href="javascript:void(0);" id="p_muid_add_column">Add a Column</a>
 		</span>
 		<br /><br />
-		<div class="row-fluid" style="margin-bottom: 1em;">
-			<div class="span<?php e($max_columns); ?> new_column alert-info" style="min-height: 40px; line-height: 40px; text-align: center;">Button area.</div>
+		<div class="row" style="margin-bottom: 1em;">
+			<div class="col-sm-<?php e($max_columns); ?> new_column alert-info" style="min-height: 40px; line-height: 40px; text-align: center;">Button area.</div>
 		</div>
-		<div class="row-fluid" id="p_muid_cols">
+		<div class="row" id="p_muid_cols">
 			<?php if (isset($this->tab['columns'])) { foreach ($this->tab['columns'] as $cur_key => $cur_column) {
 				$col_style = h($cur_column['size'] < 1 ? floor($max_columns * $cur_column['size']) : $cur_column['size']); ?>
-			<div class="span<?php echo $col_style; ?> new_column alert-info" id="<?php e($cur_key); ?>">
+			<div class="col-sm-<?php echo $col_style; ?> new_column alert-info" id="<?php e($cur_key); ?>">
 				<div style="padding: .4em;">
 					<div style="float: right;">
-						<a href="javascript:void(0);" class="remove_column btn btn-mini btn-info">Remove</a>
+						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-info">Remove</a>
 					</div>
-					<a href="javascript:void(0);" class="grow_column btn btn-mini">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-mini">Shrink</a>
+					<a href="javascript:void(0);" class="grow_column btn btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
 					<div style="text-align: center; margin-top: 2em;">Drag me to reorder.</div>
 				</div>
 			</div>
 			<?php } } else { ?>
-			<div class="span<?php echo $default_column; ?> new_column alert-info">
+			<div class="col-sm-<?php echo $default_column; ?> new_column alert-info">
 				<div style="padding: .4em;">
 					<div style="float: right;">
-						<a href="javascript:void(0);" class="remove_column btn btn-mini btn-info">Remove</a>
+						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-info">Remove</a>
 					</div>
-					<a href="javascript:void(0);" class="grow_column btn btn-mini">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-mini">Shrink</a>
+					<a href="javascript:void(0);" class="grow_column btn btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
 					<div style="text-align: center; margin-top: 2em;">Drag me to reorder.</div>
 				</div>
 			</div>
-			<div class="span<?php echo $default_column; ?> new_column alert-info">
+			<div class="col-sm-<?php echo $default_column; ?> new_column alert-info">
 				<div style="padding: .4em;">
 					<div style="float: right;">
-						<a href="javascript:void(0);" class="remove_column btn btn-mini btn-info">Remove</a>
+						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-info">Remove</a>
 					</div>
-					<a href="javascript:void(0);" class="grow_column btn btn-mini">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-mini">Shrink</a>
+					<a href="javascript:void(0);" class="grow_column btn btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
 					<div style="text-align: center; margin-top: 2em;">Drag me to reorder.</div>
 				</div>
 			</div>
-			<div class="span<?php echo $default_column; ?> new_column alert-info">
+			<div class="col-sm-<?php echo $default_column; ?> new_column alert-info">
 				<div style="padding: .4em;">
 					<div style="float: right;">
-						<a href="javascript:void(0);" class="remove_column btn btn-mini btn-info">Remove</a>
+						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-info">Remove</a>
 					</div>
-					<a href="javascript:void(0);" class="grow_column btn btn-mini">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-mini">Shrink</a>
+					<a href="javascript:void(0);" class="grow_column btn btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
 					<div style="text-align: center; margin-top: 2em;">Drag me to reorder.</div>
 				</div>
 			</div>
@@ -244,7 +244,7 @@ $default_column = h(floor($max_columns / 3));
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
 		<?php if ( !empty($this->key) ) { ?>
-		<input class="pf-button btn" type="button" onclick="p_muid_cancel();" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="p_muid_cancel();" value="Cancel" />
 		<?php } ?>
 	</div>
 	<br class="pf-clearing" />

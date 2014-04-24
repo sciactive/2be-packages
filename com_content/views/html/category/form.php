@@ -96,7 +96,7 @@ $_->com_ptags->load();
 					<span class="pf-label">Name</span>
 					<span class="pf-group pf-full-width">
 						<span class="pf-field" style="display: block;">
-							<input style="width: 100%;" type="text" name="name" value="<?php e($this->entity->name); ?>" />
+							<input class="form-control" style="width: 100%;" type="text" name="name" value="<?php e($this->entity->name); ?>" />
 						</span>
 					</span>
 				</label>
@@ -106,7 +106,7 @@ $_->com_ptags->load();
 					<span class="pf-label">Alias</span>
 					<span class="pf-group pf-full-width">
 						<span class="pf-field" style="display: block;">
-							<input style="width: 100%;" type="text" name="alias" value="<?php e($this->entity->alias); ?>" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
+							<input class="form-control" style="width: 100%;" type="text" name="alias" value="<?php e($this->entity->alias); ?>" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
 						</span>
 					</span>
 				</label>
@@ -126,13 +126,13 @@ $_->com_ptags->load();
 				<div class="pf-group pf-full-width">
 					<label><input class="pf-field" type="checkbox" id="p_muid_use_name" name="title_use_name" value="ON"<?php echo $this->entity->title_use_name ? ' checked="checked"' : ''; ?> /> Use name as title.</label><br />
 					<span class="pf-field" style="display: block;">
-						<input style="width: 100%;" type="text" id="p_muid_title" name="title" value="<?php e($this->entity->title); ?>" />
+						<input class="form-control" style="width: 100%;" type="text" id="p_muid_title" name="title" value="<?php e($this->entity->title); ?>" />
 					</span>
 				</div>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Title Position</span>
-					<select class="pf-field" name="title_position">
+					<select class="pf-field form-control" name="title_position">
 						<option value="null">Use Default</option>
 						<option value="prepend"<?php echo $this->entity->title_position === 'prepend' ? ' selected="selected"' : ''; ?>>Prepend to Site Title</option>
 						<option value="append"<?php echo $this->entity->title_position === 'append' ? ' selected="selected"' : ''; ?>>Append to Site Title</option>
@@ -156,7 +156,7 @@ $_->com_ptags->load();
 			<div class="pf-element">
 				<label><span class="pf-label">Link Menu</span>
 					<span class="pf-note">Link the menu item and breadcrumbs to the category's page.</span>
-					<select class="pf-field" name="link_menu">
+					<select class="pf-field form-control" name="link_menu">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->link_menu === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->link_menu === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -165,7 +165,7 @@ $_->com_ptags->load();
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Tags</span>
 				<div class="pf-group">
-					<input class="pf-field" type="text" name="content_tags" size="24" value="<?php echo isset($this->entity->content_tags) ? h(implode(',', $this->entity->content_tags)) : ''; ?>" />
+					<input class="pf-field form-control" type="text" name="content_tags" size="24" value="<?php echo isset($this->entity->content_tags) ? h(implode(',', $this->entity->content_tags)) : ''; ?>" />
 					<script type="text/javascript">
 						$_(function(){
 							$("#p_muid_form [name=content_tags]").ptags({
@@ -181,7 +181,7 @@ $_->com_ptags->load();
 			<div class="pf-element">
 				<label>
 					<span class="pf-label">Parent</span>
-					<select class="pf-field" name="parent">
+					<select class="pf-field form-control" name="parent">
 						<option value="null">-- No Parent --</option>
 						<?php
 						/**
@@ -370,11 +370,11 @@ $_->com_ptags->load();
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Name</span>
-							<input class="pf-field" type="text" name="cur_meta_tag_name" id="p_muid_cur_meta_tag_name" size="24" /></label>
+							<input class="pf-field form-control" type="text" name="cur_meta_tag_name" id="p_muid_cur_meta_tag_name" size="24" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Content</span>
-							<input class="pf-field" type="text" name="cur_meta_tag_value" size="24" /></label>
+							<input class="pf-field form-control" type="text" name="cur_meta_tag_value" size="24" /></label>
 					</div>
 				</div>
 				<br style="clear: both; height: 1px;" />
@@ -625,13 +625,13 @@ $_->com_ptags->load();
 				<span class="pf-label">Menu Entries</span>
 				<span class="pf-note">It isn't necessary to add the same conditions on menu entries. They will only appear if the Category Conditions are met.</span>
 				<div class="pf-group">
-					<input class="pf-field" type="text" name="com_menueditor_entries" id="p_muid_menu_entries" size="24" value="<?php e(json_encode($this->entity->com_menueditor_entries)); ?>" />
+					<input class="pf-field form-control" type="text" name="com_menueditor_entries" id="p_muid_menu_entries" size="24" value="<?php e(json_encode($this->entity->com_menueditor_entries)); ?>" />
 				</div>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Show Pages in Menu</span>
 					<span class="pf-note">Show the pages in this category in the menu.</span>
-					<select class="pf-field" name="show_pages_in_menu">
+					<select class="pf-field form-control" name="show_pages_in_menu">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->show_pages_in_menu === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->show_pages_in_menu === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -642,7 +642,7 @@ $_->com_ptags->load();
 		<div class="tab-pane" id="p_muid_tab_page">
 			<div class="pf-element">
 				<label><span class="pf-label">Show Title</span>
-					<select class="pf-field" name="show_title">
+					<select class="pf-field form-control" name="show_title">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->show_title === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->show_title === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -651,7 +651,7 @@ $_->com_ptags->load();
 			<div class="pf-element">
 				<label><span class="pf-label">Show Breadcrumbs</span>
 					<span class="pf-note">Show breadcrumb links on the category's page.</span>
-					<select class="pf-field" name="show_breadcrumbs">
+					<select class="pf-field form-control" name="show_breadcrumbs">
 						<option value="null">Use Default</option>
 						<option value="true"<?php echo $this->entity->show_breadcrumbs === true ? ' selected="selected"' : ''; ?>>Yes</option>
 						<option value="false"<?php echo $this->entity->show_breadcrumbs === false ? ' selected="selected"' : ''; ?>>No</option>
@@ -660,12 +660,12 @@ $_->com_ptags->load();
 			<div class="pf-element">
 				<label><span class="pf-label">Per Page</span>
 					<span class="pf-note">The number of content pages to show per page. Use 0 to show all pages. Leave blank to use the default</span>
-					<input class="pf-field" type="text" name="per_page" size="5" value="<?php e($this->entity->per_page); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="per_page" size="5" value="<?php e($this->entity->per_page); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Pagination Type</span>
 					<span class="pf-note">The pagination type determines how the links to next/previous pages look.</span>
-					<select class="pf-field" name="pagination_type">
+					<select class="pf-field form-control" name="pagination_type">
 						<option value="null">Use Default</option>
 						<option value="simple"<?php echo $this->entity->pagination_type === 'simple' ? ' selected="selected"' : ''; ?>>Simple</option>
 						<option value="blog"<?php echo $this->entity->pagination_type === 'blog' ? ' selected="selected"' : ''; ?>>Blog</option>
@@ -747,12 +747,12 @@ $_->com_ptags->load();
 				?>
 				<span class="pf-field">None of the enabled templates have any page variants.</span>
 				<?php } else { ?>
-				<select class="pf-field" id="p_muid_variant_template" style="max-width: 200px;">
+				<select class="pf-field form-control" id="p_muid_variant_template" style="max-width: 200px;">
 					<?php foreach ($variants as $cur_template => $cur_variants) { ?>
 					<option value="<?php e($cur_template); ?>"<?php echo $cur_template == $_->current_template ? ' selected="selected"' : ''; ?>><?php e("{$_->info->$cur_template->name} ($cur_template)"); ?></option>
 					<?php } ?>
 				</select>
-				<select class="pf-field" id="p_muid_variant_variant" style="max-width: 200px;">
+				<select class="pf-field form-control" id="p_muid_variant_variant" style="max-width: 200px;">
 					<?php foreach ($variants as $cur_template => $cur_variants) {
 						foreach ($cur_variants as $cur_description => $cur_variant) { ?>
 					<option class="<?php e($cur_template); ?>" value="<?php e($cur_variant); ?>"><?php e($cur_description); ?></option>
@@ -794,6 +794,6 @@ $_->com_ptags->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_content', 'category/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_content', 'category/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

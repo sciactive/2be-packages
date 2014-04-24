@@ -79,7 +79,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						dataType: "html",
 						data: {id: rows.attr("title")},
 						beforeSend: function(){
-							loader = $.pnotify({
+							loader = new PNotify({
 								title: 'Stock Location Guide',
 								text: 'Retrieving info...',
 								icon: 'picon picon-throbber',

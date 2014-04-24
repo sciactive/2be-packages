@@ -197,10 +197,10 @@ $_->com_ptags->load();
 				<span class="pf-label">Type</span>
 				<div class="pf-group">
 					<div id="p_muid_type" class="pf-field btn-group" data-toggle="buttons-radio">
-						<button class="btn<?php echo (($this->entity->type == 'component') ? ' active' : ''); ?>" type="button" data-value="component">Component</button>
-						<button class="btn<?php echo (($this->entity->type == 'template') ? ' active' : ''); ?>" type="button" data-value="template">Template</button>
-						<button class="btn<?php echo (($this->entity->type == 'system') ? ' active' : ''); ?>" type="button" data-value="system">System</button>
-						<button class="btn<?php echo (($this->entity->type == 'meta') ? ' active' : ''); ?>" type="button" data-value="meta">Meta Package</button>
+						<button class="btn btn-default<?php echo (($this->entity->type == 'component') ? ' active' : ''); ?>" type="button" data-value="component">Component</button>
+						<button class="btn btn-default<?php echo (($this->entity->type == 'template') ? ' active' : ''); ?>" type="button" data-value="template">Template</button>
+						<button class="btn btn-default<?php echo (($this->entity->type == 'system') ? ' active' : ''); ?>" type="button" data-value="system">System</button>
+						<button class="btn btn-default<?php echo (($this->entity->type == 'meta') ? ' active' : ''); ?>" type="button" data-value="meta">Meta Package</button>
 					</div>
 				</div>
 			</div>
@@ -212,7 +212,7 @@ $_->com_ptags->load();
 					<label>
 						<span class="pf-label">Component</span>
 						<span class="pf-note">Information will be gathered from the component's info file.</span>
-						<select class="pf-field" name="pkg_component">
+						<select class="pf-field form-control" name="pkg_component">
 							<option value="null">-- Choose Component --</option>
 							<?php foreach ($this->components as $cur_component) {
 								if (substr($cur_component, 0, 4) != 'com_')
@@ -232,7 +232,7 @@ $_->com_ptags->load();
 					<label>
 						<span class="pf-label">Template</span>
 						<span class="pf-note">Information will be gathered from the template's info file.</span>
-						<select class="pf-field" name="pkg_template">
+						<select class="pf-field form-control" name="pkg_template">
 							<option value="null">-- Choose Template --</option>
 							<?php foreach ($this->components as $cur_component) {
 								if (substr($cur_component, 0, 4) != 'tpl_')
@@ -252,7 +252,7 @@ $_->com_ptags->load();
 					<label>
 						<span class="pf-label">Package Name</span>
 						<span class="pf-note">Information will be gathered from the system's info file.</span>
-						<input class="pf-field" type="text" name="system_package_name" size="24" value="<?php e($this->entity->name); ?>" onkeyup="this.value = this.value.toLowerCase().replace(/[^a-z0-9_-]/g, '');" />
+						<input class="pf-field form-control" type="text" name="system_package_name" size="24" value="<?php e($this->entity->name); ?>" onkeyup="this.value = this.value.toLowerCase().replace(/[^a-z0-9_-]/g, '');" />
 					</label>
 				</div>
 			</div>
@@ -263,47 +263,47 @@ $_->com_ptags->load();
 				<div class="pf-element">
 					<label>
 						<span class="pf-label">Package Name</span>
-						<input class="pf-field" type="text" name="meta_package_name" size="24" value="<?php e($this->entity->name); ?>" onkeyup="this.value = this.value.toLowerCase().replace(/[^a-z0-9_-]/g, '');" />
+						<input class="pf-field form-control" type="text" name="meta_package_name" size="24" value="<?php e($this->entity->name); ?>" onkeyup="this.value = this.value.toLowerCase().replace(/[^a-z0-9_-]/g, '');" />
 					</label>
 				</div>
 				<div class="pf-element">
 					<label>
 						<span class="pf-label">Title (Common Name)</span>
 						<span class="pf-note">The name the user will see.</span>
-						<input class="pf-field" type="text" name="meta_name" size="24" value="<?php e($this->entity->meta['name']); ?>" />
+						<input class="pf-field form-control" type="text" name="meta_name" size="24" value="<?php e($this->entity->meta['name']); ?>" />
 					</label>
 				</div>
 				<div class="pf-element">
 					<label>
 						<span class="pf-label">Author</span>
-						<input class="pf-field" type="text" name="meta_author" size="24" value="<?php e($this->entity->meta['author']); ?>" />
+						<input class="pf-field form-control" type="text" name="meta_author" size="24" value="<?php e($this->entity->meta['author']); ?>" />
 					</label>
 				</div>
 				<div class="pf-element">
 					<label>
 						<span class="pf-label">Version</span>
-						<input class="pf-field" type="text" name="meta_version" size="24" value="<?php e($this->entity->meta['version']); ?>" />
+						<input class="pf-field form-control" type="text" name="meta_version" size="24" value="<?php e($this->entity->meta['version']); ?>" />
 					</label>
 				</div>
 				<div class="pf-element">
 					<label>
 						<span class="pf-label">License</span>
 						<span class="pf-note">Provide the URL to an online version. If that's not available, provide the name of the license.</span>
-						<input class="pf-field" type="text" name="meta_license" size="24" value="<?php e($this->entity->meta['license']); ?>" />
+						<input class="pf-field form-control" type="text" name="meta_license" size="24" value="<?php e($this->entity->meta['license']); ?>" />
 					</label>
 				</div>
 				<div class="pf-element">
 					<label>
 						<span class="pf-label">Website</span>
 						<span class="pf-note">Provide the URL.</span>
-						<input class="pf-field" type="url" name="meta_website" size="24" value="<?php e($this->entity->meta['website']); ?>" />
+						<input class="pf-field form-control" type="url" name="meta_website" size="24" value="<?php e($this->entity->meta['website']); ?>" />
 					</label>
 				</div>
 				<div class="pf-element">
 					<label>
 						<span class="pf-label">Short Description</span>
 						<span class="pf-note">Please provide a simple description, sentence caps, no period. E.g. "XML parsing library"</span>
-						<input class="pf-field" type="text" name="meta_short_description" size="24" value="<?php e($this->entity->meta['short_description']); ?>" />
+						<input class="pf-field form-control" type="text" name="meta_short_description" size="24" value="<?php e($this->entity->meta['short_description']); ?>" />
 					</label>
 				</div>
 				<div class="pf-element pf-full-width">
@@ -365,7 +365,7 @@ $_->com_ptags->load();
 						<div class="pf-element">
 							<label>
 								<span class="pf-label">Class</span>
-								<select class="pf-field" name="cur_condition_class">
+								<select class="pf-field form-control" name="cur_condition_class">
 									<option value="depend">Depend</option>
 									<option value="recommend">Recommend</option>
 									<option value="conflict">Conflict</option>
@@ -375,13 +375,13 @@ $_->com_ptags->load();
 						<div class="pf-element">
 							<label>
 								<span class="pf-label">Type</span>
-								<input class="pf-field" type="text" name="cur_condition_type" size="24" />
+								<input class="pf-field form-control" type="text" name="cur_condition_type" size="24" />
 							</label>
 						</div>
 						<div class="pf-element">
 							<label>
 								<span class="pf-label">Value</span>
-								<input class="pf-field" type="text" name="cur_condition_value" size="24" />
+								<input class="pf-field form-control" type="text" name="cur_condition_value" size="24" />
 							</label>
 						</div>
 					</div>
@@ -395,7 +395,7 @@ $_->com_ptags->load();
 				<label>
 					<span class="pf-label">Filename</span>
 					<span class="pf-note">Leave this blank to use the default filename scheme, "name-version".</span>
-					<input class="pf-field" type="text" name="filename" size="24" value="<?php e($this->entity->filename); ?>" />
+					<input class="pf-field form-control" type="text" name="filename" size="24" value="<?php e($this->entity->filename); ?>" />
 				</label>
 			</div>
 			<br class="pf-clearing" />
@@ -456,7 +456,7 @@ $_->com_ptags->load();
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Search: </span>
-				<input class="pf-field" id="p_muid_additional" type="text" size="24" />
+				<input class="pf-field form-control" id="p_muid_additional" type="text" size="24" />
 				<button class="pf-button btn btn-primary" type="button" onclick="$_.com_packager_add_file($('#p_muid_additional').val());">Add</button>
 			</div>
 			<div class="pf-element">
@@ -472,7 +472,7 @@ $_->com_ptags->load();
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Search: </span>
-				<input class="pf-field" id="p_muid_exclude" type="text" size="24" />
+				<input class="pf-field form-control" id="p_muid_exclude" type="text" size="24" />
 				<button class="pf-button btn btn-primary" type="button" onclick="$_.com_packager_exc_file($('#p_muid_exclude').val());">Add</button>
 			</div>
 			<div class="pf-element">
@@ -572,7 +572,7 @@ $_->com_ptags->load();
 			</div>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label"><img class="pf-field" alt="Icon Preview" id="p_muid_icon_preview" src="<?php e($this->entity->icon); ?>" /></span>
-				<input class="pf-field puploader" id="p_muid_icon" type="text" name="icon" value="<?php e($this->entity->icon); ?>" />
+				<input class="pf-field form-control puploader" id="p_muid_icon" type="text" name="icon" value="<?php e($this->entity->icon); ?>" />
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Screenshots</h3>
@@ -580,14 +580,14 @@ $_->com_ptags->load();
 			<div class="pf-element">
 				<span class="pf-label">Add a Screenshot</span>
 				<div class="pf-group">
-					<input class="pf-field puploader" id="p_muid_screen_upload" type="text" value="" />
+					<input class="pf-field form-control puploader" id="p_muid_screen_upload" type="text" value="" />
 					<div class="pf-field" id="p_muid_max_screenshots" style="display: none;">You currently have <span id="p_muid_screenshot_count">0</span> screenshots. If you add more than 10, most repositories will reject the package.</div>
 				</div>
 			</div>
 			<div class="pf-element pf-full-width">
 				<div class="pf-note">
 					Drag image here to remove:
-					<div class="ui-widget-content ui-corner-all" id="p_muid_image_trash" style="width: 32px; height: 32px; padding: 44px;">
+					<div class="ui-widget-content ui-corner-all" id="p_muid_image_trash" style="width: 52px; height: 52px; padding: 10px;">
 						<div class="picon-32 picon-user-trash" style="width: 32px; height: 32px;"></div>
 					</div>
 				</div>
@@ -612,6 +612,6 @@ $_->com_ptags->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_packager', 'package/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_packager', 'package/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

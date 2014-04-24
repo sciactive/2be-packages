@@ -30,39 +30,39 @@ $this->note = 'This is example content.';
 	malesuada placerat dui, eget tempus erat dignissim id.
 </p>
 <ul class="thumbnails">
-	<li class="span4">
+	<li class="col-sm-4">
 		<a class="thumbnail" href="#">
 			<img alt="" src="http://placehold.it/360x268" />
 		</a>
 	</li>
-	<li class="span2">
+	<li class="col-sm-2">
 		<a class="thumbnail" href="#">
 			<img alt="" src="http://placehold.it/160x120" />
 		</a>
 	</li>
-	<li class="span2">
+	<li class="col-sm-2">
 		<a class="thumbnail" href="#">
 			<img alt="" src="http://placehold.it/160x120" />
 		</a>
 	</li>
-	<li class="span2">
+	<li class="col-sm-2">
 		<a class="thumbnail" href="#">
 			<img alt="" src="http://placehold.it/160x120" />
 		</a>
 	</li>
-	<li class="span2">
+	<li class="col-sm-2">
 		<a class="thumbnail" href="#">
 			<img alt="" src="http://placehold.it/160x120" />
 		</a>
 	</li>
-	<li class="span2">
+	<li class="col-sm-2">
 		<a class="thumbnail" href="#">
 			<img alt="" src="http://placehold.it/160x120" />
 		</a>
 	</li>
 </ul>
-<div class="row-fluid">
-	<div class="span6">
+<div class="row">
+	<div class="col-sm-6">
 		<h3>Fusce Sit Amet</h3>
 		<p>
 			Phasellus eu lectus massa. Vestibulum eu sem risus. Proin lacus
@@ -72,13 +72,13 @@ $this->note = 'This is example content.';
 			sed placerat nibh elementum eu.
 		</p>
 	</div>
-	<div class="span3">
+	<div class="col-sm-3">
 		<h3>In Varius Risus</h3>
 		<div style="padding-top: 2em;">
-			<button class="btn btn-large">Morbi Est Tortor</button>
+			<button class="btn btn-default btn-lg">Morbi Est Tortor</button>
 		</div>
 	</div>
-	<div class="span3">
+	<div class="col-sm-3">
 		<h3><a href="#">Duis Convallis</a></h3>
 		<p>
 			Duis <a href="#">convallis</a> est ut augue fringilla non elementum risus cursus.
@@ -90,8 +90,8 @@ $this->note = 'This is example content.';
 		</ul>
 	</div>
 </div>
-<div class="row-fluid">
-	<div class="span4">
+<div class="row">
+	<div class="col-sm-4">
 		<h3>Typography</h3>
 		<p>
 			<strong>strong</strong> <em>em</em> <abbr title="abbreviation">abbr</abbr> <b>b tag</b> <i>i tag</i> <code>code</code>
@@ -103,7 +103,7 @@ $this->note = 'This is example content.';
 			<abbr title="Phone">P:</abbr> (800) 555-1234
 		</address>
 	</div>
-	<div class="span4">
+	<div class="col-sm-4">
 		<h3>Definition List</h3>
 		<dl>
 			<dt>Praesent</dt>
@@ -114,7 +114,7 @@ $this->note = 'This is example content.';
 			<dd>Aliquam varius fermentum tellus, vel rutrum nisi sagittis ut.</dd>
 		</dl>
 	</div>
-	<div class="span4">
+	<div class="col-sm-4">
 		<h1>h1. Heading</h1>
 		<h2>h2. Heading</h2>
 		<h3>h3. Heading</h3>
@@ -123,8 +123,8 @@ $this->note = 'This is example content.';
 		<h6>h6. Heading</h6>
 	</div>
 </div>
-<div class="row-fluid">
-	<div class="span6">
+<div class="row">
+	<div class="col-sm-6">
 		<h3>Blockquote</h3>
 		<p>Blockquote with a cite:</p>
 		<blockquote>
@@ -133,13 +133,13 @@ $this->note = 'This is example content.';
 			<small>Generic McPerson in <cite title="The pre tag example.">The Next Paragraph</cite></small>
 		</blockquote>
 	</div>
-	<div class="span6">
+	<div class="col-sm-6">
 		<h3>Pre Tag</h3>
 		<pre>Ut id lectus nec mauris varius laoreet at sed ligula. Mauris tempus varius nibh at placerat. Ut mollis, dui quis facilisis luctus, nibh diam dignissim eros, vel sagittis felis lorem a velit.</pre>
 	</div>
 </div>
-<div class="row-fluid">
-	<div class="span6">
+<div class="row">
+	<div class="col-sm-6">
 		<h3>Default Table</h3>
 		<table>
 			<thead>
@@ -168,7 +168,7 @@ $this->note = 'This is example content.';
 			</tbody>
 		</table>
 	</div>
-	<div class="span6">
+	<div class="col-sm-6">
 		<h3>Styled Table</h3>
 		<table class="table">
 			<thead>

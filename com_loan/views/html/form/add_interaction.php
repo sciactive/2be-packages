@@ -29,7 +29,7 @@ $_->icons->load();
 	<div id="p_muid_controls" class="clearfix pf-form">
 		<div class="pf-element" style="clear:left;max-width:100%">
 			<label><span class="pf-label">Interaction Type</span>
-				<select class="interaction_type" name="interaction_type" style="width:140px; max-width:90%;">
+				<select class="interaction_type form-control" name="interaction_type" style="width:140px; max-width:90%;">
 					<?php foreach ($_->config->com_customer->interaction_types as $cur_type) {
 						$cur_type = explode(':', $cur_type);
 						echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
@@ -38,7 +38,7 @@ $_->icons->load();
 		</div>
 		<div class="pf-element" style="clear:left;max-width:100%;">
 			<label><span class="pf-label">Interaction Status</span>
-				<select class="interaction_status" name="interaction_status" style="width:140px; max-width:90%;">
+				<select class="interaction_status form-control" name="interaction_status" style="width:140px; max-width:90%;">
 					<option value="">Status</option>
 					<option value="open">Open</option>
 					<option value="closed">Closed</option>

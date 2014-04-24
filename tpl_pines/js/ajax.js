@@ -37,7 +37,7 @@ var load_page_ajax = function(url, type, data){
 		beforeSend: function(xhr) {
 			// TODO: Detect redirects.
 			if (!loader)
-				loader = $.pnotify({
+				loader = new PNotify({
 					text: "Loading...",
 					icon: "picon picon-throbber",
 					width: "120px",

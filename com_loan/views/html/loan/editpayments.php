@@ -184,13 +184,13 @@ switch ($this->entity->payment_frequency) {
 	});
 </script>
 <div id="p_muid_loan_toolbar" style="margin:10px 0;">
-	<a class="btn" href="<?php e(pines_url('com_loan', 'loan/list')); ?>">
+	<a class="btn btn-default" href="<?php e(pines_url('com_loan', 'loan/list')); ?>">
 		<span class="picon picon-go-parent-folder" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Loans</span>
 	</a>
-	<button id="p_muid_make_payment" class="btn" type="button">
+	<button id="p_muid_make_payment" class="btn btn-default" type="button">
 		<span class="picon picon-wallet-open" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Make Payment</span>
 	</button>
-	<a class="btn" href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>">
+	<a class="btn btn-default" href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>">
 		<span class="picon picon-view-refresh" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Refresh</span>
 	</a>
 </div>
@@ -492,8 +492,8 @@ switch ($this->entity->payment_frequency) {
 										});
 									</script>
 									<tr>
-										<td><input id="<?php echo 'receive_date_'.$edit_unique_id; ?>" type="text" value="<?php e(format_date($pbd['date_received'], "date_sort")); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="receive_date[]"/></td>
-										<td><input id="<?php echo 'payment_amount_'.$edit_unique_id; ?>" type="text" value="<?php echo '$'.h($_->com_sales->round($pbd['payment_amount'], true)); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="payment_amount[]"/></td>
+										<td><input class="form-control" id="<?php echo 'receive_date_'.$edit_unique_id; ?>" type="text" value="<?php e(format_date($pbd['date_received'], "date_sort")); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="receive_date[]"/></td>
+										<td><input class="form-control" id="<?php echo 'payment_amount_'.$edit_unique_id; ?>" type="text" value="<?php echo '$'.h($_->com_sales->round($pbd['payment_amount'], true)); ?>" style="color:inherit;padding:4px 1px;margin:0;display:inline;text-align:right" disabled="disabled" size="10" name="payment_amount[]"/></td>
 
 										<?php if (gatekeeper('com_loan/deletepayments')) {
 											?>
@@ -502,7 +502,7 @@ switch ($this->entity->payment_frequency) {
 										} ?>
 
 										<td>
-											<select id="<?php echo 'error_type_'.$edit_unique_id; ?>"  disabled="disabled" style="color:inherit;padding:4px 1px;margin:0;display:inline;" name="error_type[]">
+											<select class="form-control" id="<?php echo 'error_type_'.$edit_unique_id; ?>"  disabled="disabled" style="color:inherit;padding:4px 1px;margin:0;display:inline;" name="error_type[]">
 												<option id="<?php echo 'blank_error_'.$edit_unique_id; ?>" value="blank">Select</option>
 												<option value="input error">Input Error</option>
 												<option value="code error">Code Error</option>
@@ -511,10 +511,10 @@ switch ($this->entity->payment_frequency) {
 											</select>
 										</td>
 										<td>
-											<button type="button" class="pf-button btn btn-mini" name="<?php echo 'edit_button_'.$edit_unique_id; ?>" id="<?php e($pbd['payment_id']); ?>"><i class="icon-pencil"></i> edit</button>
+											<button type="button" class="pf-button btn btn-default btn-xs" name="<?php echo 'edit_button_'.$edit_unique_id; ?>" id="<?php e($pbd['payment_id']); ?>"><i class="fa fa-pencil"></i> edit</button>
 										</td>
 										<td>
-											<button type="button" class="pf-button btn btn-mini" name="<?php echo 'reset_button_'.$edit_unique_id; ?>"><i class="icon-refresh"></i> reset</button>
+											<button type="button" class="pf-button btn btn-default btn-xs" name="<?php echo 'reset_button_'.$edit_unique_id; ?>"><i class="fa fa-refresh"></i> reset</button>
 											<input type="hidden" id="<?php echo 'payment_id_'.$edit_unique_id; ?>" name="payment_id[]" value="<?php e($pbd['payment_id']); ?>" disabled="disabled" />
 										</td>
 									</tr>
@@ -562,11 +562,11 @@ switch ($this->entity->payment_frequency) {
 									<span class="pf-label" style="width:230px;margin-top:15px;">Provide Name or Description.
 										<span class="pf-note">A record will be saved with this name.</span>
 									</span>
-									<input class="pf-field" type="text" name="delete_all_payments_name" id="delete_all_payments_name_input" />
+									<input class="pf-field form-control" type="text" name="delete_all_payments_name" id="delete_all_payments_name_input" />
 								</div>
 								<div id="delete_all_payments_reason" class="pf-element" style="float:left;">
 									<span class="pf-label" style="width:230px;">Provide Reason for Deletion.</span>
-									<input class="pf-field" type="text" name="delete_all_payments_reason" id="delete_all_payments_reason_input" />
+									<input class="pf-field form-control" type="text" name="delete_all_payments_reason" id="delete_all_payments_reason_input" />
 								</div>
 							</div>
 							<div class="pf-element" style="float:right;clear:none;width:auto;margin-top:10px;">
@@ -783,7 +783,7 @@ switch ($this->entity->payment_frequency) {
 											});
 										});
 									</script>
-									<button class="pf-field btn btn-mini" id="p_muid_button_<?php echo $uniqueID2; ?>" type="button" style="float: right;">view</button>
+									<button class="pf-field btn btn-default btn-xs" id="p_muid_button_<?php echo $uniqueID2; ?>" type="button" style="float: right;">view</button>
 									<div id="p_muid_details_<?php echo $uniqueID2; ?>" title="Extended Details" style="display:none;">
 										<div class="pf-form">
 											<div class="pf-element pf-heading">
@@ -1511,7 +1511,7 @@ switch ($this->entity->payment_frequency) {
 												});
 											</script>
 											<td style="text-align:right;">
-												<button class="pf-field btn btn-mini" id="p_muid_button<?php echo '_'.$uniqueID; ?>" type="button" style="float: right;">view</button>
+												<button class="pf-field btn btn-default btn-xs" id="p_muid_button<?php echo '_'.$uniqueID; ?>" type="button" style="float: right;">view</button>
 												<div id="p_muid_details<?php echo '_'.$uniqueID; ?>" title="Extended Details" style="display:none;">
 													<div class="pf-form">
 														<div class="pf-element pf-heading">

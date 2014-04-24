@@ -65,7 +65,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				dataType: "json",
 				data: {"q": search_string, "location": location, "descendants": descendants, "all_time": all_time, "start_date": start_date, "end_date": end_date},
 				beforeSend: function(){
-					loader = $.pnotify({
+					loader = new PNotify({
 						title: 'Search',
 						text: 'Searching the database...',
 						icon: 'picon picon-throbber',
@@ -139,7 +139,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							comments: $("#p_muid_interaction_dialog [name=interaction_comments]").val()
 						},
 						beforeSend: function(){
-							loader = $.pnotify({
+							loader = new PNotify({
 								title: 'Logging',
 								text: 'Documenting customer interaction...',
 								icon: 'picon picon-throbber',
@@ -374,7 +374,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<?php if (gatekeeper('com_customer/manageinteractions') && $_->config->com_customer->com_calendar) { ?>
 		<div class="pf-element pf-full-width">
 			<label><span class="pf-label">Employee</span>
-				<select name="employee">
+				<select class="form-control" name="employee">
 				<?php foreach ($_->com_hrm->get_employees() as $cur_employee) {
 					$selected = $_SESSION['user']->is($cur_employee) ? ' selected="selected"' : '';
 					echo '<option value="'.$cur_employee->guid.'"'.$selected.'>'.h($cur_employee->name).'</option>"';
@@ -390,7 +390,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<?php } ?>
 		<div class="pf-element">
 			<label><span class="pf-label">Interaction Type</span>
-				<select name="interaction_type">
+				<select class="form-control" name="interaction_type">
 					<?php foreach ($_->config->com_customer->interaction_types as $cur_type) {
 						$cur_type = explode(':', $cur_type);
 						echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
@@ -399,14 +399,14 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Date</span>
-				<input type="text" size="22" name="interaction_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+				<input class="form-control" type="text" size="22" name="interaction_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element pf-full-width">
 			<span class="pf-label">Time</span>
 			<span class="combobox">
-				<input type="text" name="interaction_time" size="18" value="<?php e(format_date(time(), 'time_short')); ?>" />
+				<input class="form-control" type="text" name="interaction_time" size="18" value="<?php e(format_date(time(), 'time_short')); ?>" />
 				<a href="javascript:void(0);" class="ui-icon ui-icon-triangle-1-s"></a>
-				<select style="display: none;">
+				<select class="form-control" style="display: none;">
 					<option value="12:00 AM">12:00 AM</option>
 					<option value="1:00 AM">1:00 AM</option>
 					<option value="2:00 AM">2:00 AM</option>
@@ -437,7 +437,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element">
 			<label>
 				<span class="pf-label">Status</span>
-				<select name="interaction_status">
+				<select class="form-control" name="interaction_status">
 					<option value="open">Open</option>
 					<option value="closed">Closed</option>
 				</select>

@@ -112,13 +112,13 @@ if (!is_array($loan_ids))
 				beforeSend: function(){
 					button.text('...');
 					status.removeClass('text-success text-error').addClass('text-info');
-					status.html('<i class="icon-spin icon-spinner"></i> Saving...');
+					status.html('<i class="fa fa-spinner fa-spin"></i> Saving...');
 					status.show();
 				},
 				error: function(){
 					button.text('Error').toggleClass('btn-danger btn-info disabled');
 					status.removeClass('text-success text-info').addClass('text-error');
-					status.html('<i class="icon-remove"></i> Connect Error');
+					status.html('<i class="fa fa-times"></i> Connect Error');
 					status.show();
 					return;
 				},
@@ -126,28 +126,28 @@ if (!is_array($loan_ids))
 					if (data.failed) {
 						button.text('Failed').toggleClass('btn-danger btn-info disabled');
 						status.removeClass('text-success text-info').addClass('text-error');
-						status.html('<i class="icon-remove"></i> Failed');
+						status.html('<i class="fa fa-times"></i> Failed');
 						status.show();
 						return;
 					}
 					if (data.no_loan) {
 						button.text('Error').toggleClass('btn-danger btn-info disabled');
 						status.removeClass('text-success text-info').addClass('text-error');
-						status.html('<i class="icon-remove"></i> No Loan Found');
+						status.html('<i class="fa fa-times"></i> No Loan Found');
 						status.show();
 						return;
 					}
 					if (data.error) {
 						button.text('Error').toggleClass('btn-danger btn-info disabled');
 						status.removeClass('text-success text-info').addClass('text-error');
-						status.html('<i class="icon-remove"></i> Error');
+						status.html('<i class="fa fa-times"></i> Error');
 						status.show();
 						return;
 					}
 					if (data.success) {
 						button.text('Processed').toggleClass('btn-info btn-success disabled');
 						status.removeClass('text-error text-info').addClass('text-success');
-						status.html('<i class="icon-ok"></i> Saved!');
+						status.html('<i class="fa fa-check"></i> Saved!');
 						status.show();
 						return;
 					}
@@ -172,10 +172,10 @@ if (!is_array($loan_ids))
 			
 			// Missing Amount
 			if (!amount.length)
-				status.removeClass('text-info text-success').addClass('text-error').html('<i class="icon-remove"></i> Missing Amount');
+				status.removeClass('text-info text-success').addClass('text-error').html('<i class="fa fa-times"></i> Missing Amount');
 			// Missing Date
 			if (!date.length)
-				status.removeClass('text-info text-success').addClass('text-error').html('<i class="icon-remove"></i> Missing Date');
+				status.removeClass('text-info text-success').addClass('text-error').html('<i class="fa fa-times"></i> Missing Date');
 			
 			if (!amount.length || !date.length) {
 				status.show();
@@ -286,7 +286,7 @@ if (!is_array($loan_ids))
 				<td class="vertical-middle"><span class="nextdue-tooltip" data-due="<?php echo (date("c",$cur_loan->temp_next_due_date)); ?>" data-date="<?php echo (format_date($cur_loan->temp_next_due_date, 'date_short')); ?>"><?php e('$'.number_format($cur_loan->temp_next_due, 2, '.', '')); ?></span></td>
 				<td class="vertical-middle"><span class="<?php echo ($cur_loan->temp_past_due > 0) ? 'pastdue-tooltip': ''; ?>" data-due="<?php echo (date("c", $cur_loan->temp_past_due_date));?>" data-date="<?php echo (format_date($cur_loan->temp_past_due_date, 'date_short')); ?>"><?php e('$'.number_format($cur_loan->temp_past_due, 2, '.', '')); ?></span></td>
 				<td class="vertical-middle text-right">
-					<input class="payment-input  text-right <?php echo ($cur_loan->temp_past_due > 0) ? 'text-error' : ''; ?>" type="text" tabindex="<?php echo $c+1; ?>" name="payment" value="<?php e('$'.number_format($cur_loan->temp_next_due + $cur_loan->temp_past_due, 2, '.', '')); ?>" placeholder="Amount"/>
+					<input class="payment-input form-control text-right <?php echo ($cur_loan->temp_past_due > 0) ? 'text-error' : ''; ?>" type="text" tabindex="<?php echo $c+1; ?>" name="payment" value="<?php e('$'.number_format($cur_loan->temp_next_due + $cur_loan->temp_past_due, 2, '.', '')); ?>" placeholder="Amount"/>
 				</td>
 			</tr>
 			<tr class="action-row">
@@ -295,14 +295,14 @@ if (!is_array($loan_ids))
 					<div class="control-group">
 						<div class="controls">
 							<div class="input-prepend">
-								<span class="add-on"><i class="icon-circle-arrow-down"></i></span>
-								<input tabindex="<?php echo $c; ?>" type="text" class="payment-date" name="date_received" placeholder="Receive Date"/>
+								<span class="add-on"><i class="fa fa-arrow-circle-down"></i></span>
+								<input tabindex="<?php echo $c; ?>" type="text" class="payment-date form-control" name="date_received" placeholder="Receive Date"/>
 							</div>
 						</div>
 					</div>
 					
 				</td>
-				<td colspan="2" class="vertical-middle text-center"><span class="payment-status text-success hide"><i class="icon-ok"></i> Saved!</span></td>
+				<td colspan="2" class="vertical-middle text-center"><span class="payment-status text-success hide"><i class="fa fa-check"></i> Saved!</span></td>
 				<td colspan="1" class="text-right"><button tabindex="<?php echo $c+2; ?>" class="btn btn-info payment-process" type="text" date-id="<?php e($cur_loan->guid); ?>">Process</button></td>
 			</tr>
 			<?php } $c += 3; } ?>
@@ -311,6 +311,6 @@ if (!is_array($loan_ids))
 	<?php if ($c > 4) { ?>
 	<hr/>
 	<p class="text-center"><input type="checkbox" class="accurate-checkbox" name="accurate" value="on"/> <small>I will only press this button when all of these values are correct and accurate.</small></p>
-	<button type="button" class="btn btn-info btn-block btn-large process-all">Process All</button><hr/>
+	<button type="button" class="btn btn-info btn-block btn-lg process-all">Process All</button><hr/>
 	<?php } ?>
 </div>

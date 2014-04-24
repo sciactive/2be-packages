@@ -15,9 +15,16 @@ return array(
 	array(
 		'name' => 'theme',
 		'cname' => 'Theme',
-		'description' => 'Bootstrap theme. To use your own, put the files in the "custom" folder under com_bootstrap/includes/themes.',
+		'description' => 'Bootstrap theme. To use your own, put the css file in com_bootstrap/includes/css, and edit the themes.json file.',
 		'value' => 'normal',
-		'options' => pines_scandir('components/com_bootstrap/includes/themes/'),
+		'options' => function () {
+			$themes = json_decode(file_get_contents('components/com_bootstrap/includes/css/themes.json'), true);
+			$return = array();
+			foreach ($themes as $key => $theme) {
+				$return[$theme['name']] = $key;
+			}
+			return $return;
+		},
 		'peruser' => true,
 	),
 	array(
@@ -25,13 +32,6 @@ return array(
 		'cname' => 'Total Grid Columns',
 		'description' => 'You must put the total number of columns in your grid layout here. This is used by other components to style their content.',
 		'value' => 12,
-		'peruser' => true,
-	),
-	array(
-		'name' => 'responsive',
-		'cname' => 'Include Responsive Stylesheet',
-		'description' => 'Include the responsive stylesheet for mobile browsers. Don\'t set this if you\'re using a custom theme and there is no bootstrap-responsive.min.css file in the "css" folder.',
-		'value' => true,
 		'peruser' => true,
 	),
 	array(

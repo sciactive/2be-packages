@@ -62,25 +62,25 @@ if (!is_array($loan_ids))
 				dataType: "json",
 				data: {'id': loan_guid, 'status': status},
 				beforeSend: function(){
-					results.addClass('text-info').removeClass('text-error text-success').html('<i class="icon-spin icon-spinner"></i> Saving...');
+					results.addClass('text-info').removeClass('text-error text-success').html('<i class="fa fa-spinner fa-spin"></i> Saving...');
 				},
 				error: function(XMLHttpRequest, textStatus){
-					results.addClass('text-error').removeClass('text-info text-success').html('<i class="icon-remove"></i> Error');
+					results.addClass('text-error').removeClass('text-info text-success').html('<i class="fa fa-times"></i> Error');
 					item.append('<div class="text-error error-message">An error occurred: </div>\n'+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
 				success: function(data){
 					if (data.no_loan) {
-						results.addClass('text-error').removeClass('text-info text-success').html('<i class="icon-remove"></i> Error');
+						results.addClass('text-error').removeClass('text-info text-success').html('<i class="fa fa-times"></i> Error');
 						item.append('<div class="text-error error-message">Loan was not accessible. Do you have permission? Was it deleted?</div>');
 						return;
 					}
 					if (data.failed) {
-						results.addClass('text-error').removeClass('text-info text-success').html('<i class="icon-remove"></i> Error');
+						results.addClass('text-error').removeClass('text-info text-success').html('<i class="fa fa-times"></i> Error');
 						item.append('<div class="text-error error-message">The status was not changed on the loan.</div>');
 						return;
 					}
 					if (data.success) {
-						results.addClass('text-success').removeClass('text-info text-error').html('<i class="icon-ok"></i> Changed!');
+						results.addClass('text-success').removeClass('text-info text-error').html('<i class="fa fa-check"></i> Changed!');
 						// Make the grid re-search.
 						var link = $('<a href="javascript:void(0);">refresh grid with same search.</a>');
 						link.click(function(){
@@ -104,9 +104,9 @@ if (!is_array($loan_ids))
 			$cur_loan = com_loan_loan::factory((int) $cur_id); ?>
 	<div class="item clearfix">
 		<h4><?php e($cur_loan->customer->name); ?>  <span class="loan-label pull-right">Loan ID: <?php e($cur_loan->id); ?></span></h4>
-		<div class="name row-fluid">
-			<div class="span8">
-				<select class="span12" name="loan_status" data-guid="<?php echo $cur_loan->guid; ?>">
+		<div class="name row">
+			<div class="col-sm-8">
+				<select class="form-control col-sm-12" name="loan_status" data-guid="<?php echo $cur_loan->guid; ?>">
 					<option value="">None</option>
 					<?php echo (gatekeeper('com_loan/activeloan')) ?  ('<option value="active" '.(($cur_loan->has_tag('active')) ? 'selected=selected' : '').'>Active</option>') : ''; ?>
 					<?php echo (gatekeeper('com_loan/payoffloan')) ?  ('<option value="paidoff" '.(($cur_loan->has_tag('paidoff')) ? 'selected=selected' : '').'>Paid in Full</option>') : ''; ?>
@@ -115,7 +115,7 @@ if (!is_array($loan_ids))
 					<?php echo (gatekeeper('com_loan/soldloan')) ?  ('<option value="sold" '.(($cur_loan->has_tag('sold')) ? 'selected=selected' : '').'>Sold</option>') : ''; ?>
 				</select>
 			</div>
-            <div class="results text-success span4"></div>
+            <div class="results text-success col-sm-4"></div>
 		</div>
 	</div>
 	<?php } ?>

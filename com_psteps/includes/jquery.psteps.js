@@ -165,7 +165,7 @@
 						} else if (validate_result) {
 							title.removeClass('step-warning btn-info btn-warning btn-danger step-error step-info-error step-info-incomplete step-info-warning').addClass('btn-success')
 							if (opts.check_marks)
-								title.find('i.step-mark').remove().end().prepend('<i class="icon-ok step-mark"></i> ');
+								title.find('i.step-mark').remove().end().prepend('<i class="fa fa-check step-mark"></i> ');
 						} else if (!validate_result) {
 							title.removeClass('step-warning btn-info btn-success btn-danger btn-warning step-error step-info-error step-info-warning')
 								.addClass('btn-info step-info-incomplete')
@@ -416,11 +416,11 @@
 				if (title.hasClass('step-warning')) {
 					title.removeClass('btn-info btn-success').addClass('btn-warning')
 					if (opts.check_marks)
-						title.find('i.step-mark').remove().end().prepend('<i class="icon-remove step-mark"></i> ');
+						title.find('i.step-mark').remove().end().prepend('<i class="fa fa-times step-mark"></i> ');
 				} else if (title.hasClass('step-error')) {
 					title.removeClass('btn-info btn-success').addClass('btn-danger')
 					if (opts.check_marks)
-						title.find('i.step-mark').remove().end().prepend('<i class="icon-remove step-mark"></i> ');
+						title.find('i.step-mark').remove().end().prepend('<i class="fa fa-times step-mark"></i> ');
 				}
 			};
 

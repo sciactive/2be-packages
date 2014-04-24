@@ -21,7 +21,7 @@ $this->note = 'Use this form to add a trusted repository.';
 		<label><span class="pf-label">Repository Filename</span>
 			<span class="pf-note">The repository's filename will determine its priority. Repositories are loaded in order alphabetically.</span>
 			<span class="pf-note">Ex: "repo_1"</span>
-			<input class="pf-field" type="text" name="filename" size="24" /></label>
+			<input class="pf-field form-control" type="text" name="filename" size="24" /></label>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Repository Certificate</h3>
@@ -29,7 +29,7 @@ $this->note = 'Use this form to add a trusted repository.';
 	<div class="pf-element">
 		<label><span class="pf-label">Certificate URL</span>
 			<span class="pf-note">The public URL of the repository's certificate.</span>
-			<input class="pf-field" type="text" name="cert_url" size="32" /></label>
+			<input class="pf-field form-control" type="text" name="cert_url" size="32" /></label>
 	</div>
 	<div class="pf-element">
 		<strong>OR</strong>

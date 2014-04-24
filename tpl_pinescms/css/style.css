@@ -174,21 +174,21 @@ a:visited {
 	margin: 7px 0 0 15px;
 }
 
-.navbar-inner {
+#nav {
 	background: url('../images/pines-navbar-bg-green.png') repeat-x;
-	min-height: 33px;
+	min-height: 34px;
 	filter: none;
 }
-.scheme-blue .navbar-inner {
+.scheme-blue #nav {
 	background-image: url('../images/pines-navbar-bg-blue.png');
 }
-.navbar-inner a,.navbar-inner a:link,.navbar-inner a:visited {
+#nav .container a,#nav .container a:link,#nav .container a:visited {
 	color:#103101 !important;
 	text-decoration: none;
 	text-rendering: optimizelegibility;
 	text-shadow: 1px 0.1em #A5CD60;
 }
-.scheme-blue .navbar-inner a,.scheme-blue .navbar-inner a:link,.scheme-blue .navbar-inner a:visited {
+.scheme-blue #nav .container a,.scheme-blue #nav .container a:link,.scheme-blue #nav .container a:visited {
 	color:#0B4D5C !important;
 	text-shadow: 1px 0.1em #74B7C7;
 }
@@ -357,11 +357,11 @@ textarea.ui-widget-content {
 }
 
 /* Modifies Bootstrap */
-#shadow_container.container-fluid, #copyright-line-container.container-fluid {
+#shadow_container.container, #copyright-line-container.container {
 	padding: 0;
 }
 /* Hide shadow edges on fluid layout. */
-.container-fluid #shadow_box:after, .container-fluid #copyright-line-edges:after {
+.container #shadow_box:after, .container #copyright-line-edges:after {
 	width:0;
 }
 /* pnotify */

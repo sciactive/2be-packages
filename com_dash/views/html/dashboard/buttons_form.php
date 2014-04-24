@@ -124,9 +124,9 @@ $this->title = 'Edit Buttons';
 		<div id="p_muid_cur_buttons" class="buttons button_well well <?php e($this->buttons_size); ?>">
 			<?php foreach ((array) $this->current_buttons as $cur_button) {
 				if ($cur_button == 'separator') { ?>
-			<a class="separator btn disabled"><span>&nbsp;</span></a>
+			<a class="separator btn btn-default disabled"><span>&nbsp;</span></a>
 				<?php } elseif ($cur_button == 'line_break') { ?>
-			<a class="line_break btn disabled"><span>&nbsp;</span></a>
+			<a class="line_break btn btn-default disabled"><span>&nbsp;</span></a>
 				<?php } else {
 					$cur_def = $_->com_dash->get_button_def($cur_button);
 					// Check its conditions.
@@ -134,7 +134,7 @@ $this->title = 'Edit Buttons';
 						if (!$_->depend->check($cur_type, $cur_value))
 							continue 2;
 					} ?>
-			<a class="button btn" title="<?php e($cur_def['description']); ?>">
+			<a class="button btn btn-default" title="<?php e($cur_def['description']); ?>">
 				<span class="component" style="display: none;"><?php e($cur_button['component']); ?></span>
 				<span class="button_name" style="display: none;"><?php e($cur_button['button']); ?></span>
 				<span class="picon <?php echo $this->buttons_size == 'large' ? 'picon-32' : ''; ?> <?php e($cur_def['class']); ?>"><?php e($cur_def['text']); ?></span>
@@ -143,7 +143,7 @@ $this->title = 'Edit Buttons';
 		</div>
 	</div>
 	<div class="pf-element pf-full-width clearfix">
-		<div class="ui-widget-content ui-corner-all" id="p_muid_trash" style="float: right; margin-left: .5em; width: 32px; height: 32px; padding: 10px;">
+		<div class="ui-widget-content ui-corner-all" id="p_muid_trash" style="float: right; margin-left: .5em; width: 52px; height: 52px; padding: 10px;">
 			<div class="picon-32 picon-user-trash" style="width: 32px; height: 32px;"></div>
 		</div>
 		Drag buttons from the following list to add to your dashboard. Drag to the trash can to remove them. You can also sort your current buttons.
@@ -154,8 +154,8 @@ $this->title = 'Edit Buttons';
 		</div>
 		<div class="pf-element pf-full-width">
 			<div class="button_well <?php e($this->buttons_size); ?>">
-				<a class="separator btn disabled"><span>&nbsp;</span></a>
-				<a class="line_break btn disabled"><span>&nbsp;</span></a>
+				<a class="separator btn btn-default disabled"><span>&nbsp;</span></a>
+				<a class="line_break btn btn-default disabled"><span>&nbsp;</span></a>
 			</div>
 		</div>
 		<?php foreach ((array) $this->buttons as $cur_component => $cur_button_list) { ?>
@@ -165,7 +165,7 @@ $this->title = 'Edit Buttons';
 		<div class="pf-element pf-full-width">
 			<div class="button_well <?php e($this->buttons_size); ?>">
 				<?php foreach ($cur_button_list as $cur_name => $cur_button) { ?>
-				<a class="button btn" title="<?php e($cur_button['description']); ?>">
+				<a class="button btn btn-default" title="<?php e($cur_button['description']); ?>">
 					<span class="component" style="display: none;"><?php e($cur_component); ?></span>
 					<span class="button_name" style="display: none;"><?php e($cur_name); ?></span>
 					<span class="picon <?php echo $this->buttons_size == 'large' ? 'picon-32' : ''; ?> <?php e($cur_button['class']); ?>"><?php e($cur_button['text']); ?></span>

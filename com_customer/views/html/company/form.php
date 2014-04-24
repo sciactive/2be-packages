@@ -26,7 +26,7 @@ $this->note = 'Provide company profile details in this form.';
 	<?php } ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Company Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<script type="text/javascript">
@@ -52,16 +52,16 @@ $this->note = 'Provide company profile details in this form.';
 	<div id="p_muid_address_us" style="display: none;">
 		<div class="pf-element">
 			<label><span class="pf-label">Address 1</span>
-				<input class="pf-field" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
+				<input class="pf-field form-control" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Address 2</span>
-				<input class="pf-field" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
+				<input class="pf-field form-control" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">City, State</span>
-			<input class="pf-field" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
-			<select class="pf-field" name="state">
+			<input class="pf-field form-control" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
+			<select class="pf-field form-control" name="state">
 				<option value="">None</option>
 				<?php foreach (array(
 						'AL' => 'Alabama',
@@ -125,7 +125,7 @@ $this->note = 'Provide company profile details in this form.';
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Zip</span>
-				<input class="pf-field" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
+				<input class="pf-field form-control" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
 		</div>
 	</div>
 	<div id="p_muid_address_international" style="display: none;">
@@ -140,26 +140,26 @@ $this->note = 'Provide company profile details in this form.';
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Email</span>
-			<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
+			<input class="pf-field form-control" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Phone Number</span>
-			<input class="pf-field" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+			<input class="pf-field form-control" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Fax</span>
-			<input class="pf-field" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+			<input class="pf-field form-control" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Website</span>
 			<span class="pf-note">ex: http://www.website.com</span>
-			<input class="pf-field" type="url" name="website" size="24" value="<?php e($this->entity->website); ?>" /></label>
+			<input class="pf-field form-control" type="url" name="website" size="24" value="<?php e($this->entity->website); ?>" /></label>
 	</div>
 	<div class="pf-element pf-buttons">
 		<?php if ( isset($this->entity->guid) ) { ?>
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_customer', 'company/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_customer', 'company/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

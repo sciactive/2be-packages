@@ -201,7 +201,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="timespan">
 			<div class="pf-element">
 				<label><span class="pf-label">Pick a Date</span>
-					<input class="pf-field form_date" type="text" id="p_muid_date" name="date" value="<?php echo isset($this->date) ? h(format_date($this->date, 'date_sort')) : ''; ?>" /></label>
+					<input class="pf-field form-control form_date" type="text" id="p_muid_date" name="date" value="<?php echo isset($this->date) ? h(format_date($this->date, 'date_sort')) : ''; ?>" /></label>
 			</div>
 		</div>
 	</div>

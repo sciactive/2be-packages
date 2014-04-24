@@ -183,7 +183,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			});
 		};
 
-		p_muid_notice = $.pnotify({
+		p_muid_notice = new PNotify({
 			text: "",
 			hide: false,
 			closer: false,
@@ -284,11 +284,11 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<td><div class="p_muid_issue_actions">
 				<?php if (gatekeeper('com_hrm/resolveissue')) {
 					if ($cur_issue->status != 'resolved') { ?>
-					<button class="btn" type="button" onclick="$_.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'resolved');" title="Resolve"><span class="p_muid_btn picon picon-flag-yellow"></span></button>
+					<button class="btn btn-default" type="button" onclick="$_.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'resolved');" title="Resolve"><span class="p_muid_btn picon picon-flag-yellow"></span></button>
 					<?php } else { ?>
-					<button class="btn" type="button" onclick="$_.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'unresolved');" title="Unresolved"><span class="p_muid_btn picon picon-flag-red"></span></button>
+					<button class="btn btn-default" type="button" onclick="$_.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'unresolved');" title="Unresolved"><span class="p_muid_btn picon picon-flag-red"></span></button>
 					<?php } ?>
-					<button class="btn" type="button" onclick="$_.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'delete');" title="Remove"><span class="p_muid_btn picon picon-edit-delete"></span></button>
+					<button class="btn btn-default" type="button" onclick="$_.com_reports_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'delete');" title="Remove"><span class="p_muid_btn picon picon-edit-delete"></span></button>
 				<?php } ?>
 				</div></td>
 		</tr>

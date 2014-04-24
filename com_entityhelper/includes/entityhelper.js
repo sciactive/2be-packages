@@ -2,7 +2,7 @@ $_.entity_helper = function(e) {
 	var elem = $(e),
 		guid = elem.attr("data-entity"),
 		context = elem.attr("data-entity-context"),
-		modal = $('<div class="modal"><div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3>Loading...</h3></div><div class="modal-body"><p style="height: 32px; background-repeat: no-repeat; background-position: center;" class="picon-32 picon-throbber"></p></div><div class="modal-footer"><a href="javascript:void(0);" class="btn" data-dismiss="modal">Cancel</a></div></div>');
+		modal = $('<div class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Loading...</h4></div><div class="modal-body"><p style="height: 32px; background-repeat: no-repeat; background-position: center;" class="picon-32 picon-throbber"></p></div><div class="modal-footer"><a href="javascript:void(0);" class="btn" data-dismiss="modal">Cancel</a></div></div></div></div>');
 	modal.modal();
 	var header = modal.find(".modal-header"),
 		body = modal.find(".modal-body"),

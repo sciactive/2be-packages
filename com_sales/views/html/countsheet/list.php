@@ -122,7 +122,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 							dataType: "json",
 							data: {"id": row.attr("title")},
 							beforeSend: function(){
-								loader = $.pnotify({
+								loader = new PNotify({
 									title: 'Uncommit Countsheet',
 									text: 'Uncommitting countsheet...',
 									icon: 'picon picon-throbber',

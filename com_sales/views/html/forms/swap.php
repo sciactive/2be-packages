@@ -164,8 +164,8 @@ defined('P_RUN') or die('Direct access prohibited');
 	</div>
 	<div class="pf-element" id="p_muid_action">
 		<div class="btn-group" data-toggle="buttons-radio">
-			<button type="button" class="btn item-swap active">Swap</button>
-			<button type="button" class="btn item-remove">Remove</button>
+			<button type="button" class="btn btn-default item-swap active">Swap</button>
+			<button type="button" class="btn btn-default item-remove">Remove</button>
 		</div>
 		<input id="p_muid_action_input" type="hidden" name="item_action" value="swap" />
 	</div>
@@ -184,20 +184,20 @@ defined('P_RUN') or die('Direct access prohibited');
 		<span class="pf-label need-serial" style="display: none;">New Item Serial</span>
 		<span class="pf-label need-location">New Item Location</span>
 		<div class="pf-group">
-			<input class="pf-field need-serial" style="display: none;" type="text" name="new_serial" value="" />
+			<input class="pf-field form-control need-serial" style="display: none;" type="text" name="new_serial" value="" />
 			<div class="pf-field need-location location_tree"></div>
 			<div class="pf-field" id="p_muid_new_item" style="padding-top: .5em;"></div>
 		</div>
 		<input id="p_muid_new_item_input" type="hidden" name="new_item" value="" />
 	</div>
 	<div class="pf-element" id="p_muid_warehouse" style="display: none; padding-bottom: 0;">
-		<div class="alert" style="margin-bottom: 0;">
+		<div class="alert alert-warning" style="margin-bottom: 0;">
 			The selected product will be converted to a warehouse order. Any
 			other stock entries on that product will then be marked as shipped.
 		</div>
 	</div>
 	<div class="pf-element" id="p_muid_shipped" style="display: none; padding-bottom: 0;">
-		<div class="alert" style="margin-bottom: 0;">
+		<div class="alert alert-warning" style="margin-bottom: 0;">
 			The selected item has been shipped. If you swap it, the new item
 			will be marked as shipped. However, the shipment will still reflect
 			the old item.

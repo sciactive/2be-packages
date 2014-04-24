@@ -74,7 +74,7 @@ $_->com_jstree->load();
 					data: {"location": location, "date_start": date_start.val(), "date_end": date_end.val()},
 					beforeSend: function(){
 						result_totals.hide("normal");
-						loader = $.pnotify({
+						loader = new PNotify({
 							title: 'Sales Totals',
 							text: 'Retrieving totals from server...',
 							icon: 'picon picon-throbber',
@@ -173,7 +173,7 @@ $_->com_jstree->load();
 			var location_tree = $("#p_muid_form .location_tree");
 		});
 	</script>
-	<button id="p_muid_hide_parameters" class="btn" style="float: right;">Toggle Form</button>
+	<button id="p_muid_hide_parameters" class="btn btn-default" style="float: right;">Toggle Form</button>
 	<?php if (gatekeeper('com_sales/totalothersales')) { // TODO: Show all groups in the tree. ?>
 	<div class="pf-element">
 		<span class="pf-label">Location</span>
@@ -185,14 +185,14 @@ $_->com_jstree->load();
 	<?php } ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Start Date</span>
-			<input class="pf-field" type="text" id="p_muid_date_start" name="date_start" size="24" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+			<input class="pf-field form-control" type="text" id="p_muid_date_start" name="date_start" size="24" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">End Date</span>
-			<input class="pf-field" type="text" id="p_muid_date_end" name="date_end" size="24" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+			<input class="pf-field form-control" type="text" id="p_muid_date_end" name="date_end" size="24" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 	</div>
 	<div class="pf-element pf-buttons">
-		<button id="p_muid_retrieve_totals" class="pf-button btn">Retrieve</button>
+		<button id="p_muid_retrieve_totals" class="pf-button btn btn-default">Retrieve</button>
 	</div>
 	<div id="p_muid_result_totals" style="display: none;">
 		<div class="pf-element">

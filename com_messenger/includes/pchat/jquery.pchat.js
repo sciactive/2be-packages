@@ -242,7 +242,7 @@ if (!window.localStorage) {
 			action_bar.append($('<div class="ui-pchat-main-menu btn-group dropup pull-right"><a class="btn dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><span class="caret"></span></a><ul class="dropdown-menu"></ul></div>'));
 			var main_menu = action_bar.find(".ui-pchat-main-menu .dropdown-menu");
 			main_menu
-			.append($('<li><a href="javascript:void(0);"><i class="icon-plus"></i>Add a Contact</a></li>').on("click", "a", function(){
+			.append($('<li><a href="javascript:void(0);"><i class="fa fa-plus"></i>Add a Contact</a></li>').on("click", "a", function(){
 				var form = $('<div title="Add a Contact"><div class="pf-form"></div></div>').find(".pf-form")
 				.append('<div class="pf-element"><label><span class="pf-label">Username</span><input class="pf-field" type="text" name="username" /></label></div>')
 				.append('<div class="pf-element"><label><span class="pf-label">Alias (Optional)</span><input class="pf-field" type="text" name="alias" /></label></div>')
@@ -288,14 +288,14 @@ if (!window.localStorage) {
 					}
 				});
 			}))
-			.append($('<li><a href="javascript:void(0);"><i class="icon-envelope"></i>Send a Message</a></li>').on("click", "a", function(){
+			.append($('<li><a href="javascript:void(0);"><i class="fa fa-envelope"></i>Send a Message</a></li>').on("click", "a", function(){
 				var jid = prompt('To what address would you like to send a message?');
 				if (!jid)
 					return;
 				var cw = get_conv(jid);
 				cw.element.find("textarea").focus().select();
 			}))
-			.append($('<li><a href="javascript:void(0);"><i class="icon-ban-circle"></i>Manage Block List</a></li>').on("click", "a", function(){
+			.append($('<li><a href="javascript:void(0);"><i class="fa fa-ban"></i>Manage Block List</a></li>').on("click", "a", function(){
 				if (connection.blocking.blocking_support === null)
 					alert("Blocking support for the connected account has not been verified yet. Please wait a moment and try again.");
 				else if (connection.blocking.blocking_support === false)
@@ -303,12 +303,12 @@ if (!window.localStorage) {
 				else
 					blocked_user_dialog.dialog("open");
 			}))
-			.append($('<li><a href="javascript:void(0);"><i class="icon-eye-open"></i>Offline Contacts</a></li>').each(function(){
+			.append($('<li><a href="javascript:void(0);"><i class="fa fa-eye"></i>Offline Contacts</a></li>').each(function(){
 				if (opts.hide_offline)
-					$(this).find('i').removeClass('icon-eye-open').addClass('icon-eye-close');
+					$(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
 			}).on("click", "a", function(){
 				opts.hide_offline = !opts.hide_offline;
-				$(this).find('i').removeClass('icon-eye-open icon-eye-close').addClass(opts.hide_offline ? 'icon-eye-close' : 'icon-eye-open');
+				$(this).find('i').removeClass('fa-eye fa-eye-slash').addClass(opts.hide_offline ? 'fa-eye-slash' : 'fa-eye');
 				update_groups();
 			}));
 			if (opts.sounds) {
@@ -334,9 +334,9 @@ if (!window.localStorage) {
 				if (prev_sound_setting === "false")
 					opts.sound = false;
 				// A button to disable/enable sounds.
-				main_menu.append($('<li><a href="javascript:void(0);">'+(opts.sound ? '<i class="icon-volume-off"></i>Mute' : '<i class="icon-volume-up"></i>Unmute')+'</a></li>').on("click", "a", function(){
+				main_menu.append($('<li><a href="javascript:void(0);">'+(opts.sound ? '<i class="fa fa-volume-off"></i>Mute' : '<i class="fa fa-volume-up"></i>Unmute')+'</a></li>').on("click", "a", function(){
 					opts.sound = !opts.sound;
-					$(this).html(opts.sound ? '<i class="icon-volume-off"></i>Mute' : '<i class="icon-volume-up"></i>Unmute');
+					$(this).html(opts.sound ? '<i class="fa fa-volume-off"></i>Mute' : '<i class="fa fa-volume-up"></i>Unmute');
 					localStorage.setItem("pchat-sounds", opts.sound ? "true" : "false");
 				}));
 			}
@@ -1537,22 +1537,22 @@ if (!window.localStorage) {
 				// Match URLs with a protocol. (http://example.com/wow)
 				.replace(
 					/\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%]))(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi,
-					'<a href="$1" target="_blank">$1<i class="icon-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
+					'<a href="$1" target="_blank">$1<i class="fa fa-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
 				)
 				// Match things that look like URLs. (example.co.uk/wow) (No lookbehind support. Grr.)
 				.replace(
 					/(^|[^\/\w.@])\b((?:www\d{0,3}[.]|[a-z0-9.\-]{2,}[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi,
-					'$1<a href="http://$2" target="_blank">$2<i class="icon-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
+					'$1<a href="http://$2" target="_blank">$2<i class="fa fa-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
 				)
 				// Match simple domain names. (example.com) (I didn't use the above one, because things might look like TLDs, so I used only common ones for this.)
 				.replace(
 					/(^|[^\/\w.@])\b([a-z0-9.\-]{2,}[.](com|net|org|edu|gov|mil|info|biz))\b(?!\/)/gi,
-					'$1<a href="http://$2" target="_blank">$2<i class="icon-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
+					'$1<a href="http://$2" target="_blank">$2<i class="fa fa-external-link" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
 				)
 				// Match email addresses. (me@example.com)
 				.replace(
 					/\b([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})\b/gi,
-					'<a href="mailto://$1" target="_blank">$1<i class="icon-envelope" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
+					'<a href="mailto://$1" target="_blank">$1<i class="fa fa-envelope" style="text-decoration: none !important; font-size: 0.85em; margin-left: 3px;"></i></a>'
 				);
 		},
 		// Callback for when pchat connects.

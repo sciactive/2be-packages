@@ -45,7 +45,7 @@ defined('P_RUN') or die('Direct access prohibited');
 			<span class="pf-note">Payment Due: <?php (isset($this->entity->payments[0]['next_payment_due'])) ? e(format_date($this->entity->payments[0]['next_payment_due'], "date_short")) : e(format_date($this->entity->first_payment_date, "date_short")); ?></span>
 		</span>
 		<span class="pf-field">
-			<input id="p_muid_payment_amount" style="float:right;text-align:right;" class="pf-field" type="text" name="payment_amount" readonly="readonly" value="<?php echo '$'.h($_->com_sales->round($this->entity->payoff_amount, true)); ?>"/>
+			<input id="p_muid_payment_amount" style="float:right;text-align:right;" class="pf-field form-control" type="text" name="payment_amount" readonly="readonly" value="<?php echo '$'.h($_->com_sales->round($this->entity->payoff_amount, true)); ?>"/>
 		</span>
 	</div>
 	<div class="pf-element pf-full-width">
@@ -53,7 +53,7 @@ defined('P_RUN') or die('Direct access prohibited');
 			<span class="pf-note">Received:</span>
 		</span>
 		<span class="pf-field">
-			<input id="p_muid_date_input" style="float:right;text-align:right;" class="pf-field" type="text" name="payment_date_input" value="<?php e(date('Y-m-d')); ?>"/>
+			<input id="p_muid_date_input" style="float:right;text-align:right;" class="pf-field form-control" type="text" name="payment_date_input" value="<?php e(date('Y-m-d')); ?>"/>
 		</span>
 	</div>
 </form>

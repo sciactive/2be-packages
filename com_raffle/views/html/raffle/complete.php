@@ -48,7 +48,7 @@ function com_raffle__ordinal($number) {
 }
 
 foreach ($this->entity->winners as $cur_place => $cur_winner) { ?>
-<div class="hero-unit">
+<div class="jumbotron">
 	<div style="height: 32px; width: 32px; float: right;" class="picon-32 <?php echo $cur_place == 1 ? 'picon-games-highscores' : 'picon-games-achievements'; ?>"></div>
 	<h1>
 		<span style="font-size: .9em;">

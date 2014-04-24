@@ -228,10 +228,10 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 		var add_modal_button = add_modal.find('.add-modal-button');
 		
 		// h3 headers - add tops
-		h3_headers.append('<a href="#help-top" class="help-top"><span><i class="icon-caret-up"></i> Top</span></a>');
+		h3_headers.append('<a href="#help-top" class="help-top"><span><i class="fa fa-caret-up"></i> Top</span></a>');
 		
 		// Fix Lists with nicer bullets
-		help_list_li.prepend('<i class="icon-ok"></i>');
+		help_list_li.prepend('<i class="fa fa-check"></i>');
 		
 		// Fix pre tags with properly typed "html"
 		String.prototype.escapeHTML = function () {                                        
@@ -253,17 +253,17 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 		if ($(window).width() < 600)
 			view_more.hide();
 		else
-			show_more.addClass('viewing').html('<i class="icon-caret-up"></i> Hide');
+			show_more.addClass('viewing').html('<i class="fa fa-caret-up"></i> Hide');
 		
 		show_more.click(function(){
 			if (show_more.hasClass('viewing')) {
 				view_more.fadeOut();
-				show_more.html('<i class="icon-caret-down"></i> Show More');
+				show_more.html('<i class="fa fa-caret-down"></i> Show More');
 				show_more.removeClass('viewing');
 			} else {
 				view_more.fadeIn();
 				show_more.addClass('viewing');
-				show_more.html('<i class="icon-caret-up"></i> Hide');
+				show_more.html('<i class="fa fa-caret-up"></i> Hide');
 			}
 		});
 		
@@ -287,11 +287,11 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 		
 		// Make asterisks icons
 		option_asterisk.each(function(){
-			$(this).before('<i class="icon-asterisk option-icon"></i> ');
+			$(this).before('<i class="fa fa-asterisk option-icon"></i> ');
 		});
 		// Make Review Icons
 		option_review.each(function(){
-			$(this).before('<i class="icon-thumbs-up-alt option-icon"></i> ');
+			$(this).before('<i class="fa fa-thumbs-up option-icon"></i> ');
 		});
 		
 		// Make shown event function before calling the modal
@@ -370,7 +370,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 		// The function to make a preview... from the picker.
 		var make_preview = function(skip_check) {
 			var loader = $('<div style="padding: 30px; font-weight:bold;" class="text-center"></div>');
-			loader.append('<i class="icon-spin icon-spinner icon-2x"></i>');
+			loader.append('<i class="fa fa-spinner fa-spin"></i>');
 			loader.append('<div style="margin-top: 10px;">Loading...</div>');
 			preview_container.html(loader);
 			
@@ -457,9 +457,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 				module_code_textarea.text(code_wrapper.html());
 			} else {
 				var loader = $('<div style="padding: 30px; font-weight:bold;" class="text-center help-info-highlight"></div>');
-				loader.append('<i class="icon-remove icon-2x"></i>');
+				loader.append('<i class="fa fa-times"></i>');
 				loader.append('<div style="margin-top: 10px;">'+message+'</div>');
-				loader.append('<button class="skip-check btn btn-inverse" style="margin-top: 10px;">Get Code Anyway!</div>');
+				loader.append('<button class="skip-check btn btn-default" style="margin-top: 10px;">Get Code Anyway!</div>');
 				loader.find('.skip-check').click(function(){
 					make_preview(true);
 				});
@@ -570,8 +570,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 	});
 </script>
 <div class="p_muid_help">
-	<div class="row-fluid">
-		<div class="span12">
+	<div class="row">
+		<div class="col-sm-12">
 			<h3 id="help-top" class="text-center no-top">Testimonial Help</h3>
 			<div class="text-center">
 				<a href="#help-features"><span class="text-center help-info-highlight help-menu-button">Features</span></a>
@@ -586,8 +586,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			<hr>
 		</div>
 	</div>
-	<div class="row-fluid">
-		<div class="span5 section-highlight">
+	<div class="row">
+		<div class="col-sm-5 section-highlight">
 			<h3 class="text-center" id="help-features">Features</h3>
 			<p class="text-center help-info-highlight">Testimonials can be used for Business Testimonials, Reviews, and Comments.</p>
 			<hr>
@@ -609,12 +609,12 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 				<li class="view-more">Custom Tags can be an alias "This really cool picture" or a <abbr title="Unique Identifier">GUID</abbr> of an entity (picture or product).</li>
 				<li class="view-more">Note: Only customers can make testimonials</li>
 			</ul>
-			<p class="text-center show-more"><a href="javascript:void(0);"><i class="icon-caret-down"></i> Show More</a></p>
+			<p class="text-center show-more"><a href="javascript:void(0);"><i class="fa fa-caret-down"></i> Show More</a></p>
 			<hr/>
 			<h3 class="text-center" id="help-limitations">Limitations</h3>
 			<p class="help-info-plain">As of now, <strong>only customers</strong> can write testimonials, reviews, or comments on modules.</p>
 			<p class="help-info-plain">Employees/Users with abilities can create testimonials on behalf of customers from the <strong>grid view</strong> of testimonials.</p>
-			<p class="help-info-highlight"><i class="icon-info-sign"></i> Technically, employees/users can later <strong></strong> add tags to a testimonial in the approve/deny dialog to transform the testimonial into a review/comment for another name or entity.</p>
+			<p class="help-info-highlight"><i class="fa fa-info-circle"></i> Technically, employees/users can later <strong></strong> add tags to a testimonial in the approve/deny dialog to transform the testimonial into a review/comment for another name or entity.</p>
 			<p class="help-info-plain">Aggregate data not available yet for list|carousel testimonials.</p>
 			<hr/>
 			<h3 class="text-center" id="help-addtags">Add Tags</h3>
@@ -626,7 +626,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			</ul>
 			<br/>
 		</div>
-		<div class="span7">
+		<div class="col-sm-7">
 			<h3 class="text-center" id="help-manage">Manage Testimonials</h3>
 			<p class="help-info" style="text-align:left;"><strong>There are two types of official "testimonials"</strong>. The <strong>default type</strong> is "testimonials" for a business/website. They only have tags "com_testimonials" and "testimonial".</p>
 			<p class="help-info-plain">In <strong>Business</strong> > <strong>Testimonials</strong> > <strong>Testimonials</strong>, you will see a <strong>grid view</strong>. Pending, Approved, and Denied testimonials are accessible through this view. All testimonials must be approved before they can be retrieved by the testimonial module for display.</p>
@@ -635,7 +635,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			<hr/>
 			<h3 class="text-center" id="help-search">Searching Testimonials</h3>
 			<p class="help-info-highlight" style="margin-bottom: 20px;">In the <strong>grid views</strong>, you will notice a text input in the top left corner of the grid. You can search by the <strong>customer's name/email/username</strong> or by searching tags.</p>
-			<p class="text-center"><input type="text" value="review,comment,4958"/></p>
+			<p class="text-center"><input class="form-control" type="text" value="review,comment,4958"/></p>
 			<p class="text-center"> Search <strong>multiple tags</strong> by comma separating them (no spaces). Maybe 4958 is a specific guid of a product/picture/story. You should only have to search by one tag if you have the guid of the entity.</p>
 			<hr>
 			<h3 class="text-center" id="help-implementation">Implementation</h3>
@@ -684,8 +684,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 		</div>
 	</div>
 	
-	<div class="row-fluid">
-		<div class="span12">
+	<div class="row">
+		<div class="col-sm-12">
 			<hr/>
 			<h3 class="text-center" id="help-options">jQuery Modules</h3>
 			<p class="text-center">Use these options to alter the code with jQuery. For developers, you can manually code testimonial modules in PHP with similar options, but they will not have any Ajax loading without using these options. Regardless of options, you always need to call the function on PHP loaded testimonials to expand the form to share.</p>
@@ -693,17 +693,17 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 		</div>
 	</div>
 	
-	<div class="row-fluid">
-		<div class="span6">
+	<div class="row">
+		<div class="col-sm-6">
 			<h3>Options</h3>
 			<p class="help-info height">
-				<i class="icon-danger-sign"></i> All options must be <strong>hidden inputs</strong>, and they <span class="label label-important">All Require</span> display type <strong>List</strong> or <strong>Carousel</strong>.
+				<i class="fa fa-exclamation-triangle"></i> All options must be <strong>hidden inputs</strong>, and they <span class="label label-important">All Require</span> display type <strong>List</strong> or <strong>Carousel</strong>.
 			</p>
 			<p class="alert alert-info">
-				<i class="icon-asterisk"></i> Required for List | Carousel, and therefore all modules with options.<br/><br/>
-				<i class="icon-thumbs-up-alt"></i> Required for Reviews
+				<i class="fa fa-asterisk"></i> Required for List | Carousel, and therefore all modules with options.<br/><br/>
+				<i class="fa fa-thumbs-up"></i> Required for Reviews
 			</p>
-			<p class="alert"><i class="icon-warning-sign"></i> 
+			<p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 
 				If your carousel modules are hidden when initializing, 
 				you should <a class="initialize-manually" href="#initialize-manually">initialize manually</a>.
 			</p>
@@ -725,9 +725,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>Reverse = false, limit = 3, height = 200.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -746,7 +746,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<select class="option-get-value">
+								<select class="option-get-value form-control">
 									<option value=""></option>
 									<option value="list">list</option>
 									<option value="carousel">carousel</option>
@@ -761,8 +761,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_list_height (if using a list)</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -778,9 +778,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>See example where we also change the feedback text and story text to correspond to comments instead of stories.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -796,7 +796,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<select class="option-get-value">
+								<select class="option-get-value form-control">
 									<option value=""></option>
 									<option value="true">true</option>
 									<option value="false">false</option>
@@ -808,8 +808,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_item_name</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -823,9 +823,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>and you must use the clear option in conjunction with a display type.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -839,15 +839,15 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="Item Caption/Name"/>
+								<input class="option-get-value form-control" type="text" placeholder="Item Caption/Name"/>
 								<input class="option-put-value" type="hidden" name="review_item_name"/>
 							</div>
 							<div class="add-requirements hide">
 								<span class="label label-warning">review_option_display</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -861,9 +861,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>See example with list:</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -882,15 +882,15 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="Enter an integer"/>
+								<input class="option-get-value form-control" type="text" placeholder="Enter an integer"/>
 								<input class="option-put-value" type="hidden" name="review_list_height"/>
 							</div>
 							<div class="add-requirements hide">
 								<span class="label label-warning">review_option_display (suggested: list)</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -908,10 +908,10 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>See example of type = review, additional_tags = comment, review_option_name = 'Bob Joes Picture 1'</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
-								<span class="label label-warning"><i class="icon-thumbs-up-alt"></i> Review</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
+								<span class="label label-warning"><i class="fa fa-thumbs-up"></i> Review</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -928,7 +928,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<select class="option-get-value">
+								<select class="option-get-value form-control">
 									<option value=""></option>
 									<option value="review">review</option>
 									<option value="comment">comment</option>
@@ -939,8 +939,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_option_display = list</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -955,10 +955,10 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>See example of type = review, additional_tags = comment, review_option_name = 'Bob Joes Picture 1'</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
-								<span class="label label-warning"><i class="icon-thumbs-up-alt"></i> Review</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
+								<span class="label label-warning"><i class="fa fa-thumbs-up"></i> Review</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -975,15 +975,15 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="A unique name to use as a tag."/>
+								<input class="option-get-value form-control" type="text" placeholder="A unique name to use as a tag."/>
 								<input class="option-put-value" type="hidden" name="review_option_name"/>
 							</div>
 							<div class="add-requirements hide">
 								<span class="label label-warning">review_option_type = review</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -997,10 +997,10 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>See example of type = review, additional_tags = comment, review_option_entity = 'com_gallery_picture', review_option_entity_id = '3432'</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
-								<span class="label label-warning"><i class="icon-thumbs-up-alt"></i> Review</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
+								<span class="label label-warning"><i class="fa fa-thumbs-up"></i> Review</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1018,7 +1018,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="The entity class."/>
+								<input class="option-get-value form-control" type="text" placeholder="The entity class."/>
 								<input class="option-put-value" type="hidden" name="review_option_entity"/>
 							</div>
 							<div class="add-requirements hide">
@@ -1026,8 +1026,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_option_entity_id</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1042,10 +1042,10 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>See example of type = review, additional_tags = comment, review_option_entity = 'com_gallery_picture', review_option_entity_id = '3432'</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
-								<span class="label label-warning"><i class="icon-thumbs-up-alt"></i> Review</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
+								<span class="label label-warning"><i class="fa fa-thumbs-up"></i> Review</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1063,7 +1063,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="The entity guid."/>
+								<input class="option-get-value form-control" type="text" placeholder="The entity guid."/>
 								<input class="option-put-value" type="hidden" name="review_option_entity_id"/>
 							</div>
 							<div class="add-requirements hide">
@@ -1071,8 +1071,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_option_entity_id</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1087,10 +1087,10 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>Can only be used with lists because of infinite lists. Carousels will never make another call to retrieve more testimonial, and they are random.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
-								<span class="label label-warning"><i class="icon-thumbs-up-alt"></i> Review</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
+								<span class="label label-warning"><i class="fa fa-thumbs-up"></i> Review</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1110,7 +1110,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<select class="option-get-value">
+								<select class="option-get-value form-control">
 									<option value=""></option>
 									<option value="true">true</option>
 									<option value="false">false</option>
@@ -1122,8 +1122,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_option_type = review (comment)</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1135,9 +1135,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>Use a comma separated list with no spaces to add multiple tags.</li>
 									<li>Add a tag like "comments" to help distinguish testimonials and to search for them easier.</li>
 								</ul>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1161,8 +1161,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_option_display = list|carousel</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1173,9 +1173,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<ul class="help-list">
 									<li>Change to any text, but not any html.</li>
 								</ul>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1187,13 +1187,13 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="The text to expand share form"/>
+								<input class="option-get-value form-control" type="text" placeholder="The text to expand share form"/>
 								<input class="option-put-value" type="hidden" name="review_option_feedback_text"/>
 							</div>
 							<div class="add-requirements hide">None</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1206,9 +1206,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>See example - used in conjunction with feedback_text</li>
 									<li>Note: Since only customers can see the feedback form, you won't notice the example for 'story'</li>
 								</ul>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1221,13 +1221,13 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="The text to replace the word 'story'"/>
+								<input class="option-get-value form-control" type="text" placeholder="The text to replace the word 'story'"/>
 								<input class="option-put-value" type="hidden" name="review_option_story_text"/>
 							</div>
 							<div class="add-requirements hide">None</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1241,9 +1241,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>Ideal for Reviews and Comments to help people understand which reviews/comments are new and relevant.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1255,7 +1255,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<select class="option-get-value">
+								<select class="option-get-value form-control">
 									<option value=""></option>
 									<option value="true">true</option>
 									<option value="false">false</option>
@@ -1266,8 +1266,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_option_display</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1280,9 +1280,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>Set to False to not display the quotes.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1294,7 +1294,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<select class="option-get-value">
+								<select class="option-get-value form-control">
 									<option value=""></option>
 									<option value="true">true</option>
 									<option value="false">false</option>
@@ -1305,8 +1305,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_option_display</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1320,9 +1320,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>Ideal for <strong>comments</strong>.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1334,7 +1334,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<select class="option-get-value">
+								<select class="option-get-value form-control">
 									<option value=""></option>
 									<option value="true">true</option>
 									<option value="false">false</option>
@@ -1345,8 +1345,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_option_display</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1363,9 +1363,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>to get the first 10 after offsetting the first 5 entities.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1382,7 +1382,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<select class="option-get-value">
+								<select class="option-get-value form-control">
 									<option value=""></option>
 									<option value="true">true</option>
 									<option value="false">false</option>
@@ -1393,8 +1393,8 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								<span class="label label-warning">review_option_display</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1413,9 +1413,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>* Lists always need a height.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1432,15 +1432,15 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="Enter an integer. Low numbers for lists."/>
+								<input class="option-get-value form-control" type="text" placeholder="Enter an integer. Low numbers for lists."/>
 								<input class="option-put-value" type="hidden" name="review_option_limit"/>
 							</div>
 							<div class="add-requirements hide">
 								<span class="label label-warning">review_option_display</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1458,9 +1458,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>to get the first 10 after offsetting the first 5 entities.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="option-example hide">
 								<div class="clearfix">
@@ -1477,15 +1477,15 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="Enter an integer. 0 for lists."/>
+								<input class="option-get-value form-control" type="text" placeholder="Enter an integer. 0 for lists."/>
 								<input class="option-put-value" type="hidden" name="review_option_offset"/>
 							</div>
 							<div class="add-requirements hide">
 								<span class="label label-warning">review_option_display</span>
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1498,7 +1498,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>Set the href attribute, or link, of where the signup button should take the user.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
+								<span class="label label-default">Required Options</span>
 								None.
 							</div>
 							<div class="option-example hide">
@@ -1511,15 +1511,15 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								</div>
 							</div>
 							<div class="add-section hide">
-								<input class="option-get-value" type="text" placeholder="Type the URL"/>
+								<input class="option-get-value form-control" type="text" placeholder="Type the URL"/>
 								<input class="option-put-value" type="hidden" name="review_signup_url"/>
 							</div>
 							<div class="add-requirements hide">
 								None.
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 					<tr class="option">
 						<td>
@@ -1532,9 +1532,9 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 									<li>Aggregate setting not fully functional yet: leave default.</li>
 								</ul>
 								<hr/>
-								<span class="label">Required Options</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> Carousel</span>
-								<span class="label label-warning"><i class="icon-asterisk"></i> List</span>
+								<span class="label label-default">Required Options</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> Carousel</span>
+								<span class="label label-warning"><i class="fa fa-asterisk"></i> List</span>
 							</div>
 							<div class="add-section hide">
 								Option Currently Not Complete
@@ -1543,49 +1543,53 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 								Option Currently Not Complete
 							</div>
 						</td>
-						<td><button class="btn btn-mini details">Details</button></td>
-						<td><button class="btn btn-mini add">Add</button></td>
+						<td><button class="btn btn-default btn-xs details">Details</button></td>
+						<td><button class="btn btn-default btn-xs add">Add</button></td>
 					</tr>
 				</tbody>
 			</table>
 			
-			<div class="option-modal modal hide fade in">
-				<div class="modal-header">
-					<button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="text-center"><span class="option-name"></span></h4>
-				</div>
-				<div class="modal-body">
-					<h4 class="help-info-highlight">Information</h4>
-					<div class="option-section">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Default</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="option-type"></td>
-									<td class="option-default"></td>
-								</tr>
-							</tbody>
-						</table>
+			<div class="option-modal modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title"><span class="option-name"></span></h4>
+						</div>
+						<div class="modal-body">
+							<h4 class="help-info-highlight">Information</h4>
+							<div class="option-section">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Type</th>
+											<th>Default</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="option-type"></td>
+											<td class="option-default"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<hr>
+							<h4 class="help-info-highlight">Description</h4>
+							<div class="option-description option-section more-padding"></div>
+							<hr>
+							<h4 class="help-info-highlight">Example</h4>
+							<div class="option-example option-section more-padding"></div>
+							<hr>
+							<div class="option-module">
+								<div class="hide clone-from"><?php echo $_->format_content('[com_testimonials/testimonials /]'); ?></div>
+								<div class="clone-to clearfix"></div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button style="border-radius: 20px; margin-top: 4px;" data-dismiss="modal" class="btn btn-lg btn-primary">OK</button>
+						</div>
 					</div>
-					<hr>
-					<h4 class="help-info-highlight">Description</h4>
-					<div class="option-description option-section more-padding"></div>
-					<hr>
-					<h4 class="help-info-highlight">Example</h4>
-					<div class="option-example option-section more-padding"></div>
-					<hr>
-					<div class="option-module">
-						<div class="hide clone-from"><?php echo $_->format_content('[com_testimonials/testimonials /]'); ?></div>
-						<div class="clone-to clearfix"></div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button style="border-radius: 20px; margin-top: 4px;" data-dismiss="modal" class="btn btn-large btn-primary">OK</button>
 				</div>
 			</div>
 			
@@ -1602,20 +1606,20 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 					<div class="add-requirements option-section more-padding"></div>
 				</div>
 				<div class="modal-footer">
-					<button style="border-radius: 20px; margin-top: 4px;" data-dismiss="modal" class="btn btn-large btn-primary">Cancel</button>
-					<button style="border-radius: 20px; margin-top: 4px;" data-dismiss="modal" class="btn btn-large btn-success add-modal-button">Add</button>
+					<button style="border-radius: 20px; margin-top: 4px;" data-dismiss="modal" class="btn btn-lg btn-primary">Cancel</button>
+					<button style="border-radius: 20px; margin-top: 4px;" data-dismiss="modal" class="btn btn-lg btn-success add-modal-button">Add</button>
 				</div>
 			</div>
 		</div>
-		<div class="span6">
+		<div class="col-sm-6">
 			<h3 class="text-center" id="help-picker">Preview</h3>
 			<div class="help-info height">
 				Here is a preview based on your options.
 				<p style="margin-top: 20px;">
 					<span class="btn-group">
-						<button class="btn btn-primary undo-button"><i class="icon-undo"></i> Undo</button>
-						<button class="btn btn-primary preview-button"><i class="icon-eye-open"></i> Preview</button>
-						<button class="btn btn-primary clear-button"><i class="icon-eraser"></i> Clear</button>
+						<button class="btn btn-primary undo-button"><i class="fa fa-undo"></i> Undo</button>
+						<button class="btn btn-primary preview-button"><i class="fa fa-eye"></i> Preview</button>
+						<button class="btn btn-primary clear-button"><i class="fa fa-eraser"></i> Clear</button>
 					</span>
 				</p>
 			</div>
@@ -1623,7 +1627,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			<h4>The Preview:</h4>
 			<div class="preview clearfix">
 				<div style="padding: 30px; font-weight:bold;" class="text-center">
-					<i class="icon-spin icon-spinner icon-2x"></i>
+					<i class="fa fa-spinner fa-spin"></i>
 					<div style="margin-top: 10px;">Loading...</div>
 				</div>
 			</div>

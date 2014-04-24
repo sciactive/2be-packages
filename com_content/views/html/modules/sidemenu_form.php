@@ -66,7 +66,7 @@ $_->editor->load();
 		var tag_input = form.find('[name=tag]');
 		var guid_order = form.find('[name=guid_order]');
 		var done_button = $('.ui-dialog-buttonset button.btn:contains(Done):visible');
-		var new_done_button = $('<button class="btn new-done-button">Done</button>');
+		var new_done_button = $('<button class="btn btn-default new-done-button">Done</button>');
 		var update_modal = $('.update-modal');
 		var update_modal_update_button = update_modal.find('.update-modal-update');
 		var update_modal_done_button = update_modal.find('.update-modal-done');
@@ -102,7 +102,7 @@ $_->editor->load();
 			form.find('.red-warning').remove();
 			if (tag_input.val() == '') {
 				// We can't get a menu without a tag!
-				tag_input.after('<div class="red-warning"><i class="icon-warning-sign"></i> Cannot preview a menu without specifying a tag!</div>');
+				tag_input.after('<div class="red-warning"><i class="fa fa-exclamation-triangle"></i> Cannot preview a menu without specifying a tag!</div>');
 				return;
 			}
 			
@@ -118,7 +118,7 @@ $_->editor->load();
 			form.find('.red-warning').remove();
 			if (guid_order.val() == '') {
 				// We can't get a menu without a tag!
-				guid_order.after('<div class="red-warning"><i class="icon-warning-sign"></i> Cannot save the menu without a menu order. Make sure the preview is working properly.</div>');
+				guid_order.after('<div class="red-warning"><i class="fa fa-exclamation-triangle"></i> Cannot save the menu without a menu order. Make sure the preview is working properly.</div>');
 				return;
 			}
 			
@@ -145,7 +145,7 @@ $_->editor->load();
 						var ul = $('<ul class="preview-menu"></ul>');
 						var order_value = new Array();
 						$.each(data, function(index, value){
-							ul.append('<li data-id="'+value.menu_item_guid+'" class="btn-group"><span class="btn"><i class="icon-move"></i></span><span class="btn item">'+value.menu_item_name+'</span></li>');
+							ul.append('<li data-id="'+value.menu_item_guid+'" class="btn-group"><span class="btn"><i class="fa fa-arrows-alt"></i></span><span class="btn btn-default item">'+value.menu_item_name+'</span></li>');
 							order_value.push(value.menu_item_guid);
 						});
 						
@@ -190,11 +190,11 @@ $_->editor->load();
 		
 	});
 </script>
-<div id="p_muid_form" class="pf-form span6">
+<div id="p_muid_form" class="pf-form col-sm-6">
 	<div class="pf-element pf-heading">
 		<p>What page tag do you want to use to base the menu on.</p>
 	</div>
-	<p class="well" style="clear:both;"><i class="icon-info-sign"></i> 
+	<p class="well" style="clear:both;"><i class="fa fa-info-circle"></i> 
 	This module is useful if you have many pages, sorted by categories that you want
 	to display on a left side menu. At this point in time its limitations are that it
 	relies on JavaScript/jQuery, that the pages and categories you want to use must 
@@ -207,17 +207,17 @@ $_->editor->load();
 	<div class="pf-element pf-full-width">
 		<label>
 			<span class="pf-label">Page Tag</span><br />
-			<input class="pf-field" type="text" name="tag" value="<?php e($this->tag); ?>"/>
+			<input class="pf-field form-control" type="text" name="tag" value="<?php e($this->tag); ?>"/>
 		</label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<label>
 			<span class="pf-label">Sub Menu Position</span><br />
-			<input class="pf-field" type="text" name="sub_position" value="<?php e($this->sub_position); ?>"/>
+			<input class="pf-field form-control" type="text" name="sub_position" value="<?php e($this->sub_position); ?>"/>
 		</label>
 	</div>
 	<div class="preview-menu">
-		<p class="well"><i class="icon-info-sign"></i> You must click to preview the menu in order to update your menu. 
+		<p class="well"><i class="fa fa-info-circle"></i> You must click to preview the menu in order to update your menu. 
 		You want to update the menu whenever you add new pages or categories with your selected tag. It
 		saves time loading pages to not run a function to call the menu every time. So update here!</p>
 		<div class="preview-button btn btn-primary">Preview Top Level</div>
@@ -230,16 +230,20 @@ $_->editor->load();
 	
 </div>
 
-<div class="modal hide fade update-modal" style="z-index: 9000;">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h3><span style="font-weight:bold; text-transform: uppercase; text-align: center; display:block;">Update Before Saving?</span></h3>
-	</div>
-	<div class="modal-body">
-		<p>Did you sort your menu? Did you re-order your pages within categories? Have you added new pages? Then update your menu before you click done!</p>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-success update-modal-update" data-dismiss="modal" aria-hidden="true">Update</button>
-		<button class="btn btn-primary update-modal-done" data-dismiss="modal" aria-hidden="true">Done</button>
+<div class="modal fade update-modal" style="z-index: 9000;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><span style="font-weight:bold; text-transform: uppercase; text-align: center; display:block;">Update Before Saving?</span></h4>
+			</div>
+		</div>
+		<div class="modal-body">
+			<p>Did you sort your menu? Did you re-order your pages within categories? Have you added new pages? Then update your menu before you click done!</p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success update-modal-update" data-dismiss="modal" aria-hidden="true">Update</button>
+			<button class="btn btn-primary update-modal-done" data-dismiss="modal" aria-hidden="true">Done</button>
+		</div>
 	</div>
 </div>

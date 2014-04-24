@@ -27,10 +27,10 @@ $this->title = 'Shipment Actions';
 </script>
 <div style="text-align: center;">
 	<?php if (isset($this->entity->ref->customer->email)) { ?>
-	<button id="p_muid_email" class="btn"><i class="icon-envelope"></i> Email Customer</button>
+	<button id="p_muid_email" class="btn btn-default"><i class="fa fa-envelope"></i> Email Customer</button>
 	<br /><br />
 	<?php } ?>
-	<button id="p_muid_print" class="btn"><i class="icon-print"></i> Print This Page</button>
+	<button id="p_muid_print" class="btn btn-default"><i class="fa fa-print"></i> Print This Page</button>
 	<br /><br />
-	<button id="p_muid_delivered" class="btn"><i class="icon-truck"></i> Mark <?php echo $this->entity->delivered ? 'Not ' : ''; ?>Delivered</button>
+	<button id="p_muid_delivered" class="btn btn-default"><i class="fa fa-truck"></i> Mark <?php echo $this->entity->delivered ? 'Not ' : ''; ?>Delivered</button>
 </div>

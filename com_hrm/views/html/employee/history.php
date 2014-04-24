@@ -55,7 +55,7 @@ $_->com_pgrid->load();
 			pgrid_view_height: 'auto'
 		});
 
-		p_muid_notice = $.pnotify({
+		p_muid_notice = new PNotify({
 			text: "",
 			hide: false,
 			closer: false,
@@ -129,14 +129,14 @@ $_->com_pgrid->load();
 	});
 </script>
 <div class="pf-form">
-	<div id="p_muid_div" class="accordion">
+	<div id="p_muid_div" class="panel-group">
 		<?php if (!empty($this->entity->employment_history)) { ?>
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle">Employment History</big>
+		<div class="panel panel-default">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Employment History</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<table id="p_muid_history">
 						<thead>
 							<tr>
@@ -157,12 +157,12 @@ $_->com_pgrid->load();
 			</div>
 		</div>
 		<?php } if (!empty($this->issues)) { ?>
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle">Issues/Transgressions</big>
+		<div class="panel panel-default">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Issues/Transgressions</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<table id="p_muid_issues">
 						<thead>
 							<tr>
@@ -189,11 +189,11 @@ $_->com_pgrid->load();
 								<?php if (gatekeeper('com_hrm/resolveissue')) { ?>
 								<td><div class="p_muid_issue_actions">
 									<?php if ($cur_issue->status != 'resolved') { ?>
-									<button class="btn btn-mini" type="button" onclick="$_.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'resolved');" title="Resolve"><span class="p_muid_btn picon picon-flag-yellow"></span></button>
+									<button class="btn btn-default btn-xs" type="button" onclick="$_.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'resolved');" title="Resolve"><span class="p_muid_btn picon picon-flag-yellow"></span></button>
 									<?php } else { ?>
-									<button class="btn btn-mini" type="button" onclick="$_.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'unresolved');" title="Reissue"><span class="p_muid_btn picon picon-flag-red"></span></button>
+									<button class="btn btn-default btn-xs" type="button" onclick="$_.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'unresolved');" title="Reissue"><span class="p_muid_btn picon picon-flag-red"></span></button>
 									<?php } ?>
-									<button class="btn btn-mini" type="button" onclick="$_.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'delete');" title="Remove"><span class="p_muid_btn picon picon-edit-delete"></span></button>
+									<button class="btn btn-default btn-xs" type="button" onclick="$_.com_hrm_process_issue(<?php e(json_encode("{$cur_issue->guid}")); ?>, 'delete');" title="Remove"><span class="p_muid_btn picon picon-edit-delete"></span></button>
 								</div></td>
 								<?php } ?>
 							</tr>
@@ -204,12 +204,12 @@ $_->com_pgrid->load();
 			</div>
 		</div>
 		<?php } if (!empty($this->sales)) { ?>
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle">Sales History</big>
+		<div class="panel panel-default">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Sales History</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<table id="p_muid_sales">
 						<thead>
 							<tr>
@@ -240,12 +240,12 @@ $_->com_pgrid->load();
 			</div>
 		</div>
 		<?php } if (!empty($this->returns)) { ?>
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle">Return History</big>
+		<div class="panel panel-default">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Return History</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<table id="p_muid_returns">
 						<thead>
 							<tr>
@@ -278,12 +278,12 @@ $_->com_pgrid->load();
 			</div>
 		</div>
 		<?php } if (!empty($this->paystubs)) { ?>
-		<div class="accordion-group">
-			<a class="accordion-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-				<big class="accordion-toggle">Paystubs</big>
+		<div class="panel panel-default">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+				<big class="panel-title">Paystubs</big>
 			</a>
-			<div class="accordion-body collapse">
-				<div class="accordion-inner clearfix">
+			<div class="panel-collapse collapse">
+				<div class="panel-body clearfix">
 					<table id="p_muid_paystubs">
 						<thead>
 							<tr>
@@ -319,5 +319,5 @@ $_->com_pgrid->load();
 	</div>
 </div>
 <?php if (gatekeeper('com_hrm/listemployees')) { ?>
-<input class="btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="&laquo; Employees" />
+<input class="btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_hrm', 'employee/list', array('employed' => isset($this->entity->terminated) ? 'false' : 'true')))); ?>);" value="&laquo; Employees" />
 <?php }

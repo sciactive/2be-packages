@@ -137,7 +137,7 @@ $_->com_pgrid->load();
 				dataType: "json",
 				data: {"id": new_location},
 				beforeSend: function(){
-					loader = $.pnotify({
+					loader = new PNotify({
 						title: 'Loading',
 						text: 'Loading location...',
 						icon: 'picon picon-throbber',
@@ -224,7 +224,7 @@ $_->com_pgrid->load();
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_reports', 'savesalesranking')); ?>">
 	<div class="pf-element">
 		<label><span class="pf-label">Ranking Name</span>
-			<input class="pf-field" type="text" name="ranking_name" value="<?php e($this->entity->name); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="ranking_name" value="<?php e($this->entity->name); ?>" /></label>
 	</div>
 
 	<div class="pf-element pf-heading">
@@ -232,11 +232,11 @@ $_->com_pgrid->load();
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Start Date</span>
-			<input class="pf-field" type="text" name="start" value="<?php ($this->entity->start_date) ? e(format_date($this->entity->start_date, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" style="text-align: center;" /></label>
+			<input class="pf-field form-control" type="text" name="start" value="<?php ($this->entity->start_date) ? e(format_date($this->entity->start_date, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" style="text-align: center;" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">End Date</span>
-			<input class="pf-field" type="text" name="end" value="<?php ($this->entity->end_date) ? e(format_date($this->entity->end_date - 1, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" style="text-align: center;" /></label>
+			<input class="pf-field form-control" type="text" name="end" value="<?php ($this->entity->end_date) ? e(format_date($this->entity->end_date - 1, 'date_sort')) : e(format_date(time(), 'date_sort')); ?>" style="text-align: center;" /></label>
 	</div>
 	<?php if ($_->depend->check('component', 'com_mifi')) { ?>
 	<div class="pf-element">
@@ -283,6 +283,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="top_location" />
 		<input type="hidden" name="sales_goals" value="<?php e(json_encode($this->entity->sales_goals)); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Save" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_reports', 'salesrankings'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_reports', 'salesrankings'))); ?>);" value="Cancel" />
 	</div>
 </form>

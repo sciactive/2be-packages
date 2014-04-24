@@ -118,7 +118,7 @@ $_(function(){$(".puploader").each(function(){
 		if (pfile.val() == '')
 			pfile.attr({"data-original-title": 'File Upload', "data-content": 'Click to upload files.'});
 	});
-	$('<button class="btn" type="button" style="margin-left: .5em">'+(pfile.hasClass("puploader-temp") ? 'Upload' : 'Browse')+'&hellip;</button>')
+	$('<button class="btn btn-default" type="button" style="margin-left: .5em">'+(pfile.hasClass("puploader-temp") ? 'Upload' : 'Browse')+'&hellip;</button>')
 	.click(function(){pfile.focus()})
 	.insertAfter(pfile);
 });});

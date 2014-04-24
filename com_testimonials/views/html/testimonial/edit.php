@@ -25,14 +25,14 @@ $_->com_ptags->load();
 			var rate_button = $('.rate');
 			
 			rate_button.click(function(){
-				stars.find('.icon-star-empty')
+				stars.find('.fa-star-o')
 				$(this).remove();
 			});
 			
 			stars.click(function(){
 				var cur_star = $(this);
-				if (cur_star.find('i').hasClass('icon-star-empty')) {
-					stars.find('i').addClass('icon-star').removeClass('icon-star-empty');
+				if (cur_star.find('i').hasClass('fa-star-o')) {
+					stars.find('i').addClass('fa-star').removeClass('fa-star-o');
 				}
 				var num = cur_star.nextAll('.star').andSelf().length;
 				var rated = cur_star.nextAll('.star').andSelf(); // deprecated changed to addBack();
@@ -102,7 +102,7 @@ $_->com_ptags->load();
 	</div>
 	<div class="pf-element">
 		<span class="pf-note">Enter part of a name, company, email, or phone # to search.</span>
-		<input id="p_muid_customer" class="pf-field" type="text" name="customer" value="<?php echo (isset($this->entity->customer->guid) ? h("{$this->entity->customer->guid}: {$this->entity->customer->name}") : ''); ?>"/>
+		<input id="p_muid_customer" class="pf-field form-control" type="text" name="customer" value="<?php echo (isset($this->entity->customer->guid) ? h("{$this->entity->customer->guid}: {$this->entity->customer->name}") : ''); ?>"/>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Feedback</h3>
@@ -133,17 +133,17 @@ $_->com_ptags->load();
 		<span class="pf-label">Rating</span>
 		<div id="rating-container">
 			<?php if (!$this->entity->rating) { ?>
-				<span class="star"><i class="icon-star-empty"></i></span>
-				<span class="star"><i class="icon-star-empty"></i></span>
-				<span class="star"><i class="icon-star-empty"></i></span>
-				<span class="star"><i class="icon-star-empty"></i></span>
-				<span class="star"><i class="icon-star-empty"></i></span>
+				<span class="star"><i class="fa fa-star-o"></i></span>
+				<span class="star"><i class="fa fa-star-o"></i></span>
+				<span class="star"><i class="fa fa-star-o"></i></span>
+				<span class="star"><i class="fa fa-star-o"></i></span>
+				<span class="star"><i class="fa fa-star-o"></i></span>
 			<?php } else { 
 				for ($c = 5; $c >= 1; $c--) { 
 					if ((int) $this->entity->rating >= $c) { ?>
-					<span class="star rated"><i class="icon-star"></i></span>
+					<span class="star rated"><i class="fa fa-star"></i></span>
 					<?php } else { ?>
-					<span class="star"><i class="icon-star"></i></span>
+					<span class="star"><i class="fa fa-star"></i></span>
 					<?php } 
 					}
 				} ?>
@@ -176,7 +176,7 @@ $_->com_ptags->load();
 		<span class="pf-label">Tags 
 			<span class="pf-note">Certain tags cannot be removed or added: approved, com_testimonials, testimonial etc</span>
 		</span>
-		<input class="pf-field" id="p_muid_tags" name="tags" type="text" value="<?php echo implode(',', $this->entity->tags);?>" />
+		<input class="pf-field form-control" id="p_muid_tags" name="tags" type="text" value="<?php echo implode(',', $this->entity->tags);?>" />
 	</div>
 	<?php } if (gatekeeper('com_testimonials/changestatus')) { ?>
 	<div class="pf-element">
@@ -191,6 +191,6 @@ $_->com_ptags->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_testimonials', 'testimonial/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_testimonials', 'testimonial/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -20,29 +20,29 @@ $_->uploader->load();
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">File</span>
-			<input class="pf-field puploader" type="text" name="file" />
+			<input class="pf-field form-control puploader" type="text" name="file" />
 		</label>
 	</div>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Temp File</span>
 			<span class="pf-note">A temp file uploader only lets you upload to a temporary folder.</span>
-			<input class="pf-field puploader puploader-temp" type="text" name="tmpfile" />
+			<input class="pf-field form-control puploader puploader-temp" type="text" name="tmpfile" />
 		</label>
 	</div>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Allow Folders</span>
-			<input class="pf-field puploader puploader-folders" type="text" name="folder" />
+			<input class="pf-field form-control puploader puploader-folders" type="text" name="folder" />
 		</label>
 	</div>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Files</span>
-			<input class="pf-field puploader puploader-multiple" type="text" name="files" />
+			<input class="pf-field form-control puploader puploader-multiple" type="text" name="files" />
 		</label>
 	</div>
 	<div class="pf-element pf-buttons">
-		<input class="pf-button btn" type="submit" value="Submit" />
+		<input class="pf-button btn btn-default" type="submit" value="Submit" />
 	</div>
 </form>

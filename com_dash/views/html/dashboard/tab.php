@@ -51,7 +51,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 					return;
 				allow_update = false;
 				var struct = {};
-				$("#p_muid_tab > .row-fluid > .column").each(function(){
+				$("#p_muid_tab > .row > .column").each(function(){
 					var column = $(this);
 					var col_key = column.children(".key").text();
 					struct[col_key] = [];
@@ -81,10 +81,10 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 		<?php } ?>
 		var tab = $("#p_muid_tab").on("click", ".max_widget", function(){
 			// Maximize widget.
-			$(this).toggleClass("icon-resize-full icon-resize-small").closest(".object").add("#p_muid_tab").toggleClass("maximized");
+			$(this).toggleClass("fa-expand fa-compress").closest(".object").add("#p_muid_tab").toggleClass("maximized");
 		}).on("click", ".min_widget", function(){
 			// Minimize widget.
-			$(this).toggleClass("icon-chevron-up icon-chevron-down").closest(".object").toggleClass("minimized");
+			$(this).toggleClass("fa-chevron-up fa-chevron-down").closest(".object").toggleClass("minimized");
 		}).on("mouseleave", ".object", function(){
 			// Close the edit menu.
 			$(this).find(".controls").removeClass("open");
@@ -366,13 +366,13 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 	<div class="buttons well <?php e($this->tab['buttons_size']); ?>">
 		<?php if ($this->editable) { ?>
 		<div class="controls">
-			<span class="edit_buttons w_icon icon-cog" title="Configure Buttons"></span>
+			<span class="edit_buttons w_icon fa fa-cog" title="Configure Buttons"></span>
 		</div>
 		<?php } foreach ((array) $this->tab['buttons'] as $cur_button) {
 			if ($cur_button == 'separator') { ?>
-		<a class="separator btn disabled"><span>&nbsp;</span></a>
+		<a class="separator btn btn-default disabled"><span>&nbsp;</span></a>
 			<?php } elseif ($cur_button == 'line_break') { ?>
-		<a class="line_break btn disabled"><span>&nbsp;</span></a>
+		<a class="line_break btn btn-default disabled"><span>&nbsp;</span></a>
 			<?php } else {
 				$cur_def = $_->com_dash->get_button_def($cur_button);
 				// Check its conditions.
@@ -380,15 +380,15 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 					if (!$_->depend->check($cur_type, $cur_value))
 						continue 2;
 				} ?>
-		<a class="btn" href="<?php e($cur_def['href']); ?>" title="<?php e($cur_def['description']); ?>">
+		<a class="btn btn-default" href="<?php e($cur_def['href']); ?>" title="<?php e($cur_def['description']); ?>">
 			<span class="picon <?php echo $this->tab['buttons_size'] == 'large' ? 'picon-32' : ''; ?> <?php e($cur_def['class']); ?>"><?php e($cur_def['text']); ?></span>
 		</a>
 		<?php } } ?>
 	</div>
-	<div class="row-fluid">
+	<div class="row">
 		<?php foreach ((array) $this->tab['columns'] as $cur_c_key => $cur_column) {
 			$col_style = h($cur_column['size'] < 1 ? floor($max_columns * $cur_column['size']) : $cur_column['size']); ?>
-		<div class="span<?php echo $col_style; ?> column">
+		<div class="col-sm-<?php echo $col_style; ?> column">
 			<div class="key" style="display: none;"><?php e($cur_c_key); ?></div>
 			<?php foreach ((array) $cur_column['widgets'] as $cur_w_key => $cur_widget) {
 				// Get the widget definition.
@@ -405,12 +405,12 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 					<span class="title">Loading...</span>
 					<div class="controls dropdown clearfix">
 						<?php if ($this->editable) { ?>
-						<span class="edit_widget w_icon icon-cog" title="Edit this Widget" data-toggle="dropdown"></span>
+						<span class="edit_widget w_icon fa fa-cog" title="Edit this Widget" data-toggle="dropdown"></span>
 						<?php } else { ?>
-						<span class="widget_refresh w_icon icon-refresh" title="Refresh this Widget"></span>
+						<span class="widget_refresh w_icon fa fa-refresh" title="Refresh this Widget"></span>
 						<?php } ?>
-						<span class="max_widget w_icon icon-resize-full" title="Maximize this Widget"></span>
-						<span class="min_widget w_icon icon-chevron-up" title="Minimize this Widget"></span>
+						<span class="max_widget w_icon fa fa-expand" title="Maximize this Widget"></span>
+						<span class="min_widget w_icon fa fa-chevron-up" title="Minimize this Widget"></span>
 						<?php if ($this->editable) { ?>
 						<ul class="edit_widget_menu dropdown-menu">
 							<?php if (isset($cur_def['form']) || isset($cur_def['form_callback'])) { ?>
@@ -433,7 +433,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 	</div>
 	<?php if ($this->editable) { ?>
 	<div class="add_widget">
-		<button id="p_muid_add_widget" class="btn">Add Widgets</button>
+		<button id="p_muid_add_widget" class="btn btn-default">Add Widgets</button>
 	</div>
 	<?php } ?>
 </div>

@@ -216,7 +216,7 @@ if ($this->entity->final)
 					dataType: "json",
 					data: {"q": search_string, "enabled": "true"},
 					beforeSend: function(){
-						loader = $.pnotify({
+						loader = new PNotify({
 							title: 'Search',
 							text: 'Searching the database...',
 							icon: 'picon picon-throbber',
@@ -425,18 +425,18 @@ if ($this->entity->final)
 	<div class="pf-element">
 		<label><span class="pf-label">PO #</span>
 			<span class="pf-note">If left blank, one will be auto-generated.</span>
-			<input class="pf-field" type="text" name="po_number" size="24" value="<?php e($this->entity->po_number); ?>" <?php echo $read_only; ?> /></label>
+			<input class="pf-field form-control" type="text" name="po_number" size="24" value="<?php e($this->entity->po_number); ?>" <?php echo $read_only; ?> /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Reference #</span>
-			<input class="pf-field" type="text" name="reference_number" size="24" value="<?php e($this->entity->reference_number); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="reference_number" size="24" value="<?php e($this->entity->reference_number); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label>
 			<span class="pf-label">Vendor</span>
 			<?php if (!$this->entity->final && empty($this->entity->received)) { ?>
 			<span class="pf-note">Changing this will remove products not in new vendor!</span>
-			<select class="pf-field" name="vendor" id="p_muid_vendor">
+			<select class="pf-field form-control" name="vendor" id="p_muid_vendor">
 				<option value="null">-- None --</option>
 				<?php
 				$_->entity_manager->sort($this->vendors, 'name');
@@ -475,7 +475,7 @@ if ($this->entity->final)
 		<label>
 			<span class="pf-label">Shipper</span>
 			<?php if (empty($this->entity->received)) { ?>
-			<select class="pf-field" name="shipper">
+			<select class="pf-field form-control" name="shipper">
 				<option value="null">-- None --</option>
 				<?php foreach ($this->shippers as $cur_shipper) { ?>
 				<option value="<?php e($cur_shipper->guid); ?>"<?php echo $this->entity->shipper->guid == $cur_shipper->guid ? ' selected="selected"' : ''; ?>><?php e($cur_shipper->name); ?></option>
@@ -500,7 +500,7 @@ if ($this->entity->final)
 			});
 		</script>
 		<label><span class="pf-label">ETA</span>
-			<input class="pf-field" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? h(format_date($this->entity->eta, 'date_sort')) : ''); ?>" /></label>
+			<input class="pf-field form-control" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? h(format_date($this->entity->eta, 'date_sort')) : ''); ?>" /></label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<label><span class="pf-label">Tracking Number(s)</span>
@@ -604,11 +604,11 @@ if ($this->entity->final)
 		<div class="pf-form">
 			<div class="pf-element">
 				<label><span class="pf-label">Quantity</span>
-					<input class="pf-field" type="text" name="cur_product_quantity" size="24" id="p_muid_cur_product_quantity" /></label>
+					<input class="pf-field form-control" type="text" name="cur_product_quantity" size="24" id="p_muid_cur_product_quantity" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Cost</span>
-					<input class="pf-field" type="text" name="cur_product_cost" size="24" id="p_muid_cur_product_cost" /></label>
+					<input class="pf-field form-control" type="text" name="cur_product_cost" size="24" id="p_muid_cur_product_cost" /></label>
 			</div>
 		</div>
 		<br />
@@ -617,11 +617,11 @@ if ($this->entity->final)
 		<div class="pf-form">
 			<div class="pf-element">
 				<label><span class="pf-label">Quantity</span>
-					<input class="pf-field" type="text" name="cur_product_quantity" size="24" id="p_muid_cur_product_edit_quantity" /></label>
+					<input class="pf-field form-control" type="text" name="cur_product_quantity" size="24" id="p_muid_cur_product_edit_quantity" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Cost</span>
-					<input class="pf-field" type="text" name="cur_product_cost" size="24" id="p_muid_cur_product_edit_cost" /></label>
+					<input class="pf-field form-control" type="text" name="cur_product_cost" size="24" id="p_muid_cur_product_edit_cost" /></label>
 			</div>
 		</div>
 		<br />
@@ -712,6 +712,6 @@ if ($this->entity->final)
 		<?php if (!$this->entity->final) { ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="<?php echo isset($this->item_ids) ? 'Commit and Attach' : 'Commit'; ?>" onclick="$('#p_muid_save').val('commit');" />
 		<?php } ?>
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'po/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'po/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

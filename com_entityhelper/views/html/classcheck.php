@@ -39,7 +39,7 @@ $this->title = 'Class Check';
 				});
 		}).on("click", "table thead th", function(){
 			var column = $(this),
-				desc = !!column.find(".icon-chevron-up").length,
+				desc = !!column.find(".fa-chevron-up").length,
 				table = column.closest("table"),
 				col_num = column.prevAll().length,
 				tbody = table.children("tbody"),
@@ -48,7 +48,7 @@ $this->title = 'Class Check';
 				return (desc ? -1 : 1) * $("td:eq("+col_num+")", a).text().localeCompare($("td:eq("+col_num+")", b).text());
 			}));
 			table.find("thead tr .sort-icon").remove();
-			column.append('<i class="sort-icon icon-chevron-'+(desc ? "down" : "up")+'"></i>');
+			column.append('<i class="sort-icon fa fa-chevron-'+(desc ? "down" : "up")+'"></i>');
 		}).find("table thead th:first-child").click();
 	});
 </script>
@@ -58,7 +58,7 @@ $this->title = 'Class Check';
 		without one will use the default helper.
 	</p>
 	<p>
-		<label>Filter: <input type="text" name="filter" value="" size="24" /></label>
+		<label>Filter: <input class="form-control" type="text" name="filter" value="" size="24" /></label>
 	</p>
 	<table class="table table-condensed table-bordered">
 		<thead>

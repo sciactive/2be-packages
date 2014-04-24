@@ -15,11 +15,11 @@ defined('P_RUN') or die('Direct access prohibited');
 	<div class="pf-element">
 		<label><span class="pf-label">Title</span>
 			<span class="pf-note">"#name#" and "#username#" will be replaced by the current user's name and username.</span>
-			<input class="pf-field" type="text" name="widget_title" size="36" value="<?php echo isset($this->widget_title) ? h($this->widget_title) : 'Chat #name# [#username#]'; ?>" /></label>
+			<input class="pf-field form-control" type="text" name="widget_title" size="36" value="<?php echo isset($this->widget_title) ? h($this->widget_title) : 'Chat #name# [#username#]'; ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Interface</span>
-			<select class="pf-field" name="interface">
+			<select class="pf-field form-control" name="interface">
 				<option value="inline"<?php echo $this->interface == 'inline' ? ' selected="selected"' : ''; ?>>Inline (Where the module is.)</option>
 				<option value="floating"<?php echo $this->interface == 'floating' ? ' selected="selected"' : ''; ?>>Floating (In the bottom right.)</option>
 			</select></label>
@@ -35,7 +35,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	<div class="pf-element">
 		<label><span class="pf-label">Roster Max Length</span>
 			<span class="pf-note">The max length of a displayed name in the roster (Longer names will show &hellip;).</span>
-			<input class="pf-field" type="text" name="roster_max_len" size="5" value="<?php echo isset($this->roster_max_len) ? h((int) $this->roster_max_len) : '20'; ?>" /></label>
+			<input class="pf-field form-control" type="text" name="roster_max_len" size="5" value="<?php echo isset($this->roster_max_len) ? h((int) $this->roster_max_len) : '20'; ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Status Box</span>

@@ -167,7 +167,7 @@ $this->sawasc = $_->com_user->activate_sawasc();
 				<?php if ($this->style != 'small') { ?>
 				<span class="pf-group" style="display: block;">
 				<?php } ?>
-					<input class="pf-field" type="text" name="username" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" />
+					<input class="pf-field form-control" type="text" name="username" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" />
 					<?php if ($this->check_username) { echo ($this->style == 'compact') ? '<br class="pf-clearing" />' : ''; ?>
 					<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 					<span class="pf-field picon" id="p_muid_username_message" style="display: none;"></span>
@@ -180,19 +180,19 @@ $this->sawasc = $_->com_user->activate_sawasc();
 		<div class="pf-element">
 			<label><span class="pf-label">Password</span>
 				<?php echo ($_->config->com_user->pw_empty ? '<span class="pf-note">May be blank.</span>' : ''); ?>
-				<input class="pf-field" type="password" name="password" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+				<input class="pf-field form-control" type="password" name="password" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 		</div>
 		<?php if ($_->config->com_user->allow_registration) { ?>
 		<div id="p_muid_register_form" style="display: none;">
 			<div class="pf-element">
 				<label><span class="pf-label">Re-enter Password</span>
-					<input class="pf-field" type="password" name="password2" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+					<input class="pf-field form-control" type="password" name="password2" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
 			<?php if ($_->config->com_user->referral_codes) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Referral Code</span>
 					<span class="pf-note">Optional</span>
-					<input class="pf-field" type="text" name="referral_code" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="referral_code" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
 			<?php } if ($_->config->com_user->one_step_registration) { ?>
 			<div class="pf-element">
@@ -201,37 +201,37 @@ $this->sawasc = $_->com_user->activate_sawasc();
 			<?php if (in_array('name', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">First Name <span class="pf-required">*</span></span>
-					<input class="pf-field" type="text" name="name_first" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_first" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Middle Name</span>
-					<input class="pf-field" type="text" name="name_middle" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_middle" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Last Name</span>
-					<input class="pf-field" type="text" name="name_last" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_last" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
 			<?php } if (!$_->config->com_user->email_usernames && in_array('email', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Email <span class="pf-required">*</span></span>
-					<input class="pf-field" type="email" name="email" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+					<input class="pf-field form-control" type="email" name="email" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
 			<?php } if (in_array('phone', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone Number</span>
-					<input class="pf-field" type="tel" name="phone" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+					<input class="pf-field form-control" type="tel" name="phone" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
 			<?php } if (in_array('fax', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Fax Number</span>
-					<input class="pf-field" type="tel" name="fax" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+					<input class="pf-field form-control" type="tel" name="fax" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 			</div>
 			<?php } if (in_array('timezone', $_->config->com_user->reg_fields)) { ?>
 			<div class="pf-element<?php echo ($this->style == 'small') ? ' pf-full-width' : ''; ?>">
 				<label><span class="pf-label">Timezone</span>
 					<span class="pf-note">This overrides the primary group's timezone.</span>
 					<?php echo ($this->style == 'compact') ? '<div class="pf-group">' : ''; ?>
-					<select class="pf-field" name="timezone" size="1"<?php echo ($this->style == 'small') ? ' style="max-width: 95%;"' : ''; ?>>
+					<select class="pf-field form-control" name="timezone"<?php echo ($this->style == 'small') ? ' style="max-width: 95%;"' : ''; ?>>
 						<option value="">--Default--</option>
 						<?php $tz = DateTimeZone::listIdentifiers();
 						sort($tz);
@@ -267,17 +267,17 @@ $this->sawasc = $_->com_user->activate_sawasc();
 			<div id="p_muid_address_us" style="display: none;">
 				<div class="pf-element">
 					<label><span class="pf-label">Address 1</span>
-						<input class="pf-field" type="text" name="address_1" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_1" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Address 2</span>
-						<input class="pf-field" type="text" name="address_2" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_2" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 				</div>
 				<div class="pf-element<?php echo ($this->style == 'small') ? ' pf-full-width' : ''; ?>">
 					<label for="p_muid_city"><span class="pf-label">City, State</span></label>
 					<?php echo ($this->style == 'compact') ? '<div class="pf-group" style="white-space: nowrap; margin-right: 16px;">' : ''; ?>
-					<input class="pf-field" type="text" name="city" id="p_muid_city" size="<?php echo ($this->style == 'small') ? '10' : '15'; ?>" />
-					<select class="pf-field" name="state"<?php echo ($this->style == 'small') ? ' style="max-width: 95%;"' : ''; ?>>
+					<input class="pf-field form-control" type="text" name="city" id="p_muid_city" size="<?php echo ($this->style == 'small') ? '10' : '15'; ?>" />
+					<select class="pf-field form-control" name="state"<?php echo ($this->style == 'small') ? ' style="max-width: 95%;"' : ''; ?>>
 						<option value="">None</option>
 						<?php foreach (array(
 								'AL' => 'Alabama',
@@ -342,7 +342,7 @@ $this->sawasc = $_->com_user->activate_sawasc();
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Zip</span>
-						<input class="pf-field" type="text" name="zip" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
+						<input class="pf-field form-control" type="text" name="zip" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" /></label>
 				</div>
 			</div>
 			<div id="p_muid_address_international" style="display: none;">
@@ -369,7 +369,7 @@ $this->sawasc = $_->com_user->activate_sawasc();
 			<?php } ?>
 			<input class="pf-button btn btn-primary" type="submit" name="submit" value="Log In" />
 			<?php if ($this->style != 'small') { ?>
-			<input class="pf-button btn" type="reset" name="reset" value="Reset" />
+			<input class="pf-button btn btn-default" type="reset" name="reset" value="Reset" />
 			<?php } ?>
 		</div>
 		<?php if (!$this->hide_recovery && $_->config->com_user->pw_recovery) { ?>
@@ -385,11 +385,11 @@ $this->sawasc = $_->com_user->activate_sawasc();
 <?php if ($this->style == 'compact') { ?>
 <script type="text/javascript">
 	$_(function(){
-		var notice = $.pnotify({
+		var notice = new PNotify({
 			type: 'info',
 			title: <?php echo json_encode($this->title); ?>,
 			text: $("#p_muid_form").detach().show().append("<br style=\"clear: both; height: 0; line-height: 0;\" />"),
-			icon: 'icon-key',
+			icon: 'fa fa-key',
 			width: 'auto',
 			hide: false,
 			sticker: false,

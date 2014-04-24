@@ -122,7 +122,7 @@ $_->com_sales->sort_specs($specs);
 				<strong>SKU:</strong> <?php echo format_content(h($this->entity->sku)); ?>
 			</div>
 			<?php if (!$_->config->com_storefront->catalog_mode) { ?>
-			<div><button class="add_cart btn btn-large btn-primary"><i class="icon-shopping-cart icon-white"></i> Add to Cart</button></div>
+			<div><button class="add_cart btn btn-lg btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart</button></div>
 			<?php } ?>
 		</div>
 		<div class="desc"><?php echo format_content($this->entity->short_description); ?></div>

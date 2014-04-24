@@ -44,6 +44,9 @@ $component->config = array();
 foreach ($component->defaults as $cur_var) {
 	if ($_REQUEST['manset_'.$cur_var['name']] != 'ON')
 		continue;
+	if (is_callable($cur_var['options'])) {
+		$cur_var['options'] = call_user_func($cur_var['options']);
+	}
 	if (is_array($cur_var['options'])) {
 		if (is_array($cur_var['value'])) {
 			$rvalue = (array) $_REQUEST['opt_multi_'.$cur_var['name']];

@@ -121,23 +121,23 @@ $_->com_hrm->load_employee_select();
 	<form class="pf-form" method="post" action="">
 		<div class="pf-element">
 			<label><span class="pf-label">Employee</span>
-				<input class="pf-field" type="text" size="24" name="employee" /></label>
+				<input class="pf-field form-control" type="text" size="24" name="employee" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Bonus</span>
-				<input class="pf-field" type="text" size="24" name="name" /></label>
+				<input class="pf-field form-control" type="text" size="24" name="name" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Date</span>
-				<input type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+				<input class="form-control" type="text" size="24" name="effective_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Amount</span>
-				<span class="pf-field">$ <input type="text" size="5" name="amount" /></span></label>
+				<span class="pf-field">$ <input class="form-control" type="text" size="5" name="amount" /></span></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Comments</span>
-				<input class="pf-field" type="text" size="24" name="comments" value="" /></label>
+				<input class="pf-field form-control" type="text" size="24" name="comments" value="" /></label>
 		</div>
 	</form>
 	<br />

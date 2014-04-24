@@ -162,5 +162,5 @@ if ($this->render == 'body' && (gatekeeper('com_sales/managestock') || gatekeepe
 	<div style="white-space: pre-wrap; padding-bottom: .5em;"><?php e($this->entity->comments); ?></div>
 </div>
 <?php } } elseif ($this->render == 'footer' && $this->entity->final && !$this->entity->shipped && gatekeeper('com_sales/shipstock')) { ?>
-<a href="<?php e(pines_url('com_sales', 'transfer/ship', array('id' => $this->entity->guid))); ?>" class="btn">Ship</a>
+<a href="<?php e(pines_url('com_sales', 'transfer/ship', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Ship</a>
 <?php }

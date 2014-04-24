@@ -16,7 +16,7 @@ hr {
 	padding-right: 0;
 }
 /* Bootstrap Min-height Fix */
-.page-width > .row-fluid > [class*="span"],
+.page-width > .row > [class*="span"],
 #content_top_left,
 #content_top_right,
 #content_bottom_left,

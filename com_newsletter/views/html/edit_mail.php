@@ -28,11 +28,11 @@ $_->uploader->load();
 	<?php } ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
-		<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
+		<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Subject</span>
-		<input class="pf-field" type="text" name="subject" size="24" value="<?php e($this->entity->subject); ?>" /></label>
+		<input class="pf-field form-control" type="text" name="subject" size="24" value="<?php e($this->entity->subject); ?>" /></label>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Message</h3>
@@ -61,6 +61,6 @@ $_->uploader->load();
 		<input type="hidden" name="update" value="yes" />
 		<input type="hidden" name="mail_id" value="<?php e($this->entity->guid); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Save Mail" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url($this->close_option, $this->close_action))); ?>);" value="Close" /> <small>(Closing will lose any unsaved changes!)</small>
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url($this->close_option, $this->close_action))); ?>);" value="Close" /> <small>(Closing will lose any unsaved changes!)</small>
 	</div>
 </form>

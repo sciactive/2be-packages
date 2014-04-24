@@ -62,7 +62,7 @@ $missing_stock = array();
 									dataType: "json",
 									data: {"code": code},
 									beforeSend: function(){
-										loader = $.pnotify({
+										loader = new PNotify({
 											title: 'Product Search',
 											text: 'Retrieving product from server...',
 											icon: 'picon picon-throbber',
@@ -168,7 +168,7 @@ $missing_stock = array();
 							dataType: "json",
 							data: {"id": row.attr("title")},
 							beforeSend: function(){
-								loader = $.pnotify({
+								loader = new PNotify({
 									title: 'Product Search',
 									text: 'Retrieving products from server...',
 									icon: 'picon picon-throbber',
@@ -365,10 +365,10 @@ $missing_stock = array();
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Reference #</span>
-			<input class="pf-field" type="text" name="reference_number" size="24" value="<?php e($this->entity->reference_number); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="reference_number" size="24" value="<?php e($this->entity->reference_number); ?>" /></label>
 	</div>
-	<div class="row-fluid" style="clear: both;">
-		<div class="span6">
+	<div class="row" style="clear: both;">
+		<div class="col-sm-6">
 			<div class="pf-element">
 				<span class="pf-label">Origin</span>
 				<?php if (!$this->entity->final && !$this->entity->shipped) { ?>
@@ -384,7 +384,7 @@ $missing_stock = array();
 				<input type="hidden" name="origin" />
 			</div>
 		</div>
-		<div class="span6">
+		<div class="col-sm-6">
 			<div class="pf-element">
 				<span class="pf-label">Destination</span>
 				<?php if (!$this->entity->final && !$this->entity->shipped) { ?>
@@ -405,7 +405,7 @@ $missing_stock = array();
 		<label>
 			<span class="pf-label">Shipper</span>
 			<?php if (!$this->entity->shipped) { ?>
-			<select class="pf-field" name="shipper">
+			<select class="pf-field form-control" name="shipper">
 				<option value="null">-- None --</option>
 				<?php foreach ($this->shippers as $cur_shipper) { ?>
 				<option value="<?php e($cur_shipper->guid); ?>"<?php echo $this->entity->shipper->guid == $cur_shipper->guid ? ' selected="selected"' : ''; ?>><?php e($cur_shipper->name); ?></option>
@@ -430,7 +430,7 @@ $missing_stock = array();
 			});
 		</script>
 		<label><span class="pf-label">ETA</span>
-			<input class="pf-field" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? date('Y-m-d', $this->entity->eta) : ''); ?>" /></label>
+			<input class="pf-field form-control" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? date('Y-m-d', $this->entity->eta) : ''); ?>" /></label>
 	</div>
 	<div id="p_muid_category_dialog" title="Categories" style="display: none;">
 		<table id="p_muid_category_grid">
@@ -581,10 +581,10 @@ $missing_stock = array();
 		<?php } if (!$this->entity->final) { ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Commit" onclick="$('#p_muid_save').val('commit');" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
 		<?php } else { ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" onclick="$('#p_muid_save').val('save');" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'transfer/list'))); ?>);" value="Cancel" />
 		<?php } ?>
 	</div>
 </form>

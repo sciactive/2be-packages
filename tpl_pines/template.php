@@ -92,9 +92,9 @@ header('Content-Type: text/html');
 		}
 	?></div>
 	<div id="header" class="ui-widget-header">
-		<div class="container-fluid page-width centered">
-			<div class="row-fluid">
-				<div class="span4">
+		<div class="container page-width centered">
+			<div class="row">
+				<div class="col-sm-4">
 					<div id="page_title">
 						<a href="<?php e($_->config->full_location); ?>">
 							<?php if ($_->config->tpl_pines->use_header_image) { ?>
@@ -105,48 +105,48 @@ header('Content-Type: text/html');
 						</a>
 					</div>
 				</div>
-				<div id="header_position" class="span4"><?php echo $_->page->render_modules('header', 'module_header'); ?>&nbsp;</div>
-				<div id="header_right" class="span4"><?php echo $_->page->render_modules('header_right', 'module_header_right'); ?></div>
+				<div id="header_position" class="col-sm-4"><?php echo $_->page->render_modules('header', 'module_header'); ?>&nbsp;</div>
+				<div id="header_right" class="col-sm-4"><?php echo $_->page->render_modules('header_right', 'module_header_right'); ?></div>
 			</div>
 		</div>
-		<div class="container-fluid page-width centered">
-			<div class="row-fluid">
-				<div class="span12">
+		<div class="container page-width centered">
+			<div class="row">
+				<div class="col-sm-12">
 					<div id="main_menu"<?php echo $_->config->tpl_pines->center_menu ? ' class="centered"' : ''; ?>><?php echo $_->page->render_modules('main_menu', 'module_head'); ?></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid page-width centered">
-		<div class="row-fluid">
-			<div id="pre_content" class="span12"><?php echo $_->page->render_modules('pre_content', 'module_header'); ?></div>
+	<div class="container page-width centered">
+		<div class="row">
+			<div id="pre_content" class="col-sm-12"><?php echo $_->page->render_modules('pre_content', 'module_header'); ?></div>
 		</div>
 	</div>
 	<div id="column_container">
-		<div class="container-fluid page-width centered">
-			<div class="row-fluid">
+		<div class="container page-width centered">
+			<div class="row">
 				<?php if (in_array($_->config->tpl_pines->variant, array('threecol', 'twocol-sideleft'))) { ?>
-				<div id="left" class="span2">
+				<div id="left" class="col-sm-2">
 					<?php echo $_->page->render_modules('left', 'module_side'); ?>
 					<?php if ($_->config->tpl_pines->variant == 'twocol-sideleft') { echo $_->page->render_modules('right', 'module_side'); } ?>&nbsp;
 				</div>
 				<?php } ?>
-				<div class="<?php echo $_->config->tpl_pines->variant == 'full-page' ? 'span12' : ($_->config->tpl_pines->variant == 'threecol' ? 'span8' : 'span10'); ?>">
+				<div class="<?php echo $_->config->tpl_pines->variant == 'full-page' ? 'col-sm-12' : ($_->config->tpl_pines->variant == 'threecol' ? 'col-sm-8' : 'col-sm-10'); ?>">
 					<div id="content_container">
 						<div id="breadcrumbs"><?php echo $_->page->render_modules('breadcrumbs', 'module_header'); ?></div>
-						<div class="row-fluid">
-							<div id="content_top_left" class="span6"><?php echo $_->page->render_modules('content_top_left', 'module_header'); ?></div>
-							<div id="content_top_right" class="span6"><?php echo $_->page->render_modules('content_top_right', 'module_header'); ?></div>
+						<div class="row">
+							<div id="content_top_left" class="col-sm-6"><?php echo $_->page->render_modules('content_top_left', 'module_header'); ?></div>
+							<div id="content_top_right" class="col-sm-6"><?php echo $_->page->render_modules('content_top_right', 'module_header'); ?></div>
 						</div>
 						<div id="content"><?php echo $_->page->render_modules('content', 'module_content'); ?></div>
-						<div class="row-fluid">
-							<div id="content_bottom_left" class="span6"><?php echo $_->page->render_modules('content_bottom_left', 'module_header'); ?></div>
-							<div id="content_bottom_right" class="span6"><?php echo $_->page->render_modules('content_bottom_right', 'module_header'); ?></div>
+						<div class="row">
+							<div id="content_bottom_left" class="col-sm-6"><?php echo $_->page->render_modules('content_bottom_left', 'module_header'); ?></div>
+							<div id="content_bottom_right" class="col-sm-6"><?php echo $_->page->render_modules('content_bottom_right', 'module_header'); ?></div>
 						</div>
 					</div>
 				</div>
 				<?php if (in_array($_->config->tpl_pines->variant, array('threecol', 'twocol-sideright'))) { ?>
-				<div id="right" class="span2">
+				<div id="right" class="col-sm-2">
 					<?php if ($_->config->tpl_pines->variant == 'twocol-sideright') { echo $_->page->render_modules('left', 'module_side'); } ?>
 					<?php echo $_->page->render_modules('right', 'module_side'); ?>&nbsp;
 				</div>
@@ -154,15 +154,15 @@ header('Content-Type: text/html');
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid page-width centered">
-		<div class="row-fluid">
-			<div id="post_content" class="span12"><?php echo $_->page->render_modules('post_content', 'module_header'); ?></div>
+	<div class="container page-width centered">
+		<div class="row">
+			<div id="post_content" class="col-sm-12"><?php echo $_->page->render_modules('post_content', 'module_header'); ?></div>
 		</div>
 	</div>
 	<div id="footer" class="ui-widget-header">
-		<div class="container-fluid page-width centered">
-			<div class="row-fluid">
-				<div class="span12">
+		<div class="container page-width centered">
+			<div class="row">
+				<div class="col-sm-12">
 					<div id="footer_position"><?php echo $_->page->render_modules('footer', 'module_header'); ?></div>
 					<p id="copyright"><?php e($_->config->copyright_notice, ENT_COMPAT, '', false); ?></p>
 				</div>

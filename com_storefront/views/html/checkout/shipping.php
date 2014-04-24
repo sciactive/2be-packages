@@ -44,11 +44,11 @@ $this->title = 'Shipping Address';
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_storefront', 'checkout/shippingsave')); ?>">
 	<div class="pf-element">
 		<span class="pf-label">Autofill</span>
-		<small><button type="button" class="pf-field btn" id="p_muid_use_profile">Use My Account Info</button></small>
+		<small><button type="button" class="pf-field btn btn-default" id="p_muid_use_profile">Use My Account Info</button></small>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php e(isset($this->address->name) ? $this->address->name : $this->user_address->name); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e(isset($this->address->name) ? $this->address->name : $this->user_address->name); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Address Type</span>
@@ -58,16 +58,16 @@ $this->title = 'Shipping Address';
 	<div id="p_muid_address_us" style="display: none;">
 		<div class="pf-element">
 			<label><span class="pf-label">Address 1</span>
-				<input class="pf-field" type="text" name="address_1" size="24" value="<?php e($this->address->address_1); ?>" /></label>
+				<input class="pf-field form-control" type="text" name="address_1" size="24" value="<?php e($this->address->address_1); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Address 2</span>
-				<input class="pf-field" type="text" name="address_2" size="24" value="<?php e($this->address->address_2); ?>" /></label>
+				<input class="pf-field form-control" type="text" name="address_2" size="24" value="<?php e($this->address->address_2); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">City, State</span>
-			<input class="pf-field" type="text" name="city" size="15" value="<?php e($this->address->city); ?>" />
-			<select class="pf-field" name="state">
+			<input class="pf-field form-control" type="text" name="city" size="15" value="<?php e($this->address->city); ?>" />
+			<select class="pf-field form-control" name="state">
 				<option value="">None</option>
 				<?php foreach (array(
 						'AL' => 'Alabama',
@@ -131,7 +131,7 @@ $this->title = 'Shipping Address';
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Zip</span>
-				<input class="pf-field" type="text" name="zip" size="24" value="<?php e($this->address->zip); ?>" /></label>
+				<input class="pf-field form-control" type="text" name="zip" size="24" value="<?php e($this->address->zip); ?>" /></label>
 		</div>
 	</div>
 	<div id="p_muid_address_international" style="display: none;">

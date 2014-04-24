@@ -251,7 +251,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<div class="pf-element pf-heading disposal_title"></div>
 		<div class="pf-element">
 		<label><span class="pf-label">Dispose as</span>
-			<select class="pf-field" name="dispose">
+			<select class="pf-field form-control" name="dispose">
 				<?php
 					foreach ($_->config->com_esp->disposal_types as $cur_dispo) {
 						$dispo_array = explode(':', $cur_dispo);

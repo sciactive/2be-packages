@@ -22,11 +22,11 @@ if ($_->current_template != 'tpl_print') {
 </div>
 <?php } ?>
 <div class="pf-form" id="p_muid_form">
-	<div class="hero-unit pull-right" style="padding-top: 30px; padding-bottom: 30px;">
+	<div class="jumbotron pull-right" style="padding-top: 30px; padding-bottom: 30px;">
 		<h2><?php e($this->entity->ref->info('name')); ?></h2>
 	</div>
 	<div class="pf-element" style="margin: 2em;">
-		<span class="pf-label"><span class="label">Ship To</span></span>
+		<span class="pf-label"><span class="label label-default">Ship To</span></span>
 		<div class="pf-group">
 			<div class="pf-field">
 				<strong><?php e($this->entity->shipping_address->name); ?></strong><br />
@@ -42,23 +42,23 @@ if ($_->current_template != 'tpl_print') {
 	<div class="pf-element pf-full-width">
 		<table class="table table-bordered table-condensed" style="border-left: none; border-right: none; border-bottom: none;">
 			<tr>
-				<td style="width: 10%; text-align: right; border-left: none;"><span class="label">Shipment ID</span></td>
+				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">Shipment ID</span></td>
 				<td style="width: 23%;"><?php e($this->entity->id); ?></td>
-				<td style="width: 10%; text-align: right; border-left: none;"><span class="label">Ship Date</span></td>
+				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">Ship Date</span></td>
 				<td style="width: 23%;"><?php e(format_date($this->entity->p_cdate, 'date_med')); ?></td>
-				<td style="width: 10%; text-align: right; border-left: none;"><span class="label">Fulfilled By</span></td>
+				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">Fulfilled By</span></td>
 				<td style="width: 23%;"><?php e($this->entity->user->name); ?></td>
 			</tr>
 			<tr>
-				<td style="width: 10%; text-align: right; border-left: none;"><span class="label">Shipper</span></td>
+				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">Shipper</span></td>
 				<td style="width: 23%;"><?php e($this->entity->shipper->name); ?></td>
-				<td style="width: 10%; text-align: right; border-left: none;"><span class="label">ETA</span></td>
+				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">ETA</span></td>
 				<td style="width: 23%;"><?php echo ($this->entity->eta ? h(format_date($this->entity->eta, 'date_med')) : ''); ?></td>
-				<td style="width: 10%; text-align: right; border-left: none;"><span class="label">Reference</span></td>
+				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">Reference</span></td>
 				<td style="width: 23%;"><?php e($this->entity->ref->info('name')); ?></td>
 			</tr>
 			<tr>
-				<td style="width: 10%; text-align: right; border-left: none;"><span class="label">Tracking #</span></td>
+				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">Tracking #</span></td>
 				<td colspan="5"><div style="white-space: pre; font-family: monospace;"><?php echo isset($this->entity->tracking_numbers) ? h(implode("\n", $this->entity->tracking_numbers)) : ''; ?></div></td>
 			</tr>
 		</table>
@@ -83,7 +83,7 @@ if ($_->current_template != 'tpl_print') {
 	</div>
 	<?php if (!empty($this->entity->notes)) { ?>
 	<div class="pf-element" style="margin: 2em;">
-		<span class="pf-label"><span class="label">Notes</span></span>
+		<span class="pf-label"><span class="label label-default">Notes</span></span>
 		<div class="pf-group">
 			<div class="pf-field" style="white-space: pre; font-family: monospace;"><?php e($this->entity->notes); ?></div>
 		</div>

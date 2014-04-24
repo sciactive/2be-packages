@@ -36,7 +36,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	</div>
 	<div class="pf-element">
 		<span class="pf-label">Product</span>
-		<input class="pf-field product_box" type="text" name="new_product" value="" />
+		<input class="pf-field form-control product_box" type="text" name="new_product" value="" />
 	</div>
 	<?php } ?>
 </form>

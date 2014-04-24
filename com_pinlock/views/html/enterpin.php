@@ -22,7 +22,7 @@ $this->title = 'Verify Access';
 		<label>
 			<span class="pf-label">PIN</span>
 			<span class="pf-note">Please enter your PIN to continue.</span>
-			<input class="pf-field" type="password" name="pin" size="24" />
+			<input class="pf-field form-control" type="password" name="pin" size="24" />
 		</label>
 	</div>
 	<div class="pf-element pf-buttons">
@@ -31,6 +31,6 @@ $this->title = 'Verify Access';
 		<input type="hidden" name="sessionid" value="<?php e($this->orig_sessionid); ?>" />
 		<input type="hidden" name="com_pinlock_continue" value="true" />
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Continue" />
-		<input class="pf-button btn" type="reset" name="reset" value="Reset" />
+		<input class="pf-button btn btn-default" type="reset" name="reset" value="Reset" />
 	</div>
 </form>

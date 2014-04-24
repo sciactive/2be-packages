@@ -45,7 +45,7 @@ $_->com_pgrid->load();
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_reports', 'savewarboard')); ?>">
 	<div class="pf-element">
 		<span class="pf-label">Company Name</span>
-		<input class="pf-field form_date" type="text" name="company_name" size="24" value="<?php e($this->entity->company_name); ?>" />
+		<input class="pf-field form-control form_date" type="text" name="company_name" size="24" value="<?php e($this->entity->company_name); ?>" />
 	</div>
 	<div class="pf-element pf-full-width">
 		<span class="pf-label">Employee Positions</span>
@@ -59,7 +59,7 @@ $_->com_pgrid->load();
 	<div class="pf-element">
 		<span class="pf-label">Columns</span>
 		<span class="pf-note">The number of columns in each row.</span>
-		<select class="pf-field" name="columns">
+		<select class="pf-field form-control" name="columns">
 			<option value="1" <?php echo ($this->entity->columns == 1) ? 'selected="selected"' : ''; ?>>1</option>
 			<option value="2" <?php echo ($this->entity->columns == 2) ? 'selected="selected"' : ''; ?>>2</option>
 			<option value="3" <?php echo ($this->entity->columns == 3) ? 'selected="selected"' : ''; ?>>3</option>
@@ -99,6 +99,6 @@ $_->com_pgrid->load();
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<input class="pf-button btn btn-primary" type="submit" value="Save" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_reports', 'warboard'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_reports', 'warboard'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -40,13 +40,13 @@ $this->title = 'Search Loan By Customer'
 				row.append('<td style="text-align:right;"><span class="text-warning"><strong>'+$_.safe(data.archived)+'</strong></span></td>');
 			} else if (data.current_past_due != '$0.00') {
 				row.append('<td><span class="text-error">Past Due</span></td>');
-				row.append('<td style="text-align:right;"><span class="text-error"><strong>'+$_.safe(data.current_past_due)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="icon-refresh"></i></span></span></td>');
+				row.append('<td style="text-align:right;"><span class="text-error"><strong>'+$_.safe(data.current_past_due)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="fa fa-refresh"></i></span></span></td>');
 			} else if (data.missed_first_payment) {
 				row.append('<td><span class="text-error widget-tooltip" title="'+$_.safe(data.missed_first_payment)+' days late" >Missed 1st</span></td>');
-				row.append('<td style="text-align:right;"><span class="text-error"><strong>'+$_.safe(data.next_payment_amount)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="icon-refresh"></i></span></span></td>');
+				row.append('<td style="text-align:right;"><span class="text-error"><strong>'+$_.safe(data.next_payment_amount)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="fa fa-refresh"></i></span></span></td>');
 			} else {
 				row.append('<td><span class="text-info">'+$_.safe(data.next_payment_due)+'</span></td>');
-				row.append('<td style="text-align:right;"><span class="text-info"><strong>'+$_.safe(data.next_payment_amount)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="icon-refresh"></i></span></span></td>');
+				row.append('<td style="text-align:right;"><span class="text-info"><strong>'+$_.safe(data.next_payment_amount)+'</strong> <span class="widget-refresh widget-tooltip" title="Refresh to Confirm Amount." data-toggle="tooltip" style="cursor:pointer;"><i class="fa fa-refresh"></i></span></span></td>');
 			}
 			return row;
 		};
@@ -66,7 +66,7 @@ $this->title = 'Search Loan By Customer'
 					loan_results.hide();
 					loan_table_tbody.html('');
 					loan_status.removeClass('alert-success alert-danger').addClass('alert-info');
-					status_icon.removeClass('icon-ok icon-remove').addClass('icon-spin icon-spinner');
+					status_icon.removeClass('fa-check fa-times').addClass('fa-spinner fa-spin');
 					status_msg.text('Searching Loans...');
 					loan_status.show();
 				},
@@ -74,7 +74,7 @@ $this->title = 'Search Loan By Customer'
 					if (refresh)
 						return;
 					loan_status.removeClass('alert-success alert-info').addClass('alert-danger');
-					status_icon.removeClass('icon-ok icon-spin icon-spinner').addClass('icon-remove');
+					status_icon.removeClass('fa-check fa-spinner fa-spin').addClass('fa-times');
 					status_msg.text($_.safe(XMLHttpRequest.status)+': '+$_.safe(textStatus));
 					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 				},
@@ -89,7 +89,7 @@ $this->title = 'Search Loan By Customer'
 					}
 						
 					loan_status.removeClass('alert-info alert-danger').addClass('alert-success');
-					status_icon.removeClass('icon-spin icon-spinner icon-remove').addClass('icon-ok');
+					status_icon.removeClass('fa-spinner fa-spin fa-times').addClass('fa-check');
 					if (!count) {
 						status_msg.text('No matching Loans were found.');
 						return;
@@ -172,12 +172,12 @@ $this->title = 'Search Loan By Customer'
 </script>
 <div id="loan-widget-search">
 	<p>
-		<input type="text" class="input-medium" name="q" placeholder="Name, Phone, or Email">
-		<span class="btn widget-search"><i class="icon-search"></i></span>
-		<span class="btn widget-tooltip" data-toggle="tooltip" title="Search for Loans by Customer Name, Phone or Email" ><i class="icon-question"></i></span>
+		<input type="text" class="input-medium form-control" name="q" placeholder="Name, Phone, or Email">
+		<span class="btn btn-default widget-search"><i class="fa fa-search"></i></span>
+		<span class="btn btn-default widget-tooltip" data-toggle="tooltip" title="Search for Loans by Customer Name, Phone or Email" ><i class="fa fa-question"></i></span>
 	</p>
 	<div class="alert alert-info hide widget-status">
-		<i class="status-icon icon-spin icon-spinner"></i>
+		<i class="status-icon fa fa-spinner fa-spin"></i>
 		<span class="status-message">Searching Loans...</span>
 	</div>
 	<div class="widget-results hide">

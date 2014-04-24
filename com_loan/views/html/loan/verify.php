@@ -169,7 +169,7 @@ $this->title = 'Loan Overview';
 			<?php } ?>
 			<input id="p_muid_loan_process_type" type="hidden" name="loan_process_type" value="none" />
 			<input class="pf-button btn btn-primary" type="button" onclick="$('#p_muid_loan_process_type').val('submit'); $('#p_muid_loan_form').submit();" value="Yes, Continue." />
-			<input class="pf-button btn" type="button" onclick="$('#p_muid_loan_process_type').val('go_back'); $('#p_muid_loan_form').submit();" value="No, Go Back." />
+			<input class="pf-button btn btn-default" type="button" onclick="$('#p_muid_loan_process_type').val('go_back'); $('#p_muid_loan_form').submit();" value="No, Go Back." />
 		</form>
 	</div>
 </div>

@@ -57,9 +57,9 @@ if ($this->render == 'body') {
 	$url_view = $this->entity->info('url_view');
 	$url_edit = $this->entity->info('url_edit');
 	if ($url_view) { ?>
-<a href="<?php e($url_view); ?>" class="btn">View</a>
+<a href="<?php e($url_view); ?>" class="btn btn-default">View</a>
 <?php } if ($url_edit) { ?>
-<a href="<?php e($url_edit); ?>" class="btn">Edit</a>
+<a href="<?php e($url_edit); ?>" class="btn btn-default">Edit</a>
 <?php } if (!$url_view && !$url_edit) { ?>
-<a href="javascript:void(0);" class="btn" data-dismiss="modal">Close</a>
+<a href="javascript:void(0);" class="btn btn-default" data-dismiss="modal">Close</a>
 <?php } }

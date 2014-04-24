@@ -19,7 +19,7 @@ top: auto;
 }
 </style>
 <script type="text/javascript">
-$_(function(){$.pnotify({
+$_(function(){new PNotify({
 	type: 'info',
 	title: 'Email Verification',
 	text: 'You haven\'t verified your email address yet. <a href="javascript:void(0);" class="resend">Request another verification email</a> if you\'re having trouble.',
@@ -31,7 +31,7 @@ $_(function(){$.pnotify({
 		pnotify.on("click", ".resend", function(){
 			$.post(<?php echo json_encode(pines_url('com_user', 'resend_verification')); ?>, function(data){
 				if (data) {
-					$.pnotify({type: "success", title: "Email Sent", text: "The verification email has been resent."});
+					new PNotify({type: "success", title: "Email Sent", text: "The verification email has been resent."});
 					pnotify.pnotify_remove();
 				} else
 					$_.error("The email could not be sent. Please try again in a few minutes.");

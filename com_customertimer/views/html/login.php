@@ -32,14 +32,14 @@ $this->note = 'Please enter your info, or scan your barcode to login or logout.'
 	</script>
 	<div class="pf-element">
 		<label><span class="pf-label">Customer ID</span>
-			<input class="pf-field" type="password" name="id" size="24" /></label>
+			<input class="pf-field form-control" type="password" name="id" size="24" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Password</span>
-			<input class="pf-field" type="password" name="password" size="24" /></label>
+			<input class="pf-field form-control" type="password" name="password" size="24" /></label>
 	</div>
 	<div class="pf-element pf-buttons">
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Submit" />
-		<input class="pf-button btn" type="reset" name="reset" value="Reset" />
+		<input class="pf-button btn btn-default" type="reset" name="reset" value="Reset" />
 	</div>
 </form>

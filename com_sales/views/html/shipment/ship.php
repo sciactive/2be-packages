@@ -105,7 +105,7 @@ else
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Shipper</span>
-			<select class="pf-field" name="shipper">
+			<select class="pf-field form-control" name="shipper">
 				<option value="null">-- None --</option>
 				<?php foreach ($this->shippers as $cur_shipper) { ?>
 				<option value="<?php e($cur_shipper->guid); ?>"<?php echo $this->entity->shipper->guid == $cur_shipper->guid ? ' selected="selected"' : ''; ?>><?php e($cur_shipper->name); ?></option>
@@ -123,7 +123,7 @@ else
 			});
 		</script>
 		<label><span class="pf-label">ETA</span>
-			<input class="pf-field" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? h(format_date($this->entity->eta, 'date_sort')) : ''); ?>" /></label>
+			<input class="pf-field form-control" type="text" id="p_muid_eta" name="eta" size="24" value="<?php echo ($this->entity->eta ? h(format_date($this->entity->eta, 'date_sort')) : ''); ?>" /></label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<label><span class="pf-label">Tracking Number(s)</span>
@@ -160,7 +160,7 @@ else
 					<?php foreach ($cur_product['stock_entities'] as $stock_key => $cur_stock) { ?>
 					<div class="well item_box">
 						<div class="guid" style="display: none"><?php e($cur_stock->guid); ?></div>
-						<button type="button" class="btn btn-mini number_box">#<?php echo (int) ($stock_key+1); ?></button>
+						<button type="button" class="btn btn-default btn-xs number_box">#<?php echo (int) ($stock_key+1); ?></button>
 						<div>Stock Entry: <a data-entity="<?php e($cur_stock->guid); ?>" data-entity-context="com_sales_stock"><?php e($cur_stock->guid); ?></a></div>
 						<div>Shipped From: <a data-entity="<?php e($cur_stock->location->guid); ?>" data-entity-context="group"><?php e($cur_stock->location->name); ?></a></div>
 						<?php if ($cur_product['entity']->serialized) { ?>
@@ -189,6 +189,6 @@ else
 		<input type="hidden" name="ref_id" value="<?php e($this->entity->ref->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" name="submit" value="Save" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'shipment/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'shipment/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -16,7 +16,7 @@ $_->entity_manager->sort($categories, 'name');
 <div class="pf-form">
 	<div class="pf-element">
 		<label><span class="pf-label">Category</span>
-			<select class="pf-field" name="id">
+			<select class="pf-field form-control" name="id">
 				<?php foreach ($categories as $cur_category) { ?>
 				<option value="<?php e($cur_category->guid); ?>"<?php echo $this->id == "$cur_category->guid" ? ' selected="selected"' : ''; ?>><?php e($cur_category->name); ?></option>
 				<?php } ?>

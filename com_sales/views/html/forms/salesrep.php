@@ -27,6 +27,6 @@ defined('P_RUN') or die('Direct access prohibited');
 	<div class="pf-element">
 		<span class="pf-label">Salesperson</span>
 		<span class="pf-note">Start typing to select a Salesperson.</span>
-		<input class="pf-field salesperson_box" type="text" name="salesperson" value="" />
+		<input class="pf-field form-control salesperson_box" type="text" name="salesperson" value="" />
 	</div>
 </form>

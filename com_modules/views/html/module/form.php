@@ -207,7 +207,7 @@ $_->com_pgrid->load();
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Name/Title</span>
-					<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Enabled</span>
@@ -220,9 +220,9 @@ $_->com_pgrid->load();
 			<div class="pf-element">
 				<span class="pf-label">Position</span>
 				<span class="combobox">
-					<input class="pf-field" type="text" name="position" size="24" value="<?php e($this->entity->position); ?>" />
+					<input class="pf-field form-control" type="text" name="position" size="24" value="<?php e($this->entity->position); ?>" />
 					<a href="javascript:void(0);" class="ui-icon ui-icon-triangle-1-s"></a>
-					<select style="display: none;">
+					<select class="form-control" style="display: none;">
 						<?php foreach ($_->info->template->positions as $cur_position) {
 							?><option value="<?php e($cur_position); ?>"><?php e($cur_position); ?></option><?php
 						} ?>
@@ -231,7 +231,7 @@ $_->com_pgrid->load();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Order</span>
-					<input class="pf-field" type="text" name="order" size="10" value="<?php e($this->entity->order); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="order" size="10" value="<?php e($this->entity->order); ?>" /></label>
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Module Type</h3>
@@ -254,7 +254,7 @@ $_->com_pgrid->load();
 									<?php e($cur_module['description']); ?>
 								</span>
 								<span style="display: block; padding: 0 0 .6em 1.8em;">
-									<span class="label"><?php echo str_replace(' ', '</span> <span class="label">', h(isset($cur_module['type']) ? $cur_module['type'] : 'module imodule')); ?></span>
+									<span class="label label-default"><?php echo str_replace(' ', '</span> <span class="label label-default">', h(isset($cur_module['type']) ? $cur_module['type'] : 'module imodule')); ?></span>
 								</span>
 							</label>
 						</div>
@@ -294,13 +294,13 @@ $_->com_pgrid->load();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Name</span>
-							<input class="pf-field" type="text" name="cur_option_name" size="24" />
+							<input class="pf-field form-control" type="text" name="cur_option_name" size="24" />
 						</label>
 					</div>
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Value</span>
-							<input class="pf-field" type="text" name="cur_option_value" size="24" />
+							<input class="pf-field form-control" type="text" name="cur_option_value" size="24" />
 						</label>
 					</div>
 				</div>
@@ -336,6 +336,6 @@ $_->com_pgrid->load();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_modules', 'module/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_modules', 'module/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

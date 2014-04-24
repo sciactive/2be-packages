@@ -26,19 +26,19 @@ $this->note = 'Provide shipper details in this form.';
 	<?php } ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Email</span>
-			<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
+			<input class="pf-field form-control" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Phone</span>
-			<input class="pf-field" type="tel" name="phone_work" size="24" value="<?php e(format_phone($this->entity->phone_work)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+			<input class="pf-field form-control" type="tel" name="phone_work" size="24" value="<?php e(format_phone($this->entity->phone_work)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Fax</span>
-			<input class="pf-field" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+			<input class="pf-field form-control" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 	</div>
 	<div class="pf-element">
 		<script type="text/javascript">
@@ -64,16 +64,16 @@ $this->note = 'Provide shipper details in this form.';
 	<div id="p_muid_address_us" style="display: none;">
 		<div class="pf-element">
 			<label><span class="pf-label">Address 1</span>
-				<input class="pf-field" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
+				<input class="pf-field form-control" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Address 2</span>
-				<input class="pf-field" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
+				<input class="pf-field form-control" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
 		</div>
 		<div class="pf-element">
 			<span class="pf-label">City, State</span>
-			<input class="pf-field" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
-			<select class="pf-field" name="state">
+			<input class="pf-field form-control" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
+			<select class="pf-field form-control" name="state">
 				<option value="">None</option>
 				<?php foreach (array(
 						'AL' => 'Alabama',
@@ -137,7 +137,7 @@ $this->note = 'Provide shipper details in this form.';
 		</div>
 		<div class="pf-element">
 			<label><span class="pf-label">Zip</span>
-				<input class="pf-field" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
+				<input class="pf-field form-control" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
 		</div>
 	</div>
 	<div id="p_muid_address_international" style="display: none;">
@@ -152,7 +152,7 @@ $this->note = 'Provide shipper details in this form.';
 	</div>
 	<div class="pf-element">
 		<label><span class="pf-label">Account #</span>
-			<input class="pf-field" type="text" name="account_number" size="24" value="<?php e($this->entity->account_number); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="account_number" size="24" value="<?php e($this->entity->account_number); ?>" /></label>
 	</div>
 	<div class="pf-element pf-full-width">
 		<label><span class="pf-label">Terms</span>
@@ -203,7 +203,7 @@ $this->note = 'Provide shipper details in this form.';
 				<label><input type="radio" name="tracking" value="ontrac"<?php echo $this->entity->tracking == 'ontrac' ? ' checked="checked"' : ''; ?> data-predef-url="<?php e($_->com_sales->tracking_urls['ontrac']); ?>" /> OnTrac</label>
 				<label><input type="radio" name="tracking" value="custom"<?php echo $this->entity->tracking == 'custom' ? ' checked="checked"' : ''; ?> /> Custom</label>
 			</div>
-			<input class="pf-field" type="text" id="p_muid_tracking_url" name="tracking_url" size="40" value="<?php e($this->entity->tracking_url); ?>" data-intial-value="<?php e($this->entity->tracking_url); ?>" />
+			<input class="pf-field form-control" type="text" id="p_muid_tracking_url" name="tracking_url" size="40" value="<?php e($this->entity->tracking_url); ?>" data-intial-value="<?php e($this->entity->tracking_url); ?>" />
 			<div class="pf-field" style="display: none;" id="p_muid_url_howto">
 				In the URL, where you want the tracking number to go, put
 				<code>#tracking_number#</code>.
@@ -215,6 +215,6 @@ $this->note = 'Provide shipper details in this form.';
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'shipper/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'shipper/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

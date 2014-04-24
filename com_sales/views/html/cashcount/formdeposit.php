@@ -117,10 +117,10 @@ $this->note = 'Count the cash as you put it into the drawer.';
 	<div class="pf-element pf-full-width" style="position: relative;">
 		<?php foreach ($this->entity->cashcount->currency as $key => $cur_denom) { ?>
 		<div class="pf-element">
-			<input class="pf-field entry" type="text" name="count_<?php e($key); ?>" title="<?php e($cur_denom); ?>" value="0" />
+			<input class="pf-field form-control entry" type="text" name="count_<?php e($key); ?>" title="<?php e($cur_denom); ?>" value="0" />
 			x <span class="amount"><?php e($this->entity->cashcount->currency_symbol . $cur_denom); ?></span>
-			<button class="pf-field btn btn-success add_btn" type="button"><i class="icon-plus icon-white"></i></button>
-			<button class="pf-field btn btn-danger remove_btn" type="button"><i class="icon-minus icon-white"></i></button>
+			<button class="pf-field btn btn-success add_btn" type="button"><i class="fa fa-plus"></i></button>
+			<button class="pf-field btn btn-danger remove_btn" type="button"><i class="fa fa-minus"></i></button>
 		</div>
 		<?php } ?>
 		<div class="alert alert-info total">
@@ -137,6 +137,6 @@ $this->note = 'Count the cash as you put it into the drawer.';
 	<div class="pf-element pf-buttons">
 		<input type="hidden" name="id" value="<?php e($this->entity->cashcount->guid); ?>" />
 		<input class="pf-button btn btn-primary submit_button" type="button" value="Finish Deposit" onclick="$_.com_sales_verify();" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'cashcount/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

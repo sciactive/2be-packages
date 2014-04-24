@@ -36,14 +36,14 @@ img {
 	border-left: 0 !important;
 	border-right: 0 !important;
 }
-#navbar {
+#nav {
     margin-bottom: 0;
 }
-#navbar .brand-image {
+#nav .brand-image {
 	padding-top: 0;
 	padding-bottom: 0;
 }
-#navbar .brand-image img {
+#nav .brand-image img {
 	margin: 0;
 	padding: 0;
 	border: none 0;

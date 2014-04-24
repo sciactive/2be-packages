@@ -221,7 +221,7 @@ $_->com_customer->load_company_select();
 						dataType: "json",
 						data: {"id": interaction_id},
 						beforeSend: function(){
-							loader = $.pnotify({
+							loader = new PNotify({
 								title: 'Search',
 								text: 'Searching the database...',
 								icon: 'picon picon-throbber',
@@ -302,7 +302,7 @@ $_->com_customer->load_company_select();
 							comments: $("#p_muid_new_interaction [name=interaction_comments]").val()
 						},
 						beforeSend: function(){
-							loader = $.pnotify({
+							loader = new PNotify({
 								title: 'Logging',
 								text: 'Documenting customer interaction...',
 								icon: 'picon picon-throbber',
@@ -353,7 +353,7 @@ $_->com_customer->load_company_select();
 							review_comments: $("#p_muid_interaction_dialog [name=review_comments]").val()
 						},
 						beforeSend: function(){
-							loader = $.pnotify({
+							loader = new PNotify({
 								title: 'Updating',
 								text: 'Processing customer interaction...',
 								icon: 'picon picon-throbber',
@@ -444,21 +444,21 @@ $_->com_customer->load_company_select();
 			<?php if (in_array('name', $_->config->com_customer->shown_fields_customer) && (!in_array('name', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->name))) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">First Name</span>
-					<input class="pf-field" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Middle Name</span>
-					<input class="pf-field" type="text" name="name_middle" size="24" value="<?php e($this->entity->name_middle); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_middle" size="24" value="<?php e($this->entity->name_middle); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Last Name</span>
-					<input class="pf-field" type="text" name="name_last" size="24" value="<?php e($this->entity->name_last); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_last" size="24" value="<?php e($this->entity->name_last); ?>" /></label>
 			</div>
 			<?php } if (in_array('ssn', $_->config->com_customer->shown_fields_customer) && (!in_array('ssn', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->ssn))) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">SSN</span>
 					<span class="pf-note">Without dashes.</span>
-					<input class="pf-field" type="text" name="ssn" size="24" value="<?php e($this->entity->ssn); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="ssn" size="24" value="<?php e($this->entity->ssn); ?>" /></label>
 			</div>
 			<?php } if (in_array('dob', $_->config->com_customer->shown_fields_customer) && (!in_array('dob', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->dob))) { ?>
 			<div class="pf-element">
@@ -475,47 +475,47 @@ $_->com_customer->load_company_select();
 					});
 				</script>
 				<label><span class="pf-label">Date of Birth</span>
-					<input class="pf-field" type="text" name="dob" size="24" value="<?php echo $this->entity->dob ? h(format_date($this->entity->dob, 'date_sort')) : ''; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="dob" size="24" value="<?php echo $this->entity->dob ? h(format_date($this->entity->dob, 'date_sort')) : ''; ?>" /></label>
 			</div>
 			<?php } if (in_array('email', $_->config->com_customer->shown_fields_customer) && (!in_array('email', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->email))) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Email</span>
-					<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
+					<input class="pf-field form-control" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" /></label>
 			</div>
 			<?php } if (in_array('company', $_->config->com_customer->shown_fields_customer) && (!in_array('company', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->company))) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Company</span>
 					<span class="pf-note">Enter part of a company name, email, or phone # to search.</span>
-					<input class="pf-field" type="text" id="p_muid_company" name="company" size="24" value="<?php echo $this->entity->company->guid ? h("{$this->entity->company->guid}: \"{$this->entity->company->name}\"") : ''; ?>" />
+					<input class="pf-field form-control" type="text" id="p_muid_company" name="company" size="24" value="<?php echo $this->entity->company->guid ? h("{$this->entity->company->guid}: \"{$this->entity->company->name}\"") : ''; ?>" />
 				</label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Job Title</span>
-					<input class="pf-field" type="text" name="job_title" size="24" value="<?php e($this->entity->job_title); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="job_title" size="24" value="<?php e($this->entity->job_title); ?>" /></label>
 			</div>
 			<?php } if (in_array('phone', $_->config->com_customer->shown_fields_customer)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Cell Phone</span>
-					<input class="pf-field" type="tel" name="phone_cell" size="24" value="<?php e(format_phone($this->entity->phone_cell)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="phone_cell" size="24" value="<?php e(format_phone($this->entity->phone_cell)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Work Phone</span>
-					<input class="pf-field" type="tel" name="phone_work" size="24" value="<?php e(format_phone($this->entity->phone_work)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="phone_work" size="24" value="<?php e(format_phone($this->entity->phone_work)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Home Phone</span>
-					<input class="pf-field" type="tel" name="phone_home" size="24" value="<?php e(format_phone($this->entity->phone_home)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="phone_home" size="24" value="<?php e(format_phone($this->entity->phone_home)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Fax</span>
-					<input class="pf-field" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
 				<label>
 					<span class="pf-label">Timezone</span>
 					<span class="pf-note">This overrides the primary group's timezone.</span>
-					<select class="pf-field" name="timezone" size="1">
+					<select class="pf-field form-control" name="timezone">
 						<option value="">--Inherit From Group--</option>
 						<?php
 						$tz = DateTimeZone::listIdentifiers();
@@ -530,7 +530,7 @@ $_->com_customer->load_company_select();
 			<div class="pf-element">
 				<label><span class="pf-label">Referrer</span>
 					<span class="pf-note">Where did you hear about us?</span>
-					<select class="pf-field" name="referrer">
+					<select class="pf-field form-control" name="referrer">
 						<option value="">-- Please Select --</option>
 						<?php foreach ($_->config->com_customer->referrer_values as $cur_value) { ?>
 						<option value="<?php e($cur_value); ?>"<?php echo ($this->entity->referrer == $cur_value) ? ' selected="selected"' : ''; ?>><?php e($cur_value); ?></option>
@@ -550,7 +550,7 @@ $_->com_customer->load_company_select();
 				if (!$_->config->com_user->email_usernames) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Username</span>
-					<input class="pf-field" type="text" name="username" size="24" value="<?php e($this->entity->username); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="username" size="24" value="<?php e($this->entity->username); ?>" /></label>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
@@ -565,7 +565,7 @@ $_->com_customer->load_company_select();
 					} else {
 						echo '<span class="pf-note">Leave blank, if not changing.</span>';
 					} ?>
-					<input class="pf-field" type="text" name="password" size="24" /></label>
+					<input class="pf-field form-control" type="text" name="password" size="24" /></label>
 			</div>
 			<?php } } if (in_array('points', $_->config->com_customer->shown_fields_customer) && (!in_array('points', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical'))) { ?>
 			<div class="pf-element pf-heading">
@@ -589,7 +589,7 @@ $_->com_customer->load_company_select();
 			<div class="pf-element">
 				<label><span class="pf-label">Adjust Points</span>
 					<span class="pf-note">Use a negative value to subtract points.</span>
-					<input class="pf-field" type="text" name="adjust_points" size="24" value="0" /></label>
+					<input class="pf-field form-control" type="text" name="adjust_points" size="24" value="0" /></label>
 			</div>
 			<?php } } if (in_array('membership', $_->config->com_customer->shown_fields_customer) && (!in_array('membership', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical'))) { ?>
 			<div class="pf-element pf-heading">
@@ -618,7 +618,7 @@ $_->com_customer->load_company_select();
 					});
 				</script>
 				<label><span class="pf-label">Membership Expiration</span>
-					<input class="pf-field" type="text" name="member_exp" size="24" value="<?php echo $this->entity->member_exp ? h(format_date($this->entity->member_exp, 'date_sort')) : ''; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="member_exp" size="24" value="<?php echo $this->entity->member_exp ? h(format_date($this->entity->member_exp, 'date_sort')) : ''; ?>" /></label>
 			</div>
 			<?php } ?>
 			<br class="pf-clearing" />
@@ -652,16 +652,16 @@ $_->com_customer->load_company_select();
 			<div id="p_muid_address_us" style="display: none;">
 				<div class="pf-element">
 					<label><span class="pf-label">Address 1</span>
-						<input class="pf-field" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Address 2</span>
-						<input class="pf-field" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<span class="pf-label">City, State</span>
-					<input class="pf-field" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
-					<select class="pf-field" name="state">
+					<input class="pf-field form-control" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
+					<select class="pf-field form-control" name="state">
 						<option value="">None</option>
 						<?php foreach (array(
 								'AL' => 'Alabama',
@@ -725,7 +725,7 @@ $_->com_customer->load_company_select();
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Zip</span>
-						<input class="pf-field" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
 				</div>
 			</div>
 			<div id="p_muid_address_international" style="display: none;">
@@ -773,26 +773,26 @@ $_->com_customer->load_company_select();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Type</span>
-							<input class="pf-field" type="text" size="24" name="cur_address_type" id="p_muid_cur_address_type" />
+							<input class="pf-field form-control" type="text" size="24" name="cur_address_type" id="p_muid_cur_address_type" />
 						</label>
 					</div>
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Address 1</span>
-							<input class="pf-field" type="text" size="24" name="cur_address_addr1" id="p_muid_cur_address_addr1" />
+							<input class="pf-field form-control" type="text" size="24" name="cur_address_addr1" id="p_muid_cur_address_addr1" />
 						</label>
 					</div>
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Address 2</span>
-							<input class="pf-field" type="text" size="24" name="cur_address_addr2" id="p_muid_cur_address_addr2" />
+							<input class="pf-field form-control" type="text" size="24" name="cur_address_addr2" id="p_muid_cur_address_addr2" />
 						</label>
 					</div>
 					<div class="pf-element">
 						<span class="pf-label">City, State, Zip</span>
-						<input class="pf-field" type="text" size="8" name="cur_address_city" id="p_muid_cur_address_city" />
-						<input class="pf-field" type="text" size="2" name="cur_address_state" id="p_muid_cur_address_state" />
-						<input class="pf-field" type="text" size="5" name="cur_address_zip" id="p_muid_cur_address_zip" />
+						<input class="pf-field form-control" type="text" size="8" name="cur_address_city" id="p_muid_cur_address_city" />
+						<input class="pf-field form-control" type="text" size="2" name="cur_address_state" id="p_muid_cur_address_state" />
+						<input class="pf-field form-control" type="text" size="5" name="cur_address_zip" id="p_muid_cur_address_zip" />
 					</div>
 				</div>
 				<br class="pf-clearing" />
@@ -825,13 +825,13 @@ $_->com_customer->load_company_select();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Name</span>
-							<input class="pf-field" type="text" name="cur_attribute_name" size="24" />
+							<input class="pf-field form-control" type="text" name="cur_attribute_name" size="24" />
 						</label>
 					</div>
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Value</span>
-							<input class="pf-field" type="text" name="cur_attribute_value" size="24" />
+							<input class="pf-field form-control" type="text" name="cur_attribute_value" size="24" />
 						</label>
 					</div>
 				</div>
@@ -841,13 +841,13 @@ $_->com_customer->load_company_select();
 		</div>
 		<?php } if (isset($this->entity->guid) && gatekeeper('com_customer/viewhistory')) { ?>
 		<div class="tab-pane" id="p_muid_tab_history">
-			<div class="accordion">
-				<div class="accordion-group">
-					<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-						<big class="accordion-toggle">Customer Interaction</big>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+						<big class="panel-title">Customer Interaction</big>
 					</a>
-					<div class="accordion-body collapse in">
-						<div class="accordion-inner clearfix">
+					<div class="panel-collapse collapse in">
+						<div class="panel-body clearfix">
 							<table id="p_muid_interactions">
 								<thead>
 									<tr>
@@ -887,13 +887,13 @@ $_->com_customer->load_company_select();
 							$returned_sales[] = $cur_return->sale->guid;
 					}
 					?>
-				<div class="accordion">
-					<div class="accordion-group">
-						<a class="accordion-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-							<big class="accordion-toggle">Purchases and Returns</big>
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+							<big class="panel-title">Purchases and Returns</big>
 						</a>
-						<div class="accordion-body collapse in">
-							<div class="accordion-inner clearfix">
+						<div class="panel-collapse collapse in">
+							<div class="panel-body clearfix">
 								<table id="p_muid_sales">
 									<thead>
 										<tr>
@@ -947,7 +947,7 @@ $_->com_customer->load_company_select();
 					<?php if (gatekeeper('com_customer/manageinteractions') && $_->config->com_customer->com_calendar) { ?>
 					<div class="pf-element">
 						<label><span class="pf-label">Employee</span>
-							<select style="max-width: 150px;" name="employee">
+							<select class="form-control" style="max-width: 150px;" name="employee">
 								<?php foreach ($_->com_hrm->get_employees() as $cur_employee) {
 									$selected = $_SESSION['user']->is($cur_employee) ? ' selected="selected"' : '';
 									echo '<option value="'.h($cur_employee->guid).'"'.$selected.'>'.h($cur_employee->name).'</option>"';
@@ -963,7 +963,7 @@ $_->com_customer->load_company_select();
 					<?php } ?>
 					<div class="pf-element">
 						<label><span class="pf-label">Interaction Type</span>
-							<select name="interaction_type">
+							<select class="form-control" name="interaction_type">
 								<?php foreach ($_->config->com_customer->interaction_types as $cur_type) {
 									$cur_type = explode(':', $cur_type);
 									echo '<option value="'.h($cur_type[1]).'">'.h($cur_type[1]).'</option>';
@@ -972,14 +972,14 @@ $_->com_customer->load_company_select();
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Date</span>
-							<input type="text" size="22" name="interaction_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
+							<input class="form-control" type="text" size="22" name="interaction_date" value="<?php e(format_date(time(), 'date_sort')); ?>" /></label>
 					</div>
 					<div class="pf-element pf-full-width">
 						<span class="pf-label">Time</span>
 						<span class="combobox">
-							<input type="text" name="interaction_time" size="18" value="<?php e(format_date(time(), 'time_short')); ?>" />
+							<input class="form-control" type="text" name="interaction_time" size="18" value="<?php e(format_date(time(), 'time_short')); ?>" />
 							<a href="javascript:void(0);" class="ui-icon ui-icon-triangle-1-s"></a>
-							<select style="display: none;">
+							<select class="form-control" style="display: none;">
 								<option value="12:00 AM">12:00 AM</option>
 								<option value="1:00 AM">1:00 AM</option>
 								<option value="2:00 AM">2:00 AM</option>
@@ -1010,7 +1010,7 @@ $_->com_customer->load_company_select();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Status</span>
-							<select name="interaction_status">
+							<select class="form-control" name="interaction_status">
 								<option value="open">Open</option>
 								<option value="closed">Closed</option>
 							</select>
@@ -1052,7 +1052,7 @@ $_->com_customer->load_company_select();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Status</span>
-							<select name="status">
+							<select class="form-control" name="status">
 								<option value="open">Open</option>
 								<option value="closed">Closed</option>
 								<option value="canceled">Canceled</option>
@@ -1070,6 +1070,6 @@ $_->com_customer->load_company_select();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_customer', 'customer/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_customer', 'customer/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

@@ -121,8 +121,8 @@ echo $module->render();
 </div>
 <?php } elseif ($this->render == 'footer') {
 	if (gatekeeper('com_sales/seestock')) { ?>
-<a href="<?php e(pines_url('com_sales', 'stock/list', array('location' => $this->entity->location->guid, 'removed' => isset($this->entity->location->guid) ? 'false' : 'true'))); ?>" class="btn">View in List</a>
+<a href="<?php e(pines_url('com_sales', 'stock/list', array('location' => $this->entity->location->guid, 'removed' => isset($this->entity->location->guid) ? 'false' : 'true'))); ?>" class="btn btn-default">View in List</a>
 <?php } if (gatekeeper('com_sales/managestock')) { ?>
-<a href="<?php e(pines_url('com_sales', 'stock/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
-<a href="<?php e(pines_url('com_sales', 'stock/transfer', array('id' => $this->entity->guid))); ?>" class="btn">Transfer</a>
+<a href="<?php e(pines_url('com_sales', 'stock/edit', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Edit</a>
+<a href="<?php e(pines_url('com_sales', 'stock/transfer', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Transfer</a>
 <?php } }

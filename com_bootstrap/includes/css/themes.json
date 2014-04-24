@@ -1,0 +1,103 @@
+{
+	"normal": {
+		"name": "Normal",
+		"file": "bootstrap.css",
+		"minfile": "bootstrap.min.css"
+	},
+	"amelia": {
+		"name": "Amelia",
+		"file": "bootstrap-amelia.css",
+		"minfile": "bootstrap-amelia.css"
+	},
+	"cerulean": {
+		"name": "Cerulean",
+		"file": "bootstrap-cerulean.css",
+		"minfile": "bootstrap-cerulean.css"
+	},
+	"cosmo": {
+		"name": "Cosmo",
+		"file": "bootstrap-cosmo.css",
+		"minfile": "bootstrap-cosmo.css"
+	},
+	"cupid": {
+		"name": "Cupid",
+		"file": "bootstrap-cupid.css",
+		"minfile": "bootstrap-cupid.css"
+	},
+	"cyborg": {
+		"name": "Cyborg",
+		"file": "bootstrap-cyborg.css",
+		"minfile": "bootstrap-cyborg.css"
+	},
+	"darkly": {
+		"name": "Darkly",
+		"file": "bootstrap-darkly.css",
+		"minfile": "bootstrap-darkly.css"
+	},
+	"flatly": {
+		"name": "Flatly",
+		"file": "bootstrap-flatly.css",
+		"minfile": "bootstrap-flatly.css"
+	},
+	"journal": {
+		"name": "Journal",
+		"file": "bootstrap-journal.css",
+		"minfile": "bootstrap-journal.css"
+	},
+	"lumen": {
+		"name": "Lumen",
+		"file": "bootstrap-lumen.css",
+		"minfile": "bootstrap-lumen.css"
+	},
+	"pinkiepie": {
+		"name": "Pinkie Pie",
+		"file": "bootstrap-pinkiepie.css",
+		"minfile": "bootstrap-pinkiepie.min.css"
+	},
+	"readable": {
+		"name": "Readable",
+		"file": "bootstrap-readable.css",
+		"minfile": "bootstrap-readable.css"
+	},
+	"shamrock": {
+		"name": "Shamrock",
+		"file": "bootstrap-shamrock.css",
+		"minfile": "bootstrap-shamrock.css"
+	},
+	"simplex": {
+		"name": "Simplex",
+		"file": "bootstrap-simplex.css",
+		"minfile": "bootstrap-simplex.css"
+	},
+	"slate": {
+		"name": "Slate",
+		"file": "bootstrap-slate.css",
+		"minfile": "bootstrap-slate.css"
+	},
+	"spacelab": {
+		"name": "Spacelab",
+		"file": "bootstrap-spacelab.css",
+		"minfile": "bootstrap-spacelab.css"
+	},
+	"superhero": {
+		"name": "Superhero",
+		"file": "bootstrap-superhero.css",
+		"minfile": "bootstrap-superhero.css"
+	},
+	"theme": {
+		"name": "Bootstrap 2 Style",
+		"file": "bootstrap-theme.css",
+		"minfile": "bootstrap-theme.min.css",
+		"andnormal": true
+	},
+	"united": {
+		"name": "United",
+		"file": "bootstrap-united.css",
+		"minfile": "bootstrap-united.css"
+	},
+	"yeti": {
+		"name": "Yeti",
+		"file": "bootstrap-yeti.css",
+		"minfile": "bootstrap-yeti.css"
+	}
+}

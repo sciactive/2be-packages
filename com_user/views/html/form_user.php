@@ -118,7 +118,7 @@ if ($_->config->com_user->check_username) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Username</span>
 					<span class="pf-group" style="display: block;">
-						<input class="pf-field" type="text" name="username" size="24" value="<?php e($this->entity->username); ?>" />
+						<input class="pf-field form-control" type="text" name="username" size="24" value="<?php e($this->entity->username); ?>" />
 						<?php if ($_->config->com_user->check_username) { ?>
 						<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 						<span class="pf-field picon" id="p_muid_username_message"></span>
@@ -129,15 +129,15 @@ if ($_->config->com_user->check_username) { ?>
 			<?php } if (in_array('name', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">First Name</span>
-					<input class="pf-field" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_first" size="24" value="<?php e($this->entity->name_first); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Middle Name</span>
-					<input class="pf-field" type="text" name="name_middle" size="24" value="<?php e($this->entity->name_middle); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_middle" size="24" value="<?php e($this->entity->name_middle); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Last Name</span>
-					<input class="pf-field" type="text" name="name_last" size="24" value="<?php e($this->entity->name_last); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="name_last" size="24" value="<?php e($this->entity->name_last); ?>" /></label>
 			</div>
 			<?php } if ($this->display_enable) { ?>
 			<div class="pf-element">
@@ -149,7 +149,7 @@ if ($_->config->com_user->check_username) { ?>
 				<?php if ($this->display_email_verified && isset($this->entity->secret)) { ?>
 				<label for="p_muid_email"><span class="pf-label">Email</span></label>
 				<div class="pf-group">
-					<input class="pf-field" type="email" name="email" id="p_muid_email" size="24" value="<?php e($this->entity->email); ?>" />
+					<input class="pf-field form-control" type="email" name="email" id="p_muid_email" size="24" value="<?php e($this->entity->email); ?>" />
 					<?php if ($_->config->com_user->email_usernames && $_->config->com_user->check_username) { ?>
 					<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 					<span class="pf-field picon" id="p_muid_username_message"></span>
@@ -159,7 +159,7 @@ if ($_->config->com_user->check_username) { ?>
 				<?php } else { ?>
 				<label>
 					<span class="pf-label">Email</span>
-					<input class="pf-field" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" />
+					<input class="pf-field form-control" type="email" name="email" size="24" value="<?php e($this->entity->email); ?>" />
 					<?php if ($_->config->com_user->email_usernames && $_->config->com_user->check_username) { ?>
 					<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 					<span class="pf-field picon" id="p_muid_username_message"></span>
@@ -175,24 +175,24 @@ if ($_->config->com_user->check_username) { ?>
 			<?php } } if (in_array('phone', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Phone</span>
-					<input class="pf-field" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="phone" size="24" value="<?php e(format_phone($this->entity->phone)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<?php } if (in_array('fax', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Fax</span>
-					<input class="pf-field" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
+					<input class="pf-field form-control" type="tel" name="fax" size="24" value="<?php e(format_phone($this->entity->fax)); ?>" onkeyup="this.value=this.value.replace(/\D*0?1?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d)?\D*(\d*)\D*/, '($1$2$3) $4$5$6-$7$8$9$10 x$11').replace(/\D*$/, '');" /></label>
 			</div>
 			<?php } if ($_->config->com_user->referral_codes) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Referral Code</span>
-					<input class="pf-field" type="text" name="referral_code" size="24" value="<?php e($this->entity->referral_code); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="referral_code" size="24" value="<?php e($this->entity->referral_code); ?>" /></label>
 			</div>
 			<?php } if (in_array('timezone', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label>
 					<span class="pf-label">Timezone</span>
 					<span class="pf-note">This overrides the primary group's timezone.</span>
-					<select class="pf-field" name="timezone" size="1">
+					<select class="pf-field form-control" name="timezone">
 						<option value="">--Inherit From Group--</option>
 						<?php
 						$tz = DateTimeZone::listIdentifiers();
@@ -212,11 +212,11 @@ if ($_->config->com_user->check_username) { ?>
 					else
 						echo '<span class="pf-note">Leave blank, if not changing.</span>';
 					?>
-					<input class="pf-field" type="password" name="password" size="24" /></label>
+					<input class="pf-field form-control" type="password" name="password" size="24" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Repeat Password</span>
-					<input class="pf-field" type="password" name="password2" size="24" /></label>
+					<input class="pf-field form-control" type="password" name="password2" size="24" /></label>
 			</div>
 			<?php } elseif (isset($this->entity->guid) && $this->entity->is($_SESSION['user'])) { ?>
 			<div class="pf-element">
@@ -226,7 +226,7 @@ if ($_->config->com_user->check_username) { ?>
 			<?php } if ($this->display_pin && in_array('pin', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">PIN code</span>
-					<input class="pf-field" type="password" name="pin" size="5" value="<?php e($this->entity->pin); ?>" <?php echo $_->config->com_user->max_pin_length > 0 ? "maxlength=\"{$_->config->com_user->max_pin_length}\"" : ''; ?>/></label>
+					<input class="pf-field form-control" type="password" name="pin" size="5" value="<?php e($this->entity->pin); ?>" <?php echo $_->config->com_user->max_pin_length > 0 ? "maxlength=\"{$_->config->com_user->max_pin_length}\"" : ''; ?>/></label>
 			</div>
 			<?php } ?>
 			<br class="pf-clearing" />
@@ -241,7 +241,7 @@ if ($_->config->com_user->check_username) { ?>
 				<div class="pf-element">
 					<label>
 						<span class="pf-label">Primary Group</span>
-						<select class="pf-field" name="group" size="1">
+						<select class="pf-field form-control" name="group">
 							<option value="null">-- No Primary Group --</option>
 							<?php
 							$_->user_manager->group_sort($this->group_array_primary, 'name');
@@ -344,16 +344,16 @@ if ($_->config->com_user->check_username) { ?>
 			<div id="p_muid_address_us" style="display: none;">
 				<div class="pf-element">
 					<label><span class="pf-label">Address 1</span>
-						<input class="pf-field" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_1" size="24" value="<?php e($this->entity->address_1); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Address 2</span>
-						<input class="pf-field" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="address_2" size="24" value="<?php e($this->entity->address_2); ?>" /></label>
 				</div>
 				<div class="pf-element">
 					<span class="pf-label">City, State</span>
-					<input class="pf-field" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
-					<select class="pf-field" name="state">
+					<input class="pf-field form-control" type="text" name="city" size="15" value="<?php e($this->entity->city); ?>" />
+					<select class="pf-field form-control" name="state">
 						<option value="">None</option>
 						<?php foreach (array(
 								'AL' => 'Alabama',
@@ -417,7 +417,7 @@ if ($_->config->com_user->check_username) { ?>
 				</div>
 				<div class="pf-element">
 					<label><span class="pf-label">Zip</span>
-						<input class="pf-field" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
+						<input class="pf-field form-control" type="text" name="zip" size="24" value="<?php e($this->entity->zip); ?>" /></label>
 				</div>
 			</div>
 			<div id="p_muid_address_international" style="display: none;">
@@ -546,21 +546,21 @@ if ($_->config->com_user->check_username) { ?>
 				<div class="pf-form">
 					<div class="pf-element">
 						<label><span class="pf-label">Type</span>
-							<input class="pf-field" type="text" size="24" name="cur_address_type" id="p_muid_cur_address_type" /></label>
+							<input class="pf-field form-control" type="text" size="24" name="cur_address_type" id="p_muid_cur_address_type" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Address 1</span>
-							<input class="pf-field" type="text" size="24" name="cur_address_addr1" id="p_muid_cur_address_addr1" /></label>
+							<input class="pf-field form-control" type="text" size="24" name="cur_address_addr1" id="p_muid_cur_address_addr1" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Address 2</span>
-							<input class="pf-field" type="text" size="24" name="cur_address_addr2" id="p_muid_cur_address_addr2" /></label>
+							<input class="pf-field form-control" type="text" size="24" name="cur_address_addr2" id="p_muid_cur_address_addr2" /></label>
 					</div>
 					<div class="pf-element">
 						<span class="pf-label">City, State, Zip</span>
-						<input class="pf-field" type="text" size="8" name="cur_address_city" id="p_muid_cur_address_city" />
-						<input class="pf-field" type="text" size="2" name="cur_address_state" id="p_muid_cur_address_state" />
-						<input class="pf-field" type="text" size="5" name="cur_address_zip" id="p_muid_cur_address_zip" />
+						<input class="pf-field form-control" type="text" size="8" name="cur_address_city" id="p_muid_cur_address_city" />
+						<input class="pf-field form-control" type="text" size="2" name="cur_address_state" id="p_muid_cur_address_state" />
+						<input class="pf-field form-control" type="text" size="5" name="cur_address_zip" id="p_muid_cur_address_zip" />
 					</div>
 				</div>
 				<br class="pf-clearing" />
@@ -574,7 +574,7 @@ if ($_->config->com_user->check_username) { ?>
 				#p_muid_tab_abilities .abilities_accordion {
 					margin-bottom: .2em;
 				}
-				#p_muid_tab_abilities .abilities_accordion .accordion-heading .component {
+				#p_muid_tab_abilities .abilities_accordion .panel-heading .component {
 					float: right;
 				}
 			</style>
@@ -591,8 +591,8 @@ if ($_->config->com_user->check_username) { ?>
 			</script>
 			<div class="pf-element pf-full-width ui-helper-clearfix">
 				<div class="btn-group" style="float: right; clear: both;">
-					<button type="button" class="expand_all btn">Expand All</button>
-					<button type="button" class="collapse_all btn">Collapse All</button>
+					<button type="button" class="expand_all btn btn-default">Expand All</button>
+					<button type="button" class="collapse_all btn btn-default">Collapse All</button>
 				</div>
 				<span class="pf-label">Inherit</span>
 				<label>
@@ -607,13 +607,13 @@ if ($_->config->com_user->check_username) { ?>
 				else
 					$section_abilities = (array) $_->info->$cur_section->abilities;
 				if (!$section_abilities) continue; ?>
-			<div class="abilities_accordion accordion">
-				<div class="accordion-group">
-					<a class="accordion-heading ui-helper-clearfix" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
-						<big class="accordion-toggle"><?php ($cur_section == 'system') ? e($_->info->name) : e($_->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
+			<div class="abilities_accordion panel-group">
+				<div class="panel panel-default">
+					<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+						<big class="panel-title"><?php ($cur_section == 'system') ? e($_->info->name) : e($_->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
 					</a>
-					<div class="accordion-body collapse">
-						<div class="accordion-inner clearfix">
+					<div class="panel-collapse collapse">
+						<div class="panel-body clearfix">
 							<div class="pf-element">
 								<?php foreach ($section_abilities as $cur_ability) { ?>
 								<label>
@@ -721,11 +721,11 @@ if ($_->config->com_user->check_username) { ?>
 				<div class="pf-form">
 					<div class="pf-element">
 						<label><span class="pf-label">Name</span>
-							<input class="pf-field" type="text" id="p_muid_cur_attribute_name" size="24" /></label>
+							<input class="pf-field form-control" type="text" id="p_muid_cur_attribute_name" size="24" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Value</span>
-							<input class="pf-field" type="text" id="p_muid_cur_attribute_value" size="24" /></label>
+							<input class="pf-field form-control" type="text" id="p_muid_cur_attribute_value" size="24" /></label>
 					</div>
 				</div>
 				<br style="clear: both; height: 1px;" />
@@ -740,9 +740,9 @@ if ($_->config->com_user->check_username) { ?>
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
 		<?php if (gatekeeper('com_user/listusers')) { ?>
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_user', 'listusers'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_user', 'listusers'))); ?>);" value="Cancel" />
 		<?php } else { ?>
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url())); ?>);" value="Cancel" />
 		<?php } ?>
 	</div>
 </form>

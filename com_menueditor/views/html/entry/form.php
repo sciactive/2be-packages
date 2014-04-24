@@ -183,7 +183,7 @@ unset($cur_child);
 	<div class="pf-element">
 		<label><span class="pf-label">Menu</span>
 			<span class="pf-note">What menu does this entry belong to?</span>
-			<select class="pf-field" name="top_menu" id="p_muid_top_menu">
+			<select class="pf-field form-control" name="top_menu" id="p_muid_top_menu">
 				<option value="--new--"<?php echo isset($this->entity->top_menu) ? '' : ' selected="selected"'; ?>>-- New Menu --</option>
 				<?php foreach ($menus as $key => $cur_menu) { ?>
 				<option value="<?php e($key); ?>"<?php echo $this->entity->top_menu == $key ? ' selected="selected"' : ''; ?>><?php e($cur_menu[0]->data); ?></option>
@@ -234,9 +234,9 @@ unset($cur_child);
 	<div class="pf-element" id="p_muid_position">
 		<span class="pf-label">Position</span>
 		<span class="combobox">
-			<input class="pf-field" type="text" name="position" size="24" value="<?php e($this->entity->position); ?>" />
+			<input class="pf-field form-control" type="text" name="position" size="24" value="<?php e($this->entity->position); ?>" />
 			<a href="javascript:void(0);" class="ui-icon ui-icon-triangle-1-s"></a>
-			<select style="display: none;">
+			<select class="form-control" style="display: none;">
 				<?php foreach ($_->info->template->positions as $cur_position) {
 					?><option value="<?php e($cur_position); ?>"><?php e($cur_position); ?></option><?php
 				} ?>
@@ -247,19 +247,19 @@ unset($cur_child);
 	<div class="pf-element">
 		<label><span class="pf-label">Name</span>
 			<span class="pf-note">This is what will make its path. It also determines its position alphanumerically if the location is sorted.</span>
-			<input class="pf-field" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 	</div>
 	<?php } if (!in_array('text', (array) $this->disabled_fields)) { ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Text</span>
 			<span class="pf-note">This is the text that will appear on the menu entry.</span>
-			<input class="pf-field" type="text" name="text" size="24" value="<?php e($this->entity->text); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="text" size="24" value="<?php e($this->entity->text); ?>" /></label>
 	</div>
 	<?php } if (!in_array('sort_order', (array) $this->disabled_fields)) { ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Sort Order</span>
 			<span class="pf-note">Menu entries created by this system will be sorted using this value. However, if they are placed in a sorted parent, they will use the name.</span>
-			<input class="pf-field" type="text" name="sort_order" size="24" value="<?php e($this->entity->sort_order); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="sort_order" size="24" value="<?php e($this->entity->sort_order); ?>" /></label>
 	</div>
 	<?php } if (!in_array('enabled', (array) $this->disabled_fields)) { ?>
 	<div class="pf-element">
@@ -274,12 +274,12 @@ unset($cur_child);
 	<?php } if (!in_array('link', (array) $this->disabled_fields)) { ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Link</span>
-			<input class="pf-field" type="text" name="link" size="24" value="<?php e($this->entity->link); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="link" size="24" value="<?php e($this->entity->link); ?>" /></label>
 	</div>
 	<?php } if (!in_array('text', (array) $this->disabled_fields) && gatekeeper('com_menueditor/jsentry')) { ?>
 	<div class="pf-element">
 		<label><span class="pf-label">Onclick JavaScript</span>
-			<input class="pf-field" type="text" name="onclick" size="24" value="<?php e($this->entity->onclick); ?>" /></label>
+			<input class="pf-field form-control" type="text" name="onclick" size="24" value="<?php e($this->entity->onclick); ?>" /></label>
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-heading">
@@ -307,7 +307,7 @@ unset($cur_child);
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_menueditor', 'entry/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_menueditor', 'entry/list'))); ?>);" value="Cancel" />
 	</div>
 	<?php } ?>
 </form>

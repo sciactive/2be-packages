@@ -237,8 +237,8 @@ defined('P_RUN') or die('Direct access prohibited');
 			<label>Displays:<br />
 				<select id="p_muid_displays" onchange="get_values();">
 				</select></label>
-			<input type="button" class="btn" value="+" name="display_add" onclick="display_add();" />
-			<input type="button" class="btn" value="-" name="display_remove" onclick="display_remove();" />
+			<input type="button" class="btn btn-default" value="+" name="display_add" onclick="display_add();" />
+			<input type="button" class="btn btn-default" value="-" name="display_remove" onclick="display_remove();" />
 		</div>
 		<div id="p_muid_form_div" style="float: left; clear: left;">
 			<div style="float: left; clear: left;">
@@ -271,7 +271,7 @@ defined('P_RUN') or die('Direct access prohibited');
 			</div>
 			<div style="float: left; clear: left;">
 				<label>Font Family:<br />
-					<select id="p_muid_fontfamily_suggest" name="fontfamily_suggest" size="1" onchange="$('#p_muid_fontfamily').val(this.value); this.value='--'; set_values();">
+					<select id="p_muid_fontfamily_suggest" name="fontfamily_suggest" onchange="$('#p_muid_fontfamily').val(this.value); this.value='--'; set_values();">
 						<option value="--">Installed Fonts</option>
 					<?php
 					$fonts = array();

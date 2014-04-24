@@ -244,9 +244,9 @@ echo $module->render();
 	</table>
 </div>
 <?php } elseif ($this->render == 'footer') { ?>
-<a href="<?php e(pines_url('com_sales', 'return/receipt', array('id' => $this->entity->guid))); ?>" class="btn">Receipt</a>
+<a href="<?php e(pines_url('com_sales', 'return/receipt', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Receipt</a>
 <?php if (gatekeeper('com_sales/listreturns')) { ?>
-<a href="<?php e(pines_url('com_sales', 'return/list', array('location' => $this->entity->group->guid, 'descendants' => 'false', 'all_time' => 'false', 'start_date' => format_date($this->entity->p_cdate, 'custom', 'Y-m-d'), 'end_date' => format_date(strtotime('+1 day', $this->entity->p_cdate), 'custom', 'Y-m-d')))); ?>" class="btn">View in List</a>
+<a href="<?php e(pines_url('com_sales', 'return/list', array('location' => $this->entity->group->guid, 'descendants' => 'false', 'all_time' => 'false', 'start_date' => format_date($this->entity->p_cdate, 'custom', 'Y-m-d'), 'end_date' => format_date(strtotime('+1 day', $this->entity->p_cdate), 'custom', 'Y-m-d')))); ?>" class="btn btn-default">View in List</a>
 <?php } if (gatekeeper('com_sales/editreturn')) { ?>
-<a href="<?php e(pines_url('com_sales', 'return/edit', array('id' => $this->entity->guid))); ?>" class="btn">Edit</a>
+<a href="<?php e(pines_url('com_sales', 'return/edit', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Edit</a>
 <?php } }

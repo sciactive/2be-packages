@@ -68,7 +68,7 @@ ul.side-menu-list {
 				$add_sub_menu .= '<li class="sidemenu-category level'.$level.' '.$has_cats_class.'">';
 				// If it's a sub sub or more add the chevron down things
 				if ($level > 0)
-					$add_sub_menu .= '<i class="icon-chevron-down"></i> ';
+					$add_sub_menu .= '<i class="fa fa-chevron-down"></i> ';
 				$add_sub_menu .= '<a class="sub-category">'.$cur_child->menu_item_name.'</a>';
 				// Right here we send it back to this function, it has to have children
 				$new_level = $level + 1;
@@ -88,7 +88,7 @@ if ($menu === false || empty($this->sub_position) || empty($this->tag)) { ?>
 	echo '<ul class="side-menu-list">';
 	foreach ($menu as $cur_top_menu_item) { 
 		if ($cur_top_menu_item->menu_item_type == 'category') {
-			echo '<li class="top-sidemenu-item"><a class="top-category" data-id="'.$cur_top_menu_item->menu_item_guid.'">'.$cur_top_menu_item->menu_item_name.'</a><i class="icon-chevron-right pull-right"></i></li>';
+			echo '<li class="top-sidemenu-item"><a class="top-category" data-id="'.$cur_top_menu_item->menu_item_guid.'">'.$cur_top_menu_item->menu_item_name.'</a><i class="fa fa-chevron-right pull-right"></i></li>';
 			// It has to have children...
 			$sub_menu .= '<div class="sub-menu" data-id="'.$cur_top_menu_item->menu_item_guid.'"><div class="top-category-title"><h4 style="margin: 0;">'.$cur_top_menu_item->menu_item_name.'</h4></div>';
 			$sub_menu .= make_sub_menu($cur_top_menu_item, 0);

@@ -216,7 +216,7 @@ $_->com_sales->load_jcrop();
 					<span class="pf-label">Name</span>
 					<span class="pf-group pf-full-width">
 						<span class="pf-field" style="display: block;">
-							<input style="width: 100%;" type="text" name="name" value="<?php e($this->entity->name); ?>" />
+							<input class="form-control" style="width: 100%;" type="text" name="name" value="<?php e($this->entity->name); ?>" />
 						</span>
 					</span>
 				</label>
@@ -238,7 +238,7 @@ $_->com_sales->load_jcrop();
 			<div class="pf-element">
 				<label><span class="pf-label">Product SKU</span>
 					<span class="pf-group" style="display: block;">
-						<input class="pf-field" type="text" name="sku" size="24" value="<?php e($this->entity->sku); ?>" />
+						<input class="pf-field form-control" type="text" name="sku" size="24" value="<?php e($this->entity->sku); ?>" />
 						<span class="pf-field picon picon-throbber loader" id="p_muid_sku_loading" style="display: none;">&nbsp;</span>
 						<span class="pf-field picon" id="p_muid_sku_message"></span>
 					</span>
@@ -246,7 +246,7 @@ $_->com_sales->load_jcrop();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Manufacturer</span>
-					<select class="pf-field" name="manufacturer">
+					<select class="pf-field form-control" name="manufacturer">
 						<option value="null">-- None --</option>
 						<?php foreach ($this->manufacturers as $cur_manufacturer) { ?>
 						<option value="<?php e($cur_manufacturer->guid); ?>"<?php echo $this->entity->manufacturer->guid == $cur_manufacturer->guid ? ' selected="selected"' : ''; ?>><?php e($cur_manufacturer->name); ?></option>
@@ -255,12 +255,12 @@ $_->com_sales->load_jcrop();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Manufacturer SKU</span>
-					<input class="pf-field" type="text" name="manufacturer_sku" size="24" value="<?php e($this->entity->manufacturer_sku); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="manufacturer_sku" size="24" value="<?php e($this->entity->manufacturer_sku); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Receipt Description</span>
 					<span class="pf-note">A short description to be shown on receipts.</span>
-					<input class="pf-field" type="text" name="receipt_description" size="40" value="<?php e($this->entity->receipt_description); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="receipt_description" size="40" value="<?php e($this->entity->receipt_description); ?>" /></label>
 			</div>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Short Description</span><br />
@@ -367,7 +367,7 @@ $_->com_sales->load_jcrop();
 				</script>
 				<label><span class="pf-label">Stock Type</span>
 					<span class="pf-note">Regular stock items cannot be sold without available stock. Stock optional items can be sold without available stock. Non stocked items do not use inventory tracking.</span>
-					<select class="pf-field" name="stock_type">
+					<select class="pf-field form-control" name="stock_type">
 						<?php foreach (array('regular_stock' => 'Regular Stock', 'stock_optional' => 'Stock Optional', 'non_stocked' => 'Non Stocked') as $cur_stock_key => $cur_stock_type) { ?>
 						<option value="<?php e($cur_stock_key); ?>"<?php echo $this->entity->stock_type == $cur_stock_key ? ' selected="selected"' : ''; ?>><?php e($cur_stock_type); ?></option>
 						<?php } ?>
@@ -381,7 +381,7 @@ $_->com_sales->load_jcrop();
 								show_in_storefront = $("#p_muid_form input[name=show_in_storefront]");
 							if (custom_item.is(":checked") && show_in_storefront.is(":checked")) {
 								$(this).removeAttr("checked");
-								var notice = $.pnotify('The product cannot be both a custom item and shown in the storefront.<br/><br/><button class="btn" type="button">Swap Options</button>').on("click", "button", function(){
+								var notice = new PNotify('The product cannot be both a custom item and shown in the storefront.<br/><br/><button class="btn btn-default" type="button">Swap Options</button>').on("click", "button", function(){
 									custom_item.add(show_in_storefront).each(function(){
 										var cur_box = $(this);
 										if (cur_box.is(":checked"))
@@ -455,15 +455,15 @@ $_->com_sales->load_jcrop();
 					<br class="pf-clearing" />
 					<div class="pf-element">
 						<label><span class="pf-label">Vendor SKU</span>
-							<input type="text" class="pf-field" name="cur_vendor_sku" size="15" id="p_muid_cur_vendor_sku" /></label>
+							<input type="text" class="pf-field form-control" name="cur_vendor_sku" size="15" id="p_muid_cur_vendor_sku" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Cost</span>
-							<input type="text" class="pf-field" name="cur_vendor_cost" size="8" id="p_muid_cur_vendor_cost" /></label>
+							<input type="text" class="pf-field form-control" name="cur_vendor_cost" size="8" id="p_muid_cur_vendor_cost" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Link</span>
-							<input type="url" class="pf-field" name="cur_vendor_link" size="20" id="p_muid_cur_vendor_link" /></label>
+							<input type="url" class="pf-field form-control" name="cur_vendor_link" size="20" id="p_muid_cur_vendor_link" /></label>
 					</div>
 				</div>
 				<br />
@@ -489,7 +489,7 @@ $_->com_sales->load_jcrop();
 					});
 				</script>
 				<label><span class="pf-label">Pricing Method</span>
-					<select class="pf-field" name="pricing_method">
+					<select class="pf-field form-control" name="pricing_method">
 						<option value="fixed" title="Only one price will be available."<?php echo $this->entity->pricing_method == 'fixed' ? ' selected="selected"' : ''; ?>>Fixed Pricing</option>
 						<option value="variable" title="An employee can increase/decrease the price."<?php echo $this->entity->pricing_method == 'variable' ? ' selected="selected"' : ''; ?>>Variable Pricing</option>
 						<option value="margin" title="The price is based on the cost of the item."<?php echo $this->entity->pricing_method == 'margin' ? ' selected="selected"' : ''; ?>>Margin Pricing</option>
@@ -512,28 +512,28 @@ $_->com_sales->load_jcrop();
 						<?php } ?>
 					</span>
 					<span class="pf-note">Only informational. Doesn't affect product availability.</span>
-					<input class="pf-field" type="text" id="p_muid_product_exp" name="product_exp" size="24" value="<?php echo ($this->entity->product_exp ? h(format_date($this->entity->product_exp, 'date_sort')) : ''); ?>" /></label>
+					<input class="pf-field form-control" type="text" id="p_muid_product_exp" name="product_exp" size="24" value="<?php echo ($this->entity->product_exp ? h(format_date($this->entity->product_exp, 'date_sort')) : ''); ?>" /></label>
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Defaults</h3>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Unit Price</span>
-					<input class="pf-field" type="text" name="unit_price" size="24" value="<?php e($this->entity->unit_price); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="unit_price" size="24" value="<?php e($this->entity->unit_price); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Margin</span>
-					<input class="pf-field" type="text" name="margin" size="24" value="<?php e($this->entity->margin); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="margin" size="24" value="<?php e($this->entity->margin); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Floor</span>
 					<span class="pf-note">The lowest price allowed.</span>
-					<input class="pf-field" type="text" name="floor" size="24" value="<?php e($this->entity->floor); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="floor" size="24" value="<?php e($this->entity->floor); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Ceiling</span>
 					<span class="pf-note">The highest price allowed.</span>
-					<input class="pf-field" type="text" name="ceiling" size="24" value="<?php e($this->entity->ceiling); ?>" /></label>
+					<input class="pf-field form-control" type="text" name="ceiling" size="24" value="<?php e($this->entity->ceiling); ?>" /></label>
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Taxes/Fees</h3>
@@ -546,7 +546,7 @@ $_->com_sales->load_jcrop();
 				<label><span class="pf-label">Additional Fees</span>
 					<span class="pf-note">These fees will be applied in addition to the group's default taxes. If you select a fee/tax applied to a group, it will be applied twice to this product for that group.</span>
 					<span class="pf-note">Hold Ctrl (Command on Mac) to select multiple.</span>
-					<select class="pf-field" name="additional_tax_fees[]" size="6" multiple="multiple">
+					<select class="pf-field form-control" name="additional_tax_fees[]" size="6" multiple="multiple">
 						<?php foreach ($this->tax_fees as $cur_tax_fee) { ?>
 						<option value="<?php e($cur_tax_fee->guid); ?>"<?php echo ($cur_tax_fee->in_array($this->entity->additional_tax_fees)) ? ' selected="selected"' : ''; ?>><?php e($cur_tax_fee->name); ?></option>
 						<?php } ?>
@@ -556,7 +556,7 @@ $_->com_sales->load_jcrop();
 				<label><span class="pf-label">Return Fee Checklists</span>
 					<span class="pf-note">These checklists will be used to calculate additional restocking/return fees.</span>
 					<span class="pf-note">Hold Ctrl (Command on Mac) to select multiple.</span>
-					<select class="pf-field" name="return_checklists[]" size="6" multiple="multiple">
+					<select class="pf-field form-control" name="return_checklists[]" size="6" multiple="multiple">
 						<?php foreach ($this->return_checklists as $cur_return_checklist) { ?>
 						<option value="<?php e($cur_return_checklist->guid); ?>"<?php echo ($cur_return_checklist->in_array($this->entity->return_checklists)) ? ' selected="selected"' : ''; ?>><?php e($cur_return_checklist->name); ?></option>
 						<?php } ?>
@@ -567,11 +567,11 @@ $_->com_sales->load_jcrop();
 		<div class="tab-pane" id="p_muid_tab_attributes">
 			<div class="pf-element">
 				<label><span class="pf-label">Weight</span>
-					<input class="pf-field" type="text" name="weight" size="10" value="<?php e($this->entity->weight); ?>" /> lbs.</label>
+					<input class="pf-field form-control" type="text" name="weight" size="10" value="<?php e($this->entity->weight); ?>" /> lbs.</label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">RMA Available After</span>
-					<input class="pf-field" type="text" name="rma_after" size="10" value="<?php e($this->entity->rma_after); ?>" /> days.</label>
+					<input class="pf-field form-control" type="text" name="rma_after" size="10" value="<?php e($this->entity->rma_after); ?>" /> days.</label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Serialized</span>
@@ -609,7 +609,7 @@ $_->com_sales->load_jcrop();
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Additional Barcodes</span>
 				<div class="pf-group">
-					<input class="pf-field" type="text" name="additional_barcodes" size="24" value="<?php e(implode(',', $this->entity->additional_barcodes)); ?>" />
+					<input class="pf-field form-control" type="text" name="additional_barcodes" size="24" value="<?php e(implode(',', $this->entity->additional_barcodes)); ?>" />
 					<script type="text/javascript">
 						$_(function(){
 							$("#p_muid_form [name=additional_barcodes]").ptags({
@@ -626,7 +626,7 @@ $_->com_sales->load_jcrop();
 				<label><span class="pf-label">Product Actions</span>
 					<span class="pf-note">These actions will be executed when an event takes place with this product.</span>
 					<span class="pf-note">Hold Ctrl (Command on Mac) to select multiple.</span>
-					<select class="pf-field" name="actions[]" size="6" multiple="multiple">
+					<select class="pf-field form-control" name="actions[]" size="6" multiple="multiple">
 						<?php foreach ($this->actions as $cur_action) { ?>
 						<option value="<?php e($cur_action['name']); ?>" title="<?php e($cur_action['description']); ?>"<?php echo in_array($cur_action['name'], $this->entity->actions) ? ' selected="selected"' : ''; ?>><?php e($cur_action['cname']); ?></option>
 						<?php } ?>
@@ -758,7 +758,7 @@ $_->com_sales->load_jcrop();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Group</span>
-							<select class="pf-field" name="cur_commission_group">
+							<select class="pf-field form-control" name="cur_commission_group">
 								<?php foreach ($this->groups as $cur_group) {
 								?><option value="<?php e("{$cur_group->guid}: {$cur_group->name}"); ?>"><?php e("{$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
 								} ?>
@@ -768,7 +768,7 @@ $_->com_sales->load_jcrop();
 					<div class="pf-element">
 						<label>
 							<span class="pf-label">Type</span>
-							<select class="pf-field" name="cur_commission_type">
+							<select class="pf-field form-control" name="cur_commission_type">
 								<option value="spiff">Spiff (Fixed Amount)</option>
 								<option value="percent_price">% Price (Before Tax, After Specials)</option>
 								<option value="percent_line_total">% Line Total (Before Tax, Before Specials)</option>
@@ -778,7 +778,7 @@ $_->com_sales->load_jcrop();
 					<div class="pf-element">
 						<label><span class="pf-label">Amount</span>
 							<span class="pf-note">$ or %</span>
-							<input class="pf-field" type="text" name="cur_commission_amount" size="24" onkeyup="this.value=this.value.replace(/[^\d.]/g, '');" /></label>
+							<input class="pf-field form-control" type="text" name="cur_commission_amount" size="24" onkeyup="this.value=this.value.replace(/[^\d.]/g, '');" /></label>
 					</div>
 				</div>
 				<br style="clear: both; height: 1px;" />
@@ -859,7 +859,7 @@ $_->com_sales->load_jcrop();
 					update_images();
 
 					var add_image = function(image){
-						$('<li class="thumbnail" data-source="temp"><button type="button" style="display: none;" class="remove btn btn-mini btn-danger"><i class="icon-remove"></i></button><a href="'+$_.safe(image.img_url)+'" target="_blank"><img alt="'+$_.safe(image.img.replace(/.*\//, ''))+'" src="'+$_.safe(image.tmb_url)+'" /></a><p>Click to add description...</p></li>')
+						$('<li class="thumbnail" data-source="temp"><button type="button" style="display: none;" class="remove btn btn-xs btn-danger"><i class="fa fa-times"></i></button><a href="'+$_.safe(image.img_url)+'" target="_blank"><img alt="'+$_.safe(image.img.replace(/.*\//, ''))+'" src="'+$_.safe(image.tmb_url)+'" /></a><p>Click to add description...</p></li>')
 						.attr("data-image", image.img).attr("data-thumbnail", image.tmb).appendTo("#p_muid_sortable");
 					};
 
@@ -991,19 +991,19 @@ $_->com_sales->load_jcrop();
 			</script>
 			<div class="pf-element">
 				<span class="pf-label">Add Image(s)</span>
-				<input class="pf-field puploader puploader-temp puploader-multiple" id="p_muid_image_upload" type="text" value="" />
+				<input class="pf-field form-control puploader puploader-temp puploader-multiple" id="p_muid_image_upload" type="text" value="" />
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Images</span>
 				<span class="pf-note">The first image will be the default image.</span>
 				<div class="pf-note">
-					<button type="button" class="btn btn-danger" id="p_muid_clear"><i class="icon-trash"></i> Clear</button>
+					<button type="button" class="btn btn-danger" id="p_muid_clear"><i class="fa fa-trash-o"></i> Clear</button>
 				</div>
 				<div class="pf-group">
 					<ul id="p_muid_sortable" class="pf-field">
 						<?php if ($this->entity->images) { foreach ($this->entity->images as $cur_image) { ?>
 						<li data-source="file" data-image="<?php e($cur_image['file']); ?>" data-thumbnail="<?php e($cur_image['thumbnail']); ?>" class="thumbnail">
-							<button type="button" style="display: none;" class="remove btn btn-mini btn-danger"><i class="icon-remove"></i></button>
+							<button type="button" style="display: none;" class="remove btn btn-xs btn-danger"><i class="fa fa-times"></i></button>
 							<a href="<?php e($_->config->location.$cur_image['file']); ?>" target="_blank"><img alt="<?php e(basename($cur_image['file'])); ?>" src="<?php e($_->config->location.$cur_image['thumbnail']); ?>" /></a>
 							<p><?php echo empty($cur_image['alt']) ? 'Click to add description...' : h(basename($cur_image['alt'])); ?></p>
 						</li>
@@ -1014,7 +1014,7 @@ $_->com_sales->load_jcrop();
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Thumbnail</span>
-				<input class="pf-field puploader puploader-temp" id="p_muid_thumbnail" type="text" name="thumbnail" value="<?php e($this->entity->thumbnail); ?>" />
+				<input class="pf-field form-control puploader puploader-temp" id="p_muid_thumbnail" type="text" name="thumbnail" value="<?php e($this->entity->thumbnail); ?>" />
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Thumbnail Preview</span>
@@ -1108,7 +1108,7 @@ $_->com_sales->load_jcrop();
 					<span class="pf-label">Alias</span>
 					<span class="pf-group pf-full-width">
 						<span class="pf-field" style="display: block;">
-							<input style="width: 100%;" type="text" name="alias" value="<?php e($this->entity->alias); ?>" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
+							<input class="form-control" style="width: 100%;" type="text" name="alias" value="<?php e($this->entity->alias); ?>" onkeyup="this.value=this.value.replace(/[^\w\d-.]/g, '_');" />
 						</span>
 					</span>
 				</label>
@@ -1119,7 +1119,7 @@ $_->com_sales->load_jcrop();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Featured Image</span>
-					<input class="pf-field puploader" id="p_muid_featured_image" type="text" name="featured_image" value="<?php e($this->entity->featured_image); ?>" /></label>
+					<input class="pf-field form-control puploader" id="p_muid_featured_image" type="text" name="featured_image" value="<?php e($this->entity->featured_image); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Featured Image Preview</span>
@@ -1149,19 +1149,19 @@ $_->com_sales->load_jcrop();
 							case 'string':
 							case 'float':
 								if (empty($cur_spec['options'])) {
-									?><input class="pf-field" type="text" name="<?php e($key); ?>" size="24" value="<?php e($this->entity->specs[$key]); ?>" /><?php
+									?><input class="pf-field form-control" type="text" name="<?php e($key); ?>" size="24" value="<?php e($this->entity->specs[$key]); ?>" /><?php
 								} else {
 									if ($cur_spec['restricted']) {
-										?><select class="pf-field" name="<?php e($key); ?>">
+										?><select class="pf-field form-control" name="<?php e($key); ?>">
 											<?php foreach ($cur_spec['options'] as $cur_option) {
 												?><option value="<?php e($cur_option); ?>"<?php echo $this->entity->specs[$key] == $cur_option ? ' selected="selected"' : ''; ?>><?php e($cur_option); ?></option><?php
 											} ?>
 										</select><?php
 									} else {
 										?><span class="combobox">
-											<input class="pf-field" type="text" name="<?php e($key); ?>" size="24" value="<?php e($this->entity->specs[$key]); ?>" />
+											<input class="pf-field form-control" type="text" name="<?php e($key); ?>" size="24" value="<?php e($this->entity->specs[$key]); ?>" />
 											<a href="javascript:void(0);" class="ui-icon ui-icon-triangle-1-s"></a>
-											<select style="display: none;">
+											<select class="form-control" style="display: none;">
 												<?php foreach ($cur_spec['options'] as $cur_option) {
 													?><option value="<?php e($cur_option); ?>"><?php e($cur_option); ?></option><?php
 												} ?>
@@ -1200,13 +1200,13 @@ $_->com_sales->load_jcrop();
 				<div class="pf-group pf-full-width">
 					<label><input class="pf-field" type="checkbox" id="p_muid_use_name" name="title_use_name" value="ON"<?php echo $this->entity->title_use_name ? ' checked="checked"' : ''; ?> /> Use name as title.</label><br />
 					<span class="pf-field" style="display: block;">
-						<input style="width: 100%;" type="text" id="p_muid_title" name="title" value="<?php e($this->entity->title); ?>" />
+						<input class="form-control" style="width: 100%;" type="text" id="p_muid_title" name="title" value="<?php e($this->entity->title); ?>" />
 					</span>
 				</div>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Title Position</span>
-					<select class="pf-field" name="title_position">
+					<select class="pf-field form-control" name="title_position">
 						<option value="prepend"<?php echo $this->entity->title_position === 'prepend' ? ' selected="selected"' : ''; ?>>Prepend to Site Title</option>
 						<option value="append"<?php echo $this->entity->title_position === 'append' ? ' selected="selected"' : ''; ?>>Append to Site Title</option>
 						<option value="replace"<?php echo $this->entity->title_position === 'replace' ? ' selected="selected"' : ''; ?>>Replace Site Title</option>
@@ -1348,11 +1348,11 @@ $_->com_sales->load_jcrop();
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Name</span>
-							<input class="pf-field" type="text" name="cur_meta_tag_name" id="p_muid_cur_meta_tag_name" size="24" /></label>
+							<input class="pf-field form-control" type="text" name="cur_meta_tag_name" id="p_muid_cur_meta_tag_name" size="24" /></label>
 					</div>
 					<div class="pf-element">
 						<label><span class="pf-label">Content</span>
-							<input class="pf-field" type="text" name="cur_meta_tag_value" size="24" /></label>
+							<input class="pf-field form-control" type="text" name="cur_meta_tag_value" size="24" /></label>
 					</div>
 				</div>
 				<br style="clear: both; height: 1px;" />
@@ -1366,6 +1366,6 @@ $_->com_sales->load_jcrop();
 		<input type="hidden" name="id" value="<?php e($this->entity->guid); ?>" />
 		<?php } ?>
 		<input class="pf-button btn btn-primary" type="submit" value="Submit" />
-		<input class="pf-button btn" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'product/list'))); ?>);" value="Cancel" />
+		<input class="pf-button btn btn-default" type="button" onclick="$_.get(<?php e(json_encode(pines_url('com_sales', 'product/list'))); ?>);" value="Cancel" />
 	</div>
 </form>

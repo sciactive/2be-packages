@@ -24,7 +24,7 @@ defined('P_RUN') or die('Direct access prohibited');
 	$.fn.dialog = function(){
 		var d = real_dialog.apply(this, arguments);
 		if (typeof d == "object" && d.jquery && d.hasClass("ui-dialog-content"))
-			real_dialog.call(d, "widget").find(".ui-dialog-buttonpane button").addClass("btn");
+			real_dialog.call(d, "widget").find(".ui-dialog-buttonpane button").addClass("btn btn-default");
 		return d;
 	};
 	<?php } ?>

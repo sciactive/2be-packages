@@ -77,7 +77,7 @@ switch ($this->entity->payment_frequency) {
 			<span class="pf-note">Payment Due: <?php (isset($this->entity->payments[0]['next_payment_due'])) ? e(format_date($this->entity->payments[0]['next_payment_due'], "date_short")) : e(format_date($this->entity->first_payment_date, "date_short")); ?></span>
 		</span>
 		<span class="pf-field">
-			<input style="float:right;text-align:right;" class="pf-field" type="text" name="payment_amount" />
+			<input style="float:right;text-align:right;" class="pf-field form-control" type="text" name="payment_amount" />
 		</span>
 	</div>
 	<div class="pf-element pf-full-width">
@@ -85,7 +85,7 @@ switch ($this->entity->payment_frequency) {
 			<span class="pf-note">Date of payment received.</span>
 		</span>
 		<span class="pf-field">
-			<input value="<?php e(date('Y-m-d')); ?>" style="float:right;text-align:right;" class="pf-field" type="text" name="payment_date_input" />
+			<input value="<?php e(date('Y-m-d')); ?>" style="float:right;text-align:right;" class="pf-field form-control" type="text" name="payment_date_input" />
 		</span>
 	</div>
 </form>

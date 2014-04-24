@@ -35,7 +35,7 @@ $show = $_REQUEST['show'];
 				dataType: "json",
 				data: {"q": search_string, "status": <?php echo json_encode($this->testimonial_type); ?>, "type": 'review'},
 				beforeSend: function(){
-					loader = $.pnotify({
+					loader = new PNotify({
 						title: 'Search',
 						text: 'Searching the database...',
 						icon: 'picon picon-throbber',
