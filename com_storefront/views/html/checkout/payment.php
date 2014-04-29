@@ -117,7 +117,7 @@ $this->title = 'Payment Options';
 				});
 			};
 
-			$("#p_muid_payment_types").delegate("input[name=payment_type]", "change", function(){
+			$("#p_muid_payment_types").on("change", "input[name=payment_type]", function(){
 				var radio = $(this);
 				var payment = JSON.parse(radio.val());
 				if (radio.attr("checked"))

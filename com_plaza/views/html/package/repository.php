@@ -267,7 +267,7 @@ if (isset($_->com_fancybox))
 		};
 
 		var info_dialog;
-		package_grid.delegate("tbody tr", "click", function(){
+		package_grid.on("click", "tbody tr", function(){
 			var cur_row = $(this);
 			var name = cur_row.pgrid_get_value(2);
 			var publisher = cur_row.pgrid_get_value(3);

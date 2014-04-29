@@ -14,7 +14,6 @@ $this->title = 'Edit Buttons';
 ?>
 <div class="pf-form" id="p_muid_form">
 	<style type="text/css" scoped="scoped">
-		/* <[CDATA[ */
 		#p_muid_form .buttons {
 			padding: .5em .25em 0;
 			margin-bottom: .5em;
@@ -49,11 +48,11 @@ $this->title = 'Edit Buttons';
 		#p_muid_form .button_well .separator:before {
 			content: "separator";
 			display: block;
-			font-size: 3px;
+			font-size: .9em;
 			height: 0;
 			position: absolute;
-			right: 5px;
-			top: 5px;
+			right: 2%;
+			top: 5%;
 			width: 0;
 
 			transform: rotate(90deg);
@@ -66,8 +65,6 @@ $this->title = 'Edit Buttons';
 			content: "sep";
 		}
 		#p_muid_form .button_well .line_break {
-			display: block;
-			width: auto;
 			clear: both;
 			padding: 10px 0;
 			height: 1px;
@@ -85,20 +82,33 @@ $this->title = 'Edit Buttons';
 		$_(function(){
 			$("#p_muid_cur_buttons").sortable({
 				tolerance: "pointer",
-				placeholder: "btn btn-warning placeholder",
+				placeholder: "button btn btn-warning placeholder",
 				forcePlaceholderSize: true,
 				start: function(e, ui){
-					if (ui.item.hasClass("line_break"))
+					if (ui.item.hasClass("line_break")) {
 						ui.placeholder.css("width", "32px");
+					} else {
+						ui.item.css("height", "auto");
+						if (!ui.item.hasClass("separator"))
+							ui.item.css("width", "auto");
+						ui.placeholder.css({height: ui.item.outerHeight()+"px", width: ui.item.outerWidth()+"px"})
+					}
 				}
 			});
 			$("#p_muid_add_buttons .btn").draggable({
 				helper: "clone",
-				connectToSortable: "#p_muid_cur_buttons"
+				connectToSortable: "#p_muid_cur_buttons",
+				start: function(e, ui){
+					if (!ui.helper.hasClass("line_break")) {
+						ui.helper.css("height", "auto");
+						if (!ui.helper.hasClass("separator"))
+							ui.helper.css("width", "auto");
+					}
+				}
 			});
 			$("#p_muid_trash").droppable({
 				accept: "#p_muid_cur_buttons .btn",
-				hoverClass: "alert-error",
+				hoverClass: "btn-danger",
 				tolerance: 'touch',
 				drop: function(e, ui){
 					ui.draggable.remove();
@@ -124,9 +134,9 @@ $this->title = 'Edit Buttons';
 		<div id="p_muid_cur_buttons" class="buttons button_well well <?php e($this->buttons_size); ?>">
 			<?php foreach ((array) $this->current_buttons as $cur_button) {
 				if ($cur_button == 'separator') { ?>
-			<a class="separator btn btn-default disabled"><span>&nbsp;</span></a>
+			<a class="separator btn btn-default"><span>&nbsp;</span></a>
 				<?php } elseif ($cur_button == 'line_break') { ?>
-			<a class="line_break btn btn-default disabled"><span>&nbsp;</span></a>
+			<a class="line_break btn btn-default btn-block"><span>&nbsp;</span></a>
 				<?php } else {
 					$cur_def = $_->com_dash->get_button_def($cur_button);
 					// Check its conditions.
@@ -143,7 +153,7 @@ $this->title = 'Edit Buttons';
 		</div>
 	</div>
 	<div class="pf-element pf-full-width clearfix">
-		<div class="ui-widget-content ui-corner-all" id="p_muid_trash" style="float: right; margin-left: .5em; width: 52px; height: 52px; padding: 10px;">
+		<div class="btn" id="p_muid_trash" style="float: right; margin-left: .5em; width: 52px; height: 52px; padding: 10px;">
 			<div class="picon-32 picon-user-trash" style="width: 32px; height: 32px;"></div>
 		</div>
 		Drag buttons from the following list to add to your dashboard. Drag to the trash can to remove them. You can also sort your current buttons.
@@ -154,8 +164,8 @@ $this->title = 'Edit Buttons';
 		</div>
 		<div class="pf-element pf-full-width">
 			<div class="button_well <?php e($this->buttons_size); ?>">
-				<a class="separator btn btn-default disabled"><span>&nbsp;</span></a>
-				<a class="line_break btn btn-default disabled"><span>&nbsp;</span></a>
+				<a class="separator btn btn-default"><span>&nbsp;</span></a>
+				<a class="line_break btn btn-default btn-block"><span>&nbsp;</span></a>
 			</div>
 		</div>
 		<?php foreach ((array) $this->buttons as $cur_component => $cur_button_list) { ?>

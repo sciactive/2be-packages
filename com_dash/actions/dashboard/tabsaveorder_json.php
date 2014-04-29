@@ -54,9 +54,12 @@ foreach ($struct as $cur_c_key => $cur_w_key_list) {
 // If there are any widgets left, throw them into whatever column. This
 // *shouldn't* be necessary, but.. you know, shouldn't =/= isn't.
 if ($widgets) {
-	$key = key($dashboard->tabs[$_REQUEST['key']]['columns']);
-	foreach ($widgets as $wkey => $widget)
-		$dashboard->tabs[$_REQUEST['key']]['columns'][$key]['widgets'][$wkey] = $widget;
+	$columns = $dashboard->tabs[$_REQUEST['key']]['columns'];
+	$key = key($columns);
+	foreach ($widgets as $wkey => $widget) {
+		$columns[$key]['widgets'][$wkey] = $widget;
+	}
+	$dashboard->tabs[$_REQUEST['key']]['columns'] = $columns;
 }
 
 $_->page->override_doc(json_encode($dashboard->save()));

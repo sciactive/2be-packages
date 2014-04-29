@@ -27,7 +27,7 @@ foreach ($floor->active_stations as $cur_station => $cur_entry) {
 	}
 	$session_info = $cur_entry['customer']->com_customertimer_get_session_info($floor, $cur_station);
 	$return[] = (object) array(
-		'guid' => $cur_entry['customer']->guid,
+		'guid' => "{$cur_entry['customer']->guid}",
 		'name' => $cur_entry['customer']->name,
 		'login_time' => $cur_entry['time_in'],
 		'points' => $cur_entry['customer']->points,

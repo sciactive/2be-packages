@@ -100,7 +100,7 @@ if ($_->config->com_calendar->com_customer)
 			});
 		});
 
-		$("#p_muid_filter").delegate("button", "click", function() {
+		$("#p_muid_filter").on("click", "button", function() {
 			$_.get(<?php echo json_encode(pines_url('com_calendar', 'editcalendar')); ?>, {
 				view_type: <?php echo json_encode($this->view_type); ?>,
 				start: <?php echo json_encode(format_date($this->date[0], 'date_sort', '', $this->timezone)); ?>,
@@ -453,13 +453,17 @@ if ($_->config->com_calendar->com_customer)
 								title: 'Saving',
 								text: 'Creating customer interaction...',
 								icon: 'picon picon-throbber',
-								nonblock: true,
+								nonblock: {
+									nonblock: true
+								},
 								hide: false,
-								history: false
+								history: {
+									history: false
+								}
 							});
 						},
 						complete: function(){
-							loader.pnotify_remove();
+							loader.remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
 							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -516,13 +520,17 @@ if ($_->config->com_calendar->com_customer)
 								title: 'Updating',
 								text: 'Processing customer interaction...',
 								icon: 'picon picon-throbber',
-								nonblock: true,
+								nonblock: {
+									nonblock: true
+								},
 								hide: false,
-								history: false
+								history: {
+									history: false
+								}
 							});
 						},
 						complete: function(){
-							loader.pnotify_remove();
+							loader.remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
 							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));

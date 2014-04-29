@@ -186,13 +186,17 @@ if ($_->config->com_sales->autocomplete_product)
 											title: 'Product Search',
 											text: 'Retrieving product from server...',
 											icon: 'picon picon-throbber',
-											nonblock: true,
+											nonblock: {
+												nonblock: true
+											},
 											hide: false,
-											history: false
+											history: {
+												history: false
+											}
 										});
 									},
 									complete: function(){
-										loader.pnotify_remove();
+										loader.remove();
 									},
 									error: function(XMLHttpRequest, textStatus){
 										$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -451,13 +455,17 @@ if ($_->config->com_sales->autocomplete_product)
 									title: 'Product Search',
 									text: 'Retrieving products from server...',
 									icon: 'picon picon-throbber',
-									nonblock: true,
+									nonblock: {
+										nonblock: true
+									},
 									hide: false,
-									history: false
+									history: {
+										history: false
+									}
 								});
 							},
 							complete: function(){
-								loader.pnotify_remove();
+								loader.remove();
 							},
 							error: function(XMLHttpRequest, textStatus){
 								$_.error("An error occured while trying to lookup the products:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -623,9 +631,13 @@ if ($_->config->com_sales->autocomplete_product)
 						title: 'Loading Products',
 						text: 'Retrieving product information from server...',
 						icon: 'picon picon-throbber',
-						nonblock: true,
+						nonblock: {
+							nonblock: true
+						},
 						hide: false,
-						history: false
+						history: {
+							history: false
+						}
 					});
 				var cur_row = $(this);
 				var cur_export = cur_row.pgrid_export_rows();
@@ -649,7 +661,7 @@ if ($_->config->com_sales->autocomplete_product)
 				});
 			});
 			if (loader)
-				loader.pnotify_remove();
+				loader.remove();
 
 			<?php if ($this->entity->status == 'processed' || $this->entity->status == 'voided') { ?>
 			payments_table.pgrid({

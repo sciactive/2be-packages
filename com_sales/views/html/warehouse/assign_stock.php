@@ -36,14 +36,14 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 		$_(function(){
 			var current_item;
 
-			$("#p_muid_form").delegate(".products div.serial a.assign", "click", function(){
+			$("#p_muid_form").on("click", ".products div.serial a.assign", function(){
 				current_item = $(this).closest("div.serial");
 				serial_dialog.dialog("open");
-			}).delegate(".products div.nonserial a.assign", "click", function(){
+			}).on("click", ".products div.nonserial a.assign", function(){
 				current_item = $(this).closest("div.nonserial");
 				quantity_box.val(current_item.find(".qty_left").text());
 				location_dialog.dialog("open");
-			}).delegate(".products .entry a.remove", "click", function(){
+			}).on("click", ".products .entry a.remove", function(){
 				$(this).closest(".entry").remove();
 				refresh_entries();
 			});
@@ -64,13 +64,17 @@ $warehouse = group::factory($_->config->com_sales->warehouse_group);
 							title: 'Stock Search',
 							text: 'Retrieving stock from server...',
 							icon: 'picon picon-throbber',
-							nonblock: true,
+							nonblock: {
+								nonblock: true
+							},
 							hide: false,
-							history: false
+							history: {
+								history: false
+							}
 						});
 					},
 					complete: function(){
-						loader.pnotify_remove();
+						loader.remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
 						$_.error("An error occured while trying to lookup the stock:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));

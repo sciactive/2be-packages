@@ -222,6 +222,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 									$_(function(){
 										$("#p_muid_next_payment").popover({
 											trigger: 'hover',
+											html: true,
 											title: 'Next Payment Due: <span style="float:right;">$'+<?php echo json_encode(h((string) ($_->com_sales->round($this->entity->payments[0]['next_payment_due_amount']) + $_->com_sales->round($this->entity->payments[0]['past_due'])))); ?>+'</span>',
 											content: 'Past Due: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($this->entity->payments[0]['past_due'], true)));?>+'</span><br/>'+<?php echo json_encode(h($payment_frequency));?>+' Payment: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($this->entity->payments[0]['next_payment_due_amount'], true))); ?>+'</span><br/><span style="font-size:.8em;">Past Due Amount is due immediately.</span>',
 											placement: 'right'
@@ -379,6 +380,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 								$_(function(){
 									$("#p_muid_tooltip_<?php e($uniq2); ?>").popover({
 										trigger: 'hover',
+										html: true,
 										title: 'Unpaid Interest: $'+<?php echo json_encode(h($_->com_sales->round($payment['payment_interest_unpaid'], true))); ?>,
 										content: 'Expected Interest: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($payment['payment_interest_expected'], true))); ?>+'</span><br/>Interest Paid: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($payment['payment_interest_paid'], true))); ?>+' </span><br/><span style="font-size:.8em;">Interest is calculated based on the terms of the loan at the time of payment.</span>',
 										placement: "right",
@@ -430,6 +432,7 @@ $this->note =  'Customer: '.h($this->entity->customer->name).'<span style="float
 								$_(function(){
 									$("#p_muid_tooltip_<?php e($uniq); ?>").popover({
 										trigger: 'hover',
+										html: true,
 										title: 'Unpaid Balance: $'+<?php echo json_encode(h($_->com_sales->round($payment['payment_balance_unpaid'], true))); ?>,
 										content: 'Previous Remaining Balance: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($payment['remaining_balance'], true))); ?>+'</span><br/>Expected Balance: <span style="float:right;">$'+<?php echo json_encode(h($_->com_sales->round($payment['scheduled_balance'], true))); ?>+' </span><br/><span style="font-size:.8em;">Calculated unpaid balance based on the terms of the loan at the time of payment.</span>',
 										placement: "right"

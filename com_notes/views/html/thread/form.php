@@ -48,7 +48,7 @@ $this->note = 'For the entity '.h($this->entity->entities[0]->guid.' with the ta
 		</style>
 		<script type="text/javascript">
 			$_(function(){
-				$("#p_muid_notes").delegate(":checkbox", "click", function(){
+				$("#p_muid_notes").on("click", ":checkbox", function(){
 					var checkbox = $(this);
 					if (checkbox.is(":checked"))
 						checkbox.closest(".note").addClass("ui-state-error ui-corner-all");

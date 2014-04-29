@@ -70,10 +70,10 @@ $_->com_jstree->load();
 	<?php } ?>
 	<script type="text/javascript">
 		$_(function(){
-			$(".p_muid_option_accordian", "#p_muid_form").on("shown", function(){
+			$(".p_muid_option_accordian", "#p_muid_form").on("shown.bs.collapse", function(){
 				$(this).find(".p_muid_change_this").val("1").end()
 				.find(".panel").removeClass("panel-info").addClass("panel-success");
-			}).on("hide", function(){
+			}).on("hide.bs.collapse", function(){
 				$(this).find(".p_muid_change_this").val("").end()
 				.find(".panel").removeClass("panel-success").addClass("panel-info");
 			});

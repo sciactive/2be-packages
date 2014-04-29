@@ -355,7 +355,7 @@ if ($_->config->com_sales->com_storefront) {
 							$("<div class=\"pf-field well\">"+$_.safe(name)+"<input type=\"hidden\" name=\"show_pages[]\" value=\""+$_.safe(guid)+"\" /> <a href=\"javascript:void(0);\" class=\"remove_page close\" style=\"float: right;\">&times;</a></div>").appendTo($("#p_muid_show_pages"));
 						});
 						
-						$("#p_muid_show_pages").delegate("a.remove_page", "click", function(){
+						$("#p_muid_show_pages").on("click", "a.remove_page", function(){
 							$(this).closest("div.pf-field").remove();
 						}).sortable();
 					});

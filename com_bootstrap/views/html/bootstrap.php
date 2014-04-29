@@ -21,17 +21,19 @@ unset($themes);
 $_.loadcss("<?php e($_->config->location); ?>components/com_bootstrap/includes/css/<?php e($_->config->debug_mode ? 'bootstrap.css' : 'bootstrap.min.css'); ?>");
 <?php } ?>
 $_.loadcss("<?php e($_->config->location); ?>components/com_bootstrap/includes/css/<?php e(clean_filename($_->config->debug_mode ? $theme['file'] : $theme['minfile'])); ?>");
-$_.loadcss("<?php e($_->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/font-awesome.css");
+$_.loadcss("<?php e($_->config->rela_location); ?>components/com_bootstrap/includes/fontawesome/css/<?php echo $_->config->debug_mode ? 'font-awesome.css' : 'font-awesome.min.css'; ?>");
 $_.loadjs("<?php e($_->config->location); ?>components/com_bootstrap/includes/js/<?php echo $_->config->debug_mode ? 'bootstrap.js' : 'bootstrap.min.js'; ?>");
 // Get the current number of columns in the CSS grid.
 $_.com_bootstrap_get_columns = function(){
-	var cur_grid = 0, cur_test;
-	do {
-		cur_grid++;
-		cur_test = $("<div class=\"row\"><div class=\"span"+cur_grid+"\"><\/div><\/div>");
-	} while (cur_grid <= 256 && cur_test.children().css("width") != "0px");
-	cur_grid--;
-	return cur_grid;
+var test, last, cur = 0;
+do {
+	if (test) last = test.children().css("width");
+	cur++;
+	test = $("<div class=\"row\"><div class=\"col-xs-"+cur+"\"><\/div><\/div>").appendTo("body");
+} while (cur <= 256 && test.children().css("width") != last);
+cur -= 2;
+test.remove();
+return cur;
 };
 <?php /* Example:
 $_(function(){

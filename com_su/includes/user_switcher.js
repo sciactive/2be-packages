@@ -10,20 +10,23 @@ $_(function(){
 				title: "Switch User",
 				icon: "picon picon-throbber",
 				hide: false,
-				history: false
+				width: "350px",
+				history: {
+					history: false
+				}
 			});
 		},
 		error: function(XMLHttpRequest, textStatus){
-			notice.pnotify_remove();
+			notice.remove();
 			$_.error("An error occured while trying to load login page:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 		},
 		success: function(data){
-			notice.pnotify({
+			notice.update({
 				title: "Switch User",
 				text: data,
 				icon: "picon picon-dialog-password",
 				insert_brs: false
-			}).find("input").eq(0).focus();
+			}).get().find("input").eq(0).focus();
 		}
 	});
 });

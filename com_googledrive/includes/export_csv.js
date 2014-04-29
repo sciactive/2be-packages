@@ -111,7 +111,7 @@ function insertFile(csv, callback) {
     });
     if (!callback) {
         callback = function(file) {
-            loader.pnotify_remove();
+            loader.remove();
             alert("File uploaded");
             // To open the newly created Google Doc in a new tab/window
             window.open(file.alternateLink, '_blank');

@@ -45,7 +45,8 @@ foreach ($widgets as $cur_component => $cur_widget_set) {
 }
 
 // Reset the column array.
-reset($dashboard->tabs[$_REQUEST['key']]['columns']);
+$columns = $dashboard->tabs[$_REQUEST['key']]['columns'];
+reset($columns);
 
 // Add all the new widgets.
 $add_widgets = json_decode($_REQUEST['widgets'], true);
@@ -54,14 +55,16 @@ foreach ($add_widgets as $cur_widget) {
 		$_->page->override_doc(json_encode(false));
 		return;
 	}
-	$key = key($dashboard->tabs[$_REQUEST['key']]['columns']);
-	$dashboard->tabs[$_REQUEST['key']]['columns'][$key]['widgets'][uniqid()] = array(
+	$key = key($columns);
+	$columns[$key]['widgets'][uniqid()] = array(
 		'component' => $cur_widget['component'],
 		'widget' => $cur_widget['widget'],
 		'options' => array()
 	);
-	if (!next($dashboard->tabs[$_REQUEST['key']]['columns']))
-		reset($dashboard->tabs[$_REQUEST['key']]['columns']);
+	if (!next($columns))
+		reset($columns);
 }
+// Save the columns.
+$dashboard->tabs[$_REQUEST['key']]['columns'] = $columns;
 
 $_->page->override_doc(json_encode($dashboard->save()));

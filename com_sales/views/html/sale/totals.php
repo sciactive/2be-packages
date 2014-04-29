@@ -78,13 +78,17 @@ $_->com_jstree->load();
 							title: 'Sales Totals',
 							text: 'Retrieving totals from server...',
 							icon: 'picon picon-throbber',
-							nonblock: true,
+							nonblock: {
+								nonblock: true
+							},
 							hide: false,
-							history: false
+							history: {
+								history: false
+							}
 						});
 					},
 					complete: function(){
-						loader.pnotify_remove();
+						loader.remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
 						$_.error("An error occured while trying to retrieve totals:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));

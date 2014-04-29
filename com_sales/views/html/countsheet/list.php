@@ -126,32 +126,40 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 									title: 'Uncommit Countsheet',
 									text: 'Uncommitting countsheet...',
 									icon: 'picon picon-throbber',
-									nonblock: true,
+									nonblock: {
+										nonblock: true
+									},
 									hide: false,
-									history: false
+									history: {
+										history: false
+									}
 								});
 							},
 							error: function(XMLHttpRequest, textStatus){
-								loader.pnotify_remove();
+								loader.remove();
 								$_.error("An error occured while trying to uncommit the countsheet:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 							},
 							success: function(data){
 								if (!data)
 									return;
 								if (!data[0]) {
-									loader.pnotify({
+									loader.update({
 										type: 'error',
 										text: $_.safe(data[1]),
 										hide: true,
-										history: true
+										history: {
+											history: true
+										}
 									});
 									return;
 								}
-								loader.pnotify({
+								loader.update({
 									icon: 'picon picon-task-complete',
 									text: $_.safe(data[1]),
 									hide: true,
-									history: true
+									history: {
+										history: true
+									}
 								});
 								row.pgrid_set_value(6, 'No');
 							}

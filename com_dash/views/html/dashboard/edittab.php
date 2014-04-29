@@ -18,7 +18,6 @@ $default_column = h(floor($max_columns / 3));
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_dash', 'dashboard/tabsave', array('id' => (string) $this->entity->guid))); ?>">
 	<style type="text/css" scoped="scoped">
 		#p_muid_form .new_column {
-			border: none;
 			min-height: 100px;
 			cursor: pointer;
 		}
@@ -40,7 +39,7 @@ $default_column = h(floor($max_columns / 3));
 				update: function(){
 					update_columns();
 				}
-			}).delegate(".remove_column", "click", function(){
+			}).on("click", ".remove_column", function(){
 				var col = $(this).closest(".new_column");
 				// Don't remove if it's the last one.
 				if (col.siblings().length) {
@@ -48,7 +47,7 @@ $default_column = h(floor($max_columns / 3));
 					size_columns();
 					update_columns();
 				}
-			}).delegate(".grow_column", "click", function(){
+			}).on("click", ".grow_column", function(){
 				var max_columns = $_.com_bootstrap_get_columns();
 				// Check to make sure we aren't growing too big.
 				var total_cols = 0;
@@ -56,7 +55,7 @@ $default_column = h(floor($max_columns / 3));
 					// Add the column width of each column.
 					var col = $(this);
 					for (var i=1; i<=max_columns; i++) {
-						if (col.hasClass("span"+i)) {
+						if (col.hasClass("col-sm-"+i)) {
 							total_cols += i;
 							return;
 						}
@@ -69,7 +68,7 @@ $default_column = h(floor($max_columns / 3));
 				var col = $(this).closest(".new_column"), cur_size = 1;
 				// Get the column's size.
 				for (var i=1; i<=max_columns; i++) {
-					if (col.hasClass("span"+i)) {
+					if (col.hasClass("col-sm-"+i)) {
 						cur_size = i;
 						break;
 					}
@@ -77,14 +76,14 @@ $default_column = h(floor($max_columns / 3));
 				if (cur_size == max_columns)
 					return;
 				// Grow the column.
-				col.removeClass("span"+cur_size).attr("class", "span"+(cur_size+1)+" "+col.attr("class"));
+				col.removeClass("col-sm-"+cur_size).attr("class", "col-sm-"+(cur_size+1)+" "+col.attr("class"));
 				update_columns();
-			}).delegate(".shrink_column", "click", function(){
+			}).on("click", ".shrink_column", function(){
 				var max_columns = $_.com_bootstrap_get_columns();
 				var col = $(this).closest(".new_column"), cur_size = 1;
 				// Get the column's size.
 				for (var i=1; i<=max_columns; i++) {
-					if (col.hasClass("span"+i)) {
+					if (col.hasClass("col-sm-"+i)) {
 						cur_size = i;
 						break;
 					}
@@ -92,7 +91,7 @@ $default_column = h(floor($max_columns / 3));
 				if (cur_size == 1)
 					return;
 				// Shrink the column.
-				col.removeClass("span"+cur_size).attr("class", "span"+(cur_size-1)+" "+col.attr("class"));
+				col.removeClass("col-sm-"+cur_size).attr("class", "col-sm-"+(cur_size-1)+" "+col.attr("class"));
 				update_columns();
 			});
 			$("#p_muid_add_column").click(function(){
@@ -110,8 +109,8 @@ $default_column = h(floor($max_columns / 3));
 				// Fit the columns into the width evenly.
 				var max_columns = $_.com_bootstrap_get_columns(), all_columns = columns.children();
 				for (var i=1; i<=max_columns; i++)
-					all_columns.removeClass("span"+i);
-				all_columns.attr("class", "span"+(Math.floor(max_columns/all_columns.length))+" "+all_columns.eq(0).attr("class"));
+					all_columns.removeClass("col-sm-"+i);
+				all_columns.attr("class", "col-sm-"+(Math.floor(max_columns/all_columns.length))+" "+all_columns.eq(0).attr("class"));
 			};
 			var update_columns = function(){
 				var col_struct = [], max_columns = $_.com_bootstrap_get_columns();
@@ -119,7 +118,7 @@ $default_column = h(floor($max_columns / 3));
 					var cur_col_struct = {}, col = $(this);
 					// Get the column's size.
 					for (var i=1; i<=max_columns; i++) {
-						if (col.hasClass("span"+i)) {
+						if (col.hasClass("col-sm-"+i)) {
 							cur_col_struct.size = i;
 							break;
 						}
@@ -192,13 +191,17 @@ $default_column = h(floor($max_columns / 3));
 		</span>
 		<br /><br />
 		<div class="row" style="margin-bottom: 1em;">
-			<div class="col-sm-<?php e($max_columns); ?> new_column alert-info" style="min-height: 40px; line-height: 40px; text-align: center;">Button area.</div>
+			<div class="col-sm-<?php e($max_columns); ?> new_column" style="min-height: 40px; line-height: 40px; text-align: center;">
+				<div class="alert alert-info">
+					Button area.
+				</div>
+			</div>
 		</div>
 		<div class="row" id="p_muid_cols">
 			<?php if (isset($this->tab['columns'])) { foreach ($this->tab['columns'] as $cur_key => $cur_column) {
 				$col_style = h($cur_column['size'] < 1 ? floor($max_columns * $cur_column['size']) : $cur_column['size']); ?>
-			<div class="col-sm-<?php echo $col_style; ?> new_column alert-info" id="<?php e($cur_key); ?>">
-				<div style="padding: .4em;">
+			<div class="col-sm-<?php echo $col_style; ?> new_column" id="<?php e($cur_key); ?>">
+				<div class="alert alert-info">
 					<div style="float: right;">
 						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-info">Remove</a>
 					</div>
@@ -207,30 +210,30 @@ $default_column = h(floor($max_columns / 3));
 				</div>
 			</div>
 			<?php } } else { ?>
-			<div class="col-sm-<?php echo $default_column; ?> new_column alert-info">
-				<div style="padding: .4em;">
+			<div class="col-sm-<?php echo $default_column; ?> new_column">
+				<div class="alert alert-info">
 					<div style="float: right;">
-						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-info">Remove</a>
+						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-danger">Remove</a>
 					</div>
-					<a href="javascript:void(0);" class="grow_column btn btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
+					<a href="javascript:void(0);" class="grow_column btn btn-primary btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
 					<div style="text-align: center; margin-top: 2em;">Drag me to reorder.</div>
 				</div>
 			</div>
-			<div class="col-sm-<?php echo $default_column; ?> new_column alert-info">
-				<div style="padding: .4em;">
+			<div class="col-sm-<?php echo $default_column; ?> new_column">
+				<div class="alert alert-info">
 					<div style="float: right;">
-						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-info">Remove</a>
+						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-danger">Remove</a>
 					</div>
-					<a href="javascript:void(0);" class="grow_column btn btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
+					<a href="javascript:void(0);" class="grow_column btn btn-primary btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
 					<div style="text-align: center; margin-top: 2em;">Drag me to reorder.</div>
 				</div>
 			</div>
-			<div class="col-sm-<?php echo $default_column; ?> new_column alert-info">
-				<div style="padding: .4em;">
+			<div class="col-sm-<?php echo $default_column; ?> new_column">
+				<div class="alert alert-info">
 					<div style="float: right;">
-						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-info">Remove</a>
+						<a href="javascript:void(0);" class="remove_column btn btn-xs btn-danger">Remove</a>
 					</div>
-					<a href="javascript:void(0);" class="grow_column btn btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
+					<a href="javascript:void(0);" class="grow_column btn btn-primary btn-xs">Grow</a> <a href="javascript:void(0);" class="shrink_column btn btn-default btn-xs">Shrink</a>
 					<div style="text-align: center; margin-top: 2em;">Drag me to reorder.</div>
 				</div>
 			</div>

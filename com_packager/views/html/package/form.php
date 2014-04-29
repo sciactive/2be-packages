@@ -519,7 +519,7 @@ $_->com_ptags->load();
 						$(this).val("");
 					});
 					$("#p_muid_sortable")
-					.delegate("li p", "click", function(){
+					.on("click", "li p", function(){
 						var cur_alt = $(this);
 						var desc = cur_alt.html();
 						var ta = $("<textarea cols=\"4\" rows=\"3\" style=\"width: 100%\">"+$_.safe(desc)+"</textarea>")

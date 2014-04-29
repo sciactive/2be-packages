@@ -38,7 +38,7 @@ $_->entity_manager->sort($threads, 'p_mdate');
 $return = array();
 foreach ($threads as $cur_thread) {
 	$cur_struct = array(
-		'guid' => $cur_thread->guid,
+		'guid' => "$cur_thread->guid",
 		'date' => format_date($cur_thread->p_cdate, 'date_short'),
 		'user' => $cur_thread->user->name,
 		'privacy' => ($cur_thread->ac->other ? 'everyone' : ($cur_thread->ac->group ? 'my-group' : 'only-me')),

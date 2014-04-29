@@ -389,7 +389,7 @@ $_->com_sales->load_jcrop();
 										else
 											cur_box.attr("checked", "checked");
 									});
-									notice.pnotify_remove();
+									notice.remove();
 								});
 							}
 						});

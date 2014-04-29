@@ -17,10 +17,10 @@ $_->com_pgrid->load();
 	$_.loadcss("<?php e($_->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.css");
 	$_.loadjs("<?php e($_->config->location); ?>components/com_sales/includes/farbtastic/farbtastic.js");
 	$_(function(){
-		var bgcolor_picker = $.farbtastic("#p_muid_bgcolor_picker", "#p_muid_bgcolor_input");
-		var textcolor_picker = $.farbtastic("#p_muid_textcolor_picker", "#p_muid_textcolor_input");
-		var color_dialog = $("#p_muid_color_dialog")
-		.delegate(".color_preset", "click", function(){
+		var bgcolor_picker = $.farbtastic("#p_muid_bgcolor_picker", "#p_muid_bgcolor_input"),
+			textcolor_picker = $.farbtastic("#p_muid_textcolor_picker", "#p_muid_textcolor_input"),
+			color_dialog = $("#p_muid_color_dialog")
+		.on("click", ".color_preset", function(){
 			var preset = $(this);
 			var bgcolor = preset.attr("title").split(",")[0];
 			var textcolor = preset.attr("title").split(",")[1];

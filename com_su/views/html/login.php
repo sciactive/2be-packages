@@ -37,7 +37,7 @@ $this->title = 'Switch User';
 	</div>
 	<?php } ?>
 	<div class="pf-element">
-		<label><span class="pf-label">Username</span>
+		<label><span class="pf-label"><?php echo (isset($_->config->com_user) && $_->config->com_user->email_usernames) ? 'Email' : 'Username'; ?></span>
 			<input class="pf-field form-control" type="text" name="username" size="15" /></label>
 	</div>
 	<?php if (!$this->hide_password) { ?>

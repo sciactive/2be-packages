@@ -128,11 +128,11 @@ $_->com_datetimepicker->load();
 			$("input[name=clock]", "#p_muid_form").val(JSON.stringify(entries));
 		};
 
-		$("#p_muid_timeclock_edit").delegate(".time", "mouseover", function(){
+		$("#p_muid_timeclock_edit").on("mouseover", ".time", function(){
 			$(this).closest("div").addClass("ui-state-hover");
-		}).delegate(".time", "mouseout", function(){
+		}).on("mouseout", ".time", function(){
 			$(this).closest("div").removeClass("ui-state-hover");
-		}).delegate(".time", "click", function(){
+		}).on("click", ".time", function(){
 			cur_entry = $(this).closest(".pf-element");
 			var time_in = $(this).children(".time_in").text();
 			var time_out = $(this).children(".time_out").text();
@@ -142,7 +142,7 @@ $_->com_datetimepicker->load();
 			$("#p_muid_cur_time_out").val(time_out).datetimepicker('setDate', date_out);
 			$("#p_muid_cur_comments").val($(".comments", cur_entry).text());
 			date_time_dialog.dialog("open");
-		}).delegate("div.entry button", "click", function(){
+		}).on("click", "div.entry button", function(){
 			$(this).closest(".pf-element").animate({height: 0, opacity: 0}, "normal", function(){
 				$(this).remove();
 				clean_up();

@@ -26,13 +26,15 @@ $_(function(){new PNotify({
 	hide: false,
 	addclass: "p_muid_notice",
 	stack: {"dir1": "up", "dir2": "left", "firstpos1": 25, "firstpos2": 25},
-	history: false,
+	history: {
+		history: false
+	},
 	after_init: function(pnotify){
-		pnotify.on("click", ".resend", function(){
+		pnotify.get().on("click", ".resend", function(){
 			$.post(<?php echo json_encode(pines_url('com_user', 'resend_verification')); ?>, function(data){
 				if (data) {
 					new PNotify({type: "success", title: "Email Sent", text: "The verification email has been resent."});
-					pnotify.pnotify_remove();
+					pnotify.remove();
 				} else
 					$_.error("The email could not be sent. Please try again in a few minutes.");
 			}, "json");

@@ -83,13 +83,17 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								title: 'Stock Location Guide',
 								text: 'Retrieving info...',
 								icon: 'picon picon-throbber',
-								nonblock: true,
+								nonblock: {
+									nonblock: true
+								},
 								hide: false,
-								history: false
+								history: {
+									history: false
+								}
 							});
 						},
 						complete: function(){
-							loader.pnotify_remove();
+							loader.remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
 							$_.error("An error occured while trying to create guide:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));

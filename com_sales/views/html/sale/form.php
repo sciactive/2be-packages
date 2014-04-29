@@ -273,13 +273,17 @@ if ($_->config->com_sales->com_esp) {
 											title: 'Product Search',
 											text: 'Retrieving product from server...',
 											icon: 'picon picon-throbber',
-											nonblock: true,
+											nonblock: {
+												nonblock: true
+											},
 											hide: false,
-											history: false
+											history: {
+												history: false
+											}
 										});
 									},
 									complete: function(){
-										loader.pnotify_remove();
+										loader.remove();
 									},
 									error: function(XMLHttpRequest, textStatus){
 										$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -681,7 +685,7 @@ if ($_->config->com_sales->com_esp) {
 					success();
 			};
 			// Delivery Dialog
-			var delivery_select = $("#p_muid_delivery_select").delegate("button", "click", function(){
+			var delivery_select = $("#p_muid_delivery_select").on("click", "button", function(){
 				var rows = products_table.pgrid_get_selected_rows();
 				if (!rows)
 					return;
@@ -725,7 +729,7 @@ if ($_->config->com_sales->com_esp) {
 					$("#p_muid_product_code_box").focus();
 				}
 			});
-			var serial_dialog = $("#p_muid_serial_dialog").delegate(".serials a.serial", "click", function(){
+			var serial_dialog = $("#p_muid_serial_dialog").on("click", ".serials a.serial", function(){
 				$("#p_muid_serial_number").val($(this).html());
 				serial_dialog.dialog("option", "buttons").Done();
 			}).dialog({
@@ -789,13 +793,17 @@ if ($_->config->com_sales->com_esp) {
 									title: 'Product Search',
 									text: 'Retrieving products from server...',
 									icon: 'picon picon-throbber',
-									nonblock: true,
+									nonblock: {
+										nonblock: true
+									},
 									hide: false,
-									history: false
+									history: {
+										history: false
+									}
 								});
 							},
 							complete: function(){
-								loader.pnotify_remove();
+								loader.remove();
 							},
 							error: function(XMLHttpRequest, textStatus){
 								$_.error("An error occured while trying to lookup the products:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -949,9 +957,13 @@ if ($_->config->com_sales->com_esp) {
 						title: 'Loading Products',
 						text: 'Retrieving product information from server...',
 						icon: 'picon picon-throbber',
-						nonblock: true,
+						nonblock: {
+							nonblock: true
+						},
 						hide: false,
-						history: false
+						history: {
+							history: false
+						}
 					});
 				var cur_row = $(this);
 				var cur_export = cur_row.pgrid_export_rows();
@@ -975,7 +987,7 @@ if ($_->config->com_sales->com_esp) {
 				});
 			});
 			if (loader)
-				loader.pnotify_remove();
+				loader.remove();
 
 			<?php if ($this->entity->status == 'paid' || $this->entity->status == 'voided') { ?>
 			payments_table.pgrid({

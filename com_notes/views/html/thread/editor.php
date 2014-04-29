@@ -124,7 +124,7 @@ $_->icons->load();
 
 		function p_muid_format_thread(thread) {
 			var html = $('<div class="thread ui-widget-content"></div>').data("thread", thread);
-			html.append('<div class="ui-widget-header"><div class="privacy"><i class="fa '+(thread.privacy == "everyone" ? "fa-globe" : (thread.privacy == "my-group" ? "fa-group" : "fa-user"))+'" title="'+(thread.privacy == "everyone" ? "This thread is viewable to everyone." : (thread.privacy == "my-group" ? "This thread is viewable to the author's group." : "This thread is only viewable to the author."))+'"></i></div>\n\
+			html.append('<div class="ui-widget-header"><div class="privacy"><i class="fa '+(thread.privacy == "everyone" ? "fa-globe" : (thread.privacy == "my-group" ? "fa-group" : "fa-user"))+'" title="'+(thread.privacy == "everyone" ? "This thread is visible to everyone." : (thread.privacy == "my-group" ? "This thread is visible to the author's group." : "This thread is only visible to the author."))+'"></i></div>\n\
 			<div class="date">'+$_.safe(thread.date)+'</div>\n\
 			<div class="user">'+$_.safe(thread.user)+'</div></div>');
 			var note_div = $('<div class="notes"></div>'),
@@ -178,19 +178,19 @@ $_->icons->load();
 		}
 
 		$_(function(){
-			var thread_box = $("#p_muid_current_threads").delegate("textarea", "keydown keyup change", function(){
+			var thread_box = $("#p_muid_current_threads").on("keydown keyup change", "textarea", function(){
 				var textarea = $(this);
 				if (textarea.prop("scrollHeight"))
 					textarea.css("overflow", "hidden").height(1).height(textarea.prop("scrollHeight"));
-			}).delegate("textarea", "focus", function(){
+			}).on("focus", "textarea", function(){
 				var textarea = $(this);
 				if (textarea.css("font-style") == "italic")
 					textarea.val("").css("font-style", "normal");
-			}).delegate("textarea", "blur", function(){
+			}).on("blur", "textarea", function(){
 				var textarea = $(this);
 				if (textarea.val() == "")
 					textarea.val("Reply").css("font-style", "italic");
-			}).delegate("textarea", "keypress", function(e){
+			}).on("keypress", "textarea", function(e){
 				if (e.keyCode != 13 || e.shiftKey)
 					return;
 				// Submit a reply.

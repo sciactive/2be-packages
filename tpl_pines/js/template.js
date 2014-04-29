@@ -1,7 +1,7 @@
 $_(function(){
 if ($.pnotify) {
-	$.pnotify.defaults.opacity = .9;
-	$.pnotify.defaults.delay = 15000;
+	PNotify.prototype.options.opacity = .9;
+	PNotify.prototype.options.delay = 15000;
 }
 
 // Get the loaded page ready. (Styling, etc.)

@@ -129,7 +129,7 @@ $_->icons->load();
 		};
 		check_products();
 
-		$("#com_storefront_cart").delegate("div.product button", "click", function(){
+		$("#com_storefront_cart").on("click", "div.product button", function(){
 			var product = $(this).closest("div.product");
 			var guid = parseInt(product.children("div.guid").text());
 			$.ajax({
@@ -151,11 +151,11 @@ $_->icons->load();
 					});
 				}
 			});
-		}).delegate("div.product", "mouseenter", function(){
+		}).on("mouseenter", "div.product", function(){
 			$(this).children("div.qty").addClass("btn");
-		}).delegate("div.product", "mouseleave", function(){
+		}).on("mouseleave", "div.product", function(){
 			$(this).children("div.qty").removeClass("btn");
-		}).delegate("div.product div.qty", "click", function(){
+		}).on("click", "div.product div.qty", function(){
 			var qty = $(this);
 			var old_val = qty.text();
 			$("<input type=\"text\" class=\"qty ui-corner-all\" />").css({
@@ -189,7 +189,7 @@ $_->icons->load();
 			qty.removeClass("ui-state-hover").hide();
 		});
 
-		$("#com_storefront_cart_controls").delegate("div.yes_items button.empty_cart", "click", function(){
+		$("#com_storefront_cart_controls").on("click", "div.yes_items button.empty_cart", function(){
 			if (!confirm("Are you sure you want to remove all items from your cart?"))
 				return;
 			$.ajax({

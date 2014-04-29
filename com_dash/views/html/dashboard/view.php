@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = 'Dashboard';
 if (!$this->entity->is($_SESSION['user']->dashboard)) {
 	$this->title .= h(" for {$this->entity->user->name}");
-	$this->note = 'Some widgets will show your user info, which is normal because you\'re the logged in user.';
+	$this->note = 'Some widgets will show your user info, which is normal, because you\'re the logged in user.';
 }
 $_->com_bootstrap->load();
 ?>
@@ -160,7 +160,7 @@ $_->com_bootstrap->load();
 			$("#p_muid_page_nav a").on("click", ".edit_tab", function(e){
 				e.preventDefault();
 				e.stopPropagation();
-			}).on("show", function(e){
+			}).on("show.bs.tab", function(e){
 				var tab = $($(e.target).attr("href"));
 				if (tab.data("tab_loaded"))
 					return;
@@ -173,10 +173,10 @@ $_->com_bootstrap->load();
 	<ul class="nav nav-tabs" style="clear: both;" id="p_muid_page_nav">
 		<?php $first = true; foreach ($this->entity->tabs as $cur_key => $cur_tab) { ?>
 		<li class="<?php echo ($cur_key === $this->selected_tab || (!isset($this->selected_tab) && $first)) ? 'active' : ''; ?>">
-			<a href="#<?php e($cur_key); ?>" data-toggle="tab">
+			<a href="#p_muid_<?php e($cur_key); ?>" data-toggle="tab">
 				<?php e($cur_tab['name']);
 				if ($this->editable) { ?>
-				<span class="edit_tab w_icon fa fa-cog" title="Edit this Tab" onclick="var link = $(this).closest('a'); $('#<?php e($cur_key); ?>').data('tab_loaded', true).data('trigger_link', link).load(<?php e(json_encode(pines_url('com_dash', 'dashboard/edittab', array('id' => (string) $this->entity->guid, 'key' => $cur_key)))); ?>); link.tab('show');"></span>
+				<span class="edit_tab w_icon fa fa-cog" title="Edit this Tab" onclick="var link = $(this).closest('a'); $('#p_muid_<?php e($cur_key); ?>').data('tab_loaded', true).data('trigger_link', link).load(<?php e(json_encode(pines_url('com_dash', 'dashboard/edittab', array('id' => (string) $this->entity->guid, 'key' => $cur_key)))); ?>); link.tab('show');"></span>
 				<?php } ?>
 			</a>
 		</li>
@@ -187,7 +187,7 @@ $_->com_bootstrap->load();
 	</ul>
 	<div class="tab-content" id="p_muid_page_tabs">
 		<?php $first = true; foreach ($this->entity->tabs as $cur_key => $cur_tab) { ?>
-		<div class="tab-pane <?php echo ($cur_key === $this->selected_tab || (!isset($this->selected_tab) && $first)) ? 'active' : ''; ?>" id="<?php e($cur_key); ?>" data-url="<?php e(pines_url('com_dash', 'dashboard/tab', array('id' => (string) $this->entity->guid, 'key' => $cur_key, 'editable' => ($this->editable ? 'true' : 'false')))); ?>">
+		<div class="tab-pane <?php echo ($cur_key === $this->selected_tab || (!isset($this->selected_tab) && $first)) ? 'active' : ''; ?>" id="p_muid_<?php e($cur_key); ?>" data-url="<?php e(pines_url('com_dash', 'dashboard/tab', array('id' => (string) $this->entity->guid, 'key' => $cur_key, 'editable' => ($this->editable ? 'true' : 'false')))); ?>">
 			<?php if ($cur_key === $this->selected_tab || (!isset($this->selected_tab) && $first)) { ?>
 			<script type="text/javascript">
 				$_(function(){

@@ -220,13 +220,17 @@ if ($this->entity->final)
 							title: 'Search',
 							text: 'Searching the database...',
 							icon: 'picon picon-throbber',
-							nonblock: true,
+							nonblock: {
+								nonblock: true
+							},
 							hide: false,
-							history: false
+							history: {
+								history: false
+							}
 						});
 					},
 					complete: function(){
-						loader.pnotify_remove();
+						loader.remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
 						$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));

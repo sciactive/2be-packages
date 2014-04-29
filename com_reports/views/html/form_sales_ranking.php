@@ -141,14 +141,18 @@ $_->com_pgrid->load();
 						title: 'Loading',
 						text: 'Loading location...',
 						icon: 'picon picon-throbber',
-						nonblock: true,
+						nonblock: {
+							nonblock: true
+						},
 						hide: false,
-						history: false
+						history: {
+							history: false
+						}
 					});
 					goal_grid.pgrid_get_all_rows().pgrid_delete();
 				},
 				complete: function(){
-					loader.pnotify_remove();
+					loader.remove();
 				},
 				error: function(XMLHttpRequest, textStatus){
 					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));

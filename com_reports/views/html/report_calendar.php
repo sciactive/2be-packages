@@ -185,9 +185,13 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			title: "Information",
 			text: "",
 			hide: false,
-			closer: false,
-			sticker: false,
-			history: false,
+			buttons: {
+				closer: false,
+				sticker: false
+			},
+			history: {
+				history: false
+			},
 			animation: "none",
 			animate_speed: 0,
 			opacity: 1,
@@ -196,32 +200,32 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			stack: false,
 			after_init: function(pnotify){
 				// Remove the notice if the user mouses over it.
-				pnotify.mouseout(function(){
-					pnotify.pnotify_remove();
+				pnotify.get().mouseout(function(){
+					pnotify.remove();
 				});
 			},
 			before_open: function(pnotify){
 				// This prevents the notice from displaying when it's created.
-				pnotify.pnotify({
+				pnotify.update({
 					before_open: null
 				});
 				return false;
 			}
 		});
 		$("tbody", "#p_muid_grid").mouseenter(function(){
-			if (p_muid_notice.text)
-				p_muid_notice.pnotify_display();
+			if (p_muid_notice.options.text)
+				p_muid_notice.open();
 		}).mouseleave(function(){
-			p_muid_notice.pnotify_remove();
+			p_muid_notice.remove();
 		});
 		p_muid_notice.com_reports_issue_update = function(title, info){
 			if (info == null) {
 				info = '';
 			} else {
-				p_muid_notice.pnotify({ title: $_.safe(title), text: $_.safe(info) });
-				p_muid_notice.pnotify_display();
-				if (!p_muid_notice.is(":visible"))
-					p_muid_notice.pnotify_display();
+				p_muid_notice.update({ title: $_.safe(title), text: $_.safe(info) });
+				p_muid_notice.open();
+				if (!p_muid_notice.get().is(":visible"))
+					p_muid_notice.open();
 			}
 		};
 	});

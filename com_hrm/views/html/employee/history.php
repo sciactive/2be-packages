@@ -58,42 +58,46 @@ $_->com_pgrid->load();
 		p_muid_notice = new PNotify({
 			text: "",
 			hide: false,
-			closer: false,
-			sticker: false,
-			history: false,
+			buttons: {
+				closer: false,
+				sticker: false
+			},
+			history: {
+				history: false
+			},
 			animate_speed: 100,
 			icon: "ui-icon ui-icon-comment",
 			// Setting stack to false causes PNotify to ignore this notice when positioning.
 			stack: false,
 			after_init: function(pnotify){
 				// Remove the notice if the user mouses over it.
-				pnotify.mouseout(function(){
-					pnotify.pnotify_remove();
+				pnotify.get().mouseout(function(){
+					pnotify.remove();
 				});
 			},
 			before_open: function(pnotify){
 				// This prevents the notice from displaying when it's created.
-				pnotify.pnotify({
+				pnotify.update({
 					before_open: null
 				});
 				return false;
 			}
 		});
 		$("tbody", "#p_muid_issues").mouseenter(function(){
-			if (p_muid_notice.text)
-				p_muid_notice.pnotify_display();
+			if (p_muid_notice.options.text)
+				p_muid_notice.open();
 		}).mouseleave(function(){
-			p_muid_notice.pnotify_remove();
+			p_muid_notice.remove();
 		}).mousemove(function(e){
-			p_muid_notice.css({"top": e.clientY+12, "left": e.clientX+12});
+			p_muid_notice.get().css({"top": e.clientY+12, "left": e.clientX+12});
 		});
 		p_muid_notice.com_hrm_issue_update = function(comments){
 			if (comments == "<ul><li></li></ul>") {
-				p_muid_notice.pnotify_remove();
+				p_muid_notice.remove();
 			} else {
-				p_muid_notice.pnotify({text: comments});
-				if (!p_muid_notice.is(":visible"))
-					p_muid_notice.pnotify_display();
+				p_muid_notice.update({text: comments});
+				if (!p_muid_notice.get().is(":visible"))
+					p_muid_notice.open();
 			}
 		};
 		<?php if (gatekeeper('com_hrm/resolveissue')) { ?>

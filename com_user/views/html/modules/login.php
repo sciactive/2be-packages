@@ -393,18 +393,20 @@ $this->sawasc = $_->com_user->activate_sawasc();
 			width: 'auto',
 			hide: false,
 			sticker: false,
-			history: false,
+			history: {
+				history: false
+			},
 			insert_brs: false,
 			before_open: function(pnotify){
 				// This prevents the notice from displaying when it's created.
-				pnotify.pnotify({
+				pnotify.update({
 					before_open: null
 				});
 				return false;
 			}
 		});
 		$("#p_muid_compact_link").click(function(){
-			notice.pnotify_display();
+			notice.open();
 		});
 	});
 </script>

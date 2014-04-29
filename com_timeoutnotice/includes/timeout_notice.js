@@ -11,15 +11,17 @@ $_(function(){
 					title: "Login",
 					icon: "picon picon-throbber",
 					hide: false,
-					history: false
+					history: {
+						history: false
+					}
 				});
 			},
 			error: function(XMLHttpRequest, textStatus){
-				notice.pnotify_remove();
+				notice.remove();
 				$_.error("An error occured while trying to load login page:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 			},
 			success: function(data){
-				notice.pnotify_remove();
+				notice.remove();
 				$_.pause();
 				var login_dialog = $("<div />").html(data+"<br />").dialog({
 					modal: true,
@@ -95,15 +97,15 @@ $_(function(){
 			success: function(data){
 				if (!data) {
 					if (session_notice)
-						session_notice.pnotify_remove();
+						session_notice.remove();
 					logged_out();
 					return;
 				}
 				if (data > 60) {
 					if (timeout)
 						clearTimeout(timeout);
-					if (session_notice && session_notice.is(":visible"))
-						session_notice.pnotify_remove();
+					if (session_notice && session_notice.get().is(":visible"))
+						session_notice.remove();
 				}
 				if (data < 260) {
 					timeout = setTimeout(function(){
@@ -111,18 +113,20 @@ $_(function(){
 						setTimeout(check_timeout, 41000);
 						setTimeout(check_timeout, 61000);
 						if (session_notice) {
-							if (!session_notice.is(":visible"))
-								session_notice.pnotify_display();
+							if (!session_notice.get().is(":visible"))
+								session_notice.open();
 						} else {
 							session_notice = new PNotify({
 								title: "Session Timeout",
 								text: "Your session is about to expire. <a href=\"javascript:void(0)\" class=\"extend_session\">Click here to stay logged in.</a>",
 								icon: "picon picon-user-away",
 								hide: false,
-								history: false,
+								history: {
+									history: false
+								},
 								mouse_reset: false
 							});
-							session_notice.find("a.extend_session").click(function(){
+							session_notice.get().find("a.extend_session").click(function(){
 								$.ajax({
 									url: $_.com_timeoutnotice.extend_url,
 									type: "GET",
@@ -131,7 +135,7 @@ $_(function(){
 										$_.error("An error occured while trying to extend your session:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
 									},
 									success: function(data){
-										session_notice.pnotify_remove();
+										session_notice.remove();
 										if (!data) {
 											logged_out();
 											return;

@@ -39,7 +39,7 @@ $switched = ($_COOKIE['com_uasniffer_switch'] == 'true');
 				date.setTime(date.getTime()+1209600000);
 				return ['true', date.toGMTString()];
 			}
-			$("#p_muid_links").delegate("a", "click", function(){
+			$("#p_muid_links").on("click", "a", function(){
 				var cookie = values();
 				document.cookie = 'com_uasniffer_switch='+cookie[0]+'; expires='+cookie[1]+'; path=<?php e($_->config->rela_location); ?>';
 				location.reload(true);

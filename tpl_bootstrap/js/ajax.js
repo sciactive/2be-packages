@@ -43,17 +43,21 @@ var load_page_ajax = function(url, type, data){
 					width: "120px",
 					opacity: .6,
 					animate_speed: 20,
-					nonblock: true,
+					nonblock: {
+						nonblock: true
+					},
 					hide: false,
-					history: false,
+					history: {
+						history: false
+					},
 					stack: {"dir1": "down","dir2": "right"}
-				}).css("top", "-.6em");
-			loader.css("left", (j_window.width() / 2) - (loader.width() / 2));
-			loader.pnotify_display();
+				});
+			loader.get().css({"top": "-0.6em", "left": (j_window.width() / 2) - (loader.width() / 2)});
+			loader.open();
 			xhr.setRequestHeader("Accept", "application/json");
 		},
 		complete: function(){
-			loader.pnotify_remove();
+			loader.remove();
 		},
 		error: function(xhr, textStatus){
 			$_.error("An error occured while communicating with the server:\n\n"+$_.safe(xhr.status)+": "+$_.safe(textStatus));

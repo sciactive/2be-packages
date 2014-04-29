@@ -52,8 +52,8 @@ $_->com_bootstrap->load_js_css();
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<script type="text/javascript" src="<?php e($_->config->rela_location); ?>system/includes/js.php"></script>
 	<script type="text/javascript">$_(function(){if ($.pnotify) {
-		$.pnotify.defaults.opacity = .9;
-		$.pnotify.defaults.delay = 15000;
+		PNotify.prototype.options.opacity = .9;
+		PNotify.prototype.options.delay = 15000;
 	}});</script>
 	<?php if ($_->config->tpl_bootstrap->ajax) { ?>
 	<script type="text/javascript" src="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/js/ajax.js"></script>

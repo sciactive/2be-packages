@@ -738,7 +738,7 @@ if (!$this->quickpage_options) {
 						</div>';
 						$("#p_muid_variants").append(new_html);
 					});
-					$("#p_muid_variants").delegate(".remove", "click", function(){
+					$("#p_muid_variants").on("click", ".remove", function(){
 						$(this).closest(".pf-element").remove();
 					});
 				});

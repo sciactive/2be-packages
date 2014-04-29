@@ -80,6 +80,7 @@ $_->icons->load();
 								"<p><strong>Manufacturer SKU:</strong> "+$_.safe(this.manufacturer_sku)+"</p>";
 							stock_struct.push($("<div class=\"entry clearfix alert alert-success\">"+cur_stock_link+" | "+cur_product_link+"<br/>Last Transaction: "+$_.safe(this.last_transaction)+"</div>").popover({
 								trigger: 'hover',
+								html: true,
 								title: "Stock Entry "+$_.safe(this.guid),
 								content: content
 							}));

@@ -38,7 +38,7 @@ $_->com_ptags->load();
 <script type="text/javascript">
 	$_(function(){
 		$(".p_muid_do_tags", "#p_muid_form").ptags({ptags_delimiter: ';;', ptags_sortable: true});
-		$("#p_muid_form").delegate(".p_muid_default_checkbox", "change", function(){
+		$("#p_muid_form").on("change", ".p_muid_default_checkbox", function(){
 			var checkbox = $(this);
 			if (checkbox.attr("checked")) {
 				checkbox.closest("div.pf-element").children("div.default").hide().end().children("div.setting").show();
@@ -51,6 +51,7 @@ $_->com_ptags->load();
 			var label = $(this);
 			label.popover({
 				trigger: 'hover',
+				html: true,
 				title: label.find(".cname").text(),
 				content: "<p>"+label.find(".description").html()+"<br /><br /><strong>Default:</strong> "+label.nextAll(".default").children().text()+"</p>"
 			})

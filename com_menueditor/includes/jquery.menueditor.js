@@ -26,9 +26,9 @@ all.each(function(){
 <button class=\"ui-menueditor-add btn btn-success\" type=\"button\">New Entry</button>\n\
 <button class=\"ui-menueditor-clear btn btn-danger\" type=\"button\">Clear All Entries</button>\n\
 </div>").appendTo(container)
-	.delegate(".ui-menueditor-add", "click", function(){
+	.on("click", ".ui-menueditor-add", function(){
 		edit_entry();
-	}).delegate(".ui-menueditor-clear", "click", function(){
+	}).on("click", ".ui-menueditor-clear", function(){
 		if (confirm("Are you sure you want to delete all menu entries?")) {
 			entries.children(".ui-menu-editor-entry").remove();
 			update_entries();

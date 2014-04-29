@@ -269,7 +269,7 @@ $_->com_customer->load_customer_select();
 		});
 
 		// Handle clicks on them.
-		station_floor.delegate(".station", "click", function(){
+		station_floor.on("click", ".station", function(){
 			var station_id = $(".station_id", this).text();
 			var station = stations[station_id];
 			if ("customer" in station && station.customer)

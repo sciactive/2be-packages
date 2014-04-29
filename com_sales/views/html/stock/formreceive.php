@@ -79,13 +79,17 @@ if ($_->config->com_sales->autocomplete_product)
 							title: 'Shipment Search',
 							text: 'Retrieving products...',
 							icon: 'picon picon-throbber',
-							nonblock: true,
+							nonblock: {
+								nonblock: true
+							},
 							hide: false,
-							history: false
+							history: {
+								history: false
+							}
 						});
 					},
 					complete: function(){
-						loader.pnotify_remove();
+						loader.remove();
 					},
 					error: function(XMLHttpRequest, textStatus){
 						$_.error("An error occured while trying to lookup the shipment:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -166,13 +170,17 @@ if ($_->config->com_sales->autocomplete_product)
 											title: 'Product Search',
 											text: 'Retrieving product from server...',
 											icon: 'picon picon-throbber',
-											nonblock: true,
+											nonblock: {
+												nonblock: true
+											},
 											hide: false,
-											history: false
+											history: {
+												history: false
+											}
 										});
 									},
 									complete: function(){
-										loader.pnotify_remove();
+										loader.remove();
 									},
 									error: function(XMLHttpRequest, textStatus){
 										$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -274,13 +282,17 @@ if ($_->config->com_sales->autocomplete_product)
 								title: 'Product Search',
 								text: 'Retrieving product from server...',
 								icon: 'picon picon-throbber',
-								nonblock: true,
+								nonblock: {
+									nonblock: true
+								},
 								hide: false,
-								history: false
+								history: {
+									history: false
+								}
 							});
 						},
 						complete: function(){
-							loader.pnotify_remove();
+							loader.remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
 							$_.error("An error occured while trying to lookup the product code:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));

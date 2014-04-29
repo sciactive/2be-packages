@@ -225,13 +225,17 @@ $_->com_customer->load_company_select();
 								title: 'Search',
 								text: 'Searching the database...',
 								icon: 'picon picon-throbber',
-								nonblock: true,
+								nonblock: {
+									nonblock: true
+								},
 								hide: false,
-								history: false
+								history: {
+									history: false
+								}
 							});
 						},
 						complete: function(){
-							loader.pnotify_remove();
+							loader.remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
 							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -306,13 +310,17 @@ $_->com_customer->load_company_select();
 								title: 'Logging',
 								text: 'Documenting customer interaction...',
 								icon: 'picon picon-throbber',
-								nonblock: true,
+								nonblock: {
+									nonblock: true
+								},
 								hide: false,
-								history: false
+								history: {
+									history: false
+								}
 							});
 						},
 						complete: function(){
-							loader.pnotify_remove();
+							loader.remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
 							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -357,13 +365,17 @@ $_->com_customer->load_company_select();
 								title: 'Updating',
 								text: 'Processing customer interaction...',
 								icon: 'picon picon-throbber',
-								nonblock: true,
+								nonblock: {
+									nonblock: true
+								},
 								hide: false,
-								history: false
+								history: {
+									history: false
+								}
 							});
 						},
 						complete: function(){
-							loader.pnotify_remove();
+							loader.remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
 							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));

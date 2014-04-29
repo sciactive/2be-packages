@@ -11,14 +11,15 @@
 /* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 $_->icons->load();
+$min = $_->config->debug_mode ? '' : '.min';
 ?>
 <script type="text/javascript">
-$_.loadcss("<?php e($_->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.css");
-$_.loadcss("<?php e($_->config->location); ?>components/com_pnotify/includes/jquery.pnotify.default.icons.css");
-$_.loadjs("<?php e($_->config->location); ?>components/com_pnotify/includes/<?php echo $_->config->debug_mode ? 'jquery.pnotify.js' : 'jquery.pnotify.min.js'; ?>");
-$_.pnotify_alert_defaults = {nonblock: true};
-$_.pnotify_notice_defaults = {nonblock: true};
-$_.pnotify_error_defaults = {type: "error", hide: false, nonblock: false};
+$_.loadcss("<?php e($_->config->location); ?>components/com_pnotify/includes/pnotify.custom<?php e($min); ?>.css");
+$_.loadcss("<?php e($_->config->location); ?>components/com_pnotify/includes/pnotify.picon<?php e($min); ?>.css");
+$_.loadjs("<?php e($_->config->location); ?>components/com_pnotify/includes/pnotify.custom<?php e($min); ?>.js");
+$_.pnotify_alert_defaults = {nonblock: {nonblock: true}};
+$_.pnotify_notice_defaults = {nonblock: {nonblock: true}};
+$_.pnotify_error_defaults = {type: "error", hide: false, nonblock: {nonblock: false}};
 $_.load(function(){
 	if (!window._alert) {
 		window._alert = window.alert;

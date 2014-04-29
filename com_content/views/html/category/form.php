@@ -43,7 +43,7 @@ $_->com_ptags->load();
 
 			// Updating pages.
 			var pages_input = $("#p_muid_pages_input");
-			$("#p_muid_pages").delegate("a.remove", "click", function(){
+			$("#p_muid_pages").on("click", "a.remove", function(){
 				$(this).closest(".page").remove();
 				update_pages();
 				return false;
@@ -713,7 +713,7 @@ $_->com_ptags->load();
 						</div>';
 						$("#p_muid_variants").append(new_html);
 					});
-					$("#p_muid_variants").delegate(".remove", "click", function(){
+					$("#p_muid_variants").on("click", ".remove", function(){
 						$(this).closest(".pf-element").remove();
 					});
 				});

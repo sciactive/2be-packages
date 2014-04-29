@@ -69,14 +69,18 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 						title: 'Search',
 						text: 'Searching the database...',
 						icon: 'picon picon-throbber',
-						nonblock: true,
+						nonblock: {
+							nonblock: true
+						},
 						hide: false,
-						history: false
+						history: {
+							history: false
+						}
 					});
 					customer_grid.pgrid_get_all_rows().pgrid_delete();
 				},
 				complete: function(){
-					loader.pnotify_remove();
+					loader.remove();
 				},
 				error: function(XMLHttpRequest, textStatus){
 					$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
@@ -143,13 +147,17 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								title: 'Logging',
 								text: 'Documenting customer interaction...',
 								icon: 'picon picon-throbber',
-								nonblock: true,
+								nonblock: {
+									nonblock: true
+								},
 								hide: false,
-								history: false
+								history: {
+									history: false
+								}
 							});
 						},
 						complete: function(){
-							loader.pnotify_remove();
+							loader.remove();
 						},
 						error: function(XMLHttpRequest, textStatus){
 							$_.error("An error occured:\n"+$_.safe(XMLHttpRequest.status)+": "+$_.safe(textStatus));
