@@ -52,8 +52,8 @@ class com_sales_category extends entity {
 			case 'types':
 				return 'product categories';
 			case 'url_view':
-				if ($_->config->com_sales->com_storefront)
-					return pines_url('com_storefront', 'category/browse', array('a' => $this->alias));
+				if ($_->config->com_sales->com_shop)
+					return pines_url('com_shop', 'category/browse', array('a' => $this->alias));
 				break;
 			case 'url_edit':
 				if (gatekeeper('com_sales/editcategory'))

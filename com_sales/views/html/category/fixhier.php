@@ -20,7 +20,7 @@ if (!$this->fixes) { ?>
 <?php } else { ?>
 <form class="pf-form" method="post" action="<?php e(pines_url('com_sales', 'category/fixhiersave')); ?>">
 	<div class="pf-element">
-		When a product is in a category, it is listed in the storefront in all the
+		When a product is in a category, it is listed in the shop in all the
 		parent categories as well. Therefore, a product doesn't need to be placed in
 		the ancestor of a category it is already in. The following table lists the
 		categories that are assigned to products, but don't need to be. You can

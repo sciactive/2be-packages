@@ -34,9 +34,9 @@ return array(
 		'peruser' => true,
 	),
 	array(
-		'name' => 'com_storefront',
-		'cname' => 'Storefront Integration',
-		'description' => 'Integrate with com_storefront. Requires com_content as well.',
+		'name' => 'com_shop',
+		'cname' => 'Shop Integration',
+		'description' => 'Integrate with com_shop. Requires com_content as well.',
 		'value' => true,
 		'peruser' => true,
 	),

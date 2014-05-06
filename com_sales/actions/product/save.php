@@ -281,10 +281,10 @@ if ($_->config->com_sales->com_hrm) {
 	unset($cur_commission);
 }
 
-if ($_->config->com_sales->com_storefront) {
-	// Storefront
+if ($_->config->com_sales->com_shop) {
+	// Shop
 	$product->alias = preg_replace('/[^\w\d-.]/', '', $_REQUEST['alias']);
-	$product->show_in_storefront = ($_REQUEST['show_in_storefront'] == 'ON');
+	$product->show_in_shop = ($_REQUEST['show_in_shop'] == 'ON');
 	$product->featured = ($_REQUEST['featured'] == 'ON');
 	$product->featured_image = $_REQUEST['featured_image'];
 	if (!$_->uploader->check($product->featured_image))
@@ -370,9 +370,9 @@ if (isset($test)) {
 	return;
 }
 
-if ($product->show_in_storefront && $product->custom_item) {
+if ($product->show_in_shop && $product->custom_item) {
 	$product->print_form();
-	pines_notice('Custom items cannot be displayed in the storefront. Select only one of these options.');
+	pines_notice('Custom items cannot be displayed in the shop. Select only one of these options.');
 	return;
 }
 

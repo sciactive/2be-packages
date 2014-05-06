@@ -32,12 +32,12 @@ $this->note = 'Provide payment type details in this form.';
 		<label><span class="pf-label">Enabled</span>
 			<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->enabled ? ' checked="checked"' : ''; ?> /></label>
 	</div>
-	<?php if ($_->config->com_sales->com_storefront) { ?>
+	<?php if ($_->config->com_sales->com_shop) { ?>
 	<div class="pf-element">
-		<label><span class="pf-label">Enabled in Storefront</span>
-			<span class="pf-note">Check to make this a web storefront payment type.</span>
-			<span class="pf-note">Uncheck "Enabled" to <em>only</em> show this in the web storefront.</span>
-			<input class="pf-field" type="checkbox" name="storefront" value="ON"<?php echo $this->entity->storefront ? ' checked="checked"' : ''; ?> /></label>
+		<label><span class="pf-label">Enabled in Shop</span>
+			<span class="pf-note">Check to make this a web shop payment type.</span>
+			<span class="pf-note">Uncheck "Enabled" to <em>only</em> show this in the web shop.</span>
+			<input class="pf-field" type="checkbox" name="shop" value="ON"<?php echo $this->entity->shop ? ' checked="checked"' : ''; ?> /></label>
 	</div>
 	<?php } ?>
 	<div class="pf-element">

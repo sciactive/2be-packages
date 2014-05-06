@@ -29,8 +29,8 @@ if ( isset($_REQUEST['id']) ) {
 $category->name = $_REQUEST['name'];
 $category->enabled = ($_REQUEST['enabled'] == 'ON');
 
-if ($_->config->com_sales->com_storefront) {
-	// Storefront
+if ($_->config->com_sales->com_shop) {
+	// Shop
 	$category->alias = preg_replace('/[^\w\d-.]/', '', $_REQUEST['alias']);
 	$category->replace_title = $_REQUEST['replace_title'];
 	$category->show_title = ($_REQUEST['show_title'] == 'ON');

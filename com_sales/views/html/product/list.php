@@ -93,8 +93,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								$_.safe(this.modified),
 								$_.safe(this.expiration),
 								links.join(', ')
-								<?php if ($_->config->com_sales->com_storefront) { ?>,
-								this.storefront ? 'Yes' : 'No',
+								<?php if ($_->config->com_sales->com_shop) { ?>,
+								this.shop ? 'Yes' : 'No',
 								this.featured ? 'Yes' : 'No'
 								<?php } ?>
 							]
@@ -188,8 +188,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<th>Modified</th>
 			<th>Expiration</th>
 			<th>Link</th>
-			<?php if ($_->config->com_sales->com_storefront) { ?>
-			<th>Shown in Storefront</th>
+			<?php if ($_->config->com_sales->com_shop) { ?>
+			<th>Shown in Shop</th>
 			<th>Featured</th>
 			<?php } ?>
 		</tr>
@@ -214,7 +214,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<td>-</td>
 			<td>-</td>
 			<td>-</td>
-			<?php if ($_->config->com_sales->com_storefront) { ?>
+			<?php if ($_->config->com_sales->com_shop) { ?>
 			<td>-</td>
 			<td>-</td>
 			<?php } ?>

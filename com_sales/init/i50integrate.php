@@ -23,5 +23,5 @@ if ($_->config->com_sales->com_hrm && !$_->depend->check('component', 'com_hrm')
 if ($_->config->com_sales->per_item_salesperson && !$_->config->com_sales->com_hrm)
 	$_->config->com_sales->per_item_salesperson = false;
 
-if ($_->config->com_sales->com_storefront && !$_->depend->check('component', 'com_storefront&com_content'))
-	$_->config->com_sales->com_storefront = false;
+if ($_->config->com_sales->com_shop && !$_->depend->check('component', 'com_shop&com_content'))
+	$_->config->com_sales->com_shop = false;

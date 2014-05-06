@@ -15,7 +15,7 @@ $this->note = 'Products that appear here are missing images.';
 ?>
 <div>
 	<div class="page-header">
-		<h3>Section 1: Enabled Products Shown in Storefront</h3>
+		<h3>Section 1: Enabled Products Shown in Shop</h3>
 	</div>
 	<table class="table table-striped table-hover">
 		<thead>
@@ -34,7 +34,7 @@ $this->note = 'Products that appear here are missing images.';
 				<td><a data-entity="<?php e($cur_product->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_product->name); ?></a></td>
 				<td style="text-align: right;">
 					<a href="<?php e(pines_url('com_sales', 'product/edit', array('id' => $cur_product->guid), true)); ?>" target="_blank">Edit <i class="fa fa-external-link"></i></a>
-					| <a href="<?php e(pines_url('com_storefront', 'product', array('a' => $cur_product->alias), true)); ?>" target="_blank">View <i class="fa fa-external-link"></i></a>
+					| <a href="<?php e(pines_url('com_shop', 'product', array('a' => $cur_product->alias), true)); ?>" target="_blank">View <i class="fa fa-external-link"></i></a>
 				</td>
 			</tr>
 			<?php } ?>
@@ -43,7 +43,7 @@ $this->note = 'Products that appear here are missing images.';
 </div>
 <div>
 	<div class="page-header">
-		<h3>Section 2: Enabled Products Not in Storefront</h3>
+		<h3>Section 2: Enabled Products Not in Shop</h3>
 	</div>
 	<table class="table table-striped table-hover">
 		<thead>
@@ -70,7 +70,7 @@ $this->note = 'Products that appear here are missing images.';
 </div>
 <div>
 	<div class="page-header">
-		<h3>Section 3: Disabled Products Set to Show in Storefront</h3>
+		<h3>Section 3: Disabled Products Set to Show in Shop</h3>
 	</div>
 	<table class="table table-striped table-hover">
 		<thead>
@@ -97,7 +97,7 @@ $this->note = 'Products that appear here are missing images.';
 </div>
 <div>
 	<div class="page-header">
-		<h3>Section 4: Disabled Products Not Set to Show in Storefront</h3>
+		<h3>Section 4: Disabled Products Not Set to Show in Shop</h3>
 	</div>
 	<table class="table table-striped table-hover">
 		<thead>

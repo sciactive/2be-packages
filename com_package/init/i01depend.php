@@ -67,9 +67,9 @@ com_repository>=1.0.0&com_repository-data
 :	Check that the com_repository package is installed and that it is at least
 	version 1.0.0, and that the com_repository-data package is installed.
 
-com_customer&!com_storefront
-:	Check that the com_customer package is installed, and that the
-	com_storefront package is not.
+com_customer&!com_shop
+:	Check that the com_customer package is installed, and that the com_shop
+	package is not.
 EOF;
 		$return['simple_parse'] = true;
 		return $return;

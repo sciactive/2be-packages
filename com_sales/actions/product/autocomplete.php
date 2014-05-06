@@ -46,8 +46,8 @@ if (empty($query)) {
 			case 'serialized':
 				$selector['strict'][] = array('serialized', ($value == 'true'));
 				break;
-			case 'storefront':
-				$selector['strict'][] = array('show_in_storefront', ($value == 'true'));
+			case 'shop':
+				$selector['strict'][] = array('show_in_shop', ($value == 'true'));
 				break;
 			case 'featured':
 				$selector['strict'][] = array('featured', ($value == 'true'));

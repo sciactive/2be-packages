@@ -201,9 +201,9 @@ $_->com_sales->load_jcrop();
 			<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Appearance <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li><a href="#p_muid_tab_images" data-toggle="tab">Images</a></li>
-				<?php if ($_->config->com_sales->com_storefront) { ?>
+				<?php if ($_->config->com_sales->com_shop) { ?>
 				<li class="divider"></li>
-				<li><a href="#p_muid_tab_storefront" data-toggle="tab">Storefront</a></li>
+				<li><a href="#p_muid_tab_shop" data-toggle="tab">Shop</a></li>
 				<li><a href="#p_muid_tab_head" data-toggle="tab">Page Head</a></li>
 				<?php } ?>
 			</ul>
@@ -304,7 +304,7 @@ $_->com_sales->load_jcrop();
 							var box = $(this),
 								row = box.closest("tr"),
 								desc = row.pgrid_add_descendant_rows().not(row);
-							if (box.is(":checked") && desc.find(":checkbox:checked").length && !confirm("You have already selected a descendant of this category, which puts the product\nin this category in the storefront. Are you sure you want to add this category\ntoo?")) {
+							if (box.is(":checked") && desc.find(":checkbox:checked").length && !confirm("You have already selected a descendant of this category, which puts the product\nin this category in the shop. Are you sure you want to add this category\ntoo?")) {
 								box.removeAttr("checked");
 								e.preventDefault();
 								e.stopPropagation();
@@ -376,13 +376,13 @@ $_->com_sales->load_jcrop();
 			<div class="pf-element">
 				<script type="text/javascript">
 					$_(function(){
-						$("#p_muid_form").on("change", "input[name=custom_item], input[name=show_in_storefront]", function(){
+						$("#p_muid_form").on("change", "input[name=custom_item], input[name=show_in_shop]", function(){
 							var custom_item = $("#p_muid_form input[name=custom_item]"),
-								show_in_storefront = $("#p_muid_form input[name=show_in_storefront]");
-							if (custom_item.is(":checked") && show_in_storefront.is(":checked")) {
+								show_in_shop = $("#p_muid_form input[name=show_in_shop]");
+							if (custom_item.is(":checked") && show_in_shop.is(":checked")) {
 								$(this).removeAttr("checked");
-								var notice = new PNotify('The product cannot be both a custom item and shown in the storefront.<br/><br/><button class="btn btn-default" type="button">Swap Options</button>').on("click", "button", function(){
-									custom_item.add(show_in_storefront).each(function(){
+								var notice = new PNotify('The product cannot be both a custom item and shown in the shop.<br/><br/><button class="btn btn-default" type="button">Swap Options</button>').on("click", "button", function(){
+									custom_item.add(show_in_shop).each(function(){
 										var cur_box = $(this);
 										if (cur_box.is(":checked"))
 											cur_box.removeAttr("checked");
@@ -396,7 +396,7 @@ $_->com_sales->load_jcrop();
 					});
 				</script>
 				<label><span class="pf-label">Custom Item</span>
-					<span class="pf-note">Custom items aren't shown in the storefront.</span>
+					<span class="pf-note">Custom items aren't shown in the shop.</span>
 					<input class="pf-field" type="checkbox" name="custom_item" value="ON"<?php echo $this->entity->custom_item ? ' checked="checked"' : ''; ?> /></label>
 			</div>
 			<div class="pf-element pf-full-width">
@@ -1029,15 +1029,15 @@ $_->com_sales->load_jcrop();
 			<input type="hidden" name="images" />
 			<br class="pf-clearing" />
 		</div>
-		<?php if ($_->config->com_sales->com_storefront) { ?>
+		<?php if ($_->config->com_sales->com_shop) { ?>
 		<style type="text/css">
-			#p_muid_tab_storefront .combobox {
+			#p_muid_tab_shop .combobox {
 				position: relative;
 			}
-			#p_muid_tab_storefront .combobox input {
+			#p_muid_tab_shop .combobox input {
 				padding-right: 32px;
 			}
-			#p_muid_tab_storefront .combobox a {
+			#p_muid_tab_shop .combobox a {
 				display: block;
 				position: absolute;
 				right: 8px;
@@ -1049,7 +1049,7 @@ $_->com_sales->load_jcrop();
 			$_(function(){
 				var category_grid = $("#p_muid_category_grid");
 				var show_specs = function(){
-					$("div.spec", "#p_muid_tab_storefront").hide();
+					$("div.spec", "#p_muid_tab_shop").hide();
 					category_grid.find(":checkbox:checked").each(function(){
 						var guid = $(this).val();
 						var cur_spec;
@@ -1062,7 +1062,7 @@ $_->com_sales->load_jcrop();
 				category_grid.on("change", ":checkbox", show_specs);
 				show_specs();
 
-				$(".combobox", "#p_muid_tab_storefront").each(function(){
+				$(".combobox", "#p_muid_tab_shop").each(function(){
 					var box = $(this);
 					var autobox = box.children("input").autocomplete({
 						minLength: 0,
@@ -1084,10 +1084,10 @@ $_->com_sales->load_jcrop();
 				});
 			});
 		</script>
-		<div class="tab-pane" id="p_muid_tab_storefront">
+		<div class="tab-pane" id="p_muid_tab_shop">
 			<div class="pf-element">
-				<label><span class="pf-label">Shown in Storefront</span>
-					<input class="pf-field" type="checkbox" name="show_in_storefront" value="ON"<?php echo $this->entity->show_in_storefront ? ' checked="checked"' : ''; ?> /></label>
+				<label><span class="pf-label">Shown in Shop</span>
+					<input class="pf-field" type="checkbox" name="show_in_shop" value="ON"<?php echo $this->entity->show_in_shop ? ' checked="checked"' : ''; ?> /></label>
 			</div>
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">

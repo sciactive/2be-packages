@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Category' : 'Editing ['.h($this->entity->name).']';
 $this->note = 'Provide category details in this form.';
-if ($_->config->com_sales->com_storefront) {
+if ($_->config->com_sales->com_shop) {
 	$_->com_pgrid->load();
 	$_->com_ptags->load();
 	$_->editor->load();
@@ -23,7 +23,7 @@ if ($_->config->com_sales->com_storefront) {
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'category/save')); ?>">
 	<script type="text/javascript">
 		$_(function(){
-			<?php if ($_->config->com_sales->com_storefront) { ?>
+			<?php if ($_->config->com_sales->com_shop) { ?>
 			$("#p_muid_spec_options").ptags({ptags_delimiter: ';;', ptags_sortable: null});
 			$("#p_muid_spec_do_sort").click(function(){
 				var tags_elem = $("#p_muid_spec_options");
@@ -197,8 +197,8 @@ if ($_->config->com_sales->com_storefront) {
 	</script>
 	<ul class="nav nav-tabs" style="clear: both;">
 		<li class="active"><a href="#p_muid_tab_general" data-toggle="tab">General</a></li>
-		<?php if ($_->config->com_sales->com_storefront) { ?>
-		<li><a href="#p_muid_tab_storefront" data-toggle="tab">Storefront</a></li>
+		<?php if ($_->config->com_sales->com_shop) { ?>
+		<li><a href="#p_muid_tab_shop" data-toggle="tab">Shop</a></li>
 		<li><a href="#p_muid_tab_head" data-toggle="tab">Page Head</a></li>
 		<?php } ?>
 	</ul>
@@ -286,8 +286,8 @@ if ($_->config->com_sales->com_storefront) {
 			</div>
 			<br class="pf-clearing" />
 		</div>
-		<?php if ($_->config->com_sales->com_storefront) { ?>
-		<div class="tab-pane" id="p_muid_tab_storefront">
+		<?php if ($_->config->com_sales->com_shop) { ?>
+		<div class="tab-pane" id="p_muid_tab_shop">
 			<div class="pf-element pf-full-width">
 				<script type="text/javascript">
 					$_(function(){
@@ -383,7 +383,7 @@ if ($_->config->com_sales->com_storefront) {
 			</div>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Common Specs</span>
-				<span class="pf-note">These specs will be available for filtering in the storefront.</span>
+				<span class="pf-note">These specs will be available for filtering in the shop.</span>
 				<div class="pf-group pf-full-width">
 					<div class="pf-field">
 						<table id="p_muid_specs_table">
@@ -462,7 +462,7 @@ if ($_->config->com_sales->com_storefront) {
 						<div class="string float bool">
 							<div class="pf-element">
 								<span class="pf-label">Show Filter</span>
-								<label><input class="pf-field" type="checkbox" name="cur_spec_show_filter" /> Show filtering options in the category browser in storefront.</label>
+								<label><input class="pf-field" type="checkbox" name="cur_spec_show_filter" /> Show filtering options in the category browser in shop.</label>
 							</div>
 						</div>
 						<div class="string float">
@@ -480,7 +480,7 @@ if ($_->config->com_sales->com_storefront) {
 							</div>
 						</div>
 						<div class="heading">
-							<div class="pf-element">Headings will show up in the product page in the storefront.</div>
+							<div class="pf-element">Headings will show up in the product page in the shop.</div>
 						</div>
 					</div>
 				</div>

@@ -1,0 +1,33 @@
+[
+	{
+		"path": "main_menu/shop",
+		"text": "Shops",
+		"depend": {
+			"children": true
+		}
+	},
+		{
+			"path": "main_menu/shop/shops",
+			"text": "Shops",
+			"href": ["com_shop","shop/list"],
+			"depend": {
+				"ability": "com_shop/listshops"
+			}
+		},
+		{
+			"path": "main_menu/shop/newshop",
+			"text": "New Shop",
+			"href": ["com_shop","shop/edit"],
+			"depend": {
+				"ability": "com_shop/newshop"
+			}
+		},
+	{
+		"path": "main_menu/business/0_pos/inventory/verifystock",
+		"text": "Verify Shop Inventory",
+		"href": ["com_shop","verifystock"],
+		"depend": {
+			"ability": "com_sales/editproduct"
+		}
+	}
+]

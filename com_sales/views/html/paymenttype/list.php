@@ -61,8 +61,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<tr>
 			<th>Name</th>
 			<th>Enabled</th>
-			<?php if ($_->config->com_sales->com_storefront) { ?>
-			<th>Storefront</th>
+			<?php if ($_->config->com_sales->com_shop) { ?>
+			<th>Shop</th>
 			<?php } ?>
 			<th>Kick Drawer</th>
 			<th>Change Type</th>
@@ -76,8 +76,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 		<tr title="<?php e($payment_type->guid); ?>">
 			<td><a data-entity="<?php e($payment_type->guid); ?>" data-entity-context="com_sales_payment_type"><?php e($payment_type->name); ?></a></td>
 			<td><?php echo $payment_type->enabled ? 'Yes' : 'No'; ?></td>
-			<?php if ($_->config->com_sales->com_storefront) { ?>
-			<td><?php echo $payment_type->storefront ? 'Yes' : 'No'; ?></td>
+			<?php if ($_->config->com_sales->com_shop) { ?>
+			<td><?php echo $payment_type->shop ? 'Yes' : 'No'; ?></td>
 			<?php } ?>
 			<td><?php echo $payment_type->kick_drawer ? 'Yes' : 'No'; ?></td>
 			<td><?php echo $payment_type->change_type ? 'Yes' : 'No'; ?></td>

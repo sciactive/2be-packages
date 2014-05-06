@@ -32,7 +32,7 @@ class com_sales_product extends entity {
 		$this->require_customer = true;
 		$this->additional_barcodes = array();
 		$this->actions = array();
-		$this->show_in_storefront = false;
+		$this->show_in_shop = false;
 		$this->title_use_name = true;
 		$this->title_position = 'prepend';
 		$this->meta_tags = array();
@@ -52,8 +52,8 @@ class com_sales_product extends entity {
 			case 'types':
 				return 'products';
 			case 'url_view':
-				if ($_->config->com_sales->com_storefront && $this->show_in_storefront)
-					return pines_url('com_storefront', 'product', array('a' => $this->alias));
+				if ($_->config->com_sales->com_shop && $this->show_in_shop)
+					return pines_url('com_shop', 'product', array('a' => $this->alias));
 				break;
 			case 'url_edit':
 				if (gatekeeper('com_sales/editproduct'))

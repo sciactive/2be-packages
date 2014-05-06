@@ -55,7 +55,7 @@ defined('P_RUN') or die('Direct access prohibited');
  * information from the user, simply do nothing.
  *
  * If "action" is "request_cust", it is the same as "request", except that the
- * form is meant to be shown to a customer in the web storefront, not an
+ * form is meant to be shown to a customer in the web shop, not an
  * employee. This might differ, for example, if a credit card form includes a
  * "slide card" option for employees, but not customers.
  *

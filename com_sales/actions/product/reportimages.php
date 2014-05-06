@@ -39,12 +39,12 @@ foreach ($products as $cur_product) {
 		}
 	}
 	if ($cur_product->enabled) {
-		if ($cur_product->show_in_storefront)
+		if ($cur_product->show_in_shop)
 			$module->section1[] = $cur_product;
 		else
 			$module->section2[] = $cur_product;
 	} else {
-		if ($cur_product->show_in_storefront)
+		if ($cur_product->show_in_shop)
 			$module->section3[] = $cur_product;
 		else
 			$module->section4[] = $cur_product;
