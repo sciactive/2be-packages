@@ -75,6 +75,30 @@ class com_shop_shop extends entity {
 	}
 
 	/**
+	 * View the shop's home.
+	 * @return module The module.
+	 */
+	public function home() {
+		$module = new module('com_shop', 'shop/home', 'content');
+		$module->entity = $this;
+
+		return $module;
+	}
+
+	/**
+	 * Print a shop header.
+	 * @return module The module.
+	 */
+	public function print_header() {
+		$module = new module('com_shop', 'shop/header', '');
+		$module->entity = $this;
+		$module->detach();
+		echo $module->render();
+
+		return $module;
+	}
+
+	/**
 	 * Print a form to edit the shop.
 	 * @return module The form's module.
 	 */

@@ -576,7 +576,7 @@ class com_sales extends component {
 
 	/**
 	 * Creates and attaches a module which lists products.
-	 * 
+	 *
 	 * @param bool $enabled Show enabled products if true, disabled if false.
 	 * @param string $show A default search string.
 	 * @return module The module.
@@ -747,7 +747,7 @@ class com_sales extends component {
 
 	/**
 	 * Creates and attaches a module which lists specials.
-	 * 
+	 *
 	 * @param bool $enabled Show enabled specials if true, disabled if false.
 	 * @return module The module.
 	 */
@@ -1095,14 +1095,15 @@ class com_sales extends component {
 
 	/**
 	 * Process a product image.
-	 * 
+	 *
 	 * Type can be:
 	 * - prod_img - A regular product image.
 	 * - prod_tmb - A regular product image thumbnail.
 	 * - thumbnail - The main product thumbnail.
-	 * 
+	 * - header - A shop header (4x1 ratio).
+	 *
 	 * This method alters the image passed to it.
-	 * 
+	 *
 	 * @param Imagick &$image An Imagick image.
 	 * @param string $type The type of processing to perform.
 	 * @param array $options Options for cropping and thumbnail method.
@@ -1111,6 +1112,29 @@ class com_sales extends component {
 		global $_;
 		$image->setImageFormat('png');
 		switch ($type) {
+			case 'header':
+				// Fit the image into the thumbnail size.
+				$image->cropThumbnailImage(1600, 400);
+
+				// Create a transparent canvas.
+				$canvas = clone $image;
+				$canvas->newImage(1600, 400, 'none');
+				$canvas->setImageFormat('png');
+
+				// Get the image dimensions.
+				$width = $image->getImageWidth();
+				$height = $image->getImageHeight();
+
+				// Calculate position of the thumbnail on the canvas.
+				$x = (1600 - $width) / 2;
+				$y = 0;
+
+				// Composite the image.
+				$canvas->compositeImage($image, imagick::COMPOSITE_OVER, $x, $y);
+
+				// Set the new image.
+				$image = $canvas;
+				break;
 			case 'thumbnail':
 				// Fit the image into the thumbnail size.
 				$image->thumbnailImage($_->config->com_sales->product_thumbnail_width, $_->config->com_sales->product_thumbnail_height, true);
@@ -1119,7 +1143,7 @@ class com_sales extends component {
 				$canvas = clone $image;
 				$canvas->newImage($_->config->com_sales->product_thumbnail_width, $_->config->com_sales->product_thumbnail_height, 'none');
 				$canvas->setImageFormat('png');
-				
+
 				// Get the image dimensions.
 				$width = $image->getImageWidth();
 				$height = $image->getImageHeight();
@@ -1205,7 +1229,7 @@ class com_sales extends component {
 				$canvas = clone $image;
 				$canvas->newImage($_->config->com_sales->product_images_tmb_width, $_->config->com_sales->product_images_tmb_height, 'none');
 				$canvas->setImageFormat('png');
-				
+
 				// Get the image dimensions.
 				$width = $image->getImageWidth();
 				$height = $image->getImageHeight();
@@ -1426,11 +1450,11 @@ class com_sales extends component {
 
 	/**
 	 * List assigned warehouse items.
-	 * 
+	 *
 	 * Fulfilled items are either shipped out to the cutomer, or waiting at the
 	 * store to be picked up. When they are delivered/picked up they become
 	 * complete.
-	 * 
+	 *
 	 * @return module The module.
 	 */
 	public function warehouse_assigned() {
@@ -1462,9 +1486,9 @@ class com_sales extends component {
 
 	/**
 	 * List pending warehouse items.
-	 * 
+	 *
 	 * By default, shows items that need to be ordered.
-	 * 
+	 *
 	 * @param bool $ordered Whether to show ordered products instead.
 	 * @param int $start_date The start date of orders to show.
 	 * @param int $end_date The end date of orders to show.
@@ -1573,7 +1597,7 @@ class com_sales extends component {
 
 	/**
 	 * Round a number to the nearest integer value using gaussian rounding.
-	 * 
+	 *
 	 * @param float $value The number to round.
 	 * @return float The rounded number.
 	 */

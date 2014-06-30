@@ -14,6 +14,7 @@ $this->title = (!isset($this->entity->guid)) ? 'Editing New Shop' : 'Editing ['.
 $this->note = 'Provide shop details in this form.';
 $_->editor->load();
 $_->com_pgrid->load();
+$_->uploader->load();
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_shop', 'shop/save')); ?>">
 	<script type="text/javascript">
@@ -108,9 +109,50 @@ $_->com_pgrid->load();
 				<label><span class="pf-label">Name</span>
 					<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
+			<script type="text/javascript">
+				$_(function(){
+					$("#p_muid_thumbnail").change(function(){
+						var tmp_url = <?php echo json_encode(pines_url('com_sales', 'product/temp_image', array('image' => '__image__', 'type' => '__type__', 'source' => '__source__', 'options' => '__options__'))); ?>;
+						$("#p_muid_thumbnail_preview").attr("src", tmp_url.replace('__image__', escape($(this).val())).replace('__type__', 'thumbnail').replace('__source__', 'temp').replace('__options__', ''));
+					});
+				});
+			</script>
 			<div class="pf-element">
-				<label><span class="pf-label">Enabled</span>
-					<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->enabled ? ' checked="checked"' : ''; ?> /></label>
+				<span class="pf-label">Thumbnail</span>
+				<input class="pf-field form-control puploader puploader-temp" id="p_muid_thumbnail" type="text" name="thumbnail" value="<?php e($this->entity->thumbnail); ?>" />
+			</div>
+			<div class="pf-element">
+				<span class="pf-label">Thumbnail Preview</span>
+				<div class="pf-group">
+					<div class="pf-field">
+						<div class="thumbnail">
+							<img alt="Thumbnail Preview" id="p_muid_thumbnail_preview" src="<?php e($_->config->location.$this->entity->thumbnail); ?>" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$_(function(){
+					$("#p_muid_header").change(function(){
+						var tmp_url = <?php echo json_encode(pines_url('com_sales', 'product/temp_image', array('image' => '__image__', 'type' => '__type__', 'source' => '__source__', 'options' => '__options__'))); ?>;
+						$("#p_muid_header_preview").attr("src", tmp_url.replace('__image__', escape($(this).val())).replace('__type__', 'header').replace('__source__', 'temp').replace('__options__', ''));
+					});
+				});
+			</script>
+			<div class="pf-element">
+				<span class="pf-label">Header Image</span>
+				<span class="pf-note">1600x400 or 4x1 ratio</span>
+				<input class="pf-field form-control puploader puploader-temp" id="p_muid_header" type="text" name="header" value="<?php e($this->entity->header); ?>" />
+			</div>
+			<div class="pf-element pf-full-width">
+				<span class="pf-label">Header Preview</span>
+				<div class="pf-group">
+					<div class="pf-field">
+						<div class="header">
+							<img alt="Header Preview" style="width: 100%; height: auto;" id="p_muid_header_preview" src="<?php e($_->config->location.$this->entity->header); ?>" />
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Description</span><br />

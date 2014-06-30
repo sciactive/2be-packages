@@ -17,7 +17,7 @@ return array(
 		'description' => 'This email is sent when a shop is saved.',
 		'view' => 'mails/save_shop',
 		'has_recipient' => false,
-		'unsubscribe' => true,
+		'unsubscribe' => false,
 		'macros' => array(
 			'shop_name' => 'Name of the shop that has been saved.',
 		),

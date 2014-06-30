@@ -27,7 +27,81 @@ if ( isset($_REQUEST['id']) ) {
 
 // General
 $shop->name = $_REQUEST['name'];
-$shop->enabled = ($_REQUEST['enabled'] == 'ON');
+if (!isset($shop->images_dir))
+	$shop->images_dir = uniqid();
+$dir = $_->config->upload_location.$_->config->com_shop->shop_images_directory.$shop->images_dir.'/';
+$shop->thumbnail = $_REQUEST['thumbnail'];
+$file = $_->uploader->temp($shop->thumbnail);
+while (true) {
+	if ($file) {
+		if (!file_exists($file)) {
+			unset($shop->thumbnail);
+			pines_error("Error reading image: {$shop->thumbnail}");
+			break;
+		}
+
+		$image = new Imagick($file);
+		if (!$image) {
+			unset($shop->thumbnail);
+			pines_error("Error opening image: {$shop->thumbnail}");
+			break;
+		}
+
+		$_->com_sales->process_product_image($image, 'thumbnail');
+
+		if (!file_exists($dir)) {
+			if (!mkdir($dir, 0755, true)) {
+				unset($shop->thumbnail);
+				pines_error("Error making image directory for shop {$shop->name}: $dir.");
+				break;
+			}
+		}
+
+		if (!$image->writeImage("{$dir}thumb.png")) {
+			unset($shop->thumbnail);
+			pines_error("Error saving image: {$shop->thumbnail}");
+			continue;
+		}
+		$shop->thumbnail = "{$dir}thumb.png";
+	}
+	break;
+}
+$shop->header = $_REQUEST['header'];
+$file = $_->uploader->temp($shop->header);
+while (true) {
+	if ($file) {
+		if (!file_exists($file)) {
+			unset($shop->header);
+			pines_error("Error reading image: {$shop->header}");
+			break;
+		}
+
+		$image = new Imagick($file);
+		if (!$image) {
+			unset($shop->header);
+			pines_error("Error opening image: {$shop->header}");
+			break;
+		}
+
+		$_->com_sales->process_product_image($image, 'header');
+
+		if (!file_exists($dir)) {
+			if (!mkdir($dir, 0755, true)) {
+				unset($shop->header);
+				pines_error("Error making image directory for shop {$shop->name}: $dir.");
+				break;
+			}
+		}
+
+		if (!$image->writeImage("{$dir}header.png")) {
+			unset($shop->header);
+			pines_error("Error saving image: {$shop->header}");
+			continue;
+		}
+		$shop->header = "{$dir}header.png";
+	}
+	break;
+}
 $shop->description = $_REQUEST['description'];
 $shop->short_description = $_REQUEST['short_description'];
 

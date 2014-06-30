@@ -34,6 +34,13 @@ return array(
 		'peruser' => true,
 	),
 	array(
+		'name' => 'shop_images_directory',
+		'cname' => 'Shop Images Directory',
+		'description' => 'Relative to the main upload directory. If it doesn\'t exist, it will be created. End this path with a slash!',
+		'value' => 'shops/',
+		'peruser' => true,
+	),
+	array(
 		'name' => 'show_categories',
 		'cname' => 'Show Category Menus',
 		'description' => 'Show category menus from com_sales.',
