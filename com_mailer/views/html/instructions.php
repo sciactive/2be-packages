@@ -83,7 +83,7 @@ This system constructs emails using three parts:
 			<pre style="font-size: 1.2em; font-weight: normal;"><span class="label label-success">Right</span> <strong>#to_name#</strong>, <em>#old_date#</em></pre>
 		</div>
 		<div class="col-sm-6">
-			<pre style="font-size: 1.2em; font-weight: normal;"><span class="label label-important">Wrong</span> #<strong>to_name</strong>#, #old_<em>date#</em></pre>
+			<pre style="font-size: 1.2em; font-weight: normal;"><span class="label label-danger">Wrong</span> #<strong>to_name</strong>#, #old_<em>date#</em></pre>
 		</div>
 	</div>
 </div>

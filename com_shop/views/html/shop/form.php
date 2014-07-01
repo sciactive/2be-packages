@@ -126,7 +126,7 @@ $_->uploader->load();
 				<div class="pf-group">
 					<div class="pf-field">
 						<div class="thumbnail">
-							<img alt="Thumbnail Preview" id="p_muid_thumbnail_preview" src="<?php e($_->config->location.$this->entity->thumbnail); ?>" />
+							<img alt="Thumbnail Preview" id="p_muid_thumbnail_preview" src="<?php e(isset($this->entity->thumbnail) ? $_->config->location.$this->entity->thumbnail : "http://placehold.it/{$_->config->com_sales->product_thumbnail_width}x{$_->config->com_sales->product_thumbnail_height}"); ?>" />
 						</div>
 					</div>
 				</div>
@@ -149,7 +149,7 @@ $_->uploader->load();
 				<div class="pf-group">
 					<div class="pf-field">
 						<div class="header">
-							<img alt="Header Preview" style="width: 100%; height: auto;" id="p_muid_header_preview" src="<?php e($_->config->location.$this->entity->header); ?>" />
+							<img alt="Header Preview" style="width: 100%; height: 25%;" id="p_muid_header_preview" src="<?php e(isset($this->entity->header) ? $_->config->location.$this->entity->header : 'http://placehold.it/1600x400'); ?>" />
 						</div>
 					</div>
 				</div>

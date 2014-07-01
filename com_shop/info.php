@@ -25,6 +25,7 @@ return array(
 		'component' => 'com_customer&com_sales&com_jquery&com_bootstrap&com_pgrid&com_pnotify&com_popeye&com_pform'
 	),
 	'abilities' => array(
+		array('manageshops', 'Manage Shops', 'User can manage other users\' shops.'),
 		array('listshops', 'List Shops', 'User can see shops.'),
 		array('newshop', 'Create Shops', 'User can create new shops.'),
 		array('editshop', 'Edit Shops', 'User can edit current shops.'),

@@ -181,25 +181,25 @@ $_->editor->load();
 				<label><span class="pf-label">Sender (From Address)</span>
 					<span class="pf-note">Leave blank to use the default address (see config).</span>
 					<input class="pf-field form-control" type="text" name="from" size="40" value="<?php e($this->entity->from); ?>" />
-					<span class="label label-important hide">Incorrect Format</span></label>
+					<span class="label label-danger hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element" id="p_muid_recipient" style="display: none;">
 				<label><strong class="pf-label">Recipient (To Address)</strong>
 					<span class="pf-note"><strong>This mailing doesn't have a To address specified.</strong> Leave blank to use the master address (see config).</span>
 					<input class="pf-field form-control" type="text" name="to" size="40" value="<?php e($this->entity->to); ?>" />
-					<span class="label label-important hide">Incorrect Format</span></label>
+					<span class="label label-danger hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Carbon Copy (CC Address)</span>
 					<span class="pf-note">The email is copied to these addresses. This <strong>will</strong> be visible to the recipient.</span>
 					<input class="pf-field form-control" type="text" name="cc" size="40" value="<?php e($this->entity->cc); ?>" />
-					<span class="label label-important hide">Incorrect Format</span></label>
+					<span class="label label-danger hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Blind Carbon Copy (BCC Address)</span>
 					<span class="pf-note">The email is copied to these addresses. This <strong>will not</strong> be visible to the recipient.</span>
 					<input class="pf-field form-control" type="text" name="bcc" size="40" value="<?php e($this->entity->bcc); ?>" />
-					<span class="label label-important hide">Incorrect Format</span></label>
+					<span class="label label-danger hide">Incorrect Format</span></label>
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Content</h3>

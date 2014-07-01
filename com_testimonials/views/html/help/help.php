@@ -188,7 +188,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 	.add-section .option-get-value {
 		width: 80%;
 	}
-	
+
 	/* SECTION HIGHLIGHTS */
 	.p_muid_help .section-highlight {
 		background: <?php echo $bg_lightest; ?>;
@@ -226,35 +226,35 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 		var h3_headers = help_container.find('h3:not(.no-top)');
 		var add_modal = help_container.find('.add-modal');
 		var add_modal_button = add_modal.find('.add-modal-button');
-		
+
 		// h3 headers - add tops
 		h3_headers.append('<a href="#help-top" class="help-top"><span><i class="fa fa-caret-up"></i> Top</span></a>');
-		
+
 		// Fix Lists with nicer bullets
 		help_list_li.prepend('<i class="fa fa-check"></i>');
-		
+
 		// Fix pre tags with properly typed "html"
-		String.prototype.escapeHTML = function () {                                        
-			return(                                                                 
+		String.prototype.escapeHTML = function () {
+			return(
 			  this.replace(/>/g,'&gt;').
 				   replace(/</g,'&lt;').
 				   replace(/"/g,'&quot;')
 			);
 		};
-		
+
 		var fix_code = function(element) {
 			 element.html(element.html().replace(/>/g,'&gt;').replace(/</g,'&lt;').replace(/"/g,'&quot;'))
 		};
-		
+
 		help_code.each(function(){
 			fix_code($(this));
 		});
-		
+
 		if ($(window).width() < 600)
 			view_more.hide();
 		else
 			show_more.addClass('viewing').html('<i class="fa fa-caret-up"></i> Hide');
-		
+
 		show_more.click(function(){
 			if (show_more.hasClass('viewing')) {
 				view_more.fadeOut();
@@ -266,15 +266,15 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 				show_more.html('<i class="fa fa-caret-up"></i> Hide');
 			}
 		});
-		
+
 		step_heading.each(function(){
 			var cur_step = $(this);
 			var step_num = cur_step.find('.step-num');
-			
+
 			var margin_top = (cur_step.height() - step_num.height()) / 2;
 			step_num.css('margin-top', margin_top+'px');
 		});
-		
+
 		// Make options light up on hover
 		option_trs.mouseenter(function(){
 			var button = $(this).find('button');
@@ -284,7 +284,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			var button = $(this).find('button');
 			button.removeClass('btn-primary btn-info');
 		});
-		
+
 		// Make asterisks icons
 		option_asterisk.each(function(){
 			$(this).before('<i class="fa fa-asterisk option-icon"></i> ');
@@ -293,7 +293,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 		option_review.each(function(){
 			$(this).before('<i class="fa fa-thumbs-up option-icon"></i> ');
 		});
-		
+
 		// Make shown event function before calling the modal
 		option_modal.on('show', function(){
 			if (option_modal.hasClass('initialize-module')) {
@@ -304,7 +304,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 				option_modal.removeClass('initilize-module');
 			}
 		});
-		
+
 		// Make Options load into modal
 		option_trs.find('.details').click(function(){
 			var option_tr = $(this).closest('tr');
@@ -312,7 +312,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			// Check real quick that the option is not already loaded
 			if (option_tr.find('.option-name').text() == option_modal.find('.option-name').text())
 				skip_load = true;
-			
+
 			if (!skip_load) {
 				// Get html/text of what to load
 				var option_name = option_tr.find('.option-name').text();
@@ -323,7 +323,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 				var pre_div_text = option_tr.find('.option-example pre').text();
 				var pre_div = $(pre_div_text.replace(/\r/, '').replace(/\t/, '').replace(/(.*)>.*\[.*">/, '$1>'));
 				var pre_inputs = $(pre_div_text.replace(/\r/).replace(/\t/, '').replace(/.*testimonials \/\].*?<(.*)<\/div>/), '>$1').find('input');
-					
+
 				// Get jQuery objects of where to put things
 				var load_name = option_modal.find('.option-name');
 				var load_type = option_modal.find('.option-type');
@@ -334,25 +334,25 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 				var clone_from = load_module.find('.clone-from');
 				var clone_from_module = clone_from.find('.testimonials-module').removeAttr('id');
 				var clone_to = load_module.find('.clone-to');
-				
+
 				// Load it!
 				load_name.text(option_name);
 				load_type.text(option_type);
 				load_default.text(option_default);
 				load_description.html(option_description);
 				load_example.html(option_example);
-				
+
 				// Clear, clone, Load Module
 				pre_div.html(clone_from_module.clone());
 				pre_div.prepend(pre_inputs);
 				clone_to.html(pre_div) // clear the clone_to html with a cleared pre_div.
 				option_modal.addClass('initialize-module');
 			}
-			
+
 			// Show modal
 			option_modal.modal('show');
 		});
-		
+
 		var flash = function(element, time) {
 			time = (time == undefined) ? 300 : time;
 			element.addClass('blink');
@@ -362,29 +362,29 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 				element.removeClass('blink', 400);
 			}, time);
 		};
-		
+
 		initialize_manually_link.click(function(){
 			flash($(this));
 		});
-		
+
 		// The function to make a preview... from the picker.
 		var make_preview = function(skip_check) {
 			var loader = $('<div style="padding: 30px; font-weight:bold;" class="text-center"></div>');
 			loader.append('<i class="fa fa-spinner fa-spin"></i>');
 			loader.append('<div style="margin-top: 10px;">Loading...</div>');
 			preview_container.html(loader);
-			
+
 			var options_true = store_options.html().length;
-			
+
 			// If options, make invisible because it would have to be a list or a carousel.
 			if (options_true)
 				var preview_box = preview_container.html('<div class="testimonial-box" style="visibility: hidden;"></div>').find('.testimonial-box');
 			else
 				var preview_box = preview_container.html('<div class="testimonial-box"></div>').find('.testimonial-box');
-			
+
 			// Start building code
 			var code = $(preview_container.html());
-			
+
 			// CHECK FOR ERRORS
 			if (skip_check == undefined) {
 				if (!store_options.find('[name=review_option_display]').length && options_true) {
@@ -425,14 +425,14 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 					flash($('.option-name:contains(review_option_name)').closest('tr'), 'never');
 				}
 			}
-			
+
 			if (error == undefined) {
 				if (!store_options.find('[name=review_option_clear]').length && options_true)
 					store_options.append('<input type="hidden" name="review_option_clear" value="true"/>');
-			
+
 				if (store_options.find('[name=review_option_display]').val() == 'list' && !store_options.find('[name=review_option_offset]').length)
 					store_options.append('<input type="hidden" name="review_option_offset" value="0"/>');
-					
+
 				// Load Clone
 				preview_box.html(help_container.find('.clone-from').html());
 
@@ -467,21 +467,21 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 				module_code_textarea.text('Add missing options to get code.');
 			}
 		}
-		
+
 		// When you click the text area it selects
 		module_code_textarea.click(function(){
 			$(this).select();
 		});
-		
+
 		// Start with a plain preview:
 		make_preview();
-		
+
 		// preview button makes a whole new clone...
 		preview_button.click(function(){
 			make_preview();
 		});
-		
-		
+
+
 		// Add an item to the store options
 		option_trs.find('.add').click(function(){
 			var tr = $(this).closest('tr');
@@ -489,42 +489,42 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			var requirements = tr.find('.add-requirements').html();
 			var section = tr.find('.add-section').html();
 			var name = tr.find('.option-name').text();
-			
+
 			// Get sections to load things to...
 			var load_requirements = add_modal.find('.add-requirements');
 			var load_section = add_modal.find('.add-section');
 			var load_name = add_modal.find('.add-name');
-			
-			
+
+
 			// Load them
 			load_requirements.html(requirements);
 			load_section.html(section);
 			load_name.html(name);
-			
+
 			// Create some cool events
 			var get_value = load_section.find('.option-get-value');
 			var put_value = load_section.find('.option-put-value');
-			
+
 			get_value.change(function(){
 				var value = $(this).val();
 				if (value != '') {
 					put_value.val(value);
 				}
 			});
-			
+
 			add_modal.modal();
 		});
-		
+
 		add_modal_button.click(function(){
 			// Take the current modal's "put-value" and add it to store options
 			var put_input = add_modal.find('.option-put-value');
 			var put_value = (put_input.val() == undefined) ? '' : put_input.val();
 			var put_name = put_input.attr('name');
-			
+
 			var additional_tags = store_options.find('[name=review_option_additional_tags]');
-			
+
 			if (put_value != '' && !store_options.find('[name='+put_name+']').length) {
-				
+
 				// Special stuff is the "comment" for review_option_type
 				if (put_name == 'review_option_type' && put_value == 'comment') {
 					// they want a review, but also add in submit_refresh and make sure it's a list and add tag comment
@@ -534,10 +534,10 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 						additional_tags.val(additional_tags.val() + ',comment');
 					} else
 						store_options.append('<input type="hidden" name="review_option_additional_tags" value="comment" />');
-					
+
 				}
-				
-				if (put_name == 'review_option_additional_tags' && additional_tags.length) 
+
+				if (put_name == 'review_option_additional_tags' && additional_tags.length)
 					additional_tags.val(additional_tags.val() + ','+put_value);
 				else
 					store_options.append('<input type="hidden" name="'+put_name+'" value="'+put_value+'" />');
@@ -550,7 +550,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			// Should we auto-trigger previews? Or not? Maybe? Cause it will help tell the user what options they need
 			make_preview();
 		});
-		
+
 		undo_button.click(function(){
 			if (store_options.html().length) {
 				store_options.find('input').last().remove();
@@ -560,7 +560,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 				preview_container.prepend('<div class="blink help-info-highlight" style="margin-bottom: 20px;">No options to undo.</div>')
 			}
 		});
-		
+
 		clear_button.click(function(){
 			store_options.html('');
 			option_trs.filter('.blink').removeClass('blink');
@@ -640,7 +640,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			<hr>
 			<h3 class="text-center" id="help-implementation">Implementation</h3>
 			<p class="help-info-plain">
-				Any Testimonial, Review, or Comment can be 
+				Any Testimonial, Review, or Comment can be
 				easily implemented on your <strong>website content pages</strong>.
 			</p>
 			<hr/>
@@ -683,7 +683,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="col-sm-12">
 			<hr/>
@@ -692,19 +692,19 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 			<hr/>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="col-sm-6">
 			<h3>Options</h3>
 			<p class="help-info height">
-				<i class="fa fa-exclamation-triangle"></i> All options must be <strong>hidden inputs</strong>, and they <span class="label label-important">All Require</span> display type <strong>List</strong> or <strong>Carousel</strong>.
+				<i class="fa fa-exclamation-triangle"></i> All options must be <strong>hidden inputs</strong>, and they <span class="label label-warning">All Require</span> display type <strong>List</strong> or <strong>Carousel</strong>.
 			</p>
 			<p class="alert alert-info">
 				<i class="fa fa-asterisk"></i> Required for List | Carousel, and therefore all modules with options.<br/><br/>
 				<i class="fa fa-thumbs-up"></i> Required for Reviews
 			</p>
-			<p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 
-				If your carousel modules are hidden when initializing, 
+			<p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i>
+				If your carousel modules are hidden when initializing,
 				you should <a class="initialize-manually" href="#initialize-manually">initialize manually</a>.
 			</p>
 			<table class="table option-table table-condensed">
@@ -1548,7 +1548,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 					</tr>
 				</tbody>
 			</table>
-			
+
 			<div class="option-modal modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -1592,7 +1592,7 @@ $font_light = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimonials->a
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="add-modal modal hide fade in">
 				<div class="modal-header">
 					<button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>

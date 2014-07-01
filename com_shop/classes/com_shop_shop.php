@@ -99,6 +99,19 @@ class com_shop_shop extends entity {
 	}
 
 	/**
+	 * Print a shop owner info.
+	 * @return module The module.
+	 */
+	public function print_owner() {
+		$module = new module('com_shop', 'shop/owner', '');
+		$module->entity = $this;
+		$module->detach();
+		echo $module->render();
+
+		return $module;
+	}
+
+	/**
 	 * Print a form to edit the shop.
 	 * @return module The form's module.
 	 */

@@ -19,5 +19,10 @@ if (!empty($_REQUEST['id'])) {
 		punt_user(null, pines_url('com_sales', 'product/edit'));
 }
 
+if ($_->config->com_sales->com_shop && !isset($_SESSION['shop'])) {
+	pines_notice('You must have a shop to add products.');
+	pines_redirect(pines_url('com_shop', 'shop/edit'));
+}
+
 $entity = com_sales_product::factory((int) $_REQUEST['id']);
 $entity->print_form();

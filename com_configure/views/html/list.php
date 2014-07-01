@@ -148,7 +148,7 @@ $this->title = 'Component Configuration';
 			<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_components" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
 				<big class="panel-title">
 					<span class="panel-title"><?php e($cur_component->info->name); ?></span>
-					<?php echo $cur_component->config ? ' <span class="label label-info">Modified</span>' : ''; echo $cur_component->is_disabled() ? ' <span class="label label-important">Disabled</span>' : ''; ?>
+					<?php echo $cur_component->config ? ' <span class="label label-info">Modified</span>' : ''; echo $cur_component->is_disabled() ? ' <span class="label label-warning">Disabled</span>' : ''; ?>
 					<span class="version">
 						<span class="version-text"><?php e($cur_component->name); ?> <?php e($cur_component->info->version); ?></span>
 					</span>

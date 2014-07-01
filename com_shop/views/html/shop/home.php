@@ -30,7 +30,9 @@ $this->show_title = false;
 					<?php echo $this->entity->short_description; ?>
 				</div>
 			</div>
-			<div class="col-sm-4"><div class="shop_owner shop_box"></div></div>
+			<div class="col-sm-4">
+				<div class="shop_owner shop_box"><?php $this->entity->print_owner(); ?></div>
+			</div>
 		</div>
 		<div class="shop_page row">
 			<div class="col-sm-8">

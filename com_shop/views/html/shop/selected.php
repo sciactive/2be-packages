@@ -10,8 +10,6 @@
  */
 /* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-
-if (isset($_SESSION['shop'])) {
 ?>
 <style type="text/css">
 	#p_muid_thumbnail {
@@ -32,12 +30,10 @@ if (isset($_SESSION['shop'])) {
 </style>
 <div id="p_muid_box">
 	<div>
+		<?php if (isset($_SESSION['shop'])) { ?>
 		<img alt="Current Shop: <?php e($_SESSION['shop']->name); ?>" title="Current Shop: <?php e($_SESSION['shop']->name); ?>" id="p_muid_thumbnail" src="<?php e($_->config->location.$_SESSION['shop']->thumbnail); ?>" />
+		<?php } else { ?>
+		<span id="p_muid_thumbnail" class="label label-primary">No Shop</span>
+		<?php } ?>
 	</div>
 </div>
-<?php
-} else {
-?>
-<a class="btn btn-primary">No Shop</a>
-<?php
-}

@@ -24,9 +24,9 @@ $_.entity_helper = function(e) {
 			}
 			$_.pause();
 			if (data.title)
-				header.find("h3").text(data.title);
+				header.find(".modal-title").text(data.title);
 			else
-				header.find("h3").text("Entity "+$_.safe(guid)+" ("+$_.safe(context)+")");
+				header.find(".modal-title").text("Entity "+$_.safe(guid)+" ("+$_.safe(context)+")");
 			body.html(data.body);
 			footer.html(data.footer);
 			$_.play();
