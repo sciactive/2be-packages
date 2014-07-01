@@ -39,7 +39,6 @@ if ($_->config->tpl_shop->ajax && ($_REQUEST['tpl_shop_ajax'] == 1 && strpos($_S
 	return;
 }
 header('Content-Type: text/html');
-$_->com_bootstrap->load_js_css();
 
 ?>
 <!DOCTYPE html>
