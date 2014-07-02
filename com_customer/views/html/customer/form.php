@@ -552,7 +552,7 @@ $_->com_customer->load_company_select();
 			<?php } if (in_array('description', $_->config->com_customer->shown_fields_customer) && (!in_array('description', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->description))) { ?>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Description</span><br />
-				<textarea rows="3" cols="35" class="pf-field peditor" style="width: 100%;" name="description"><?php e($this->entity->description); ?></textarea>
+				<textarea rows="3" cols="35" class="pf-field peditor" style="width: 100%;" name="description"><?php e($this->entity->description_pesource); ?></textarea>
 			</div>
 			<?php } ?>
 			<br class="pf-clearing" />

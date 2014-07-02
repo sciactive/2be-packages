@@ -102,8 +102,18 @@ while (true) {
 	}
 	break;
 }
-$shop->description = $_REQUEST['description'];
-$shop->short_description = $_REQUEST['short_description'];
+if (is_callable($_->editor, 'parse_input')) {
+	$shop->description_pesource = $_REQUEST['description'];
+	$shop->description = $_->editor->parse_input($_REQUEST['description']);
+} else {
+	$shop->description = $_REQUEST['description'];
+}
+if (is_callable($_->editor, 'parse_input')) {
+	$shop->short_description_pesource = $_REQUEST['short_description'];
+	$shop->short_description = $_->editor->parse_input($_REQUEST['short_description']);
+} else {
+	$shop->short_description = $_REQUEST['short_description'];
+}
 
 // Attributes
 $shop->attributes = (array) json_decode($_REQUEST['attributes']);

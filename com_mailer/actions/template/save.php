@@ -28,7 +28,12 @@ if ( isset($_REQUEST['id']) ) {
 // General
 $template->name = $_REQUEST['name'];
 $template->enabled = ($_REQUEST['enabled'] == 'ON');
-$template->content = $_REQUEST['content'];
+if (is_callable($_->editor, 'parse_input')) {
+	$template->content_pesource = $_REQUEST['content'];
+	$template->content = $_->editor->parse_input($_REQUEST['content']);
+} else {
+	$template->content = $_REQUEST['content'];
+}
 
 // Replace
 $template->replacements = (array) json_decode($_REQUEST['replacements']);

@@ -47,8 +47,18 @@ foreach ($page->content_tags as $key => $cur_tag) {
 		unset($page->content_tags[$key]);
 }
 // TODO: Use an HTML filter here.
-$page->intro = $_REQUEST['intro'];
-$page->content = $_REQUEST['content'];
+if (is_callable($_->editor, 'parse_input')) {
+	$page->intro_pesource = $_REQUEST['intro'];
+	$page->intro = $_->editor->parse_input($_REQUEST['intro']);
+} else {
+	$page->intro = $_REQUEST['intro'];
+}
+if (is_callable($_->editor, 'parse_input')) {
+	$page->content_pesource = $_REQUEST['content'];
+	$page->content = $_->editor->parse_input($_REQUEST['content']);
+} else {
+	$page->content = $_REQUEST['content'];
+}
 
 // Page Head
 if (gatekeeper('com_content/editmeta')) {

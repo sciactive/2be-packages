@@ -31,8 +31,18 @@ $product->enabled = ($_REQUEST['enabled'] == 'ON');
 $product->autocomplete_hide = ($_REQUEST['autocomplete_hide'] == 'ON');
 $product->sku = $_REQUEST['sku'];
 $product->receipt_description = $_REQUEST['receipt_description'];
-$product->short_description = $_REQUEST['short_description'];
-$product->description = $_REQUEST['description'];
+if (is_callable($_->editor, 'parse_input')) {
+	$product->description_pesource = $_REQUEST['description'];
+	$product->description = $_->editor->parse_input($_REQUEST['description']);
+} else {
+	$product->description = $_REQUEST['description'];
+}
+if (is_callable($_->editor, 'parse_input')) {
+	$product->short_description_pesource = $_REQUEST['short_description'];
+	$product->short_description = $_->editor->parse_input($_REQUEST['short_description']);
+} else {
+	$product->short_description = $_REQUEST['short_description'];
+}
 $product->manufacturer = ($_REQUEST['manufacturer'] == 'null' ? null : com_sales_manufacturer::factory((int) $_REQUEST['manufacturer']));
 if (!isset($product->manufacturer->guid))
 	$product->manufacturer = null;

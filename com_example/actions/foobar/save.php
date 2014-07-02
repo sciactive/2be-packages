@@ -28,8 +28,18 @@ if ( isset($_REQUEST['id']) ) {
 // General
 $foobar->name = $_REQUEST['name'];
 $foobar->enabled = ($_REQUEST['enabled'] == 'ON');
-$foobar->description = $_REQUEST['description'];
-$foobar->short_description = $_REQUEST['short_description'];
+if (is_callable($_->editor, 'parse_input')) {
+	$foobar->description_pesource = $_REQUEST['description'];
+	$foobar->description = $_->editor->parse_input($_REQUEST['description']);
+} else {
+	$foobar->description = $_REQUEST['description'];
+}
+if (is_callable($_->editor, 'parse_input')) {
+	$foobar->short_description_pesource = $_REQUEST['short_description'];
+	$foobar->short_description = $_->editor->parse_input($_REQUEST['short_description']);
+} else {
+	$foobar->short_description = $_REQUEST['short_description'];
+}
 
 // Attributes
 $foobar->attributes = (array) json_decode($_REQUEST['attributes']);

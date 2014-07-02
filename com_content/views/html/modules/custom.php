@@ -13,6 +13,10 @@ defined('P_RUN') or die('Direct access prohibited');
 
 if ($_->config->com_content->wrap_content)
 	echo '<div style="position: relative;">';
-echo format_content($this->icontent);
+if (is_callable($_->editor, 'parse_input')) {
+	echo format_content($_->editor->parse_input($this->icontent));
+} else {
+	echo format_content($this->icontent);
+}
 if ($_->config->com_content->wrap_content)
 	echo '</div>';

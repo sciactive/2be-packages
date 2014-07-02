@@ -79,7 +79,12 @@ $category->show_title = ($_REQUEST['show_title'] == 'null' ? null : ($_REQUEST['
 $category->show_breadcrumbs = ($_REQUEST['show_breadcrumbs'] == 'null' ? null : ($_REQUEST['show_breadcrumbs'] == 'true'));
 $category->per_page = ($_REQUEST['per_page'] === '' ? null : (int) $_REQUEST['per_page']);
 $category->pagination_type = ($_REQUEST['pagination_type'] == 'null' ? null : $_REQUEST['pagination_type']);
-$category->intro = $_REQUEST['intro'];
+if (is_callable($_->editor, 'parse_input')) {
+	$category->intro_pesource = $_REQUEST['intro'];
+	$category->intro = $_->editor->parse_input($_REQUEST['intro']);
+} else {
+	$category->intro = $_REQUEST['intro'];
+}
 $category->variants = array();
 if (is_array($_REQUEST['variants'])) {
 	foreach ($_REQUEST['variants'] as $cur_variant_entry) {

@@ -182,7 +182,7 @@ $_->com_pgrid->load();
 			</div>
 			<div class="pf-element pf-full-width">
 				Put the text "#content#" (without quotes) where you want the content of the email to go.<br />
-				<textarea rows="20" cols="35" class="peditor-email" style="width: 100%;" name="content"><?php e($this->entity->content); ?></textarea>
+				<textarea rows="20" cols="35" class="peditor-email" style="width: 100%;" name="content"><?php e($this->entity->content_pesource); ?></textarea>
 			</div>
 			<div class="pf-element">
 				Macros let you replace a string with a value that can change. To

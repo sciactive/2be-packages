@@ -161,13 +161,13 @@ if (!$this->quickpage_options) {
 				<h3>Intro</h3>
 			</div>
 			<div class="pf-element pf-full-width">
-				<textarea rows="3" cols="35" class="peditor" style="width: 100%;" name="intro"><?php e($this->entity->intro); ?></textarea>
+				<textarea rows="3" cols="35" class="peditor" style="width: 100%;" name="intro"><?php e($this->entity->intro_pesource); ?></textarea>
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Content</h3>
 			</div>
 			<div class="pf-element pf-full-width">
-				<textarea rows="8" cols="35" class="peditor" style="width: 100%; height: 500px;" name="content"><?php e($this->entity->content); ?></textarea>
+				<textarea rows="8" cols="35" class="peditor" style="width: 100%; height: 500px;" name="content"><?php e($this->entity->content_pesource); ?></textarea>
 			</div>
 			<?php } ?>
 			<br class="pf-clearing" />
@@ -534,7 +534,7 @@ if (!$this->quickpage_options) {
 /* pygmentize -l html -f html -o /dev/stdout pygments.html
 <script type="text/javascript">
 	$_(function(){
-		// This code will run after all files have 
+		// This code will run after all files have
 		// been loaded and after the page is ready.
 		... code ...
 	});

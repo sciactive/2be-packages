@@ -34,7 +34,12 @@ $rendition->to = $_REQUEST['to'];
 $rendition->cc = $_REQUEST['cc'];
 $rendition->bcc = $_REQUEST['bcc'];
 $rendition->subject = $_REQUEST['subject'];
-$rendition->content = $_REQUEST['content'];
+if (is_callable($_->editor, 'parse_input')) {
+	$rendition->content_pesource = $_REQUEST['content'];
+	$rendition->content = $_->editor->parse_input($_REQUEST['content']);
+} else {
+	$rendition->content = $_REQUEST['content'];
+}
 
 // Conditions
 $conditions = (array) json_decode($_REQUEST['conditions']);

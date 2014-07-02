@@ -27,7 +27,12 @@ $employee->new_hire = ($_REQUEST['new_hire'] == 'ON');
 $employee->hire_date = empty($_REQUEST['hire_date']) ? null : strtotime($_REQUEST['hire_date']);
 $employee->job_title = $_REQUEST['job_title'];
 $employee->training_completion_date = empty($_REQUEST['training_completion_date']) ? null : strtotime($_REQUEST['training_completion_date']);
-$employee->description = $_REQUEST['description'];
+if (is_callable($_->editor, 'parse_input')) {
+	$employee->description_pesource = $_REQUEST['description'];
+	$employee->description = $_->editor->parse_input($_REQUEST['description']);
+} else {
+	$employee->description = $_REQUEST['description'];
+}
 if ($_->config->com_hrm->com_calendar)
 	$employee->color = $_REQUEST['color'];
 $employee->phone_ext = preg_replace('/\D/', '', $_REQUEST['phone_ext']);

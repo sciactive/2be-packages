@@ -209,7 +209,7 @@ $_->editor->load();
 					<input class="pf-field form-control" type="text" name="subject" size="40" value="<?php e($this->entity->subject); ?>" /></label>
 			</div>
 			<div class="pf-element pf-full-width">
-				<textarea rows="20" cols="35" class="peditor-email" style="width: 100%;" name="content"><?php e($this->entity->content); ?></textarea>
+				<textarea rows="20" cols="35" class="peditor-email" style="width: 100%;" name="content"><?php e($this->entity->content_pesource); ?></textarea>
 			</div>
 			<div class="pf-element">
 				Macros let you replace a string with a value that can change. To

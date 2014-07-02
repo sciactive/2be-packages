@@ -156,11 +156,11 @@ $_->uploader->load();
 			</div>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Description</span><br />
-				<textarea rows="3" cols="35" class="peditor" style="width: 100%;" name="description"><?php e($this->entity->description); ?></textarea>
+				<textarea rows="3" cols="35" class="peditor" style="width: 100%;" name="description"><?php e($this->entity->description_pesource); ?></textarea>
 			</div>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Short Description</span><br />
-				<textarea rows="3" cols="35" class="peditor-simple" style="width: 100%;" name="short_description"><?php e($this->entity->short_description); ?></textarea>
+				<textarea rows="3" cols="35" class="peditor-simple" style="width: 100%;" name="short_description"><?php e($this->entity->short_description_pesource); ?></textarea>
 			</div>
 			<br class="pf-clearing" />
 		</div>

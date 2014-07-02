@@ -145,6 +145,11 @@ class entity implements entity_interface {
 			$this->data[$name] = unserialize($this->sdata[$name]);
 			unset($this->sdata[$name]);
 		}
+		// Check for peditor sources.
+		if (substr($name, -9) === "_pesource" && !isset($this->sdata[$name]) && isset($this->sdata[substr($name, 0, -9)])) {
+			$this->data[substr($name, 0, -9)] = unserialize($this->sdata[substr($name, 0, -9)]);
+			unset($this->sdata[substr($name, 0, -9)]);
+		}
 		// Check for an entity first.
 		if (isset($this->entity_cache[$name])) {
 			if ($this->data[$name][0] == 'pines_entity_reference') {
@@ -167,10 +172,14 @@ class entity implements entity_interface {
 			// But, if it's an array, check all the values for entity references, and change them.
 			array_walk($this->data[$name], array($this, 'reference_to_entity'));
 		} elseif ((object) $this->data[$name] === $this->data[$name] && !(((is_a($this->data[$name], 'entity') || is_a($this->data[$name], 'hook_override'))) && is_callable(array($this->data[$name], 'to_reference')))) {
-			// Only do this for non-entity objects.	
+			// Only do this for non-entity objects.
 			foreach ($this->data[$name] as &$cur_property)
 				$this->reference_to_entity($cur_property, null);
 			unset($cur_property);
+		}
+		// Check for peditor sources.
+		if (substr($name, -9) === "_pesource" && !isset($this->data[$name])) {
+			return $this->data[substr($name, 0, -9)];
 		}
 		return $this->data[$name];
 	}
@@ -506,7 +515,7 @@ class entity implements entity_interface {
 				array_walk($item, array($this, 'reference_to_entity'));
 			}
 		} elseif ((object) $item === $item && !(((is_a($item, 'entity') || is_a($item, 'hook_override'))) && is_callable(array($item, 'to_reference')))) {
-			// Only do this for non-entity objects.	
+			// Only do this for non-entity objects.
 			foreach ($item as &$cur_property)
 				$this->reference_to_entity($cur_property, null);
 			unset($cur_property);
@@ -515,7 +524,7 @@ class entity implements entity_interface {
 
 	/**
 	 * Wake from a sleeping reference.
-	 * 
+	 *
 	 * @return bool True on success, false on failure.
 	 */
 	private function reference_wake() {

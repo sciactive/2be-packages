@@ -114,7 +114,7 @@ $_->com_pgrid->load();
 				$("#p_muid_rate").hide();
 			}
 		}).change();
-		
+
 		$('#p_muid_form').find('.input-mask').keyup(function(){
 			var field = $(this);
 			if (field.attr('name').match(/phone$/)) {
@@ -232,7 +232,7 @@ $_->com_pgrid->load();
 			</div>
 			<div class="pf-element pf-full-width">
 				<span class="pf-label">Description</span><br />
-				<textarea rows="3" cols="35" class="pf-field peditor" style="width: 100%;" name="description"><?php e($this->entity->description); ?></textarea>
+				<textarea rows="3" cols="35" class="pf-field peditor" style="width: 100%;" name="description"><?php e($this->entity->description_pesource); ?></textarea>
 			</div>
 			<br class="pf-clearing" />
 		</div>

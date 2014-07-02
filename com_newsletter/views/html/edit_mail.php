@@ -38,7 +38,7 @@ $_->uploader->load();
 		<h3>Message</h3>
 	</div>
 	<div class="pf-element pf-full-width">
-		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea rows="3" cols="35" class="peditor" name="data" style="width: 100%;"><?php e($this->entity->message); ?></textarea></div>
+		<div class="pf-group pf-full-width" style="margin-left: 0;"><textarea rows="3" cols="35" class="peditor" name="data" style="width: 100%;"><?php e($this->entity->message_pesource); ?></textarea></div>
 	</div>
 	<div class="pf-element pf-heading">
 		<h3>Attachments</h3>

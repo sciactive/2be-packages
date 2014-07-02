@@ -593,7 +593,7 @@ $_->com_ptags->load();
 /* pygmentize -l html -f html -o /dev/stdout pygments.html
 <script type="text/javascript">
 	$_(function(){
-		// This code will run after all files have 
+		// This code will run after all files have
 		// been loaded and after the page is ready.
 		... code ...
 	});
@@ -685,7 +685,7 @@ $_->com_ptags->load();
 				<h3>Intro</h3>
 			</div>
 			<div class="pf-element pf-full-width">
-				<textarea rows="8" cols="35" class="peditor" style="width: 100%;" name="intro"><?php e($this->entity->intro); ?></textarea>
+				<textarea rows="8" cols="35" class="peditor" style="width: 100%;" name="intro"><?php e($this->entity->intro_pesource); ?></textarea>
 			</div>
 			<div class="pf-element pf-heading">
 				<h3>Page Variants</h3>

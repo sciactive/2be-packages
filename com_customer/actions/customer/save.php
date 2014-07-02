@@ -57,8 +57,14 @@ $customer->phone_home = preg_replace('/\D/', '', $_REQUEST['phone_home']);
 $customer->fax = preg_replace('/\D/', '', $_REQUEST['fax']);
 $customer->timezone = $_REQUEST['timezone'];
 $customer->referrer = $_REQUEST['referrer'];
-if (!in_array('description', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->description))
-	$customer->description = $_REQUEST['description'];
+if (!in_array('description', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->description)) {
+	if (is_callable($_->editor, 'parse_input')) {
+		$customer->description_pesource = $_REQUEST['description'];
+		$customer->description = $_->editor->parse_input($_REQUEST['description']);
+	} else {
+		$customer->description = $_REQUEST['description'];
+	}
+}
 
 // Account
 if (!in_array('account', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->username)) {
