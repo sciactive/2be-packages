@@ -13,6 +13,9 @@ defined('P_RUN') or die('Direct access prohibited');
 
 $user = $this->entity->user;
 
+if (!isset($user))
+	return;
+
 ?>
 <div id="p_muid_owner" class="shop_owner">
 	<h4 style="margin: 5px; float: right;">Shop Owner</h4>
