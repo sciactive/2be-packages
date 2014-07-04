@@ -41,9 +41,9 @@ foreach ($category->products as $product) {
 			}
 		}
 	}
-	
+
 	$json_struct = (object) array(
-		'guid' => $product->guid,
+		'guid' => "$product->guid",
 		'name' => $product->name,
 		'sku' => $product->sku,
 		'stock_type' => $product->stock_type,

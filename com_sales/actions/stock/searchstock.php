@@ -48,13 +48,13 @@ if (preg_match('/^\s*$/', $query)) {
 // Build JSON array.
 foreach ($stock_entries as &$stock_entry) {
 	// Get last transaction
-	if (!isset($stock_entry->guid)) 
+	if (!isset($stock_entry->guid))
 		$last_transaction = "";
 	else
 		$last_transaction = preg_replace('/\bpo\b/i', 'PO', ucwords(str_replace('_', ' ', $stock_entry->last_reason())));
 	$stock_entry = array(
-		'guid' => $stock_entry->guid,
-		'product_guid' => $stock_entry->product->guid,
+		'guid' => "$stock_entry->guid",
+		'product_guid' => "{$stock_entry->product->guid}",
 		'enabled' => $stock_entry->product->enabled,
 		'product_sku' => $stock_entry->product->sku,
 		'product_name' => $stock_entry->product->name,

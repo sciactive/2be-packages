@@ -27,7 +27,7 @@ $users = (array) $group->get_users(true);
 
 $json_data = array(
 	$group->guid => array(
-		'guid' => $group->guid,
+		'guid' => "$group->guid",
 		'type' => 'location',
 		'name' => $group->name,
 		'parent' => ($descendants || $users)
@@ -37,11 +37,11 @@ $json_data = array(
 // Add all the groups.
 foreach ($descendants as $cur_group) {
 	$json_data[$cur_group->guid] = array(
-		'guid' => $cur_group->guid,
+		'guid' => "$cur_group->guid",
 		'type' => 'location',
 		'name' => $cur_group->name,
 		'parent' => false,
-		'parent_id' => (isset($cur_group->parent->guid) ? $cur_group->parent->guid : ''),
+		'parent_id' => (isset($cur_group->parent->guid) ? "{$cur_group->parent->guid}" : ''),
 		'child' => isset($cur_group->parent->guid)
 	);
 }
@@ -64,11 +64,11 @@ foreach ($users as $cur_user) {
 	$json_data[$cur_user->group->guid]['parent'] = true;
 	// Add the user.
 	$json_data[$cur_user->guid] = array(
-		'guid' => $cur_user->guid,
+		'guid' => "$cur_user->guid",
 		'type' => 'employee',
 		'name' => $cur_user->name,
 		'parent' => false,
-		'parent_id' => $cur_user->group->guid,
+		'parent_id' => "{$cur_user->group->guid}",
 		'child' => true
 	);
 }

@@ -140,7 +140,7 @@ $_->com_bootstrap->load();
 						struct.push($(this).attr("href").replace(/^#/, ""));
 					});
 					$.ajax({
-						url: <?php echo json_encode(pines_url('com_dash', 'dashboard/savetabs_json', array('id' => (string) $this->entity->guid))); ?>,
+						url: <?php echo json_encode(pines_url('com_dash', 'dashboard/savetabs_json', array('id' => "{$this->entity->guid}"))); ?>,
 						type: "POST",
 						dataType: "json",
 						data: {"order": JSON.stringify(struct)},
@@ -176,7 +176,7 @@ $_->com_bootstrap->load();
 			<a href="#p_muid_<?php e($cur_key); ?>" data-toggle="tab">
 				<?php e($cur_tab['name']);
 				if ($this->editable) { ?>
-				<span class="edit_tab w_icon fa fa-cog" title="Edit this Tab" onclick="var link = $(this).closest('a'); $('#p_muid_<?php e($cur_key); ?>').data('tab_loaded', true).data('trigger_link', link).load(<?php e(json_encode(pines_url('com_dash', 'dashboard/edittab', array('id' => (string) $this->entity->guid, 'key' => $cur_key)))); ?>); link.tab('show');"></span>
+				<span class="edit_tab w_icon fa fa-cog" title="Edit this Tab" onclick="var link = $(this).closest('a'); $('#p_muid_<?php e($cur_key); ?>').data('tab_loaded', true).data('trigger_link', link).load(<?php e(json_encode(pines_url('com_dash', 'dashboard/edittab', array('id' => "{$this->entity->guid}", 'key' => $cur_key)))); ?>); link.tab('show');"></span>
 				<?php } ?>
 			</a>
 		</li>
@@ -187,7 +187,7 @@ $_->com_bootstrap->load();
 	</ul>
 	<div class="tab-content" id="p_muid_page_tabs">
 		<?php $first = true; foreach ($this->entity->tabs as $cur_key => $cur_tab) { ?>
-		<div class="tab-pane <?php echo ($cur_key === $this->selected_tab || (!isset($this->selected_tab) && $first)) ? 'active' : ''; ?>" id="p_muid_<?php e($cur_key); ?>" data-url="<?php e(pines_url('com_dash', 'dashboard/tab', array('id' => (string) $this->entity->guid, 'key' => $cur_key, 'editable' => ($this->editable ? 'true' : 'false')))); ?>">
+		<div class="tab-pane <?php echo ($cur_key === $this->selected_tab || (!isset($this->selected_tab) && $first)) ? 'active' : ''; ?>" id="p_muid_<?php e($cur_key); ?>" data-url="<?php e(pines_url('com_dash', 'dashboard/tab', array('id' => "{$this->entity->guid}", 'key' => $cur_key, 'editable' => ($this->editable ? 'true' : 'false')))); ?>">
 			<?php if ($cur_key === $this->selected_tab || (!isset($this->selected_tab) && $first)) { ?>
 			<script type="text/javascript">
 				$_(function(){
@@ -204,7 +204,7 @@ $_->com_bootstrap->load();
 		</div>
 		<?php $first = false; }
 		if ($this->editable) { ?>
-		<div class="tab-pane" id="p_muid_edit_tab" data-url="<?php e(pines_url('com_dash', 'dashboard/edittab', array('id' => (string) $this->entity->guid))); ?>">
+		<div class="tab-pane" id="p_muid_edit_tab" data-url="<?php e(pines_url('com_dash', 'dashboard/edittab', array('id' => "{$this->entity->guid}"))); ?>">
 			<div style="display: block; width: 32px; height: 32px; margin: 0 auto;" class="picon picon-32 picon-throbber"></div>
 		</div>
 		<?php } ?>

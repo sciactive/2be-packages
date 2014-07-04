@@ -40,7 +40,7 @@ if (isset($special)) {
 		if (isset($cur_discount['qualifier']))
 			$discounts[] = array(
 				'type' => $cur_discount['type'],
-				'qualifier' => $cur_discount['qualifier']->guid,
+				'qualifier' => "{$cur_discount['qualifier']->guid}",
 				'value' => $cur_discount['value']
 			);
 		else
@@ -51,14 +51,14 @@ if (isset($special)) {
 		if (is_object($cur_requirement['value']))
 			$requirements[] = array(
 				'type' => $cur_requirement['type'],
-				'value' => $cur_requirement['value']->guid
+				'value' => "{$cur_requirement['value']->guid}"
 			);
 		else
 			$requirements[] = $cur_requirement;
 	}
 
 	$json_struct = (object) array(
-		'guid' => $special->guid,
+		'guid' => "$special->guid",
 		'name' => $special->name,
 		'per_ticket' => $special->per_ticket,
 		'before_tax' => $special->before_tax,

@@ -1,13 +1,13 @@
 <?php
 /**
  * Provides a form for the user to edit a sale.
- * 
+ *
  * This file contains probably the most unholy and confusing heap of JavaScript
  * in all of 2be. I highly suggest you don't attempt to customize it.
- * 
+ *
  * But if you choose to battle with this JS, I can't stop you. It's dangerous to
  * go alone! Take this.
- * 
+ *
  *       ooo
  *     ooooooo
  *     ooooooo
@@ -130,7 +130,7 @@ if ($_->config->com_sales->com_esp) {
 					if (isset($cur_discount['qualifier']))
 						$discounts[] = array(
 							'type' => $cur_discount['type'],
-							'qualifier' => $cur_discount['qualifier']->guid,
+							'qualifier' => "{$cur_discount['qualifier']->guid}",
 							'value' => $cur_discount['value']
 						);
 					else
@@ -141,13 +141,13 @@ if ($_->config->com_sales->com_esp) {
 					if (is_object($cur_requirement['value']))
 						$requirements[] = array(
 							'type' => $cur_requirement['type'],
-							'value' => $cur_requirement['value']->guid
+							'value' => "{$cur_requirement['value']->guid}"
 						);
 					else
 						$requirements[] = $cur_requirement;
 				}
 				$elig_specials[] = array(
-					'guid' => $cur_special->guid,
+					'guid' => "$cur_special->guid",
 					'name' => $cur_special->name,
 					'per_ticket' => $cur_special->per_ticket,
 					'before_tax' => $cur_special->before_tax,
@@ -162,7 +162,7 @@ if ($_->config->com_sales->com_esp) {
 					if (isset($cur_discount['qualifier']))
 						$discounts[] = array(
 							'type' => $cur_discount['type'],
-							'qualifier' => $cur_discount['qualifier']->guid,
+							'qualifier' => "{$cur_discount['qualifier']->guid}",
 							'value' => $cur_discount['value']
 						);
 					else
@@ -173,13 +173,13 @@ if ($_->config->com_sales->com_esp) {
 					if (is_object($cur_requirement['value']))
 						$requirements[] = array(
 							'type' => $cur_requirement['type'],
-							'value' => $cur_requirement['value']->guid
+							'value' => "{$cur_requirement['value']->guid}"
 						);
 					else
 						$requirements[] = $cur_requirement;
 				}
 				$added_specials[] = array(
-					'guid' => $cur_special->guid,
+					'guid' => "$cur_special->guid",
 					'name' => $cur_special->name,
 					'per_ticket' => $cur_special->per_ticket,
 					'before_tax' => $cur_special->before_tax,
@@ -473,8 +473,8 @@ if ($_->config->com_sales->com_esp) {
 								} else if (insured_item.pgrid_get_value(10) != '') {
 									alert('There is already an ESP for this item');
 									return;
-								} 
-								
+								}
+
 								<?php if (!empty($_->config->com_esp->product_min_price)) { ?>
 									var product_min = $_.safe(<?php echo $_->config->com_esp->product_min_price; ?>);
 									var insured_item_price = insured_item.pgrid_get_value(6);
@@ -505,7 +505,7 @@ if ($_->config->com_sales->com_esp) {
 								}
 
 								$json_struct = (object) array(
-									'guid' => $esp_product->guid,
+									'guid' => "$esp_product->guid",
 									'name' => $esp_product->name,
 									'sku' => $esp_product->sku,
 									'stock_type' => $esp_product->stock_type,
@@ -529,7 +529,7 @@ if ($_->config->com_sales->com_esp) {
 								foreach ((array) $esp_product->return_checklists as $cur_return_checklist) {
 									if (!$cur_return_checklist->enabled)
 										continue;
-									$json_struct->return_checklists[] = array('guid' => $cur_return_checklist->guid, 'label' => $cur_return_checklist->label, 'conditions' => (array) $cur_return_checklist->conditions);
+									$json_struct->return_checklists[] = array('guid' => "$cur_return_checklist->guid", 'label' => $cur_return_checklist->label, 'conditions' => (array) $cur_return_checklist->conditions);
 								}
 
 								// Look up serials in the user's current location to allow them to choose.
@@ -1185,7 +1185,7 @@ if ($_->config->com_sales->com_esp) {
 			(function(){
 				var table_entry = <?php
 				$object = (object) array(
-					'key' => $cur_payment['entity']->guid,
+					'key' => "{$cur_payment['entity']->guid}",
 					'values' => array(
 						$cur_payment['entity']->name,
 						$_->com_sales->round($cur_payment['amount'], true),
@@ -1201,7 +1201,7 @@ if ($_->config->com_sales->com_esp) {
 					<?php } ?>
 					var data = <?php
 					$data = array();
-					if (!empty($cur_payment['data'])) { 
+					if (!empty($cur_payment['data'])) {
 						foreach ($cur_payment['data'] as $cur_key => $cur_value) {
 							$data[] = (object) array('name' => $cur_key, 'value' => $cur_value);
 						}
@@ -1511,7 +1511,7 @@ if ($_->config->com_sales->com_esp) {
 
 				// Trigger custom event that the total has been updated.
 				$('#p_muid_total').trigger('update.com_sales');
-				
+
 				update_payments();
 			};
 
@@ -1858,7 +1858,7 @@ if ($_->config->com_sales->com_esp) {
 		<div class="pf-note">
 			<div style="text-align: left;">
 				<?php foreach ($this->payment_types as $cur_payment_type) { ?>
-				<button id="p_muid_payment_<?php e($cur_payment_type->guid); ?>" class="btn btn-default payment-button" type="button" style="margin-bottom: 2px;" value="<?php e(json_encode((object) array('guid' => $cur_payment_type->guid, 'name' => $cur_payment_type->name, 'minimum' => $cur_payment_type->minimum, 'maximum' => $cur_payment_type->maximum, 'processing_type' => $cur_payment_type->processing_type))); ?>">
+				<button id="p_muid_payment_<?php e($cur_payment_type->guid); ?>" class="btn btn-default payment-button" type="button" style="margin-bottom: 2px;" value="<?php e(json_encode((object) array('guid' => "$cur_payment_type->guid", 'name' => $cur_payment_type->name, 'minimum' => $cur_payment_type->minimum, 'maximum' => $cur_payment_type->maximum, 'processing_type' => $cur_payment_type->processing_type))); ?>">
 					<span class="picon picon-32 picon-view-financial-payment-mode" style="display: block; padding-top: 32px; min-width: 50px; background-repeat: no-repeat; background-position: top center;"><?php e($cur_payment_type->name); ?></span>
 				</button>
 				<?php } ?>

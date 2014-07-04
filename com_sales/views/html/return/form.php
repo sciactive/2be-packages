@@ -859,12 +859,12 @@ if ($_->config->com_sales->autocomplete_product)
 			};
 			<?php } ?>
 
-			
+
 			<?php if (!empty($this->entity->payments)) { foreach ($this->entity->payments as $key => $cur_payment) { ?>
 			(function(){
 				var table_entry = <?php
 				$object = (object) array(
-					'key' => $cur_payment['entity']->guid,
+					'key' => "{$cur_payment['entity']->guid}",
 					'values' => array(
 						$cur_payment['entity']->name,
 						$_->com_sales->round($cur_payment['amount'], true),
@@ -877,7 +877,7 @@ if ($_->config->com_sales->autocomplete_product)
 					var new_row = $(this).data("orig_key", <?php echo (int) $key; ?>);
 					var data = <?php
 					$data = array();
-					if (!empty($cur_payment['data'])) { 
+					if (!empty($cur_payment['data'])) {
 						foreach ($cur_payment['data'] as $cur_key => $cur_value) {
 							$data[] = (object) array('name' => $cur_key, 'value' => $cur_value);
 						}
@@ -1317,7 +1317,7 @@ if ($_->config->com_sales->autocomplete_product)
 		<div class="pf-note">
 			<div style="text-align: left;">
 				<?php foreach ($this->payment_types as $cur_payment_type) { ?>
-				<button id="p_muid_payment_<?php e($cur_payment_type->guid); ?>" class="btn btn-default payment-button" type="button" style="margin-bottom: 2px;" value="<?php e(json_encode((object) array('guid' => $cur_payment_type->guid, 'name' => $cur_payment_type->name, 'minimum' => $cur_payment_type->minimum, 'maximum' => $cur_payment_type->maximum, 'processing_type' => $cur_payment_type->processing_type))); ?>">
+				<button id="p_muid_payment_<?php e($cur_payment_type->guid); ?>" class="btn btn-default payment-button" type="button" style="margin-bottom: 2px;" value="<?php e(json_encode((object) array('guid' => "$cur_payment_type->guid", 'name' => $cur_payment_type->name, 'minimum' => $cur_payment_type->minimum, 'maximum' => $cur_payment_type->maximum, 'processing_type' => $cur_payment_type->processing_type))); ?>">
 					<span class="picon picon-32 picon-view-financial-payment-mode" style="display: block; padding-top: 32px; min-width: 50px; background-repeat: no-repeat; background-position: top center;"><?php e($cur_payment_type->name); ?></span>
 				</button>
 				<?php } ?>

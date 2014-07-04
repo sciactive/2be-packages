@@ -38,7 +38,7 @@ if ($query == '*') {
 			),
 			array('|',
 				'match' => array(
-					array('name', $r_query), 
+					array('name', $r_query),
 					array('sku', $r_query)
 				)
 			)
@@ -65,7 +65,7 @@ foreach ($products as $key => &$product) {
 	$vendors = array();
 	foreach((array) $product->vendors as $cur_vendor) {
 		$vendors[] = (object) array(
-			'guid' => $cur_vendor['entity']->guid,
+			'guid' => "{$cur_vendor['entity']->guid}",
 			'name' => (string) $cur_vendor['entity']->name,
 			'sku' => $cur_vendor['sku'],
 			'cost' => '$'.$_->com_sales->round($cur_vendor['cost'], true),
@@ -85,7 +85,7 @@ foreach ($products as $key => &$product) {
 		default:
 			$stock_type = 'Unrecognized';
 			break;
-	} 
+	}
 	$additional_barcodes = implode(', ', $product->additional_barcodes);
 	$serialized = (bool) $product->serialized;
 	$discountable = (bool) $product->discountable;
@@ -93,7 +93,7 @@ foreach ($products as $key => &$product) {
 	$featured = (bool) $product->featured;
 	$custom_item = (bool) $product->custom_item;
 	$receipt_description = (!empty($product->receipt_description) ? $product->receipt_description : '');
-	
+
 	$images = array();
 	if (isset($product->thumbnail)) {
 		if (file_exists($_->uploader->real($product->thumbnail)))
@@ -115,18 +115,18 @@ foreach ($products as $key => &$product) {
 		$product_images = implode(', ', $images);
 	else
 		$product_images = 'None';
-	
+
 	$created = format_date($product->p_cdate, 'date_short');
 	$modified = format_date($product->p_mdate, 'date_short');
 	$expiration = (!empty($product->product_exp)) ? format_date($product->product_exp, 'date_short') : '';
-	
+
 	$json_struct = (object) array(
-		'guid' => $product->guid,
+		'guid' => "$product->guid",
 		'sku' => $product->sku,
 		'name' => $product->name,
 		'price' => $_->com_sales->round($product->unit_price, true),
 		'vendors' => $vendors,
-		'manufacturer_guid' => $product->manufacturer->guid,
+		'manufacturer_guid' => "{$product->manufacturer->guid}",
 		'manufacturer_name' => $product->manufacturer->name,
 		'manufacturer_sku' => $product->manufacturer_sku,
 		'stock_type' => $stock_type,

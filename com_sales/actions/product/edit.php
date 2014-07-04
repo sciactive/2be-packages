@@ -24,5 +24,5 @@ if ($_->config->com_sales->com_shop && !isset($_SESSION['shop'])) {
 	pines_redirect(pines_url('com_shop', 'shop/edit'));
 }
 
-$entity = com_sales_product::factory((int) $_REQUEST['id']);
+$entity = com_sales_product::factory("{$_REQUEST['id']}");
 $entity->print_form();

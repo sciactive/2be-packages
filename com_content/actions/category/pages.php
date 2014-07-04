@@ -27,9 +27,9 @@ $return = array();
 foreach ($category->pages as $page) {
 	if (!$page->enabled)
 		continue;
-	
+
 	$json_struct = (object) array(
-		'guid' => $page->guid,
+		'guid' => "$page->guid",
 		'name' => $page->name
 	);
 

@@ -64,7 +64,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				{type: 'button', title: 'Timespan', extra_class: 'picon picon-view-time-schedule', selection_optional: true, click: function(){attendance_grid.date_form();}},
 				{type: 'separator'},
 				<?php if (isset($this->employees)) { ?>
-				{type: 'button', text: 'View', extra_class: 'picon picon-user-identity', double_click: true, url: <?php echo json_encode(pines_url('com_reports', 'attendance/hoursclocked', array('employee' => '__title__', 'start_date' => format_date($this->start_date, 'date_sort'), 'end_date' => format_date($this->end_date - 1, 'date_sort'), 'all_time' => ($this->all_time ? 'true' : 'false'), 'location' => $this->location->guid, 'descendants' => $this->descendants ? 'true' : 'false'), false)); ?>},
+				{type: 'button', text: 'View', extra_class: 'picon picon-user-identity', double_click: true, url: <?php echo json_encode(pines_url('com_reports', 'attendance/hoursclocked', array('employee' => '__title__', 'start_date' => format_date($this->start_date, 'date_sort'), 'end_date' => format_date($this->end_date - 1, 'date_sort'), 'all_time' => ($this->all_time ? 'true' : 'false'), 'location' => "{$this->location->guid}", 'descendants' => $this->descendants ? 'true' : 'false'), false)); ?>},
 				{type: 'separator'},
 				<?php } else { ?>
 				{type: 'button', text: '&laquo; All Employees', extra_class: 'picon picon-system-users', selection_optional: true, click: function(){

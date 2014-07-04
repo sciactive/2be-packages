@@ -281,7 +281,7 @@ $_->com_datetimepicker->load();
 			},
 			buttons: {
 				"Go": function(){
-					$_.get(<?php echo json_encode(pines_url('com_hrm', 'employee/timeclock/edit', array('id' => $this->entity->user->guid))); ?>, {
+					$_.get(<?php echo json_encode(pines_url('com_hrm', 'employee/timeclock/edit', array('id' => "{$this->entity->user->guid}"))); ?>, {
 						"time_start": $("#p_muid_time_start").val(),
 						"time_end": $("#p_muid_time_end").val()
 					});

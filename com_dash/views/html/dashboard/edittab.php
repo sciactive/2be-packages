@@ -15,7 +15,7 @@ $_->com_bootstrap->load();
 $max_columns = $_->config->com_bootstrap->grid_columns;
 $default_column = h(floor($max_columns / 3));
 ?>
-<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_dash', 'dashboard/tabsave', array('id' => (string) $this->entity->guid))); ?>">
+<form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_dash', 'dashboard/tabsave', array('id' => "{$this->entity->guid}"))); ?>">
 	<style type="text/css" scoped="scoped">
 		#p_muid_form .new_column {
 			min-height: 100px;
@@ -137,7 +137,7 @@ $default_column = h(floor($max_columns / 3));
 				if (!confirm("Are you sure you want to delete this tab and all of its buttons, widgets, and configuration?\nThis cannot be undone."))
 					return;
 				$.ajax({
-					url: <?php echo json_encode(pines_url('com_dash', 'dashboard/tabremove_json', array('id' => (string) $this->entity->guid))); ?>,
+					url: <?php echo json_encode(pines_url('com_dash', 'dashboard/tabremove_json', array('id' => "{$this->entity->guid}"))); ?>,
 					type: "POST",
 					dataType: "json",
 					data: {"key": <?php echo json_encode($this->key); ?>},

@@ -45,7 +45,7 @@ if (isset($product)) {
 	}
 
 	$json_struct = (object) array(
-		'guid' => $product->guid,
+		'guid' => "$product->guid",
 		'name' => $product->name,
 		'sku' => $product->sku,
 		'stock_type' => $product->stock_type,
@@ -69,7 +69,7 @@ if (isset($product)) {
 	foreach ((array) $product->return_checklists as $cur_return_checklist) {
 		if (!$cur_return_checklist->enabled)
 			continue;
-		$json_struct->return_checklists[] = array('guid' => $cur_return_checklist->guid, 'label' => $cur_return_checklist->label, 'conditions' => (array) $cur_return_checklist->conditions);
+		$json_struct->return_checklists[] = array('guid' => "$cur_return_checklist->guid", 'label' => $cur_return_checklist->label, 'conditions' => (array) $cur_return_checklist->conditions);
 	}
 
 	// Look up serials in the user's current location to allow them to choose.

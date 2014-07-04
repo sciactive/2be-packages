@@ -17,7 +17,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 	$module->render = $this->render;
 	$module->entity = $this->entity;
 	echo $module->render();
-	
+
 	switch ($this->entity->payment_frequency) {
 		case "12":
 			$frequency = "Monthly";
@@ -108,7 +108,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 						}
 					}
 				} ?>
-				<td><?php 
+				<td><?php
 					if (isset($code_description)) { ?>
 						<abbr title="<?php e($code_description); ?>"><?php e($this->entity->collection_code); ?></abbr>
 					<?php } else { ?>
@@ -132,7 +132,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 				<td style="font-weight:bold;"><?php echo $frequency;?> Payment</td>
 				<td><?php e('$'.number_format($this->entity->frequency_payment, 2, '.', '')); ?></td>
 			</tr>
-			<?php 
+			<?php
 			$tag_status = $this->entity->get_loan_status(true);
 			$display_status = $this->entity->get_loan_status();
 			?>
@@ -144,7 +144,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 			</tr>
 		</tbody>
 	</table>
-	
+
 	<hr />
 	<h3 style="margin:10px 0;">Payment Information</h3>
 	<table class="table table-bordered" style="clear:both;">
@@ -153,7 +153,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 				<td style="font-weight:bold;">First Payment Due</td>
 				<td><?php e(format_date($this->entity->first_payment_date, "date_short")); ?></td>
 			</tr>
-			<?php 
+			<?php
 			$past_due = ($this->entity->payments[0]['past_due'] > 0) ? true: false;
 			if ($this->entity->missed_first_payment && !(!empty($this->entity->paid))) {
 				$missed_or_made = 'Missed';
@@ -181,7 +181,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 			<tr>
 				<td style="font-weight:bold;">Next Payment</td>
 				<td <?php echo ($missed_or_made == 'Missed' || $past_due) ? 'class="text-error" style="font-weight:bold;"': ''; ?>>
-					<?php 
+					<?php
 					if ($this->entity->status == 'paid off') {
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
 					} else if (isset($this->entity->payments[0]['next_payment_due'])) {
@@ -213,7 +213,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 				<td <?php echo ($missed_or_made == 'Missed' || $past_due) ? 'class="text-error" style="font-weight:bold;"': ''; ?>>
 					<?php if ($this->entity->status == 'paid off') {
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
-					} else if ($past_due) { 
+					} else if ($past_due) {
 						e('$'.number_format($this->entity->payments[0]['past_due'], 2, '.', ''));
 					} else if ($missed_or_made == 'Missed') {
 						e('$'.number_format($this->entity->payments[0]['sum_payment_short'], 2, '.', ''));
@@ -225,8 +225,8 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 			<tr class="<?php echo ($past_due) ? 'error' : '';?>">
 				<td style="font-weight:bold;">Past Due + Next Due Payment</td>
 				<td <?php echo ($missed_or_made == 'Missed' || $past_due) ? 'class="text-error" style="font-weight:bold;"': ''; ?>>
-					<?php 
-					if ($this->entity->status == 'paid off') 
+					<?php
+					if ($this->entity->status == 'paid off')
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
 					else if ($missed_or_made == 'Missed')
 						e('$'.number_format($this->entity->balance + $this->entity->payments[0]['sum_payment_short'], 2, '.', ''));
@@ -302,11 +302,11 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 			<tr>
 				<td style="font-weight:bold;">Pay Off Amount</td>
 				<td>
-					<?php 
-					if ($this->entity->status == 'paid off') 
+					<?php
+					if ($this->entity->status == 'paid off')
 						echo '<span class="text-success"><strong>Paid Off</strong></span>';
 					else
-						echo '$'.h($_->com_sales->round($this->entity->payoff_amount, true)); 
+						echo '$'.h($_->com_sales->round($this->entity->payoff_amount, true));
 					?>
 				</td>
 			</tr>
@@ -316,7 +316,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 <?php } elseif ($this->render == 'footer') { ?>
 <a href="<?php e(pines_url('com_loan', 'loan/list', array('id' => $this->entity->id))); ?>" class="btn btn-default">View in List</a>
 <?php if (gatekeeper('com_loan/viewloan')) { ?>
-<a href="<?php e(pines_url('com_loan', 'loan/overview', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Overview</a>
+<a href="<?php e(pines_url('com_loan', 'loan/overview', array('id' => "{$this->entity->guid}"))); ?>" class="btn btn-default">Overview</a>
 <?php } if (gatekeeper('com_loan/editpayments')) { ?>
-<a href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Edit Payments</a>
+<a href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => "{$this->entity->guid}"))); ?>" class="btn btn-default">Edit Payments</a>
 <?php } } ?>

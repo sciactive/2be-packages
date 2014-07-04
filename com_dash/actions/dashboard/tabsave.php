@@ -78,4 +78,4 @@ if (empty($_REQUEST['key'])) {
 if (!$dashboard->save())
 	pines_error('An error occured while trying to save the tab.');
 
-pines_redirect(pines_url('com_dash', null, array('id' => (string) $dashboard->guid, 'tab' => $tab_key)));
+pines_redirect(pines_url('com_dash', null, array('id' => "$dashboard->guid", 'tab' => $tab_key)));

@@ -51,9 +51,9 @@ switch ($this->entity->payment_frequency) {
 				width = window_width - 10;
 			else
 				width = 500;
-			
+
 			var leftoffset = (window_width - width) / 2;
-			
+
 			if ($('.ui-dialog:visible').length) {
 				$('.ui-dialog:visible').css({
 					'width': width,
@@ -61,7 +61,7 @@ switch ($this->entity->payment_frequency) {
 				});
 			}
 		}).resize();
-		
+
 		// Check all payments delete name. (That it's not "Auto-save").
 		$('#delete_all_payments_name_input').change(function() {
 			var rege = /^Auto-save/;
@@ -190,7 +190,7 @@ switch ($this->entity->payment_frequency) {
 	<button id="p_muid_make_payment" class="btn btn-default" type="button">
 		<span class="picon picon-wallet-open" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Make Payment</span>
 	</button>
-	<a class="btn btn-default" href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => $this->entity->guid))); ?>">
+	<a class="btn btn-default" href="<?php e(pines_url('com_loan', 'loan/editpayments', array('id' => "{$this->entity->guid}"))); ?>">
 		<span class="picon picon-view-refresh" style="white-space:nowrap;display:inline-block;line-height:16px;padding-left:18px; background-repeat:no-repeat;">Refresh</span>
 	</a>
 </div>
@@ -1328,7 +1328,7 @@ switch ($this->entity->payment_frequency) {
 			<br/>
 		</div>
 	<?php
-	} 
+	}
 //	var_dump($this->entity->past_due);
 //	var_dump($this->entity->pay_by_date);
 //	var_dump($this->entity->paid);
@@ -2020,7 +2020,7 @@ switch ($this->entity->payment_frequency) {
 			<br/>
 		</div>
 		<div class="tab-pane" id="p_muid_tab_overview">
-			<?php 
+			<?php
 			// var_dump($this->entity->paid);
 			// var_dump($this->entity->payments);
 			?>

@@ -129,7 +129,7 @@ $this->title = 'Payment Options';
 	</script>
 	<div class="pf-element" id="p_muid_payment_types">
 		<?php foreach ($this->payment_types as $cur_payment_type) { ?>
-		<label><input type="radio" name="payment_type" value="<?php e(json_encode(array('guid' => $cur_payment_type->guid, 'processing_type' => $cur_payment_type->processing_type, 'name' => $cur_payment_type->name, 'data' => $cur_payment_type->is($this->payment->entity) ? $this->payment->data : null))); ?>"<?php echo $cur_payment_type->is($this->payment->entity) ? ' checked="checked"' : ''; ?> /> <?php e($cur_payment_type->name); ?></label>
+		<label><input type="radio" name="payment_type" value="<?php e(json_encode(array('guid' => "$cur_payment_type->guid", 'processing_type' => $cur_payment_type->processing_type, 'name' => $cur_payment_type->name, 'data' => $cur_payment_type->is($this->payment->entity) ? $this->payment->data : null))); ?>"<?php echo $cur_payment_type->is($this->payment->entity) ? ' checked="checked"' : ''; ?> /> <?php e($cur_payment_type->name); ?></label>
 		<?php } ?>
 	</div>
 	<form id="p_muid_form" method="POST" action="<?php e(pines_url('com_shop', 'checkout/paymentsave')); ?>">

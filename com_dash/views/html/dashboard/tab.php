@@ -62,7 +62,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 					});
 				});
 				$.ajax({
-					url: <?php echo json_encode(pines_url('com_dash', 'dashboard/tabsaveorder_json', array('id' => (string) $this->entity->guid))); ?>,
+					url: <?php echo json_encode(pines_url('com_dash', 'dashboard/tabsaveorder_json', array('id' => "{$this->entity->guid}"))); ?>,
 					type: "POST",
 					dataType: "json",
 					data: {"key": <?php echo json_encode($this->key); ?>, "order": JSON.stringify(struct)},
@@ -98,7 +98,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 			var widget = $(this).closest(".object");
 			var options = JSON.parse(widget.children(".options").html());
 			$.ajax({
-				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widgetoptions_form', array('id' => (string) $this->entity->guid))); ?>,
+				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widgetoptions_form', array('id' => "{$this->entity->guid}"))); ?>,
 				type: "POST",
 				dataType: "json",
 				data: {"key": widget.children(".key").text()},
@@ -154,7 +154,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 				return;
 			var widget = $(this).closest(".object");
 			$.ajax({
-				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widgetremove_json', array('id' => (string) $this->entity->guid))); ?>,
+				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widgetremove_json', array('id' => "{$this->entity->guid}"))); ?>,
 				type: "POST",
 				dataType: "json",
 				data: {"key": widget.children(".key").text()},
@@ -175,7 +175,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 		}).on("click", ".edit_buttons", function(){
 			// Edit the button bar.
 			$.ajax({
-				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/buttons_form', array('id' => (string) $this->entity->guid))); ?>,
+				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/buttons_form', array('id' => "{$this->entity->guid}"))); ?>,
 				type: "POST",
 				dataType: "html",
 				data: {"key": <?php echo json_encode($this->key); ?>},
@@ -223,7 +223,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 									});
 								});
 								$.ajax({
-									url: <?php echo json_encode(pines_url('com_dash', 'dashboard/buttonssave_json', array('id' => (string) $this->entity->guid))); ?>,
+									url: <?php echo json_encode(pines_url('com_dash', 'dashboard/buttonssave_json', array('id' => "{$this->entity->guid}"))); ?>,
 									type: "POST",
 									dataType: "json",
 									data: {"key": <?php echo json_encode($this->key); ?>, "buttons": JSON.stringify(struct), "buttons_size": form.find("[name=buttons_size]:checked").val()},
@@ -249,7 +249,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 		var save_options = function(widget){
 			// Save a widget's options.
 			$.ajax({
-				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widgetsaveoptions_json', array('id' => (string) $this->entity->guid))); ?>,
+				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widgetsaveoptions_json', array('id' => "{$this->entity->guid}"))); ?>,
 				type: "POST",
 				dataType: "json",
 				data: {"key": widget.children(".key").text(), "options": widget.children(".options").text()},
@@ -307,7 +307,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 									});
 								});
 								$.ajax({
-									url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widgetadd_json', array('id' => (string) $this->entity->guid))); ?>,
+									url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widgetadd_json', array('id' => "{$this->entity->guid}"))); ?>,
 									type: "POST",
 									dataType: "json",
 									data: {"key": <?php echo json_encode($this->key); ?>, "widgets": JSON.stringify(struct)},
@@ -334,7 +334,7 @@ $max_columns = $_->config->com_bootstrap->grid_columns;
 
 		var reload_widget = function(widget){
 			$.ajax({
-				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widget_json', array('id' => (string) $this->entity->guid))); ?>,
+				url: <?php echo json_encode(pines_url('com_dash', 'dashboard/widget_json', array('id' => "{$this->entity->guid}"))); ?>,
 				type: "POST",
 				dataType: "json",
 				data: {"key": widget.children(".key").text()},

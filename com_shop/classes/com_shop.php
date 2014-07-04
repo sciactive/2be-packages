@@ -326,7 +326,7 @@ class com_shop extends component {
 		$cookie = array();
 		foreach ($this->cart as $cur_item) {
 			$cookie[] = array(
-				'product' => $cur_item['product']->guid,
+				'product' => "{$cur_item['product']->guid}",
 				'quantity' => (int) $cur_item['quantity']
 			);
 		}

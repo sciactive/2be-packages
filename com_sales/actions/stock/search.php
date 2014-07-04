@@ -62,9 +62,9 @@ if ($not_guids) {
 
 foreach ($stock as &$cur_stock) {
 	$cur_stock = array(
-		'guid' => $cur_stock->guid,
-		'product' => $cur_stock->product->guid,
-		'location' => $cur_stock->location->guid,
+		'guid' => "$cur_stock->guid",
+		'product' => "{$cur_stock->product->guid}",
+		'location' => "{$cur_stock->location->guid}",
 		'location_name' => $cur_stock->location->name,
 		'serial' => $cur_stock->serial
 	);
