@@ -1055,7 +1055,7 @@ class com_sales extends component {
 					array('class' => com_sales_transfer, 'skip_ac' => true),
 					$selector_transfer
 				);
-		} else {
+		} elseif (isset($_SESSION['user']->group)) {
 			$groups = $_SESSION['user']->group->get_descendants(true);
 			$module->pos = (array) $_->entity_manager->get_entities(
 					array('class' => com_sales_po, 'skip_ac' => true),
@@ -1067,6 +1067,8 @@ class com_sales extends component {
 					$selector_transfer,
 					array('|', 'ref' => array('destination', $groups))
 				);
+		} else {
+			$module->pos = $module->transfers = array();
 		}
 		$module->categories = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_category),
