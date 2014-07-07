@@ -61,14 +61,14 @@ return array(
 		'name' => 'use_header_image',
 		'cname' => 'Use Header Image',
 		'description' => 'Show a header image (instead of just text) at the top of the page.',
-		'value' => false,
+		'value' => true,
 		'peruser' => true,
 	),
 	array(
 		'name' => 'header_image',
 		'cname' => 'Header Image',
 		'description' => 'The header image to use.',
-		'value' => (isset($_SESSION['user']->group) && is_callable(array($_SESSION['user']->group, 'get_logo'))) ? $_SESSION['user']->group->get_logo() : $_->config->location.$_->config->upload_location.'logos/default_logo.png',
+		'value' => $_->config->location.'templates/tpl_shop/images/mascot_logo.png',//(isset($_SESSION['user']->group) && is_callable(array($_SESSION['user']->group, 'get_logo'))) ? $_SESSION['user']->group->get_logo() : $_->config->location.$_->config->upload_location.'logos/default_logo.png',
 		'peruser' => true,
 	),
 	array(

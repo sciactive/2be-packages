@@ -39,6 +39,9 @@ class com_shop_shop extends entity {
 				return 'shop';
 			case 'types':
 				return 'shops';
+			case 'url_view':
+				return pines_url('com_shop', 'shop', array('id' => $this->guid));
+				break;
 			case 'url_edit':
 				if (gatekeeper('com_shop/editshop'))
 					return pines_url('com_shop', 'shop/edit', array('id' => $this->guid));

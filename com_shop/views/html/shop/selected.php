@@ -13,8 +13,8 @@ defined('P_RUN') or die('Direct access prohibited');
 ?>
 <style type="text/css">
 	#p_muid_thumbnail {
-		width: 16px;
-		height: 16px;
+		width: 24px;
+		height: 24px;
 		border: 1px #AAA solid;
 	}
 	#p_muid_box {

@@ -285,12 +285,22 @@ class com_shop extends component {
 
 		$module = new module('com_shop', 'shop/list', 'content');
 
-		$module->shops = $_->entity_manager->get_entities(
-				array('class' => com_shop_shop),
-				array('&',
-					'tag' => array('com_shop', 'shop')
-				)
-			);
+		if (gatekeeper('com_shop/manageshops')) {
+			$module->shops = $_->entity_manager->get_entities(
+					array('class' => com_shop_shop),
+					array('&',
+						'tag' => array('com_shop', 'shop')
+					)
+				);
+		} else {
+			$module->shops = $_->entity_manager->get_entities(
+					array('class' => com_shop_shop),
+					array('&',
+						'tag' => array('com_shop', 'shop'),
+						'ref' => array('user', $_SESSION['user'])
+					)
+				);
+		}
 
 		if ( empty($module->shops) )
 			pines_notice('No shops found.');

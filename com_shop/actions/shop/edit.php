@@ -20,4 +20,8 @@ if (!empty($_REQUEST['id'])) {
 }
 
 $entity = com_shop_shop::factory((int) $_REQUEST['id']);
+
+if (!gatekeeper('com_shop/manageshops') && !$_SESSION['user']->is($entity->user))
+	punt_user(null, pines_url('com_shop', 'shop/list'));
+
 $entity->print_form();

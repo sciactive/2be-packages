@@ -96,7 +96,9 @@ header('Content-Type: text/html');
 				</button>
 				<a class="navbar-brand" href="<?php e($_->config->full_location); ?>">
 					<?php if ($_->config->tpl_shop->use_header_image) { ?>
-					<img src="<?php e($_->config->tpl_shop->header_image); ?>" alt="<?php e($_->config->page_title); ?>" />
+					<div style="position: relative; width: 78px;">
+						<img style="position: absolute; width: 78px; height: 57px; top: -13px;" src="<?php e($_->config->tpl_shop->header_image); ?>" alt="<?php e($_->config->page_title); ?>" />
+					</div>
 					<?php } else { ?>
 						<span>
 						<?php switch ($_->config->tpl_shop->brand_type) {

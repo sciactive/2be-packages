@@ -20,6 +20,7 @@ class com_sales_product extends entity {
 	protected $tags = array('com_sales', 'product');
 
 	public function __construct($id = 0) {
+		global $_;
 		if (parent::__construct($id) !== null)
 			return;
 		// Defaults.
@@ -36,6 +37,11 @@ class com_sales_product extends entity {
 		$this->title_use_name = true;
 		$this->title_position = 'prepend';
 		$this->meta_tags = array();
+		if (isset($_->com_shop)) {
+			$this->show_in_shop = true;
+			if (isset($_SESSION['shop']))
+				$this->shop = $_SESSION['shop'];
+		}
 	}
 
 	public static function etype() {
@@ -171,7 +177,7 @@ class com_sales_product extends entity {
 			$module->groups = (array) $_->user_manager->get_groups();
 			usort($module->groups, array($this, 'sort_groups'));
 		}
-		
+
 		return $module;
 	}
 
