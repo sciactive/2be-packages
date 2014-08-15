@@ -42,7 +42,7 @@ $_(function(){
 });
 </script>
 <div style="height: .5em;">&nbsp;</div>
-<?php foreach ($products as $key => $cur_product) { ?>
+<?php foreach ($this->products as $key => $cur_product) { ?>
 <div class="product page-header">
 	<div class="product_guid" style="display: none;"><?php e($cur_product->guid); ?></div>
 	<div class="product_alias" style="display: none;"><?php e($cur_product->alias); ?></div>
@@ -69,7 +69,7 @@ $_(function(){
 				<div class="name"><a href="<?php e(pines_url('com_shop', 'product', array('a' => $cur_product->alias))); ?>"><?php e($cur_product->name); ?></a></div>
 				<div class="info">
 					<?php if (!empty($cur_product->manufacturer_sku)) { ?>
-					<strong>Model:</strong> <?php echo format_content(h($cur_product->manufacturer_sku)); ?> | 
+					<strong>Model:</strong> <?php echo format_content(h($cur_product->manufacturer_sku)); ?> |
 					<?php } ?>
 					<strong>SKU:</strong> <?php echo format_content(h($cur_product->sku)); ?>
 				</div>

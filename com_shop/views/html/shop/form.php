@@ -109,6 +109,11 @@ $_->uploader->load();
 				<label><span class="pf-label">Name</span>
 					<input class="pf-field form-control" type="text" name="name" size="24" value="<?php e($this->entity->name); ?>" /></label>
 			</div>
+			<div class="pf-element">
+				<label><span class="pf-label">Display Email</span>
+					<span class="pf-note">Check this to display your email on your shop page. Note that customers can already reach you through a private message.</span>
+					<input class="pf-field" type="checkbox" name="display_email" value=""<?php echo $this->entity->display_email ? ' checked="checked"' : ''; ?> /></label>
+			</div>
 			<script type="text/javascript">
 				$_(function(){
 					$("#p_muid_thumbnail").change(function(){

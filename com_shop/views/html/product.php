@@ -129,9 +129,7 @@ $_->com_sales->sort_specs($specs);
 		<div style="clear: right; height: 0; line-height: 0">&nbsp;</div>
 	</div>
 	<div style="clear: both;" class="clearfix description">
-		<div class="page-header">
-			<h3>Product Description</h3>
-		</div>
+		<hr />
 		<?php echo format_content($this->entity->description); ?>
 	</div>
 	<?php if ($specs) { ?>

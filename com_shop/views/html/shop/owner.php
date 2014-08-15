@@ -17,8 +17,8 @@ if (!isset($user))
 	return;
 
 ?>
+<h4>Shop Owner</h4>
 <div id="p_muid_owner" class="shop_owner">
-	<h4 style="margin: 5px; float: right;">Shop Owner</h4>
 	<?php if (gatekeeper()) { ?>
 	<a href="#" class="btn btn-default" style="float: right; clear: right;">Message</a>
 	<?php } ?>
@@ -32,13 +32,19 @@ if (!isset($user))
 			Username: <?php e($user->username); ?><br />
 			<?php } ?>
 			Member since: <?php e(format_date($user->cdate, 'date_med')); ?><br />
-			<?php if ($_->config->com_user->email_usernames || (!empty($user->email) && in_array('email', $_->config->com_user->user_fields))) { ?>
+			<?php if (
+					$this->entity->display_email &&
+					(
+						$_->config->com_user->email_usernames ||
+						(!empty($user->email) && in_array('email', $_->config->com_user->user_fields))
+					)
+				) { ?>
 			Email: <a href="mailto:<?php e($user->email); ?>"><?php e($user->email); ?></a><?php echo isset($user->secret) ? ' (Unverified)' : ''; ?><br />
-			<?php } if (!empty($user->phone) && in_array('phone', $_->config->com_user->user_fields)) { ?>
+			<?php } /* if (!empty($user->phone) && in_array('phone', $_->config->com_user->user_fields)) { ?>
 			Phone: <a href="tel:<?php e($user->phone); ?>"><?php e(format_phone($user->phone)); ?></a><br />
 			<?php } if (!empty($user->fax) && in_array('fax', $_->config->com_user->user_fields)) { ?>
 			Fax: <a href="tel:<?php e($user->fax); ?>"><?php e(format_phone($user->fax)); ?></a><br />
-			<?php } ?>
+			<?php } */ ?>
 		</div>
 	</div>
 </div>

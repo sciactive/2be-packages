@@ -62,7 +62,7 @@ class com_myentity extends component implements entity_manager_interface {
 
 	/**
 	 * Create entity tables in the database.
-	 * 
+	 *
 	 * @param string $etype The entity type to create a table for. If this is blank, the default tables are created.
 	 * @return bool True on success, false on failure.
 	 */
@@ -125,7 +125,7 @@ class com_myentity extends component implements entity_manager_interface {
 	public function delete_entity_by_id($guid, $etype = null) {
 		global $_;
 		$etype = isset($etype) ? '_'.mysql_real_escape_string($etype, $_->com_mysql->link) : '';
-		$query = sprintf("DELETE e, d FROM `%scom_myentity_entities%s` e LEFT JOIN `%scom_myentity_data%s` d ON e.`guid`=d.`guid` WHERE e.`guid`=%u;",
+		$query = sprintf("DELETE e, d FROM `%scom_myentity_entities%s` e LEFT JOIN `%scom_myentity_data%s` d ON e.`guid`=d.`guid` WHERE e.`guid`='%u';",
 			$_->config->com_mysql->prefix,
 			$etype,
 			$_->config->com_mysql->prefix,
@@ -136,7 +136,7 @@ class com_myentity extends component implements entity_manager_interface {
 				pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 			return false;
 		}
-		$query = sprintf("DELETE FROM `%scom_myentity_guids` g WHERE g.`guid`=%u;",
+		$query = sprintf("DELETE FROM `%scom_myentity_guids` WHERE `guid`='%u';",
 			$_->config->com_mysql->prefix,
 			(int) $guid);
 		if ( !(mysql_query($query, $_->com_mysql->link)) ) {
@@ -419,7 +419,7 @@ class com_myentity extends component implements entity_manager_interface {
 							foreach ($cur_value as $cur_guid) {
 								if ( $cur_query )
 									$cur_query .= $type_is_or ? ' OR ' : ' AND ';
-								$cur_query .= (($type_is_not xor $clause_not) ? 'NOT ' : '' ).'e.`guid`='.(int) $cur_guid;
+								$cur_query .= (($type_is_not xor $clause_not) ? 'NOT ' : '' ).'e.`guid`=\''.(int) $cur_guid.'\'';
 							}
 							break;
 						case 'tag':
@@ -850,7 +850,7 @@ class com_myentity extends component implements entity_manager_interface {
 							pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 						return false;
 					}
-					$query = sprintf("DELETE FROM `%scom_myentity_data` WHERE `guid`=%u;",
+					$query = sprintf("DELETE FROM `%scom_myentity_data` WHERE `guid`='%u';",
 						$_->config->com_mysql->prefix,
 						$guid);
 					if ( !(mysql_query($query, $_->com_mysql->link)) ) {
@@ -916,7 +916,7 @@ class com_myentity extends component implements entity_manager_interface {
 					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
-			$query = sprintf("DELETE FROM `%scom_myentity_data` WHERE `guid`=%u;",
+			$query = sprintf("DELETE FROM `%scom_myentity_data` WHERE `guid`='%u';",
 				$_->config->com_mysql->prefix,
 				$guid);
 			if ( !(mysql_query($query, $_->com_mysql->link)) ) {
@@ -1091,7 +1091,7 @@ class com_myentity extends component implements entity_manager_interface {
 				// That number might be too big on some machines. :(
 				if ($new_id < 1)
 					$new_id = rand(1, 0x7FFFFFFF);
-				$query = sprintf("SELECT `guid` FROM `%scom_myentity_guids` WHERE `guid`=%u;",
+				$query = sprintf("SELECT `guid` FROM `%scom_myentity_guids` WHERE `guid`='%u';",
 					$_->config->com_mysql->prefix,
 					$new_id);
 				if ( !($result = mysql_query($query, $_->com_mysql->link)) ) {
@@ -1162,7 +1162,7 @@ class com_myentity extends component implements entity_manager_interface {
 			// Removed any cached versions of this entity.
 			if ($_->config->com_myentity->cache)
 				$this->clean_cache($entity->guid);
-			$query = sprintf("UPDATE `%scom_myentity_entities%s` SET `tags`='%s', `varlist`='%s', `cdate`=%F, `mdate`=%F WHERE `guid`=%u;",
+			$query = sprintf("UPDATE `%scom_myentity_entities%s` SET `tags`='%s', `varlist`='%s', `cdate`=%F, `mdate`=%F WHERE `guid`='%u';",
 				$_->config->com_mysql->prefix,
 				$etype,
 				mysql_real_escape_string(','.implode(',', array_diff($entity->tags, array(''))).',', $_->com_mysql->link),
@@ -1175,7 +1175,7 @@ class com_myentity extends component implements entity_manager_interface {
 					pines_error('Query failed: ' . mysql_errno() . ': ' . mysql_error() . ($_->config->com_myentity->show_failures ? ' --- '.$query : ''));
 				return false;
 			}
-			$query = sprintf("DELETE FROM `%scom_myentity_data%s` WHERE `guid`=%u;",
+			$query = sprintf("DELETE FROM `%scom_myentity_data%s` WHERE `guid`='%u';",
 				$_->config->com_mysql->prefix,
 				$etype,
 				(int) $entity->guid);

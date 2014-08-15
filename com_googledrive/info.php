@@ -21,7 +21,7 @@ return array(
 	'description' => 'Exports rows in a grid to Google Drive as a spreadsheet',
 	'depend' => array(
 		'core' => '<3',
-                'component' => 'com_pnotify'
+		'component' => 'com_pnotify'
 	),
-	
+
 );

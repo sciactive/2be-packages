@@ -36,9 +36,13 @@ $this->show_title = false;
 		</div>
 		<div class="shop_page row">
 			<div class="col-sm-8">
-				<div class="shop_products shop_box"></div>
+				<h4>Newest Products</h4>
+				<div class="shop_products shop_box"><?php $this->entity->print_product_featurette(); ?></div>
 			</div>
-			<div class="col-sm-4"><div class="shop_categories shop_box"></div></div>
+			<div class="col-sm-4">
+				<h4>Browse by Category</h4>
+				<div class="shop_categories shop_box"></div>
+			</div>
 		</div>
 	</div>
 </div>

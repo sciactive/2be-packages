@@ -37,13 +37,17 @@ if ($this->entity->has_tag('product')) {
 }
 
 while (isset($cur_entity)) {
-	$bc = '<li><a href="'.h(pines_url('com_shop', 'category/browse', array('a' => $cur_entity->alias))).'" class="breadcrumb_item">'.h($cur_entity->name).'</a> <span class="divider">&gt;</span></li> ' . $bc;
+	$bc = '<li><a href="'.h(pines_url('com_shop', 'category/browse', array('a' => $cur_entity->alias))).'" class="breadcrumb_item">'.h($cur_entity->name).'</a></li> ' . $bc;
 	if ($cur_entity->show_menu)
 		unset($cur_entity);
 	else
 		$cur_entity = $cur_entity->parent;
 }
 
-$bc = '<ul class="breadcrumb"><li><a href="'.h(pines_url()).'" class="breadcrumb_item">Home</a> <span class="divider">&gt;</span></li> ' . $bc . '</ul>';
+if (isset($this->entity->shop)) {
+	$bc = '<li><a href="'.h(pines_url('com_shop', null, array('id' => $this->entity->shop->guid))).'" class="breadcrumb_item">'.h($this->entity->shop->name).'</a></li> ' . $bc;
+}
+
+$bc = '<ul class="breadcrumb"><li><a href="'.h(pines_url()).'" class="breadcrumb_item">Home</a></li> ' . $bc . '</ul>';
 
 echo $bc;

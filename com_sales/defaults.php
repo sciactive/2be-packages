@@ -381,14 +381,14 @@ return array(
 		'name' => 'product_thumbnail_width',
 		'cname' => 'Product Thumbnail Width',
 		'description' => 'The width of main product thumbnail. Images may be scaled.',
-		'value' => 90,
+		'value' => 128,
 		'peruser' => true,
 	),
 	array(
 		'name' => 'product_thumbnail_height',
 		'cname' => 'Product Thumbnail Height',
 		'description' => 'The height of main product thumbnail. Images may be scaled.',
-		'value' => 90,
+		'value' => 128,
 		'peruser' => true,
 	),
 	array(

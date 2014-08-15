@@ -255,6 +255,45 @@ class com_shop extends component {
 	}
 
 	/**
+	 * Get the products to display from a shop.
+	 *
+	 * @param com_shop_shop $shop The shop.
+	 * @param int $page The page number.
+	 * @param int $products_per_page The number of products per page.
+	 * @param mixed &$offset This variable will receive the product offset.
+	 * @param mixed &$count This variable will receive the total number of products.
+	 * @param mixed &$pages This variable will receive the total number of pages.
+	 * @param string|null $sort_var The variable by which the products should be sorted. If null, no sorting.
+	 * @param bool $sort_reverse Whether to reverse sort order.
+	 * @return array The array of products.
+	 */
+	public function get_shop_products($shop, $page, $products_per_page, &$offset, &$count, &$pages, $sort_var = null, $sort_reverse = false) {
+		global $_;
+		$products = (array) $shop->get_products();
+
+		// Get the products to be displayed.
+		foreach ($products as $key => $cur_product) {
+			if (!isset($cur_product->guid) || !$cur_product->enabled || !$cur_product->show_in_shop)
+				unset($products[$key]);
+		}
+
+		if (isset($sort_var))
+			$_->entity_manager->sort($products, $sort_var, false, $sort_reverse);
+
+		// How many products/pages are there?
+		$count = count($products);
+		$pages = ceil($count / $products_per_page);
+
+		// What's the first product to show?
+		$offset = ($page -1) * $products_per_page;
+
+		// Get the products to show;
+		$products = array_slice($products, $offset, $products_per_page);
+
+		return $products;
+	}
+
+	/**
 	 * Get all products in a category and its descendants.
 	 *
 	 * @param com_sales_category $category The category.

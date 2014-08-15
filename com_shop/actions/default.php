@@ -12,4 +12,6 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 $entity = com_shop_shop::factory((int) $_REQUEST['id']);
+if (!$entity->guid)
+	throw new HttpClientException(null, 404);
 $entity->home();

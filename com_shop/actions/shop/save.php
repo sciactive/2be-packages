@@ -27,6 +27,7 @@ if ( isset($_REQUEST['id']) ) {
 
 // General
 $shop->name = $_REQUEST['name'];
+$shop->display_email = ($_REQUEST['display_email'] == 'ON');
 if (!isset($shop->images_dir))
 	$shop->images_dir = uniqid();
 $dir = $_->config->upload_location.$_->config->com_shop->shop_images_directory.$shop->images_dir.'/';
@@ -60,7 +61,7 @@ while (true) {
 		if (!$image->writeImage("{$dir}thumb.png")) {
 			unset($shop->thumbnail);
 			pines_error("Error saving image: {$shop->thumbnail}");
-			continue;
+			break;
 		}
 		$shop->thumbnail = "{$dir}thumb.png";
 	}
@@ -96,7 +97,7 @@ while (true) {
 		if (!$image->writeImage("{$dir}header.png")) {
 			unset($shop->header);
 			pines_error("Error saving image: {$shop->header}");
-			continue;
+			break;
 		}
 		$shop->header = "{$dir}header.png";
 	}

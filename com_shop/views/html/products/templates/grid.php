@@ -37,7 +37,7 @@ $_(function(){
 });
 </script>
 <div class="row">
-	<?php $i = 0; foreach ($products as $key => $cur_product) {
+	<?php $i = 0; foreach ($this->products as $key => $cur_product) {
 		if ($i && !($i % 3)) { ?>
 </div>
 <hr />
@@ -53,11 +53,11 @@ $_(function(){
 			<div class="name"><a href="<?php e(pines_url('com_shop', 'product', array('a' => $cur_product->alias))); ?>"><?php e($cur_product->name); ?></a></div>
 			<div class="info">
 				<?php if (!empty($cur_product->manufacturer_sku)) { ?>
-				<strong>Model:</strong> <?php echo format_content(h($cur_product->manufacturer_sku)); ?> | 
+				<strong>Model:</strong> <?php echo format_content(h($cur_product->manufacturer_sku)); ?> |
 				<?php } ?>
 				<strong>SKU:</strong> <?php echo format_content(h($cur_product->sku)); ?>
 			</div>
-			
+
 			<div class="price_box clearfix">
 				<div class="price"><?php echo $_->com_shop->format_price($cur_product->unit_price); ?><span class="value"><?php echo isset($cur_product->unit_price) ? round($cur_product->unit_price, 2) : ''; ?></span></div>
 				<?php if (!$_->config->com_shop->catalog_mode) { ?>

@@ -40,7 +40,7 @@ class com_shop_shop extends entity {
 			case 'types':
 				return 'shops';
 			case 'url_view':
-				return pines_url('com_shop', 'shop', array('id' => $this->guid));
+				return pines_url('com_shop', null, array('id' => $this->guid));
 				break;
 			case 'url_edit':
 				if (gatekeeper('com_shop/editshop'))
@@ -78,6 +78,31 @@ class com_shop_shop extends entity {
 	}
 
 	/**
+	 * Get the products that belong to this shop.
+	 *
+	 * @param bool $only_enabled Only retrieve enabled products.
+	 * @param bool $only_show_in_shop Only retrieve products set to show in the shop.
+	 * @return array The resulting products.
+	 */
+	public function get_products($only_enabled = true, $only_show_in_shop = true) {
+		global $_;
+		$selector = array('&',
+			'tag' => array('com_sales', 'product'),
+			'ref' => array('shop', $this)
+		);
+		if ($only_enabled || $only_show_in_shop)
+			$selector['data'] = array();
+		if ($only_enabled)
+			$selector['data'][] = array('enabled', true);
+		if ($only_show_in_shop)
+			$selector['data'][] = array('show_in_shop', true);
+		return $_->entity_manager->get_entities(
+				array('class' => com_sales_product),
+				$selector
+			);
+	}
+
+	/**
 	 * View the shop's home.
 	 * @return module The module.
 	 */
@@ -108,6 +133,21 @@ class com_shop_shop extends entity {
 	public function print_owner() {
 		$module = new module('com_shop', 'shop/owner', '');
 		$module->entity = $this;
+		$module->detach();
+		echo $module->render();
+
+		return $module;
+	}
+
+	/**
+	 * Print a shop's printuct featurette.
+	 * @return module The module.
+	 */
+	public function print_product_featurette() {
+		$module = new module('com_shop', 'products/list', '');
+		$module->products = array_slice(array_reverse($this->get_products()), 0, 5);
+		$module->no_controls = true;
+		$module->template = 'featurette';
 		$module->detach();
 		echo $module->render();
 
