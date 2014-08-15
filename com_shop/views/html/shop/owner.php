@@ -31,7 +31,7 @@ if (!isset($user))
 			<?php if (!$_->config->com_user->email_usernames) { ?>
 			Username: <?php e($user->username); ?><br />
 			<?php } ?>
-			Member since: <?php e(format_date($user->cdate, 'date_med')); ?><br />
+			Member since: <?php e(format_date($user->p_cdate, 'date_med')); ?><br />
 			<?php if (
 					$this->entity->display_email &&
 					(
