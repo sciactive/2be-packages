@@ -136,7 +136,7 @@ $_->com_pgrid->load();
 	<div id="p_muid_div" class="panel-group">
 		<?php if (!empty($this->entity->employment_history)) { ?>
 		<div class="panel panel-default">
-			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Employment History</big>
 			</a>
 			<div class="panel-collapse collapse">
@@ -162,7 +162,7 @@ $_->com_pgrid->load();
 		</div>
 		<?php } if (!empty($this->issues)) { ?>
 		<div class="panel panel-default">
-			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Issues/Transgressions</big>
 			</a>
 			<div class="panel-collapse collapse">
@@ -209,7 +209,7 @@ $_->com_pgrid->load();
 		</div>
 		<?php } if (!empty($this->sales)) { ?>
 		<div class="panel panel-default">
-			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Sales History</big>
 			</a>
 			<div class="panel-collapse collapse">
@@ -245,7 +245,7 @@ $_->com_pgrid->load();
 		</div>
 		<?php } if (!empty($this->returns)) { ?>
 		<div class="panel panel-default">
-			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Return History</big>
 			</a>
 			<div class="panel-collapse collapse">
@@ -283,7 +283,7 @@ $_->com_pgrid->load();
 		</div>
 		<?php } if (!empty($this->paystubs)) { ?>
 		<div class="panel panel-default">
-			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-parent="#p_muid_div" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Paystubs</big>
 			</a>
 			<div class="panel-collapse collapse">

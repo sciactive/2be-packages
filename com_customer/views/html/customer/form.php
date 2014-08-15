@@ -855,7 +855,7 @@ $_->com_customer->load_company_select();
 		<div class="tab-pane" id="p_muid_tab_history">
 			<div class="panel-group">
 				<div class="panel panel-default">
-					<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+					<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 						<big class="panel-title">Customer Interaction</big>
 					</a>
 					<div class="panel-collapse collapse in">
@@ -901,7 +901,7 @@ $_->com_customer->load_company_select();
 					?>
 				<div class="panel-group">
 					<div class="panel panel-default">
-						<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+						<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 							<big class="panel-title">Purchases and Returns</big>
 						</a>
 						<div class="panel-collapse collapse in">

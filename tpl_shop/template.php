@@ -50,18 +50,12 @@ header('Content-Type: text/html');
 	<meta name="HandheldFriendly" content="true" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<script type="text/javascript" src="<?php e($_->config->rela_location); ?>system/includes/js.php"></script>
-	<script type="text/javascript">$_(function(){if ($.pnotify) {
-		PNotify.prototype.options.opacity = .9;
-		PNotify.prototype.options.delay = 15000;
-	}});</script>
+	<script type="text/javascript" src="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/js/template.js"></script>
 	<?php if ($_->config->tpl_shop->ajax) { ?>
 	<script type="text/javascript" src="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/js/ajax.js"></script>
 	<?php } ?>
-	<!--[if lt IE 8]>
-	<script type="text/javascript" src="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/js/jquery/jquery.dropdown.js"></script>
-	<![endif]-->
 	<?php echo $_->page->render_modules('head', 'module_head'); ?>
-	<link href="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/css/pines.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/css/template.css" media="all" rel="stylesheet" type="text/css" />
 	<link href="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/css/print.css" media="print" rel="stylesheet" type="text/css" />
 </head>
 <body class="<?php echo in_array('printfix', $_->config->tpl_shop->fancy_style) ? ' printfix' : ''; echo in_array('printheader', $_->config->tpl_shop->fancy_style) ? ' printheader' : ''; echo in_array('nosidegutters', $_->config->tpl_shop->fancy_style) ? ' nosidegutters' : '';?>">

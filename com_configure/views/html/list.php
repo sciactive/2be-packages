@@ -145,7 +145,7 @@ $this->title = 'Component Configuration';
 		<?php foreach($this->components as $cur_component) {
 			if (($this->per_user || $this->per_condition) && !$cur_component->is_configurable()) continue; ?>
 		<div class="panel panel-default">
-			<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_components" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_components" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">
 					<span class="panel-title"><?php e($cur_component->info->name); ?></span>
 					<?php echo $cur_component->config ? ' <span class="label label-info">Modified</span>' : ''; echo $cur_component->is_disabled() ? ' <span class="label label-warning">Disabled</span>' : ''; ?>

@@ -28,7 +28,7 @@ $this->title = 'Welcome to '.h($_->info->name);
 				<p>Migrating a 2be installation involves just a few quick steps:</p>
 				<div id="p_muid_migrate_steps" class="panel-group">
 					<div class="panel panel-default">
-						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 							<big class="panel-title">
 								Reinstalling Components and Templates
 							</big>
@@ -42,7 +42,7 @@ $this->title = 'Welcome to '.h($_->info->name);
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 							<big class="panel-title">
 								Copying Configuration Files
 							</big>
@@ -61,7 +61,7 @@ $this->title = 'Welcome to '.h($_->info->name);
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 							<big class="panel-title">
 								Copying Media Files
 							</big>
@@ -76,7 +76,7 @@ $this->title = 'Welcome to '.h($_->info->name);
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 							<big class="panel-title">
 								Migrating Entity Data
 							</big>
@@ -94,7 +94,7 @@ $this->title = 'Welcome to '.h($_->info->name);
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+						<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-parent="#p_muid_migrate_steps" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 							<big class="panel-title">
 								Anything Else?
 							</big>

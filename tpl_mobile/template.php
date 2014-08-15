@@ -15,6 +15,11 @@ defined('P_RUN') or die('Direct access prohibited');
 header('Content-Type: text/html');
 
 $menu = $_->page->render_modules('main_menu', 'module_head');
+
+$left = $_->page->render_modules('left');
+$right = $_->page->render_modules('right');
+
+$sidebar = (empty($left) ? '' : '<div id="left">'.$left.'</div>').(empty($right) ? '' : '<div id="right">'.$right.'</div>')
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,18 +32,21 @@ $menu = $_->page->render_modules('main_menu', 'module_head');
 	<script type="text/javascript" src="<?php e($_->config->rela_location); ?>system/includes/js.php"></script>
 	<script type="text/javascript" src="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/js/template.js"></script>
 	<?php echo $_->page->render_modules('head', 'module_head'); ?>
-	<link href="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/css/pines.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="<?php e($_->config->location); ?>templates/<?php e($_->current_template); ?>/css/template.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div id="nav" class="navbar navbar-default navbar-fixed-top">
+<div id="nav" class="navbar navbar-default">
 	<div class="container">
 		<div class="navbar-header">
 			<?php if (!empty($menu)) { ?>
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			<button type="button" class="menu-toggle navbar-toggle" onclick="$('#wrapper').toggleClass('menu-open').removeClass('sidebar-open');$('#wrapper #sidebar').hide();">
 				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
+				<span class="fa fa-bars"></span>
+			</button>
+			<?php } if (!empty($sidebar)) { ?>
+			<button type="button" class="sidebar-toggle navbar-toggle" onclick="$('#wrapper #sidebar:hidden').show();$('#wrapper.sidebar-open #sidebar').hide();setTimeout(function(){$('#wrapper').toggleClass('sidebar-open').removeClass('menu-open');}, 0)">
+				<span class="sr-only">Toggle sidebar</span>
+				<span class="fa fa-list-alt"></span>
 			</button>
 			<?php } if ($_->config->tpl_mobile->use_header_image) { ?>
 			<a class="navbar-brand brand-image" href="<?php e(pines_url()); ?>">
@@ -49,9 +57,6 @@ $menu = $_->page->render_modules('main_menu', 'module_head');
 				<?php e($_->config->page_title); ?>
 			</a>
 			<?php } ?>
-		</div>
-		<div class="collapse navbar-collapse">
-			<?php echo $_->page->render_modules('main_menu', 'module_head'); ?>
 		</div>
 	</div>
 </div>
@@ -90,11 +95,6 @@ $menu = $_->page->render_modules('main_menu', 'module_head');
 	<div id="content"><?php echo $_->page->render_modules('content'); ?></div>
 	<div id="content_bottom_left"><?php echo $_->page->render_modules('content_bottom_left'); ?></div>
 	<div id="content_bottom_right"><?php echo $_->page->render_modules('content_bottom_right'); ?></div>
-	<?php if (in_array($_->config->tpl_mobile->variant, array('full', 'left'))) { ?>
-	<div id="left"><?php echo $_->page->render_modules('left'); ?></div>
-	<?php } if (in_array($_->config->tpl_mobile->variant, array('full', 'right'))) { ?>
-	<div id="right"><?php echo $_->page->render_modules('right'); ?></div>
-	<?php } ?>
 	<div id="post_content"><?php echo $_->page->render_modules('post_content', 'module_header'); ?></div>
 	<div id="footer" class="well">
 		<div class="modules"><?php echo $_->page->render_modules('footer', 'module_header'); ?></div>
@@ -103,8 +103,12 @@ $menu = $_->page->render_modules('main_menu', 'module_head');
 	<div id="bottom"><?php echo $_->page->render_modules('bottom', 'module_header'); ?></div>
 </div>
 <?php if (!empty($menu)) { ?>
-<div id="menu">
+<div id="menu" class="navbar-default">
 	<?php echo $menu; ?>
+</div>
+<?php } if (!empty($sidebar)) { ?>
+<div id="sidebar" class="navbar-default">
+	<?php echo $sidebar; ?>
 </div>
 <?php } ?>
 </div>

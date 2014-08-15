@@ -32,7 +32,7 @@ class tpl_mobile extends template {
 
 	/**
 	 * Format a menu in HTML.
-	 * 
+	 *
 	 * @param array $menu The menu.
 	 * @return string The menu's HTML.
 	 */
@@ -40,39 +40,43 @@ class tpl_mobile extends template {
 		global $_;
 		if (count($menu) == 1)
 			return '';
-		$return = '<ul class="menu">';
+		$id = uniqid('menu_');
+		$return = '<div class="panel-group" id="'.$id.'">';
 		foreach ($menu as $key => &$value) {
 			if ((int) $key === $key) continue;
-			$return .= $this->sub_menu($value);
+			$return .= $this->sub_menu($value, $id);
 		}
-		$return .= '</ul>';
+		$return .= '</div>';
 		return $return;
 	}
 
 	/**
 	 * Format a sub menu in HTML.
-	 * 
+	 *
 	 * @param array &$menu The menu.
 	 * @return string The menu's HTML.
 	 */
-	public function sub_menu(&$menu) {
+	public function sub_menu(&$menu, $id) {
 		$count = count($menu);
-		// TODO: Remove target attribute. It's not XHTML 1.0 Strict.
-		$return = '<li><a class="btn btn-default" href="'.
+		$return = '<div class="panel '.(($menu[0]['current_page'] || $menu[0]['current_page_parent']) ? 'panel-primary' : 'panel-default').'">'.
+			'<a class="panel-heading" href="'.
 			(isset($menu[0]['href']) ? h($menu[0]['href']) : 'javascript:void(0);').'"'.
+			($count > 1 ? ' data-parent="#'.$id.'" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0"' : '').
 			(isset($menu[0]['onclick']) ? " onclick=\"{$menu[0]['onclick']}\"" : '').
 			(isset($menu[0]['target']) ? " target=\"{$menu[0]['target']}\"" : '').
-			'>'.h($menu[0]['text']).'</a>'.
-			($count > 1 ? '<a class="btn btn-default expander" href="javascript:void(0);"><i class="fa fa-chevron-down"></i></a>' : '');
+			'>'.
+			($count > 1 ? '<span class="menu-icon"><span></span><span></span><span></span></span>' : '').
+			'<big class="panel-title"><span class="panel-title">'.h($menu[0]['text']).'</span></big>'.
+			'</a>';
 		if ($count > 1) {
-			$return .= '<ul>';
+			$new_id = uniqid('menu_');
+			$return .= '<div class="panel-collapse collapse"><div class="panel-body clearfix"><div class="panel-group" id="'.$new_id.'">';
 			foreach ($menu as $key => &$value) {
 				if ((int) $key === $key) continue;
-				$return .= $this->sub_menu($value);
+				$return .= $this->sub_menu($value, $new_id);
 			}
-			$return .= '</ul>';
+			$return .= '</div></div></div>';
 		}
-		$return .= '</li>';
-		return $return;
+		return $return.'</div>';
 	}
 }

@@ -13,19 +13,6 @@ defined('P_RUN') or die('Direct access prohibited');
 
 return array(
 	array(
-		'name' => 'variant',
-		'cname' => 'Page Variant/Layout',
-		'description' => 'The layout of the page.',
-		'value' => 'full',
-		'options' => array(
-			'full (Show content, left, and right modules.)' => 'full',
-			'left (Show content and left modules.)' => 'left',
-			'right (Show content and right modules.)' => 'right',
-			'content (Show content modules.)' => 'content',
-		),
-		'peruser' => true,
-	),
-	array(
 		'name' => 'use_header_image',
 		'cname' => 'Use Header Image',
 		'description' => 'Show a header image (instead of just text) at the top of the page.',

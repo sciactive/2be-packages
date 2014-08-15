@@ -116,7 +116,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['user']->com_shop_starred) && $t
 </script>
 <div id="p_muid_header" class="shop_header">
 	<div class="shop_title">
-		<h1><a href="<?php e(pines_url('com_shop', 'shop', array('id' => $this->entity->guid))); ?>"><img alt="Shop Thumbnail" src="<?php e($_->config->location.$this->entity->thumbnail); ?>" /></a> <?php e($this->entity->name); ?></h1>
+		<h1><a href="<?php e(pines_url('com_shop', null, array('id' => $this->entity->guid))); ?>"><img alt="Shop Thumbnail" src="<?php e($_->config->location.$this->entity->thumbnail); ?>" /></a> <?php e($this->entity->name); ?></h1>
 	</div>
 	<div class="shop_actions">
 		<?php if ($can_edit) { ?>

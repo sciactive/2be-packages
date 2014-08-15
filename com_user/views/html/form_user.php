@@ -580,11 +580,10 @@ if ($_->config->com_user->check_username) { ?>
 			</style>
 			<script type="text/javascript">
 				$_(function(){
-					var sections = $("#p_muid_tab_abilities .abilities_accordion .collapse");
-					$("#p_muid_tab_abilities button.expand_all").click(function(){
+					var sections = $("#p_muid_tab_abilities .abilities_accordion .panel-collapse");
+					$("#p_muid_tab_abilities").on("click", "button.expand_all", function(){
 						sections.collapse("show");
-					});
-					$("#p_muid_tab_abilities button.collapse_all").click(function(){
+					}).on("click", "button.collapse_all", function(){
 						sections.collapse("hide");
 					});
 				});
@@ -609,7 +608,7 @@ if ($_->config->com_user->check_username) { ?>
 				if (!$section_abilities) continue; ?>
 			<div class="abilities_accordion panel-group">
 				<div class="panel panel-default">
-					<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+					<a class="panel-heading ui-helper-clearfix" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 						<big class="panel-title"><?php ($cur_section == 'system') ? e($_->info->name) : e($_->info->$cur_section->name); ?> <span class="component"><?php e($cur_section); ?></span></big>
 					</a>
 					<div class="panel-collapse collapse">

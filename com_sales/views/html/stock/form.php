@@ -110,7 +110,7 @@ $_->com_jstree->load();
 	<br class="pf-clearing" />
 	<div class="p_muid_option_accordian panel-group">
 		<div class="panel panel-info">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Change Availability</big>
 			</a>
 			<div class="panel-collapse collapse">
@@ -168,7 +168,7 @@ $_->com_jstree->load();
 	<?php if (isset($this->entity) && $this->entity->product->serialized) { ?>
 	<div class="p_muid_option_accordian panel-group">
 		<div class="panel panel-info">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Change Serial</big>
 			</a>
 			<div class="panel-collapse collapse">
@@ -198,7 +198,7 @@ $_->com_jstree->load();
 	<?php } ?>
 	<div class="p_muid_option_accordian panel-group">
 		<div class="panel panel-info">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Change Location</big>
 			</a>
 			<div class="panel-collapse collapse">
@@ -260,7 +260,7 @@ $_->com_jstree->load();
 	</div>
 	<div class="p_muid_option_accordian panel-group">
 		<div class="panel panel-info">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Change Vendor</big>
 			</a>
 			<div class="panel-collapse collapse">
@@ -296,7 +296,7 @@ $_->com_jstree->load();
 	</div>
 	<div class="p_muid_option_accordian panel-group">
 		<div class="panel panel-info">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Change Cost</big>
 			</a>
 			<div class="panel-collapse collapse">

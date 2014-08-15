@@ -37,7 +37,7 @@ $_->com_pgrid->load();
 	<?php if ($this->entity->missing) { ?>
 	<div class="panel-group">
 		<div class="panel panel-error">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Missing Items</big>
 			</a>
 			<div class="panel-collapse collapse in">
@@ -73,7 +73,7 @@ $_->com_pgrid->load();
 	<?php } if ($this->entity->matched) { ?>
 	<div class="panel-group">
 		<div class="panel panel-success">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Matched Items</big>
 			</a>
 			<div class="panel-collapse collapse in">
@@ -109,7 +109,7 @@ $_->com_pgrid->load();
 	<?php } if ($this->entity->potential) { ?>
 	<div class="panel-group">
 		<div class="panel panel-info">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Potential Matches</big>
 			</a>
 			<div class="panel-collapse collapse in">
@@ -168,7 +168,7 @@ $_->com_pgrid->load();
 	<?php } if ($this->entity->duplicate) { ?>
 	<div class="panel-group">
 		<div class="panel panel-warning">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title" style="margin-bottom: 0;">Duplicate Items</big>
 			</a>
 			<div class="panel-collapse collapse in">
@@ -204,7 +204,7 @@ $_->com_pgrid->load();
 	<?php } if ($this->entity->history) { ?>
 	<div class="panel-group">
 		<div class="panel panel-warning">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title" style="margin-bottom: 0;">Past Items</big>
 			</a>
 			<div class="panel-collapse collapse in">
@@ -236,7 +236,7 @@ $_->com_pgrid->load();
 	<?php } if ($this->entity->invalid) { ?>
 	<div class="panel-group">
 		<div class="panel panel-default">
-			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .collapse" tabindex="0">
+			<a class="panel-heading" href="javascript:void(0);" data-toggle="collapse" data-target=":focus + .panel-collapse" tabindex="0">
 				<big class="panel-title">Invalid/Unknown Entries</big>
 			</a>
 			<div class="panel-collapse collapse in">
