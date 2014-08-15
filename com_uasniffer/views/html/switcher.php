@@ -23,7 +23,7 @@ $is_mobile = $_->depend->check('browser', 'mobile-real');
 $switched = ($_COOKIE['com_uasniffer_switch'] == 'true');
 
 ?>
-<div id="p_muid_links"<?php echo ($this->center ? ' style="text-align: center;"' : ''); ?>>
+<div id="p_muid_links" style="<?php echo ($this->center ? 'text-align: center; ' : ''); ?>margin: 1em 0;">
 	<script type="text/javascript">
 		$_(function(){
 			var values = function(){

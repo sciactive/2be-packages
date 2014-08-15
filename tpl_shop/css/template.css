@@ -70,8 +70,10 @@
 	width:auto;
 }
 #bottom {
-	font-size: 0;
 	line-height: 0;
+}
+#bottom * {
+	line-height: normal;
 }
 #header_position {
 	float: left;
