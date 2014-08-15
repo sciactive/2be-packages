@@ -167,7 +167,7 @@ $this->sawasc = $_->com_user->activate_sawasc();
 				<?php if ($this->style != 'small') { ?>
 				<span class="pf-group" style="display: block;">
 				<?php } ?>
-					<input class="pf-field form-control" type="text" name="username" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" />
+					<input class="pf-field form-control" type="<?php echo $_->config->com_user->email_usernames ? 'email' : 'text'; ?>" name="username" size="<?php echo ($this->style == 'small') ? '10' : '24'; ?>" />
 					<?php if ($this->check_username) { echo ($this->style == 'compact') ? '<br class="pf-clearing" />' : ''; ?>
 					<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 					<span class="pf-field picon" id="p_muid_username_message" style="display: none;"></span>
@@ -355,7 +355,7 @@ $this->sawasc = $_->com_user->activate_sawasc();
 						</span></label>
 				</div>
 			</div>
-			<?php	} 
+			<?php	}
 			} ?>
 		</div>
 		<?php } ?>
