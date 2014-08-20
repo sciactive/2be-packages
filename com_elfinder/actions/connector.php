@@ -35,89 +35,53 @@ function com_elfinder__access($attr, $path, $data, $volume) {
 	}
 }
 
-if ($_REQUEST['temp'] == 'true') {
-	$dir = $_SESSION['elfinder_request_id'][$_REQUEST['request_id']];
-	if (!isset($dir)) {
-		pines_session('write');
-		$dir = $_SESSION['elfinder_request_id'][$_REQUEST['request_id']] = uniqid('2be_upload_');
-		pines_session('close');
-	}
-	$tmp = sys_get_temp_dir().'/'.$dir.'/';
-	$opts = array(
-		'roots' => array(
-			array(
-				'driver' => 'LocalFileSystem',
-				'path' => $tmp,
-				'alias' => 'Upload Area',
-				'URL' => $_REQUEST['request_id'],
-				'tmbPath' => '',
-				'dateFormat' => $_->config->com_elfinder->date_format,
-				'timeFormat' => $_->config->com_elfinder->time_format,
-				'defaults' => array(
-					'read' => true,
-					'write' => true
-				),
-				'disabled' => empty($_->config->com_elfinder->disabled) ? array() : $_->config->com_elfinder->disabled,
-				'accessControl' => 'com_elfinder__access'
-			)
-		),
-	);
-	if ($_->config->com_elfinder->upload_check) {
-		$opts['roots'][0]['uploadAllow'] = $_->config->com_elfinder->upload_allow;
-		$opts['roots'][0]['uploadDeny'] = $_->config->com_elfinder->upload_deny;
-		$opts['roots'][0]['uploadOrder'] = $_->config->com_elfinder->upload_order;
-	}
-	if (!file_exists($opts['roots'][0]['path']))
-		mkdir($opts['roots'][0]['path'], 0700);
-} else {
-	$opts = array(
-		'roots' => array(
-			array(
-				'driver' => 'LocalFileSystem',
-				'path' => $_->config->com_elfinder->root,
-				'alias' => $_->config->com_elfinder->root_alias,
-				'URL' => $_->config->com_elfinder->root_url,
-				'fileMode' => $_->config->com_elfinder->file_mode,
-				'dirMode' => $_->config->com_elfinder->dir_mode,
-				'tmbPath' => $_->config->com_elfinder->tmb_dir,
-				'tmbCleanProb' => $_->config->com_elfinder->tmb_clean_prob,
-				'tmbSize' => $_->config->com_elfinder->tmb_size,
-				'tmbPathMode' => 0700,
-				'dateFormat' => $_->config->com_elfinder->date_format,
-				'timeFormat' => $_->config->com_elfinder->time_format,
-				'defaults' => array(
-					'read' => $_->config->com_elfinder->default_read,
-					'write' => $_->config->com_elfinder->default_write
-				),
-				'disabled' => empty($_->config->com_elfinder->disabled) ? array() : $_->config->com_elfinder->disabled,
-				'accessControl' => 'com_elfinder__access'
-			)
-		),
-	);
+$opts = array(
+	'roots' => array(
+		array(
+			'driver' => 'LocalFileSystem',
+			'path' => $_->config->com_elfinder->root,
+			'alias' => $_->config->com_elfinder->root_alias,
+			'URL' => $_->config->com_elfinder->root_url,
+			'fileMode' => $_->config->com_elfinder->file_mode,
+			'dirMode' => $_->config->com_elfinder->dir_mode,
+			'tmbPath' => $_->config->com_elfinder->tmb_dir,
+			'tmbCleanProb' => $_->config->com_elfinder->tmb_clean_prob,
+			'tmbSize' => $_->config->com_elfinder->tmb_size,
+			'tmbPathMode' => 0700,
+			'dateFormat' => $_->config->com_elfinder->date_format,
+			'timeFormat' => $_->config->com_elfinder->time_format,
+			'defaults' => array(
+				'read' => $_->config->com_elfinder->default_read,
+				'write' => $_->config->com_elfinder->default_write
+			),
+			'disabled' => empty($_->config->com_elfinder->disabled) ? array() : $_->config->com_elfinder->disabled,
+			'accessControl' => 'com_elfinder__access'
+		)
+	),
+);
 
-	if (!empty($_REQUEST['start_path']))
-		$opts['roots'][0]['startPath'] = $_REQUEST['start_path'];
+if (!empty($_REQUEST['start_path']))
+	$opts['roots'][0]['startPath'] = $_REQUEST['start_path'];
 
-	if ($_->config->com_elfinder->upload_check) {
-		$opts['roots'][0]['uploadAllow'] = $_->config->com_elfinder->upload_allow;
-		$opts['roots'][0]['uploadDeny'] = $_->config->com_elfinder->upload_deny;
-		$opts['roots'][0]['uploadOrder'] = $_->config->com_elfinder->upload_order;
-	}
-	if (isset($_SESSION['user']) && file_exists($_->config->com_elfinder->root . $_->config->com_elfinder->own_root)) {
-		if (!gatekeeper('com_elfinder/finder')) {
-			$opts['roots'][0]['path'] .= $_->config->com_elfinder->own_root . $_SESSION['user']->guid . '/';
-			$opts['roots'][0]['URL'] .= $_->config->com_elfinder->own_root . $_SESSION['user']->guid . '/';
-			$opts['roots'][0]['alias'] = $_->config->com_elfinder->own_root_alias;
-			if (!file_exists($opts['roots'][0]['path']))
-				mkdir($opts['roots'][0]['path']);
-		} else {
-			$opts['roots'][1] = $opts['roots'][0];
-			$opts['roots'][1]['path'] .= $_->config->com_elfinder->own_root . $_SESSION['user']->guid . '/';
-			$opts['roots'][1]['URL'] .= $_->config->com_elfinder->own_root . $_SESSION['user']->guid . '/';
-			$opts['roots'][1]['alias'] = $_->config->com_elfinder->own_root_alias;
-			if (!file_exists($opts['roots'][1]['path']))
-				mkdir($opts['roots'][1]['path']);
-		}
+if ($_->config->com_elfinder->upload_check) {
+	$opts['roots'][0]['uploadAllow'] = $_->config->com_elfinder->upload_allow;
+	$opts['roots'][0]['uploadDeny'] = $_->config->com_elfinder->upload_deny;
+	$opts['roots'][0]['uploadOrder'] = $_->config->com_elfinder->upload_order;
+}
+if (isset($_SESSION['user']) && file_exists($_->config->com_elfinder->root . $_->config->com_elfinder->own_root)) {
+	if (!gatekeeper('com_elfinder/finder')) {
+		$opts['roots'][0]['path'] .= $_->config->com_elfinder->own_root . $_SESSION['user']->guid . '/';
+		$opts['roots'][0]['URL'] .= $_->config->com_elfinder->own_root . $_SESSION['user']->guid . '/';
+		$opts['roots'][0]['alias'] = $_->config->com_elfinder->own_root_alias;
+		if (!file_exists($opts['roots'][0]['path']))
+			mkdir($opts['roots'][0]['path']);
+	} else {
+		$opts['roots'][1] = $opts['roots'][0];
+		$opts['roots'][1]['path'] .= $_->config->com_elfinder->own_root . $_SESSION['user']->guid . '/';
+		$opts['roots'][1]['URL'] .= $_->config->com_elfinder->own_root . $_SESSION['user']->guid . '/';
+		$opts['roots'][1]['alias'] = $_->config->com_elfinder->own_root_alias;
+		if (!file_exists($opts['roots'][1]['path']))
+			mkdir($opts['roots'][1]['path']);
 	}
 }
 
