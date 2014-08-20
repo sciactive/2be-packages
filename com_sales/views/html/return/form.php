@@ -65,7 +65,7 @@ if ($_->config->com_sales->autocomplete_product)
 				payments_table = $("#p_muid_payments_table"),
 				payments = $("#p_muid_payments");
 			<?php if ($_->config->com_sales->com_customer) { ?>
-			var require_customer = false;
+			var require_customer = <?php echo json_encode((bool) $_->config->com_sales->always_require_customer); ?>;
 			<?php } ?>
 
 			// Number of decimal places to round to.
@@ -911,26 +911,26 @@ if ($_->config->com_sales->autocomplete_product)
 				var rows = products_table.pgrid_get_all_rows();
 				if (!rows)
 					return;
-				var subtotal = 0;
-				var specials = [];
-				var taxes = 0;
-				var item_fees = 0;
-				var total = 0;
-				// How many times to apply a flat tax.
-				var tax_qty = 0;
-				var taxable_subtotal = 0;
-				var row_export = [];
-				var return_fees = 0;
+				var subtotal = 0,
+					specials = [],
+					taxes = 0,
+					item_fees = 0,
+					total = 0,
+					// How many times to apply a flat tax.
+					tax_qty = 0,
+					taxable_subtotal = 0,
+					row_export = [],
+					return_fees = 0;
 				<?php if ($_->config->com_sales->com_customer) { ?>
-				require_customer = false;
+				require_customer = <?php echo json_encode((bool) $_->config->com_sales->always_require_customer); ?>;
 				<?php } ?>
 				rows.each(function(){
-					var cur_row = $(this);
-					var product = cur_row.data("product");
-					var checklists = cur_row.data("return_checklists");
+					var cur_row = $(this),
+						product = cur_row.data("product"),
+						checklists = cur_row.data("return_checklists");
 					if (!checklists)
 						checklists = {};
-					<?php if ($_->config->com_sales->com_customer) { ?>
+					<?php if ($_->config->com_sales->com_customer && !$_->config->com_sales->always_require_customer) { ?>
 					if (product.require_customer)
 						require_customer = true;
 					<?php } ?>
@@ -1077,7 +1077,7 @@ if ($_->config->com_sales->autocomplete_product)
 
 			$_.com_sales_run_check = function(use_drawer){
 				if (require_customer && !$("#p_muid_customer").val().match(/^\d+/)) {
-					alert("One of the products on this return requires a customer. Please select a customer before continuing.");
+					alert("This return requires a customer. Please select a customer before continuing.");
 					return;
 				}
 				var product_val = products.val();

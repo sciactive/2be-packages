@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = h($this->entity->name);
 //$this->note = '';
-//if (!empty($this->entity->manufacturer_sku))
+//if ($_->config->com_sales->enable_manufacturers && !empty($this->entity->manufacturer_sku))
 //	$this->note = '<strong>Model:</strong> '.format_content(h($this->entity->manufacturer_sku)).' | ';
 //$this->note .= '<strong>SKU:</strong> '.format_content(h($this->entity->sku));
 
@@ -116,7 +116,7 @@ $_->com_sales->sort_specs($specs);
 		<div class="info_container alert alert-info">
 			<div class="price"><?php echo $_->com_shop->format_price($this->entity->unit_price); ?></div>
 			<div class="info">
-				<?php if (!empty($this->entity->manufacturer_sku)) { ?>
+				<?php if ($_->config->com_sales->enable_manufacturers && !empty($this->entity->manufacturer_sku)) { ?>
 				<strong>Model:</strong> <?php echo format_content(h($this->entity->manufacturer_sku)); ?><br />
 				<?php } ?>
 				<strong>SKU:</strong> <?php echo format_content(h($this->entity->sku)); ?>

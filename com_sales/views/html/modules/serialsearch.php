@@ -75,9 +75,9 @@ $_->icons->load();
 								"<p><strong>Location:</strong> "+(this.location_name ? $_.safe(this.location_name) : "Not in Inventory")+"</p>"+
 								"<p><strong>Product:</strong> "+$_.safe(this.product_name)+"</p>"+
 								"<p><strong>Product ID:</strong> "+$_.safe(this.product_guid)+"</p>"+
-								"<p><strong>Product SKU:</strong> "+$_.safe(this.product_sku)+"</p>"+
+								"<p><strong>Product SKU:</strong> "+$_.safe(this.product_sku)+"</p>"<?php if ($_->config->com_sales->enable_manufacturers) { ?>+
 								"<p><strong>Manufacturer:</strong> "+$_.safe(this.manufacturer)+"</p>"+
-								"<p><strong>Manufacturer SKU:</strong> "+$_.safe(this.manufacturer_sku)+"</p>";
+								"<p><strong>Manufacturer SKU:</strong> "+$_.safe(this.manufacturer_sku)+"</p>"<?php } ?>;
 							stock_struct.push($("<div class=\"entry clearfix alert alert-success\">"+cur_stock_link+" | "+cur_product_link+"<br/>Last Transaction: "+$_.safe(this.last_transaction)+"</div>").popover({
 								trigger: 'hover',
 								html: true,

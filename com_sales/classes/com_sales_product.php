@@ -28,9 +28,9 @@ class com_sales_product extends entity {
 		$this->images = array();
 		$this->additional_tax_fees = array();
 		$this->return_checklists = array();
-		$this->serialized = true;
 		$this->discountable = true;
-		$this->require_customer = true;
+		if (!$_->config->com_sales->always_require_customer)
+			$this->require_customer = true;
 		$this->additional_barcodes = array();
 		$this->actions = array();
 		$this->show_in_shop = false;
@@ -155,8 +155,10 @@ class com_sales_product extends entity {
 					'data' => array('enabled', true)
 				)
 			);
-		$module->manufacturers = (array) $_->entity_manager->get_entities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
-		$_->entity_manager->sort($module->manufacturers, 'name');
+		if ($_->config->com_sales->enable_manufacturers) {
+			$module->manufacturers = (array) $_->entity_manager->get_entities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
+			$_->entity_manager->sort($module->manufacturers, 'name');
+		}
 		$module->vendors = (array) $_->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
 		$module->tax_fees = (array) $_->entity_manager->get_entities(
 				array('class' => com_sales_tax_fee),

@@ -97,7 +97,7 @@ if ($_->config->com_sales->com_esp) {
 			<?php if ($_->config->com_sales->com_esp) { ?>
 			var esp_rate = <?php echo (float) $_->config->com_esp->esp_rate; ?>;
 			<?php } if ($_->config->com_sales->com_customer) { ?>
-			var require_customer = false;
+			var require_customer = <?php echo json_encode((bool) $_->config->com_sales->always_require_customer); ?>;
 			<?php } ?>
 
 			// Number of decimal places to round to.
@@ -518,13 +518,13 @@ if ($_->config->com_sales->com_esp) {
 									'return_checklists' => array(),
 									'serialized' => $esp_product->serialized,
 									'discountable' => $esp_product->discountable,
-									'require_customer' => $esp_product->require_customer,
 									'one_per_ticket' => $esp_product->one_per_ticket,
 									'non_refundable' => $esp_product->non_refundable,
 									'fees_percent' => $fees_percent,
 									'fees_flat' => $fees_flat,
 									'serials' => array()
 								);
+								$json_struct->require_customer = $esp_product->require_customer;
 
 								foreach ((array) $esp_product->return_checklists as $cur_return_checklist) {
 									if (!$cur_return_checklist->enabled)
@@ -609,8 +609,8 @@ if ($_->config->com_sales->com_esp) {
 			var add_product = function(data, success){
 				var cur_row, del_dia = <?php echo json_encode($_->config->com_sales->delivery_dialog); ?>;
 				if (data.one_per_ticket) {
-					var cur_products = products_table.pgrid_get_all_rows().pgrid_export_rows();
-					var pass = true;
+					var cur_products = products_table.pgrid_get_all_rows().pgrid_export_rows(),
+						pass = true;
 					$.each(cur_products, function(){
 						if (parseInt(this.key) == data.guid) {
 							alert("Only one of this product is allowed per ticket.");
@@ -671,7 +671,7 @@ if ($_->config->com_sales->com_esp) {
 					serial_box.val("");
 					if (data.serials.length) {
 						var serial_list = $("#p_muid_available_serials").show().find(".serials").empty();
-						serial_list.append("<a href=\"javascript:void(0);\" class=\"serial\">"+$.map(data.serials, $_.safe).join("</a> | <a href=\"javascript:void(0);\" class=\"serial\">")+"</a>");
+						serial_list.append('<a href="javascript:void(0);" class="serial">'+$.map(data.serials, $_.safe).join('</a> | <a href="javascript:void(0);" class="serial">')+'</a>');
 					}
 					return;
 				}
@@ -692,8 +692,8 @@ if ($_->config->com_sales->com_esp) {
 				var delivery = $(this).attr("data-value");
 				if (delivery == "warehouse") {
 					rows.each(function(){
-						var cur_row = $(this);
-						var product = cur_row.data("product");
+						var cur_row = $(this),
+							product = cur_row.data("product");
 						if (product.stock_type != "stock_optional") {
 							alert("Warehouse sales are only allowed on stock optional items, and the item, "+product.name+", is not stock optional.");
 							return;
@@ -703,8 +703,8 @@ if ($_->config->com_sales->com_esp) {
 					});
 				} else {
 					rows.each(function(){
-						var cur_row = $(this);
-						var product = cur_row.data("product");
+						var cur_row = $(this),
+							product = cur_row.data("product");
 						if (product.serialized && cur_row.pgrid_get_value(3) == "") {
 							var serial = "";
 							while (!serial) {
@@ -1260,12 +1260,12 @@ if ($_->config->com_sales->com_esp) {
 				var tax_qty = 0;
 				var taxable_subtotal = 0;
 				<?php if ($_->config->com_sales->com_customer) { ?>
-				require_customer = false;
+				require_customer = <?php echo json_encode((bool) $_->config->com_sales->always_require_customer); ?>;
 				<?php } ?>
 				rows.each(function(){
 					var cur_row = $(this);
 					var product = cur_row.data("product");
-					<?php if ($_->config->com_sales->com_customer) { ?>
+					<?php if ($_->config->com_sales->com_customer && !$_->config->com_sales->always_require_customer) { ?>
 					if (product.require_customer)
 						require_customer = true;
 					<?php } ?>
@@ -1550,7 +1550,7 @@ if ($_->config->com_sales->com_esp) {
 
 			$_.com_sales_run_check = function(use_drawer){
 				if (require_customer && !$("#p_muid_customer").val().match(/^\d+/)) {
-					alert("One of the products on this sale requires a customer. Please select a customer before continuing.");
+					alert("This sale requires a customer. Please select a customer before continuing.");
 					return;
 				}
 				var product_val = products.val();

@@ -52,7 +52,7 @@ $_(function(){
 			<?php } ?>
 			<div class="name"><a href="<?php e(pines_url('com_shop', 'product', array('a' => $cur_product->alias))); ?>"><?php e($cur_product->name); ?></a></div>
 			<div class="info">
-				<?php if (!empty($cur_product->manufacturer_sku)) { ?>
+				<?php if ($_->config->com_sales->enable_manufacturers && !empty($cur_product->manufacturer_sku)) { ?>
 				<strong>Model:</strong> <?php echo format_content(h($cur_product->manufacturer_sku)); ?> |
 				<?php } ?>
 				<strong>SKU:</strong> <?php echo format_content(h($cur_product->sku)); ?>

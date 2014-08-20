@@ -245,10 +245,12 @@ if ($this->entity->final)
 						$.each(data, function(){
 							if (this.stock_type == "non_stocked")
 								return;
+							<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 							if (typeof this.manufacturer_name != "undefined" && this.manufacturer_name !== null)
 								this.manufacturer = '<a data-entity="'+$_.safe(this.manufacturer_guid)+'" data-entity-context="com_sales_manufacturer">'+$_.safe(this.manufacturer_name)+'</a>';
 							else
 								this.manufacturer = '';
+							<?php } ?>
 							var sku = "",
 								cost = "",
 								link = "",
@@ -271,8 +273,10 @@ if ($this->entity->final)
 								"values": [
 									$_.safe(this.sku),
 									'<a data-entity="'+$_.safe(this.guid)+'" data-entity-context="com_sales_product">'+$_.safe(this.name)+'</a>',
+									<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 									this.manufacturer,
 									$_.safe(this.manufacturer_sku),
+									<?php } ?>
 									$_.safe(sku),
 									$_.safe(cost),
 									$_.safe('$'+this.price),
@@ -592,8 +596,10 @@ if ($this->entity->final)
 				<tr>
 					<th>SKU</th>
 					<th>Name</th>
+					<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 					<th>Manufacturer</th>
 					<th>Manufacturer SKU</th>
+					<?php } ?>
 					<th>Vendor SKU</th>
 					<th>Vendor Cost</th>
 					<th>Unit Price</th>

@@ -78,7 +78,7 @@ $_(function(){$(".puploader").each(function(){
 				pfile.val(value).attr({
 					"data-original-title": title,
 					"data-content": content
-				}).popover({trigger: 'hover', placement: "bottom"});
+				}).popover({trigger: 'hover', placement: "bottom", html: true});
 				pfile.elfdlg.dialog("close");
 				pfile.change();
 			}
@@ -107,9 +107,11 @@ $_(function(){$(".puploader").each(function(){
 				var up = pfile.elfdlg.find(".elfinder-toolbar .elfinder-button:not(.ui-state-disabled) input[type=file]");
 				if (up.length) {
 					clearInterval(oi);
+					console.log("File Input: ", up);
 					up.click();
+					console.log("File Input: ", up);
 				}
-			}, 200);
+			}, 400);
 			pfile.elfdlg.dialog("option", {"width": "auto", "resizable": false});
 		}
 		pfile.elfdlg.dialog("option", "position", "center");

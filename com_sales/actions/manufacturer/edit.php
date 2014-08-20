@@ -11,6 +11,9 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
+if (!$_->config->com_sales->enable_manufacturers)
+	throw HttpClientException(null, 404);
+
 if (!empty($_REQUEST['id'])) {
 	if ( !gatekeeper('com_sales/editmanufacturer') )
 		punt_user(null, pines_url('com_sales', 'manufacturer/edit', array('id' => $_REQUEST['id'])));

@@ -59,10 +59,12 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					}
 					var struct = [];
 					$.each(data, function(){
+						<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 						if (typeof this.manufacturer_name != "undefined" && this.manufacturer_name !== null)
 							this.manufacturer = '<a data-entity="'+$_.safe(this.manufacturer_guid)+'" data-entity-context="com_sales_manufacturer">'+$_.safe(this.manufacturer_name)+'</a>';
 						else
 							this.manufacturer = '';
+						<?php } ?>
 						var vendors = [],
 							links = [],
 							costs = [];
@@ -80,8 +82,10 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 								$_.safe('$'+this.price),
 								$_.safe(costs.join(', ')),
 								vendors.join(', '),
+								<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 								this.manufacturer,
 								$_.safe(this.manufacturer_sku),
+								<?php } ?>
 								$_.safe(this.stock_type),
 								this.custom_item ? 'Yes' : 'No',
 								this.serialized ? 'Yes' : 'No',
@@ -105,7 +109,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				}
 			});
 		}
-		
+
 		var state_xhr;
 		var cur_state = <?php echo (isset($this->pgrid_state) ? json_encode($this->pgrid_state) : '{}');?>;
 		var cur_defaults = {
@@ -175,8 +179,10 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<th>Price</th>
 			<th>Cost(s)</th>
 			<th>Vendor(s)</th>
+			<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 			<th>Manufacturer</th>
 			<th>Manufacturer SKU</th>
+			<?php } ?>
 			<th>Stock Type</th>
 			<th>Custom Item</th>
 			<th>Serialized</th>

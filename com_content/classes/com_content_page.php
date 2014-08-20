@@ -145,8 +145,6 @@ class com_content_page extends entity {
 	public function print_intro() {
 		if (!$this->ready())
 			return null;
-		global $_;
-		$_->com_content->load_custom_css();
 		$module = new module('com_content', 'page/intro', 'content');
 		$module->entity = $this;
 
@@ -183,8 +181,6 @@ class com_content_page extends entity {
 	public function print_page() {
 		if (!$this->ready())
 			return null;
-		global $_;
-		$_->com_content->load_custom_css();
 		$module = new module('com_content', 'page/page', 'content');
 		$module->entity = $this;
 

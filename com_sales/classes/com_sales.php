@@ -1137,6 +1137,12 @@ class com_sales extends component {
 				// Set the new image.
 				$image = $canvas;
 				break;
+			case 'featured':
+				$width = $image->getImageWidth();
+				$height = $image->getImageHeight();
+				if ($width > $_->config->com_sales->product_featured_max_width || $height > $_->config->com_sales->product_featured_max_height)
+					$image->thumbnailImage($_->config->com_sales->product_featured_max_width, $_->config->com_sales->product_featured_max_height, true);
+				break;
 			case 'thumbnail':
 				// Fit the image into the thumbnail size.
 				$image->thumbnailImage($_->config->com_sales->product_thumbnail_width, $_->config->com_sales->product_thumbnail_height, true);

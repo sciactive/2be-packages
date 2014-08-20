@@ -57,8 +57,10 @@ $_->com_pgrid->load();
 				<th>SKU</th>
 				<th>Name</th>
 				<th>Enabled</th>
+				<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 				<th>Manufacturer</th>
 				<th>Manufacturer SKU</th>
+				<?php } ?>
 				<th>Pricing Method</th>
 				<th>Stock Type</th>
 			</tr>
@@ -69,8 +71,10 @@ $_->com_pgrid->load();
 				<td><?php e($cur_item->sku); ?></td>
 				<td><?php e($cur_item->name); ?></td>
 				<td><?php echo ($cur_item->enabled ? 'Yes' : 'No'); ?></td>
+				<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 				<td><?php e($cur_item->manufacturer->name); ?></td>
 				<td><?php e($cur_item->manufacturer_sku); ?></td>
+				<?php } ?>
 				<td><?php e($cur_item->pricing_method); ?></td>
 				<td><?php e($cur_item->stock_type); ?></td>
 			</tr>
@@ -87,8 +91,10 @@ $_->com_pgrid->load();
 				<th>SKU</th>
 				<th>Name</th>
 				<th>Enabled</th>
+				<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 				<th>Manufacturer</th>
 				<th>Manufacturer SKU</th>
+				<?php } ?>
 				<th>Pricing Method</th>
 				<th>Stock Type</th>
 			</tr>
@@ -99,8 +105,10 @@ $_->com_pgrid->load();
 				<td><?php e($cur_item->sku); ?></td>
 				<td><?php e($cur_item->name); ?></td>
 				<td><?php echo ($cur_item->enabled ? 'Yes' : 'No'); ?></td>
+				<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 				<td><?php e($cur_item->manufacturer->name); ?></td>
 				<td><?php e($cur_item->manufacturer_sku); ?></td>
+				<?php } ?>
 				<td><?php e($cur_item->pricing_method); ?></td>
 				<td><?php e($cur_item->stock_type); ?></td>
 			</tr>

@@ -54,8 +54,10 @@ $_->com_pgrid->load();
 			<th>Price</th>
 			<th>Cost(s)</th>
 			<th>Vendor(s)</th>
+			<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 			<th>Manufacturer</th>
 			<th>Manufacturer SKU</th>
+			<?php } ?>
 			<th>Stock Type</th>
 			<th>Serialized</th>
 			<th>Discountable</th>
@@ -77,8 +79,10 @@ $_->com_pgrid->load();
 			<td style="text-align: right;">$<?php e($_->com_sales->round($product->unit_price, true)); ?></td>
 			<td style="text-align: right;"><?php e(implode(', ', $costs)); ?></td>
 			<td><?php echo implode(', ', $vendors); ?></td>
+			<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 			<td><a data-entity="<?php e($product->manufacturer->guid); ?>" data-entity-context="com_sales_manufacturer"><?php e($product->manufacturer->name); ?></a></td>
 			<td><?php e($product->manufacturer_sku); ?></td>
+			<?php } ?>
 			<td><?php switch ($product->stock_type) {
 				case 'non_stocked':
 					echo 'Non Stocked';

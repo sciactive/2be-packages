@@ -262,13 +262,18 @@ class com_sales_return extends entity {
 		$return = true;
 		// These will be searched through to match products to stock entries.
 		if ($_->config->com_sales->com_customer && !isset($this->customer)) {
-			foreach ($this->products as &$cur_product) {
-				if (!$cur_product['entity'] || ($cur_product['entity']->require_customer)) {
-					pines_notice('One of the products on this return requires a customer. Please select a customer for this return before processing.');
-					return false;
+			if ($_->config->com_sales->always_require_customer) {
+				pines_notice('This return requires a customer. Please select a customer for this return before processing.');
+				return false;
+			} else {
+				foreach ($this->products as &$cur_product) {
+					if (!$cur_product['entity'] || ($cur_product['entity']->require_customer)) {
+						pines_notice('One of the products on this return requires a customer. Please select a customer for this return before processing.');
+						return false;
+					}
 				}
+				unset($cur_product);
 			}
-			unset($cur_product);
 		}
 		// Calculate and save the return's totals.
 		if (!$this->total()) {

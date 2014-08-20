@@ -126,9 +126,6 @@ foreach ($products as $key => &$product) {
 		'name' => $product->name,
 		'price' => $_->com_sales->round($product->unit_price, true),
 		'vendors' => $vendors,
-		'manufacturer_guid' => "{$product->manufacturer->guid}",
-		'manufacturer_name' => $product->manufacturer->name,
-		'manufacturer_sku' => $product->manufacturer_sku,
 		'stock_type' => $stock_type,
 		'custom_item' => $custom_item,
 		'serialized' => $serialized,
@@ -142,6 +139,11 @@ foreach ($products as $key => &$product) {
 		'modified' => $modified,
 		'expiration' => $expiration,
 	);
+	if ($_->config->com_sales->enable_manufacturers) {
+		$json_struct->manufacturer_guid = "{$product->manufacturer->guid}";
+		$json_struct->manufacturer_name = $product->manufacturer->name;
+		$json_struct->manufacturer_sku = $product->manufacturer_sku;
+	}
 	$product = $json_struct;
 }
 unset($product);

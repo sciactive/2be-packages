@@ -55,12 +55,13 @@ foreach ($category->products as $product) {
 		'tax_exempt' => $product->tax_exempt,
 		'serialized' => $product->serialized,
 		'discountable' => $product->discountable,
-		'require_customer' => $product->require_customer,
 		'one_per_ticket' => $product->one_per_ticket,
 		'non_refundable' => $product->non_refundable,
 		'fees_percent' => $fees_percent,
 		'fees_flat' => $fees_flat
 	);
+	if (!$_->config->com_sales->always_require_customer)
+		$json_struct->require_customer = $product->require_customer;
 
 	$return[] = $json_struct;
 }

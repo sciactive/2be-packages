@@ -114,8 +114,9 @@ if ($sale->status != 'invoiced' && $sale->status != 'paid' && $sale->status != '
 				$product_error = true;
 			}
 			if ($cur_product_entity->one_per_ticket) {
-				// This causes products with >1 qtys to not be added to $one_per_ticket_guids,
-				// but that's ok, since they're already an erroneous entry.
+				// This causes products with >1 qtys to not be added to
+				// $one_per_ticket_guids, but that's ok, since they're already
+				// an erroneous entry.
 				if ($cur_qty > 1 || in_array($cur_product_entity->guid, $one_per_ticket_guids)) {
 					pines_notice("Only one of product with SKU [$cur_sku] is allowed on a ticket.");
 					$product_error = true;

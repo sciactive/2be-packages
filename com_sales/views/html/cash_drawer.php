@@ -1,6 +1,6 @@
 <?php
 /**
- * Provides a form for the user to edit a manufacturer.
+ * Load the cash drawer JS.
  *
  * @package Components\sales
  * @license http://www.gnu.org/licenses/agpl-3.0.html

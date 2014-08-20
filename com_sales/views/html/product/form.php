@@ -244,6 +244,7 @@ $_->com_sales->load_jcrop();
 					</span>
 				</label>
 			</div>
+			<?php if ($_->config->com_sales->enable_manufacturers) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Manufacturer</span>
 					<select class="pf-field form-control" name="manufacturer">
@@ -257,6 +258,7 @@ $_->com_sales->load_jcrop();
 				<label><span class="pf-label">Manufacturer SKU</span>
 					<input class="pf-field form-control" type="text" name="manufacturer_sku" size="24" value="<?php e($this->entity->manufacturer_sku); ?>" /></label>
 			</div>
+			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Receipt Description</span>
 					<span class="pf-note">A short description to be shown on receipts.</span>
@@ -570,10 +572,6 @@ $_->com_sales->load_jcrop();
 					<input class="pf-field form-control" type="text" name="weight" size="10" value="<?php e($this->entity->weight); ?>" /> lbs.</label>
 			</div>
 			<div class="pf-element">
-				<label><span class="pf-label">RMA Available After</span>
-					<input class="pf-field form-control" type="text" name="rma_after" size="10" value="<?php e($this->entity->rma_after); ?>" /> days.</label>
-			</div>
-			<div class="pf-element">
 				<label><span class="pf-label">Serialized</span>
 					<input class="pf-field" type="checkbox" name="serialized" value="ON"<?php echo $this->entity->serialized ? ' checked="checked"' : ''; ?> /></label>
 			</div>
@@ -581,7 +579,7 @@ $_->com_sales->load_jcrop();
 				<label><span class="pf-label">Discountable</span>
 					<input class="pf-field" type="checkbox" name="discountable" value="ON"<?php echo $this->entity->discountable ? ' checked="checked"' : ''; ?> /></label>
 			</div>
-			<?php if ($_->config->com_sales->com_customer) { ?>
+			<?php if ($_->config->com_sales->com_customer && !$_->config->com_sales->always_require_customer) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Require Customer</span>
 					<span class="pf-note">This means a customer must be selected when selling this item.</span>
@@ -589,7 +587,7 @@ $_->com_sales->load_jcrop();
 			</div>
 			<?php } ?>
 			<div class="pf-element">
-				<label><span class="pf-label">One Per Ticket</span>
+				<label><span class="pf-label">One Per Sale</span>
 					<span class="pf-note">Only allow one of this item on a sales ticket.</span>
 					<input class="pf-field" type="checkbox" name="one_per_ticket" value="ON"<?php echo $this->entity->one_per_ticket ? ' checked="checked"' : ''; ?> /></label>
 			</div>
@@ -1021,7 +1019,7 @@ $_->com_sales->load_jcrop();
 				<div class="pf-group">
 					<div class="pf-field">
 						<div class="thumbnail">
-							<img alt="Thumbnail Preview" id="p_muid_thumbnail_preview" src="<?php e($_->config->location.$this->entity->thumbnail); ?>" />
+							<img alt="Thumbnail Preview" id="p_muid_thumbnail_preview" src="<?php e($this->entity->thumbnail ? $_->config->location.$this->entity->thumbnail : "http://placehold.it/{$_->config->com_sales->product_thumbnail_width}x{$_->config->com_sales->product_thumbnail_height}"); ?>" />
 						</div>
 					</div>
 				</div>
@@ -1079,8 +1077,9 @@ $_->com_sales->load_jcrop();
 					});
 				});
 
+				var tmp_url = <?php echo json_encode(pines_url('com_sales', 'product/temp_image', array('image' => '__image__', 'type' => '__type__', 'source' => '__source__', 'options' => '__options__'))); ?>;
 				$("#p_muid_featured_image").change(function(){
-					$("#p_muid_featured_image_preview").attr("src", $(this).val());
+					$("#p_muid_featured_image_preview").attr("src", tmp_url.replace('__image__', escape($(this).val())).replace('__type__', 'featured').replace('__source__', 'temp').replace('__options__', ''));
 				});
 			});
 		</script>
@@ -1119,12 +1118,17 @@ $_->com_sales->load_jcrop();
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Featured Image</span>
-					<input class="pf-field form-control puploader" id="p_muid_featured_image" type="text" name="featured_image" value="<?php e($this->entity->featured_image); ?>" /></label>
+					<input class="pf-field form-control puploader puploader-temp" id="p_muid_featured_image" type="text" name="featured_image" value="<?php e($this->entity->featured_image); ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<span class="pf-label">Featured Image Preview</span>
+				<span class="pf-note">May be resized, depending on where it is placed.</span>
 				<div class="pf-group">
-					<img class="pf-field" alt="Featured Image Preview" id="p_muid_featured_image_preview" src="<?php e($this->entity->featured_image); ?>" />
+					<div class="pf-field">
+						<div class="thumbnail">
+							<img alt="Featured Image Preview" id="p_muid_featured_image_preview" src="<?php e($this->entity->featured_image ? $_->config->location.$this->entity->featured_image : "http://placehold.it/480x320&text=Max+480+x+320"); ?>" />
+						</div>
+					</div>
 				</div>
 			</div>
 			<fieldset class="pf-group">

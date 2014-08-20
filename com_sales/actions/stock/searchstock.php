@@ -58,12 +58,14 @@ foreach ($stock_entries as &$stock_entry) {
 		'enabled' => $stock_entry->product->enabled,
 		'product_sku' => $stock_entry->product->sku,
 		'product_name' => $stock_entry->product->name,
-		'manufacturer' => $stock_entry->product->manufacturer->name,
-		'manufacturer_sku' => $stock_entry->product->manufacturer_sku,
 		'location_name' => isset($stock_entry->location->guid) ? $stock_entry->location->name : null,
 		'serial' => $stock_entry->serial,
 		'last_transaction' => $last_transaction
 	);
+	if ($_->config->com_sales->enable_manufacturers) {
+		$stock_entry['manufacturer'] = $stock_entry->product->manufacturer->name;
+		$stock_entry['manufacturer_sku'] = $stock_entry->product->manufacturer_sku;
+	}
 }
 unset($stock_entry);
 if (!$stock_entries)

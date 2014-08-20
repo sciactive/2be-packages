@@ -43,10 +43,12 @@ if (is_callable($_->editor, 'parse_input')) {
 } else {
 	$product->short_description = $_REQUEST['short_description'];
 }
-$product->manufacturer = ($_REQUEST['manufacturer'] == 'null' ? null : com_sales_manufacturer::factory((int) $_REQUEST['manufacturer']));
-if (!isset($product->manufacturer->guid))
-	$product->manufacturer = null;
-$product->manufacturer_sku = $_REQUEST['manufacturer_sku'];
+if ($_->config->com_sales->enable_manufacturers) {
+	$product->manufacturer = ($_REQUEST['manufacturer'] == 'null' ? null : com_sales_manufacturer::factory((int) $_REQUEST['manufacturer']));
+	if (!isset($product->manufacturer->guid))
+		$product->manufacturer = null;
+	$product->manufacturer_sku = $_REQUEST['manufacturer_sku'];
+}
 
 // Images
 // First remember all images, so we can check if they got removed when we're done.
@@ -266,10 +268,10 @@ if (is_array($_REQUEST['return_checklists'])) {
 
 // Attributes
 $product->weight = (float) $_REQUEST['weight'];
-$product->rma_after = (float) $_REQUEST['rma_after'];
 $product->serialized = ($_REQUEST['serialized'] == 'ON');
 $product->discountable = ($_REQUEST['discountable'] == 'ON');
-$product->require_customer = ($_REQUEST['require_customer'] == 'ON');
+if (!$_->config->com_sales->always_require_customer)
+	$product->require_customer = ($_REQUEST['require_customer'] == 'ON');
 $product->one_per_ticket = ($_REQUEST['one_per_ticket'] == 'ON');
 $product->hide_on_invoice = ($_REQUEST['hide_on_invoice'] == 'ON');
 $product->non_refundable = ($_REQUEST['non_refundable'] == 'ON');
@@ -297,8 +299,41 @@ if ($_->config->com_sales->com_shop) {
 	$product->show_in_shop = ($_REQUEST['show_in_shop'] == 'ON');
 	$product->featured = ($_REQUEST['featured'] == 'ON');
 	$product->featured_image = $_REQUEST['featured_image'];
-	if (!$_->uploader->check($product->featured_image))
-		$product->featured_image = null;
+	$file = $_->uploader->temp($product->featured_image);
+	while (true) {
+		if ($file) {
+			if (!file_exists($file)) {
+				unset($product->featured_image);
+				pines_error("Error reading image: {$product->featured_image}");
+				break;
+			}
+
+			$image = new Imagick($file);
+			if (!$image) {
+				unset($product->featured_image);
+				pines_error("Error opening image: {$product->featured_image}");
+				break;
+			}
+
+			$_->com_sales->process_product_image($image, 'featured');
+
+			if (!file_exists($dir)) {
+				if (!mkdir($dir, 0755, true)) {
+					unset($product->featured_image);
+					pines_error("Error making image directory for product {$product->name}: $dir.");
+					break;
+				}
+			}
+
+			if (!$image->writeImage("{$dir}featured.png")) {
+				unset($product->featured_image);
+				pines_error("Error saving image: {$product->featured_image}");
+				continue;
+			}
+			$product->featured_image = "{$dir}featured.png";
+		}
+		break;
+	}
 	// Build a list of categories.
 	$categories = array();
 	if (is_array($_REQUEST['categories']))

@@ -196,13 +196,18 @@ class com_sales_sale extends entity {
 		$return = true;
 		if ($this->status != 'invoiced') {
 			if ($_->config->com_sales->com_customer && !isset($this->customer)) {
-				foreach ($this->products as &$cur_product) {
-					if (!$cur_product['entity'] || ($cur_product['entity']->require_customer)) {
-						pines_notice('One of the products on this sale requires a customer. Please select a customer for this sale before invoicing.');
-						return false;
+				if ($_->config->com_sales->always_require_customer) {
+					pines_notice('This sale requires a customer. Please select a customer for this sale before invoicing.');
+					return false;
+				} else {
+					foreach ($this->products as &$cur_product) {
+						if (!$cur_product['entity'] || ($cur_product['entity']->require_customer)) {
+							pines_notice('One of the products on this sale requires a customer. Please select a customer for this sale before invoicing.');
+							return false;
+						}
 					}
+					unset($cur_product);
 				}
-				unset($cur_product);
 			}
 			// Calculate and save the sale's totals.
 			if (!$this->total()) {
@@ -451,13 +456,18 @@ class com_sales_sale extends entity {
 		// Keep track of the whole process.
 		$return = true;
 		if ($_->config->com_sales->com_customer && !isset($this->customer)) {
-			foreach ($this->products as &$cur_product) {
-				if (!$cur_product['entity'] || ($cur_product['entity']->require_customer)) {
-					pines_notice('One of the products on this sale requires a customer. Please select a customer for this sale before invoicing.');
-					return false;
+			if ($_->config->com_sales->always_require_customer) {
+				pines_notice('This sale requires a customer. Please select a customer for this sale before invoicing.');
+				return false;
+			} else {
+				foreach ($this->products as &$cur_product) {
+					if (!$cur_product['entity'] || ($cur_product['entity']->require_customer)) {
+						pines_notice('One of the products on this sale requires a customer. Please select a customer for this sale before invoicing.');
+						return false;
+					}
 				}
+				unset($cur_product);
 			}
-			unset($cur_product);
 		}
 		// Calculate and save the sale's totals.
 		if (!$this->total()) {

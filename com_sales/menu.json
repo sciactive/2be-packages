@@ -230,7 +230,8 @@
 				"text": "Manufacturers",
 				"href": ["com_sales","manufacturer/list"],
 				"depend": {
-					"ability": "com_sales/listmanufacturers"
+					"ability": "com_sales/listmanufacturers",
+					"com_sales__config": "enable_manufacturers"
 				}
 			},
 			{
