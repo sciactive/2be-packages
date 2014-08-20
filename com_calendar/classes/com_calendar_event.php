@@ -78,7 +78,6 @@ class com_calendar_event extends entity {
 	 */
 	public function print_form($location = null, $timezone = null) {
 		global $_;
-		$_->page->override = true;
 
 		if (empty($timezone)) {
 			if (isset($this->user->guid))
@@ -96,6 +95,6 @@ class com_calendar_event extends entity {
 		if (empty($event_location))
 			$event_location = $location->guid;
 		$module->location = $event_location;
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 	}
 }

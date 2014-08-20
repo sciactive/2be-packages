@@ -14,8 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_notes/newthread') )
 	punt_user(null, pines_url('com_notes', 'thread/list'));
 
-$_->page->override = true;
-
 $thread = com_notes_thread::factory();
 
 // Using an array leaves the possibility to associate a thread with multiple
@@ -50,12 +48,12 @@ switch ($_REQUEST['privacy']) {
 }
 
 if (!isset($thread->entities[0]->guid) || $thread->notes[$note_id]['text'] == '') {
-	$_->page->override_doc(json_encode(false));
+	$_->page->ajax(json_encode(false));
 	return;
 }
 
 if ($thread->save()) {
-	$_->page->override_doc(json_encode(true));
+	$_->page->ajax(json_encode(true));
 } else {
-	$_->page->override_doc(json_encode(false));
+	$_->page->ajax(json_encode(false));
 }

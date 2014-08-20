@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/seestock') )
 	punt_user(null, pines_url('com_sales', 'stock/list', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 // The query.
 $query = trim($_REQUEST['serial']);
 
@@ -74,4 +71,4 @@ if (!$stock_entries)
 $result = array();
 $result['stock_entries'] = $stock_entries;
 
-$_->page->override_doc(json_encode($result));
+$_->page->ajax(json_encode($result));

@@ -580,12 +580,11 @@ class com_sales_return extends entity {
 	 */
 	public function salesrep_form() {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/salesrep', 'content');
 		$module->entity = $this;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 

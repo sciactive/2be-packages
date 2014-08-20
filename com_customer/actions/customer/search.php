@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_customer/listcustomers') )
 	punt_user(null, pines_url('com_customer', 'customer/search', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 // Time span.
 if (!empty($_REQUEST['start_date'])) {
 	$start_date = $_REQUEST['start_date'];
@@ -154,4 +151,4 @@ unset($cur_customer);
 if (!$customers)
 	$customers = null;
 
-$_->page->override_doc(json_encode($customers));
+$_->page->ajax(json_encode($customers));

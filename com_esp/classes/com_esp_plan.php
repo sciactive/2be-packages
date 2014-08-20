@@ -156,12 +156,11 @@ class com_esp_plan extends entity {
 	 */
 	public function swap_form() {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_esp', 'form_swap', 'content');
 		$module->entity = $this;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 }

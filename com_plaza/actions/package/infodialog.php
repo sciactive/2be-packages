@@ -14,7 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_plaza/listpackages') )
 	punt_user(null, pines_url('com_plaza', 'package/list'));
 
-$_->page->override = true;
 if ($_REQUEST['local'] == 'true') {
 	$package = $_->com_package->db['packages'][$_REQUEST['name']];
 } else {
@@ -25,5 +24,5 @@ if (isset($package)) {
 	$module = new module('com_plaza', 'package/info');
 	$module->package = $package;
 
-	$_->page->override_doc($module->render());
+	$_->page->ajax($module->render(), 'text/html');
 }

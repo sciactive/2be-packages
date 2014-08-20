@@ -24,7 +24,5 @@ if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage')) {
 if (!isset($dashboard->guid))
 	throw new HttpClientException(null, 400);
 
-$_->page->override = true;
 $module = $dashboard->print_tab($_REQUEST['key'], $editable);
-$module->detach();
-$_->page->override_doc($module->render());
+$_->page->ajax($module->render(), 'text/html');

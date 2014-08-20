@@ -20,4 +20,4 @@ $login = new module('com_su', 'login');
 $login->hide_password = gatekeeper('com_su/nopassword');
 $login->pin_login = $_->config->com_su->allow_pins;
 $loginhtml = $login->render('module_head');
-$_->page->override_doc($loginhtml);
+$_->page->ajax($loginhtml, 'text/html');

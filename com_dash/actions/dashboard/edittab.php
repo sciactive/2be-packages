@@ -23,6 +23,5 @@ if (!isset($dashboard->guid))
 if ($dashboard->locked && !gatekeeper('com_dash/manage'))
 	throw new HttpClientException(null, 403);
 
-$_->page->override = true;
 $module = $dashboard->edit_tab($_REQUEST['key']);
-$_->page->override_doc($module->render());
+$_->page->ajax($module->render(), 'text/html');

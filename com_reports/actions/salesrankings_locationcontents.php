@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_reports/editsalesranking') )
 	punt_user(null, pines_url('com_reports', 'salesrankings'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $group = group::factory((int) $_REQUEST['id']);
 if (!isset($group->guid))
 	return;
@@ -73,4 +70,4 @@ foreach ($users as $cur_user) {
 	);
 }
 
-$_->page->override_doc(json_encode($json_data));
+$_->page->ajax(json_encode($json_data));

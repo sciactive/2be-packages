@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_customer/listcustomers') )
 	punt_user(null, pines_url('com_customer', 'customer/info', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $customer = com_customer_customer::factory((int) $_REQUEST['id']);
 
 if (!isset($customer->guid))
@@ -50,4 +47,4 @@ $json_struct = (object) array(
 	'points'		=> (int) $customer->points
 );
 
-$_->page->override_doc(json_encode($json_struct));
+$_->page->ajax(json_encode($json_struct));

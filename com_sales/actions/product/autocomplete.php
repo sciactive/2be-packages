@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/searchproducts') )
 	punt_user(null, pines_url('com_sales', 'product/autocomplete', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $query = $_REQUEST['q'];
 
 if (empty($query)) {
@@ -84,4 +81,4 @@ foreach ($products as $key => &$cur_product) {
 if (!$products)
 	$products = null;
 
-$_->page->override_doc(json_encode($products));
+$_->page->ajax(json_encode($products));

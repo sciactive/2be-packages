@@ -14,11 +14,9 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_notes/seethreads') )
 	punt_user(null, pines_url('com_notes', 'thread/list'));
 
-$_->page->override = true;
-
 $entity = $_->entity_manager->get_entity(array('class' => $_REQUEST['context']), array('&', 'guid' => (int) $_REQUEST['id']));
 if (!isset($entity->guid)) {
-	$_->page->override_doc(json_encode(false));
+	$_->page->ajax(json_encode(false));
 	return;
 }
 
@@ -56,4 +54,4 @@ foreach ($threads as $cur_thread) {
 	$return[] = $cur_struct;
 }
 
-$_->page->override_doc(json_encode($return));
+$_->page->ajax(json_encode($return));

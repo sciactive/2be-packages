@@ -14,13 +14,10 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/listproducts') && !gatekeeper('com_sales/newsale') && !gatekeeper('com_sales/editsale'))
 	punt_user(null, pines_url('com_sales', 'category/products', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $category = com_sales_category::factory((int) $_REQUEST['id']);
 
 if (!isset($category->guid)) {
-	$_->page->override_doc(json_encode(array()));
+	$_->page->ajax(json_encode(array()));
 	return;
 }
 
@@ -66,4 +63,4 @@ foreach ($category->products as $product) {
 	$return[] = $json_struct;
 }
 
-$_->page->override_doc(json_encode($return));
+$_->page->ajax(json_encode($return));

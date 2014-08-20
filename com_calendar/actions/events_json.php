@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_calendar/viewcalendar') && !gatekeeper('com_calendar/editcalendar') )
 	punt_user(null, pines_url('com_calendar', 'events_json', $_GET));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $location = group::factory((int) $_REQUEST['location']);
 if (!isset($location->guid))
 	$location = null;
@@ -114,4 +111,4 @@ foreach ($events as $cur_event) {
 }
 
 // Return the JSON structure.
-$_->page->override_doc(json_encode($struct));
+$_->page->ajax(json_encode($struct));

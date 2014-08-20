@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_mailer/editrendition') && !gatekeeper('com_mailer/newrendition') )
 	punt_user(null, pines_url('com_mailer', 'rendition/edit', array('id' => $_REQUEST['id'])));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 list($component, $defname) = explode('/', $_REQUEST['type'], 2);
 $component = clean_filename($component);
 /**
@@ -39,4 +36,4 @@ else {
 
 $content = $module->render();
 
-$_->page->override_doc(json_encode(array('content' => $content, 'subject' => $module->title)));
+$_->page->ajax(json_encode(array('content' => $content, 'subject' => $module->title)));

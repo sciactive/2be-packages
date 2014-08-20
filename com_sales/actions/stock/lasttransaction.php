@@ -18,7 +18,4 @@ if (!isset($stock->guid)) {
 	pines_error('Requested stock id is not accessible.');
 	return;
 }
-
-$_->page->override = true;
-header('Content-Type: text/plain');
-$_->page->override_doc($stock->last_reason());
+$_->page->ajax($stock->last_reason(), 'text/plain');

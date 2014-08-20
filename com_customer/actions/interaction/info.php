@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_customer/viewhistory') )
 	punt_user(null, pines_url('com_customer', 'interaction/info', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 // Change the timezone to the supplied timezone or user's timezone.
 $cur_timezone = date_default_timezone_get();
 if (!empty($_REQUEST['timezone']))
@@ -26,7 +23,7 @@ else
 
 $interaction = com_customer_interaction::factory((int) $_REQUEST['id']);
 if (!isset($interaction->guid))
-	$_->page->override_doc();
+	$_->page->ajax('');
 
 if (!isset($interaction->sale->guid)) {
 	$sale_title = '';
@@ -62,6 +59,6 @@ $json_struct = (object) array(
 	'review_comments'	=> (array) $interaction->review_comments
 );
 
-$_->page->override_doc(json_encode($json_struct));
+$_->page->ajax(json_encode($json_struct));
 
 date_default_timezone_set($cur_timezone);

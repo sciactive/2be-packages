@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_hrm/clock') )
 	punt_user(null, pines_url('com_hrm', 'timeoff/save'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if (isset($_REQUEST['employee'])) {	
 	if ($_REQUEST['start'] != 'Date') {
 		$rto_month = date('n', strtotime($_REQUEST['start']));
@@ -37,7 +34,7 @@ if (isset($_REQUEST['employee'])) {
 	if (!empty($_REQUEST['id'])) {
 		$rto = com_hrm_rto::factory((int) $_REQUEST['id']);
 		if (!isset($rto->guid)) {
-			$_->page->override_doc('false');
+			$_->page->ajax('false');
 			return;
 		}
 	} else {
@@ -46,7 +43,7 @@ if (isset($_REQUEST['employee'])) {
 
 	$rto->employee = com_hrm_employee::factory((int) $_REQUEST['employee']);
 	if (!isset($rto->employee->guid)) {
-		$_->page->override_doc('false');
+		$_->page->ajax('false');
 		return;
 	}
 	$rto->reason = $_REQUEST['reason'];
@@ -59,8 +56,8 @@ if (isset($_REQUEST['employee'])) {
 		$rto->ac->other = 1;
 
 	if ($rto->save()) {
-		$_->page->override_doc('true');
+		$_->page->ajax('true');
 	} else {
-		$_->page->override_doc('false');
+		$_->page->ajax('false');
 	}
 }

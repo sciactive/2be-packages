@@ -11,12 +11,9 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $tag = $_REQUEST['tag'];
 json_decode($tag);
 
 $result = $_->com_content->create_sidemenu($tag);
 
-$_->page->override_doc(json_encode($result));
+$_->page->ajax(json_encode($result));

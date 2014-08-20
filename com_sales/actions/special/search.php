@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/searchspecials'))
 	punt_user(null, pines_url('com_sales', 'special/search', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $code = strtoupper($_REQUEST['code']);
 
 if (empty($code)) {
@@ -69,4 +66,4 @@ if (isset($special)) {
 	$special = $json_struct;
 }
 
-$_->page->override_doc(json_encode($special));
+$_->page->ajax(json_encode($special));

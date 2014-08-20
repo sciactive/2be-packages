@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
 	punt_user(null, pines_url('com_dash'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage'))
 	$dashboard = com_dash_dashboard::factory((int) $_REQUEST['id']);
 else
@@ -52,7 +49,7 @@ reset($columns);
 $add_widgets = json_decode($_REQUEST['widgets'], true);
 foreach ($add_widgets as $cur_widget) {
 	if (!isset($widgets[$cur_widget['component']][$cur_widget['widget']])) {
-		$_->page->override_doc(json_encode(false));
+		$_->page->ajax('false');
 		return;
 	}
 	$key = key($columns);
@@ -67,4 +64,4 @@ foreach ($add_widgets as $cur_widget) {
 // Save the columns.
 $dashboard->tabs[$_REQUEST['key']]['columns'] = $columns;
 
-$_->page->override_doc(json_encode($dashboard->save()));
+$_->page->ajax(json_encode($dashboard->save()));

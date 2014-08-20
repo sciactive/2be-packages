@@ -141,7 +141,6 @@ class com_menueditor_entry extends entity {
 	public function capture_menu_override() {
 		global $_;
 		$this->cur_module->captured_menu_arrays = $_->menu->menu_arrays;
-		$_->page->override = true;
-		$_->page->override_doc($this->cur_module->render());
+		$_->page->ajax($this->cur_module->render(), 'text/html');
 	}
 }

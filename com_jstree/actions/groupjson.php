@@ -11,9 +11,6 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if ($_REQUEST['all'] == 'true') {
 	$locations = $_->user_manager->get_groups();
 } elseif ($_REQUEST['primaries'] == 'true') {
@@ -46,4 +43,4 @@ if ($_REQUEST['all'] == 'true') {
 $_->user_manager->group_sort($locations, 'name');
 
 $groups_json_struct = $_->com_jstree->entity_json_struct($locations);
-$_->page->override_doc(json_encode($groups_json_struct));
+$_->page->ajax(json_encode($groups_json_struct));

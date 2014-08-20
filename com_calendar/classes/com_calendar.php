@@ -69,7 +69,6 @@ class com_calendar extends component {
 	 */
 	public function lineup_form($location = null) {
 		global $_;
-		$_->page->override = true;
 
 		if (!isset($location->guid))
 			$location = $_SESSION['user']->group;
@@ -78,7 +77,7 @@ class com_calendar extends component {
 		$module->location = $location;
 		$module->employees = $_->com_hrm->get_employees();
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 	}
 
 	/**
@@ -90,7 +89,6 @@ class com_calendar extends component {
 	 */
 	public function location_select_form($location = null, $descendants = false) {
 		global $_;
-		$_->page->override = true;
 
 		if (!isset($location))
 			$location = $_SESSION['user']->group->guid;
@@ -98,7 +96,7 @@ class com_calendar extends component {
 		$module->location = $location;
 		$module->descendants = $descendants;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 
@@ -108,10 +106,9 @@ class com_calendar extends component {
 	 */
 	public function schedule_form($employee) {
 		global $_;
-		$_->page->override = true;
 		$module = new module('com_calendar', 'form_schedule', 'content');
 		$module->entity = $employee;
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 	}
 
 	/**
@@ -165,7 +162,7 @@ class com_calendar extends component {
 
 	/**
 	 * Get calendar events.
-	 * 
+	 *
 	 * @param int $start The start date of the events.
 	 * @param int $end The end date of the events.
 	 * @param string $timezone The timezone to use.

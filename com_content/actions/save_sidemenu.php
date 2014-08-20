@@ -11,9 +11,6 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $guid_order = $_REQUEST['guid_order'];
 $tag = $_REQUEST['tag'];
 $order_array = explode(',', $guid_order);
@@ -21,4 +18,4 @@ $order_array = explode(',', $guid_order);
 $result = $_->com_content->save_sidemenu($order_array, $tag);
 
 
-$_->page->override_doc(json_encode($result));
+$_->page->ajax(json_encode($result));

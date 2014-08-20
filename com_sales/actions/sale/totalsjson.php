@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/totalsales') )
 	punt_user(null, pines_url('com_sales', 'sale/totalsjson', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 // Format the location.
 $location = group::factory((int) $_REQUEST['location']);
 if (!isset($location->guid))
@@ -143,4 +140,4 @@ if (empty($tx_array)) {
 	);
 }
 
-$_->page->override_doc(json_encode($return));
+$_->page->ajax(json_encode($return));

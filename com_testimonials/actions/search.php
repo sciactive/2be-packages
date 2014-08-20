@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_testimonials/search') )
 	punt_user(null, pines_url('com_testimonials', 'testimonial/list', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $query = trim($_REQUEST['q']);
 $type = trim($_REQUEST['type']);
 $status = trim($_REQUEST['status']);
@@ -123,4 +120,4 @@ unset($cur_testimonial);
 if (!$testimonials)
 	$testimonials = null;
 
-$_->page->override_doc(json_encode($testimonials));
+$_->page->ajax(json_encode($testimonials));

@@ -14,18 +14,16 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/viewwarehouse') && !gatekeeper('com_sales/warehouse') )
 	punt_user(null, pines_url('com_sales', 'warehouse/pending_info'));
 
-$_->page->override = true;
-
 list ($sale_id, $key) = explode('_', $_REQUEST['id']);
 $sale = com_sales_sale::factory((int) $sale_id);
 if (!isset($sale->guid)) {
-	$_->page->override_doc('Couldn\'t find specified sale.');
+	$_->page->ajax('Couldn\'t find specified sale.', 'text/plain');
 	return;
 }
 
 $product = $sale->products[(int) $key]['entity'];
 if (!isset($product->guid)) {
-	$_->page->override_doc('Couldn\'t find specified product.');
+	$_->page->ajax('Couldn\'t find specified product.', 'text/plain');
 	return;
 }
 
@@ -103,4 +101,4 @@ foreach ($stock as $cur_stock) {
 
 $module->product = $product;
 
-$_->page->override_doc($module->render());
+$_->page->ajax($module->render(), 'text/html');

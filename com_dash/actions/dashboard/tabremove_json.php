@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
 	punt_user(null, pines_url('com_dash'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage'))
 	$dashboard = com_dash_dashboard::factory((int) $_REQUEST['id']);
 else
@@ -31,11 +28,11 @@ if (!isset($dashboard->tabs[$_REQUEST['key']]))
 	throw new HttpClientException(null, 400);
 // Check that it's not the last tab.
 if (count($dashboard->tabs) <= 1) {
-	$_->page->override_doc(json_encode('last'));
+	$_->page->ajax(json_encode('last'));
 	return;
 }
 
 // Remove it.
 unset($dashboard->tabs[$_REQUEST['key']]);
 
-$_->page->override_doc(json_encode($dashboard->save()));
+$_->page->ajax(json_encode($dashboard->save()));

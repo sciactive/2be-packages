@@ -40,7 +40,7 @@ class com_customer extends component {
 		$module = new module('com_customer', 'company/list', 'content');
 		return $module;
 	}
-	
+
 	/**
 	 * Creates and attaches a module which lists customers.
 	 * @return module The module.
@@ -150,31 +150,31 @@ class com_customer extends component {
 			pines_error("Error adding $points points to $type {$array['ticket']->customer->name}.");
 		}
 	}
-	
+
 	/**
 	 * Check that an ssn is unique.
-	 * 
+	 *
 	 * The ID of a user can be given so that user is excluded when checking if
 	 * the ssn is already in use.
-	 * 
+	 *
 	 * Wrote this mainly for quick ajax testing of the ssn for user sign up on
 	 * an application.
-	 * 
+	 *
 	 * @param string $ssn The ssn to check.
 	 * @param int $id The GUID of the user for which the name is being checked.
 	 * @return array An associative array with a boolean 'result' entry and a 'message' entry.
 	 */
 	public function check_ssn($ssn, $id = null) {
 		global $_;
-		
+
 		if (empty($ssn))
 			return array('result' => false, 'message' => 'Please specify an SSN.');
 		if (!preg_match('/^((?!000)(?!666)(?:[0-8]\d{2}|7[0-2][0-9]|73[0-3]|7[5-6][0-9]|77[0-2]))-((?!00)\d{2})-((?!0000)\d{4})$/i', $ssn))
 			return array('result' => false, 'message' => 'SSN must be a valid and correctly formatted SSN.');
-		
+
 		// Remove Dashes
 		$ssn = str_replace('-', '', $ssn);
-		
+
 		$selector = array('&',
 				'tag' => array('com_customer', 'customer'),
 				'strict' => array('ssn', $ssn)
@@ -190,7 +190,7 @@ class com_customer extends component {
 
 		return array('result' => true, 'message' => (isset($id) ? 'SSN is valid.' : 'SSN is valid!'));
 	}
-	
+
 
 	/**
 	 * Make new users customers as well.
@@ -244,14 +244,13 @@ class com_customer extends component {
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_customer', 'forms/date_selector', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 
@@ -264,7 +263,6 @@ class com_customer extends component {
 	 */
 	public function location_select_form($location = null, $descendants = false) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_customer', 'forms/location_selector', 'content');
 		if (!isset($location)) {
@@ -274,10 +272,10 @@ class com_customer extends component {
 		}
 		$module->descendants = $descendants;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
-	
+
 	/**
 	 * Transform a string to title case.
 	 *
@@ -310,7 +308,7 @@ class com_customer extends component {
 		}
 		return $string;
 	}
-	
+
 	/**
 	 * Sort users.
 	 * @param group $a User.
@@ -322,7 +320,7 @@ class com_customer extends component {
 		$bname = empty($b->name) ? $b->username : $b->name;
 		return strtolower($aname) > strtolower($bname);
 	}
-	
+
 	/**
 	 * Print a form to select users.
 	 *
@@ -331,7 +329,6 @@ class com_customer extends component {
 	 */
 	public function user_select_form($all = false) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_customer', 'forms/users');
 		if (!$all) {
@@ -353,7 +350,7 @@ class com_customer extends component {
 			);
 		}
 		usort($module->users, array($this, 'sort_users'));
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 }

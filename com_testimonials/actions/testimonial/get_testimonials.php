@@ -13,9 +13,6 @@ defined('P_RUN') or die('Direct access prohibited');
 
 // The permissions on this are weak, because we want testimonials to be public
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 // If not set, they will just be null
 $review_entity_class = !empty($_REQUEST['review_entity']) ? $_REQUEST['review_entity'] : null;
 $review_entity_guid = !empty($_REQUEST['review_entity_id']) ? $_REQUEST['review_entity_id'] : null;
@@ -33,4 +30,4 @@ if ($_REQUEST['review_option_type'] == 'review') {
 }
 $result = $_->com_testimonials->get_testimonials($review_data_type, $review_option_reverse, $review_option_limit, $review_option_offset, $review_option_additional_tags, $review_entity_guid, $review_entity_class, $review_option_name, $review_ratings_off);
 
-$_->page->override_doc(json_encode($result));
+$_->page->ajax(json_encode($result));

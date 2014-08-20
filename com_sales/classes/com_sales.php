@@ -123,14 +123,13 @@ class com_sales extends component {
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/date_selector', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 
@@ -933,7 +932,6 @@ class com_sales extends component {
 	 */
 	public function location_select_form($location = null, $descendants = false) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/location_selector', 'content');
 		if (!isset($location)) {
@@ -943,7 +941,7 @@ class com_sales extends component {
 		}
 		$module->descendants = $descendants;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 
@@ -957,12 +955,11 @@ class com_sales extends component {
 	 */
 	public function override_form($entity = null) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_sales', 'forms/overrideowner', 'content');
 		$module->entity = $entity;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 
@@ -1000,7 +997,7 @@ class com_sales extends component {
 		switch ($array['action']) {
 			case 'request':
 				$module = new module('com_sales', 'forms/payment_manager');
-				$_->page->override_doc($module->render());
+				$_->page->ajax($module->render(), 'text/html');
 				break;
 			case 'approve':
 				if (gatekeeper('com_sales/manager')) {

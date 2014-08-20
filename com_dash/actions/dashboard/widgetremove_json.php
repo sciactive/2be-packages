@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
 	punt_user(null, pines_url('com_dash'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage'))
 	$dashboard = com_dash_dashboard::factory((int) $_REQUEST['id']);
 else
@@ -34,4 +31,4 @@ if (!$widget_location)
 // Remove it. Scary isn't it. D:
 unset($dashboard->tabs[$widget_location['tab']]['columns'][$widget_location['column']]['widgets'][$_REQUEST['key']]);
 
-$_->page->override_doc(json_encode($dashboard->save()));
+$_->page->ajax(json_encode($dashboard->save()));

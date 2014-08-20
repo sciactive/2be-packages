@@ -44,6 +44,5 @@ if ($pdfpage >= 0 && $pdfpage < $pagecount) {
 	header('Content-Type: image/png');
 	$_->page->override_doc($output);
 } else {
-	header('Content-Type: text/plain');
-	$_->page->override_doc('Invalid file or page.');
+	$_->page->ajax('Invalid file or page.', 'text/plain');
 }

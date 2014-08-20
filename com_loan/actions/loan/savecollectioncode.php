@@ -11,9 +11,6 @@
 /* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if ( !gatekeeper('com_loan/changecollectioncode') )
 	$result = array('failed' => true);
 
@@ -31,4 +28,4 @@ if (!is_array($result) && $loan->save())
 else
 	$result = array('failed' => false);
 
-$_->page->override_doc(json_encode($result));
+$_->page->ajax(json_encode($result));

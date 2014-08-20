@@ -14,8 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/editsale') && !gatekeeper('com_sales/newsale') )
 	punt_user(null, pines_url('com_sales', 'sale/checkproducts', $_GET));
 
-$_->page->override = true;
-
 // This is all the common parts of the selector.
 $selector = array('&',
 		'tag' => array('com_sales', 'stock'),
@@ -89,4 +87,4 @@ foreach ($products as $key => $cur_product) {
 		$guids[] = $cur_stock->guid;
 }
 
-$_->page->override_doc(json_encode(array('result' => $success, 'messages' => $messages)));
+$_->page->ajax(json_encode(array('result' => $success, 'messages' => $messages)));

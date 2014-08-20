@@ -11,13 +11,10 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $publisher = $_REQUEST['pub'];
 
 $user = user::factory($publisher);
 if (!isset($user->guid))
 	$user = null;
 
-$_->page->override_doc($_->com_repository->get_index($user, false));
+$_->page->ajax($_->com_repository->get_index($user, false));

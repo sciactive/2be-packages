@@ -14,8 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
 	punt_user(null, pines_url('com_dash'));
 
-$_->page->override = true;
-
 $module = new module('com_dash', 'dashboard/widget_add_form');
 $module->widgets = $_->com_dash->widget_types();
 foreach ($module->widgets as $cur_component => $cur_widget_set) {
@@ -31,5 +29,4 @@ foreach ($module->widgets as $cur_component => $cur_widget_set) {
 	}
 }
 
-$content = $module->render();
-$_->page->override_doc($content);
+$_->page->ajax($module->render(), 'text/html');

@@ -31,22 +31,22 @@ $list_item_border = (preg_match('/^#[a-fA-F0-9]{6}$/', $_->config->com_testimoni
 $misc_css = $_->config->com_testimonials->misc_css;
 
 ?>
-/* style tag used only for ide purposes. 
+/* style tag used only for ide purposes.
 <style type="text/css"> */
 	/* TESTIMONIAL FRAME */
 	.testimonials-module .frame {
 		background: <?php echo $review_background; ?>;
 	}
-	
+
 	.testimonials-module #feedback_form {
 		display: none;
 		text-align: left;
 	}
-	
+
 	.testimonials-module .testimonials {
 		padding: 10px;
 	}
-	
+
 	.testimonials-module .give-feedback {
 		padding: 3px 10px;
 		background-color: <?php echo $feedback_background; ?>;
@@ -54,31 +54,31 @@ $misc_css = $_->config->com_testimonials->misc_css;
 		cursor: pointer;
 		text-transform: uppercase;
 		font-size: .8em;
-		position: relative; 
+		position: relative;
 	}
-	
+
 	.testimonials-module .trigger-feedback {
 		text-align:right;
 	}
-	
+
 	.testimonials-module .give-feedback:hover, .testimonials-module .give-feedback.opened {
 		background-color: <?php echo $feedback_background_opened; ?>;
 		color: <?php echo $feedback_color_opened; ?>;
 	}
-	
+
 	.testimonials-module .feedback-hr {
 		margin: 4px 0;
 		border-color: <?php echo $feedback_hr_top; ?>;
 		border-bottom-color: <?php echo $feedback_hr_bottom; ?>;
 	}
-	
+
 	.testimonials-module .form-submit {
 		font-size: 20px;
 		text-align:center;
 		text-transform: none;
 		display: none;
 	}
-	
+
 	.testimonials-module .feedback-status {
 		position: absolute;
 		width: 100%;
@@ -86,7 +86,7 @@ $misc_css = $_->config->com_testimonials->misc_css;
 		top: 50%;
 		margin-top: -23px;
 	}
-	
+
 	.testimonials-module .share-again {
 		text-align:center;
 		background: <?php echo $feedback_hr_top ?>;
@@ -168,29 +168,29 @@ $misc_css = $_->config->com_testimonials->misc_css;
 	.testimonials-module .submit-button:hover {
 		color: <?php echo $feedback_hr_bottom; ?>;
 	}
-	
+
 	.testimonials-module .share-checkbox label.right-align {
 		float: right;
 	}
-	
+
 	.testimonials-module .average-rating, .testimonials-module .no-average-rating {
 		background: <?php echo $average_background; ?>;
 		color: <?php echo $author_text; ?>;
 		padding: 3px;
 	}
-	
+
 	.testimonials-module .testimonial-loader {
 		color: <?php echo $author_text; ?>;
 		text-align:center;
 		padding: 20px;
 		display: none;
 	}
-	
+
 	.testimonials-module .testimonial-loader i {
 		font-size: 25px;
 		margin-bottom: 7px;
 	}
-	.testimonials-module .enable-js.star-container { 
+	.testimonials-module .enable-js.star-container {
 		float:left;
 		width: auto;
 		font-size: 10px;
@@ -199,8 +199,8 @@ $misc_css = $_->config->com_testimonials->misc_css;
 	.testimonials-module .testimonials .rating-container {
 		color: <?php echo $feedback_background; ?>;
 	}
-	
-	
+
+
 	/* LIST */
 	.testimonials-module .testimonials.make-list {
 		position: relative;
@@ -295,12 +295,12 @@ $misc_css = $_->config->com_testimonials->misc_css;
 		margin-top: 3px;
 		border-bottom: none;
 	}
-	
+
 	.testimonials-module .item .description {
 		clear: both;
 	}
-	
-	
+
+
 	/* CAROUSEL */
 	.testimonials-module .carousel-inner {
 		padding: 0;
@@ -312,8 +312,8 @@ $misc_css = $_->config->com_testimonials->misc_css;
 	.testimonials-module .testimonials .testimonial.item blockquote {
 		color: <?php echo $review_text; ?>;
 	}
-	
-	
+
+
 	/* LOGIN MENU */
 	.testimonials-module  .login-container .pf-label {
 		float: none;
@@ -373,8 +373,8 @@ $misc_css = $_->config->com_testimonials->misc_css;
 	.testimonials-module .login-container a.pf-field {
 		color: <?php echo $feedback_color_opened; ?>;
 	}
-	
-	
+
+
 	/* SMALL SIZE */
 	.testimonials-module.small .trigger-feedback {
 		text-align: center;

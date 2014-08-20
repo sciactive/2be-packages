@@ -39,14 +39,13 @@ class com_loan extends component {
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/dateselect', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 	
@@ -59,7 +58,6 @@ class com_loan extends component {
 	 */
 	public function location_select_form($location = null, $descendants = false) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/locationselect', 'content');
 		if (!isset($location)) {
@@ -69,7 +67,7 @@ class com_loan extends component {
 		}
 		$module->descendants = $descendants;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 	
@@ -81,12 +79,11 @@ class com_loan extends component {
 	 */
 	public function search_status_form($cur_state) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/searchstatus', 'content');
 		$module->cur_state = json_decode($cur_state);
 		
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 	
@@ -100,12 +97,11 @@ class com_loan extends component {
 	 */
 	public function make_payments_form($loan_ids) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/makepayments', 'content');
 		$module->loan_ids = $loan_ids;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 	
@@ -119,12 +115,11 @@ class com_loan extends component {
 	 */
 	public function loan_status_form($loan_ids) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/loanstatus', 'content');
 		$module->loan_ids = $loan_ids;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 	
@@ -138,12 +133,11 @@ class com_loan extends component {
 	 */
 	public function cust_history_form($loan_ids) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/cust_history', 'content');
 		$module->loan_ids = $loan_ids;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 	
@@ -156,8 +150,6 @@ class com_loan extends component {
 	 */
 	public function add_interaction_form() {
 		global $_;
-		$_->page->override = true;
-		header('Content-Type: application/json');
 
 		$module = new module('com_loan', 'form/add_interaction', 'content');
 		$module->entity = $this;
@@ -172,7 +164,7 @@ class com_loan extends component {
 		foreach ($_->page->modules['head'] as $cur_module)
 			$head .= $cur_module->render();
 
-		$_->page->override_doc($head.$content);
+		$_->page->ajax($head.$content, 'text/html');
 		return $module;
 	}
 	

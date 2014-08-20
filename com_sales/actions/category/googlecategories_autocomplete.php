@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/editcategory') && !gatekeeper('com_sales/newcategory'))
 	punt_user(null, pines_url('com_sales', 'category/list'));
 
-header('Content-Type: application/json');
-$_->page->override = true;
-
 $googlecategories = file_get_contents("components/com_sales/includes/googlecategories.txt");
 
 $query = preg_quote($_REQUEST['term'], '/');
@@ -32,4 +29,4 @@ foreach ($results as &$cur_result){
 }
 unset($cur_result);
 
-$_->page->override_doc(json_encode($results));
+$_->page->ajax(json_encode($results));

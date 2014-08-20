@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_modules/editmodule') && !gatekeeper('com_modules/newmodule') )
 	punt_user(null, pines_url('com_modules', 'module/edit', array('id' => $_REQUEST['id'])));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 list($component, $modname) = explode('/', $_REQUEST['type'], 2);
 $component = clean_filename($component);
 /**
@@ -78,4 +75,4 @@ $head = '';
 foreach ($_->page->modules['head'] as $cur_module)
 	$head .= $cur_module->render();
 
-$_->page->override_doc(json_encode(array('content' => $content, 'head' => $head)));
+$_->page->ajax(json_encode(array('content' => $content, 'head' => $head)));

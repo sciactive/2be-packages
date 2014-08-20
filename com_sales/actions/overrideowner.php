@@ -14,27 +14,24 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/overrideowner') )
 	punt_user(null, pines_url('com_sales', 'sale/overrideowner'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $entity = com_sales_sale::factory((int) $_REQUEST['id']);
 if (!isset($entity->guid))
 	$entity = com_sales_return::factory((int) $_REQUEST['id']);
 
 if (!isset($entity->guid)) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 	return;
 }
 
 $location = group::factory(intval($_REQUEST['location']));
 if (!isset($location->guid)) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 	return;
 }
 
 $user = user::factory(intval($_REQUEST['user']));
 if (!isset($user->guid)) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 	return;
 }
 
@@ -60,8 +57,8 @@ foreach ($transactions as $cur_tx) {
 
 if ($entity->save()) {
 	pines_notice("[{$entity->guid}] has been overridden.");
-	$_->page->override_doc('true');
+	$_->page->ajax('true');
 } else {
 	pines_notice('The entity could not be overridden.');
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 }

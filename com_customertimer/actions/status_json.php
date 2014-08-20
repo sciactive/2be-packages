@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_customertimer/timefloor') )
 	punt_user(null, pines_url('com_customertimer', 'status'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $floor = com_customertimer_floor::factory((int) $_REQUEST['floor']);
 $return = array();
 
@@ -40,4 +37,4 @@ foreach ($floor->active_stations as $cur_station => $cur_entry) {
 	);
 }
 
-$_->page->override_doc(json_encode($return));
+$_->page->ajax(json_encode($return));

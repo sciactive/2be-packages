@@ -11,8 +11,6 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$_->page->override = true;
-
 $login = new module('com_timeoutnotice', 'login');
 $loginhtml = $login->render('module_head');
-$_->page->override_doc($loginhtml);
+$_->page->ajax($loginhtml, 'text/html');

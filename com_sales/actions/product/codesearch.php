@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/searchproducts'))
 	punt_user(null, pines_url('com_sales', 'product/codesearch', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $code = $_REQUEST['code'];
 
 if (empty($code)) {
@@ -96,4 +93,4 @@ if (isset($product)) {
 	$product = $json_struct;
 }
 
-$_->page->override_doc(json_encode($product));
+$_->page->ajax(json_encode($product));

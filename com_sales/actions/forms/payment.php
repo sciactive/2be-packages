@@ -47,7 +47,6 @@ if ($_->config->com_sales->com_customer && $ticket->status != 'invoiced' && $tic
 	}
 }
 
-$_->page->override = true;
 $_->com_sales->call_payment_process(array(
 	'action' => 'request',
 	'name' => $_REQUEST['name'],
@@ -55,4 +54,4 @@ $_->com_sales->call_payment_process(array(
 ), $module);
 
 if (isset($module))
-	$_->page->override_doc($module->render());
+	$_->page->ajax($module->render(), 'text/html');

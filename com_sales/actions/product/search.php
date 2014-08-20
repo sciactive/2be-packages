@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/searchproducts'))
 	punt_user(null, pines_url('com_sales', 'product/search', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $query = trim($_REQUEST['q']);
 $r_query = '/'.str_replace(' ', '.*', preg_quote($query)).'/i';
 
@@ -151,4 +148,4 @@ unset($product);
 if (!$products)
 	$products = null;
 
-$_->page->override_doc(json_encode($products));
+$_->page->ajax(json_encode($products));

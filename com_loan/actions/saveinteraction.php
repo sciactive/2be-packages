@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_customer/newinteraction') )
 		punt_user(null, pines_url('com_loan', 'loan/list'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $loan_ids = $_REQUEST['loan_ids'];
 $employee = $_REQUEST['employee'];
 $status = $_REQUEST['status'];
@@ -47,8 +44,8 @@ elseif (!empty($loan_ids)) {
 }
 
 if ($success)
-	$_->page->override_doc('true');
+	$_->page->ajax('true');
 else
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 return;
 

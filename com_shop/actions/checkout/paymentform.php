@@ -30,4 +30,4 @@ $_->com_sales->call_payment_process(array(
 ), $module);
 
 if (isset($module))
-	$_->page->override_doc($module->render());
+	$_->page->ajax($module->render(), 'text/html');

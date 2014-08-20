@@ -14,8 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_plaza/listpackages') )
 	punt_user(null, pines_url('com_plaza', 'package/list'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
 if ($_REQUEST['local'] == 'true') {
 	$package = $_->com_package->db['packages'][$_REQUEST['name']];
 } else {
@@ -23,4 +21,4 @@ if ($_REQUEST['local'] == 'true') {
 	$package = $index['packages'][$_REQUEST['name']];
 }
 if (isset($package))
-	$_->page->override_doc(json_encode($package));
+	$_->page->ajax(json_encode($package));

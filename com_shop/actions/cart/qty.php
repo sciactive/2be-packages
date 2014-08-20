@@ -11,6 +11,4 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$_->page->override = true;
-header('Content-Type: application/json');
-$_->page->override_doc(json_encode($_->com_shop->adjust_quantity((int) $_REQUEST['id'], (int) $_REQUEST['qty'])));
+$_->page->ajax(json_encode($_->com_shop->adjust_quantity((int) $_REQUEST['id'], (int) $_REQUEST['qty'])));

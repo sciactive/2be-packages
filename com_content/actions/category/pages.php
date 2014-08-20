@@ -13,13 +13,10 @@ defined('P_RUN') or die('Direct access prohibited');
 
 // TODO: Gatekeeper checks?
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $category = com_content_category::factory((int) $_REQUEST['id']);
 
 if (!isset($category->guid)) {
-	$_->page->override_doc(json_encode(array()));
+	$_->page->ajax(json_encode(array()));
 	return;
 }
 
@@ -36,4 +33,4 @@ foreach ($category->pages as $page) {
 	$return[] = $json_struct;
 }
 
-$_->page->override_doc(json_encode($return));
+$_->page->ajax(json_encode($return));

@@ -11,8 +11,6 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$_->page->override = true;
-
 if ( !gatekeeper() )
 	return;
 $shop = com_shop_shop::factory((int) $_REQUEST['id']);
@@ -24,24 +22,24 @@ $_->session('write');
 while (true) {
 	if ((array) $_SESSION['user']->com_shop_starred !== $_SESSION['user']->com_shop_starred) {
 		$_SESSION['user']->com_shop_starred = array($shop);
-		$_->page->override_doc(json_encode(array('starred' => true)));
+		$_->page->ajax(json_encode(array('starred' => true)));
 		break;
 	}
 
 	$key = $shop->array_search($_SESSION['user']->com_shop_starred);
 	if ($key === false) {
 		$_SESSION['user']->com_shop_starred[] = $shop;
-		$_->page->override_doc(json_encode(array('starred' => true)));
+		$_->page->ajax(json_encode(array('starred' => true)));
 		break;
 	} else {
 		unset($_SESSION['user']->com_shop_starred[$key]);
 		$_SESSION['user']->com_shop_starred = array_values($_SESSION['user']->com_shop_starred);
-		$_->page->override_doc(json_encode(array('starred' => false)));
+		$_->page->ajax(json_encode(array('starred' => false)));
 		break;
 	}
 	break;
 }
 
 if (!$_SESSION['user']->save()) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 }

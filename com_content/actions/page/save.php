@@ -25,11 +25,7 @@ if ( isset($_REQUEST['id']) ) {
 	$page = com_content_page::factory();
 }
 
-if ($_REQUEST['ajax'] == 'true') {
-	$ajax = true;
-	$_->page->override = true;
-	header('Content-Type: application/json');
-}
+$ajax = ($_REQUEST['ajax'] == 'true');
 
 // General
 $page->name = $_REQUEST['name'];
@@ -116,14 +112,14 @@ if (empty($page->name)) {
 	$page->print_form();
 	pines_notice('Please specify a name.');
 	if ($ajax)
-		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
+		$_->page->ajax(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 	return;
 }
 if (empty($page->alias)) {
 	$page->print_form();
 	pines_notice('Please specify an alias.');
 	if ($ajax)
-		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
+		$_->page->ajax(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 	return;
 }
 
@@ -132,14 +128,14 @@ if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$page->print_form();
 	pines_notice('There is already an page with that alias. Please choose a different alias.');
 	if ($ajax)
-		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
+		$_->page->ajax(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 	return;
 }
 
 if (!$_->com_menueditor->check_entries($page->com_menueditor_entries)) {
 	$page->print_form();
 	if ($ajax)
-		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
+		$_->page->ajax(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 	return;
 }
 
@@ -169,11 +165,11 @@ if ($page->save()) {
 	}
 	unset($cur_cat);
 	if ($ajax)
-		$_->page->override_doc(json_encode(array('result' => true, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
+		$_->page->ajax(json_encode(array('result' => true, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 } else {
 	pines_error('Error saving page. Do you have permission?');
 	if ($ajax)
-		$_->page->override_doc(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
+		$_->page->ajax(json_encode(array('result' => false, 'notice' => $_->page->get_notice(), 'error' => $_->page->get_error())));
 }
 
 if (!$ajax)

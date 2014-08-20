@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
 	punt_user(null, pines_url('com_dash'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage'))
 	$dashboard = com_dash_dashboard::factory((int) $_REQUEST['id']);
 else
@@ -54,10 +51,10 @@ $add_buttons = json_decode($_REQUEST['buttons'], true);
 foreach ($add_buttons as $cur_button) {
 	// Check that the button exists and there aren't any weird things in the array.
 	if ($cur_button !== 'separator' && $cur_button !== 'line_break' && (!isset($buttons[$cur_button['component']][$cur_button['button']]) || count($cur_button) > 2)) {
-		$_->page->override_doc(json_encode(false));
+		$_->page->ajax('false');
 		return;
 	}
 	$dashboard->tabs[$_REQUEST['key']]['buttons'][] = $cur_button;
 }
 
-$_->page->override_doc(json_encode($dashboard->save()));
+$_->page->ajax(json_encode($dashboard->save()));

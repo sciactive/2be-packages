@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if (!gatekeeper('com_calendar/editcalendar') && !gatekeeper('com_calendar/managecalendar'))
 	punt_user(null, pines_url('com_calendar', 'editcalendar'));
 
-$_->page->override = true;
-header('Content-Type: text/plain');
-
 // Run the action in the given timezone.
 $cur_timezone = date_default_timezone_get();
 date_default_timezone_set($_REQUEST['timezone']);
@@ -74,6 +71,6 @@ foreach ($events as $cur_event) {
 	if (!$event->save())
 		$errors[] = 'Event starting at '.format_date($event->start, 'full_short').' and ending at '.format_date($event->end, 'full_short').' couldn\'t be saved. Do you have permission?';
 }
-$_->page->override_doc(implode("\n", $errors));
+$_->page->ajax(implode("\n", $errors), 'text/plain');
 
 date_default_timezone_set($cur_timezone);

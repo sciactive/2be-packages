@@ -14,7 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ($_REQUEST['type'] == 'module') {
 	// if we need to use and return json
 	$_->page->override = true;
-	header('Content-Type: application/json');
 	
 	if ( isset($_REQUEST['id']) ) {
 		if ( gatekeeper('com_testimonials/edittestimonials') ) {
@@ -30,7 +29,7 @@ if ($_REQUEST['type'] == 'module') {
 			$testimonial = com_testimonials_testimonial::factory();
 		else {
 			$result = array('result' => false, 'message' => 'Lack of Permissions or Unavailable Testimonial ID.');
-			$_->page->override_doc(json_encode($result));
+			$_->page->ajax(json_encode($result));
 			return;
 		}
 	}
@@ -226,5 +225,5 @@ if ($testimonial->type == "form") {
 		$result = true;
 	}
 	
-	$_->page->override_doc(json_encode($result));
+	$_->page->ajax(json_encode($result));
 }

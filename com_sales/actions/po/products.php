@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/listpos') && !gatekeeper('com_sales/receive'))
 	punt_user(null, pines_url('com_sales', 'po/products', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $po = com_sales_po::factory((int) $_REQUEST['id']);
 if (!isset($po->guid))
 	return;
@@ -42,4 +39,4 @@ unset($cur_product);
 if (empty($products))
 	$products = null;
 
-$_->page->override_doc(json_encode($products));
+$_->page->ajax(json_encode($products));

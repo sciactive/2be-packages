@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_entitytools/test') )
 	punt_user(null, pines_url('com_entitytools', 'benchmark'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 set_time_limit(3600);
 
 $benchmark->time_start = microtime(true);
@@ -52,4 +49,4 @@ $benchmark->delete[1] = microtime(true);
 
 $benchmark->time_end = microtime(true);
 
-$_->page->override_doc(json_encode($benchmark));
+$_->page->ajax(json_encode($benchmark));

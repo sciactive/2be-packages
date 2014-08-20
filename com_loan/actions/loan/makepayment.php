@@ -12,13 +12,10 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($_REQUEST['type'] == 'ajax') {
-	
-	$_->page->override = true;
-	header('Content-Type: application/json');
 
 	if ( !gatekeeper('com_loan/makepayment') ) {
 		$result = array('failed' => true);
-		$_->page->override_doc(json_encode($result));
+		$_->page->ajax(json_encode($result));
 		return;
 	}
 
@@ -26,7 +23,7 @@ if ($_REQUEST['type'] == 'ajax') {
 		$loan = com_loan_loan::factory((int) $_REQUEST['id']);
 		if (!isset($loan->guid)) {
 			$result = array('no_loan' => true);
-			$_->page->override_doc(json_encode($result));
+			$_->page->ajax(json_encode($result));
 			return;
 		}
 	}
@@ -50,7 +47,7 @@ $payment_amount = $_REQUEST['payment_amount'];
 if (!preg_match('/^\$?[0-9]*\.?[0-9]*$/', $payment_amount)) {
 	if (($_REQUEST['type'] == 'ajax')) {
 		$result = array('error' => true);
-		$_->page->override_doc(json_encode($result));
+		$_->page->ajax(json_encode($result));
 		return;
 	} else {
 		pines_notice('Please enter a valid payment amount.');
@@ -80,7 +77,7 @@ $remaining_balance = ($loan->payments[0]['remaining_balance']) ? $loan->payments
 if($remaining_balance < .01) {
 	if (($_REQUEST['type'] == 'ajax')) {
 		$result = array('paid' => true);
-		$_->page->override_doc(json_encode($result));
+		$_->page->ajax(json_encode($result));
 		return;
 	} else {
 		pines_notice('The balance is paid. No more payments accepted.');
@@ -113,7 +110,7 @@ $date_recorded = strtotime('now');
 if (strtotime($date_received) === 0) {
 	if (($_REQUEST['type'] == 'ajax')) {
 		$result = array('error' => true);
-		$_->page->override_doc(json_encode($result));
+		$_->page->ajax(json_encode($result));
 		return;
 	} else {
 		pines_notice('A valid date for receiving payment is required.');
@@ -169,7 +166,7 @@ if ($loan->save()) {
 }
 
 if ($_REQUEST['type'] == 'ajax') {
-	$_->page->override_doc(json_encode($result));
+	$_->page->ajax(json_encode($result));
 	return;
 }
 

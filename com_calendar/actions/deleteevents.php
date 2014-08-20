@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_calendar/editcalendar') )
 	punt_user(null, pines_url('com_calendar', 'editcalendar'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $list = array_map('intval', (array) $_REQUEST['events']);
 $failed_removes = array();
 foreach ($list as $cur_id) {
@@ -45,4 +42,4 @@ foreach ($list as $cur_id) {
 	}
 }
 if (!empty($failed_removes))
-	$_->page->override_doc(json_encode($failed_removes));
+	$_->page->ajax(json_encode($failed_removes));

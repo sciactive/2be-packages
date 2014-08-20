@@ -14,22 +14,19 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/uncommitcountsheet') )
 	punt_user(null, pines_url('com_sales', 'countsheet/list'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $countsheet = com_sales_countsheet::factory((int) $_REQUEST['id']);
 if (!isset($countsheet->guid)) {
-	$_->page->override_doc(json_encode(array(false, 'Requested countsheet id is not accessible.')));
+	$_->page->ajax(json_encode(array(false, 'Requested countsheet id is not accessible.')));
 	return;
 }
 if (!$countsheet->final) {
-	$_->page->override_doc(json_encode(array(false, 'Requested countsheet has not been committed.')));
+	$_->page->ajax(json_encode(array(false, 'Requested countsheet has not been committed.')));
 	return;
 }
 
 $countsheet->final = false;
 
 if ($countsheet->save())
-	$_->page->override_doc(json_encode(array(true, 'Countsheet has been uncommitted.')));
+	$_->page->ajax(json_encode(array(true, 'Countsheet has been uncommitted.')));
 else
-	$_->page->override_doc(json_encode(array(false, 'Error saving countsheet. Do you have permission?')));
+	$_->page->ajax(json_encode(array(false, 'Error saving countsheet. Do you have permission?')));

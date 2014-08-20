@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_customertimer/logout') )
 	punt_user(null, pines_url('com_customertimer', 'status'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $return = false;
 
 if (isset($_REQUEST['id'], $_REQUEST['floor'], $_REQUEST['station'])) {
@@ -30,4 +27,4 @@ if (isset($_REQUEST['id'], $_REQUEST['floor'], $_REQUEST['station'])) {
 	}
 }
 
-$_->page->override_doc(json_encode($return));
+$_->page->ajax(json_encode($return));

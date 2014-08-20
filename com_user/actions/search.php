@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_customer/listusers') )
 	punt_user(null, pines_url('com_user', 'search', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $query = trim($_REQUEST['q']);
 
 // Build the main selector, including location and timespan.
@@ -65,4 +62,4 @@ unset($cur_user);
 if (!$users)
 	$users = null;
 
-$_->page->override_doc(json_encode($users));
+$_->page->ajax(json_encode($users));

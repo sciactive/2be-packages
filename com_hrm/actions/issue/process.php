@@ -14,12 +14,9 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_hrm/resolveissue') )
 	punt_user(null, pines_url('com_hrm', 'employee/list'));
 
-$_->page->override = true;
-header('Content-Type: text/plain');
-
 $issue = com_hrm_issue::factory((int) $_REQUEST['id']);
 if (!isset($issue->guid) || !isset($issue->employee->guid)) {
-	$_->page->override_doc('Error');
+	$_->page->ajax('Error', 'text/plain');
 	return;
 }
 // Either delete an employee issue or mark it's status.
@@ -36,4 +33,4 @@ switch ($_REQUEST['status']) {
 		}
 		break;
 }
-$_->page->override_doc();
+$_->page->ajax('', 'text/plain');

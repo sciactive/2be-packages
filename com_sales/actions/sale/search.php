@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/listsales') )
 	punt_user(null, pines_url('com_sales', 'sales/search', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $sales = array();
 // This array will be customized, and used to search for sales entities.
 $sales_query = array('&',
@@ -93,4 +90,4 @@ unset($cur_sale);
 if (empty($sales))
 	$sales = null;
 
-$_->page->override_doc(json_encode($sales));
+$_->page->ajax(json_encode($sales));

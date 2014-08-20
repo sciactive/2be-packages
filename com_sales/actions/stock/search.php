@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_sales/seestock'))
 	punt_user(null, pines_url('com_sales', 'stock/search', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $product = com_sales_product::factory((int) $_REQUEST['product']);
 $serial = $_REQUEST['serial'];
 $location = empty($_REQUEST['location']) ? null : group::factory((int) $_REQUEST['location']);
@@ -24,7 +21,7 @@ $quantity = (int) $_REQUEST['quantity'];
 $not_guids = (array) json_decode($_REQUEST['not_guids']);
 
 if (!isset($product->guid) || (empty($serial) && (empty($location) || !isset($location->guid))) || $quantity < 1) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 	return;
 }
 
@@ -70,4 +67,4 @@ foreach ($stock as &$cur_stock) {
 	);
 }
 
-$_->page->override_doc(json_encode($stock));
+$_->page->ajax(json_encode($stock));

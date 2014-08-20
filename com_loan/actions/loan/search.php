@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_loan/listloans') )
 	punt_user(null, pines_url('com_loan', 'loan/list'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 // Time span.
 if (!empty($_REQUEST['start_date'])) {
 	$start_date = $_REQUEST['start_date'];
@@ -206,4 +203,4 @@ if ($loans) {
 		$loans = null;
 }
 
-$_->page->override_doc(json_encode($loans));
+$_->page->ajax(json_encode($loans));

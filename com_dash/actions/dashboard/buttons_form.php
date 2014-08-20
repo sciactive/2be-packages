@@ -14,8 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_dash/dash') || !gatekeeper('com_dash/editdash') )
 	punt_user(null, pines_url('com_dash'));
 
-$_->page->override = true;
-
 if (!empty($_REQUEST['id']) && gatekeeper('com_dash/manage'))
 	$dashboard = com_dash_dashboard::factory((int) $_REQUEST['id']);
 else
@@ -42,5 +40,4 @@ foreach ($module->buttons as $cur_component => $cur_button_set) {
 	}
 }
 
-$content = $module->render();
-$_->page->override_doc($content);
+$_->page->ajax($module->render(), 'text/html');

@@ -11,9 +11,6 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 // TODO: Provide a method to define a context. (So non-entities would still work.)
 
 $entity = $_->entity_manager->get_entity(
@@ -23,7 +20,7 @@ $entity = $_->entity_manager->get_entity(
 		)
 	);
 if (!$entity->guid) {
-	$_->page->override_doc(json_encode(false));
+	$_->page->ajax(json_encode(false));
 	return;
 }
 
@@ -41,10 +38,10 @@ if (is_callable(array($entity, 'helper'))) {
 		$response->render = 'footer';
 		$response->entity = $entity;
 		$result['footer'] = $response->render();
-		$_->page->override_doc(json_encode($result));
+		$_->page->ajax(json_encode($result));
 		return;
 	} elseif ((array) $response === $response && isset($response['title']) && isset($response['body']) && isset($response['footer'])) {
-		$_->page->override_doc(json_encode($response));
+		$_->page->ajax(json_encode($response));
 		return;
 	}
 }
@@ -60,4 +57,4 @@ $module = new module('com_entityhelper', 'default_helper');
 $module->render = 'footer';
 $module->entity = $entity;
 $result['footer'] = $module->render();
-$_->page->override_doc(json_encode($result));
+$_->page->ajax(json_encode($result));

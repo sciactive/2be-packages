@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_packager/newpackage') || !gatekeeper('com_packager/editpackage'))
 	punt_user(null, pines_url('com_packager', 'glob'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 switch ($_REQUEST['type']) {
 	case 'component':
 		$prefix = clean_filename("components/{$_REQUEST['pkg_component']}/");
@@ -35,4 +32,4 @@ foreach ($files as &$cur_file) {
 }
 unset($cur_file);
 
-$_->page->override_doc(json_encode($files));
+$_->page->ajax(json_encode($files));

@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_customer/listcompanies') )
 	punt_user(null, pines_url('com_customer', 'company/search', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $query = strtolower($_REQUEST['q']);
 
 if (empty($query)) {
@@ -70,4 +67,4 @@ unset($cur_company);
 if (empty($companies))
 	$companies = null;
 
-$_->page->override_doc(json_encode($companies));
+$_->page->ajax(json_encode($companies));

@@ -96,13 +96,12 @@ class com_hrm_rto extends entity {
 	 */
 	public function print_form() {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_hrm', 'timeoff/request', 'content');
 		$module->entity = $this;
 		$module->requests = array();
 		// Load all pending time off requests so they can be edited if needed.
 		$module->requests = $_->entity_manager->get_entities(array('class' => com_hrm_rto), array('!&', 'data' => array('status', 'approved')), array('&', 'tag' => array('com_hrm', 'rto'), 'ref' => array('user', $_SESSION['user'])));
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 	}
 }

@@ -169,12 +169,11 @@ class com_loan_loan extends entity {
 	 */
 	public function collection_code_form() {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/collection_code', 'content');
 		$module->entity = $this;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 	
@@ -187,12 +186,11 @@ class com_loan_loan extends entity {
 	 */
 	public function makepayment_form() {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/makepayment', 'content');
 		$module->entity = $this;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 
@@ -205,12 +203,11 @@ class com_loan_loan extends entity {
 	 */
 	public function payoff_form() {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_loan', 'form/payoff', 'content');
 		$module->entity = $this;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 

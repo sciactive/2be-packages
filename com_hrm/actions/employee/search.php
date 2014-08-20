@@ -14,9 +14,6 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_hrm/listemployees') )
 	punt_user(null, pines_url('com_hrm', 'employee/search', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $query = strtolower($_REQUEST['q']);
 
 if (empty($query)) {
@@ -57,4 +54,4 @@ $employees = array_values($employees);
 if (empty($employees))
 	$employees = null;
 
-$_->page->override_doc(json_encode($employees));
+$_->page->ajax(json_encode($employees));

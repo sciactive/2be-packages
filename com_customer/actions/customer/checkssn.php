@@ -14,10 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 if (!$_->config->com_customer->check_ssn)
 	throw new HttpClientException(null, 404);
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if (!empty($_REQUEST['id']))
 	$id = intval($_REQUEST['id']);
 
-$_->page->override_doc(json_encode($_->com_customer->check_ssn($_REQUEST['ssn'], $id)));
+$_->page->ajax(json_encode($_->com_customer->check_ssn($_REQUEST['ssn'], $id)));

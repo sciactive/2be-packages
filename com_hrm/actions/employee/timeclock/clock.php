@@ -14,13 +14,10 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_hrm/clock') && !gatekeeper('com_hrm/manageclock') )
 	punt_user(null, pines_url('com_hrm', 'employee/timeclock/clock', $_REQUEST));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if ($_REQUEST['id'] == 'self') {
 	$employee = com_hrm_employee::factory($_SESSION['user']->guid);
 	if ($_->config->com_hrm->timeclock_verify_pin && !empty($_SESSION['user']->pin) && $_REQUEST['pin'] != $_SESSION['user']->pin) {
-		$_->page->override_doc(json_encode('pin'));
+		$_->page->ajax(json_encode('pin'));
 		return;
 	}
 } else {
@@ -30,7 +27,7 @@ if ($_REQUEST['id'] == 'self') {
 }
 
 if (!isset($employee->guid)) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 	return;
 }
 
@@ -41,9 +38,9 @@ if ($employee->timeclock->clocked_in_time()) {
 }
 
 if (!$success || !$employee->save()) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 	return;
 }
 
 
-$_->page->override_doc(json_encode($employee->timeclock->clocked_in_time()));
+$_->page->ajax(json_encode($employee->timeclock->clocked_in_time()));

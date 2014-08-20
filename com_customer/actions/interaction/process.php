@@ -16,21 +16,18 @@ $interaction = com_customer_interaction::factory((int) $_REQUEST['id']);
 if (!gatekeeper('com_customer/editinteraction'))
 	punt_user(null, pines_url('com_customer', 'interaction/process', array('id' => $_REQUEST['id'])));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 if ((!gatekeeper('com_customer/manageinteractions') && !$interaction->employee->is($_SESSION['user'])) ||
 	!isset($interaction->guid)) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 	return;
 }
 if ($interaction->status == 'closed'){
-	$_->page->override_doc('"closed"');
+	$_->page->ajax('"closed"');
 	return;
 }
 $comments = trim($_REQUEST['review_comments']);
 if (empty($comments)) {
-	$_->page->override_doc('"comments"');
+	$_->page->ajax('"comments"');
 	return;
 }
 
@@ -53,7 +50,7 @@ if ($_->config->com_customer->com_calendar) {
 	$interaction->event->save();
 }
 if ($interaction->save()) {
-	$_->page->override_doc('true');
+	$_->page->ajax('true');
 } else {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 }

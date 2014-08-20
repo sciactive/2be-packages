@@ -198,10 +198,9 @@ class com_hrm extends component {
 	 */
 	public function review_timeoff() {
 		global $_;
-		$_->page->override = true;
 		$module = new module('com_hrm', 'timeoff/review', 'content');
 		$module->requests = $_->entity_manager->get_entities(array('class' => com_hrm_rto), array('&', 'tag' => array('com_hrm', 'rto'), 'data' => array('status', 'pending')));
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 
 		return $module;
 	}
@@ -226,7 +225,6 @@ class com_hrm extends component {
 	 */
 	public function user_select_form($all = false) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_hrm', 'forms/users');
 		$module->users = (array) $_->user_manager->get_users();
@@ -240,7 +238,7 @@ class com_hrm extends component {
 		}
 		usort($module->users, array($this, 'sort_users'));
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 }

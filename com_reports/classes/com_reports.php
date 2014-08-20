@@ -27,14 +27,13 @@ class com_reports extends component {
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_reports', 'date_selector', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 
@@ -78,7 +77,6 @@ class com_reports extends component {
 	 */
 	public function location_select_form($location = null, $descendants = false) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_reports', 'location_selector', 'content');
 		if (!isset($location)) {
@@ -88,7 +86,7 @@ class com_reports extends component {
 		}
 		$module->descendants = $descendants;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 

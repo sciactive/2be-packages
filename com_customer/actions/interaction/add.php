@@ -14,21 +14,18 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_customer/newinteraction') )
 	punt_user(null, pines_url('com_customer', 'interaction/add'));
 
-$_->page->override = true;
-header('Content-Type: application/json');
-
 $customer = com_customer_customer::factory(intval($_REQUEST['customer']));
 if (!isset($customer->guid))
 	$customer = com_customer_company::factory(intval($_REQUEST['customer']));
 
 if (!isset($customer->guid)) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 	return;
 }
 
 $employee = com_hrm_employee::factory((int) $_REQUEST['employee']);
 if (!isset($employee)) {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 	return;
 }
 
@@ -60,7 +57,7 @@ $existing_appt = $_->entity_manager->get_entity(
 		)
 	);
 if (isset($existing_appt->guid) && $interaction->guid != $existing_appt->guid) {
-	$_->page->override_doc('"conflict"');
+	$_->page->ajax('"conflict"');
 	date_default_timezone_set($cur_timezone);
 	return;
 }
@@ -96,7 +93,7 @@ if ($_->config->com_customer->com_calendar) {
 	$event->information = '('.$interaction->employee->name.') '.$interaction->comments;
 	$event->ac->other = 2;
 	if (!$event->save()) {
-		$_->page->override_doc('false');
+		$_->page->ajax('false');
 		date_default_timezone_set($cur_timezone);
 		return;
 	}
@@ -112,9 +109,9 @@ if ($interaction->save()) {
 		$event->group = $location;
 		$event->save();
 	}
-	$_->page->override_doc('true');
+	$_->page->ajax('true');
 } else {
-	$_->page->override_doc('false');
+	$_->page->ajax('false');
 }
 
 date_default_timezone_set($cur_timezone);

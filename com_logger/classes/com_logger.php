@@ -138,14 +138,13 @@ class com_logger extends component implements log_manager_interface {
 	 */
 	public function date_select_form($all_time = false, $start = null, $end = null) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_logger', 'date_selector', 'content');
 		$module->all_time = $all_time;
 		$module->start_date = $start;
 		$module->end_date = $end;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 
@@ -158,7 +157,6 @@ class com_logger extends component implements log_manager_interface {
 	 */
 	public function location_select_form($location = null, $descendants = false) {
 		global $_;
-		$_->page->override = true;
 
 		$module = new module('com_logger', 'location_selector', 'content');
 		if (!isset($location)) {
@@ -168,7 +166,7 @@ class com_logger extends component implements log_manager_interface {
 		}
 		$module->descendants = $descendants;
 
-		$_->page->override_doc($module->render());
+		$_->page->ajax($module->render(), 'text/html');
 		return $module;
 	}
 }
