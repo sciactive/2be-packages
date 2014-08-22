@@ -16,7 +16,7 @@ $this->note = 'The next step is to verify the email address you entered.';
 <div>
 	An email has been sent to <?php e($this->entity->email); ?> with a
 	verification link.
-	<?php if ($_->config->com_user->unconfirmed_access) { ?>
+	<?php if ($_->config->com_user->unverified_access) { ?>
 	You will have limited access until you verify your email address by clicking
 	the link.
 	<?php } else { ?>

@@ -154,7 +154,7 @@ if ($_->config->com_user->check_username) { ?>
 					<span class="pf-field picon picon-throbber loader" id="p_muid_username_loading" style="display: none;">&nbsp;</span>
 					<span class="pf-field picon" id="p_muid_username_message"></span>
 					<?php } ?>
-					<label<?php if ($_->config->com_user->unconfirmed_access) { ?> title="Disregards changes to the user's secondary groups, and defaults will be used."<?php } ?>><input class="pf-field" type="checkbox" name="email_verified" value="ON" /> Mark this address as verified.</label>
+					<label<?php if ($_->config->com_user->unverified_access) { ?> title="Disregards changes to the user's secondary groups, and defaults will be used."<?php } ?>><input class="pf-field" type="checkbox" name="email_verified" value="ON" /> Mark this address as verified.</label>
 				</div>
 				<?php } else { ?>
 				<label>

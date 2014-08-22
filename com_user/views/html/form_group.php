@@ -186,9 +186,9 @@ $_->uploader->load();
 					<input class="pf-field" type="checkbox" name="default_secondary" value="ON"<?php echo $this->entity->default_secondary ? ' checked="checked"' : ''; ?> /></label>
 			</div>
 			<div class="pf-element">
-				<label><span class="pf-label">Unconfirmed User Secondary Group</span>
-					<span class="pf-note">Default secondary group for newly registered users who haven't confirmed their email. See config for details.</span>
-					<input class="pf-field" type="checkbox" name="unconfirmed_secondary" value="ON"<?php echo $this->entity->unconfirmed_secondary ? ' checked="checked"' : ''; ?> /></label>
+				<label><span class="pf-label">Unverified User Secondary Group</span>
+					<span class="pf-note">Default secondary group for newly registered users who haven't verified their email. See config for details.</span>
+					<input class="pf-field" type="checkbox" name="unverified_secondary" value="ON"<?php echo $this->entity->unverified_secondary ? ' checked="checked"' : ''; ?> /></label>
 			</div>
 			<?php } ?>
 			<br class="pf-clearing" />

@@ -81,14 +81,14 @@ if (empty($user->password) && !$_->config->com_user->pw_empty) {
 $user->group = $_->entity_manager->get_entity(array('class' => group), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_primary', true)));
 if (!isset($user->group->guid))
 	unset($user->group);
-if ($_->config->com_user->confirm_email && $_->config->com_user->unconfirmed_access)
-	$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('unconfirmed_secondary', true)));
+if ($_->config->com_user->verify_email && $_->config->com_user->unverified_access)
+	$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('unverified_secondary', true)));
 else
 	$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
 
-if ($_->config->com_user->confirm_email) {
-	// The user will be enabled after confirming their e-mail address.
-	if (!$_->config->com_user->unconfirmed_access)
+if ($_->config->com_user->verify_email) {
+	// The user will be enabled after verifying their e-mail address.
+	if (!$_->config->com_user->unverified_access)
 		$user->disable();
 	$user->secret = uniqid('', true);
 } else
@@ -125,12 +125,12 @@ if ($user->save()) {
 	unset($_SESSION['com_user__tmppassword']);
 	unset($_SESSION['com_user__tmpreferral_code']);
 	pines_session('close');
-	if ($_->config->com_user->confirm_email) {
+	if ($_->config->com_user->verify_email) {
 		// Send the verification email.
 		if ($user->send_email_verification($_REQUEST['url'])) {
 			$note = new module('com_user', 'note_verify_email', 'content');
 			$note->entity = $user;
-			if ($_->config->com_user->unconfirmed_access) {
+			if ($_->config->com_user->unverified_access) {
 				$_->user_manager->login($user);
 				if ( !empty($_REQUEST['url']) ) {
 					pines_redirect(urldecode($_REQUEST['url']));

@@ -10,12 +10,12 @@
  */
 /* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$this->title = '#to_first_name#, Please confirm your new email address for #system_name#.';
+$this->title = '#to_first_name#, Please verify your new email address for #system_name#.';
 ?>
 Hi #to_name#,<br />
 <br />
 We've received a request to change your email address at <a href="#site_link#" target="_blank">#site_link#</a>.
-Please confirm your new email by clicking on the following link:<br />
+Please verify your new email by clicking on the following link:<br />
 <br />
 <a href="#verify_link#" target="_blank">#verify_link#</a><br />
 <br />

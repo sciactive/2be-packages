@@ -31,10 +31,10 @@ return array(
 	),
 	'abilities' => array(
 		array('login', 'Log In', 'User can log in to the system.'),
-		array('self', 'Change Info', 'User can change his own information. Email address changes may be subject to confirmation.'),
+		array('self', 'Change Info', 'User can change his own information. Email address changes may be subject to verification.'),
 		array('listusers', 'List Users', 'User can see users.'),
 		array('newuser', 'Create Users', 'User can create new users.'),
-		array('edituser', 'Edit Users', 'User can edit other users. Email address changes take place immediately. Can confirm unverified email addresses.'),
+		array('edituser', 'Edit Users', 'User can edit other users. Email address changes take place immediately. Can verify unverified email addresses.'),
 		array('deleteuser', 'Delete Users', 'User can delete other users.'),
 		array('enabling', 'Manage Enabling', 'User can enable and disable users and groups.'),
 		array('usernames', 'Manage Usernames', 'User can change usernames and groupnames.'),

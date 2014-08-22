@@ -204,7 +204,7 @@ class com_customer extends component {
 		if ($object->has_tag('com_customer', 'customer')) {
 			// If the secret is unset, it means they verified their email address.
 			if (!isset($object->secret)) {
-				if ($object->com_customer__unconfirmed_groups) {
+				if ($object->com_customer__unverified_groups) {
 					// We should put them in the default customer groups.
 					$object->groups = (array) $_->entity_manager->get_entities(
 							array('class' => group, 'skip_ac' => true),
@@ -213,9 +213,9 @@ class com_customer extends component {
 								'data' => array('default_customer_secondary', true)
 							)
 						);
-					unset($object->com_customer__unconfirmed_groups);
+					unset($object->com_customer__unverified_groups);
 				}
-				unset($object->com_customer__unconfirmed);
+				unset($object->com_customer__unverified);
 			}
 			return;
 		}

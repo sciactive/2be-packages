@@ -28,7 +28,7 @@ switch ($_REQUEST['type']) {
 			return;
 		}
 
-		if ($_->config->com_user->unconfirmed_access)
+		if ($_->config->com_user->unverified_access)
 			$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
 		$user->enable();
 		unset($user->secret);

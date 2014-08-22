@@ -126,8 +126,8 @@ if ($this->render == 'body' && gatekeeper('com_user/listgroups')) { ?>
 				<td><?php echo $this->entity->default_secondary ? 'Yes' : 'No'; ?></td>
 			</tr>
 			<tr>
-				<td style="font-weight:bold;" colspan="2">Unconfirmed Secondary Group</td>
-				<td><?php echo $this->entity->unconfirmed_secondary ? 'Yes' : 'No'; ?></td>
+				<td style="font-weight:bold;" colspan="2">Unverified Secondary Group</td>
+				<td><?php echo $this->entity->unverified_secondary ? 'Yes' : 'No'; ?></td>
 			</tr>
 		</tbody>
 	</table>

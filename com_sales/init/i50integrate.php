@@ -26,8 +26,8 @@ if ($_->config->com_sales->per_item_salesperson && !$_->config->com_sales->com_h
 if ($_->config->com_sales->com_shop && !$_->depend->check('component', 'com_shop&com_content'))
 	$_->config->com_sales->com_shop = false;
 
-$check_com_sales__config = function($value){
-	global $_;
+$check_com_sales__config = function($value, $help = false){
+	global $_, $check_com_sales__config;
 	if ($help) {
 		$return = array();
 		$return['cname'] = 'POS Config Checker';
@@ -56,7 +56,7 @@ EOF;
 			strpos($value, '(') !== false ||
 			strpos($value, ')') !== false
 		)
-		return $this->simple_parse($check_com_sales__config);
+		return $_->depend->simple_parse($value, $check_com_sales__config);
 	return (bool) $_->config->com_sales->$value;
 };
 

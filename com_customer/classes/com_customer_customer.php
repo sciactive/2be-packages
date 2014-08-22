@@ -61,24 +61,24 @@ class com_customer_customer extends user {
 			);
 		if (isset($group->guid))
 			$this->group = $group;
-		if ($_->config->com_customer->follow_um_rules && $_->config->com_user->confirm_email) {
-			if ($_->config->com_user->unconfirmed_access) {
-				// Use unconfirmed user groups.
+		if ($_->config->com_customer->follow_um_rules && $_->config->com_user->verify_email) {
+			if ($_->config->com_user->unverified_access) {
+				// Use unverified user groups.
 				$groups = $_->entity_manager->get_entities(
 						array('class' => group, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_user', 'group'),
-							'data' => array('unconfirmed_secondary', true)
+							'data' => array('unverified_secondary', true)
 						)
 					);
-				$this->com_customer__unconfirmed = true;
-				$this->com_customer__unconfirmed_groups = true;
+				$this->com_customer__unverified = true;
+				$this->com_customer__unverified_groups = true;
 				if ($groups)
 					$this->groups = $groups;
 				$this->add_tag('enabled');
 				return;
 			}
-			$this->com_customer__unconfirmed = true;
+			$this->com_customer__unverified = true;
 			$this->remove_tag('enabled');
 		} else
 			$this->add_tag('enabled');
@@ -243,7 +243,7 @@ class com_customer_customer extends user {
 		global $_;
 		if (!isset($this->name))
 			return false;
-		if (!isset($this->guid) && $this->com_customer__unconfirmed) {
+		if (!isset($this->guid) && $this->com_customer__unverified) {
 			// Remember to send the verification email.
 			$this->secret = uniqid('', true);
 			$send_verification = true;

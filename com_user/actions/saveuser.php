@@ -44,10 +44,10 @@ if (gatekeeper('com_user/enabling')) {
 }
 if ($_->config->com_user->email_usernames || in_array('email', $_->config->com_user->user_fields)) {
 	// Only send an email if they don't have the ability to edit all users.
-	if ($_->config->com_user->confirm_email && !gatekeeper('com_user/edituser')) {
+	if ($_->config->com_user->verify_email && !gatekeeper('com_user/edituser')) {
 		if (isset($user->guid) && $user->email != $_REQUEST['email']) {
-			if (isset($user->email_change_date) && $user->email_change_date > strtotime('-1 week'))
-				pines_notice('You already changed your email address recently. Please wait until '.format_date(strtotime('+1 week', $user->email_change_date), 'full_short').' to change your email address again.');
+			if ($_->config->com_user->email_rate_limit !== '' && isset($user->email_change_date) && $user->email_change_date > strtotime('-'.$_->config->com_user->email_rate_limit))
+				pines_notice('You already changed your email address recently. Please wait until '.format_date(strtotime('+'.$_->config->com_user->email_rate_limit, $user->email_change_date), 'full_short').' to change your email address again.');
 			else {
 				if (isset($user->secret)) {
 					// The user hasn't verified their previous email, so just update it.
@@ -63,14 +63,14 @@ if ($_->config->com_user->email_usernames || in_array('email', $_->config->com_u
 					$user->cancel_email_address = $user->email;
 					$user->cancel_email_secret = uniqid('', true);
 					$user->email_change_date = time();
-					$confirm_email = true;
+					$verify_email = true;
 				}
 			}
 		}
 	} else
 		$user->email = $_REQUEST['email'];
 	if (isset($user->secret) && gatekeeper('com_user/edituser') && $_REQUEST['email_verified'] == 'ON') {
-		if ($_->config->com_user->unconfirmed_access)
+		if ($_->config->com_user->unverified_access)
 			$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
 		$user->enable();
 		unset($user->secret);
@@ -162,7 +162,7 @@ if ( gatekeeper('com_user/assigngroup') ) {
 	if ($_REQUEST['group'] == 'null')
 		unset($user->group);
 
-	if (!(gatekeeper('com_user/edituser') && $_REQUEST['email_verified'] == 'ON' && $_->config->com_user->unconfirmed_access)) {
+	if (!(gatekeeper('com_user/edituser') && $_REQUEST['email_verified'] == 'ON' && $_->config->com_user->unverified_access)) {
 		$highest_secondary_parent = $_->config->com_user->highest_secondary;
 		$secondary_groups = array();
 		if ($highest_secondary_parent == 0) {
@@ -247,7 +247,7 @@ if (in_array('pin', $_->config->com_user->user_fields) && gatekeeper('com_user/a
 if ($user->save()) {
 	pines_notice('Saved user ['.$user->username.']');
 	pines_log('Saved user ['.$user->username.']');
-	if ($_->config->com_user->confirm_email && $confirm_email) {
+	if ($_->config->com_user->verify_email && $verify_email) {
 		// Send the verification email.
 		$link = h(pines_url('com_user', 'verifyuser', array('id' => $user->guid, 'type' => 'change', 'secret' => $user->new_email_secret), true));
 		$link2 = h(pines_url('com_user', 'verifyuser', array('id' => $user->guid, 'type' => 'cancelchange', 'secret' => $user->cancel_email_secret), true));
@@ -272,9 +272,9 @@ if ($user->save()) {
 			'name_last' => $user->name_last,
 		);
 		if ($_->com_mailer->send_mail('com_user/verify_email_change', $macros, $recipient) && $_->com_mailer->send_mail('com_user/cancel_email_change', $macros2, $user))
-			pines_notice('A confirmation has been sent to your new email address. Please click the link provided to verify your address.');
+			pines_notice('A verification link has been sent to your new email address. Please click the link provided to verify your new address.');
 		else
-			pines_error('Couldn\'t send confirmation email.');
+			pines_error('Couldn\'t send verification email.');
 	}
 } else
 	pines_error('Error saving user. Do you have permission?');

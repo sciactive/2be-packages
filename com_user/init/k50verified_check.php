@@ -14,7 +14,7 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$_->config->com_user->confirm_email)
+if (!$_->config->com_user->verify_email)
 	return;
 
 // Check to see if they're not verified.

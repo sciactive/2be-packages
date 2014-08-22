@@ -11,7 +11,7 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-if (!$_->config->com_user->confirm_email || !gatekeeper() || !isset($_SESSION['user']->secret)) {
+if (!$_->config->com_user->verify_email || !gatekeeper() || !isset($_SESSION['user']->secret)) {
 	$_->page->ajax('false');
 	return;
 }
