@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\calendar
  */
-class com_calendar_event extends entity {
+class com_calendar_event extends Entity {
+	const etype = 'com_calendar_event';
 	protected $tags = array('com_calendar', 'event');
 
 	public function __construct($id = 0) {
@@ -24,10 +25,6 @@ class com_calendar_event extends entity {
 			return;
 		// Defaults.
 		$this->private = false;
-	}
-
-	public static function etype() {
-		return 'com_calendar_event';
 	}
 
 	public function info($type) {

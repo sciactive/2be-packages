@@ -53,7 +53,7 @@ if (empty($replacement->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_replace_replacement, 'skip_ac' => true), array('&', 'tag' => array('com_replace', 'replacement'), 'data' => array('name', $replacement->name)));
+$test = $_->nymph->getEntity(array('class' => com_replace_replacement, 'skip_ac' => true), array('&', 'tag' => array('com_replace', 'replacement'), 'data' => array('name', $replacement->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$replacement->print_form();
 	pines_notice('There is already a replacement with that name. Please choose a different name.');

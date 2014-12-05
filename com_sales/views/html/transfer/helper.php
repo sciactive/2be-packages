@@ -110,7 +110,7 @@ if ($this->render == 'body' && (gatekeeper('com_sales/managestock') || gatekeepe
 						if ($cur_product['entity']->is($cur_shipped->product)) {
 							$shipped[] = $cur_shipped;
 							unset($all_shipped[$key]);
-							if ($rkey = $cur_shipped->array_search($all_received)) {
+							if ($rkey = $cur_shipped->arraySearch($all_received)) {
 								$received[] = $all_received[$rkey];
 								unset($all_received[$rkey]);
 							}

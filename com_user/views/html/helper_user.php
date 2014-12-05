@@ -42,7 +42,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listusers')) { ?>
 			<?php } ?>
 			<tr>
 				<td style="font-weight:bold;">Enabled</td>
-				<td><?php echo $this->entity->has_tag('enabled') ? 'Yes' : 'No'; ?></td>
+				<td><?php echo $this->entity->hasTag('enabled') ? 'Yes' : 'No'; ?></td>
 			</tr>
 			<?php if ($_->config->com_user->email_usernames || (!empty($this->entity->email) && in_array('email', $_->config->com_user->user_fields))) { ?>
 			<tr>

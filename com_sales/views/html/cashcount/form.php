@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Cash-In' : (($this->entity->final) ? 'Viewing' : 'Editing').' Float for Cash-In ['.h($this->entity->guid).']';
 if (isset($this->entity->guid))
-	$this->note = 'Created by ' . h($this->entity->user->name) . ' on ' . h(format_date($this->entity->p_cdate, 'date_short')) . ' - Last Modified on ' .  h(format_date($this->entity->p_mdate, 'date_short'));
+	$this->note = 'Created by ' . h($this->entity->user->name) . ' on ' . h(format_date($this->entity->cdate, 'date_short')) . ' - Last Modified on ' .  h(format_date($this->entity->mdate, 'date_short'));
 ?>
 <style type="text/css" >
 	#p_muid_form .amount {

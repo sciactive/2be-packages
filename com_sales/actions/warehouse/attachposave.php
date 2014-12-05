@@ -30,7 +30,7 @@ foreach (explode(',', $_REQUEST['id']) as $cur_id) {
 
 	// Save the item for PO search.
 	$products[] = array('pending_products', $sale->products[(int) $key]['entity']);
-	if (!$sale->products[(int) $key]['entity']->in_array($product_entities))
+	if (!$sale->products[(int) $key]['entity']->inArray($product_entities))
 		$product_entities[] = $sale->products[(int) $key]['entity'];
 }
 
@@ -40,7 +40,7 @@ if (!$products) {
 	return;
 }
 
-$pos = $_->entity_manager->get_entities(
+$pos = $_->nymph->getEntities(
 		array('class' => com_sales_po),
 		array('&',
 			'tag' => array('com_sales', 'po'),
@@ -63,7 +63,7 @@ if (!isset($po->guid)) {
 	return;
 }
 
-if (!$po->in_array($pos)) {
+if (!$po->inArray($pos)) {
 	pines_notice('Specified PO does not contain all the specified items.');
 	pines_redirect(pines_url('com_sales', 'warehouse/pending'));
 	return;

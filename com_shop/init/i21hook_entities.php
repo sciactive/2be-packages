@@ -1,6 +1,6 @@
 <?php
 /**
- * Hook entity functions for shop control.
+ * Hook Entity functions for shop control.
  *
  * @package Components\shop
  * @license http://www.gnu.org/licenses/agpl-3.0.html
@@ -34,30 +34,30 @@ function com_shop__add_shop(&$array) {
 	if (
 			(object) $_SESSION['shop'] === $_SESSION['shop'] &&
 			!isset($array[0]->guid) &&
-			$array[0]->has_tag('com_sales') &&
+			$array[0]->hasTag('com_sales') &&
 			(
-				$array[0]->has_tag('cashcount') ||
-				$array[0]->has_tag('cashcount_audit') ||
-				$array[0]->has_tag('category') ||
-				$array[0]->has_tag('countsheet') ||
-				$array[0]->has_tag('manufacturer') ||
-				$array[0]->has_tag('payment_type') ||
-				$array[0]->has_tag('po') ||
-				$array[0]->has_tag('product') ||
-				$array[0]->has_tag('return') ||
-				$array[0]->has_tag('return_checklist') ||
-				$array[0]->has_tag('sale') ||
-				$array[0]->has_tag('shipment') ||
-				$array[0]->has_tag('shipper') ||
-				$array[0]->has_tag('special') ||
-				$array[0]->has_tag('stock') ||
-				$array[0]->has_tag('tax_fee') ||
-				$array[0]->has_tag('transfer') ||
-				$array[0]->has_tag('vendor')
+				$array[0]->hasTag('cashcount') ||
+				$array[0]->hasTag('cashcount_audit') ||
+				$array[0]->hasTag('category') ||
+				$array[0]->hasTag('countsheet') ||
+				$array[0]->hasTag('manufacturer') ||
+				$array[0]->hasTag('payment_type') ||
+				$array[0]->hasTag('po') ||
+				$array[0]->hasTag('product') ||
+				$array[0]->hasTag('return') ||
+				$array[0]->hasTag('return_checklist') ||
+				$array[0]->hasTag('sale') ||
+				$array[0]->hasTag('shipment') ||
+				$array[0]->hasTag('shipper') ||
+				$array[0]->hasTag('special') ||
+				$array[0]->hasTag('stock') ||
+				$array[0]->hasTag('tax_fee') ||
+				$array[0]->hasTag('transfer') ||
+				$array[0]->hasTag('vendor')
 			)
 		) {
 		$array[0]->shop = $_SESSION['shop'];
 	}
 }
 
-$_->hook->add_callback('$_->entity_manager->save_entity', -100, 'com_shop__add_shop');
+$_->hook->add_callback('$_->nymph->saveEntity', -100, 'com_shop__add_shop');

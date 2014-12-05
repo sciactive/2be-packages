@@ -21,7 +21,7 @@ return array(
 	'description' => 'Create and send newsletters to your users.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager&editor&uploader',
+		'service' => 'editor&uploader',
 		'component' => 'com_mailer&com_jquery&com_bootstrap&com_pgrid&com_jstree&com_pform',
 		'package' => 'com_newsletter-data'
 	),

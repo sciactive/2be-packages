@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\hrm
  */
-class com_hrm_timeclock extends entity {
+class com_hrm_timeclock extends Entity {
+	const etype = 'com_hrm_timeclock';
 	protected $tags = array('com_hrm', 'timeclock');
 
 	public function __construct($id = 0) {
@@ -24,10 +25,6 @@ class com_hrm_timeclock extends entity {
 			return;
 		// Defaults.
 		$this->ac = (object) array('user' => 3, 'group' => 3, 'other' => 2);
-	}
-
-	public static function etype() {
-		return 'com_hrm_timeclock';
 	}
 
 	public function info($type) {
@@ -67,7 +64,7 @@ class com_hrm_timeclock extends entity {
 	public function add($time_in, $time_out, $comment = '', $extras = array()) {
 		global $_;
 		// Check that this time doesn't conflict with any other times.
-		$check = $_->entity_manager->get_entity(
+		$check = $_->nymph->getEntity(
 				array('class' => com_hrm_timeclock_entry),
 				array('&',
 					'tag' => array('com_hrm', 'timeclock_entry'),
@@ -163,7 +160,7 @@ class com_hrm_timeclock extends entity {
 		$module->time_start = (int) $time_start;
 		$module->time_end = (int) $time_end;
 		// Get the matching entries.
-		$module->entries = $_->entity_manager->get_entities(
+		$module->entries = $_->nymph->getEntities(
 				array('class' => com_hrm_timeclock_entry),
 				array('&',
 					'tag' => array('com_hrm', 'timeclock_entry'),
@@ -198,7 +195,7 @@ class com_hrm_timeclock extends entity {
 			$selector['lt'] = array('in', $time_end);
 			$selector['gt'] = array('out', $time_start);
 		}
-		$module->entries = $_->entity_manager->get_entities(
+		$module->entries = $_->nymph->getEntities(
 				array('class' => com_hrm_timeclock_entry),
 				$selector
 			);
@@ -226,7 +223,7 @@ class com_hrm_timeclock extends entity {
 			$selector['lt'] = array('in', $time_end);
 			$selector['gt'] = array('out', $time_start);
 		}
-		$entries = $_->entity_manager->get_entities(
+		$entries = $_->nymph->getEntities(
 				array('class' => com_hrm_timeclock_entry),
 				$selector
 			);

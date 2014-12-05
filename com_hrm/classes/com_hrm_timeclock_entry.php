@@ -20,7 +20,8 @@ defined('P_RUN') or die('Direct access prohibited');
  * @property string $comment An optional comment.
  * @property array $extras Any extra information.
  */
-class com_hrm_timeclock_entry extends entity {
+class com_hrm_timeclock_entry extends Entity {
+	const etype = 'com_hrm_timeclock_entry';
 	protected $tags = array('com_hrm', 'timeclock_entry');
 
 	public function __construct($id = 0) {
@@ -29,10 +30,6 @@ class com_hrm_timeclock_entry extends entity {
 		// Defaults.
 		$this->extras = array();
 		$this->ac = (object) array('user' => 3, 'group' => 3, 'other' => 2);
-	}
-
-	public static function etype() {
-		return 'com_hrm_timeclock_entry';
 	}
 
 	public function info($type) {

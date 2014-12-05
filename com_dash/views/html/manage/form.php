@@ -159,7 +159,7 @@ $_->com_pgrid->load();
 					</thead>
 					<tbody>
 					<?php foreach($this->group_array as $cur_group) { ?>
-						<tr title="<?php e($cur_group->guid); ?>" class="<?php echo $cur_group->get_children() ? 'parent ' : ''; ?><?php echo (isset($cur_group->parent) && $cur_group->parent->in_array($this->group_array)) ? h("child ch_{$cur_group->parent->guid} ") : ''; ?>">
+						<tr title="<?php e($cur_group->guid); ?>" class="<?php echo $cur_group->get_children() ? 'parent ' : ''; ?><?php echo (isset($cur_group->parent) && $cur_group->parent->inArray($this->group_array)) ? h("child ch_{$cur_group->parent->guid} ") : ''; ?>">
 							<td><input type="checkbox" name="groups[]" value="<?php e($cur_group->guid); ?>" <?php echo ($cur_group->dashboard->guid && $cur_group->dashboard->is($this->entity)) ? 'checked="checked" ' : ''; ?>/></td>
 							<td><?php e($cur_group->name); ?></td>
 							<td><?php e($cur_group->groupname); ?></td>

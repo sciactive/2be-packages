@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_cashcount extends entity {
+class com_sales_cashcount extends Entity {
+	const etype = 'com_sales_cashcount';
 	protected $tags = array('com_sales', 'cashcount');
 
 	public function __construct($id = 0) {
@@ -32,10 +33,6 @@ class com_sales_cashcount extends entity {
 			$key = str_replace('.', '_', $cur_currency);
 			$this->currency[$key] = $cur_currency;
 		}
-	}
-
-	public static function etype() {
-		return 'com_sales_cashcount';
 	}
 
 	public function info($type) {
@@ -131,11 +128,11 @@ class com_sales_cashcount extends entity {
 		$this->total = $this->float;
 		// Update the total in the drawer for each skim, deposit or sale made.
 		if (isset($this->guid)) {
-			$new_txs = (array) $_->entity_manager->get_entities(
+			$new_txs = (array) $_->nymph->getEntities(
 					array('class' => com_sales_tx),
 					array('&',
 						'tag' => array('com_sales', 'transaction', 'payment_tx'),
-						'gte' => array('p_cdate', (int) $this->p_cdate),
+						'gte' => array('cdate', (int) $this->cdate),
 						'ref' => array('group', $this->group)
 					)
 				);

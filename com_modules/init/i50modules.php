@@ -14,14 +14,14 @@ defined('P_RUN') or die('Direct access prohibited');
 if (!$_->config->com_modules->show_modules)
 	return;
 
-$modules = (array) $_->entity_manager->get_entities(
+$modules = (array) $_->nymph->getEntities(
 		array('class' => com_modules_module),
 		array('&',
 			'tag' => array('com_modules', 'module'),
 			'data' => array('enabled', true)
 		)
 	);
-$_->entity_manager->sort($modules, 'order');
+$_->nymph->sort($modules, 'order');
 foreach ($modules as $cur_module) {
 	if ($cur_module->check_conditions())
 		$cur_module->print_module();

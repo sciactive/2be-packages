@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_shipment extends entity {
+class com_sales_shipment extends Entity {
+	const etype = 'com_sales_shipment';
 	protected $tags = array('com_sales', 'shipment');
 
 	public function __construct($id = 0) {
@@ -26,10 +27,6 @@ class com_sales_shipment extends entity {
 		$this->shipped = false;
 		$this->delivered = false;
 		$this->products = array();
-	}
-
-	public static function etype() {
-		return 'com_sales_shipment';
 	}
 
 	public function info($type) {
@@ -72,7 +69,7 @@ class com_sales_shipment extends entity {
 	public function save() {
 		global $_;
 		if (!isset($this->id))
-			$this->id = $_->entity_manager->new_uid('com_sales_shipment');
+			$this->id = $_->nymph->newUID('com_sales_shipment');
 		return parent::save();
 	}
 
@@ -144,12 +141,12 @@ class com_sales_shipment extends entity {
 			$stock_entries = $cur_product['stock_entities'];
 			$shipped_stock_entries = (array) $cur_product['shipped_entities'];
 			foreach ((array) $cur_product['returned_stock_entities'] as $cur_stock_entity) {
-				$i = $cur_stock_entity->array_search($stock_entries);
+				$i = $cur_stock_entity->arraySearch($stock_entries);
 				if (isset($i))
 					unset($stock_entries[$i]);
 				// If it's still in there, it was entered on the sale twice (fulfilled after returned once), so don't remove it from shipped.
-				if (!$cur_stock_entity->in_array($stock_entries)) {
-					$i = $cur_stock_entity->array_search($shipped_stock_entries);
+				if (!$cur_stock_entity->inArray($stock_entries)) {
+					$i = $cur_stock_entity->arraySearch($shipped_stock_entries);
 					if (isset($i))
 						unset($shipped_stock_entries[$i]);
 				}
@@ -164,7 +161,7 @@ class com_sales_shipment extends entity {
 				'stock_entities' => array()
 			);
 			foreach ($stock_entries as $cur_stock) {
-				if ($cur_stock->in_array($shipped_stock_entries))
+				if ($cur_stock->inArray($shipped_stock_entries))
 					continue;
 				$product_entry['stock_entities'][] = $cur_stock;
 			}
@@ -209,12 +206,12 @@ class com_sales_shipment extends entity {
 			$stock_entries = $cur_product['stock_entities'];
 			$shipped_stock_entries = (array) $cur_product['shipped_entities'];
 			foreach ((array) $cur_product['returned_stock_entities'] as $cur_stock_entity) {
-				$i = $cur_stock_entity->array_search($stock_entries);
+				$i = $cur_stock_entity->arraySearch($stock_entries);
 				if (isset($i))
 					unset($stock_entries[$i]);
 				// If it's still in there, it was entered on the sale twice (fulfilled after returned once), so don't remove it from shipped.
-				if (!$cur_stock_entity->in_array($stock_entries)) {
-					$i = $cur_stock_entity->array_search($shipped_stock_entries);
+				if (!$cur_stock_entity->inArray($stock_entries)) {
+					$i = $cur_stock_entity->arraySearch($shipped_stock_entries);
 					if (isset($i))
 						unset($shipped_stock_entries[$i]);
 				}
@@ -229,7 +226,7 @@ class com_sales_shipment extends entity {
 				'stock_entities' => array()
 			);
 			foreach ($stock_entries as $cur_stock) {
-				if ($cur_stock->in_array($shipped_stock_entries))
+				if ($cur_stock->inArray($shipped_stock_entries))
 					continue;
 				$product_entry['stock_entities'][] = $cur_stock;
 			}
@@ -255,7 +252,7 @@ class com_sales_shipment extends entity {
 		global $_;
 		//$module = new module('com_sales', 'shipment/form', 'content');
 		$module = new module('com_sales', 'shipment/ship', 'content');
-		$module->shippers = (array) $_->entity_manager->get_entities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
+		$module->shippers = (array) $_->nymph->getEntities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
 		$module->entity = $this;
 
 		return $module;
@@ -282,7 +279,7 @@ class com_sales_shipment extends entity {
 		// Keep track of the whole process.
 		$no_errors = true;
 		// Remove the stock from inventory.
-		if ($this->ref->has_tag('sale')) {
+		if ($this->ref->hasTag('sale')) {
 			// Go through each product on the packing list, marking its stock as shipped.
 			foreach ($this->products as $cur_product) {
 				$key = $cur_product['key'];
@@ -293,13 +290,13 @@ class com_sales_shipment extends entity {
 				if (!is_array($this->ref->products[$key]['shipped_entities']))
 					$this->ref->products[$key]['shipped_entities'] = array();
 				foreach ($cur_product['stock_entities'] as $cur_stock) {
-					$stock_key = $cur_stock->array_search($this->ref->products[$key]['stock_entities']);
+					$stock_key = $cur_stock->arraySearch($this->ref->products[$key]['stock_entities']);
 					if ($stock_key === false || !isset($this->ref->products[$key]['stock_entities'][$stock_key])) {
 						$no_errors = false;
 						continue;
 					}
 					// If the stock is already shipped, skip it.
-					if ($this->ref->products[$key]['stock_entities'][$stock_key]->in_array($this->ref->products[$key]['shipped_entities']))
+					if ($this->ref->products[$key]['stock_entities'][$stock_key]->inArray($this->ref->products[$key]['shipped_entities']))
 						continue;
 					// Remove inventory and save stock entity.
 					if ($this->ref->products[$key]['stock_entities'][$stock_key]->remove('sale_shipped', $this) && $this->ref->products[$key]['stock_entities'][$stock_key]->save())

@@ -50,7 +50,7 @@ else {
 	);
 }
 // Gather all published pages on the front page.
-$pages = $_->entity_manager->get_entities(
+$pages = $_->nymph->getEntities(
 		$options,
 		array('&',
 			'tag' => array('com_content', 'page'),

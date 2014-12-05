@@ -21,7 +21,7 @@ return array(
 	'description' => 'This component functions as an example of how to use various features of 2be.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager&editor',
+		'service' => 'editor',
 		'component' => 'com_jquery&com_bootstrap&com_pgrid&com_pform'
 	),
 	'abilities' => array(

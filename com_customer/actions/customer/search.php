@@ -41,9 +41,9 @@ $query = trim($_REQUEST['q']);
 // Build the main selector, including location and timespan.
 $selector = array('&', 'tag' => array('com_customer', 'customer'));
 if (isset($start_date))
-	$selector['gte'] = array('p_cdate', (int) $start_date);
+	$selector['gte'] = array('cdate', (int) $start_date);
 if (isset($end_date))
-	$selector['lt'] = array('p_cdate', (int) $end_date);
+	$selector['lt'] = array('cdate', (int) $end_date);
 if (isset($location)) {
 	if ($descendants)
 		$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
@@ -64,7 +64,7 @@ if (empty($query)) {
 		);
 		if ($or)
 			$args[] = $or;
-		$customers = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
+		$customers = (array) call_user_func_array(array($_->nymph, 'getEntities'), $args);
 	}
 } else {
 	$num_query = preg_replace('/\D/', '', $query);
@@ -91,11 +91,11 @@ if (empty($query)) {
 		);
 	if ($or)
 		$args[] = $or;
-	$customers = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
+	$customers = (array) call_user_func_array(array($_->nymph, 'getEntities'), $args);
 	$count_customers = count($customers);
 	// Only bother searching companies if the limit hasn't been reached.
 	if ($_->config->com_customer->customer_search_limit - $count_customers) {
-		$companies = $_->entity_manager->get_entities(
+		$companies = $_->nymph->getEntities(
 				array('class' => com_customer_company),
 				array('&',
 					'tag' => array('com_customer', 'company'),
@@ -103,7 +103,7 @@ if (empty($query)) {
 				)
 			);
 		if ($companies) {
-			$comp_customers = (array) $_->entity_manager->get_entities(
+			$comp_customers = (array) $_->nymph->getEntities(
 					array('class' => com_customer_customer, 'limit' => ($_->config->com_customer->customer_search_limit - $count_customers)),
 					array('&',
 						'tag' => array('com_customer', 'customer'),
@@ -111,7 +111,7 @@ if (empty($query)) {
 					)
 				);
 			foreach ($comp_customers as &$cur_customer) {
-				if (!$cur_customer->in_array($customers))
+				if (!$cur_customer->inArray($customers))
 					$customers[] = $cur_customer;
 			}
 		}
@@ -136,8 +136,8 @@ foreach ($customers as $key => &$cur_customer) {
 		'phone_work'	=> format_phone($cur_customer->phone_work),
 		'phone_cell'	=> format_phone($cur_customer->phone_cell),
 		'fax'			=> format_phone($cur_customer->fax),
-		'cdate'			=> format_date($cur_customer->p_cdate),
-		'enabled'		=> (bool) $cur_customer->has_tag('enabled'),
+		'cdate'			=> format_date($cur_customer->cdate),
+		'enabled'		=> (bool) $cur_customer->hasTag('enabled'),
 		'member'		=> (bool) $cur_customer->member,
 		'valid_member'	=> (bool) $cur_customer->valid_member(),
 		'member_exp'	=> $cur_customer->member_exp ? format_date($cur_customer->member_exp) : '',

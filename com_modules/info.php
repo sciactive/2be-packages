@@ -21,7 +21,6 @@ return array(
 	'description' => 'A module management system, which allows you to place modules in different positions on the page.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager',
 		'component' => 'com_jquery&com_bootstrap&com_pgrid&com_markdown&com_pform'
 	),
 	'abilities' => array(

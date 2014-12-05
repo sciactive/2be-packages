@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\raffle
  */
-class com_raffle_raffle extends entity {
+class com_raffle_raffle extends Entity {
+	const etype = 'com_raffle_raffle';
 	protected $tags = array('com_raffle', 'raffle');
 
 	public function __construct($id = 0) {
@@ -28,10 +29,6 @@ class com_raffle_raffle extends entity {
 		$this->public_contestants = array();
 		$this->winners = array();
 		$this->places = 1;
-	}
-
-	public static function etype() {
-		return 'com_raffle_raffle';
 	}
 
 	public function info($type) {
@@ -105,7 +102,7 @@ class com_raffle_raffle extends entity {
 			return false;
 		global $_;
 		if (!isset($this->id))
-			$this->id = $_->entity_manager->new_uid('com_raffle_raffle');
+			$this->id = $_->nymph->newUID('com_raffle_raffle');
 		return parent::save();
 	}
 

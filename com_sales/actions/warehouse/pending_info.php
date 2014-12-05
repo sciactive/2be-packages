@@ -38,7 +38,7 @@ $module = new module('com_sales', 'warehouse/pending_info');
 
 // Find warehouse stock.
 $module->warehouse_entity = $warehouse;
-$module->warehouse = $_->entity_manager->get_entities(
+$module->warehouse = $_->nymph->getEntities(
 		array('class' => com_sales_stock, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'stock'),
@@ -51,7 +51,7 @@ $module->warehouse = $_->entity_manager->get_entities(
 	);
 
 // Find PO products.
-$module->pos = (array) $_->entity_manager->get_entities(
+$module->pos = (array) $_->nymph->getEntities(
 		array('class' => com_sales_po, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'po'),
@@ -64,7 +64,7 @@ $module->pos = (array) $_->entity_manager->get_entities(
 	);
 
 // Find transfer products.
-$module->transfers = (array) $_->entity_manager->get_entities(
+$module->transfers = (array) $_->nymph->getEntities(
 		array('class' => com_sales_transfer, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'transfer'),
@@ -77,7 +77,7 @@ $module->transfers = (array) $_->entity_manager->get_entities(
 	);
 
 // Find item in current inventory.
-$stock = (array) $_->entity_manager->get_entities(
+$stock = (array) $_->nymph->getEntities(
 		array('class' => com_sales_stock, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'stock'),
@@ -94,7 +94,7 @@ $module->locations_serials = array();
 foreach ($stock as $cur_stock) {
 	if (!isset($cur_stock->location->guid))
 		continue;
-	if (!$cur_stock->location->in_array($module->locations))
+	if (!$cur_stock->location->inArray($module->locations))
 		$module->locations[] = $cur_stock->location;
 	$module->locations_serials[$cur_stock->location->guid][] = $cur_stock;
 }

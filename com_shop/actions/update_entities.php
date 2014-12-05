@@ -21,8 +21,8 @@ $errors = array();
 $offset = $count = $nochange = 0;
 // Grab entities, 50 at a time, and update.
 do {
-	$entities = $_->entity_manager->get_entities(
-			array('limit' => 50, 'offset' => $offset, 'class' => entity),
+	$entities = $_->nymph->getEntities(
+			array('limit' => 50, 'offset' => $offset, 'class' => Entity),
 			array('&',
 				'tag' => 'com_sales'
 			),
@@ -33,15 +33,15 @@ do {
 
 	foreach ($entities as &$cur_entity) {
 		$changed = false;
-		if ($cur_entity->has_tag('category') && !isset($cur_entity->show_title)) {
+		if ($cur_entity->hasTag('category') && !isset($cur_entity->show_title)) {
 			$cur_entity->show_title = true;
 			$changed = true;
 		}
-		if ($cur_entity->has_tag('category') && !isset($cur_entity->show_breadcrumbs)) {
+		if ($cur_entity->hasTag('category') && !isset($cur_entity->show_breadcrumbs)) {
 			$cur_entity->show_breadcrumbs = true;
 			$changed = true;
 		}
-		if ($cur_entity->has_tag('category') && !isset($cur_entity->show_products)) {
+		if ($cur_entity->hasTag('category') && !isset($cur_entity->show_products)) {
 			$cur_entity->show_products = true;
 			$changed = true;
 		}

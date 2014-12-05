@@ -62,9 +62,9 @@ if (empty($query)) {
 		$or['match'][] = array('sku', $r_query);
 	}
 	if ($or != array('|'))
-		$products = (array) $_->entity_manager->get_entities(array('class' => com_sales_product), $selector, $notselector, $or);
+		$products = (array) $_->nymph->getEntities(array('class' => com_sales_product), $selector, $notselector, $or);
 	else
-		$products = (array) $_->entity_manager->get_entities(array('class' => com_sales_product), $selector, $notselector);
+		$products = (array) $_->nymph->getEntities(array('class' => com_sales_product), $selector, $notselector);
 }
 
 foreach ($products as $key => &$cur_product) {

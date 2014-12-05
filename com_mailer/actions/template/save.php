@@ -64,7 +64,7 @@ if (empty($template->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_mailer_template, 'skip_ac' => true), array('&', 'tag' => array('com_mailer', 'template'), 'data' => array('name', $template->name)));
+$test = $_->nymph->getEntity(array('class' => com_mailer_template, 'skip_ac' => true), array('&', 'tag' => array('com_mailer', 'template'), 'data' => array('name', $template->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$template->print_form();
 	pines_notice('There is already a template with that name. Please choose a different name.');

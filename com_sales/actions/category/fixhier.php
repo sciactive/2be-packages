@@ -29,7 +29,7 @@ function com_sales__category_fix_check($cat, &$fixes) {
 		foreach ((array) $cat->products as $cur_product) {
 			if (!isset($cur_product->guid))
 				continue;
-			if ($cur_product->in_array($cur_child->products)) {
+			if ($cur_product->inArray($cur_child->products)) {
 				// Remember all the reasons it should be removed.
 				if ($fixes[$cur_product->guid.'_'.$cat->guid])
 					$fixes[$cur_product->guid.'_'.$cat->guid]['reasons'][] = $cur_child;
@@ -52,7 +52,7 @@ function com_sales__category_fix_check($cat, &$fixes) {
 
 $fixes = array();
 // Start with top level categories.
-$cats = $_->entity_manager->get_entities(
+$cats = $_->nymph->getEntities(
 		array('class' => com_sales_category),
 		array('&',
 			'tag' => array('com_sales', 'category')

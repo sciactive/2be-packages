@@ -21,7 +21,7 @@ return array(
 	'description' => 'This component creates, amortizes, and records payments on loans.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager&user_manager',
+		'service' => 'user_manager',
 		'component' => 'com_customer&com_jquery&com_bootstrap&com_pgrid&com_pform'
 	),
 	'abilities' => array(

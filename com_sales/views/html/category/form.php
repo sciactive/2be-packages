@@ -16,8 +16,8 @@ if ($_->config->com_sales->com_shop) {
 	$_->com_pgrid->load();
 	$_->com_ptags->load();
 	$_->editor->load();
-	$pages = $_->entity_manager->get_entities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
-	$_->entity_manager->sort($pages, 'name');
+	$pages = $_->nymph->getEntities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
+	$_->nymph->sort($pages, 'name');
 }
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'category/save')); ?>">
@@ -220,8 +220,8 @@ if ($_->config->com_sales->com_shop) {
 				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">

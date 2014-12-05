@@ -20,7 +20,7 @@ defined('P_RUN') or die('Direct access prohibited');
 			if ($cur_product['delivery'] != 'warehouse')
 				continue;
 			foreach ($cur_product['stock_entities'] as $cur_stock) {
-				if (!$cur_stock->in_array((array) $cur_product['returned_stock_entities']))
+				if (!$cur_stock->inArray((array) $cur_product['returned_stock_entities']))
 					continue 2;
 			}
 			$items_shown = true;

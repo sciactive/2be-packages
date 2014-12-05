@@ -59,7 +59,7 @@ if (!$un_check['result']) {
 	return;
 }
 if (!$_->config->com_user->email_usernames && in_array('email', $_->config->com_user->reg_fields)) {
-	$test = $_->entity_manager->get_entity(
+	$test = $_->nymph->getEntity(
 			array('class' => user, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_user', 'user'),
@@ -78,13 +78,13 @@ if (empty($user->password) && !$_->config->com_user->pw_empty) {
 	return;
 }
 
-$user->group = $_->entity_manager->get_entity(array('class' => group), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_primary', true)));
+$user->group = $_->nymph->getEntity(array('class' => group), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_primary', true)));
 if (!isset($user->group->guid))
 	unset($user->group);
 if ($_->config->com_user->verify_email && $_->config->com_user->unverified_access)
-	$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('unverified_secondary', true)));
+	$user->groups = (array) $_->nymph->getEntities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('unverified_secondary', true)));
 else
-	$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
+	$user->groups = (array) $_->nymph->getEntities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
 
 if ($_->config->com_user->verify_email) {
 	// The user will be enabled after verifying their e-mail address.
@@ -96,7 +96,7 @@ if ($_->config->com_user->verify_email) {
 
 // If create_admin is true and there are no other users, grant "system/all".
 if ($_->config->com_user->create_admin) {
-	$other_users = $_->entity_manager->get_entities(array('class' => user, 'skip_ac' => true, 'limit' => 1), array('&', 'tag' => array('com_user', 'user')));
+	$other_users = $_->nymph->getEntities(array('class' => user, 'skip_ac' => true, 'limit' => 1), array('&', 'tag' => array('com_user', 'user')));
 	// Make sure it's not just null, cause that means an error.
 	if ($other_users === array()) {
 		$user->grant('system/all');

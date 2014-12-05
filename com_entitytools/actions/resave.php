@@ -11,7 +11,7 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ( !gatekeeper('com_entitytools/test') )
+if ( !gatekeeper('com_entitytools/benchmark') )
 	punt_user(null, pines_url('com_entitytools', 'resave'));
 
 $module = new module('system', 'null', 'content');
@@ -21,7 +21,7 @@ $errors = array();
 $offset = $count = $nochange = 0;
 // Grab all entities, 50 at a time, and resave them.
 do {
-	$entities = $_->entity_manager->get_entities(array('limit' => 50, 'offset' => $offset));
+	$entities = $_->nymph->getEntities(array('limit' => 50, 'offset' => $offset));
 	// If we have run through all entities, we are done updating.
 	foreach ($entities as &$cur_entity) {
 		if ($cur_entity->save())

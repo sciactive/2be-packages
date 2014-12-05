@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_sale extends entity {
+class com_sales_sale extends Entity {
+	const etype = 'com_sales_sale';
 	protected $tags = array('com_sales', 'sale');
 
 	public function __construct($id = 0) {
@@ -26,10 +27,6 @@ class com_sales_sale extends entity {
 		$this->shipping_use_customer = true;
 		$this->products = array();
 		$this->payments = array();
-	}
-
-	public static function etype() {
-		return 'com_sales_sale';
 	}
 
 	/**
@@ -239,7 +236,7 @@ class com_sales_sale extends entity {
 			return false;
 		}
 		if ($this->change > 0.00) {
-			$change_type = $_->entity_manager->get_entity(
+			$change_type = $_->nymph->getEntity(
 					array('class' => com_sales_payment_type),
 					array('&',
 						'tag' => array('com_sales', 'payment_type'),
@@ -404,9 +401,9 @@ class com_sales_sale extends entity {
 					if ($cur_product['entity']->serialized)
 						$selector['data'][] = array('serial', $cur_product['serial']);
 					if (!$guids) {
-						$stock_entry = $_->entity_manager->get_entity(array('class' => com_sales_stock), $selector);
+						$stock_entry = $_->nymph->getEntity(array('class' => com_sales_stock), $selector);
 					} else {
-						$stock_entry = $_->entity_manager->get_entity(
+						$stock_entry = $_->nymph->getEntity(
 								array('class' => com_sales_stock),
 								array('!&',
 									'guid' => $guids
@@ -571,21 +568,21 @@ class com_sales_sale extends entity {
 		global $_;
 		$module = new module('com_sales', 'sale/form', 'content');
 		$module->entity = $this;
-		$module->categories = (array) $_->entity_manager->get_entities(
+		$module->categories = (array) $_->nymph->getEntities(
 				array('class' => com_sales_category),
 				array('&',
 					'tag' => array('com_sales', 'category'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->tax_fees = (array) $_->entity_manager->get_entities(
+		$module->tax_fees = (array) $_->nymph->getEntities(
 				array('class' => com_sales_tax_fee),
 				array('&',
 					'tag' => array('com_sales', 'tax_fee'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->payment_types = (array) $_->entity_manager->get_entities(
+		$module->payment_types = (array) $_->nymph->getEntities(
 				array('class' => com_sales_payment_type),
 				array('&',
 					'tag' => array('com_sales', 'payment_type'),
@@ -594,7 +591,7 @@ class com_sales_sale extends entity {
 			);
 		// Find eligible specials.
 		if (!isset($this->elig_specials)) {
-			$specials = (array) $_->entity_manager->get_entities(
+			$specials = (array) $_->nymph->getEntities(
 					array('class' => com_sales_special),
 					array('&',
 						'tag' => array('com_sales', 'special'),
@@ -614,7 +611,7 @@ class com_sales_sale extends entity {
 			$module->specials = $this->elig_specials;
 		}
 		if (isset($this->guid)) {
-			$module->returns = (array) $_->entity_manager->get_entities(
+			$module->returns = (array) $_->nymph->getEntities(
 					array('class' => com_sales_return),
 					array('&',
 						'tag' => array('com_sales', 'return'),
@@ -714,7 +711,7 @@ class com_sales_sale extends entity {
 			case 'quoted':
 				$lines = $_->config->com_sales->quote_receipt_header;
 				$name = 'Quote';
-				$date = $this->p_cdate;
+				$date = $this->cdate;
 				break;
 			case 'invoiced':
 				$lines = $_->config->com_sales->invoice_receipt_header;
@@ -888,7 +885,7 @@ class com_sales_sale extends entity {
 			}
 		}
 		// Make sure this item is not attached to any returns.
-		$attached_return = $_->entity_manager->get_entity(
+		$attached_return = $_->nymph->getEntity(
 			array('class' => com_sales_return, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_sales', 'return'),
@@ -912,12 +909,12 @@ class com_sales_sale extends entity {
 			pines_notice('This item cannot be removed, because the sale reference info is invalid.');
 			return false;
 		}
-		$stock_key = $item->array_search($this->products[$key]['stock_entities']);
+		$stock_key = $item->arraySearch($this->products[$key]['stock_entities']);
 		if ($stock_key === false) {
 			pines_notice('This item cannot be removed, because it was not found on the sale.');
 			return false;
 		}
-		if ($item->in_array($this->products[$key]['returned_stock_entities'])) {
+		if ($item->inArray($this->products[$key]['returned_stock_entities'])) {
 			pines_notice('This item cannot be removed, because it is marked as returned.');
 			return false;
 		}
@@ -934,7 +931,7 @@ class com_sales_sale extends entity {
 
 
 		// Put the old item back into inventory.
-		$last_tx = $_->entity_manager->get_entity(
+		$last_tx = $_->nymph->getEntity(
 				array('reverse' => true, 'class' => com_sales_tx),
 				array('&',
 					'tag' => array('com_sales', 'transaction', 'stock_tx'),
@@ -978,12 +975,12 @@ class com_sales_sale extends entity {
 			$this->products[$key]['shipped_entities'] = array();
 			// Put all remaining stock into the shipped array.
 			foreach ($this->products[$key]['stock_entities'] as $cur_stock) {
-				if (!isset($cur_stock->guid) || $cur_stock->in_array($this->products[$key]['returned_stock_entities']))
+				if (!isset($cur_stock->guid) || $cur_stock->inArray($this->products[$key]['returned_stock_entities']))
 					continue;
 				$this->products[$key]['shipped_entities'][] = $cur_stock;
 			}
 		}
-		$shipped_key = $item->array_search((array) $this->products[$key]['shipped_entities']);
+		$shipped_key = $item->arraySearch((array) $this->products[$key]['shipped_entities']);
 		if ($shipped_key !== false)
 			unset($this->products[$key]['shipped_entities'][$shipped_key]);
 		$this->warehouse = true;
@@ -1050,7 +1047,7 @@ class com_sales_sale extends entity {
 		if (!isset($this->status))
 			$this->status = 'quoted';
 		if (!isset($this->id))
-			$this->id = $_->entity_manager->new_uid('com_sales_sale');
+			$this->id = $_->nymph->newUID('com_sales_sale');
 
 		// Set special warehouse vars.
 		if ($this->warehouse) {
@@ -1065,15 +1062,15 @@ class com_sales_sale extends entity {
 				}
 				// Check where the stock entities are.
 				foreach ($cur_product['stock_entities'] as $cur_stock) {
-					if ($cur_stock->in_array($cur_product['returned_stock_entities']) || $cur_stock->in_array((array) $cur_product['shipped_entities']))
+					if ($cur_stock->inArray($cur_product['returned_stock_entities']) || $cur_stock->inArray((array) $cur_product['shipped_entities']))
 						continue;
 					// It's not with the customer, so not delivered.
 					$this->warehouse_assigned = true;
 					// There is stock that needs to be shipped.
-					$this->add_tag('shipping_pending');
+					$this->addTag('shipping_pending');
 				}
 				foreach ((array) $cur_product['shipped_entities'] as $cur_stock_entity) {
-					if (!$cur_stock_entity->in_array((array) $cur_product['returned_stock_entities'])) {
+					if (!$cur_stock_entity->inArray((array) $cur_product['returned_stock_entities'])) {
 						$this->warehouse_shipped = true;
 						break;
 					}
@@ -1082,7 +1079,7 @@ class com_sales_sale extends entity {
 		}
 
 		// Check all products are shipped.
-		if ($this->has_tag('shipping_pending')) {
+		if ($this->hasTag('shipping_pending')) {
 			$all_shipped = true;
 			foreach ($this->products as $cur_product) {
 				if (!in_array($cur_product['delivery'], array('shipped', 'warehouse')))
@@ -1091,12 +1088,12 @@ class com_sales_sale extends entity {
 				$stock_entries = $cur_product['stock_entities'];
 				$shipped_stock_entries = (array) $cur_product['shipped_entities'];
 				foreach ((array) $cur_product['returned_stock_entities'] as $cur_stock_entity) {
-					$i = $cur_stock_entity->array_search($stock_entries);
+					$i = $cur_stock_entity->arraySearch($stock_entries);
 					if (isset($i))
 						unset($stock_entries[$i]);
 					// If it's still in there, it was entered on the sale twice (fulfilled after returned once), so don't remove it from shipped.
-					if (!$cur_stock_entity->in_array($stock_entries)) {
-						$i = $cur_stock_entity->array_search($shipped_stock_entries);
+					if (!$cur_stock_entity->inArray($stock_entries)) {
+						$i = $cur_stock_entity->arraySearch($shipped_stock_entries);
 						if (isset($i))
 							unset($shipped_stock_entries[$i]);
 					}
@@ -1109,8 +1106,8 @@ class com_sales_sale extends entity {
 			}
 			if ($all_shipped) {
 				// All shipped, so mark the sale.
-				$this->remove_tag('shipping_pending');
-				$this->add_tag('shipping_shipped');
+				$this->removeTag('shipping_pending');
+				$this->addTag('shipping_shipped');
 			}
 		}
 
@@ -1145,7 +1142,7 @@ class com_sales_sale extends entity {
 			}
 		}
 		// Make sure this item is not attached to any returns.
-		$attached_return = $_->entity_manager->get_entity(
+		$attached_return = $_->nymph->getEntity(
 			array('class' => com_sales_return, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_sales', 'return'),
@@ -1178,12 +1175,12 @@ class com_sales_sale extends entity {
 			pines_notice('This item cannot be swapped, because the sale reference info is invalid.');
 			return false;
 		}
-		$stock_key = $old_item->array_search($this->products[$key]['stock_entities']);
+		$stock_key = $old_item->arraySearch($this->products[$key]['stock_entities']);
 		if ($stock_key === false) {
 			pines_notice('This item cannot be swapped, because it was not found on the sale.');
 			return false;
 		}
-		if ($old_item->in_array($this->products[$key]['returned_stock_entities'])) {
+		if ($old_item->inArray($this->products[$key]['returned_stock_entities'])) {
 			pines_notice('This item cannot be swapped out, because it is marked as returned.');
 			return false;
 		}
@@ -1207,7 +1204,7 @@ class com_sales_sale extends entity {
 		$tx->save();
 
 		// Put the old item back into inventory.
-		$last_tx = $_->entity_manager->get_entity(
+		$last_tx = $_->nymph->getEntity(
 				array('reverse' => true, 'class' => com_sales_tx),
 				array('&',
 					'tag' => array('com_sales', 'transaction', 'stock_tx'),
@@ -1246,7 +1243,7 @@ class com_sales_sale extends entity {
 		if (isset($this->products[$key]['serial']))
 			$this->products[$key]['serial'] = $new_item->serial;
 		$this->products[$key]['stock_entities'][$stock_key] = $new_item;
-		$shipped_key = $old_item->array_search((array) $this->products[$key]['shipped_entities']);
+		$shipped_key = $old_item->arraySearch((array) $this->products[$key]['shipped_entities']);
 		if ($shipped_key !== false)
 			$this->products[$key]['shipped_entities'][$shipped_key] = $new_item;
 
@@ -1297,7 +1294,7 @@ class com_sales_sale extends entity {
 		}
 		/* Not included because only one item may have been returned...
 		// Make sure this sale is not attached to any returns.
-		$attached_return = $_->entity_manager->get_entity(
+		$attached_return = $_->nymph->getEntity(
 			array('class' => com_sales_return, 'skip_ac' => true),
 			array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('sale', $this))
 		);
@@ -1555,7 +1552,7 @@ class com_sales_sale extends entity {
 		if (!is_array($this->products) || in_array($this->status, array('invoiced', 'paid', 'voided')))
 			return false;
 		// We need a list of enabled taxes and fees.
-		$tax_fees = (array) $_->entity_manager->get_entities(
+		$tax_fees = (array) $_->nymph->getEntities(
 				array('class' => com_sales_tax_fee),
 				array('&',
 					'tag' => array('com_sales', 'tax_fee'),
@@ -1574,7 +1571,7 @@ class com_sales_sale extends entity {
 		// Once we get eligible specials, don't get them again.
 		if (!isset($this->elig_specials)) {
 			// Find eligible specials.
-			$specials = (array) $_->entity_manager->get_entities(
+			$specials = (array) $_->nymph->getEntities(
 					array('class' => com_sales_special),
 					array('&',
 						'tag' => array('com_sales', 'special'),
@@ -1854,7 +1851,7 @@ class com_sales_sale extends entity {
 		if ($this->status == 'voided')
 			return true;
 		// Check if this sale is attached to any returns. If so, it cannot be voided.
-		$attached_return = $_->entity_manager->get_entity(
+		$attached_return = $_->nymph->getEntity(
 				array('class' => com_sales_return, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'return'),
@@ -1878,7 +1875,7 @@ class com_sales_sale extends entity {
 				foreach ($stock_entities as &$cur_stock) {
 					if (!isset($cur_stock->guid))
 						continue;
-					$last_tx = $_->entity_manager->get_entity(
+					$last_tx = $_->nymph->getEntity(
 							array('reverse' => true, 'class' => com_sales_tx),
 							array('&',
 								'tag' => array('com_sales', 'transaction', 'stock_tx'),
@@ -1981,7 +1978,7 @@ class com_sales_sale extends entity {
 			foreach ($this->products as $cur_product) {
 				if (!isset($cur_product['salesperson']))
 					continue;
-				if (!$cur_product['salesperson']->in_array($users) && is_array($cur_product['salesperson']->commissions))
+				if (!$cur_product['salesperson']->inArray($users) && is_array($cur_product['salesperson']->commissions))
 					$users[] = $cur_product['salesperson'];
 			}
 			foreach ($users as $cur_user) {

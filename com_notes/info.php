@@ -21,7 +21,7 @@ return array(
 	'description' => 'A note system which allows note threads to be added to most entities. A thread is a collection of related notes.',
 	'depend' => array(
 		'core' => '>=1.0.2&<3',
-		'service' => 'entity_manager&icons',
+		'service' => 'icons',
 		'component' => 'com_jquery&com_bootstrap&com_pgrid&com_pform'
 	),
 	'abilities' => array(

@@ -47,7 +47,7 @@ $interaction->type = $_REQUEST['type'];
 $interaction->status = $_REQUEST['status'];
 $interaction->comments = $_REQUEST['comments'];
 
-$existing_appt = $_->entity_manager->get_entity(
+$existing_appt = $_->nymph->getEntity(
 		array('class' => com_customer_interaction),
 		array('&',
 			'data' => array('status', 'open'),

@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_return extends entity {
+class com_sales_return extends Entity {
+	const etype = 'com_sales_return';
 	protected $tags = array('com_sales', 'return');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_sales_return extends entity {
 		// Defaults.
 		$this->products = array();
 		$this->payments = array();
-	}
-
-	public static function etype() {
-		return 'com_sales_return';
 	}
 
 	/**
@@ -424,7 +421,7 @@ class com_sales_return extends entity {
 			// Remove products that have already been returned.
 			if (is_array($cur_product['stock_entities'])) {
 				foreach ($cur_product['stock_entities'] as $stock_key => &$cur_stock) {
-					if ($cur_stock->in_array($cur_product['returned_stock_entities']))
+					if ($cur_stock->inArray($cur_product['returned_stock_entities']))
 						unset($cur_product['stock_entities'][$stock_key]);
 				}
 				unset($cur_stock);
@@ -493,21 +490,21 @@ class com_sales_return extends entity {
 		}
 		$module = new module('com_sales', 'return/form', 'content');
 		$module->entity = $this;
-		$module->categories = (array) $_->entity_manager->get_entities(
+		$module->categories = (array) $_->nymph->getEntities(
 				array('class' => com_sales_category),
 				array('&',
 					'tag' => array('com_sales', 'category'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->tax_fees = (array) $_->entity_manager->get_entities(
+		$module->tax_fees = (array) $_->nymph->getEntities(
 				array('class' => com_sales_tax_fee),
 				array('&',
 					'tag' => array('com_sales', 'tax_fee'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->payment_types = (array) $_->entity_manager->get_entities(
+		$module->payment_types = (array) $_->nymph->getEntities(
 				array('class' => com_sales_payment_type),
 				array('&',
 					'tag' => array('com_sales', 'payment_type'),
@@ -597,7 +594,7 @@ class com_sales_return extends entity {
 		if (!isset($this->status))
 			$this->status = 'quoted';
 		if (!isset($this->id))
-			$this->id = $_->entity_manager->new_uid('com_sales_return');
+			$this->id = $_->nymph->newUID('com_sales_return');
 		return parent::save();
 	}
 
@@ -778,7 +775,7 @@ class com_sales_return extends entity {
 		if (!is_array($this->products) || in_array($this->status, array('processed', 'voided')))
 			return false;
 		// We need a list of enabled taxes and fees.
-		$tax_fees = (array) $_->entity_manager->get_entities(
+		$tax_fees = (array) $_->nymph->getEntities(
 				array('class' => com_sales_tax_fee),
 				array('&',
 					'tag' => array('com_sales', 'tax_fee'),

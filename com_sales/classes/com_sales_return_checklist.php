@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_return_checklist extends entity {
+class com_sales_return_checklist extends Entity {
+	const etype = 'com_sales_return_checklist';
 	protected $tags = array('com_sales', 'return_checklist');
 
 	public function __construct($id = 0) {
@@ -24,10 +25,6 @@ class com_sales_return_checklist extends entity {
 			return;
 		// Defaults.
 		$this->enabled = true;
-	}
-
-	public static function etype() {
-		return 'com_sales_return_checklist';
 	}
 
 	public function info($type) {

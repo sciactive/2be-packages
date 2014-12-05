@@ -11,7 +11,7 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-if ( !gatekeeper('com_entitytools/test') )
+if ( !gatekeeper('com_entitytools/benchmark') )
 	punt_user(null, pines_url('com_entitytools', 'benchmark'));
 
 set_time_limit(3600);
@@ -21,8 +21,8 @@ $benchmark->time_start = microtime(true);
 // Creating 1000 entities...
 $pass = true;
 for ($i=0; $i<1000; $i++) {
-	$entity = entity::factory();
-	$entity->add_tag('com_entitytools', 'benchmark');
+	$entity = Entity::factory();
+	$entity->addTag('com_entitytools', 'benchmark');
 	$entity->name = "Entity Benchmark ".time();
 	$entity->int = 1000;
 	$entity->float = 10.5;
@@ -35,7 +35,7 @@ $benchmark->create[0] = $pass;
 $benchmark->create[1] = microtime(true);
 
 // Retrieving entities...
-$entities = $_->entity_manager->get_entities(array('limit' => 1000), array('&', 'tag' => array('com_entitytools', 'benchmark')));
+$entities = $_->nymph->getEntities(array('limit' => 1000), array('&', 'tag' => array('com_entitytools', 'benchmark')));
 $benchmark->retrieve[0] = count($entities) == 1000;
 $benchmark->retrieve[1] = microtime(true);
 

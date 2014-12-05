@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\content
  */
-class com_content_category extends entity {
+class com_content_category extends Entity {
+	const etype = 'com_content_category';
 	protected $tags = array('com_content', 'category');
 
 	public function __construct($id = 0) {
@@ -31,10 +32,6 @@ class com_content_category extends entity {
 		$this->com_menueditor_entries = array();
 		$this->conditions = array();
 		$this->variants = array();
-	}
-
-	public static function etype() {
-		return 'com_content_category';
 	}
 
 	public function info($type) {
@@ -67,7 +64,7 @@ class com_content_category extends entity {
 	 */
 	public function delete() {
 		if (isset($this->parent)) {
-			$i = $this->array_search($this->parent->children);
+			$i = $this->arraySearch($this->parent->children);
 			unset($this->parent->children[$i]);
 			if (!$this->parent->save()) {
 				pines_error("Couldn't remove category from parent {$this->parent->name}.");
@@ -110,17 +107,17 @@ class com_content_category extends entity {
 		global $_;
 		/* This method isn't possible yet. :(
 		// First get all the GUIDs of the pages.
-		$data = $this->get_data();
+		$data = $this->getData();
 		$page_guids = array();
 		if ($data['pages']) {
 			foreach ($data['pages'] as $cur_page) {
 				if (!$cur_page)
 					continue;
-				$ref = $cur_page->to_reference();
+				$ref = $cur_page->toReference();
 				$page_guids[] = $ref[1];
 			}
 		} else {
-			$sdata = $this->get_sdata();
+			$sdata = $this->getSData();
 			if (!$sdata['pages'])
 				return array();
 			preg_match_all('/i:1;i:(\d+);/', $sdata['pages'], $matches);
@@ -199,7 +196,7 @@ class com_content_category extends entity {
 		global $_;
 		$module = new module('com_content', 'category/form', 'content');
 		$module->entity = $this;
-		$module->categories = $_->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'data' => array('parent', null)));
+		$module->categories = $_->nymph->getEntities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'data' => array('parent', null)));
 
 		return $module;
 	}

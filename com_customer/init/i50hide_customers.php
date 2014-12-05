@@ -25,7 +25,7 @@ function com_customer__hook_entities(&$args, $name) {
 	if ($name == '$_->user_manager->get_users' && $args[0])
 		return;
 	global $_;
-	$_->info->com_customer->hook_callbacks = $_->hook->add_callback('$_->entity_manager->get_entities', -10, 'com_customer__hide_customers');
+	$_->info->com_customer->hook_callbacks = $_->hook->add_callback('$_->nymph->getEntities', -10, 'com_customer__hide_customers');
 }
 /**
  * Hide customers from com_user.
@@ -38,7 +38,7 @@ function com_customer__hide_customers(&$args) {
 		$args[] = array('!&',
 				'tag' => array('com_customer', 'customer')
 			);
-		$_->hook->del_callback_by_id('$_->entity_manager->get_entities', $_->info->com_customer->hook_callbacks[0]);
+		$_->hook->del_callback_by_id('$_->nymph->getEntities', $_->info->com_customer->hook_callbacks[0]);
 	}
 }
 

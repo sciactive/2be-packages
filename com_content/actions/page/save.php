@@ -84,10 +84,10 @@ foreach ($conditions as $cur_condition) {
 }
 
 // Advanced
-if (!empty($_REQUEST['p_cdate']))
-	$page->p_cdate = strtotime($_REQUEST['p_cdate']);
-if (!empty($_REQUEST['p_mdate']))
-	$page->p_mdate = strtotime($_REQUEST['p_mdate']);
+if (!empty($_REQUEST['cdate']))
+	$page->cdate = strtotime($_REQUEST['cdate']);
+if (!empty($_REQUEST['mdate']))
+	$page->mdate = strtotime($_REQUEST['mdate']);
 $page->publish_begin = strtotime($_REQUEST['publish_begin']);
 if (!empty($_REQUEST['publish_end']))
 	$page->publish_end = strtotime($_REQUEST['publish_end']);
@@ -123,7 +123,7 @@ if (empty($page->alias)) {
 	return;
 }
 
-$test = $_->entity_manager->get_entity(array('class' => com_content_page, 'skip_ac' => true), array('&', 'tag' => array('com_content', 'page'), 'data' => array('alias', $page->alias)));
+$test = $_->nymph->getEntity(array('class' => com_content_page, 'skip_ac' => true), array('&', 'tag' => array('com_content', 'page'), 'data' => array('alias', $page->alias)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$page->print_form();
 	pines_notice('There is already an page with that alias. Please choose a different alias.');
@@ -147,17 +147,17 @@ if ($page->save()) {
 	// Assign the page to the selected categories.
 	// We have to do this here, because new pages won't have a GUID until now.
 	$categories = array_map('intval', (array) $_REQUEST['categories']);
-	$all_categories = $_->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'data' => array('enabled', true)));
+	$all_categories = $_->nymph->getEntities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'data' => array('enabled', true)));
 	foreach($all_categories as &$cur_cat) {
-		if (in_array($cur_cat->guid, $categories) && !$page->in_array($cur_cat->pages)) {
+		if (in_array($cur_cat->guid, $categories) && !$page->inArray($cur_cat->pages)) {
 			if ($_->config->com_content->new_pages_first)
 				$cur_cat->pages = array_merge(array($page), $cur_cat->pages);
 			else
 				$cur_cat->pages[] = $page;
 			if (!$cur_cat->save())
 				pines_error("Couldn't add page to category {$cur_cat->name}. Do you have permission?");
-		} elseif (!in_array($cur_cat->guid, $categories) && $page->in_array($cur_cat->pages)) {
-			$key = $page->array_search($cur_cat->pages);
+		} elseif (!in_array($cur_cat->guid, $categories) && $page->inArray($cur_cat->pages)) {
+			$key = $page->arraySearch($cur_cat->pages);
 			unset($cur_cat->pages[$key]);
 			if (!$cur_cat->save())
 				pines_error("Couldn't remove page from category {$cur_cat->name}. Do you have permission?");

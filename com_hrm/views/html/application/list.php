@@ -145,7 +145,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	<tbody>
 	<?php foreach($this->applications as $cur_application) { ?>
 		<tr title="<?php e($cur_application->guid); ?>">
-			<td><?php e(format_date($cur_application->p_cdate)); ?></td>
+			<td><?php e(format_date($cur_application->cdate)); ?></td>
 			<td><a data-entity="<?php e($cur_application->guid); ?>" data-entity-context="com_hrm_application"><?php e($cur_application->name); ?></a></td>
 			<td><?php e($cur_application->position); ?></td>
 			<td><?php e(ucwords($cur_application->status)); ?></td>

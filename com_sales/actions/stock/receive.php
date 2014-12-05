@@ -30,7 +30,7 @@ else {
 	// These are the shipments (POs and transfers) selected to be received on
 	// the form. The GUIDs can be either a PO or transfer.
 	$shipments_json = array_map('intval', $shipments_json);
-	$shipments_transfers = $_->entity_manager->get_entities(
+	$shipments_transfers = $_->nymph->getEntities(
 			array('class' => com_sales_transfer),
 			array('&',
 				'tag' => array('com_sales', 'transfer')
@@ -39,7 +39,7 @@ else {
 				'guid' => $shipments_json
 			)
 		);
-	$shipments_pos = $_->entity_manager->get_entities(
+	$shipments_pos = $_->nymph->getEntities(
 			array('class' => com_sales_po),
 			array('&',
 				'tag' => array('com_sales', 'po')
@@ -71,7 +71,7 @@ if (gatekeeper('com_sales/receivelocation') && isset($_REQUEST['location'])) {
 		pines_notice('Specified location not found.');
 		return;
 	}
-	if (!$location->is($_SESSION['user']->group) && !$location->in_array($_SESSION['user']->group->get_descendants())) {
+	if (!$location->is($_SESSION['user']->group) && !$location->inArray($_SESSION['user']->group->get_descendants())) {
 		pines_notice('Specified location is not under yours.');
 		return;
 	}
@@ -109,7 +109,7 @@ foreach ($products as $cur_product) {
 			if ($cur_product_entity->serialized) {
 				$stock->serial = $serial;
 				if ($_->config->com_sales->unique_serials) {
-					$test = $_->entity_manager->get_entity(array('class' => com_sales_stock, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'stock'), 'strict' => array('serial', $stock->serial)));
+					$test = $_->nymph->getEntity(array('class' => com_sales_stock, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'stock'), 'strict' => array('serial', $stock->serial)));
 					if (isset($test)) {
 						pines_notice("There is already a stock entry with the serial {$stock->serial}. Serials must be unique.");
 						continue;
@@ -133,7 +133,7 @@ foreach ($products as $cur_product) {
 
 		if ($status == 'received_po') {
 			// Check for warehouse items being assigned the incoming stock.
-			$wh_sales = $_->entity_manager->get_entities(
+			$wh_sales = $_->nymph->getEntities(
 					array('class' => com_sales_sale, 'skip_ac' => true),
 					array('&',
 						'tag' => array('com_sales', 'sale'),

@@ -253,7 +253,7 @@ class com_loan extends component {
 		$interaction->status = $status;
 		$interaction->comments = $comments;
 
-		$existing_appt = $_->entity_manager->get_entity(
+		$existing_appt = $_->nymph->getEntity(
 			array('class' => com_customer_interaction),
 			array('&',
 				'data' => array('status', 'open'),

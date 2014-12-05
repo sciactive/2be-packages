@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\notes
  */
-class com_notes_thread extends entity {
+class com_notes_thread extends Entity {
+	const etype = 'com_notes_thread';
 	protected $tags = array('com_notes', 'thread');
 
 	public function __construct($id = 0) {
@@ -26,10 +27,6 @@ class com_notes_thread extends entity {
 		$this->ac = (object) array('user' => 3, 'group' => 2, 'other' => 2);
 		$this->notes = array();
 		$this->hidden = false;
-	}
-
-	public static function etype() {
-		return 'com_notes_thread';
 	}
 
 	public function info($type) {

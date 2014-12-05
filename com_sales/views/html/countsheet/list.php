@@ -288,8 +288,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<td><a data-entity="<?php e($countsheet->guid); ?>" data-entity-context="com_sales_countsheet"><?php e($countsheet->guid); ?></a></td>
 			<td><?php e($countsheet->group->name); ?></td>
 			<td><?php e($countsheet->user->name); ?></td>
-			<td><?php e(format_date($countsheet->p_cdate)); ?></td>
-			<td><?php e(format_date($countsheet->p_mdate)); ?></td>
+			<td><?php e(format_date($countsheet->cdate)); ?></td>
+			<td><?php e(format_date($countsheet->mdate)); ?></td>
 			<td><?php echo $countsheet->final ? 'Yes' : 'No'; ?></td>
 			<td><?php switch ($countsheet->status) {
 				case 'approved':

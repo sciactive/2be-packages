@@ -57,7 +57,7 @@ if (empty($foobar->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_example_foobar, 'skip_ac' => true), array('&', 'tag' => array('com_example', 'foobar'), 'data' => array('name', $foobar->name)));
+$test = $_->nymph->getEntity(array('class' => com_example_foobar, 'skip_ac' => true), array('&', 'tag' => array('com_example', 'foobar'), 'data' => array('name', $foobar->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$foobar->print_form();
 	pines_notice('There is already a foobar with that name. Please choose a different name.');

@@ -61,7 +61,7 @@ $this->title = h($this->entity->company_name).' Warboard';
 	foreach ($this->entity->locations as $cur_location) {
 		$location_count[$cur_location->guid] = 0;
 		$employees = $cur_location->get_users();
-		$_->entity_manager->sort($employees, 'hire_date');
+		$_->nymph->sort($employees, 'hire_date');
 		if ($count > 0 && ($count / $this->entity->columns) == floor($count / $this->entity->columns)) { ?>
 		</tr>
 		<tr>
@@ -167,7 +167,7 @@ $this->title = h($this->entity->company_name).' Warboard';
 		foreach ($this->entity->important as $cur_important) {
 			$imortant_count[$cur_important->guid] = 0;
 			$employees = $cur_important->get_users();
-			$_->entity_manager->sort($employees, 'job_title');
+			$_->nymph->sort($employees, 'job_title');
 		?>
 		<td colspan="<?php echo floor(($this->entity->columns - 1)/count($this->entity->important)); ?>">
 			<table class="important" id="p_muid_important_<?php e($cur_important->guid); ?>">

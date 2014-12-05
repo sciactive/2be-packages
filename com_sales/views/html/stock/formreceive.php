@@ -420,7 +420,7 @@ if ($_->config->com_sales->autocomplete_product)
 			<tbody>
 			<?php foreach($this->categories as $category) { ?>
 				<tr title="<?php e($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? h("child ch_{$category->parent->guid} ") : ''; ?>">
-					<td><?php echo isset($category->parent) ? $category->array_search($category->parent->children) + 1 : '0' ; ?></td>
+					<td><?php echo isset($category->parent) ? $category->arraySearch($category->parent->children) + 1 : '0' ; ?></td>
 					<td><?php e($category->name); ?></td>
 					<td><?php echo count($category->products); ?></td>
 				</tr>

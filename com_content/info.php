@@ -21,7 +21,7 @@ return array(
 	'description' => 'Manage content pages.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'user_manager&entity_manager&editor',
+		'service' => 'user_manager&editor',
 		'component' => 'com_jquery&com_bootstrap&com_pgrid&com_markdown&com_ptags&com_pform&com_menueditor'
 	),
 	'abilities' => array(

@@ -47,30 +47,30 @@ if ($testimonial->share) {
 
 // Add / Remove appropriate SHARING tag
 if ($testimonial->share) {
-	$testimonial->add_tag('share');
+	$testimonial->addTag('share');
 } else {
-	$testimonial->remove_tag('share');
+	$testimonial->removeTag('share');
 }
 
 // Add / Remove appropriate status tags
 // I remove share tags if the testimonial is not approved
 switch ($testimonial->status) {
 	case 'pending':
-		if (!$testimonial->has_tag('pending')) {
-			$testimonial->add_tag('pending');
-			$testimonial->remove_tag('share', 'denied', 'approved');
+		if (!$testimonial->hasTag('pending')) {
+			$testimonial->addTag('pending');
+			$testimonial->removeTag('share', 'denied', 'approved');
 		}
 		break;
 	case 'approved':
-		if (!$testimonial->has_tag('approved')) {
-			$testimonial->add_tag('approved');
-			$testimonial->remove_tag('denied', 'pending');
+		if (!$testimonial->hasTag('approved')) {
+			$testimonial->addTag('approved');
+			$testimonial->removeTag('denied', 'pending');
 		}
 		break;
 	case 'denied':
-		if (!$testimonial->has_tag('denied')) {
-			$testimonial->add_tag('denied');
-			$testimonial->remove_tag('share', 'pending', 'approved');
+		if (!$testimonial->hasTag('denied')) {
+			$testimonial->addTag('denied');
+			$testimonial->removeTag('share', 'pending', 'approved');
 		}
 		break;
 }

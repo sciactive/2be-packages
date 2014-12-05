@@ -26,7 +26,7 @@ if ($entity->shipped) {
 
 $guids = array();
 foreach ($entity->products as $cur_product) {
-	$stock = $_->entity_manager->get_entity(
+	$stock = $_->nymph->getEntity(
 			array('class' => com_sales_stock, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_sales', 'stock'),

@@ -15,13 +15,13 @@ if ( !gatekeeper('com_newsletter/listmail') )
 	punt_user(null, pines_url('com_newsletter', 'list'));
 
 if ( !empty($_REQUEST['mail_id']) ) {
-	$mail = $_->entity_manager->get_entity(array(), array('&', 'guid' => (int) $_REQUEST['mail_id'], 'tag' => array('com_newsletter', 'mail')));
+	$mail = $_->nymph->getEntity(array(), array('&', 'guid' => (int) $_REQUEST['mail_id'], 'tag' => array('com_newsletter', 'mail')));
 	if ( !isset($mail) ) {
 		pines_error('Invalid mail!');
 		return false;
 	}
 } else {
-	$mail = new entity('com_newsletter', 'mail');
+	$mail = new Entity('com_newsletter', 'mail');
 	$mail->attachments = array();
 }
 

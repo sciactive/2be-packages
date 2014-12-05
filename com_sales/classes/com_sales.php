@@ -148,11 +148,11 @@ class com_sales extends component {
 		global $_;
 		if (isset($this->product_cache[$code])) {
 			// Check if the cached one is old.
-			$tmp_product = $_->entity_manager->get_entity(
+			$tmp_product = $_->nymph->getEntity(
 					array('class' => com_sales_product),
 					array('&',
 						'guid' => array($this->product_cache[$code]->guid),
-						'gt' => array('p_mdate', $this->product_cache[$code]->p_mdate)
+						'gt' => array('mdate', $this->product_cache[$code]->mdate)
 					)
 				);
 			if (isset($tmp_product)) {
@@ -167,12 +167,12 @@ class com_sales extends component {
 				}
 			} else {
 				// The product hasn't been changed since it was retrieved.
-				$this->product_cache[$code]->clear_cache();
+				$this->product_cache[$code]->clearCache();
 				return $this->product_cache[$code];
 			}
 		}
 		// Check for a SKU match first.
-		$product = $_->entity_manager->get_entity(
+		$product = $_->nymph->getEntity(
 				array('class' => com_sales_product),
 				array('&',
 					'tag' => array('com_sales', 'product'),
@@ -181,7 +181,7 @@ class com_sales extends component {
 			);
 		if (!isset($product->guid)) {
 			// If that didn't match, check for an additional barcode.
-			$product = $_->entity_manager->get_entity(
+			$product = $_->nymph->getEntity(
 					array('class' => com_sales_product),
 					array('&',
 						'tag' => array('com_sales', 'product'),
@@ -210,12 +210,12 @@ class com_sales extends component {
 		global $_;
 		// First check through the suggestions to see if they match.
 		foreach ($suggestions as &$cur_po) {
-			if (!isset($cur_po->guid) || !$cur_po->has_tag('com_sales', 'po'))
+			if (!isset($cur_po->guid) || !$cur_po->hasTag('com_sales', 'po'))
 				continue;
 			$cur_po->refresh();
 			if ($cur_po->finished || !$cur_po->final)
 				continue;
-			if (!$product->in_array($cur_po->pending_products))
+			if (!$product->inArray($cur_po->pending_products))
 				continue;
 			return $cur_po;
 		}
@@ -233,7 +233,7 @@ class com_sales extends component {
 			);
 		if (isset($location))
 			$selector['ref'][] = array('destination', $location);
-		return $_->entity_manager->get_entity(
+		return $_->nymph->getEntity(
 				array('class' => com_sales_po),
 				$selector
 			);
@@ -255,12 +255,12 @@ class com_sales extends component {
 		global $_;
 		// First check through the suggestions to see if they match.
 		foreach ($suggestions as &$cur_transfer) {
-			if (!isset($cur_transfer->guid) || !$cur_transfer->has_tag('com_sales', 'transfer'))
+			if (!isset($cur_transfer->guid) || !$cur_transfer->hasTag('com_sales', 'transfer'))
 				continue;
 			$cur_transfer->refresh();
 			if ($cur_transfer->finished || !$cur_transfer->final)
 				continue;
-			if (!$product->in_array($cur_transfer->pending_products))
+			if (!$product->inArray($cur_transfer->pending_products))
 				continue;
 			if (isset($serial) && !in_array($serial, $cur_transfer->pending_serials))
 				continue;
@@ -277,7 +277,7 @@ class com_sales extends component {
 				if (!$product->is($cur_stock->product))
 					continue;
 				// If it's already received, move on.
-				if ($cur_stock->in_array((array) $cur_transfer->received))
+				if ($cur_stock->inArray((array) $cur_transfer->received))
 					continue;
 				// If it's a match, return the transfer and the item.
 				return array($cur_transfer, $cur_stock);
@@ -299,7 +299,7 @@ class com_sales extends component {
 			$selector['array'] = array('pending_serials', $serial);
 		if (isset($location))
 			$selector['ref'][] = array('destination', $location);
-		$entities = (array) $_->entity_manager->get_entities(
+		$entities = (array) $_->nymph->getEntities(
 				array('class' => com_sales_transfer),
 				$selector
 			);
@@ -316,7 +316,7 @@ class com_sales extends component {
 				if (!$product->is($cur_stock->product))
 					continue;
 				// If it's already received, move on.
-				if ($cur_stock->in_array((array) $cur_transfer->received))
+				if ($cur_stock->inArray((array) $cur_transfer->received))
 					continue;
 				// If it's a match, return the transfer and the item.
 				return array($cur_transfer, $cur_stock);
@@ -378,14 +378,14 @@ class com_sales extends component {
 			$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 		else
 			$or = array('|', 'ref' => array('group', $location));
-		$module->counts = $_->entity_manager->get_entities(
+		$module->counts = $_->nymph->getEntities(
 				array('class' => com_sales_cashcount),
 				$selector,
 				$or,
 				array('&',
 					'tag' => array('com_sales', 'cashcount'),
-					'gte' => array('p_cdate', (int) $start_date),
-					'lt' => array('p_cdate', (int) $end_date)
+					'gte' => array('cdate', (int) $start_date),
+					'lt' => array('cdate', (int) $end_date)
 				)
 			);
 		$form->start_date = $start_date;
@@ -424,7 +424,7 @@ class com_sales extends component {
 
 		$module = new module('com_sales', 'category/list', 'content');
 
-		$module->categories = $_->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category')));
+		$module->categories = $_->nymph->getEntities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category')));
 
 		if ( empty($module->categories) )
 			pines_notice('No categories found.');
@@ -447,9 +447,9 @@ class com_sales extends component {
 
 		$selector = array('&', 'tag' => array('com_sales', 'countsheet'));
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		if (!isset($location->guid))
 			$location = $_SESSION['user']->group;
 		if (!gatekeeper('com_sales/approvecountsheet'))
@@ -460,7 +460,7 @@ class com_sales extends component {
 			$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 		else
 			$or = array('|', 'ref' => array('group', $location));
-		$module->countsheets = $_->entity_manager->get_entities(array('class' => com_sales_countsheet), $selector, $approved_selector, $or);
+		$module->countsheets = $_->nymph->getEntities(array('class' => com_sales_countsheet), $selector, $approved_selector, $or);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -491,7 +491,7 @@ class com_sales extends component {
 
 		$module = new module('com_sales', 'manufacturer/list', 'content');
 
-		$module->manufacturers = $_->entity_manager->get_entities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
+		$module->manufacturers = $_->nymph->getEntities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
 
 		if ( empty($module->manufacturers) )
 			pines_notice('There are no manufacturers.');
@@ -508,7 +508,7 @@ class com_sales extends component {
 
 		$module = new module('com_sales', 'paymenttype/list', 'content');
 
-		$module->payment_types = $_->entity_manager->get_entities(array('class' => com_sales_payment_type), array('&', 'tag' => array('com_sales', 'payment_type')));
+		$module->payment_types = $_->nymph->getEntities(array('class' => com_sales_payment_type), array('&', 'tag' => array('com_sales', 'payment_type')));
 
 		if ( empty($module->payment_types) )
 			pines_notice('There are no payment types.');
@@ -525,7 +525,7 @@ class com_sales extends component {
 
 		$module = new module('com_sales', 'returnchecklist/list', 'content');
 
-		$module->return_checklists = $_->entity_manager->get_entities(array('class' => com_sales_return_checklist), array('&', 'tag' => array('com_sales', 'return_checklist')));
+		$module->return_checklists = $_->nymph->getEntities(array('class' => com_sales_return_checklist), array('&', 'tag' => array('com_sales', 'return_checklist')));
 
 		if ( empty($module->return_checklists) )
 			pines_notice('There are no return checklists.');
@@ -543,7 +543,7 @@ class com_sales extends component {
 
 		$module = new module('com_sales', 'po/list', 'content');
 
-		$module->pos = $_->entity_manager->get_entities(
+		$module->pos = $_->nymph->getEntities(
 				array('class' => com_sales_po),
 				array('&',
 					'tag' => array('com_sales', 'po'),
@@ -603,16 +603,16 @@ class com_sales extends component {
 
 		$selector = array('&', 'tag' => array('com_sales', 'return'));
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		if (!isset($location))
 			$location = $_SESSION['user']->group;
 		if ($descendants)
 			$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 		else
 			$or = array('|', 'ref' => array('group', $location));
-		$module->returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$module->returns = $_->nymph->getEntities(array('class' => com_sales_return), $selector, $or);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -640,16 +640,16 @@ class com_sales extends component {
 
 		$selector = array('&', 'tag' => array('com_sales', 'sale'));
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		if (!isset($location))
 			$location = $_SESSION['user']->group;
 		if ($descendants)
 			$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 		else
 			$or = array('|', 'ref' => array('group', $location));
-		$module->sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$module->sales = $_->nymph->getEntities(array('class' => com_sales_sale), $selector, $or);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -705,7 +705,7 @@ class com_sales extends component {
 						'data' => array('status', 'paid')
 					);
 			}
-			$module->sales = (array) $_->entity_manager->get_entities(
+			$module->sales = (array) $_->nymph->getEntities(
 					array('class' => com_sales_sale),
 					array('&',
 						'tag' => array('com_sales', 'sale', 'shipping_shipped'),
@@ -715,7 +715,7 @@ class com_sales extends component {
 				);
 		}
 
-		$module->shipments = (array) $_->entity_manager->get_entities(
+		$module->shipments = (array) $_->nymph->getEntities(
 				array('class' => com_sales_shipment),
 				array('&',
 					'tag' => array('com_sales', 'shipment'),
@@ -736,7 +736,7 @@ class com_sales extends component {
 
 		$module = new module('com_sales', 'shipper/list', 'content');
 
-		$module->shippers = $_->entity_manager->get_entities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
+		$module->shippers = $_->nymph->getEntities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
 
 		if ( empty($module->shippers) )
 			pines_notice('There are no shippers.');
@@ -757,9 +757,9 @@ class com_sales extends component {
 
 		$module->enabled = $enabled;
 		if ($enabled) {
-			$module->specials = $_->entity_manager->get_entities(array('class' => com_sales_special), array('&', 'tag' => array('com_sales', 'special'), 'data' => array('enabled', true)));
+			$module->specials = $_->nymph->getEntities(array('class' => com_sales_special), array('&', 'tag' => array('com_sales', 'special'), 'data' => array('enabled', true)));
 		} else {
-			$module->specials = $_->entity_manager->get_entities(array('class' => com_sales_special), array('&', 'tag' => array('com_sales', 'special')), array('!&', 'data' => array('enabled', true)));
+			$module->specials = $_->nymph->getEntities(array('class' => com_sales_special), array('&', 'tag' => array('com_sales', 'special')), array('!&', 'data' => array('enabled', true)));
 		}
 
 		if ( empty($module->specials) )
@@ -785,7 +785,7 @@ class com_sales extends component {
 		if ($removed) {
 			$module->removed = true;
 			$module->location = $_SESSION['user']->group;
-			$module->stock = $_->entity_manager->get_entities(
+			$module->stock = $_->nymph->getEntities(
 					array('class' => com_sales_stock),
 					array('&', 'tag' => array('com_sales', 'stock')),
 					array('!&', 'isset' => 'location')
@@ -802,7 +802,7 @@ class com_sales extends component {
 				else
 					$or = array('|', 'ref' => array('location', $location));
 				$module->location = $location;
-				$module->stock = $_->entity_manager->get_entities(
+				$module->stock = $_->nymph->getEntities(
 					array('class' => com_sales_stock),
 					array('&', 'tag' => array('com_sales', 'stock'), array('isset' => 'location')),
 					$or
@@ -826,7 +826,7 @@ class com_sales extends component {
 
 		$module = new module('com_sales', 'taxfee/list', 'content');
 
-		$module->tax_fees = $_->entity_manager->get_entities(array('class' => com_sales_tax_fee), array('&', 'tag' => array('com_sales', 'tax_fee')));
+		$module->tax_fees = $_->nymph->getEntities(array('class' => com_sales_tax_fee), array('&', 'tag' => array('com_sales', 'tax_fee')));
 
 		if ( empty($module->tax_fees) )
 			pines_notice('There are no taxes/fees.');
@@ -848,7 +848,7 @@ class com_sales extends component {
 		$module->finished = $finished;
 		if ($just_pending_shipment) {
 			if (isset($_SESSION['user']->group)) {
-				$module->transfers = $_->entity_manager->get_entities(
+				$module->transfers = $_->nymph->getEntities(
 						array('class' => com_sales_transfer),
 						array('&',
 							'tag' => array('com_sales', 'transfer'),
@@ -865,7 +865,7 @@ class com_sales extends component {
 				$module->transfers = array();
 			}
 		} else {
-			$module->transfers = $_->entity_manager->get_entities(
+			$module->transfers = $_->nymph->getEntities(
 					array('class' => com_sales_transfer),
 					array('&',
 						'tag' => array('com_sales', 'transfer'),
@@ -889,7 +889,7 @@ class com_sales extends component {
 
 		$module = new module('com_sales', 'vendor/list', 'content');
 
-		$module->vendors = $_->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
+		$module->vendors = $_->nymph->getEntities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
 
 		if ( empty($module->vendors) )
 			pines_notice('There are no vendors.');
@@ -1044,22 +1044,22 @@ class com_sales extends component {
 		if (!gatekeeper('com_sales/receivelocation')) {
 			$selector_po['ref'] = array('destination', $_SESSION['user']->group);
 			$selector_transfer['ref'] = array('destination', $_SESSION['user']->group);
-			$module->pos = (array) $_->entity_manager->get_entities(
+			$module->pos = (array) $_->nymph->getEntities(
 					array('class' => com_sales_po, 'skip_ac' => true),
 					$selector_po
 				);
-			$module->transfers = (array) $_->entity_manager->get_entities(
+			$module->transfers = (array) $_->nymph->getEntities(
 					array('class' => com_sales_transfer, 'skip_ac' => true),
 					$selector_transfer
 				);
 		} elseif (isset($_SESSION['user']->group)) {
 			$groups = $_SESSION['user']->group->get_descendants(true);
-			$module->pos = (array) $_->entity_manager->get_entities(
+			$module->pos = (array) $_->nymph->getEntities(
 					array('class' => com_sales_po, 'skip_ac' => true),
 					$selector_po,
 					array('|', 'ref' => array('destination', $groups))
 				);
-			$module->transfers = (array) $_->entity_manager->get_entities(
+			$module->transfers = (array) $_->nymph->getEntities(
 					array('class' => com_sales_transfer, 'skip_ac' => true),
 					$selector_transfer,
 					array('|', 'ref' => array('destination', $groups))
@@ -1067,7 +1067,7 @@ class com_sales extends component {
 		} else {
 			$module->pos = $module->transfers = array();
 		}
-		$module->categories = (array) $_->entity_manager->get_entities(
+		$module->categories = (array) $_->nymph->getEntities(
 				array('class' => com_sales_category),
 				array('&',
 					'tag' => array('com_sales', 'category'),
@@ -1325,9 +1325,9 @@ class com_sales extends component {
 			$or = array('|', 'ref' => array('group', $location));
 
 		if (isset($start_date))
-			$secondary_options['gte'] = array('p_cdate', (int) $start_date);
+			$secondary_options['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$secondary_options['lt'] = array('p_cdate', (int) $end_date);
+			$secondary_options['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -1335,7 +1335,7 @@ class com_sales extends component {
 		$module->descendants = $descendants;
 		$module->stock = $module->transactions = array();
 		if (isset($serial) || isset($sku))
-			$module->stock = $_->entity_manager->get_entities(array('class' => com_sales_stock), $selector);
+			$module->stock = $_->nymph->getEntities(array('class' => com_sales_stock), $selector);
 
 		foreach ($module->stock as $cur_stock) {
 			// Grab all of the requested transactions for any stock items matching the given product code.
@@ -1343,7 +1343,7 @@ class com_sales extends component {
 			if ($module->types['invoice']) {
 				$current_ref = $or['ref'];
 				$or['ref'] = array('products', $cur_stock);
-				$invoices = $_->entity_manager->get_entities(
+				$invoices = $_->nymph->getEntities(
 					array('class' => com_sales_sale, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1354,7 +1354,7 @@ class com_sales extends component {
 			if ($module->types['return']) {
 				$current_ref = $or['ref'];
 				$or['ref'] = array('products', $cur_stock);
-				$returns = $_->entity_manager->get_entities(
+				$returns = $_->nymph->getEntities(
 					array('class' => com_sales_return, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1366,7 +1366,7 @@ class com_sales extends component {
 			if ($module->types['swap']) {
 				$current_ref = $or['ref'];
 				$or['ref'] = array('item', $cur_stock);
-				$swaps = $_->entity_manager->get_entities(
+				$swaps = $_->nymph->getEntities(
 					array('class' => com_sales_tx, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1378,7 +1378,7 @@ class com_sales extends component {
 				$or['ref'] = $current_ref;
 			}
 			if ($module->types['countsheet']) {
-				$countsheets = $_->entity_manager->get_entities(
+				$countsheets = $_->nymph->getEntities(
 					array('class' => com_sales_countsheet, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1390,7 +1390,7 @@ class com_sales extends component {
 			}
 			$or['ref'][0] = 'destination';
 			if ($module->types['transfer']) {
-				$transfers = $_->entity_manager->get_entities(
+				$transfers = $_->nymph->getEntities(
 					array('class' => com_sales_transfer, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1401,7 +1401,7 @@ class com_sales extends component {
 				);
 			}
 			if ($module->types['po']) {
-				$pos = $_->entity_manager->get_entities(
+				$pos = $_->nymph->getEntities(
 					array('class' => com_sales_po, 'skip_ac' => true),
 					$secondary_options,
 					$or,
@@ -1418,22 +1418,22 @@ class com_sales extends component {
 						$module->transactions[$cur_tx->guid]->serials[] = $cur_stock->serial;
 				} else {
 					$cur_type = '';
-					if ($cur_tx->has_tag('sale')) {
+					if ($cur_tx->hasTag('sale')) {
 						$tx_info = ucwords($cur_tx->status);
 						$cur_type = 'sale';
-					} elseif ($cur_tx->has_tag('return')) {
+					} elseif ($cur_tx->hasTag('return')) {
 						$tx_info = ucwords($cur_tx->status);
 						$cur_type = 'return';
-					} elseif ($cur_tx->has_tag('swap')) {
+					} elseif ($cur_tx->hasTag('swap')) {
 						$tx_info = ucwords(str_replace('_', ' ', $cur_tx->type));
 						$cur_type = 'swap';
-					} elseif ($cur_tx->has_tag('transfer')) {
+					} elseif ($cur_tx->hasTag('transfer')) {
 						$tx_info = ($this->entity->finished) ? 'Received' : (empty($this->entity->received) ? 'Not Received' : 'Partially Received');
 						$cur_type = 'transfer';
-					} elseif ($cur_tx->has_tag('po')) {
+					} elseif ($cur_tx->hasTag('po')) {
 						$tx_info = ($this->entity->finished) ? 'Received' : (empty($this->entity->received) ? 'Not Received' : 'Partially Received');
 						$cur_type = 'po';
-					} elseif ($cur_tx->has_tag('countsheet')) {
+					} elseif ($cur_tx->hasTag('countsheet')) {
 						$tx_info = ucwords($cur_tx->status);
 						$cur_type = 'countsheet';
 					}
@@ -1466,7 +1466,7 @@ class com_sales extends component {
 		global $_;
 
 		// Get sales with warehouse items.
-		$sales = (array) $_->entity_manager->get_entities(
+		$sales = (array) $_->nymph->getEntities(
 				array('class' => com_sales_sale),
 				array('&',
 					'tag' => array('com_sales', 'sale', 'shipping_pending'),
@@ -1515,9 +1515,9 @@ class com_sales extends component {
 				)
 			);
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		if (!isset($location))
 			$location = $_SESSION['user']->group;
 		if (isset($location)) {
@@ -1526,7 +1526,7 @@ class com_sales extends component {
 			else
 				$or = array('|', 'ref' => array('group', $location));
 		}
-		$module->sales = (array) $_->entity_manager->get_entities(
+		$module->sales = (array) $_->nymph->getEntities(
 				array('class' => com_sales_sale),
 				$selector,
 				$or,
@@ -1555,7 +1555,7 @@ class com_sales extends component {
 		global $_;
 
 		// Get sales with warehouse items.
-		$sales = (array) $_->entity_manager->get_entities(
+		$sales = (array) $_->nymph->getEntities(
 				array('class' => com_sales_sale),
 				array('&',
 					'tag' => array('com_sales', 'sale'),

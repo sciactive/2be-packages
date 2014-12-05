@@ -46,7 +46,7 @@ class com_reports extends component {
 		global $_;
 
 		$module = new module('com_reports', 'list_paystubs', 'content');
-		$module->paystubs = $_->entity_manager->get_entities(array('class' => com_reports_paystub), array('&', 'tag' => array('com_reports', 'paystub')));
+		$module->paystubs = $_->nymph->getEntities(array('class' => com_reports_paystub), array('&', 'tag' => array('com_reports', 'paystub')));
 
 		if ( empty($module->paystubs) )
 			pines_notice('There are no completed paystubs to view.');
@@ -63,7 +63,7 @@ class com_reports extends component {
 		global $_;
 
 		$module = new module('com_reports', 'list_sales_rankings', 'content');
-		$module->rankings = $_->entity_manager->get_entities(array('class' => com_reports_sales_ranking), array('&', 'tag' => array('com_reports', 'sales_ranking')));
+		$module->rankings = $_->nymph->getEntities(array('class' => com_reports_sales_ranking), array('&', 'tag' => array('com_reports', 'sales_ranking')));
 
 		return $module;
 	}
@@ -107,9 +107,9 @@ class com_reports extends component {
 		$selector = array('&');
 		// Datespan of the report.
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -124,10 +124,10 @@ class com_reports extends component {
 		$module->descendants = $descendants;
 		$selector['tag'] = array('com_sales', 'sale');
 		$selector['strict'] = array('status', 'paid');
-		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$sales = $_->nymph->getEntities(array('class' => com_sales_sale), $selector, $or);
 		$selector['tag'] = array('com_sales', 'return');
 		$selector['strict'] = array('status', 'processed');
-		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$returns = $_->nymph->getEntities(array('class' => com_sales_return), $selector, $or);
 		$module->invoices = array_merge($sales, $returns);
 
 		return $module;
@@ -150,9 +150,9 @@ class com_reports extends component {
 		$selector = array('&');
 		// Datespan of the report.
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -166,9 +166,9 @@ class com_reports extends component {
 		$module->location = $location;
 		$module->descendants = $descendants;
 		$selector['tag'] = array('com_sales', 'sale');
-		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$sales = $_->nymph->getEntities(array('class' => com_sales_sale), $selector, $or);
 		$selector['tag'] = array('com_sales', 'return');
-		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$returns = $_->nymph->getEntities(array('class' => com_sales_return), $selector, $or);
 		$module->invoices = array_merge($sales, $returns);
 
 		return $module;
@@ -191,9 +191,9 @@ class com_reports extends component {
 		$selector = array('&');
 		// Datespan of the report.
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -208,10 +208,10 @@ class com_reports extends component {
 		$module->descendants = $descendants;
 		$selector['tag'] = array('com_sales', 'sale');
 		$selector['strict'] = array('status', 'paid');
-		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$sales = $_->nymph->getEntities(array('class' => com_sales_sale), $selector, $or);
 		$selector['tag'] = array('com_sales', 'return');
 		$selector['strict'] = array('status', 'processed');
-		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$returns = $_->nymph->getEntities(array('class' => com_sales_return), $selector, $or);
 		$module->invoices = array_merge($sales, $returns);
 
 		return $module;
@@ -255,7 +255,7 @@ class com_reports extends component {
 				'scheduled_total' => 0,
 			);
 			// Get all the employee clock-ins in our time range.
-			$entries = $_->entity_manager->get_entities(
+			$entries = $_->nymph->getEntities(
 					array('class' => com_hrm_timeclock_entry),
 					array('&',
 						'tag' => array('com_hrm', 'timeclock_entry'),
@@ -285,7 +285,7 @@ class com_reports extends component {
 					$cur_array['clocked_ips'][] = $entry->extras['ip_out'];
 			}
 			// Get their scheduled time.
-			$schedule = $_->entity_manager->get_entities(
+			$schedule = $_->nymph->getEntities(
 					array('class' => com_calendar_event),
 					array('&',
 						'tag' => array('com_calendar', 'event'),
@@ -357,7 +357,7 @@ class com_reports extends component {
 				if (!($cur_employee->in_group($location) || ($descendants && $cur_employee->is_descendant($location))))
 					continue;
 				$totals[$total_count]['scheduled'] = $totals[$total_count]['clocked'] = 0;
-				$schedule = $_->entity_manager->get_entities(
+				$schedule = $_->nymph->getEntities(
 						array('class' => com_calendar_event),
 						array('&',
 							'tag' => array('com_calendar', 'event'),
@@ -407,7 +407,7 @@ class com_reports extends component {
 				}
 			}
 			foreach ($module->dates as &$cur_date) {
-				$scheduled = $_->entity_manager->get_entities(
+				$scheduled = $_->nymph->getEntities(
 						array('class' => com_calendar_event),
 						array('&',
 							'tag' => array('com_calendar', 'event'),
@@ -467,7 +467,7 @@ class com_reports extends component {
 			$or = array('|', 'ref' => array('group', $location));
 		$module->location = $location;
 		$module->descendants = $descendants;
-		$module->events = $_->entity_manager->get_entities(array('class' => com_calendar_event), $selector, $or);
+		$module->events = $_->nymph->getEntities(array('class' => com_calendar_event), $selector, $or);
 
 		return $module;
 	}
@@ -477,7 +477,7 @@ class com_reports extends component {
 	 *
 	 * @param int $start_date The start date of the report.
 	 * @param int $end_date The end date of the report.
-	 * @param entity $employee The entity of the employee.
+	 * @param Entity $employee The entity of the employee.
 	 * @param float $payperhour This is passed in from report_payroll_summary.
 	 * @param float $totalhours This is the total amount of hours work.
 	 * @param float $totalpay This is the total they're being paid for the time period.
@@ -519,7 +519,7 @@ class com_reports extends component {
 			$module->overtime = $overtimehourpay / ($module->employee->pay_rate * 1.5);
 		}
 		// Get bonuses.
-		$module->bonuses = $_->entity_manager->get_entities(
+		$module->bonuses = $_->nymph->getEntities(
 				array('class' => com_hrm_bonus),
 				array('&',
 					'tag' => array('com_hrm', 'bonus'),
@@ -542,7 +542,7 @@ class com_reports extends component {
 			$time = $end_date - 604800;
 
 		// Get adjustments.
-		$module->adjustments = $_->entity_manager->get_entities(
+		$module->adjustments = $_->nymph->getEntities(
 				array('class' => com_hrm_adjustment),
 				array('&',
 					'tag' => array('com_hrm', 'adjustment'),
@@ -559,21 +559,21 @@ class com_reports extends component {
 		$selector = array('&');
 		// Datespan of the report.
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date -1;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
 		$selector['ref'] = array('user', $module->employee);
 		$selector['tag'] = array('com_sales', 'sale');
-		$module->sales = $_->entity_manager->get_entities(
+		$module->sales = $_->nymph->getEntities(
 				array('class' => com_sales_sale),
 				$selector
 			);
 		// Make sure this sale is not attached to any returns.
 		foreach ($module->sales as $key => &$cur_sale) {
-			$return = $_->entity_manager->get_entity(
+			$return = $_->nymph->getEntity(
 					array('class' => com_sales_return, 'skip_ac' => true),
 					array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('sale', $cur_sale))
 				);
@@ -627,9 +627,9 @@ class com_reports extends component {
 		$selector = array('&', 'tag' => array('com_hrm', 'issue'));
 		// Datespan of the report.
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -642,7 +642,7 @@ class com_reports extends component {
 			$or = array('|', 'ref' => array('group', $location));
 		$module->location = $location;
 		$module->descendants = $descendants;
-		$module->issues = $_->entity_manager->get_entities(array('class' => com_hrm_issue), $selector, $or);
+		$module->issues = $_->nymph->getEntities(array('class' => com_hrm_issue), $selector, $or);
 
 		return $module;
 	}
@@ -668,7 +668,7 @@ class com_reports extends component {
 		// End date is at the end of the last day of the pay period.
 		$end_date = $pay_start + (ceil($total_time) * $pay_period) + 86399;
 
-		$paystub = $_->entity_manager->get_entity(array('class' => com_reports_paystub),
+		$paystub = $_->nymph->getEntity(array('class' => com_reports_paystub),
 				array('&',
 					'tag' => array('com_reports', 'paystub'),
 					'gte' => array('end', (int) $start_date)
@@ -702,22 +702,22 @@ class com_reports extends component {
 		$selector = array('&',
 				'tag' => array('com_sales', 'sale'),
 				'data' => array('status', 'paid'),
-				'gte' => array('p_cdate', (int) $module->start_date),
-				'lt' => array('p_cdate', (int) $module->end_date)
+				'gte' => array('cdate', (int) $module->start_date),
+				'lt' => array('cdate', (int) $module->end_date)
 			);
 		if (!empty($or))
 			$selector = array_merge($selector, $or);
-		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector);
+		$sales = $_->nymph->getEntities(array('class' => com_sales_sale), $selector);
 		// Returns
 		$selector = array('&',
 				'tag' => array('com_sales', 'return'),
 				'data' => array('status', 'processed'),
-				'gte' => array('p_cdate', (int) $module->start_date),
-				'lt' => array('p_cdate', (int) $module->end_date)
+				'gte' => array('cdate', (int) $module->start_date),
+				'lt' => array('cdate', (int) $module->end_date)
 			);
 		if (!empty($or))
 			$selector = array_merge($selector, $or);
-		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector);
+		$returns = $_->nymph->getEntities(array('class' => com_sales_return), $selector);
 		$module->invoices = array_merge($sales, $returns);
 
 		return $module;
@@ -750,9 +750,9 @@ class com_reports extends component {
 
 		// Datespan of the report.
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -767,14 +767,14 @@ class com_reports extends component {
 		$module->location = $location;
 		$module->descendants = $descendants;
 
-		$module->sales = $_->entity_manager->get_entities(
+		$module->sales = $_->nymph->getEntities(
 				array('class' => com_sales_sale),
 				$selector,
 				$or
 			);
 		// Make sure sales are not attached to any returns.
 		foreach ($module->sales as $key => &$cur_sale) {
-			$return = $_->entity_manager->get_entity(
+			$return = $_->nymph->getEntity(
 					array('class' => com_sales_return, 'skip_ac' => true),
 					array('&',
 						'tag' => array('com_sales', 'return'),
@@ -802,7 +802,7 @@ class com_reports extends component {
 		foreach ($module->employees as &$cur_employee) {
 			$cur_employee['bonus'] = 0;
 			$totals[$total_count]['scheduled'] = $totals[$total_count]['clocked'] = 0;
-			$schedule = $_->entity_manager->get_entities(
+			$schedule = $_->nymph->getEntities(
 					array('class' => com_calendar_event),
 					array('&',
 						'tag' => array('com_calendar', 'event'),
@@ -814,7 +814,7 @@ class com_reports extends component {
 				);
 
 			// Get adjustments for employee as well.
-			$adjustments = (array) $_->entity_manager->get_entities(
+			$adjustments = (array) $_->nymph->getEntities(
 					array('class' => com_hrm_bonus),
 					array('&',
 						'tag' => array('com_hrm', 'adjustment'),
@@ -1001,9 +1001,9 @@ class com_reports extends component {
 
 		// Datespan of the report.
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -1018,10 +1018,10 @@ class com_reports extends component {
 		$module->location = $location;
 		$module->descendants = $descendants;
 
-		$module->sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$module->sales = $_->nymph->getEntities(array('class' => com_sales_sale), $selector, $or);
 		// Make sure this sale is not attached to any returns.
 		foreach ($module->sales as $key => &$cur_sale) {
-			$return = $_->entity_manager->get_entity(
+			$return = $_->nymph->getEntity(
 					array('class' => com_sales_return, 'skip_ac' => true),
 					array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('sale', $cur_sale))
 				);
@@ -1046,7 +1046,7 @@ class com_reports extends component {
 		foreach ($module->employees as &$cur_employee) {
 			$cur_employee['bonus'] = 0;
 			$totals[$total_count]['scheduled'] = $totals[$total_count]['clocked'] = 0;
-			$schedule = $_->entity_manager->get_entities(
+			$schedule = $_->nymph->getEntities(
 					array('class' => com_calendar_event),
 					array('&',
 						'tag' => array('com_calendar', 'event'),
@@ -1058,7 +1058,7 @@ class com_reports extends component {
 				);
 
 			// Get bonuses for employee too.
-			$bonuses = (array) $_->entity_manager->get_entities(
+			$bonuses = (array) $_->nymph->getEntities(
 					array('class' => com_hrm_bonus),
 					array('&',
 						'tag' => array('com_hrm', 'bonus'),
@@ -1074,7 +1074,7 @@ class com_reports extends component {
 			// Get adjustments for employee as well.
 			// Only add adjustments for this week since the other ones would
 			// have been added on the weekly hourly.
-			$adjustments = (array) $_->entity_manager->get_entities(
+			$adjustments = (array) $_->nymph->getEntities(
 					array('class' => com_hrm_bonus),
 					array('&',
 						'tag' => array('com_hrm', 'adjustment'),
@@ -1357,9 +1357,9 @@ class com_reports extends component {
 		$selector = array('&', 'tag' => array('com_sales', 'sale'));
 		// Datespan of the report.
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -1372,12 +1372,12 @@ class com_reports extends component {
 			$or = array('|', 'ref' => array('group', $location));
 		$module->location = $location;
 		$module->descendants = $descendants;
-		$module->transactions = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$module->transactions = $_->nymph->getEntities(array('class' => com_sales_sale), $selector, $or);
 
 		if ($module->types['return']) {
 			$selector['tag'] = array('com_sales', 'return');
 			$selector['strict'] = array('status', 'processed');
-			$module->transactions = array_merge($module->transactions, $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or));
+			$module->transactions = array_merge($module->transactions, $_->nymph->getEntities(array('class' => com_sales_return), $selector, $or));
 		}
 
 		return $module;
@@ -1405,8 +1405,8 @@ class com_reports extends component {
 		// Datespan of the report.
 		$date_start = strtotime('00:00:00', $start);
 		$date_end = strtotime('23:59:59', $end) + 1;
-		$selector['gte'] = array('p_cdate', $date_start);
-		$selector['lt'] = array('p_cdate', $date_end);
+		$selector['gte'] = array('cdate', $date_start);
+		$selector['lt'] = array('cdate', $date_end);
 		$module->date[0] = $form->date[0] = $date_start;
 		$module->date[1] = $form->date[1] = $date_end;
 		// Employee and location of the report.
@@ -1430,10 +1430,10 @@ class com_reports extends component {
 		$module->descendants = $form->descendants = $descendants;
 		$selector['tag'] = array('com_sales', 'sale');
 		$selector['strict'] = array('status', 'paid');
-		$sales = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$sales = $_->nymph->getEntities(array('class' => com_sales_sale), $selector, $or);
 		$selector['tag'] = array('com_sales', 'return');
 		$selector['strict'] = array('status', 'processed');
-		$returns = $_->entity_manager->get_entities(array('class' => com_sales_return), $selector, $or);
+		$returns = $_->nymph->getEntities(array('class' => com_sales_return), $selector, $or);
 		$invoices = array_merge($sales, $returns);
 
 		// Convert the timespan into the number of days that it covers.
@@ -1443,14 +1443,14 @@ class com_reports extends component {
 		$module->date_array = array();
 		$module->total = array();
 		foreach ($invoices as $cur_invoice) {
-			$event_month = format_date($cur_invoice->p_cdate, 'custom', 'n');
-			$event_day = format_date($cur_invoice->p_cdate, 'custom', 'j');
-			$event_year = format_date($cur_invoice->p_cdate, 'custom', 'Y');
+			$event_month = format_date($cur_invoice->cdate, 'custom', 'n');
+			$event_day = format_date($cur_invoice->cdate, 'custom', 'j');
+			$event_year = format_date($cur_invoice->cdate, 'custom', 'Y');
 			// This is used to identify daily sales, divided into timespan totals.
-			$date_str = format_date($cur_invoice->p_cdate, 'date_sort');
-			$sale_time = format_date($cur_invoice->p_cdate, 'custom', 'H');
+			$date_str = format_date($cur_invoice->cdate, 'date_sort');
+			$sale_time = format_date($cur_invoice->cdate, 'custom', 'H');
 			if (!$module->total[$date_str]) {
-				$module->total[$date_str][0] = $cur_invoice->p_cdate;
+				$module->total[$date_str][0] = $cur_invoice->cdate;
 				$module->total[$date_str][1] = mktime(0, 0, 0, $event_month, $event_day, $event_year);
 				$module->total[$date_str][2] = mktime(0, 0, 0, $event_month, $event_day, $event_year);
 				$module->total[$date_str][3] = 0;
@@ -1459,13 +1459,13 @@ class com_reports extends component {
 			foreach ($_->config->com_reports->timespans as $timespan) {
 				$span = explode('-', $timespan);
 				if (!$module->date_array[$date_str][$timespan]) {
-					$module->date_array[$date_str][$timespan][0] = $cur_invoice->p_cdate;
+					$module->date_array[$date_str][$timespan][0] = $cur_invoice->cdate;
 					$module->date_array[$date_str][$timespan][1] = mktime($span[0], 0, 0, $event_month, $event_day, $event_year);
 					$module->date_array[$date_str][$timespan][2] = mktime($span[1], 0, 0, $event_month, $event_day, $event_year);
 					$module->date_array[$date_str][$timespan][3] = 0;
 				}
 				if ( ($sale_time >= $span[0]) && ($sale_time < $span[1]) ) {
-					if ($cur_invoice->has_tag('sale')) {
+					if ($cur_invoice->hasTag('sale')) {
 						if (isset($module->employee->guid)) {
 							foreach ($cur_invoice->products as $cur_product) {
 								if (!$cur_product['salesperson']->is($module->employee))
@@ -1477,7 +1477,7 @@ class com_reports extends component {
 							$module->date_array[$date_str][$timespan][3] += ($cur_invoice->subtotal - $cur_invoice->total_specials);
 							$module->total[$date_str][3] += ($cur_invoice->subtotal - $cur_invoice->total_specials);
 						}
-					} elseif ($cur_invoice->has_tag('return')) {
+					} elseif ($cur_invoice->hasTag('return')) {
 						if (isset($module->employee->guid)) {
 							foreach ($cur_invoice->products as $cur_product) {
 								if (!$cur_product['salesperson']->is($module->employee))
@@ -1515,9 +1515,9 @@ class com_reports extends component {
 		$selector = array('&', 'tag' => array('com_sales', 'sale'), 'strict' => array('status', 'paid'));
 		// Datespan of the report.
 		if (isset($start_date))
-			$selector['gte'] = array('p_cdate', (int) $start_date);
+			$selector['gte'] = array('cdate', (int) $start_date);
 		if (isset($end_date))
-			$selector['lt'] = array('p_cdate', (int) $end_date);
+			$selector['lt'] = array('cdate', (int) $end_date);
 		$module->start_date = $start_date;
 		$module->end_date = $end_date;
 		$module->all_time = (!isset($start_date) && !isset($end_date));
@@ -1530,7 +1530,7 @@ class com_reports extends component {
 			$or = array('|', 'ref' => array('group', $location));
 		$module->location = $location;
 		$module->descendants = $descendants;
-		$module->transactions = $_->entity_manager->get_entities(array('class' => com_sales_sale), $selector, $or);
+		$module->transactions = $_->nymph->getEntities(array('class' => com_sales_sale), $selector, $or);
 
 		return $module;
 	}
@@ -1547,7 +1547,7 @@ class com_reports extends component {
 		$module->fix_cat_count = 0;
 
 		// Get all categories.
-		$cats = $_->entity_manager->get_entities(
+		$cats = $_->nymph->getEntities(
 				array('class' => com_sales_category, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'category'),
@@ -1555,7 +1555,7 @@ class com_reports extends component {
 				)
 			);
 		// Get all products.
-		$products = $_->entity_manager->get_entities(
+		$products = $_->nymph->getEntities(
 				array('class' => com_sales_product),
 				array('&',
 					'tag' => array('com_sales', 'product'),
@@ -1570,7 +1570,7 @@ class com_reports extends component {
 					unset($cur_cat->products[$cur_key]);
 					if ($cur_cat->save())
 						$module->fix_cat_count++;
-				} elseif (($key = $cur_product->array_search($products)) !== false) {
+				} elseif (($key = $cur_product->arraySearch($products)) !== false) {
 					unset($products[$key]);
 				}
 			}

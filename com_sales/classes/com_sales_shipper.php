@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_shipper extends entity {
+class com_sales_shipper extends Entity {
+	const etype = 'com_sales_shipper';
 	protected $tags = array('com_sales', 'shipper');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_sales_shipper extends entity {
 		// Defaults.
 		$this->address_type = 'us';
 		$this->tracking = 'custom';
-	}
-
-	public static function etype() {
-		return 'com_sales_shipper';
 	}
 
 	/**

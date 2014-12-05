@@ -84,8 +84,8 @@ if ($_->config->com_sales->com_esp) {
 		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<script type="text/javascript">
@@ -543,7 +543,7 @@ if ($_->config->com_sales->com_esp) {
 										);
 									if (isset($_SESSION['user']->group->guid))
 										$selector['ref'][] = array('location', $_SESSION['user']->group);
-									$stock_entries = $_->entity_manager->get_entities(
+									$stock_entries = $_->nymph->getEntities(
 											array('class' => com_sales_stock, 'limit' => $_->config->com_sales->add_product_show_serials),
 											$selector
 										);
@@ -1703,7 +1703,7 @@ if ($_->config->com_sales->com_esp) {
 			<tbody>
 			<?php foreach($this->categories as $category) { ?>
 				<tr title="<?php e($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? h("child ch_{$category->parent->guid} ") : ''; ?>">
-					<td><?php echo isset($category->parent) ? $category->array_search($category->parent->children) + 1 : '0' ; ?></td>
+					<td><?php echo isset($category->parent) ? $category->arraySearch($category->parent->children) + 1 : '0' ; ?></td>
 					<td><?php e($category->name); ?></td>
 					<td><?php echo count($category->products); ?></td>
 				</tr>

@@ -62,7 +62,7 @@ class com_hrm extends component {
 			$selector2 = array('&', 'data' => array('terminated', true));
 
 
-		$employees = (array) $_->entity_manager->get_entities(
+		$employees = (array) $_->nymph->getEntities(
 				array('class' => com_hrm_employee),
 				$selector,
 				$selector2
@@ -78,7 +78,7 @@ class com_hrm extends component {
 	 */
 	public function get_issue_types() {
 		global $_;
-		return $_->entity_manager->get_entities(array('class' => com_hrm_issue_type), array('&', 'tag' => array('com_hrm', 'issue_type')));
+		return $_->nymph->getEntities(array('class' => com_hrm_issue_type), array('&', 'tag' => array('com_hrm', 'issue_type')));
 	}
 	/**
 	 * Creates and attaches a module which lists employee payroll adjustments.
@@ -89,7 +89,7 @@ class com_hrm extends component {
 		global $_;
 
 		$module = new module('com_hrm', 'adjustment/list', 'content');
-		$module->adjustments = $_->entity_manager->get_entities(array('class' => com_hrm_bonus), array('&', 'tag' => array('com_hrm', 'adjustment')));
+		$module->adjustments = $_->nymph->getEntities(array('class' => com_hrm_bonus), array('&', 'tag' => array('com_hrm', 'adjustment')));
 
 		if ( empty($module->adjustments) )
 			pines_notice('There are no employee adjustments.');
@@ -105,7 +105,7 @@ class com_hrm extends component {
 		global $_;
 
 		$module = new module('com_hrm', 'application/list', 'content');
-		$module->applications = $_->entity_manager->get_entities(array('class' => com_hrm_application), array('&', 'tag' => array('com_hrm', 'application')));
+		$module->applications = $_->nymph->getEntities(array('class' => com_hrm_application), array('&', 'tag' => array('com_hrm', 'application')));
 
 		if ( empty($module->applications) )
 			pines_notice('There are no matching applications.');
@@ -122,7 +122,7 @@ class com_hrm extends component {
 		global $_;
 
 		$module = new module('com_hrm', 'bonus/list', 'content');
-		$module->bonuses = $_->entity_manager->get_entities(array('class' => com_hrm_bonus), array('&', 'tag' => array('com_hrm', 'bonus')));
+		$module->bonuses = $_->nymph->getEntities(array('class' => com_hrm_bonus), array('&', 'tag' => array('com_hrm', 'bonus')));
 
 		if ( empty($module->bonuses) )
 			pines_notice('There are no employee bonuses.');
@@ -156,7 +156,7 @@ class com_hrm extends component {
 		global $_;
 
 		$module = new module('com_hrm', 'issue/list', 'content');
-		$module->types = $_->entity_manager->get_entities(array('class' => com_hrm_issue_type), array('&', 'tag' => array('com_hrm', 'issue_type')));
+		$module->types = $_->nymph->getEntities(array('class' => com_hrm_issue_type), array('&', 'tag' => array('com_hrm', 'issue_type')));
 
 		if ( empty($module->types) )
 			pines_notice('There are no issue types.');
@@ -199,7 +199,7 @@ class com_hrm extends component {
 	public function review_timeoff() {
 		global $_;
 		$module = new module('com_hrm', 'timeoff/review', 'content');
-		$module->requests = $_->entity_manager->get_entities(array('class' => com_hrm_rto), array('&', 'tag' => array('com_hrm', 'rto'), 'data' => array('status', 'pending')));
+		$module->requests = $_->nymph->getEntities(array('class' => com_hrm_rto), array('&', 'tag' => array('com_hrm', 'rto'), 'data' => array('status', 'pending')));
 		$_->page->ajax($module->render(), 'text/html');
 
 		return $module;

@@ -22,7 +22,7 @@ class com_newsletter extends component {
 	/**
 	 * Provide a form for the user to edit a mailing.
 	 *
-	 * @param entity|null $mail The mailing to edit. If null, a new one is created.
+	 * @param Entity|null $mail The mailing to edit. If null, a new one is created.
 	 * @param string $new_option The option to route to when saved.
 	 * @param string $new_action The action to route to when saved.
 	 * @param string $close_option The option to route to when closed.
@@ -33,12 +33,12 @@ class com_newsletter extends component {
 		global $_;
 
 		if ( isset($mail) ) {
-			if ( !$mail->has_tag('com_newsletter', 'mail') ) {
+			if ( !$mail->hasTag('com_newsletter', 'mail') ) {
 				pines_error('Invalid mail!');
 				return false;
 			}
 		} else {
-			$mail = new entity('com_newsletter', 'mail');
+			$mail = new Entity('com_newsletter', 'mail');
 		}
 		$module = new module('com_newsletter', 'edit_mail', 'content');
 		$module->entity = $mail;
@@ -58,7 +58,7 @@ class com_newsletter extends component {
 		global $_;
 
 		$module = new module('com_newsletter', 'list_mails', 'content');
-		$module->mails = $_->entity_manager->get_entities(array(), array('&', 'tag' => array('com_newsletter', 'mail')));
+		$module->mails = $_->nymph->getEntities(array(), array('&', 'tag' => array('com_newsletter', 'mail')));
 
 		if ( empty($module->mails) ) {
 			//$module->detach();

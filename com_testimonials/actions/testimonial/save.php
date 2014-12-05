@@ -100,13 +100,13 @@ $testimonial->author = $testimonial->create_author();
 
 // Begin the testimonial with a pending tag
 if (!isset($testimonial->guid)) {
-	$testimonial->add_tag('pending');
+	$testimonial->addTag('pending');
 	$testimonial->date = strtotime('now');
 }
 
 // If rated, let's also give it a tag
 if (isset($testimonial->rating)) {
-	$testimonial->add_tag('rated');
+	$testimonial->addTag('rated');
 }
 
 
@@ -117,7 +117,7 @@ if (isset($testimonial->rating)) {
 // hardcoded into the sales component on products, or from hidden inputs that are
 // manually inserted on content pages you want reviews to show up on.
 if ($_REQUEST['review_option_type'] == 'review' || $_REQUEST['review'] == 'ON') {
-	$testimonial->add_tag('review');
+	$testimonial->addTag('review');
 	
 	$review_entity_class = isset($_REQUEST['review_option_entity']) ? 'review_'.$_REQUEST['review_option_entity'] : false;
 	$review_entity_guid = isset($_REQUEST['review_option_entity_id']) ? $_REQUEST['review_option_entity_id'] : false;
@@ -129,37 +129,37 @@ if ($_REQUEST['review_option_type'] == 'review' || $_REQUEST['review'] == 'ON') 
 	
 	// so now, add tags where needed
 	if ($review_entity_class) {
-		$testimonial->add_tag($review_entity_class);
+		$testimonial->addTag($review_entity_class);
 	}
 	if ($review_entity_guid) {
-		$testimonial->add_tag($review_entity_guid);
+		$testimonial->addTag($review_entity_guid);
 	}
 	if (!empty($review_option_additional_tags)) {
 		foreach($review_option_additional_tags as $cur_tag) {
 			$cur_tag = preg_replace('/ /', '-', $cur_tag);
 			if (!in_array($cur_tag, array('pending', 'denied', 'approved', 'share', 'review'))) // tags we don't want to add, but were probably used for retrieval
-				$testimonial->add_tag($cur_tag);
+				$testimonial->addTag($cur_tag);
 		}
 	}
 	// Need to be careful not to add reviews for different products/entities under the same name
 	if ($review_option_name) {
-		$testimonial->add_tag($review_option_name);
+		$testimonial->addTag($review_option_name);
 	}
 	
 	// Reviews get auto approved, but they CAN be denied later.
 	if (!isset($testimonial->guid)) {
-		$testimonial->add_tag('approved');
+		$testimonial->addTag('approved');
 		$testimonial->status = true;
-		$testimonial->remove_tag('pending');
+		$testimonial->removeTag('pending');
 	}
 	// Changing status happens elsewhere on edits.
 }
 
 // Auto deny non-shared ones
 if (!$testimonial->share) {
-	$testimonial->add_tag('denied');
+	$testimonial->addTag('denied');
 	$testimonial->status = false;
-	$testimonial->remove_tag('pending', 'approved', 'share');
+	$testimonial->removeTag('pending', 'approved', 'share');
 }
 
 // Adjust Tags on Testimonial
@@ -185,25 +185,25 @@ if (gatekeeper('com_testimonials/edittags') && !empty($_REQUEST['tags'])) {
 	$testimonial->tags = array_values(array_diff($merged_tags, $remove_tags));
 }
 
-if (!$testimonial->has_tag('pending')) {
-				$testimonial->add_tag('pending');
-				$testimonial->remove_tag('share', 'denied', 'approved');
+if (!$testimonial->hasTag('pending')) {
+				$testimonial->addTag('pending');
+				$testimonial->removeTag('share', 'denied', 'approved');
 			}
 // If the testimonial was approved or denied from the new/edit form
 if (!empty($_REQUEST['approve'])) {
 	// Add / Remove appropriate status tags
 	if ($_REQUEST['approve'] == 'ON') {
 		// Approve it.
-		if (!$testimonial->has_tag('approved')) {
-			$testimonial->add_tag('approved');
-			$testimonial->remove_tag('denied', 'pending');
+		if (!$testimonial->hasTag('approved')) {
+			$testimonial->addTag('approved');
+			$testimonial->removeTag('denied', 'pending');
 			$testimonial->status = 'approved';
 		}
 	} else {
 		// Make it Pending
-		if (!$testimonial->has_tag('pending')) {
-			$testimonial->add_tag('pending');
-			$testimonial->remove_tag('share', 'denied', 'approved');
+		if (!$testimonial->hasTag('pending')) {
+			$testimonial->addTag('pending');
+			$testimonial->removeTag('share', 'denied', 'approved');
 			// Do not set status when pending.
 		}
 	}

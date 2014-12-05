@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 if (!empty($_REQUEST['id'])) {
 	$entity = com_sales_category::factory((int) $_REQUEST['id']);
 } else {
-	$entity = $_->entity_manager->get_entity(
+	$entity = $_->nymph->getEntity(
 			array('class' => com_sales_category),
 			array('&',
 				'tag' => array('com_sales', 'category'),
@@ -102,14 +102,14 @@ switch ($_REQUEST['sort']) {
 		$module->sort_var = 'unit_price';
 		$module->sort_reverse = true;
 		break;
-	case 'p_cdate':
-		$module->sort = 'p_cdate';
-		$module->sort_var = 'p_cdate';
+	case 'cdate':
+		$module->sort = 'cdate';
+		$module->sort_var = 'cdate';
 		$module->sort_reverse = false;
 		break;
-	case 'p_cdate_r':
-		$module->sort = 'p_cdate_r';
-		$module->sort_var = 'p_cdate';
+	case 'cdate_r':
+		$module->sort = 'cdate_r';
+		$module->sort_var = 'cdate';
 		$module->sort_reverse = true;
 		break;
 }

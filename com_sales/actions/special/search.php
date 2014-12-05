@@ -19,7 +19,7 @@ $code = strtoupper($_REQUEST['code']);
 if (empty($code)) {
 	$special = null;
 } else {
-	$special = $_->entity_manager->get_entity(
+	$special = $_->nymph->getEntity(
 			array('class' => com_sales_special),
 			array('&',
 				'tag' => array('com_sales', 'special'),

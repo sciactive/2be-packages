@@ -59,8 +59,8 @@ if (!$this->products) { ?>
 			<option value="name_r"<?php echo ($this->sort == 'name_r') ? ' selected="selected"' : '' ?>>Name (Z to A)</option>
 			<option value="unit_price"<?php echo ($this->sort == 'unit_price') ? ' selected="selected"' : '' ?>>Price (Low to High)</option>
 			<option value="unit_price_r"<?php echo ($this->sort == 'unit_price_r') ? ' selected="selected"' : '' ?>>Price (High to Low)</option>
-			<option value="p_cdate"<?php echo ($this->sort == 'p_cdate') ? ' selected="selected"' : '' ?>>Date (Oldest First)</option>
-			<option value="p_cdate_r"<?php echo ($this->sort == 'p_cdate_r') ? ' selected="selected"' : '' ?>>Date (Newest First)</option>
+			<option value="cdate"<?php echo ($this->sort == 'cdate') ? ' selected="selected"' : '' ?>>Date (Oldest First)</option>
+			<option value="cdate_r"<?php echo ($this->sort == 'cdate_r') ? ' selected="selected"' : '' ?>>Date (Newest First)</option>
 		</select>
 	</div>
 </div>

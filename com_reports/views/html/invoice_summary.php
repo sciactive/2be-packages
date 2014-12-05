@@ -198,7 +198,7 @@ if (isset($_->com_googledrive)) {
 			<th>Profit</th> */ ?>
 			<th>Status</th>
 			<?php
-			$payment_types = $_->entity_manager->get_entities(
+			$payment_types = $_->nymph->getEntities(
 					array('class' => com_sales_payment_type),
 					array('&',
 						'tag' => array('com_sales', 'payment_type'),
@@ -215,7 +215,7 @@ if (isset($_->com_googledrive)) {
 		foreach ($this->invoices as $cur_invoice) {
 			if ($cur_invoice->status == 'voided')
 				$type = 'void';
-			elseif ($cur_invoice->has_tag('return'))
+			elseif ($cur_invoice->hasTag('return'))
 				$type = 'return';
 			else
 				$type = 'sale';
@@ -226,9 +226,9 @@ if (isset($_->com_googledrive)) {
 			}
 		?>
 		<tr title="<?php e($cur_invoice->customer->guid); ?>" class="<?php echo $type; ?>">
-			<td><a data-entity="<?php e($cur_invoice->guid); ?>" data-entity-context="<?php echo $cur_invoice->has_tag('return') ? 'com_sales_return' : 'com_sales_sale'; ?>"><?php e($cur_invoice->id); ?></a></td>
+			<td><a data-entity="<?php e($cur_invoice->guid); ?>" data-entity-context="<?php echo $cur_invoice->hasTag('return') ? 'com_sales_return' : 'com_sales_sale'; ?>"><?php e($cur_invoice->id); ?></a></td>
 			<td><?php echo ucwords($type); ?></td>
-			<td><?php e(format_date($cur_invoice->p_cdate, 'full_sort')); ?></td>
+			<td><?php e(format_date($cur_invoice->cdate, 'full_sort')); ?></td>
 			<td><a data-entity="<?php e($cur_invoice->group->guid); ?>" data-entity-context="group"><?php e($cur_invoice->group->name); ?></a></td>
 			<td><a data-entity="<?php e($cur_invoice->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($cur_invoice->customer->name); ?></a></td>
 			<td><a data-entity="<?php e($cur_invoice->user->guid); ?>" data-entity-context="user"><?php e($cur_invoice->user->name); ?></a></td>

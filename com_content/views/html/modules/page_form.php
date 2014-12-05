@@ -10,8 +10,8 @@
  */
 /* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$pages = $_->entity_manager->get_entities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
-$_->entity_manager->sort($pages, 'name');
+$pages = $_->nymph->getEntities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
+$_->nymph->sort($pages, 'name');
 ?>
 <div class="pf-form">
 	<div class="pf-element">

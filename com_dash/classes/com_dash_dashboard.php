@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\dash
  */
-class com_dash_dashboard extends entity {
+class com_dash_dashboard extends Entity {
+	const etype = 'com_dash_dashboard';
 	protected $tags = array('com_dash', 'dashboard');
 
 	public function __construct($id = 0) {
@@ -100,10 +101,6 @@ class com_dash_dashboard extends entity {
 				)
 			),
 		);
-	}
-
-	public static function etype() {
-		return 'com_dash_dashboard';
 	}
 
 	public function info($type) {

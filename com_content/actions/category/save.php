@@ -119,7 +119,7 @@ if (empty($category->name)) {
 	return;
 }
 
-$test = $_->entity_manager->get_entity(array('class' => com_content_category, 'skip_ac' => true), array('&', 'tag' => array('com_content', 'category'), 'data' => array('alias', $category->alias)));
+$test = $_->nymph->getEntity(array('class' => com_content_category, 'skip_ac' => true), array('&', 'tag' => array('com_content', 'category'), 'data' => array('alias', $category->alias)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$category->print_form();
 	pines_notice('There is already an category with that alias. Please choose a different alias.');
@@ -143,7 +143,7 @@ if ((int) $_REQUEST['parent'] != $category->parent->guid) {
 	// The category has a different parent.
 	if (isset($category->parent)) {
 		// Remove the category from its parent.
-		$key = $category->array_search($category->parent->children);
+		$key = $category->arraySearch($category->parent->children);
 		if ($key !== false)
 			unset($category->parent->children[$key]);
 		if ($category->parent->save() && $category->save()) {

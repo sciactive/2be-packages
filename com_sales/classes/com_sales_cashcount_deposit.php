@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_cashcount_deposit extends entity {
+class com_sales_cashcount_deposit extends Entity {
+	const etype = 'com_sales_cashcount_deposit';
 	protected $tags = array('com_sales', 'cashcount_audit');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_sales_cashcount_deposit extends entity {
 		// Defaults.
 		$this->status = 'pending';
 		$this->count = array();
-	}
-
-	public static function etype() {
-		return 'com_sales_cashcount_deposit';
 	}
 
 	public function info($type) {

@@ -149,7 +149,7 @@ $_->com_jstree->load();
 		<tr title="<?php e($cur_count->guid); ?>">
 			<td><a data-entity="<?php e($cur_count->guid); ?>" data-entity-context="com_sales_cashcount"><?php e($cur_count->guid); ?></a></td>
 			<td><a data-entity="<?php e($cur_count->group->guid); ?>" data-entity-context="group"><?php e($cur_count->group->name); ?></a></td>
-			<td><?php e(format_date($cur_count->p_cdate)); ?></td>
+			<td><?php e(format_date($cur_count->cdate)); ?></td>
 			<td><?php echo $cur_count->final ? 'Yes' : 'No'; ?></td>
 			<td><?php echo $cur_count->cashed_out ? 'Yes' : 'No'; ?></td>
 			<td style="text-align: right;"><?php echo count($cur_count->audits); ?></td>

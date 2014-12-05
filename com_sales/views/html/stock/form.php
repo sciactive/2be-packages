@@ -32,8 +32,8 @@ $_->com_jstree->load();
 		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
@@ -272,7 +272,7 @@ $_->com_jstree->load();
 							<select class="pf-field form-control" name="vendor">
 								<option value="null">-- None --</option>
 								<?php
-								$_->entity_manager->sort($this->vendors, 'name');
+								$_->nymph->sort($this->vendors, 'name');
 								foreach ($this->vendors as $cur_vendor) { ?>
 								<option value="<?php e($cur_vendor->guid); ?>"<?php echo $this->entity->vendor->guid == $cur_vendor->guid ? ' selected="selected"' : ''; ?>><?php e($cur_vendor->name); ?></option>
 								<?php } ?>

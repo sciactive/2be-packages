@@ -13,7 +13,7 @@ defined('P_RUN') or die('Direct access prohibited');
 
 // TODO: Provide a method to define a context. (So non-entities would still work.)
 
-$entity = $_->entity_manager->get_entity(
+$entity = $_->nymph->getEntity(
 		array('class' => $_REQUEST['context']),
 		array('&',
 			'guid' => (int) $_REQUEST['id']

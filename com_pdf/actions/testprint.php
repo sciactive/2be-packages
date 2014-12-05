@@ -26,7 +26,7 @@ $displays->pdf_keywords = 'test';
 // This reads the display data from the script set up by load_editors().
 $displays->read_request_data();
 
-$entity = entity::factory();
+$entity = Entity::factory();
 $entity->name = $_REQUEST['name'];
 $entity->age = $_REQUEST['age'];
 $entity->phone = $_REQUEST['phone'];

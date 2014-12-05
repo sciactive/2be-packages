@@ -21,7 +21,7 @@ return array(
 	'description' => 'The company calendar can be used to manage employees and customers.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'user_manager&entity_manager&editor',
+		'service' => 'user_manager&editor',
 		'component' => 'com_jquery&com_bootstrap&com_pnotify&com_jstree&com_ptags&com_hrm&com_pform'
 	),
 	'abilities' => array(

@@ -17,7 +17,7 @@ if ( !gatekeeper('com_customer/editcustomer') )
 $list = explode(',', $_REQUEST['id']);
 foreach ($list as $cur_customer) {
 	$cur_entity = com_customer_customer::factory((int) $cur_customer);
-	$cur_entity->remove_tag('com_customer', 'customer');
+	$cur_entity->removeTag('com_customer', 'customer');
 	if ( !isset($cur_entity->guid) || !$cur_entity->save() )
 		$failed_removes .= (empty($failed_removes) ? '' : ', ').$cur_customer;
 }

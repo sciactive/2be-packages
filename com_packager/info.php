@@ -21,7 +21,7 @@ return array(
 	'description' => 'Package your components and templates into a 2be repository ready Slim archive. You can use these packages to distribute your component to other 2be users.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager&uploader&editor&configurator',
+		'service' => 'uploader&editor&configurator',
 		'component' => 'com_slim&com_jquery&com_bootstrap&com_pgrid&com_ptags&com_pform',
 		'package' => 'com_packager-data'
 	),

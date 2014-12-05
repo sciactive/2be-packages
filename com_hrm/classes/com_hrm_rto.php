@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\hrm
  */
-class com_hrm_rto extends entity {
+class com_hrm_rto extends Entity {
+	const etype = 'com_hrm_rto';
 	protected $tags = array('com_hrm', 'rto');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_hrm_rto extends entity {
 		// Defaults.
 		$this->status = 'pending';
 		$this->all_day = true;
-	}
-
-	public static function etype() {
-		return 'com_hrm_rto';
 	}
 
 	public function info($type) {
@@ -60,9 +57,9 @@ class com_hrm_rto extends entity {
 			$selector3 = array('&', 'gte' => array('end', $this->end), 'lte' => array('start', $this->start));
 
 			$conflicts = array_merge(
-				$_->entity_manager->get_entities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector1),
-				$_->entity_manager->get_entities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector2),
-				$_->entity_manager->get_entities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector3)
+				$_->nymph->getEntities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector1),
+				$_->nymph->getEntities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector2),
+				$_->nymph->getEntities(array('limit' => 1, 'class' => com_calendar_event), $selector, $selector3)
 			);
 		} else {
 			$conflicts = array();
@@ -101,7 +98,7 @@ class com_hrm_rto extends entity {
 		$module->entity = $this;
 		$module->requests = array();
 		// Load all pending time off requests so they can be edited if needed.
-		$module->requests = $_->entity_manager->get_entities(array('class' => com_hrm_rto), array('!&', 'data' => array('status', 'approved')), array('&', 'tag' => array('com_hrm', 'rto'), 'ref' => array('user', $_SESSION['user'])));
+		$module->requests = $_->nymph->getEntities(array('class' => com_hrm_rto), array('!&', 'data' => array('status', 'approved')), array('&', 'tag' => array('com_hrm', 'rto'), 'ref' => array('user', $_SESSION['user'])));
 		$_->page->ajax($module->render(), 'text/html');
 	}
 }

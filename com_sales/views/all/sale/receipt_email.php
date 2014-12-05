@@ -11,7 +11,7 @@
 /* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
 
-$sale = $this->entity->has_tag('sale');
+$sale = $this->entity->hasTag('sale');
 
 switch ($this->entity->status) {
 	case 'quoted':
@@ -93,7 +93,7 @@ switch ($this->entity->status) {
 								echo '<span>'.h(format_date($this->entity->void_date, 'date_short')).'</span>';
 								break;
 							default:
-								echo '<span>'.h(format_date($this->entity->p_cdate, 'date_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->cdate, 'date_short')).'</span>';
 								break;
 						} ?></td>
 					</tr>
@@ -113,7 +113,7 @@ switch ($this->entity->status) {
 								echo '<span>'.h(format_date($this->entity->void_date, 'time_short')).'</span>';
 								break;
 							default:
-								echo '<span>'.h(format_date($this->entity->p_cdate, 'time_short')).'</span>';
+								echo '<span>'.h(format_date($this->entity->cdate, 'time_short')).'</span>';
 								break;
 						} ?></td>
 					</tr>
@@ -138,7 +138,7 @@ switch ($this->entity->status) {
 	<br />
 	<table width="100%" cellspacing="0" cellpadding="0">
 		<tr>
-			<?php if (isset($this->entity->shipping_address) && ($this->entity->has_tag('shipping_pending') || $this->entity->has_tag('shipping_shipped') || $this->entity->warehouse)) { ?>
+			<?php if (isset($this->entity->shipping_address) && ($this->entity->hasTag('shipping_pending') || $this->entity->hasTag('shipping_shipped') || $this->entity->warehouse)) { ?>
 			<td width="50%" valign="top" align="left">
 				<h3>Ship To:</h3>
 				<strong><?php e($this->entity->shipping_address->name); ?></strong><br />
@@ -211,10 +211,10 @@ switch ($this->entity->status) {
 					$fulfilled = 0;
 					$shipped = 0;
 					foreach ((array) $cur_product['stock_entities'] as $cur_stock) {
-						if (!isset($cur_stock->guid) || $cur_stock->in_array((array) $cur_product['returned_stock_entities']))
+						if (!isset($cur_stock->guid) || $cur_stock->inArray((array) $cur_product['returned_stock_entities']))
 							continue;
 						$fulfilled++;
-						if ($cur_stock->in_array((array) $cur_product['shipped_entities']))
+						if ($cur_stock->inArray((array) $cur_product['shipped_entities']))
 							$shipped++;
 					}
 					if ($fulfilled) {

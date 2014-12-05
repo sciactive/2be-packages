@@ -15,7 +15,7 @@ if ( !gatekeeper('com_reports/viewsalesranking') )
 	punt_user(null, pines_url('com_reports', 'viewsalesranking', array('id' => $_REQUEST['id'])));
 
 if ($_REQUEST['id'] === 'latest') {
-	$entity = $_->entity_manager->get_entity(
+	$entity = $_->nymph->getEntity(
 			array('class' => com_reports_sales_ranking, 'reverse' => true),
 			array('&',
 				'tag' => array('com_reports', 'sales_ranking')

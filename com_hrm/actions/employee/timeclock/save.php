@@ -30,7 +30,7 @@ if (empty($time_start) || empty($time_end) || $time_end <= $time_start) {
 }
 
 // And gather the current entries in that time range.
-$unsorted_entries = $_->entity_manager->get_entities(
+$unsorted_entries = $_->nymph->getEntities(
 		array('class' => com_hrm_timeclock_entry),
 		array('&',
 			'tag' => array('com_hrm', 'timeclock_entry'),

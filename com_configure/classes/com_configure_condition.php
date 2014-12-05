@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\configure
  */
-class com_configure_condition extends entity {
+class com_configure_condition extends Entity {
+	const etype = 'com_configure_condition';
 	protected $tags = array('com_configure', 'condition');
 
 	public function __construct($id = 0) {
@@ -27,10 +28,6 @@ class com_configure_condition extends entity {
 		$this->sys_config = array();
 		$this->com_config = array();
 		$this->is_com_configure_condition = true;
-	}
-
-	public static function etype() {
-		return 'com_configure_condition';
 	}
 
 	public function info($type) {

@@ -22,7 +22,7 @@ foreach ($list as $cur_id) {
 	if ( !isset($cur_entity->guid) || !$cur_entity->delete() ) {
 		$failed_removes[] = $cur_id;
 	} elseif ($group != 0) {
-		$events = $_->entity_manager->get_entities(
+		$events = $_->nymph->getEntities(
 				array('class' => com_calendar_event),
 				array('&',
 					'tag' => array('com_calendar', 'event'),

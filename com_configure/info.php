@@ -25,7 +25,7 @@ return array(
 		'component' => 'com_jquery&com_bootstrap&com_ptags&com_pgrid&com_markdown&com_pform'
 	),
 	'recommend' => array(
-		'service' => 'entity_manager&user_manager'
+		'service' => 'user_manager'
 	),
 	'abilities' => array(
 		array('edit', 'Edit Configuration', 'Let the user change (and see) configuration settings.'),

@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($this->id == 'random' || empty($this->id)) {
-	$products = $_->entity_manager->get_entities(
+	$products = $_->nymph->getEntities(
 			array('class' => com_sales_product),
 			array('&',
 				'tag' => array('com_sales', 'product'),

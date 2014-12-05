@@ -43,7 +43,7 @@ if (!empty($location) && isset($location->guid))
 
 if ($not_guids) {
 	$not_guids = array_map('intval', $not_guids);
-	$stock = (array) $_->entity_manager->get_entities(
+	$stock = (array) $_->nymph->getEntities(
 			array('class' => com_sales_stock, 'limit' => $quantity),
 			$selector,
 			array('!&',
@@ -51,7 +51,7 @@ if ($not_guids) {
 			)
 		);
 } else {
-	$stock = (array) $_->entity_manager->get_entities(
+	$stock = (array) $_->nymph->getEntities(
 			array('class' => com_sales_stock, 'limit' => $quantity),
 			$selector
 		);

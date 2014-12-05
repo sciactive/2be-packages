@@ -21,7 +21,7 @@ if ( !gatekeeper('com_customer/editcustomer') || !gatekeeper('com_user/edituser'
 $list = explode(',', $_REQUEST['id']);
 foreach ($list as $cur_user) {
 	$cur_entity = user::factory((int) $cur_user);
-	$cur_entity->add_tag('com_customer', 'customer');
+	$cur_entity->addTag('com_customer', 'customer');
 	if ( !isset($cur_entity->guid) || !$cur_entity->save() )
 		$failed_adds .= (empty($failed_adds) ? '' : ', ').$cur_user;
 }

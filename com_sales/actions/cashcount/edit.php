@@ -31,7 +31,7 @@ if ($_SESSION['user']->group->com_sales_task_cashcount) {
 	}
 	if (!isset($entity->guid) && isset($_SESSION['user']->group)) {
 		// Look for any cashcounts that are waiting to be committed.
-		$existing_counts = $_->entity_manager->get_entities(
+		$existing_counts = $_->nymph->getEntities(
 				array('class' => com_sales_cashcount),
 				array('&',
 					'tag' => array('com_sales', 'cashcount'),

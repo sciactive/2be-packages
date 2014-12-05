@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\example
  */
-class com_example_foobar extends entity {
+class com_example_foobar extends Entity {
+	const etype = 'com_example_foobar';
 	protected $tags = array('com_example', 'foobar');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_example_foobar extends entity {
 		// Defaults.
 		$this->enabled = true;
 		$this->attributes = array();
-	}
-
-	public static function etype() {
-		return 'com_example_foobar';
 	}
 
 	public function info($type) {

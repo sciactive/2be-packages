@@ -19,7 +19,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\pdf
  */
-class com_pdf_displays extends entity {
+class com_pdf_displays extends Entity {
+	const etype = 'com_pdf_displays';
 	protected $tags = array('com_pdf', 'displays');
 
 	public function __construct($id = 0) {
@@ -35,10 +36,6 @@ class com_pdf_displays extends entity {
 		$this->pdf_creator = '2be';
 		$this->pdf_subject = '';
 		$this->pdf_keywords = '';
-	}
-
-	public static function etype() {
-		return 'com_pdf_displays';
 	}
 
 	public function info($type) {

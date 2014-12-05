@@ -39,7 +39,7 @@ $entity->group = $location;
 $entity->user = $user;
 
 // Change the entity's transactions too.
-$transactions = $_->entity_manager->get_entities(
+$transactions = $_->nymph->getEntities(
 		array('class' => com_sales_tx),
 		array('&', 'tag' => array('com_sales', 'transaction')),
 		array('|',

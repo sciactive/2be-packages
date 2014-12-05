@@ -16,7 +16,7 @@ $get_testimonials = pines_url('com_testimonials', 'testimonial/get_testimonials'
 $show_entity_help = gatekeeper('com_testimonials/showentityhelp');
 $viewanonauthor = gatekeeper('com_testimonials/viewanonauthor');
 $logged_in = !empty($_SESSION['user']);
-$customer = ($logged_in && $_SESSION['user']->has_tag('customer'));
+$customer = ($logged_in && $_SESSION['user']->hasTag('customer'));
 $customer_guid = ($logged_in && $customer) ? $_SESSION['user']->guid : '';
 ?>
 

@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_transfer extends entity {
+class com_sales_transfer extends Entity {
+	const etype = 'com_sales_transfer';
 	protected $tags = array('com_sales', 'transfer');
 
 	public function __construct($id = 0) {
@@ -29,10 +30,6 @@ class com_sales_transfer extends entity {
 		$this->finished = false;
 		$this->origin = $_SESSION['user']->group;
 		$this->destination = null;
-	}
-
-	public static function etype() {
-		return 'com_sales_transfer';
 	}
 
 	/**
@@ -91,7 +88,7 @@ class com_sales_transfer extends entity {
 			$this->pending_serials = array();
 			foreach ($this->stock as $cur_stock) {
 				// If it's already received, move on.
-				if ($cur_stock->in_array((array) $this->received))
+				if ($cur_stock->inArray((array) $this->received))
 					continue;
 				$this->pending_products[] = $cur_stock->product;
 				if (isset($cur_stock->serial))
@@ -127,7 +124,7 @@ class com_sales_transfer extends entity {
 		global $_;
 		$module = new module('com_sales', 'transfer/form', 'content');
 		$module->entity = $this;
-		$module->categories = (array) $_->entity_manager->get_entities(
+		$module->categories = (array) $_->nymph->getEntities(
 				array('class' => com_sales_category),
 				array('&',
 					'tag' => array('com_sales', 'category'),
@@ -135,7 +132,7 @@ class com_sales_transfer extends entity {
 				)
 			);
 		$module->locations = (array) $_->user_manager->get_groups();
-		$module->shippers = (array) $_->entity_manager->get_entities(
+		$module->shippers = (array) $_->nymph->getEntities(
 				array('class' => com_sales_shipper),
 				array('&',
 					'tag' => array('com_sales', 'shipper')

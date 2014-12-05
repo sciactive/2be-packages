@@ -23,18 +23,18 @@ class com_customer_customer extends user {
 	 */
 	public function __construct($id = 0) {
 		parent::__construct();
-		$this->add_tag('com_user', 'user', 'com_customer', 'customer');
-		$this->remove_tag('enabled');
+		$this->addTag('com_user', 'user', 'com_customer', 'customer');
+		$this->removeTag('enabled');
 		if ($id > 0 || (string) $id === $id) {
 			global $_;
 			if ((int) $id === $id)
-				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'user', 'com_customer', 'customer')));
+				$entity = $_->nymph->getEntity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'user', 'com_customer', 'customer')));
 			else
-				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'user', 'com_customer', 'customer'), 'data' => array('username', $id)));
+				$entity = $_->nymph->getEntity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'user', 'com_customer', 'customer'), 'data' => array('username', $id)));
 			if (isset($entity)) {
 				$this->guid = $entity->guid;
 				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
+				$this->putData($entity->getData(), $entity->getSData());
 				if (isset($this->secret))
 					$this->verify_email = $this->email;
 				return;
@@ -52,7 +52,7 @@ class com_customer_customer extends user {
 		$this->attributes = array();
 		// Load default groups.
 		global $_;
-		$group = $_->entity_manager->get_entity(
+		$group = $_->nymph->getEntity(
 				array('class' => group, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_user', 'group'),
@@ -64,7 +64,7 @@ class com_customer_customer extends user {
 		if ($_->config->com_customer->follow_um_rules && $_->config->com_user->verify_email) {
 			if ($_->config->com_user->unverified_access) {
 				// Use unverified user groups.
-				$groups = $_->entity_manager->get_entities(
+				$groups = $_->nymph->getEntities(
 						array('class' => group, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_user', 'group'),
@@ -75,14 +75,14 @@ class com_customer_customer extends user {
 				$this->com_customer__unverified_groups = true;
 				if ($groups)
 					$this->groups = $groups;
-				$this->add_tag('enabled');
+				$this->addTag('enabled');
 				return;
 			}
 			$this->com_customer__unverified = true;
-			$this->remove_tag('enabled');
+			$this->removeTag('enabled');
 		} else
-			$this->add_tag('enabled');
-		$groups = $_->entity_manager->get_entities(
+			$this->addTag('enabled');
+		$groups = $_->nymph->getEntities(
 				array('class' => group, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_user', 'group'),
@@ -194,7 +194,7 @@ class com_customer_customer extends user {
 		$module->entity = $this;
 		$module->com_sales = $_->depend->check('component', 'com_sales');
 
-		$module->interactions = $_->entity_manager->get_entities(
+		$module->interactions = $_->nymph->getEntities(
 				array('class' => com_customer_interaction),
 				array('&',
 					'ref' => array('customer', $this),
@@ -202,14 +202,14 @@ class com_customer_customer extends user {
 				)
 			);
 		if ($module->com_sales) {
-			$module->sales = $_->entity_manager->get_entities(
+			$module->sales = $_->nymph->getEntities(
 					array('class' => com_sales_sale),
 					array('&',
 						'ref' => array('customer', $this),
 						'tag' => array('com_sales', 'sale')
 					)
 				);
-			$module->returns = $_->entity_manager->get_entities(
+			$module->returns = $_->nymph->getEntities(
 					array('class' => com_sales_return),
 					array('&',
 						'ref' => array('customer', $this),
@@ -268,7 +268,7 @@ class com_customer_customer extends user {
 		$module = new module('com_customer', 'customer/form', 'content');
 		$module->entity = $this;
 		$module->com_sales = $_->depend->check('component', 'com_sales');
-		$module->interactions = $_->entity_manager->get_entities(
+		$module->interactions = $_->nymph->getEntities(
 				array('class' => com_customer_interaction),
 				array('&',
 					'ref' => array('customer', $this),
@@ -276,14 +276,14 @@ class com_customer_customer extends user {
 				)
 			);
 		if ($module->com_sales) {
-			$module->sales = $_->entity_manager->get_entities(
+			$module->sales = $_->nymph->getEntities(
 					array('class' => com_sales_sale),
 					array('&',
 						'ref' => array('customer', $this),
 						'tag' => array('com_sales', 'sale')
 					)
 				);
-			$module->returns = $_->entity_manager->get_entities(
+			$module->returns = $_->nymph->getEntities(
 					array('class' => com_sales_return),
 					array('&',
 						'ref' => array('customer', $this),

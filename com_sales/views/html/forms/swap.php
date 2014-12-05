@@ -143,12 +143,12 @@ defined('P_RUN') or die('Direct access prohibited');
 		<div class="pf-group">
 			<div class="pf-field">
 				<?php foreach ($cur_product['stock_entities'] as $cur_stock) {
-					if (!isset($cur_stock->guid) || $cur_stock->in_array((array) $cur_product['returned_stock_entities']))
+					if (!isset($cur_stock->guid) || $cur_stock->inArray((array) $cur_product['returned_stock_entities']))
 						continue;
 					$classes = '';
 					if ($cur_product['delivery'] == 'warehouse')
 						$classes .= 'warehouse';
-					if ($cur_stock->in_array((array) $cur_product['shipped_entities']))
+					if ($cur_stock->inArray((array) $cur_product['shipped_entities']))
 						$classes .= ' shipped';
 					if ($cur_product['entity']->serialized)
 						$classes .= ' serialized';

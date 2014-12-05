@@ -129,8 +129,8 @@ class com_configure extends component implements configurator_interface {
 		$module->user = $condition_obj;
 		if ($condition_obj->is_com_configure_condition) {
 			$module->per_condition = true;
-			$module->conditions = $_->entity_manager->get_entities(array('class' => com_configure_condition), array('&', 'tag' => array('com_configure', 'condition')));
-			$_->entity_manager->sort($module->conditions, 'name');
+			$module->conditions = $_->nymph->getEntities(array('class' => com_configure_condition), array('&', 'tag' => array('com_configure', 'condition')));
+			$_->nymph->sort($module->conditions, 'name');
 		} else {
 			$module->per_user = true;
 			$module->groups = $_->user_manager->get_groups();

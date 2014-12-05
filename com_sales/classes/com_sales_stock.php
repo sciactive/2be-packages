@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_stock extends entity {
+class com_sales_stock extends Entity {
+	const etype = 'com_sales_stock';
 	protected $tags = array('com_sales', 'stock');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_sales_stock extends entity {
 		// Defaults.
 		$this->location = null;
 		$this->ac = (object) array('user' => 2, 'group' => 2, 'other' => 2);
-	}
-
-	public static function etype() {
-		return 'com_sales_stock';
 	}
 
 	/**
@@ -67,7 +64,7 @@ class com_sales_stock extends entity {
 	 */
 	public function last_reason() {
 		global $_;
-		$last_tx = $_->entity_manager->get_entity(
+		$last_tx = $_->nymph->getEntity(
 				array('reverse' => true, 'class' => com_sales_tx),
 				array('&',
 					'tag' => array('com_sales', 'transaction', 'stock_tx'),
@@ -89,7 +86,7 @@ class com_sales_stock extends entity {
 		global $_;
 		$module = new module('com_sales', 'stock/form', 'content');
 		$module->entity = $this;
-		$module->vendors = (array) $_->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
+		$module->vendors = (array) $_->nymph->getEntities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
 		$module->locations = $_->user_manager->get_groups();
 
 		return $module;
@@ -108,7 +105,7 @@ class com_sales_stock extends entity {
 	 * needed.
 	 *
 	 * @param string $reason The reason for the stock receipt. Such as "received_po".
-	 * @param entity &$on_entity The entity which the product is to be received on.
+	 * @param Entity &$on_entity The entity which the product is to be received on.
 	 * @param group $location The group to use for the new location.
 	 * @param bool $update_received Add this stock entry to $on_entity's received variable.
 	 * @return bool True on success, false on failure.
@@ -130,7 +127,7 @@ class com_sales_stock extends entity {
 		$this->location = ($location ? $location : $_SESSION['user']->group);
 		$tx->type = 'received';
 		$tx->reason = $reason;
-		if (isset($on_entity) && $on_entity->has_tag('po')) {
+		if (isset($on_entity) && $on_entity->hasTag('po')) {
 			// If it's being received on a PO, it needs the cost from it.
 			if (!$on_entity->pending && $on_entity->save() && !$on_entity->pending) {
 				// If it doesn't have a pending array, it's not expecting products.
@@ -179,7 +176,7 @@ class com_sales_stock extends entity {
 	 * needed.
 	 *
 	 * @param string $reason The reason for the stock removal. Such as "sold_at_store".
-	 * @param entity &$on_entity The entity which the product is to be removed by.
+	 * @param Entity &$on_entity The entity which the product is to be removed by.
 	 * @param group $location The group to use for the new location.
 	 * @return bool True on success, false on failure.
 	 */
@@ -224,7 +221,7 @@ class com_sales_stock extends entity {
 		global $_;
 
 		if ($_->config->com_sales->unique_serials && !empty($this->serial)) {
-			$test = $_->entity_manager->get_entity(array('class' => com_sales_stock, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'stock'), 'strict' => array('serial', $this->serial), '!guid' => $this->guid));
+			$test = $_->nymph->getEntity(array('class' => com_sales_stock, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'stock'), 'strict' => array('serial', $this->serial), '!guid' => $this->guid));
 			if (isset($test)) {
 				pines_notice('There is already a stock entry with that serial. Serials must be unique.');
 				return false;

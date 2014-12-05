@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 if (!empty($_REQUEST['id'])) {
 	$entity = com_content_category::factory((int) $_REQUEST['id']);
 } else {
-	$entity = $_->entity_manager->get_entity(
+	$entity = $_->nymph->getEntity(
 			array('class' => com_content_category),
 			array('&',
 				'tag' => array('com_content', 'category'),

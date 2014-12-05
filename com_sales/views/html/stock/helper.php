@@ -86,7 +86,7 @@ echo $module->render();
 		</thead>
 		<tbody>
 			<?php
-			$txs = (array) $_->entity_manager->get_entities(
+			$txs = (array) $_->nymph->getEntities(
 					array('class' => com_sales_tx),
 					array('&',
 						'tag' => array('com_sales', 'transaction', 'stock_tx'),
@@ -97,7 +97,7 @@ echo $module->render();
 			<tr>
 				<td><a data-entity="<?php e($cur_tx->guid); ?>" data-entity-context="com_sales_tx"><?php e($cur_tx->guid); ?></a></td>
 				<td><?php e(ucwords($cur_tx->type)); ?></td>
-				<td><?php e(format_date($cur_tx->p_cdate, 'full_short')); ?></td>
+				<td><?php e(format_date($cur_tx->cdate, 'full_short')); ?></td>
 				<td><a data-entity="<?php e($cur_tx->user->guid); ?>" data-entity-context="user"><?php e($cur_tx->user->name); ?></a></td>
 				<td><a data-entity="<?php e($cur_tx->ref->guid); ?>" data-entity-context="<?php echo isset($cur_tx->ref) ? h(str_replace('hook_override_', '', get_class($cur_tx->ref))) : ''; ?>"><?php echo isset($cur_tx->ref) ? h($cur_tx->ref->info('name')) : ''; ?></a></td>
 			</tr>

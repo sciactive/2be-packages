@@ -71,7 +71,7 @@ foreach ($products as $key => $cur_product) {
 	$cur_selector['ref'][] = array('product', $product);
 	if ($product->serialized)
 		$cur_selector['strict'] = array('serial', $serial);
-	$stock = $_->entity_manager->get_entities(
+	$stock = $_->nymph->getEntities(
 			array('class' => com_sales_stock, 'limit' => $qty),
 			$cur_selector,
 			array('!&',

@@ -14,8 +14,8 @@ defined('P_RUN') or die('Direct access prohibited');
 $sys_config = array();
 $com_config = array();
 
-if (isset($_->entity_manager) && $_->config->com_configure->percondition) {
-	$conditions = (array) $_->entity_manager->get_entities(array('class' => com_configure_condition), array('&', 'tag' => array('com_configure', 'condition')));
+if (isset($_->nymph) && $_->config->com_configure->percondition) {
+	$conditions = (array) $_->nymph->getEntities(array('class' => com_configure_condition), array('&', 'tag' => array('com_configure', 'condition')));
 	foreach ($conditions as &$cur_condition) {
 		// Check that all conditions are met.
 		$pass = true;

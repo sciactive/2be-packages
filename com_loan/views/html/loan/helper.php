@@ -92,7 +92,7 @@ if ($this->render == 'body' && gatekeeper('com_loan/listloans')) {
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Date Loan Added</td>
-				<td><?php e(format_date($this->entity->p_cdate, 'date_sort')); ?></td>
+				<td><?php e(format_date($this->entity->cdate, 'date_sort')); ?></td>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Status</td>

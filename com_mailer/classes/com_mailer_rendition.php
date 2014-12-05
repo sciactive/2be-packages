@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\mailer
  */
-class com_mailer_rendition extends entity {
+class com_mailer_rendition extends Entity {
+	const etype = 'com_mailer_rendition';
 	protected $tags = array('com_mailer', 'rendition');
 
 	public function __construct($id = 0) {
@@ -26,10 +27,6 @@ class com_mailer_rendition extends entity {
 		$this->enabled = true;
 		$this->conditions = array();
 		$this->ac->other = 1;
-	}
-
-	public static function etype() {
-		return 'com_mailer_rendition';
 	}
 
 	public function info($type) {

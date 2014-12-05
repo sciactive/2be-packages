@@ -181,7 +181,7 @@ class com_customer extends component {
 			);
 		if (isset($id) && $id > 0)
 			$selector['!guid'] = $id;
-		$test = $_->entity_manager->get_entity(
+		$test = $_->nymph->getEntity(
 				array('class' => com_customer_customer, 'skip_ac' => true),
 				$selector
 			);
@@ -201,12 +201,12 @@ class com_customer extends component {
 	 */
 	function save_user(&$array, $name, &$object) {
 		global $_;
-		if ($object->has_tag('com_customer', 'customer')) {
+		if ($object->hasTag('com_customer', 'customer')) {
 			// If the secret is unset, it means they verified their email address.
 			if (!isset($object->secret)) {
 				if ($object->com_customer__unverified_groups) {
 					// We should put them in the default customer groups.
-					$object->groups = (array) $_->entity_manager->get_entities(
+					$object->groups = (array) $_->nymph->getEntities(
 							array('class' => group, 'skip_ac' => true),
 							array('&',
 								'tag' => array('com_user', 'group'),
@@ -227,7 +227,7 @@ class com_customer extends component {
 						$_->depend->check('action', 'registeruser')
 				)
 			) {
-			$object->add_tag('com_customer', 'customer');
+			$object->addTag('com_customer', 'customer');
 			$object->points = 0;
 			$object->peak_points = 0;
 			$object->total_points = 0;
@@ -332,7 +332,7 @@ class com_customer extends component {
 
 		$module = new module('com_customer', 'forms/users');
 		if (!$all) {
-			$module->users = $_->entity_manager->get_entities(
+			$module->users = $_->nymph->getEntities(
 				array('class' => user),
 				array('&',
 					'tag' => array('com_user', 'user')
@@ -342,7 +342,7 @@ class com_customer extends component {
 				)
 			);
 		} else {
-			$module->users = $_->entity_manager->get_entities(
+			$module->users = $_->nymph->getEntities(
 				array('class' => user),
 				array('&',
 					'tag' => array('com_user', 'user')

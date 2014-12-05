@@ -10,7 +10,7 @@
  */
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
-$customer = (isset($_SESSION['user']) && $_SESSION['user']->has_tag('customer'));
+$customer = (isset($_SESSION['user']) && $_SESSION['user']->hasTag('customer'));
 
 // get a testimonial to have loaded
 $aggregate = $_->com_testimonials->get_testimonials('aggregate', true, 20, 0, array('rated'));

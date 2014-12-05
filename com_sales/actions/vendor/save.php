@@ -61,7 +61,7 @@ if (empty($vendor->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_sales_vendor, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'vendor'), 'data' => array('name', $vendor->name)));
+$test = $_->nymph->getEntity(array('class' => com_sales_vendor, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'vendor'), 'data' => array('name', $vendor->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$vendor->print_form();
 	pines_notice('There is already a vendor with that name. Please choose a different name.');

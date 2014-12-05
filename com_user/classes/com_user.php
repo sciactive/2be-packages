@@ -70,7 +70,7 @@ class com_user extends component implements user_manager_interface {
 			return true;
 		if (function_exists('gatekeeper') && gatekeeper('system/all'))
 			return true;
-		if ($entity->has_tag('com_user', 'user') || $entity->has_tag('com_user', 'group'))
+		if ($entity->hasTag('com_user', 'user') || $entity->hasTag('com_user', 'group'))
 			return true;
 		if (!isset($entity->user->guid) && !isset($entity->group->guid))
 			return true;
@@ -83,7 +83,7 @@ class com_user extends component implements user_manager_interface {
 
 		if (is_callable(array($entity->user, 'is')) && $entity->user->is($_SESSION['user']))
 			return ($ac->user >= $type);
-		if (is_callable(array($entity->group, 'is')) && ($entity->group->is($_SESSION['user']->group) || $entity->group->in_array($_SESSION['user']->groups) || $entity->group->in_array($_SESSION['descendants'])) )
+		if (is_callable(array($entity->group, 'is')) && ($entity->group->is($_SESSION['user']->group) || $entity->group->inArray($_SESSION['user']->groups) || $entity->group->inArray($_SESSION['descendants'])) )
 			return ($ac->group >= $type);
 		return ($ac->other >= $type);
 	}
@@ -115,7 +115,7 @@ class com_user extends component implements user_manager_interface {
 				);
 			if (isset($id) && $id > 0)
 				$selector['!guid'] = $id;
-			$test = $_->entity_manager->get_entity(
+			$test = $_->nymph->getEntity(
 					array('class' => user, 'skip_ac' => true),
 					$selector
 				);
@@ -136,7 +136,7 @@ class com_user extends component implements user_manager_interface {
 				);
 			if (isset($id) && $id > 0)
 				$selector['!guid'] = $id;
-			$test = $_->entity_manager->get_entity(
+			$test = $_->nymph->getEntity(
 					array('class' => user, 'skip_ac' => true),
 					$selector
 				);
@@ -173,7 +173,7 @@ class com_user extends component implements user_manager_interface {
 			);
 		if (isset($id) && $id > 0)
 			$selector['!guid'] = $id;
-		$test = $_->entity_manager->get_entity(
+		$test = $_->nymph->getEntity(
 				array('class' => user, 'skip_ac' => true),
 				$selector
 			);
@@ -216,7 +216,7 @@ class com_user extends component implements user_manager_interface {
 			);
 		if (isset($id) && $id > 0)
 			$selector['!guid'] = $id;
-		$test = $_->entity_manager->get_entity(
+		$test = $_->nymph->getEntity(
 				array('class' => user, 'skip_ac' => true),
 				$selector, $or
 			);
@@ -230,15 +230,15 @@ class com_user extends component implements user_manager_interface {
 		global $_;
 		pines_session('write');
 		if ((object) $_SESSION['user'] === $_SESSION['user']) {
-			$tmp_user = $_->entity_manager->get_entity(
+			$tmp_user = $_->nymph->getEntity(
 					array('class' => user),
 					array('&',
 						'guid' => array($_SESSION['user']->guid),
-						'gt' => array('p_mdate', $_SESSION['user']->p_mdate)
+						'gt' => array('mdate', $_SESSION['user']->mdate)
 					)
 				);
 			if (!isset($tmp_user)) {
-				$_SESSION['user']->clear_cache();
+				$_SESSION['user']->clearCache();
 				date_default_timezone_set($_SESSION['user_timezone']);
 				pines_session('close');
 				return;
@@ -344,7 +344,7 @@ class com_user extends component implements user_manager_interface {
 		if (!$all)
 			$tags[] = 'enabled';
 
-		return $_->entity_manager->get_entities(
+		return $_->nymph->getEntities(
 				array('class' => group),
 				array('&',
 					'tag' => $tags
@@ -359,7 +359,7 @@ class com_user extends component implements user_manager_interface {
 		if (!$all)
 			$tags[] = 'enabled';
 
-		return $_->entity_manager->get_entities(
+		return $_->nymph->getEntities(
 				array('class' => user),
 				array('&',
 					'tag' => $tags
@@ -369,7 +369,7 @@ class com_user extends component implements user_manager_interface {
 
 	public function group_sort(&$array, $property = null, $case_sensitive = false, $reverse = false) {
 		global $_;
-		$_->entity_manager->hsort($array, $property, 'parent', $case_sensitive, $reverse);
+		$_->nymph->hsort($array, $property, 'parent', $case_sensitive, $reverse);
 	}
 
 	/**
@@ -385,9 +385,9 @@ class com_user extends component implements user_manager_interface {
 
 		$module->enabled = $enabled;
 		if ($enabled)
-			$module->groups = $_->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group', 'enabled')));
+			$module->groups = $_->nymph->getEntities(array('class' => group), array('&', 'tag' => array('com_user', 'group', 'enabled')));
 		else
-			$module->groups = $_->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group')), array('!&', 'tag' => 'enabled'));
+			$module->groups = $_->nymph->getEntities(array('class' => group), array('&', 'tag' => array('com_user', 'group')), array('!&', 'tag' => 'enabled'));
 
 		if (empty($module->groups))
 			pines_notice('There are no'.($enabled ? ' enabled' : ' disabled').' groups.');
@@ -408,9 +408,9 @@ class com_user extends component implements user_manager_interface {
 
 		$module->enabled = $enabled;
 		if ($enabled)
-			$module->users = $_->entity_manager->get_entities(array('class' => user), array('&', 'tag' => array('com_user', 'user', 'enabled')));
+			$module->users = $_->nymph->getEntities(array('class' => user), array('&', 'tag' => array('com_user', 'user', 'enabled')));
 		else
-			$module->users = $_->entity_manager->get_entities(array('class' => user), array('&', 'tag' => array('com_user', 'user')), array('!&', 'tag' => 'enabled'));
+			$module->users = $_->nymph->getEntities(array('class' => user), array('&', 'tag' => array('com_user', 'user')), array('!&', 'tag' => 'enabled'));
 
 		if (empty($module->users))
 			pines_notice('There are no'.($enabled ? ' enabled' : ' disabled').' users.');
@@ -419,7 +419,7 @@ class com_user extends component implements user_manager_interface {
 	}
 
 	public function login($user) {
-		if ( isset($user->guid) && $user->has_tag('com_user', 'user', 'enabled') && $this->gatekeeper('com_user/login', $user) ) {
+		if ( isset($user->guid) && $user->hasTag('com_user', 'user', 'enabled') && $this->gatekeeper('com_user/login', $user) ) {
 			// Destroy session data.
 			$this->logout();
 			pines_session('write');

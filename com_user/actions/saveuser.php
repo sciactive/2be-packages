@@ -38,9 +38,9 @@ if (in_array('name', $_->config->com_user->user_fields)) {
 }
 if (gatekeeper('com_user/enabling')) {
 	if ($_REQUEST['enabled'] == 'ON')
-		$user->add_tag('enabled');
+		$user->addTag('enabled');
 	else
-		$user->remove_tag('enabled');
+		$user->removeTag('enabled');
 }
 if ($_->config->com_user->email_usernames || in_array('email', $_->config->com_user->user_fields)) {
 	// Only send an email if they don't have the ability to edit all users.
@@ -71,7 +71,7 @@ if ($_->config->com_user->email_usernames || in_array('email', $_->config->com_u
 		$user->email = $_REQUEST['email'];
 	if (isset($user->secret) && gatekeeper('com_user/edituser') && $_REQUEST['email_verified'] == 'ON') {
 		if ($_->config->com_user->unverified_access)
-			$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
+			$user->groups = (array) $_->nymph->getEntities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
 		$user->enable();
 		unset($user->secret);
 	}
@@ -142,7 +142,7 @@ if ( gatekeeper('com_user/assigngroup') ) {
 	$highest_primary_parent = $_->config->com_user->highest_primary;
 	$primary_groups = array();
 	if ($highest_primary_parent == 0) {
-		$primary_groups = $_->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group')));
+		$primary_groups = $_->nymph->getEntities(array('class' => group), array('&', 'tag' => array('com_user', 'group')));
 	} else {
 		if ($highest_primary_parent > 0) {
 			$highest_primary_parent = group::factory($highest_primary_parent);
@@ -166,7 +166,7 @@ if ( gatekeeper('com_user/assigngroup') ) {
 		$highest_secondary_parent = $_->config->com_user->highest_secondary;
 		$secondary_groups = array();
 		if ($highest_secondary_parent == 0) {
-			$secondary_groups = $_->entity_manager->get_entities(array('class' => group), array('&', 'tag' => array('com_user', 'group')));
+			$secondary_groups = $_->nymph->getEntities(array('class' => group), array('&', 'tag' => array('com_user', 'group')));
 		} else {
 			if ($highest_secondary_parent > 0) {
 				$highest_secondary_parent = group::factory($highest_secondary_parent);
@@ -211,7 +211,7 @@ if (!$un_check['result']) {
 	return;
 }
 if (in_array('email', $_->config->com_user->user_fields)) {
-	$test = $_->entity_manager->get_entity(
+	$test = $_->nymph->getEntity(
 			array('class' => user, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_user', 'user'),
@@ -231,7 +231,7 @@ if (empty($user->password) && !$_->config->com_user->pw_empty) {
 	return;
 }
 if (in_array('pin', $_->config->com_user->user_fields) && gatekeeper('com_user/assignpin') && !empty($user->pin)) {
-	$test = $_->entity_manager->get_entity(array('class' => user), array('&', 'tag' => array('com_user', 'user'), 'data' => array('pin', $user->pin)));
+	$test = $_->nymph->getEntity(array('class' => user), array('&', 'tag' => array('com_user', 'user'), 'data' => array('pin', $user->pin)));
 	if (isset($test) && !$user->is($test)) {
 		$user->print_form();
 		pines_notice('This PIN is already in use.');
@@ -280,7 +280,7 @@ if ($user->save()) {
 	pines_error('Error saving user. Do you have permission?');
 
 if (gatekeeper('com_user/listusers')) {
-	if ($user->has_tag('enabled'))
+	if ($user->hasTag('enabled'))
 		pines_redirect(pines_url('com_user', 'listusers'));
 	else
 		pines_redirect(pines_url('com_user', 'listusers', array('enabled' => 'false')));

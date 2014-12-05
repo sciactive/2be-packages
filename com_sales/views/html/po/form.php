@@ -420,8 +420,8 @@ if ($this->entity->final)
 		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
@@ -447,7 +447,7 @@ if ($this->entity->final)
 			<select class="pf-field form-control" name="vendor" id="p_muid_vendor">
 				<option value="null">-- None --</option>
 				<?php
-				$_->entity_manager->sort($this->vendors, 'name');
+				$_->nymph->sort($this->vendors, 'name');
 				foreach ($this->vendors as $cur_vendor) { ?>
 				<option value="<?php e($cur_vendor->guid); ?>"<?php echo $this->entity->vendor->guid == $cur_vendor->guid ? ' selected="selected"' : ''; ?>><?php e($cur_vendor->name); ?></option>
 				<?php } ?>
@@ -669,7 +669,7 @@ if ($this->entity->final)
 								<td><?php e($cur_entity->serial); ?></td>
 								<td><a data-entity="<?php e($cur_entity->user->guid); ?>" data-entity-context="user"><?php e("{$cur_entity->user->name} [{$cur_entity->user->username}]"); ?></a></td>
 								<td><a data-entity="<?php e($cur_entity->group->guid); ?>" data-entity-context="group"><?php e("{$cur_entity->group->name} [{$cur_entity->group->groupname}]"); ?></a></td>
-								<td><?php e(format_date($cur_entity->p_cdate, 'full_sort')); ?></td>
+								<td><?php e(format_date($cur_entity->cdate, 'full_sort')); ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>

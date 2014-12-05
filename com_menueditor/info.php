@@ -21,7 +21,7 @@ return array(
 	'description' => 'A menu editor that allows you to edit menu entries. It also lets other components provide user managed menu entries for any of their items.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager&icons',
+		'service' => 'icons',
 		'component' => 'com_jquery&com_bootstrap&com_pgrid&com_markdown&com_pform&com_jstree'
 	),
 	'abilities' => array(

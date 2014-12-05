@@ -36,6 +36,7 @@ defined('P_RUN') or die('Direct access prohibited');
  * @property bool $inherit_abilities Whether the user should inherit the abilities of his groups.
  */
 class user extends able_object implements user_interface {
+	const etype = 'user';
 	protected $tags = array('com_user', 'user', 'enabled');
 
 	/**
@@ -49,13 +50,13 @@ class user extends able_object implements user_interface {
 		if ($id > 0 || (string) $id === $id) {
 			global $_;
 			if ((int) $id === $id)
-				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'user')));
+				$entity = $_->nymph->getEntity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'user')));
 			else
-				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'user'), 'strict' => array(($_->config->com_user->email_usernames ? 'email' : 'username'), (string) $id)));
+				$entity = $_->nymph->getEntity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'user'), 'strict' => array(($_->config->com_user->email_usernames ? 'email' : 'username'), (string) $id)));
 			if (isset($entity)) {
 				$this->guid = $entity->guid;
 				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
+				$this->putData($entity->getData(), $entity->getSData());
 				if (isset($this->secret))
 					$this->verify_email = $this->email;
 				return;
@@ -68,10 +69,6 @@ class user extends able_object implements user_interface {
 		$this->address_type = 'us';
 		$this->addresses = array();
 		$this->attributes = array();
-	}
-
-	public static function etype() {
-		return 'user';
 	}
 
 	/**
@@ -180,11 +177,11 @@ class user extends able_object implements user_interface {
 	}
 
 	public function disable() {
-		$this->remove_tag('enabled');
+		$this->removeTag('enabled');
 	}
 
 	public function enable() {
-		$this->add_tag('enabled');
+		$this->addTag('enabled');
 	}
 
 	public function save() {
@@ -299,7 +296,7 @@ class user extends able_object implements user_interface {
 	}
 	
 	public function add_group($group) {
-		if ( !$group->in_array((array) $this->groups) ) {
+		if ( !$group->inArray((array) $this->groups) ) {
 			$this->groups[] = $group;
 			return $this->groups;
 		} else
@@ -358,7 +355,7 @@ class user extends able_object implements user_interface {
 	}
 
 	public function del_group($group) {
-		if ( $group->in_array((array) $this->groups) ) {
+		if ( $group->inArray((array) $this->groups) ) {
 			foreach ((array) $this->groups as $key => $cur_group) {
 				if ($group->is($cur_group))
 					unset($this->groups[$key]);
@@ -373,7 +370,7 @@ class user extends able_object implements user_interface {
 			$group = group::factory((int) $group);
 		if (!isset($group->guid))
 			return false;
-		return ($group->in_array((array) $this->groups) || $group->is($this->group));
+		return ($group->inArray((array) $this->groups) || $group->is($this->group));
 	}
 
 	public function is_descendant($group = null) {

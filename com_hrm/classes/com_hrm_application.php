@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\hrm
  */
-class com_hrm_application extends entity {
+class com_hrm_application extends Entity {
+	const etype = 'com_hrm_application';
 	protected $tags = array('com_hrm', 'application');
 
 	public function __construct($id = 0) {
@@ -43,10 +44,6 @@ class com_hrm_application extends entity {
 			)
 		);
 		$this->status = 'pending';
-	}
-
-	public static function etype() {
-		return 'com_hrm_application';
 	}
 
 	public function info($type) {

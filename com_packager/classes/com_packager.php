@@ -26,7 +26,7 @@ class com_packager extends component {
 
 		$module = new module('com_packager', 'package/list', 'content');
 
-		$module->packages = $_->entity_manager->get_entities(array('class' => com_packager_package), array('&', 'tag' => array('com_packager', 'package')));
+		$module->packages = $_->nymph->getEntities(array('class' => com_packager_package), array('&', 'tag' => array('com_packager', 'package')));
 
 		if ( empty($module->packages) )
 			pines_notice('There are no packages.');
@@ -46,7 +46,7 @@ class com_packager extends component {
 			$info = clone $conf->info;
 			$info->type = substr($cur_component, 0, 4) == 'tpl_' ? 'template' : 'component';
 			$info->disabled = $conf->is_disabled();
-			if (!is_null($_->entity_manager->get_entity(
+			if (!is_null($_->nymph->getEntity(
 					array('class' => com_packager_package),
 					array('&',
 						'tag' => array('com_packager', 'package'),

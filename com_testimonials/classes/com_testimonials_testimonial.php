@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\testimonials
  */
-class com_testimonials_testimonial extends entity {
+class com_testimonials_testimonial extends Entity {
+	const etype = 'com_testimonials_testimonial';
 	protected $tags = array('com_testimonials', 'testimonial');
 
 	public function __construct($id = 0) {
@@ -26,10 +27,6 @@ class com_testimonials_testimonial extends entity {
 		$this->enabled = true;
 		$this->ac = (object) array('user' => 3, 'group' => 3, 'other' => 2);
 		$this->attributes = array();
-	}
-
-	public static function etype() {
-		return 'com_testimonials_testimonial';
 	}
 
 //	public function info($type) {
@@ -106,7 +103,7 @@ class com_testimonials_testimonial extends entity {
 	public function save() {
 		global $_;
 		if (!isset($this->id))
-			$this->id = $_->entity_manager->new_uid('com_testimonials_testimonial');
+			$this->id = $_->nymph->newUID('com_testimonials_testimonial');
 		return parent::save();
 	}
 

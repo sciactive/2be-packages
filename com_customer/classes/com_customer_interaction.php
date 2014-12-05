@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\customer
  */
-class com_customer_interaction extends entity {
+class com_customer_interaction extends Entity {
+	const etype = 'com_customer_interaction';
 	protected $tags = array('com_customer', 'interaction');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_customer_interaction extends entity {
 		// Defaults.
 		$this->status = 'open';
 		$this->review_comments = array();
-	}
-
-	public static function etype() {
-		return 'com_customer_interaction';
 	}
 
 	public function info($type) {

@@ -19,7 +19,7 @@ $module->title = 'Loan Entity Update';
 $errors = array();
 $count = $nochange = 0;
 // Grab entities and update.
-$entities = $_->entity_manager->get_entities(
+$entities = $_->nymph->getEntities(
 		array('class' => com_loan_loan),
 		array('&',
 			'tag' => array('com_loan', 'loan'),

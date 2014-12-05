@@ -34,7 +34,7 @@ if ( !isset($_REQUEST['mail_id']) ) {
 	return false;
 }
 
-$mail = $_->entity_manager->get_entity(array(), array('&', 'guid' => (int) $_REQUEST['mail_id'], 'tag' => array('com_newsletter', 'mail')));
+$mail = $_->nymph->getEntity(array(), array('&', 'guid' => (int) $_REQUEST['mail_id'], 'tag' => array('com_newsletter', 'mail')));
 if ( !isset($mail) ) {
 	pines_error('Invalid mail!');
 	return false;
@@ -52,7 +52,7 @@ if ( $_REQUEST['include_permalink'] == 'on' ) {
 $location = group::factory((int) $_REQUEST['location']);
 if (isset($location->guid)) {
 	$addresses = array();
-	$group_users = $_->entity_manager->get_entities(array('class' => user), array('&', 'tag' => array('com_user', 'user')));
+	$group_users = $_->nymph->getEntities(array('class' => user), array('&', 'tag' => array('com_user', 'user')));
 	foreach ($group_users as $key => &$cur_user) {
 		if (!($cur_user->in_group($location) || $cur_user->is_descendant($location) || empty($cur_user->email))) {
 			unset($group_users[$key]);

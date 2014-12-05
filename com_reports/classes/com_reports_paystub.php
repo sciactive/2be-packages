@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\reports
  */
-class com_reports_paystub extends entity {
+class com_reports_paystub extends Entity {
+	const etype = 'com_reports_paystub';
 	protected $tags = array('com_reports', 'paystub');
 
 	public function __construct($id = 0) {
@@ -24,10 +25,6 @@ class com_reports_paystub extends entity {
 			return;
 		// Defaults.
 		$this->payroll = array();
-	}
-
-	public static function etype() {
-		return 'com_reports_paystub';
 	}
 
 	public function info($type) {

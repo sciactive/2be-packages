@@ -106,8 +106,8 @@ if ($_->config->com_user->check_username) { ?>
 			<div style="float: right; text-align: right;">
 				<?php if (isset($this->entity->guid)) { ?>
 				<div class="date_info" style="margin-bottom: 1em;">
-					<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-					<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+					<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+					<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 				</div>
 				<?php } ?>
 				<div class="thumbnail pull-right">
@@ -142,7 +142,7 @@ if ($_->config->com_user->check_username) { ?>
 			<?php } if ($this->display_enable) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Enabled</span>
-					<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->has_tag('enabled') ? ' checked="checked"' : ''; ?> /></label>
+					<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->hasTag('enabled') ? ' checked="checked"' : ''; ?> /></label>
 			</div>
 			<?php } if ($_->config->com_user->email_usernames || in_array('email', $_->config->com_user->user_fields)) { ?>
 			<div class="pf-element">
@@ -298,8 +298,8 @@ if ($_->config->com_user->check_username) { ?>
 								</thead>
 								<tbody>
 								<?php foreach($this->group_array_secondary as $cur_group) { ?>
-									<tr title="<?php e($cur_group->guid); ?>" class="<?php echo $cur_group->get_children() ? 'parent ' : ''; ?><?php echo (isset($cur_group->parent) && $cur_group->parent->in_array($this->group_array_secondary)) ? h("child ch_{$cur_group->parent->guid} ") : ''; ?>">
-										<td><input type="checkbox" name="groups[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->in_array($this->entity->groups) ? 'checked="checked" ' : ''; ?>/></td>
+									<tr title="<?php e($cur_group->guid); ?>" class="<?php echo $cur_group->get_children() ? 'parent ' : ''; ?><?php echo (isset($cur_group->parent) && $cur_group->parent->inArray($this->group_array_secondary)) ? h("child ch_{$cur_group->parent->guid} ") : ''; ?>">
+										<td><input type="checkbox" name="groups[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->inArray($this->entity->groups) ? 'checked="checked" ' : ''; ?>/></td>
 										<td><?php e($cur_group->name); ?></td>
 										<td><a data-entity="<?php e($cur_group->guid); ?>" data-entity-context="group"><?php e($cur_group->groupname); ?></a></td>
 									</tr>

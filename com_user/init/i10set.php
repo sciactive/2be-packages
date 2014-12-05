@@ -61,11 +61,11 @@ EOF;
 		case 'verified':
 			return !isset($_SESSION['user']->secret);
 		case 'primary':
-			return (isset($_SESSION['user']->group) && isset($_SESSION['user']->group->guid) && $_SESSION['user']->group->has_tag('enabled'));
+			return (isset($_SESSION['user']->group) && isset($_SESSION['user']->group->guid) && $_SESSION['user']->group->hasTag('enabled'));
 		case 'secondary':
 			if (!empty($_SESSION['user']->groups)) {
 				foreach ($_SESSION['user']->groups as $cur_group) {
-					if (isset($cur_group->guid) && $cur_group->has_tag('enabled'))
+					if (isset($cur_group->guid) && $cur_group->hasTag('enabled'))
 						return true;
 				}
 			}

@@ -23,7 +23,7 @@ if (preg_match('/^\s*$/', $query)) {
 	$stock_entries = array();
 } elseif ($query == '*') {
 	// The user wants to see all stock entries.
-	$stock_entries = (array) $_->entity_manager->get_entities(
+	$stock_entries = (array) $_->nymph->getEntities(
 			array('class' => com_sales_stock, 'reverse' => true),
 			array('&',
 				'tag' => array('com_sales', 'stock'),
@@ -32,7 +32,7 @@ if (preg_match('/^\s*$/', $query)) {
 		);
 } else {
 	// Select by query.
-	$stock_entries = (array) $_->entity_manager->get_entities(
+	$stock_entries = (array) $_->nymph->getEntities(
 			array('class' => com_sales_stock, 'reverse' => true),
 			array('&',
 				'tag' => array('com_sales', 'stock'),

@@ -30,7 +30,7 @@ function com_esp__check_sale(&$arguments, $name, &$object) {
 			continue;
 		// Find the stock entity for the current product.
 		foreach ((array) $cur_product['stock_entities'] as $cur_stock) {
-			if (!$cur_stock->in_array($cur_product['returned_stock_entities'])) {
+			if (!$cur_stock->inArray($cur_product['returned_stock_entities'])) {
 				$stock = $cur_stock;
 				break;
 			}
@@ -40,7 +40,7 @@ function com_esp__check_sale(&$arguments, $name, &$object) {
 			continue;
 		}
 		// Find an existing ESP for the current item.
-		$exisiting_esp = $_->entity_manager->get_entity(
+		$exisiting_esp = $_->nymph->getEntity(
 				array('class' => com_esp_plan),
 				array('&',
 					'tag' => array('com_esp', 'esp'),

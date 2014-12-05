@@ -61,8 +61,8 @@ if ($sale->status != 'invoiced' && $sale->status != 'paid' && $sale->status != '
 			// Default to the sale's user.
 			if (!isset($cur_salesperson->guid))
 				$cur_salesperson = $sale->user->guid ? $sale->user : $_SESSION['user'];
-			if ($cur_delivery == 'shipped' && !$sale->has_tag('shipping_shipped'))
-				$sale->add_tag('shipping_pending');
+			if ($cur_delivery == 'shipped' && !$sale->hasTag('shipping_shipped'))
+				$sale->addTag('shipping_pending');
 			if (!isset($cur_product_entity->guid)) {
 				pines_error("Product with id [$cur_product->key] and entered SKU [$cur_sku] was not found.");
 				unset($sale->products[$key]);

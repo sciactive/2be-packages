@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 if (!$_->config->com_shop->show_categories)
 	return;
 
-$categories = (array) $_->entity_manager->get_entities(
+$categories = (array) $_->nymph->getEntities(
 		array('class' => com_sales_category),
 		array('&',
 			'tag' => array('com_sales', 'category'),

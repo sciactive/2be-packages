@@ -230,7 +230,7 @@ $_->com_pgrid->load();
 						<?php foreach ($this->sales as $cur_sale) { ?>
 							<tr title="<?php e($cur_sale->guid); ?>">
 								<td><a data-entity="<?php e($cur_sale->guid); ?>" data-entity-context="com_sales_sale"><?php e($cur_sale->id); ?></a></td>
-								<td><?php e(format_date($cur_sale->p_cdate)); ?></td>
+								<td><?php e(format_date($cur_sale->cdate)); ?></td>
 								<td><a data-entity="<?php e($cur_sale->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($cur_sale->customer->name); ?></a></td>
 								<td><a data-entity="<?php e($cur_sale->products[0]['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_sale->products[0]['entity']->name); ?></a></td>
 								<td>$<?php e($cur_sale->total); ?></td>
@@ -268,7 +268,7 @@ $_->com_pgrid->load();
 							<tr title="<?php e($cur_return->guid); ?>">
 								<td><a data-entity="<?php e($cur_return->guid); ?>" data-entity-context="com_sales_return"><?php e($cur_return->id); ?></a></td>
 								<td><a data-entity="<?php e($cur_return->sale->guid); ?>" data-entity-context="com_sales_sale"><?php e($cur_return->sale->id); ?></a></td>
-								<td><?php e(format_date($cur_return->p_cdate)); ?></td>
+								<td><?php e(format_date($cur_return->cdate)); ?></td>
 								<td><a data-entity="<?php e($cur_return->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e($cur_return->customer->name); ?></a></td>
 								<td><a data-entity="<?php e($cur_return->products[0]['entity']->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_return->products[0]['entity']->name); ?></a></td>
 								<td>$<?php e($cur_return->total); ?></td>

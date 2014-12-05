@@ -55,7 +55,7 @@ if (empty($rendition->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_mailer_rendition, 'skip_ac' => true), array('&', 'tag' => array('com_mailer', 'rendition'), 'data' => array('name', $rendition->name)));
+$test = $_->nymph->getEntity(array('class' => com_mailer_rendition, 'skip_ac' => true), array('&', 'tag' => array('com_mailer', 'rendition'), 'data' => array('name', $rendition->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$rendition->print_form();
 	pines_notice('There is already a rendition with that name. Please choose a different name.');

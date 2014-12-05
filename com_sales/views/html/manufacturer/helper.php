@@ -72,7 +72,7 @@ if ($this->render == 'body' && gatekeeper('com_sales/listmanufacturers')) { ?>
 	</address>
 </div>
 <?php }
-$products = (array) $_->entity_manager->get_entities(
+$products = (array) $_->nymph->getEntities(
 		array('class' => com_sales_product),
 		array('&',
 			'tag' => array('com_sales', 'product'),

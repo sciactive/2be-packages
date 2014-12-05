@@ -74,15 +74,15 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 	<?php foreach($this->threads as $thread) {
 		// Try to guess the context (class name) of the attached entity.
 		$context = str_replace('hook_override_', '', get_class($thread->entities[0]));
-		if ($context == 'entity' && substr($thread->entities[0]->tags[0], 0, 4) === 'com_') {
+		if ($context == 'Entity' && substr($thread->entities[0]->tags[0], 0, 4) === 'com_') {
 			$guess = $thread->entities[0]->tags[0].'_'.$thread->entities[0]->tags[1];
 			if (class_exists($guess))
 				$context = $guess;
 		} ?>
 		<tr title="<?php e($thread->guid); ?>">
 			<td><a data-entity="<?php e($thread->guid); ?>" data-entity-context="com_notes_thread"><?php e($thread->guid); ?></a></td>
-			<td><?php e(format_date($thread->p_mdate)); ?></td>
-			<td><?php e(format_date($thread->p_cdate)); ?></td>
+			<td><?php e(format_date($thread->mdate)); ?></td>
+			<td><?php e(format_date($thread->cdate)); ?></td>
 			<td><?php echo isset($thread->entities[0]->guid) ? '<a data-entity="'.h($thread->entities[0]->guid).'" data-entity-context="'.h($context).'">'.h($thread->entities[0]->info('name')).'</a>' : ''; ?></td>
 			<td><?php echo ($thread->hidden ? 'Yes' : 'No'); ?></td>
 			<td><?php echo ($thread->ac->other ? 'everyone' : ($thread->ac->group ? 'my-group' : 'only-me')); ?></td>

@@ -81,7 +81,7 @@ if (isset($product)) {
 			);
 		if (isset($_SESSION['user']->group->guid))
 			$selector['ref'][] = array('location', $_SESSION['user']->group);
-		$stock_entries = $_->entity_manager->get_entities(
+		$stock_entries = $_->nymph->getEntities(
 				array('class' => com_sales_stock, 'limit' => $_->config->com_sales->add_product_show_serials),
 				$selector
 			);

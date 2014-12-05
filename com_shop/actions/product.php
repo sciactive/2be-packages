@@ -14,7 +14,7 @@ defined('P_RUN') or die('Direct access prohibited');
 if (!empty($_REQUEST['id'])) {
 	$entity = com_sales_product::factory((int) $_REQUEST['id']);
 } else {
-	$entity = $_->entity_manager->get_entity(
+	$entity = $_->nymph->getEntity(
 			array('class' => com_sales_product),
 			array('&',
 				'tag' => array('com_sales', 'product'),

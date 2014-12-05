@@ -37,7 +37,7 @@ if (empty($query)) {
 				'tag' => array('com_testimonials', 'testimonial')
 			)
 	);
-	$testimonials = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
+	$testimonials = (array) call_user_func_array(array($_->nymph, 'getEntities'), $args);
 } elseif ($query == '*') {
 	if (!gatekeeper('com_testimonials/listalltestimonials'))
 		$testimonials = array();
@@ -54,7 +54,7 @@ if (empty($query)) {
 				$selector
 			);
 		}
-		$testimonials = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
+		$testimonials = (array) call_user_func_array(array($_->nymph, 'getEntities'), $args);
 	}
 } else {
 	$r_query = '/'.str_replace(' ', '.*', preg_quote($query)).'/i';
@@ -84,7 +84,7 @@ if (empty($query)) {
 		$selector,
 		$selector3
 	);
-	$testimonials = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
+	$testimonials = (array) call_user_func_array(array($_->nymph, 'getEntities'), $args);
 }
 
 foreach ($testimonials as $key => &$cur_testimonial) {
@@ -105,7 +105,7 @@ foreach ($testimonials as $key => &$cur_testimonial) {
 		'email'			=> (string) $cur_testimonial->customer->email,
 		'city'			=> (string) $cur_testimonial->customer->city,
 		'state'			=> (string) $cur_testimonial->customer->state,
-		'creation_date'	=> format_date($cur_testimonial->p_cdate, "date_short"),
+		'creation_date'	=> format_date($cur_testimonial->cdate, "date_short"),
 		'status'		=> $status,
 		'rating'		=> (!empty($cur_testimonial->rating)) ? $cur_testimonial->rating : '',
 		'share_allowed'	=> ($cur_testimonial->share) ? 'Yes' : 'No',

@@ -144,7 +144,7 @@ class com_testimonials extends component {
 		
 		// Get the entities based on all the tags and settings
 		if ($type != 'aggregate') {
-			$testimonials = $_->entity_manager->get_entities(
+			$testimonials = $_->nymph->getEntities(
 				array('class' => com_testimonials_testimonial, 'reverse' => $reverse, 'limit' => $limit, 'offset' => $offset),
 				array('&',
 					'tag' => array_unique($tag_args)
@@ -163,7 +163,7 @@ class com_testimonials extends component {
 			// - from all these, get just the rating
 			//		(going to use the rating to get average rating)
 			// - do maths - divide by number of raters, and there is the average.
-			$testimonials = $_->entity_manager->get_entities(
+			$testimonials = $_->nymph->getEntities(
 					array('class' => com_testimonials_testimonial),
 					array('&',
 						'tag' => array_unique($tag_args)

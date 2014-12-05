@@ -36,7 +36,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listgroups')) { ?>
 			</tr>
 			<tr>
 				<td style="font-weight:bold;" colspan="2">Enabled</td>
-				<td><?php echo $this->entity->has_tag('enabled') ? 'Yes' : 'No'; ?></td>
+				<td><?php echo $this->entity->hasTag('enabled') ? 'Yes' : 'No'; ?></td>
 			</tr>
 			<?php if (!empty($this->entity->email)) { ?>
 			<tr>
@@ -59,7 +59,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listgroups')) { ?>
 				<td style="font-weight:bold;">Primary</td>
 				<td>
 					<?php
-					$user_array = $_->entity_manager->get_entities(
+					$user_array = $_->nymph->getEntities(
 							array('class' => user, 'limit' => 51),
 							array('&',
 								'tag' => array('com_user', 'user', 'enabled'),
@@ -90,7 +90,7 @@ if ($this->render == 'body' && gatekeeper('com_user/listgroups')) { ?>
 				<td style="font-weight:bold;">Secondary</td>
 				<td>
 					<?php
-					$user_array = $_->entity_manager->get_entities(
+					$user_array = $_->nymph->getEntities(
 							array('class' => user, 'limit' => 51),
 							array('&',
 								'tag' => array('com_user', 'user', 'enabled'),

@@ -92,7 +92,7 @@ echo $module->render();
 		</tbody>
 	</table>
 </div>
-<?php if (isset($this->entity->shipping_address) && ($this->entity->has_tag('shipping_pending') || $this->entity->has_tag('shipping_shipped') || $this->entity->warehouse)) { ?>
+<?php if (isset($this->entity->shipping_address) && ($this->entity->hasTag('shipping_pending') || $this->entity->hasTag('shipping_shipped') || $this->entity->warehouse)) { ?>
 <div style="clear:both;">
 	<hr />
 	<h3 style="margin:10px 0;">Shipping Address</h3>
@@ -148,10 +148,10 @@ echo $module->render();
 						$fulfilled = 0;
 						$shipped = 0;
 						foreach ((array) $cur_product['stock_entities'] as $cur_stock) {
-							if (!isset($cur_stock->guid) || $cur_stock->in_array((array) $cur_product['returned_stock_entities']))
+							if (!isset($cur_stock->guid) || $cur_stock->inArray((array) $cur_product['returned_stock_entities']))
 								continue;
 							$fulfilled++;
-							if ($cur_stock->in_array((array) $cur_product['shipped_entities']))
+							if ($cur_stock->inArray((array) $cur_product['shipped_entities']))
 								$shipped++;
 						}
 						if ($fulfilled) {
@@ -178,9 +178,9 @@ echo $module->render();
 			<?php }
 			$stock_entities = array();
 			foreach ((array) $cur_product['stock_entities'] as $cur_stock) {
-				if (!isset($cur_stock->guid) || $cur_stock->in_array((array) $cur_product['returned_stock_entities']))
+				if (!isset($cur_stock->guid) || $cur_stock->inArray((array) $cur_product['returned_stock_entities']))
 					continue;
-				$stock_entities[] = '<a data-entity="'.h($cur_stock->guid).'" data-entity-context="com_sales_stock">'.h($cur_stock->guid.($cur_stock->in_array((array) $cur_product['shipped_entities']) ? ' (Shipped)' : '')).'</a>';
+				$stock_entities[] = '<a data-entity="'.h($cur_stock->guid).'" data-entity-context="com_sales_stock">'.h($cur_stock->guid.($cur_stock->inArray((array) $cur_product['shipped_entities']) ? ' (Shipped)' : '')).'</a>';
 			}
 			if ($stock_entities) { ?>
 			<tr>
@@ -242,7 +242,7 @@ echo $module->render();
 	<div style="white-space: pre-wrap; padding-bottom: .5em;"><?php e($this->entity->comments); ?></div>
 </div>
 <?php }
-$returns = (array) $_->entity_manager->get_entities(
+$returns = (array) $_->nymph->getEntities(
 		array('class' => com_sales_return),
 		array('&',
 			'tag' => array('com_sales', 'return'),
@@ -266,7 +266,7 @@ if ($returns) { ?>
 			<?php foreach ($returns as $cur_return) { ?>
 			<tr>
 				<td><a data-entity="<?php e($cur_return->guid); ?>" data-entity-context="com_sales_return"><?php e($cur_return->id); ?></a></td>
-				<td><?php e(format_date($cur_return->p_cdate, 'full_short')); ?></td>
+				<td><?php e(format_date($cur_return->cdate, 'full_short')); ?></td>
 				<td><a data-entity="<?php e($cur_return->user->guid); ?>" data-entity-context="user"><?php e("{$cur_return->user->name} [{$cur_return->user->username}]"); ?></a></td>
 				<td style="text-align: right;">$<?php echo $_->com_sales->round($cur_return->total, true); ?></td>
 			</tr>
@@ -290,7 +290,7 @@ if ($returns) { ?>
 		</thead>
 		<tbody>
 			<?php
-			$txs = (array) $_->entity_manager->get_entities(
+			$txs = (array) $_->nymph->getEntities(
 					array('class' => com_sales_tx),
 					array('&',
 						'tag' => array('com_sales', 'transaction'),
@@ -305,7 +305,7 @@ if ($returns) { ?>
 			<tr>
 				<td><a data-entity="<?php e($cur_tx->guid); ?>" data-entity-context="com_sales_tx"><?php e($cur_tx->guid); ?></a></td>
 				<td><?php e(ucwords(str_replace('_', ' ', $cur_tx->type))); ?></td>
-				<td><?php e(format_date($cur_tx->p_cdate, 'full_short')); ?></td>
+				<td><?php e(format_date($cur_tx->cdate, 'full_short')); ?></td>
 				<td><a data-entity="<?php e($cur_tx->user->guid); ?>" data-entity-context="user"><?php e($cur_tx->user->name); ?></a></td>
 				<td><a data-entity="<?php e($ref->guid); ?>" data-entity-context="<?php echo isset($ref) ? h(str_replace('hook_override_', '', get_class($ref))) : ''; ?>"><?php echo isset($ref) ? h($ref->info('name')) : ''; ?></a></td>
 			</tr>
@@ -321,7 +321,7 @@ if ($returns) { ?>
 <?php } elseif ($this->render == 'footer') { ?>
 <a href="<?php e(pines_url('com_sales', 'sale/receipt', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Receipt</a>
 <?php if (gatekeeper('com_sales/listsales')) { ?>
-<a href="<?php e(pines_url('com_sales', 'sale/list', array('location' => $this->entity->group->guid, 'descendants' => 'false', 'all_time' => 'false', 'start_date' => format_date($this->entity->p_cdate, 'custom', 'Y-m-d'), 'end_date' => format_date(strtotime('+1 day', $this->entity->p_cdate), 'custom', 'Y-m-d')))); ?>" class="btn btn-default">View in List</a>
+<a href="<?php e(pines_url('com_sales', 'sale/list', array('location' => $this->entity->group->guid, 'descendants' => 'false', 'all_time' => 'false', 'start_date' => format_date($this->entity->cdate, 'custom', 'Y-m-d'), 'end_date' => format_date(strtotime('+1 day', $this->entity->cdate), 'custom', 'Y-m-d')))); ?>" class="btn btn-default">View in List</a>
 <?php } if (gatekeeper('com_sales/editsale')) { ?>
 <a href="<?php e(pines_url('com_sales', 'sale/edit', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Edit</a>
 <?php } if (gatekeeper('com_sales/newreturnwsale')) { ?>

@@ -21,7 +21,7 @@ return array(
 	'description' => 'Provides a dashboard with quick links and widgets.',
 	'depend' => array(
 		'core' => '>=1.0.4&<3',
-		'service' => 'entity_manager&user_manager',
+		'service' => 'user_manager',
 		'component' => 'com_jquery&com_bootstrap&com_pform'
 	),
 	'abilities' => array(

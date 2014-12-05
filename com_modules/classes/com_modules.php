@@ -29,7 +29,7 @@ class com_modules extends component {
 
 		$module = new module('com_modules', 'module/list', 'content');
 
-		$module->modules = $_->entity_manager->get_entities(array('class' => com_modules_module), array('&', 'tag' => array('com_modules', 'module')));
+		$module->modules = $_->nymph->getEntities(array('class' => com_modules_module), array('&', 'tag' => array('com_modules', 'module')));
 
 		if ( empty($module->modules) )
 			pines_notice('There are no modules.');

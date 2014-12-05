@@ -88,8 +88,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 					echo '';
 			?>
 			</td>
-			<td><?php e(format_date($page->p_cdate)); ?></td>
-			<td><?php e(format_date($page->p_mdate)); ?></td>
+			<td><?php e(format_date($page->cdate)); ?></td>
+			<td><?php e(format_date($page->mdate)); ?></td>
 			<td><?php e(format_date($page->publish_begin)); ?></td>
 			<td><?php echo isset($page->publish_end) ? h(format_date($page->publish_end)) : ''; ?></td>
 			<td><?php e(implode(', ', $page->content_tags)); ?></td>

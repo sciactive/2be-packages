@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\modules
  */
-class com_modules_module extends entity {
+class com_modules_module extends Entity {
+	const etype = 'com_modules_module';
 	protected $tags = array('com_modules', 'module');
 
 	public function __construct($id = 0) {
@@ -27,10 +28,6 @@ class com_modules_module extends entity {
 		$this->show_title = true;
 		$this->options = array();
 		$this->conditions = array();
-	}
-
-	public static function etype() {
-		return 'com_modules_module';
 	}
 
 	public function info($type) {

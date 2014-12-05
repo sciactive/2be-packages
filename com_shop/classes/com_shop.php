@@ -95,7 +95,7 @@ class com_shop extends component {
 	 * @todo Verify products. (One per ticket...)
 	 */
 	public function build_sale() {
-		if (!$_SESSION['user']->has_tag('com_customer', 'customer')) {
+		if (!$_SESSION['user']->hasTag('com_customer', 'customer')) {
 			pines_notice('You are not logged in as a customer.');
 			return false;
 		}
@@ -103,7 +103,7 @@ class com_shop extends component {
 		if (!isset($sale)) {
 			global $_;
 			$sale = com_sales_sale::factory();
-			$sale->add_tag('com_shop');
+			$sale->addTag('com_shop');
 			$sale->status = 'quoted';
 			$sale->customer = com_customer_customer::factory($_SESSION['user']->guid);
 			if (!isset($sale->customer->guid)) {
@@ -239,7 +239,7 @@ class com_shop extends component {
 		}
 
 		if (isset($sort_var))
-			$_->entity_manager->sort($products, $sort_var, false, $sort_reverse);
+			$_->nymph->sort($products, $sort_var, false, $sort_reverse);
 
 		// How many products/pages are there?
 		$count = count($products);
@@ -278,7 +278,7 @@ class com_shop extends component {
 		}
 
 		if (isset($sort_var))
-			$_->entity_manager->sort($products, $sort_var, false, $sort_reverse);
+			$_->nymph->sort($products, $sort_var, false, $sort_reverse);
 
 		// How many products/pages are there?
 		$count = count($products);
@@ -308,7 +308,7 @@ class com_shop extends component {
 			foreach ($child_products as $cur_product) {
 				if (!isset($cur_product) || !$cur_product->enabled || !$cur_product->show_in_shop)
 					continue;
-				if (!$cur_product->in_array($products))
+				if (!$cur_product->inArray($products))
 					$products[] = $cur_product;
 			}
 		}
@@ -325,14 +325,14 @@ class com_shop extends component {
 		$module = new module('com_shop', 'shop/list', 'content');
 
 		if (gatekeeper('com_shop/manageshops')) {
-			$module->shops = $_->entity_manager->get_entities(
+			$module->shops = $_->nymph->getEntities(
 					array('class' => com_shop_shop),
 					array('&',
 						'tag' => array('com_shop', 'shop')
 					)
 				);
 		} else {
-			$module->shops = $_->entity_manager->get_entities(
+			$module->shops = $_->nymph->getEntities(
 					array('class' => com_shop_shop),
 					array('&',
 						'tag' => array('com_shop', 'shop'),
@@ -393,7 +393,7 @@ class com_shop extends component {
 		$module = new module('com_shop', 'verify_stock', 'content');
 		$module->images = $module->image_descs = array();
 
-		$entities = $_->entity_manager->get_entities(
+		$entities = $_->nymph->getEntities(
 					array('limit' => 50, 'offset' => $offset, 'class' => com_sales_product),
 					array('&',
 						'tag' => array('com_sales', 'product'),

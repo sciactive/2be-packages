@@ -21,7 +21,7 @@ return array(
 	'description' => 'Manage your employees. Includes a timeclock to track your employees\' working hours.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'user_manager&entity_manager&editor',
+		'service' => 'user_manager&editor',
 		'component' => 'com_jquery&com_bootstrap&com_datetimepicker&com_pgrid&com_pnotify&com_pform&com_user'
 	),
 	'recommend' => array(

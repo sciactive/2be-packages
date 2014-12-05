@@ -22,7 +22,7 @@ return array(
 	'description' => 'Provides and manages users, groups, and abilities (access control). Uses an entity manager as a storage backend.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager&uploader&icons',
+		'service' => 'uploader&icons',
 		'component' => 'com_mailer&com_jquery&com_bootstrap&com_pgrid&com_markdown&com_pnotify&com_pform', //&com_jstree
 		'package' => 'com_user-data'
 	),

@@ -104,8 +104,8 @@ $_->uploader->load();
 		<div class="tab-pane active" id="p_muid_tab_general">
 			<?php if (isset($this->entity->guid)) { ?>
 			<div class="date_info" style="float: right; text-align: right;">
-				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<?php if ($this->display_username) { ?>
@@ -121,7 +121,7 @@ $_->uploader->load();
 			<?php if ($this->display_enable) { ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Enabled</span>
-					<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->has_tag('enabled') ? ' checked="checked"' : ''; ?> /></label>
+					<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->hasTag('enabled') ? ' checked="checked"' : ''; ?> /></label>
 			</div>
 			<?php } ?>
 			<div class="pf-element">

@@ -30,9 +30,9 @@ if (gatekeeper('com_user/usernames'))
 $group->name = $_REQUEST['name'];
 if (gatekeeper('com_user/enabling')) {
 	if ($_REQUEST['enabled'] == 'ON')
-		$group->add_tag('enabled');
+		$group->addTag('enabled');
 	else
-		$group->remove_tag('enabled');
+		$group->removeTag('enabled');
 }
 $group->email = $_REQUEST['email'];
 if ($group->email && $_REQUEST['mailing_list'] != 'ON' && !$_->com_mailer->unsubscribe_query($group->email)) {
@@ -123,7 +123,7 @@ if ($_->config->com_user->max_groupname_length > 0 && strlen($group->groupname) 
 	pines_notice("Groupnames must not exceed {$_->config->com_user->max_groupname_length} characters.");
 	return;
 }
-$test = $_->entity_manager->get_entity(
+$test = $_->nymph->getEntity(
 		array('class' => group, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_user', 'group'),
@@ -146,7 +146,7 @@ if (!preg_match($_->config->com_user->valid_regex, $group->groupname)) {
 	return;
 }
 if (!empty($group->email)) {
-	$test = $_->entity_manager->get_entity(
+	$test = $_->nymph->getEntity(
 			array('class' => group, 'skip_ac' => true),
 			array('&',
 				'tag' => array('com_user', 'group'),
@@ -165,7 +165,7 @@ if (isset($group->parent) && !isset($group->parent->guid)) {
 	return;
 }
 if (gatekeeper('com_user/defaultgroups') && $group->default_primary) {
-	$current_primary = $_->entity_manager->get_entity(array('class' => group), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_primary', true)));
+	$current_primary = $_->nymph->getEntity(array('class' => group), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_primary', true)));
 	if (isset($current_primary) && !$group->is($current_primary)) {
 		unset($current_primary->default_primary);
 		if ($current_primary->save()) {
@@ -238,7 +238,7 @@ if ($group->save()) {
 	pines_error('Error saving group. Do you have permission?');
 }
 
-if ($group->has_tag('enabled')) {
+if ($group->hasTag('enabled')) {
 	pines_redirect(pines_url('com_user', 'listgroups'));
 } else {
 	pines_redirect(pines_url('com_user', 'listgroups', array('enabled' => 'false')));

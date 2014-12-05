@@ -21,7 +21,7 @@ $errors = array();
 $offset = $count = $nochange = 0;
 // Grab entities, 50 at a time, and update.
 do {
-	$entities = $_->entity_manager->get_entities(
+	$entities = $_->nymph->getEntities(
 			array('limit' => 50, 'offset' => $offset, 'class' => com_hrm_timeclock),
 			array('&',
 				'tag' => array('com_hrm', 'timeclock')
@@ -34,7 +34,7 @@ do {
 			$changed = true;
 			foreach ($cur_entity->timeclock as $key => $cur_entry) {
 				// Check that it doesn't already exist.
-				$prev_entry = $_->entity_manager->get_entity(
+				$prev_entry = $_->nymph->getEntity(
 						array('class' => com_hrm_timeclock_entry),
 						array('&',
 							'tag' => array('com_hrm', 'timeclock_entry'),

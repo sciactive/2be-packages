@@ -26,7 +26,7 @@ class com_replace extends component {
 
 		$module = new module('com_replace', 'replacement/list', 'content');
 
-		$module->replacements = $_->entity_manager->get_entities(array('class' => com_replace_replacement), array('&', 'tag' => array('com_replace', 'replacement')));
+		$module->replacements = $_->nymph->getEntities(array('class' => com_replace_replacement), array('&', 'tag' => array('com_replace', 'replacement')));
 
 		if ( empty($module->replacements) )
 			pines_notice('There are no replacements.');
@@ -43,7 +43,7 @@ class com_replace extends component {
 		global $_;
 
 		// Gather enabled replacements.
-		$replacements = (array) $_->entity_manager->get_entities(
+		$replacements = (array) $_->nymph->getEntities(
 				array('class' => com_replace_replacement),
 				array('&',
 					'tag' => array('com_replace', 'replacement'),

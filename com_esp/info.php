@@ -21,7 +21,7 @@ return array(
 	'description' => 'Used to track and manage warranties on products.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager&icons',
+		'service' => 'icons',
 		'component' => 'com_customer&com_jquery&com_bootstrap&com_pgrid&com_pnotify&com_pform&com_sales'
 	),
 	'abilities' => array(

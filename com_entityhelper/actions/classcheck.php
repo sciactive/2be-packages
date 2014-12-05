@@ -1,6 +1,6 @@
 <?php
 /**
- * Check entity classes for a helper.
+ * Check Entity classes for a helper.
  *
  * @package Components\entityhelper
  * @license http://www.gnu.org/licenses/agpl-3.0.html
@@ -18,7 +18,7 @@ $entity_classes = array();
 // Look at each class.
 foreach ($_->class_files as $cur_class_file) {
 	$cur_class = basename($cur_class_file, '.php');
-	if ($cur_class != 'entity' && is_subclass_of($cur_class, 'entity'))
+	if ($cur_class != 'Entity' && is_subclass_of($cur_class, 'Entity'))
 		$entity_classes[] = $cur_class;
 }
 

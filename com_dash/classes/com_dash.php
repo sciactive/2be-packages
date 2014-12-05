@@ -76,7 +76,7 @@ class com_dash extends component {
 		global $_;
 
 		$module = new module('com_dash', 'manage/list', 'content');
-		$module->dashboards = $_->entity_manager->get_entities(
+		$module->dashboards = $_->nymph->getEntities(
 				array('class' => com_dash_dashboard),
 				array('&',
 					'tag' => array('com_dash', 'dashboard')

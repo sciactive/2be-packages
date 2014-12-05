@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_product extends entity {
+class com_sales_product extends Entity {
+	const etype = 'com_sales_product';
 	protected $tags = array('com_sales', 'product');
 
 	public function __construct($id = 0) {
@@ -42,10 +43,6 @@ class com_sales_product extends entity {
 			if (isset($_SESSION['shop']))
 				$this->shop = $_SESSION['shop'];
 		}
-	}
-
-	public static function etype() {
-		return 'com_sales_product';
 	}
 
 	public function info($type) {
@@ -82,7 +79,7 @@ class com_sales_product extends entity {
 	public function delete() {
 		global $_;
 		// Remove product from categories.
-		$cats = $_->entity_manager->get_entities(
+		$cats = $_->nymph->getEntities(
 				array('class' => com_sales_category, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'category'),
@@ -90,7 +87,7 @@ class com_sales_product extends entity {
 				)
 			);
 		foreach ($cats as &$cur_cat) {
-			while (($key = $this->array_search($cur_cat->products)) !== false) {
+			while (($key = $this->arraySearch($cur_cat->products)) !== false) {
 				unset($cur_cat->products[$key]);
 				$cur_cat->products = array_values($cur_cat->products);
 			}
@@ -126,7 +123,7 @@ class com_sales_product extends entity {
 	 */
 	public function get_categories() {
 		global $_;
-		$categories = (array) $_->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'ref' => array('products', $this)));
+		$categories = (array) $_->nymph->getEntities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'ref' => array('products', $this)));
 		return $categories;
 	}
 
@@ -148,7 +145,7 @@ class com_sales_product extends entity {
 		global $_;
 		$module = new module('com_sales', 'product/form', 'content');
 		$module->entity = $this;
-		$module->categories = (array) $_->entity_manager->get_entities(
+		$module->categories = (array) $_->nymph->getEntities(
 				array('class' => com_sales_category),
 				array('&',
 					'tag' => array('com_sales', 'category'),
@@ -156,18 +153,18 @@ class com_sales_product extends entity {
 				)
 			);
 		if ($_->config->com_sales->enable_manufacturers) {
-			$module->manufacturers = (array) $_->entity_manager->get_entities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
-			$_->entity_manager->sort($module->manufacturers, 'name');
+			$module->manufacturers = (array) $_->nymph->getEntities(array('class' => com_sales_manufacturer), array('&', 'tag' => array('com_sales', 'manufacturer')));
+			$_->nymph->sort($module->manufacturers, 'name');
 		}
-		$module->vendors = (array) $_->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
-		$module->tax_fees = (array) $_->entity_manager->get_entities(
+		$module->vendors = (array) $_->nymph->getEntities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
+		$module->tax_fees = (array) $_->nymph->getEntities(
 				array('class' => com_sales_tax_fee),
 				array('&',
 					'tag' => array('com_sales', 'tax_fee'),
 					'data' => array('enabled', true)
 				)
 			);
-		$module->return_checklists = (array) $_->entity_manager->get_entities(
+		$module->return_checklists = (array) $_->nymph->getEntities(
 				array('class' => com_sales_return_checklist),
 				array('&',
 					'tag' => array('com_sales', 'return_checklist'),

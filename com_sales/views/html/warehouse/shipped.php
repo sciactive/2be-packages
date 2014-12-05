@@ -67,7 +67,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			if ($cur_product['delivery'] != 'warehouse')
 				continue;
 			foreach ((array) $cur_product['shipped_entities'] as $skey => $cur_stock) {
-				if ($cur_stock->in_array($cur_product['returned_stock_entities']))
+				if ($cur_stock->inArray($cur_product['returned_stock_entities']))
 					continue;
 		?>
 		<tr title="<?php e($cur_stock->guid); ?>">

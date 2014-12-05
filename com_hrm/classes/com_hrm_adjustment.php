@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\hrm
  */
-class com_hrm_adjustment extends entity {
+class com_hrm_adjustment extends Entity {
+	const etype = 'com_hrm_adjustment';
 	protected $tags = array('com_hrm', 'adjustment');
 
 	public function __construct($id = 0) {
@@ -24,10 +25,6 @@ class com_hrm_adjustment extends entity {
 			return;
 		// Defaults.
 		$this->comments = array();
-	}
-
-	public static function etype() {
-		return 'com_hrm_adjustment';
 	}
 
 	public function info($type) {

@@ -52,7 +52,7 @@ if (empty($shipper->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_sales_shipper, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'shipper'), 'data' => array('name', $shipper->name)));
+$test = $_->nymph->getEntity(array('class' => com_sales_shipper, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'shipper'), 'data' => array('name', $shipper->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$shipper->print_form();
 	pines_notice('There is already a shipper with that name. Please choose a different name.');

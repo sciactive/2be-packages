@@ -233,7 +233,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 				($cur_tx->status == 'voided' && !$this->types['voided']) )
 					continue;
 
-			if ($cur_tx->has_tag('return')) {
+			if ($cur_tx->hasTag('return')) {
 				$class = 'class="p_muid_return"';
 				$tx_type = 'RE';
 			} else {
@@ -255,7 +255,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			?>
 			<tr <?php echo $class; ?>>
 				<td><a data-entity="<?php e($cur_tx->guid); ?>" data-entity-context="<?php echo $tx_type == 'SA' ? 'com_sales_sale' : 'com_sales_return'; ?>"><?php e($cur_tx->id); ?></a></td>
-				<td><?php e(format_date($cur_tx->p_cdate)); ?></td>
+				<td><?php e(format_date($cur_tx->cdate)); ?></td>
 				<td><?php e($cur_status); ?></td>
 				<td><?php e($cur_item['delivery']); ?></td>
 				<td><a data-entity="<?php e($cur_tx->group->guid); ?>" data-entity-context="group"><?php e($cur_tx->group->name); ?></a></td>

@@ -20,7 +20,7 @@ defined('P_RUN') or die('Direct access prohibited');
  * @param mixed &$function Unused.
  * @param array &$data The callback data array.
  */
-function com_user__get_entities(&$array, $name, &$object, &$function, &$data) {
+function com_user__getEntities(&$array, $name, &$object, &$function, &$data) {
 	if ($array[0]['skip_ac'])
 		$data['com_user_skip_ac'] = true;
 }
@@ -34,7 +34,7 @@ function com_user__check_permissions_delete(&$array) {
 	global $_;
 	$entity = $array[0];
 	if ((int) $entity === $entity)
-		$entity = $_->entity_manager->get_entity($array[0]);
+		$entity = $_->nymph->getEntity($array[0]);
 	if ((object) $entity !== $entity) {
 		$array = false;
 		return;
@@ -111,8 +111,8 @@ function com_user__check_permissions_save(&$array) {
 function com_user__add_access(&$array) {
 	if ((object) $_SESSION['user'] === $_SESSION['user'] &&
 		!isset($array[0]->guid) &&
-		!$array[0]->has_tag('com_user', 'user') &&
-		!$array[0]->has_tag('com_user', 'group') ) {
+		!$array[0]->hasTag('com_user', 'user') &&
+		!$array[0]->hasTag('com_user', 'group') ) {
 		$array[0]->user = $_SESSION['user'];
 		$array[0]->group = $_SESSION['user']->group;
 		if ((object) $array[0]->ac !== $array[0]->ac)
@@ -126,16 +126,16 @@ function com_user__add_access(&$array) {
 	}
 }
 
-foreach (array('$_->entity_manager->get_entity', '$_->entity_manager->get_entities') as $cur_hook) {
-	$_->hook->add_callback($cur_hook, -10, 'com_user__get_entities');
+foreach (array('$_->nymph->getEntity', '$_->nymph->getEntities') as $cur_hook) {
+	$_->hook->add_callback($cur_hook, -10, 'com_user__getEntities');
 	$_->hook->add_callback($cur_hook, 10, 'com_user__check_permissions_return');
 }
 unset ($cur_hook);
 
-$_->hook->add_callback('$_->entity_manager->save_entity', -100, 'com_user__add_access');
-$_->hook->add_callback('$_->entity_manager->save_entity', -99, 'com_user__check_permissions_save');
+$_->hook->add_callback('$_->nymph->saveEntity', -100, 'com_user__add_access');
+$_->hook->add_callback('$_->nymph->saveEntity', -99, 'com_user__check_permissions_save');
 
-foreach (array('$_->entity_manager->delete_entity', '$_->entity_manager->delete_entity_by_id') as $cur_hook)
+foreach (array('$_->nymph->deleteEntity', '$_->nymph->deleteEntityByID') as $cur_hook)
 	$_->hook->add_callback($cur_hook, -99, 'com_user__check_permissions_delete');
 
 unset ($cur_hook);

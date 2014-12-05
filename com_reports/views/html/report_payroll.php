@@ -162,7 +162,7 @@ if (isset($_->com_googledrive)) {
 		<?php
 		$counted = $total_store = array();
 		foreach ($this->invoices as $cur_invoice) {
-			if ($cur_invoice->has_tag('sale')) {
+			if ($cur_invoice->hasTag('sale')) {
 				foreach ($cur_invoice->products as $cur_product) {
 					if (!isset($totals[$cur_product['salesperson']->guid])){
 						$totals[$cur_product['salesperson']->guid] = array(
@@ -193,7 +193,7 @@ if (isset($_->com_googledrive)) {
 						}
 					}
 				}
-			} elseif ($cur_invoice->has_tag('return')) {
+			} elseif ($cur_invoice->hasTag('return')) {
 				foreach ($cur_invoice->products as $cur_product) {
 					if (!isset($totals[$cur_product['salesperson']->guid])){
 						$totals[$cur_product['salesperson']->guid] = array(
@@ -243,7 +243,7 @@ if (isset($_->com_googledrive)) {
 					'total_pay' => 0
 				);
 			}
-			$schedule = $_->entity_manager->get_entities(
+			$schedule = $_->nymph->getEntities(
 				array('class' => com_calendar_event),
 				array('&',
 					'tag' => array('com_calendar', 'event'),
@@ -255,7 +255,7 @@ if (isset($_->com_googledrive)) {
 			foreach ($schedule as $cur_schedule)
 				$totals[$cur_employee->guid]['scheduled'] += $cur_schedule->scheduled;
 
-			$issues = $_->entity_manager->get_entities(
+			$issues = $_->nymph->getEntities(
 				array('class' => com_hrm_issue),
 				array('&',
 					'tag' => array('com_hrm', 'issue'),
@@ -267,7 +267,7 @@ if (isset($_->com_googledrive)) {
 			foreach ($issues as $cur_issue)
 				$totals[$cur_employee->guid]['penalties'] += $cur_issue->issue_type->penalty * $cur_issue->quantity;
 
-			$bonuses = $_->entity_manager->get_entities(
+			$bonuses = $_->nymph->getEntities(
 				array('class' => com_hrm_bonus),
 				array('&',
 					'tag' => array('com_hrm', 'bonus'),
@@ -296,11 +296,11 @@ if (isset($_->com_googledrive)) {
 					$totals[$cur_employee->guid]['total_pay'] = max(($totals[$cur_employee->guid]['clocked']/3600) * $cur_employee->pay_rate, $totals[$cur_employee->guid]['commission']);
 					break;
 				case 'salary':
-					$days_worked = isset($this->start_date) ? ceil(($this->end_date-$this->start_date)/86400) : ceil((time()-$cur_employee->p_cdate)/86400);
+					$days_worked = isset($this->start_date) ? ceil(($this->end_date-$this->start_date)/86400) : ceil((time()-$cur_employee->cdate)/86400);
 					$totals[$cur_employee->guid]['total_pay'] = ($cur_employee->pay_rate/365)*($days_worked);
 					break;
 				case 'salary_commission':
-					$days_worked = isset($this->start_date) ? ceil(($this->end_date-$this->start_date)/86400) : ceil((time()-$cur_employee->p_cdate)/86400);
+					$days_worked = isset($this->start_date) ? ceil(($this->end_date-$this->start_date)/86400) : ceil((time()-$cur_employee->cdate)/86400);
 					$totals[$cur_employee->guid]['total_pay'] = (($cur_employee->pay_rate/365)*($days_worked)) + $totals[$cur_employee->guid]['commission'];
 					break;
 			}

@@ -227,8 +227,8 @@ $_->com_sales->load_jcrop();
 				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">
@@ -329,7 +329,7 @@ $_->com_sales->load_jcrop();
 						$category_guids = $this->entity->get_categories_guid();
 						foreach($this->categories as $cur_category) { ?>
 						<tr title="<?php e($cur_category->guid); ?>" class="<?php echo $cur_category->children ? 'parent ' : ''; ?><?php echo isset($cur_category->parent) ? h("child ch_{$cur_category->parent->guid} ") : ''; ?>">
-							<td><?php echo isset($cur_category->parent) ? $cur_category->array_search($cur_category->parent->children) + 1 : '0' ; ?></td>
+							<td><?php echo isset($cur_category->parent) ? $cur_category->arraySearch($cur_category->parent->children) + 1 : '0' ; ?></td>
 							<td><input type="checkbox" name="categories[]" value="<?php e($cur_category->guid); ?>" <?php echo in_array($cur_category->guid, $category_guids) ? 'checked="checked" ' : ''; ?>/></td>
 							<td><a data-entity="<?php e($cur_category->guid); ?>" data-entity-context="com_sales_category"><?php e($cur_category->name); ?></a></td>
 							<td><?php echo count($cur_category->products); ?></td>
@@ -550,7 +550,7 @@ $_->com_sales->load_jcrop();
 					<span class="pf-note">Hold Ctrl (Command on Mac) to select multiple.</span>
 					<select class="pf-field form-control" name="additional_tax_fees[]" size="6" multiple="multiple">
 						<?php foreach ($this->tax_fees as $cur_tax_fee) { ?>
-						<option value="<?php e($cur_tax_fee->guid); ?>"<?php echo ($cur_tax_fee->in_array($this->entity->additional_tax_fees)) ? ' selected="selected"' : ''; ?>><?php e($cur_tax_fee->name); ?></option>
+						<option value="<?php e($cur_tax_fee->guid); ?>"<?php echo ($cur_tax_fee->inArray($this->entity->additional_tax_fees)) ? ' selected="selected"' : ''; ?>><?php e($cur_tax_fee->name); ?></option>
 						<?php } ?>
 					</select></label>
 			</div>
@@ -560,7 +560,7 @@ $_->com_sales->load_jcrop();
 					<span class="pf-note">Hold Ctrl (Command on Mac) to select multiple.</span>
 					<select class="pf-field form-control" name="return_checklists[]" size="6" multiple="multiple">
 						<?php foreach ($this->return_checklists as $cur_return_checklist) { ?>
-						<option value="<?php e($cur_return_checklist->guid); ?>"<?php echo ($cur_return_checklist->in_array($this->entity->return_checklists)) ? ' selected="selected"' : ''; ?>><?php e($cur_return_checklist->name); ?></option>
+						<option value="<?php e($cur_return_checklist->guid); ?>"<?php echo ($cur_return_checklist->inArray($this->entity->return_checklists)) ? ' selected="selected"' : ''; ?>><?php e($cur_return_checklist->name); ?></option>
 						<?php } ?>
 					</select></label>
 			</div>

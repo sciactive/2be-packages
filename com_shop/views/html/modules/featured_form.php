@@ -10,14 +10,14 @@
  */
 /* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$products = $_->entity_manager->get_entities(
+$products = $_->nymph->getEntities(
 		array('class' => com_sales_product),
 		array('&',
 			'tag' => array('com_sales', 'product'),
 			'data' => array('featured', true)
 		)
 	);
-$_->entity_manager->sort($products, 'name');
+$_->nymph->sort($products, 'name');
 ?>
 <div class="pf-form">
 	<div class="pf-element">

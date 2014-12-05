@@ -16,11 +16,13 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\customertimer
  */
-class com_customertimer_tx extends entity {
+class com_customertimer_tx extends Entity {
+	const etype = 'com_customertimer_tx';
+	
 	public function __construct() {
 		$args = func_get_args();
 		if (!empty($args))
-			call_user_func_array(array($this, 'add_tag'), $args);
+			call_user_func_array(array($this, 'addTag'), $args);
 	}
 
 	/**
@@ -34,9 +36,5 @@ class com_customertimer_tx extends entity {
 		$entity = new $class($args);
 		$_->hook->hook_object($entity, $class.'->', false);
 		return $entity;
-	}
-
-	public static function etype() {
-		return 'com_customertimer_tx';
 	}
 }

@@ -37,7 +37,7 @@ if (empty($query)) {
 		$selector['match'][] = array('zip', $r_num_query);
 		$selector['match'][] = array('fax', $r_num_query);
 	}
-	$companies = (array) $_->entity_manager->get_entities(
+	$companies = (array) $_->nymph->getEntities(
 			array('class' => com_customer_company),
 			array('&',
 				'tag' => array('com_customer', 'company')

@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\customertimer
  */
-class com_customertimer_floor extends entity {
+class com_customertimer_floor extends Entity {
+	const etype = 'com_customertimer_floor';
 	protected $tags = array('com_customertimer', 'floor');
 
 	public function __construct($id = 0) {
@@ -26,10 +27,6 @@ class com_customertimer_floor extends entity {
 		$this->enabled = true;
 		$this->stations = array();
 		$this->active_stations = array();
-	}
-
-	public static function etype() {
-		return 'com_customertimer_floor';
 	}
 
 	public function info($type) {

@@ -30,19 +30,20 @@ defined('P_RUN') or die('Direct access prohibited');
  * @property group $parent The group's parent.
  */
 class group extends able_object implements group_interface {
+	const etype = 'group';
 	protected $tags = array('com_user', 'group', 'enabled');
 
 	public function __construct($id = 0) {
 		if ($id > 0 || (string) $id === $id) {
 			global $_;
 			if ((int) $id === $id)
-				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'group')));
+				$entity = $_->nymph->getEntity(array('class' => get_class($this)), array('&', 'guid' => $id, 'tag' => array('com_user', 'group')));
 			else
-				$entity = $_->entity_manager->get_entity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'group'), 'data' => array('groupname', $id)));
+				$entity = $_->nymph->getEntity(array('class' => get_class($this)), array('&', 'tag' => array('com_user', 'group'), 'data' => array('groupname', $id)));
 			if (isset($entity)) {
 				$this->guid = $entity->guid;
 				$this->tags = $entity->tags;
-				$this->put_data($entity->get_data(), $entity->get_sdata());
+				$this->putData($entity->getData(), $entity->getSData());
 				return;
 			}
 		}
@@ -51,10 +52,6 @@ class group extends able_object implements group_interface {
 		$this->conditions = array();
 		$this->address_type = 'us';
 		$this->attributes = array();
-	}
-
-	public static function etype() {
-		return 'group';
 	}
 
 	public function info($type) {
@@ -110,7 +107,7 @@ class group extends able_object implements group_interface {
 
 	public function delete() {
 		global $_;
-		$entities = $_->entity_manager->get_entities(
+		$entities = $_->nymph->getEntities(
 				array('class' => group),
 				array('&',
 					'tag' => array('com_user', 'group'),
@@ -128,11 +125,11 @@ class group extends able_object implements group_interface {
 	}
 
 	public function disable() {
-		$this->remove_tag('enabled');
+		$this->removeTag('enabled');
 	}
 
 	public function enable() {
-		$this->add_tag('enabled');
+		$this->addTag('enabled');
 	}
 
 	public function save() {
@@ -143,7 +140,7 @@ class group extends able_object implements group_interface {
 
 	public function get_children() {
 		global $_;
-		$return = (array) $_->entity_manager->get_entities(
+		$return = (array) $_->nymph->getEntities(
 				array('class' => group),
 				array('&',
 					'tag' => array('com_user', 'group', 'enabled'),
@@ -156,7 +153,7 @@ class group extends able_object implements group_interface {
 	public function get_descendants($and_self = false) {
 		global $_;
 		$return = array();
-		$entities = $_->entity_manager->get_entities(
+		$entities = $_->nymph->getEntities(
 				array('class' => group),
 				array('&',
 					'tag' => array('com_user', 'group', 'enabled'),
@@ -182,7 +179,7 @@ class group extends able_object implements group_interface {
 	public function get_level() {
 		$group = $this;
 		$level = 0;
-		while (isset($group->parent) && $group->parent->has_tag('enabled')) {
+		while (isset($group->parent) && $group->parent->hasTag('enabled')) {
 			$level++;
 			$group = $group->parent;
 		}
@@ -193,7 +190,7 @@ class group extends able_object implements group_interface {
 		global $_;
 		if (isset($this->logo))
 			return $full ? $_->uploader->url($_->uploader->real($this->logo), true) : $this->logo;
-		if (isset($this->parent) && $this->parent->has_tag('enabled'))
+		if (isset($this->parent) && $this->parent->hasTag('enabled'))
 			return $this->parent->get_logo($full);
 		return ($full ? $_->config->full_location : $_->config->location)."{$_->config->upload_location}logos/default_logo.png";
 	}
@@ -205,7 +202,7 @@ class group extends able_object implements group_interface {
 		else
 			$groups = array();
 		$groups[] = $this;
-		$return = $_->entity_manager->get_entities(
+		$return = $_->nymph->getEntities(
 				array('class' => user),
 				array('&',
 					'tag' => array('com_user', 'user', 'enabled')

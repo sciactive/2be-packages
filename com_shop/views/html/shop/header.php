@@ -21,7 +21,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']->is($this->entity->user)) {
 }
 
 $is_starred = false;
-if (isset($_SESSION['user']) && isset($_SESSION['user']->com_shop_starred) && $this->entity->in_array($_SESSION['user']->com_shop_starred)) {
+if (isset($_SESSION['user']) && isset($_SESSION['user']->com_shop_starred) && $this->entity->inArray($_SESSION['user']->com_shop_starred)) {
 	$is_starred = true;
 }
 

@@ -28,8 +28,8 @@ foreach ($_REQUEST['fixes'] as $cur_key) {
 		continue;
 	}
 	// Remove the product from the category.
-	if ($cur_product->in_array($cur_cat->products)) {
-		$key = $cur_product->array_search($cur_cat->products);
+	if ($cur_product->inArray($cur_cat->products)) {
+		$key = $cur_product->arraySearch($cur_cat->products);
 		unset($cur_cat->products[$key]);
 		if (!$cur_cat->save())
 			pines_error("Couldn't remove product {$cur_product->name} from category {$cur_cat->name}. Do you have permission?");

@@ -74,9 +74,9 @@ if (!in_array('account', $_->config->com_customer->critical_fields_customer) || 
 			$customer->username = uniqid('user');
 	}
 	if ($_REQUEST['enabled'] == 'ON')
-		$customer->add_tag('enabled');
+		$customer->addTag('enabled');
 	else
-		$customer->remove_tag('enabled');
+		$customer->removeTag('enabled');
 }
 if (!in_array('membership', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($customer->member)) {
 	if ($_REQUEST['member'] == 'ON')
@@ -139,7 +139,7 @@ if (empty($customer->ssn)) {
 		pines_notice('The SSN must be a 9 digit number.');
 		return;
 	}
-	$test = $_->entity_manager->get_entity(array('class' => com_customer_customer, 'skip_ac' => true), array('&', 'tag' => array('com_customer', 'customer'), 'strict' => array('ssn', $customer->ssn), '!guid' => $customer->guid));
+	$test = $_->nymph->getEntity(array('class' => com_customer_customer, 'skip_ac' => true), array('&', 'tag' => array('com_customer', 'customer'), 'strict' => array('ssn', $customer->ssn), '!guid' => $customer->guid));
 	if (isset($test)) {
 		$customer->print_form();
 		pines_notice('Another customer already has this SSN.');
@@ -217,7 +217,7 @@ if (!$un_check['result']) {
 	pines_notice($un_check['message']);
 	return;
 }
-$test = $_->entity_manager->get_entity(
+$test = $_->nymph->getEntity(
 		array('class' => user, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_user', 'user'),

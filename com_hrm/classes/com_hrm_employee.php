@@ -139,11 +139,11 @@ class com_hrm_employee extends user {
 		global $_;
 		$module = new module('com_hrm', 'employee/history', 'content');
 		$module->entity = $this;
-		$module->issues = $_->entity_manager->get_entities(array('class' => com_hrm_issue, 'skip_ac' => true), array('&', 'tag' => array('com_hrm', 'issue'), 'ref' => array('employee', $this)));
-		$module->sales = $_->entity_manager->get_entities(array('class' => com_sales_sale, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'sale'), 'ref' => array('user', $this)));
-		$module->returns = $_->entity_manager->get_entities(array('class' => com_sales_return, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('user', $this)));
+		$module->issues = $_->nymph->getEntities(array('class' => com_hrm_issue, 'skip_ac' => true), array('&', 'tag' => array('com_hrm', 'issue'), 'ref' => array('employee', $this)));
+		$module->sales = $_->nymph->getEntities(array('class' => com_sales_sale, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'sale'), 'ref' => array('user', $this)));
+		$module->returns = $_->nymph->getEntities(array('class' => com_sales_return, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'return'), 'ref' => array('user', $this)));
 		if ($_->config->com_hrm->com_reports)
-			$module->paystubs = $_->entity_manager->get_entities(array('class' => com_reports_paystub, 'skip_ac' => true), array('&', 'tag' => array('com_reports', 'paystub')));
+			$module->paystubs = $_->nymph->getEntities(array('class' => com_reports_paystub, 'skip_ac' => true), array('&', 'tag' => array('com_reports', 'paystub')));
 
 		return $module;
 	}

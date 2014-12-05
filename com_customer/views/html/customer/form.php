@@ -449,8 +449,8 @@ $_->com_customer->load_company_select();
 				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<?php if (in_array('name', $_->config->com_customer->shown_fields_customer) && (!in_array('name', $_->config->com_customer->critical_fields_customer) || gatekeeper('com_customer/editcritical') || !isset($this->entity->name))) { ?>
@@ -567,7 +567,7 @@ $_->com_customer->load_company_select();
 			<?php } ?>
 			<div class="pf-element">
 				<label><span class="pf-label">Login Enabled</span>
-					<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->has_tag('enabled') ? ' checked="checked"' : ''; ?> /></label>
+					<input class="pf-field" type="checkbox" name="enabled" value="ON"<?php echo $this->entity->hasTag('enabled') ? ' checked="checked"' : ''; ?> /></label>
 			</div>
 			<?php if (in_array('password', $_->config->com_customer->shown_fields_customer)) { ?>
 			<div class="pf-element">
@@ -876,7 +876,7 @@ $_->com_customer->load_company_select();
 									<?php foreach ($this->interactions as $cur_interaction) { ?>
 									<tr title="<?php e($cur_interaction->guid); ?>">
 										<td><a data-entity="<?php e($cur_interaction->guid); ?>" data-entity-context="com_customer_interaction"><?php e($cur_interaction->guid); ?></a></td>
-										<td><?php e(format_date($cur_interaction->p_cdate, 'full_sort')); ?></td>
+										<td><?php e(format_date($cur_interaction->cdate, 'full_sort')); ?></td>
 										<td><?php e(format_date($cur_interaction->action_date, 'full_sort')); ?></td>
 										<td><a data-entity="<?php e($cur_interaction->employee->guid); ?>" data-entity-context="user"><?php e($cur_interaction->employee->name); ?></a></td>
 										<td><?php e($cur_interaction->type); ?></td>
@@ -924,7 +924,7 @@ $_->com_customer->load_company_select();
 											$item_count = count($cur_sale->products); ?>
 										<tr title="<?php e($cur_sale->guid); ?>"<?php echo in_array($cur_sale->guid, $returned_sales) ? ' class="parent"' : ''; ?>>
 											<td><a data-entity="<?php e($cur_sale->guid); ?>" data-entity-context="com_sales_sale">Sale <?php e($cur_sale->id); ?></a></td>
-											<td><?php e(format_date($cur_sale->p_cdate)); ?></td>
+											<td><?php e(format_date($cur_sale->cdate)); ?></td>
 											<td><?php echo ($item_count == 1) ? '<a data-entity="'.h($cur_sale->products[0]['entity']->guid).'" data-entity-context="com_sales_product">'.h($cur_sale->products[0]['entity']->name).'</a> x ' . h($cur_sale->products[0]['quantity']) : $item_count.' products'; ?></td>
 											<td>$<?php echo number_format($cur_sale->subtotal, 2); ?></td>
 											<td>$<?php echo number_format($cur_sale->taxes, 2); ?></td>
@@ -934,9 +934,9 @@ $_->com_customer->load_company_select();
 										</tr>
 										<?php } foreach ((array) $this->returns as $cur_return) {
 											$item_count = count($cur_return->products); ?>
-										<tr title="<?php e($cur_return->guid); ?>"<?php echo (isset($cur_return->sale->guid) && $cur_return->sale->in_array((array) $this->sales)) ? ' class="child ch_'.h($cur_return->sale->guid).'"' : ''; ?>>
+										<tr title="<?php e($cur_return->guid); ?>"<?php echo (isset($cur_return->sale->guid) && $cur_return->sale->inArray((array) $this->sales)) ? ' class="child ch_'.h($cur_return->sale->guid).'"' : ''; ?>>
 											<td><a data-entity="<?php e($cur_return->guid); ?>" data-entity-context="com_sales_return">Return <?php e($cur_return->id); ?></a></td>
-											<td><?php e(format_date($cur_return->p_cdate)); ?></td>
+											<td><?php e(format_date($cur_return->cdate)); ?></td>
 											<td><?php echo ($item_count == 1) ? '<a data-entity="'.h($cur_return->products[0]['entity']->guid).'" data-entity-context="com_sales_product">'.h($cur_return->products[0]['entity']->name).'</a>' : $item_count.' items'; ?></td>
 											<td>$<?php echo number_format($cur_return->subtotal, 2); ?></td>
 											<td>$<?php echo number_format($cur_return->taxes, 2); ?></td>

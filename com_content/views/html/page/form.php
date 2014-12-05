@@ -123,8 +123,8 @@ if (!$this->quickpage_options) {
 				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } if (!$this->quickpage_options) { ?>
 			<div class="pf-element">
@@ -620,7 +620,7 @@ if (!$this->quickpage_options) {
 						$category_guids = $this->entity->get_categories_guid();
 					foreach($this->categories as $cur_category) { ?>
 						<tr title="<?php e($cur_category->guid); ?>" class="<?php echo $cur_category->children ? 'parent ' : ''; ?><?php echo isset($cur_category->parent) ? h("child ch_{$cur_category->parent->guid} ") : ''; ?>">
-							<td><?php echo isset($cur_category->parent) ? $cur_category->array_search($cur_category->parent->children) + 1 : '0' ; ?></td>
+							<td><?php echo isset($cur_category->parent) ? $cur_category->arraySearch($cur_category->parent->children) + 1 : '0' ; ?></td>
 							<td><input type="checkbox" name="categories[]" value="<?php e($cur_category->guid); ?>" <?php echo in_array($cur_category->guid, $category_guids) ? 'checked="checked" ' : ''; ?>/></td>
 							<td><?php e($cur_category->name); ?></td>
 							<td><?php echo count($cur_category->pages); ?></td>
@@ -654,11 +654,11 @@ if (!$this->quickpage_options) {
 			<div class="pf-element">
 				<label><span class="pf-label">Override Created Date</span>
 					<span class="pf-note">This date is used for sorting pages on the front page.</span>
-					<input class="pf-field form-control" type="text" name="p_cdate" value="<?php echo $this->entity->p_cdate ? h(format_date($this->entity->p_cdate, 'full_med')) : ''; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="cdate" value="<?php echo $this->entity->cdate ? h(format_date($this->entity->cdate, 'full_med')) : ''; ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Override Modified Date</span>
-					<input class="pf-field form-control" type="text" name="p_mdate" value="<?php echo $this->entity->p_mdate ? h(format_date($this->entity->p_mdate, 'full_med')) : ''; ?>" /></label>
+					<input class="pf-field form-control" type="text" name="mdate" value="<?php echo $this->entity->mdate ? h(format_date($this->entity->mdate, 'full_med')) : ''; ?>" /></label>
 			</div>
 			<div class="pf-element">
 				<label><span class="pf-label">Begin Publish Date</span>

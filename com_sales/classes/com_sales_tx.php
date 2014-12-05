@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_tx extends entity {
+class com_sales_tx extends Entity {
+	const etype = 'com_sales_tx';
 	protected $tags = array('com_sales', 'transaction');
 
 	/**
@@ -30,10 +31,6 @@ class com_sales_tx extends entity {
 		$entity->ac = (object) array('user' => 2, 'group' => 2, 'other' => 2);
 		$_->hook->hook_object($entity, $class.'->', false);
 		return $entity;
-	}
-
-	public static function etype() {
-		return 'com_sales_tx';
 	}
 
 	public function info($type) {

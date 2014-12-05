@@ -27,7 +27,7 @@ if ($_->config->com_sales->com_customer) {
 		// Looking for sales made to a specific customer.
 		$customer = com_customer_customer::factory((int) $_REQUEST['customer']);
 		$sales_query['ref'] = array('customer', $customer);
-		$sales = (array) $_->entity_manager->get_entities(array('class' => com_sales_sale), $sales_query);
+		$sales = (array) $_->nymph->getEntities(array('class' => com_sales_sale), $sales_query);
 	} else {
 		// Looking for sales made to any customers matching the query.
 		$query = strtolower($_REQUEST['q']);
@@ -47,18 +47,18 @@ if ($_->config->com_sales->com_customer) {
 			$selector['match'][] = array('phone_cell', $r_num_query);
 			$selector['match'][] = array('fax', $r_num_query);
 		}
-		$customers = (array) $_->entity_manager->get_entities(
+		$customers = (array) $_->nymph->getEntities(
 				array('class' => com_customer_customer),
 				array('&', 'tag' => array('com_customer', 'customer')),
 				$selector
 			);
 		foreach ($customers as $cur_customer) {
 			$sales_query['ref'] = array('customer', $cur_customer);
-			$sales = array_merge($sales, $_->entity_manager->get_entities(array('class' => com_sales_sale), $sales_query));
+			$sales = array_merge($sales, $_->nymph->getEntities(array('class' => com_sales_sale), $sales_query));
 		}
 	}
 } else {
-	$sales = (array) $_->entity_manager->get_entities(array('class' => com_sales_sale), $sales_query);
+	$sales = (array) $_->nymph->getEntities(array('class' => com_sales_sale), $sales_query);
 }
 
 foreach ($sales as $key => &$cur_sale) {
@@ -71,8 +71,8 @@ foreach ($sales as $key => &$cur_sale) {
 		'id'			=> $cur_sale->id,
 		'status'		=> $cur_sale->status,
 		'total'			=> '$'.$cur_sale->total,
-		'cdate'			=> format_date($cur_sale->p_cdate),
-		'mdate'			=> format_date($cur_sale->p_mdate),
+		'cdate'			=> format_date($cur_sale->cdate),
+		'mdate'			=> format_date($cur_sale->mdate),
 		'invoice_date'	=> ($cur_sale->invoice_date ? format_date($cur_sale->invoice_date) : ''),
 		'tender_date'	=> ($cur_sale->tender_date ? format_date($cur_sale->tender_date) : ''),
 		'void_date'		=> ($cur_sale->void_date ? format_date($cur_sale->void_date) : ''),

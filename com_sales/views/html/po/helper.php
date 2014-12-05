@@ -126,7 +126,7 @@ echo $module->render();
 	</table>
 </div>
 <?php
-$sales = $_->entity_manager->get_entities(
+$sales = $_->nymph->getEntities(
 		array('class' => com_sales_sale),
 		array('&',
 			'tag' => array('com_sales', 'sale'),
@@ -171,7 +171,7 @@ if (!empty($this->entity->comments)) { ?>
 </div>
 <?php } } elseif ($this->render == 'footer') { ?>
 <a href="<?php e(pines_url('com_sales', 'po/edit', array('id' => $this->entity->guid))); ?>" class="btn btn-default">Edit</a>
-<?php if (!$this->entity->finished && ( (gatekeeper('com_sales/receive') && isset($this->entity->destination->guid) && $this->entity->destination->is($_SESSION['user']->group)) || (gatekeeper('com_sales/receivelocation') && isset($this->entity->destination->guid) && isset($_SESSION['user']->group->guid) && $this->entity->destination->in_array($_SESSION['user']->group->get_descendants(true))) ) ) { ?>
+<?php if (!$this->entity->finished && ( (gatekeeper('com_sales/receive') && isset($this->entity->destination->guid) && $this->entity->destination->is($_SESSION['user']->group)) || (gatekeeper('com_sales/receivelocation') && isset($this->entity->destination->guid) && isset($_SESSION['user']->group->guid) && $this->entity->destination->inArray($_SESSION['user']->group->get_descendants(true))) ) ) { ?>
 <a href="<?php e(pines_url('com_sales', 'stock/receive', array('location' => $this->entity->destination->guid, 'shipments' => $this->entity->guid))); ?>" class="btn btn-default">Receive</a>
 <?php } if (gatekeeper('com_sales/listpos')) { ?>
 <a href="<?php e(pines_url('com_sales', 'po/list')); ?>" class="btn btn-default">View in List</a>

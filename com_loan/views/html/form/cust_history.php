@@ -76,7 +76,7 @@ $loan_ids = $this->loan_ids;
 			<?php continue;
 		} 
 		
-		$interactions = $_->entity_manager->get_entities(
+		$interactions = $_->nymph->getEntities(
 				array('class' => com_customer_interaction),
 				array('&',
 					'ref' => array('customer', $customer->guid),
@@ -110,7 +110,7 @@ $loan_ids = $this->loan_ids;
 						<?php foreach ($interactions as $cur_interaction) { ?>
 									<tr title="<?php e($cur_interaction->guid); ?>">
 										<td><a data-entity="<?php e($cur_interaction->guid); ?>" data-entity-context="com_customer_interaction"><?php e($cur_interaction->guid); ?></a></td>
-										<td><?php e(format_date($cur_interaction->p_cdate, 'date_sort')); ?></td>
+										<td><?php e(format_date($cur_interaction->cdate, 'date_sort')); ?></td>
 										<td><?php e(format_date($cur_interaction->action_date, 'date_sort')); ?></td>
 										<td><a data-entity="<?php e($cur_interaction->employee->guid); ?>" data-entity-context="user"><?php e($cur_interaction->employee->name); ?></a></td>
 										<td><?php e($cur_interaction->type); ?></td>
@@ -135,7 +135,7 @@ $loan_ids = $this->loan_ids;
 			<div class="alert-error panel-heading" style="margin-bottom: 10px; border: 1px solid #fff;"><big class="panel-title"><i class="fa fa-exclamation-circle"></i> Error Finding Customer.</big></div>
 			<?php
 		} else { 
-			$interactions = $_->entity_manager->get_entities(
+			$interactions = $_->nymph->getEntities(
 				array('class' => com_customer_interaction),
 				array('&',
 					'ref' => array('customer', $customer->guid),
@@ -171,7 +171,7 @@ $loan_ids = $this->loan_ids;
 							<?php foreach ($interactions as $cur_interaction) { ?>
 										<tr title="<?php e($cur_interaction->guid); ?>">
 											<td><a data-entity="<?php e($cur_interaction->guid); ?>" data-entity-context="com_customer_interaction"><?php e($cur_interaction->guid); ?></a></td>
-											<td><?php e(format_date($cur_interaction->p_cdate, 'date_sort')); ?></td>
+											<td><?php e(format_date($cur_interaction->cdate, 'date_sort')); ?></td>
 											<td><?php e(format_date($cur_interaction->action_date, 'date_sort')); ?></td>
 											<td><a data-entity="<?php e($cur_interaction->employee->guid); ?>" data-entity-context="user"><?php e($cur_interaction->employee->name); ?></a></td>
 											<td><?php e($cur_interaction->type); ?></td>

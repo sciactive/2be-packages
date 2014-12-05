@@ -11,7 +11,7 @@
 /* @var $_ core */
 defined('P_RUN') or die('Direct access prohibited');
 
-$entries = (array) $_->entity_manager->get_entities(
+$entries = (array) $_->nymph->getEntities(
 		array('class' => com_menueditor_entry),
 		array('&',
 			'tag' => array('com_menueditor', 'entry'),
@@ -19,7 +19,7 @@ $entries = (array) $_->entity_manager->get_entities(
 		)
 	);
 
-$_->entity_manager->sort($entries, 'sort_order');
+$_->nymph->sort($entries, 'sort_order');
 
 foreach ($entries as $cur_entry)
 	$_->menu->menu_arrays[] = $cur_entry->menu_array();

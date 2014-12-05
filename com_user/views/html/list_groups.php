@@ -86,7 +86,7 @@ foreach($this->groups as $cur_group) {
 		<tr title="<?php e($group->guid); ?>" class="<?php
 		if (in_array($group->guid, $parents))
 			echo "parent ";
-		if (isset($group->parent) && $group->parent->in_array($this->groups))
+		if (isset($group->parent) && $group->parent->inArray($this->groups))
 			e("child ch_{$group->parent->guid}");
 		?>">
 			<td><?php e($group->guid); ?></td>
@@ -95,7 +95,7 @@ foreach($this->groups as $cur_group) {
 			<td><a href="mailto:<?php e($group->email); ?>"><?php e($group->email); ?></a></td>
 			<td><?php e($group->timezone); ?></td>
 			<td><?php
-			$user_array = $_->entity_manager->get_entities(
+			$user_array = $_->nymph->getEntities(
 					array('class' => user, 'limit' => 51),
 					array('&',
 						'tag' => array('com_user', 'user', 'enabled')

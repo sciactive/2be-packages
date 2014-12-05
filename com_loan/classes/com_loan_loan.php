@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\loan
  */
-class com_loan_loan extends entity {
+class com_loan_loan extends Entity {
+	const etype = 'com_loan_loan';
 	protected $tags = array('com_loan', 'loan');
 
 	public function __construct($id = 0) {
@@ -64,10 +65,6 @@ class com_loan_loan extends entity {
 		return new module('com_loan', 'loan/helper');
 	}
 
-	public static function etype() {
-		return 'com_loan_loan';
-	}
-
 	public function info($type) {
 		switch ($type) {
 			case 'name':
@@ -112,7 +109,7 @@ class com_loan_loan extends entity {
 	public function save() {
 		global $_;
 		if (!isset($this->id))
-			$this->id = $_->entity_manager->new_uid('com_loan_loan');
+			$this->id = $_->nymph->newUID('com_loan_loan');
 		return parent::save();
 	}
 	
@@ -323,19 +320,19 @@ class com_loan_loan extends entity {
 	 * @return string The string of the tag or a nicely displayed version
 	 */
 	public function get_loan_status($tag = false) {
-		if ($this->has_tag('active'))
+		if ($this->hasTag('active'))
 			$status = (!$tag) ? 'Active' : 'active';
-		if ($this->has_tag('paidoff'))
+		if ($this->hasTag('paidoff'))
 			$status = (!$tag) ? 'Paid Off' : 'paidoff';
-		if ($this->has_tag('writeoff'))
+		if ($this->hasTag('writeoff'))
 			$status = (!$tag) ? 'Written Off' : 'writeoff';
-		if ($this->has_tag('cancelled'))
+		if ($this->hasTag('cancelled'))
 			$status = (!$tag) ? 'Cancelled' : 'cancelled';
-		if ($this->has_tag('sold'))
+		if ($this->hasTag('sold'))
 			$status = (!$tag) ? 'Sold' : 'sold';
 		
 		if (!$status) {
-			$this->add_tag('active');
+			$this->addTag('active');
 			$this->save();
 			$status == (!$tag) ? 'Active' : 'active';
 		}
@@ -349,24 +346,24 @@ class com_loan_loan extends entity {
 	public function change_loan_tags($tag) {
 		switch ($tag) {
 			case 'active':
-				$this->remove_tag('paidoff', 'writeoff', 'cancelled', 'sold');
-				$this->add_tag('active');
+				$this->removeTag('paidoff', 'writeoff', 'cancelled', 'sold');
+				$this->addTag('active');
 				break;
 			case 'paidoff':
-				$this->remove_tag('active', 'writeoff', 'cancelled', 'sold');
-				$this->add_tag('paidoff');
+				$this->removeTag('active', 'writeoff', 'cancelled', 'sold');
+				$this->addTag('paidoff');
 				break;
 			case 'writeoff':
-				$this->remove_tag('paidoff', 'active', 'cancelled', 'sold');
-				$this->add_tag('writeoff');
+				$this->removeTag('paidoff', 'active', 'cancelled', 'sold');
+				$this->addTag('writeoff');
 				break;
 			case 'cancelled':
-				$this->remove_tag('paidoff', 'writeoff', 'active', 'sold');
-				$this->add_tag('cancelled');
+				$this->removeTag('paidoff', 'writeoff', 'active', 'sold');
+				$this->addTag('cancelled');
 				break;
 			case 'sold':
-				$this->remove_tag('paidoff', 'writeoff', 'cancelled', 'active');
-				$this->add_tag('sold');
+				$this->removeTag('paidoff', 'writeoff', 'cancelled', 'active');
+				$this->addTag('sold');
 				break;
 		}
 	}

@@ -25,7 +25,7 @@ switch ($_REQUEST['type']) {
 		$user = user::factory($_REQUEST['account']);
 		break;
 	case 'username':
-		$user = $_->entity_manager->get_entity(
+		$user = $_->nymph->getEntity(
 				array('class' => user),
 				array('&',
 					'tag' => array('com_user', 'user', 'enabled'),
@@ -35,7 +35,7 @@ switch ($_REQUEST['type']) {
 		break;
 }
 
-if (!isset($user) || !isset($user->guid) || !$user->has_tag('enabled') || !gatekeeper('com_user/login', $user)) {
+if (!isset($user) || !isset($user->guid) || !$user->hasTag('enabled') || !gatekeeper('com_user/login', $user)) {
 	pines_error('Requested user id is not accessible.');
 	$_->user_manager->print_login();
 	return;

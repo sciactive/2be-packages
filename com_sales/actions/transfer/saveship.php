@@ -45,7 +45,7 @@ foreach ($transfer->products as $cur_product) {
 		$selector['data'] = array('serial', array_pop($serials[$cur_product->guid]));
 	}
 	$stock = null;
-	$stock_array = $_->entity_manager->get_entities(
+	$stock_array = $_->nymph->getEntities(
 			array('class' => com_sales_stock, 'skip_ac' => true),
 			$selector,
 			array('!&',

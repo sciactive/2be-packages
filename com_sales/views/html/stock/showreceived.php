@@ -24,11 +24,11 @@ if (empty($this->success)) { ?>
 	</div>
 	<?php foreach ($this->success as $cur_success) {
 		$context = '';
-		if ($cur_success[1]->has_tag('po'))
+		if ($cur_success[1]->hasTag('po'))
 			$context = 'com_sales_po';
-		elseif ($cur_success[1]->has_tag('transfer'))
+		elseif ($cur_success[1]->hasTag('transfer'))
 			$context = 'com_sales_transfer';
-		if (!empty($cur_success[1]->comments) && !$cur_success[1]->in_array($comments))
+		if (!empty($cur_success[1]->comments) && !$cur_success[1]->inArray($comments))
 			$comments[] = $cur_success[1];
 		?>
 	<div class="pf-element pf-heading">

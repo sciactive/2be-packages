@@ -43,9 +43,9 @@ $query = trim($_REQUEST['q']);
 // Build the main selector.
 $selector = array('&', 'tag' => array('com_loan', 'loan'));
 if (isset($start_date))
-	$selector['gte'] = array('p_cdate', (int) $start_date);
+	$selector['gte'] = array('cdate', (int) $start_date);
 if (isset($end_date))
-	$selector['lt'] = array('p_cdate', (int) $end_date);
+	$selector['lt'] = array('cdate', (int) $end_date);
 if (isset($location)) {
 	if ($descendants)
 		$or = array('|', 'ref' => array('group', $location->get_descendants(true)));
@@ -78,7 +78,7 @@ if (preg_match('/^\s*$/', $query)) {
 			);
 		if ($or)
 			$args[] = $or;
-		$loans = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
+		$loans = (array) call_user_func_array(array($_->nymph, 'getEntities'), $args);
 	}
 } else {
 	if ($loan_id_match = preg_match_all('/loan:(\d+)/', $query, $loan_ids))
@@ -114,7 +114,7 @@ if (preg_match('/^\s*$/', $query)) {
 			$args[] = $or;
 		if ($selector2)
 			$args[] = $selector2;
-		$loans = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
+		$loans = (array) call_user_func_array(array($_->nymph, 'getEntities'), $args);
 	}
 }
 

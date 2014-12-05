@@ -17,7 +17,7 @@ if ( !gatekeeper('com_sales/listproducts') )
 $module = new module('com_sales', 'product/report_images', 'content');
 $module->section1 = $module->section2 = $module->section3 = $module->section4 = $module->complete = array();
 
-$products = (array) $_->entity_manager->get_entities(
+$products = (array) $_->nymph->getEntities(
 		array('class' => com_sales_product),
 		array('&',
 			'tag' => array('com_sales', 'product')

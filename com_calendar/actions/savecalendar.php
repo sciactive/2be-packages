@@ -46,7 +46,7 @@ foreach ($events as $cur_event) {
 		}
 	} else {
 		if (isset($event->appointment->guid)) {
-			$existing_appt = $_->entity_manager->get_entity(
+			$existing_appt = $_->nymph->getEntity(
 					array('class' => com_customer_interaction),
 					array('&',
 						'tag' => array('com_customer', 'interaction'),

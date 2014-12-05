@@ -18,16 +18,16 @@ if ($_->config->com_sales->com_customer)
 	$_->com_customer->load_customer_select();
 $_->com_sales->load_product_select();
 
-//$categories = $_->entity_manager->get_entities(
+//$categories = $_->nymph->getEntities(
 //		array('class' => com_sales_category),
 //		array('&',
 //			'tag' => array('com_sales', 'category'),
 //			'strict' => array('enabled', true)
 //		)
 //	);
-//$_->entity_manager->hsort($categories, 'name', 'parent');
+//$_->nymph->hsort($categories, 'name', 'parent');
 
-$specials = $_->entity_manager->get_entities(
+$specials = $_->nymph->getEntities(
 		array('class' => com_sales_special),
 		array('&',
 			'tag' => array('com_sales', 'special')
@@ -36,7 +36,7 @@ $specials = $_->entity_manager->get_entities(
 			'guid' => array($this->entity->guid)
 		)
 	);
-$_->entity_manager->sort($specials, 'name');
+$_->nymph->sort($specials, 'name');
 ?>
 <form class="pf-form" method="post" id="p_muid_form" action="<?php e(pines_url('com_sales', 'special/save')); ?>">
 	<script type="text/javascript">
@@ -260,8 +260,8 @@ $_->entity_manager->sort($specials, 'name');
 				<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 				<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 				<?php } ?>
-				<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-				<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+				<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+				<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 			</div>
 			<?php } ?>
 			<div class="pf-element">

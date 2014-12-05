@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\hrm
  */
-class com_hrm_issue_type extends entity {
+class com_hrm_issue_type extends Entity {
+	const etype = 'com_hrm_issue_type';
 	protected $tags = array('com_hrm', 'issue_type');
 
 	public function __construct($id = 0) {
@@ -24,10 +25,6 @@ class com_hrm_issue_type extends entity {
 			return;
 		// Defaults.
 		$this->penalty = 0;
-	}
-
-	public static function etype() {
-		return 'com_hrm_issue_type';
 	}
 
 	public function info($type) {

@@ -34,14 +34,14 @@ class com_esp extends component {
 		$module = new module('com_esp', 'list', 'content');
 
 		if ($show == 'all') {
-			$module->plans = $_->entity_manager->get_entities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp')));
+			$module->plans = $_->nymph->getEntities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp')));
 			$module->show = 'all';
 		} else {
 			$dispositions = array_map('preg_quote', explode(',', $show));
 			$regex = '/'.implode('|', $dispositions).'/';
 			
 			// Only grab the returns that have a particular disposition.
-			$module->plans = $_->entity_manager->get_entities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp'), 'match' => array('status', $regex)));
+			$module->plans = $_->nymph->getEntities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp'), 'match' => array('status', $regex)));
 			$module->show = $show;
 		}
 

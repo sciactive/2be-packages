@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\replace
  */
-class com_replace_replacement extends entity {
+class com_replace_replacement extends Entity {
+	const etype = 'com_replace_replacement';
 	protected $tags = array('com_replace', 'replacement');
 
 	public function __construct($id = 0) {
@@ -26,10 +27,6 @@ class com_replace_replacement extends entity {
 		$this->enabled = true;
 		$this->strings = array();
 		$this->conditions = array();
-	}
-
-	public static function etype() {
-		return 'com_replace_replacement';
 	}
 
 	public function info($type) {

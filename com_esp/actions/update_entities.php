@@ -17,7 +17,7 @@ if ( !gatekeeper('system/all') )
 $module = new module('system', 'null', 'content');
 $module->title = 'ESP Entity Update';
 
-$plans = $_->entity_manager->get_entities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp')));
+$plans = $_->nymph->getEntities(array('class' => com_esp_plan), array('&', 'tag' => array('com_esp', 'esp')));
 
 foreach ($plans as $plan) {
 	// Only update the item for ESPs with a stock entity.

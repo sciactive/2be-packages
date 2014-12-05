@@ -41,7 +41,7 @@ if (empty($payment_type->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_sales_payment_type, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'payment_type'), 'data' => array('name', $payment_type->name)));
+$test = $_->nymph->getEntity(array('class' => com_sales_payment_type, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'payment_type'), 'data' => array('name', $payment_type->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$payment_type->print_form();
 	pines_notice('There is already a payment type with that name. Please choose a different name.');
@@ -61,7 +61,7 @@ if ($_->config->com_sales->global_payment_types)
 	$payment_type->ac->other = 1;
 
 if ($payment_type->change_type) {
-	$change_type = $_->entity_manager->get_entity(
+	$change_type = $_->nymph->getEntity(
 			array('class' => com_sales_payment_type),
 			array('&',
 				'tag' => array('com_sales', 'payment_type'),

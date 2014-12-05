@@ -91,7 +91,7 @@ defined('P_RUN') or die('Direct access prohibited');
 				<tr>
 					<td><?php e($cur_sale->id); ?></td>
 					<td><?php e($cur_sale->customer->name); ?></td>
-					<td><?php e(format_date($cur_sale->p_cdate)); ?></td>
+					<td><?php e(format_date($cur_sale->cdate)); ?></td>
 					<td class="right_text">$<?php e(number_format($cur_sale->subtotal, 2, '.', '')); ?></td>
 					<td></td>
 					<td class="right_text">$<?php e(number_format($commission, 2, '.', '')); ?></td>

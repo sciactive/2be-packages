@@ -237,7 +237,7 @@ class JabberAuth {
 			return (md5($this->jabber_user.format_date(time(), 'date_short', '', 'UTC').$_->config->com_messenger->guest_key) === $this->jabber_pass);
 
 		$user = user::factory($this->jabber_user);
-		if (!isset($user->guid) || !$user->has_tag('enabled'))
+		if (!isset($user->guid) || !$user->hasTag('enabled'))
 			return false;
 		if (strpos($this->jabber_pass, 'xmpp_secret_') === 0) {
 			$result = ($user->xmpp_secret === $this->jabber_pass && time() < $user->xmpp_secret_expire);
@@ -260,7 +260,7 @@ class JabberAuth {
 		if ($_->config->com_messenger->guest_access && strpos($this->jabber_user, 'guest_') === 0)
 			return true;
 		$user = user::factory($this->jabber_user);
-		return (isset($user->guid) && $user->has_tag('enabled'));
+		return (isset($user->guid) && $user->hasTag('enabled'));
 	}
 
 	function splitcomm() { // simply split command and arugments into an array.

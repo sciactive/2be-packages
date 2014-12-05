@@ -20,8 +20,8 @@ $module->title = 'Entity Update';
 $errors = array();
 $count = $nochange = 0;
 // Grab entities and update.
-$entities = $_->entity_manager->get_entities(
-		array('class' => entity),
+$entities = $_->nymph->getEntities(
+		array('class' => Entity),
 		array('&',
 			'tag' => array('com_sales')
 		),

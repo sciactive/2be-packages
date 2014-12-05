@@ -20,8 +20,8 @@ $this->note = 'Provide tax/fee details in this form.';
 		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
@@ -62,7 +62,7 @@ $this->note = 'Provide tax/fee details in this form.';
 				<?php
 				$_->user_manager->group_sort($this->locations, 'name');
 				foreach ($this->locations as $cur_group) {
-					?><option value="<?php e($cur_group->guid); ?>"<?php echo $cur_group->in_array($this->entity->locations) ? ' selected="selected"' : ''; ?>><?php e(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
+					?><option value="<?php e($cur_group->guid); ?>"<?php echo $cur_group->inArray($this->entity->locations) ? ' selected="selected"' : ''; ?>><?php e(str_repeat('->', $cur_group->get_level())." {$cur_group->name} [{$cur_group->groupname}]"); ?></option><?php
 				} ?>
 			</select>
 		</label>

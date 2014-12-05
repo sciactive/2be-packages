@@ -26,7 +26,7 @@ class com_raffle extends component {
 
 		$module = new module('com_raffle', 'raffle/list', 'content');
 
-		$module->raffles = $_->entity_manager->get_entities(
+		$module->raffles = $_->nymph->getEntities(
 				array('class' => com_raffle_raffle),
 				array('&',
 					'tag' => array('com_raffle', 'raffle')

@@ -22,7 +22,7 @@ if (!$_REQUEST['packages']) {
 foreach ((array) $_REQUEST['packages'] as $cur_component) {
 	if (!in_array($cur_component, $_->components))
 		continue;
-	if (!is_null($_->entity_manager->get_entity(
+	if (!is_null($_->nymph->getEntity(
 			array('class' => com_packager_package),
 			array('&',
 				'tag' => array('com_packager', 'package'),

@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\shop
  */
-class com_shop_shop extends entity {
+class com_shop_shop extends Entity {
+	const etype = 'com_shop_shop';
 	protected $tags = array('com_shop', 'shop');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_shop_shop extends entity {
 		// Defaults.
 		$this->enabled = true;
 		$this->attributes = array();
-	}
-
-	public static function etype() {
-		return 'com_shop_shop';
 	}
 
 	public function info($type) {
@@ -96,7 +93,7 @@ class com_shop_shop extends entity {
 			$selector['data'][] = array('enabled', true);
 		if ($only_show_in_shop)
 			$selector['data'][] = array('show_in_shop', true);
-		return $_->entity_manager->get_entities(
+		return $_->nymph->getEntities(
 				array('class' => com_sales_product),
 				$selector
 			);

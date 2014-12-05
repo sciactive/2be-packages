@@ -108,11 +108,11 @@ if (!is_array($loan_ids))
 			<div class="col-sm-8">
 				<select class="form-control col-sm-12" name="loan_status" data-guid="<?php echo $cur_loan->guid; ?>">
 					<option value="">None</option>
-					<?php echo (gatekeeper('com_loan/activeloan')) ?  ('<option value="active" '.(($cur_loan->has_tag('active')) ? 'selected=selected' : '').'>Active</option>') : ''; ?>
-					<?php echo (gatekeeper('com_loan/payoffloan')) ?  ('<option value="paidoff" '.(($cur_loan->has_tag('paidoff')) ? 'selected=selected' : '').'>Paid in Full</option>') : ''; ?>
-					<?php echo (gatekeeper('com_loan/writeoffloan')) ?  ('<option value="writtenoff" '.(($cur_loan->has_tag('writeoff')) ? 'selected=selected' : '').'>Written Off</option>') : ''; ?>
-					<?php echo (gatekeeper('com_loan/cancelloan')) ?  ('<option value="cancelled" '.(($cur_loan->has_tag('cancelled')) ? 'selected=selected' : '').'>Cancelled</option>') : ''; ?>
-					<?php echo (gatekeeper('com_loan/soldloan')) ?  ('<option value="sold" '.(($cur_loan->has_tag('sold')) ? 'selected=selected' : '').'>Sold</option>') : ''; ?>
+					<?php echo (gatekeeper('com_loan/activeloan')) ?  ('<option value="active" '.(($cur_loan->hasTag('active')) ? 'selected=selected' : '').'>Active</option>') : ''; ?>
+					<?php echo (gatekeeper('com_loan/payoffloan')) ?  ('<option value="paidoff" '.(($cur_loan->hasTag('paidoff')) ? 'selected=selected' : '').'>Paid in Full</option>') : ''; ?>
+					<?php echo (gatekeeper('com_loan/writeoffloan')) ?  ('<option value="writtenoff" '.(($cur_loan->hasTag('writeoff')) ? 'selected=selected' : '').'>Written Off</option>') : ''; ?>
+					<?php echo (gatekeeper('com_loan/cancelloan')) ?  ('<option value="cancelled" '.(($cur_loan->hasTag('cancelled')) ? 'selected=selected' : '').'>Cancelled</option>') : ''; ?>
+					<?php echo (gatekeeper('com_loan/soldloan')) ?  ('<option value="sold" '.(($cur_loan->hasTag('sold')) ? 'selected=selected' : '').'>Sold</option>') : ''; ?>
 				</select>
 			</div>
             <div class="results text-success col-sm-4"></div>

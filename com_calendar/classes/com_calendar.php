@@ -57,7 +57,7 @@ class com_calendar extends component {
 	 */
 	public function clear_calendar() {
 		global $_;
-		$calendar_events = $_->entity_manager->get_entities(array('class' => com_calendar_event), array('&', 'tag' => array('com_calendar', 'event')));
+		$calendar_events = $_->nymph->getEntities(array('class' => com_calendar_event), array('&', 'tag' => array('com_calendar', 'event')));
 		foreach ($calendar_events as $cur_event)
 			$cur_event->delete();
 	}
@@ -210,7 +210,7 @@ class com_calendar extends component {
 
 		//Retrieve all private events
 		if ($filter == 'events') {
-			$events = $_->entity_manager->get_entities(
+			$events = $_->nymph->getEntities(
 					array('class' => com_calendar_event),
 					$selector,
 					$or,
@@ -219,7 +219,7 @@ class com_calendar extends component {
 					)
 				);
 		} else {
-			$events = $_->entity_manager->get_entities(
+			$events = $_->nymph->getEntities(
 					array('class' => com_calendar_event),
 					$selector,
 					$or
@@ -233,7 +233,7 @@ class com_calendar extends component {
 		if (!empty($ancestors)) {
 			unset($selector['ref']);
 			$selector['data'] = array('private', false);
-			$more_events = $_->entity_manager->get_entities(
+			$more_events = $_->nymph->getEntities(
 					array('class' => com_calendar_event),
 					$selector,
 					array('!&',
@@ -244,7 +244,7 @@ class com_calendar extends component {
 					)
 				);
 			foreach ($more_events as $cur_more_event) {
-				if (!$cur_more_event->in_array($events))
+				if (!$cur_more_event->inArray($events))
 					$events[] = $cur_more_event;
 			}
 		}

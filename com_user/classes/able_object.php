@@ -16,7 +16,7 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\user
  */
-class able_object extends entity implements able_object_interface {
+class able_object extends Entity implements able_object_interface {
 	public static function factory($id = 0) {
 		return parent::factory($id);
 	}

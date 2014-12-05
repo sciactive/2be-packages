@@ -42,7 +42,7 @@ if (
 }
 
 // Get all products with images.
-$products = $_->entity_manager->get_entities(
+$products = $_->nymph->getEntities(
 		array('class' => com_sales_product, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'product')

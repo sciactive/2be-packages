@@ -15,7 +15,7 @@ if ( !gatekeeper('com_customer/defaultgroups') )
 	punt_user(null, pines_url('com_customer', 'defaultgroups'));
 
 // Save the default primary group.
-$cur_group = $_->entity_manager->get_entity(
+$cur_group = $_->nymph->getEntity(
 		array('class' => group),
 		array('&',
 			'tag' => array('com_user', 'group'),
@@ -33,7 +33,7 @@ if (isset($group->guid)) {
 }
 
 // Save the default secondary groups.
-$cur_groups = $_->entity_manager->get_entities(
+$cur_groups = $_->nymph->getEntities(
 		array('class' => group),
 		array('&',
 			'tag' => array('com_user', 'group'),

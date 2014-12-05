@@ -29,7 +29,7 @@ class com_customertimer extends component {
 
 		$module = new module('com_customertimer', 'list_floors', 'content');
 
-		$module->floors = $_->entity_manager->get_entities(array('class' => com_customertimer_floor), array('&', 'tag' => array('com_customertimer', 'floor')));
+		$module->floors = $_->nymph->getEntities(array('class' => com_customertimer_floor), array('&', 'tag' => array('com_customertimer', 'floor')));
 
 		if ( empty($module->floors) )
 			pines_notice('There are no floors.');

@@ -18,8 +18,8 @@ if (isset($this->tags)) {
 
 $bc = '<li class="active"><span class="breadcrumb_item">'.h($this->entity->name).'</span></li>';
 
-if ($this->entity->has_tag('page')) {
-	$categories = (array) $_->entity_manager->get_entities(
+if ($this->entity->hasTag('page')) {
+	$categories = (array) $_->nymph->getEntities(
 			array('class' => com_content_category),
 			array('&',
 				'tag' => array('com_content', 'category'),
@@ -39,7 +39,7 @@ if ($this->entity->has_tag('page')) {
 			$cur_parent = $cur_parent->parent;
 		}
 	}
-} elseif ($this->entity->has_tag('category')) {
+} elseif ($this->entity->hasTag('category')) {
 	$cur_entity = $this->entity->parent;
 }
 

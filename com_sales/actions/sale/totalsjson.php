@@ -34,13 +34,13 @@ if (preg_match('/\d{4}-\d{2}-\d{2}/', $_REQUEST['date_end'])) {
 // Build the entity query.
 $selector = array('&',
 	'tag' => array('com_sales', 'transaction'),
-	'gte' => array('p_cdate', $date_start),
-	'lt' => array('p_cdate', $date_end)
+	'gte' => array('cdate', $date_start),
+	'lt' => array('cdate', $date_end)
 );
 $or = array('|', 'ref' => array('group', $location->get_descendants(true)));
 
 // Get all transactions.
-$tx_array = (array) $_->entity_manager->get_entities(array('class' => com_sales_tx, 'skip_ac' => true),  array('|', 'tag' => array('sale_tx', 'payment_tx')), $selector, $or);
+$tx_array = (array) $_->nymph->getEntities(array('class' => com_sales_tx, 'skip_ac' => true),  array('|', 'tag' => array('sale_tx', 'payment_tx')), $selector, $or);
 $invoice_array = array('subtotal' => 0.00, 'total' => 0.00, 'count' => 0);
 $sale_array = array('subtotal' => 0.00, 'total' => 0.00, 'count' => 0);
 $sale_array_user = array();
@@ -57,7 +57,7 @@ foreach ($tx_array as $key => $cur_tx) {
 	// Skip voided sales.
 	if ($cur_tx->ticket->status == 'voided')
 		continue;
-	if ($cur_tx->has_tag('sale_tx')) {
+	if ($cur_tx->hasTag('sale_tx')) {
 		$subtotal = (float) $cur_tx->ticket->subtotal;
 		$total = (float) $cur_tx->ticket->total;
 		$name = "{$cur_tx->user->name} [{$cur_tx->user->username}]";

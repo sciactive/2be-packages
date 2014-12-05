@@ -14,8 +14,8 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('system/all') )
 	punt_user(null, pines_url('com_content', 'update_entities'));
 
-$entities = $_->entity_manager->get_entities(
-		array('class' => entity),
+$entities = $_->nymph->getEntities(
+		array('class' => Entity),
 		array('&',
 			'tag' => array('com_content'), 
 			'tag' => array('category')
@@ -38,7 +38,7 @@ foreach ($entities as $cur_category) {
 //$failed = array();
 //foreach ($entities as $cur_entity) {
 //	$changed = false;
-//	if ($cur_entity->has_tag('page') && in_array('', $cur_entity->content_tags)) {
+//	if ($cur_entity->hasTag('page') && in_array('', $cur_entity->content_tags)) {
 //		$cur_entity->content_tags = array_diff($cur_entity->content_tags, array(''));
 //		$changed = true;
 //	}

@@ -17,7 +17,7 @@ if ( !gatekeeper('com_reports/editpayroll') )
 $start = strtotime($_REQUEST['start']);
 $end = strtotime($_REQUEST['end']);
 
-$pay_stub = $_->entity_manager->get_entity(array('class' => com_reports_paystub),
+$pay_stub = $_->nymph->getEntity(array('class' => com_reports_paystub),
 		array('&',
 			'tag' => array('com_reports', 'paystub'),
 			'gte' => array('end', (int) $start)

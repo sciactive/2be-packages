@@ -29,7 +29,7 @@ if ($_SESSION['user']->group->com_sales_task_countsheet) {
 	}
 	if (!isset($entity->guid) && isset($_SESSION['user']->group)) {
 		// Look for any countsheets that are waiting to be committed.
-		$existing_sheets = $_->entity_manager->get_entities(
+		$existing_sheets = $_->nymph->getEntities(
 				array('class' => com_sales_countsheet),
 				array('&',
 					'tag' => array('com_sales', 'countsheet'),

@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\reports
  */
-class com_reports_warboard extends entity {
+class com_reports_warboard extends Entity {
+	const etype = 'com_reports_warboard';
 	protected $tags = array('com_reports', 'warboard');
 
 	public function __construct($id = 0) {
@@ -29,10 +30,6 @@ class com_reports_warboard extends entity {
 		$this->locations = array();
 		$this->important = array();
 		$this->hq = $_SESSION['user']->group;
-	}
-
-	public static function etype() {
-		return 'com_reports_warboard';
 	}
 
 	public function info($type) {
@@ -103,13 +100,13 @@ class com_reports_warboard extends entity {
 		}
 		echo "<br /><br /><br />";
 		*/
-		$_->entity_manager->psort($this->locations, 'name', 'parent');
+		$_->nymph->psort($this->locations, 'name', 'parent');
 		/*
 		foreach ($this->locations as $cur_l) {
 			echo "{$cur_l->parent->name} : {$cur_l->name}<br />";
 		}
 		*/
-		$_->entity_manager->sort($this->important, 'name');
+		$_->nymph->sort($this->important, 'name');
 
 		return $module;
 	}

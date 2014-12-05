@@ -263,7 +263,7 @@ $_->com_jstree->load();
 		}
 	?>
 		<tr title="<?php e($cur_transaction->entity->guid); ?>">
-			<td><?php e(format_date($cur_transaction->entity->p_cdate)); ?></td>
+			<td><?php e(format_date($cur_transaction->entity->cdate)); ?></td>
 			<td><a data-entity="<?php e($cur_transaction->stock->guid); ?>" data-entity-context="com_sales_stock"><?php e($cur_transaction->stock->guid); ?></a></td>
 			<td><?php e($cur_transaction->product->sku); ?></td>
 			<td><a data-entity="<?php e($cur_transaction->product->guid); ?>" data-entity-context="com_sales_product"><?php e($cur_transaction->product->name); ?></a></td>

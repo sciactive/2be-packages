@@ -45,7 +45,7 @@ if (empty($return_checklist->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_sales_return_checklist, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'return_checklist'), 'data' => array('name', $return_checklist->name)));
+$test = $_->nymph->getEntity(array('class' => com_sales_return_checklist, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'return_checklist'), 'data' => array('name', $return_checklist->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$return_checklist->print_form();
 	pines_notice('There is already a return checklist with that name. Please choose a different name.');

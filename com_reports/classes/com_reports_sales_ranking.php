@@ -17,7 +17,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\reports
  */
-class com_reports_sales_ranking extends entity {
+class com_reports_sales_ranking extends Entity {
+	const etype = 'com_reports_sales_ranking';
 	protected $tags = array('com_reports', 'sales_ranking');
 
 	public function __construct($id = 0) {
@@ -31,10 +32,6 @@ class com_reports_sales_ranking extends entity {
 		$this->exclude_pending_contracts = false;
 		$this->only_below = true;
 		$this->sales_goals = array();
-	}
-
-	public static function etype() {
-		return 'com_reports_sales_ranking';
 	}
 
 	public function info($type) {
@@ -107,7 +104,7 @@ class com_reports_sales_ranking extends entity {
 		$employees = array();
 		foreach ($users as $cur_user) {
 			// Skip users who only have secondary groups.
-			if (!isset($cur_user->group->guid) || !($cur_user->group->is($group) || $cur_user->group->in_array($locations)))
+			if (!isset($cur_user->group->guid) || !($cur_user->group->is($group) || $cur_user->group->inArray($locations)))
 				continue;
 			// Skip users who aren't employees.
 			if (!$cur_user->employee)
@@ -145,42 +142,42 @@ class com_reports_sales_ranking extends entity {
 		foreach ($employees as $cur_employee) {
 			// Get all apps for the employee.
 			if ($module->mifi_checks) {
-				$current_apps = $_->entity_manager->get_entities(
+				$current_apps = $_->nymph->getEntities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
 							'gte' => array(
-								array('p_cdate', $current_start),
-								array('p_cdate', $this->start_date)
+								array('cdate', $current_start),
+								array('cdate', $this->start_date)
 							),
 							'lt' => array(
-								array('p_cdate', $current_end),
-								array('p_cdate', $this->end_date)
+								array('cdate', $current_end),
+								array('cdate', $this->end_date)
 							),
 							'ref' => array('user', $cur_employee),
 						)
 					);
-				$last_apps = $_->entity_manager->get_entities(
+				$last_apps = $_->nymph->getEntities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
 							'gte' => array(
-								array('p_cdate', $last_start),
-								array('p_cdate', $this->start_date)
+								array('cdate', $last_start),
+								array('cdate', $this->start_date)
 							),
 							'lt' => array(
-								array('p_cdate', $last_end),
-								array('p_cdate', $this->end_date)
+								array('cdate', $last_end),
+								array('cdate', $this->end_date)
 							),
 							'ref' => array('user', $cur_employee)
 						)
 					);
-				$mtd_apps = $_->entity_manager->get_entities(
+				$mtd_apps = $_->nymph->getEntities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
-							'gte' => array('p_cdate', $this->start_date),
-							'lt' => array('p_cdate', $this->end_date),
+							'gte' => array('cdate', $this->start_date),
+							'lt' => array('cdate', $this->end_date),
 							'ref' => array('user', $cur_employee)
 						)
 					);
@@ -209,46 +206,46 @@ class com_reports_sales_ranking extends entity {
 			// Get all apps for the location.
 			if ($module->mifi_checks) {
 				$groups = $cur_location->get_descendants(true);
-				$current_apps = $_->entity_manager->get_entities(
+				$current_apps = $_->nymph->getEntities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
 							'gte' => array(
-								array('p_cdate', $current_start),
-								array('p_cdate', $this->start_date)
+								array('cdate', $current_start),
+								array('cdate', $this->start_date)
 							),
 							'lt' => array(
-								array('p_cdate', $current_end),
-								array('p_cdate', $this->end_date)
+								array('cdate', $current_end),
+								array('cdate', $this->end_date)
 							)
 						),
 						array('|',
 							'ref' => array('group', $groups)
 						)
 					);
-				$last_apps = $_->entity_manager->get_entities(
+				$last_apps = $_->nymph->getEntities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
 							'gte' => array(
-								array('p_cdate', $last_start),
-								array('p_cdate', $this->start_date)
+								array('cdate', $last_start),
+								array('cdate', $this->start_date)
 							),
 							'lt' => array(
-								array('p_cdate', $last_end),
-								array('p_cdate', $this->end_date)
+								array('cdate', $last_end),
+								array('cdate', $this->end_date)
 							)
 						),
 						array('|',
 							'ref' => array('group', $groups)
 						)
 					);
-				$mtd_apps = $_->entity_manager->get_entities(
+				$mtd_apps = $_->nymph->getEntities(
 						array('class' => com_mifi_application, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'application'),
-							'gte' => array('p_cdate', $this->start_date),
-							'lt' => array('p_cdate', $this->end_date)
+							'gte' => array('cdate', $this->start_date),
+							'lt' => array('cdate', $this->end_date)
 						),
 						array('|',
 							'ref' => array('group', $groups)
@@ -309,7 +306,7 @@ class com_reports_sales_ranking extends entity {
 		}
 
 		// Get all the sales and returns in the given time period.
-		$sales = $_->entity_manager->get_entities(
+		$sales = $_->nymph->getEntities(
 				array('class' => com_sales_sale, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'sale'),
@@ -318,7 +315,7 @@ class com_reports_sales_ranking extends entity {
 					'lt' => array('tender_date', $this->end_date)
 				)
 			);
-		$returns = $_->entity_manager->get_entities(
+		$returns = $_->nymph->getEntities(
 				array('class' => com_sales_return, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_sales', 'return'),
@@ -332,7 +329,7 @@ class com_reports_sales_ranking extends entity {
 		$skipped = array();
 		foreach ($sales as $cur_sale) {
 			if ($exclude_pending) {
-				$test = $_->entity_manager->get_entity(
+				$test = $_->nymph->getEntity(
 						array('class' => com_mifi_contract, 'skip_ac' => true),
 						array('&',
 							'tag' => array('com_mifi', 'contract', 'pending'),
@@ -439,7 +436,7 @@ class com_reports_sales_ranking extends entity {
 		foreach ($ranking_location as $cur_rank) {
 			$parent_count = 0;
 			$parent = $cur_rank['entity']->parent;
-			while (isset($parent->guid) && $parent->in_array($locations)) {
+			while (isset($parent->guid) && $parent->inArray($locations)) {
 				$parent_count++;
 				$parent = $parent->parent;
 			}

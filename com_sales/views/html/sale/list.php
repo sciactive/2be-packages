@@ -460,7 +460,7 @@ Only continue if you are fully aware of the results of changing a product."))
 	<?php foreach($this->sales as $sale) { ?>
 		<tr title="<?php e($sale->guid); ?>">
 			<td><a data-entity="<?php e($sale->guid); ?>" data-entity-context="com_sales_sale"><?php e($sale->id); ?></a></td>
-			<td><?php e(format_date($sale->p_cdate)); ?></td>
+			<td><?php e(format_date($sale->cdate)); ?></td>
 			<td><?php e(ucwords($sale->status)); ?></td>
 			<td><?php if (isset($sale->user->guid)) { ?><a data-entity="<?php e($sale->user->guid); ?>" data-entity-context="user"><?php e("{$sale->user->name} [{$sale->user->username}]"); ?></a><?php } ?></td>
 			<?php if ($_->config->com_sales->com_customer) { ?>

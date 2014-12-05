@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\mailer
  */
-class com_mailer_template extends entity {
+class com_mailer_template extends Entity {
+	const etype = 'com_mailer_template';
 	protected $tags = array('com_mailer', 'template');
 
 	public function __construct($id = 0) {
@@ -76,10 +77,6 @@ EOF;
 </html>
 EOF;
 		$this->ac->other = 1;
-	}
-
-	public static function etype() {
-		return 'com_mailer_template';
 	}
 
 	public function info($type) {

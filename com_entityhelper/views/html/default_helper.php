@@ -34,8 +34,8 @@ if ($this->render == 'body') {
 <?php } ?>
 <div style="clear: both; padding-top: 1em;" class="clearfix">
 	<div class="alert alert-info" style="float: left; font-size:.9em;">
-		Created: <?php echo format_date($this->entity->p_cdate, 'full_med'); ?>.<br />
-		Modified: <?php echo format_date($this->entity->p_mdate, 'full_med'); ?>.
+		Created: <?php echo format_date($this->entity->cdate, 'full_med'); ?>.<br />
+		Modified: <?php echo format_date($this->entity->mdate, 'full_med'); ?>.
 	</div>
 	<?php if ($this->entity->user->guid) { ?>
 	<div style="float: right; clear: right; font-size:.9em;">

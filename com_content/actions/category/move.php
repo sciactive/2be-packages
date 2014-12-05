@@ -26,7 +26,7 @@ if (!isset($entity->parent->guid)) {
 	return;
 }
 
-$key = $entity->array_search($entity->parent->children);
+$key = $entity->arraySearch($entity->parent->children);
 if ($key !== false) {
 	switch ($_REQUEST['dir']) {
 		case 'up':

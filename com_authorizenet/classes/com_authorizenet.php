@@ -121,7 +121,7 @@ class com_authorizenet extends component {
 				//$state = $args['payment']['data']['state'];
 				//$zip = $args['payment']['data']['zip'];
 				$card_code = $array['payment']['data']['cid'];
-				$invoice_num = ($array['ticket']->has_tag('sale') ? 'SA' : 'RE').$array['ticket']->id;
+				$invoice_num = ($array['ticket']->hasTag('sale') ? 'SA' : 'RE').$array['ticket']->id;
 				$transaction_name = $_->config->com_authorizenet->trans_name;
 
 				$post_values = array(

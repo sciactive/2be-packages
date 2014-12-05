@@ -13,17 +13,17 @@ defined('P_RUN') or die('Direct access prohibited');
 
 // Make footer URLs for lists & get status
 // Check if it is a review
-if ($this->entity->has_tag('review')) {
+if ($this->entity->hasTag('review')) {
 	$action = 'testimonial/list_reviews';
 } else {
 	$action = 'testimonial/list';
 }
 // get the status
-if ($this->entity->has_tag('pending'))
+if ($this->entity->hasTag('pending'))
 	$status = 'pending';
-if ($this->entity->has_tag('approved'))
+if ($this->entity->hasTag('approved'))
 	$status = 'approved';
-if ($this->entity->has_tag('denied'))
+if ($this->entity->hasTag('denied'))
 	$status = 'denied';
 
 if ($this->render == 'body' && gatekeeper('com_testimonials/listtestimonials')) {
@@ -64,7 +64,7 @@ echo $module->render();
 			</tr>
 			<tr>
 				<td style="font-weight:bold;">Date</td>
-				<td><?php e(format_date($this->entity->p_cdate)); ?></td>
+				<td><?php e(format_date($this->entity->cdate)); ?></td>
 			</tr>
 		</tbody>
 	</table>

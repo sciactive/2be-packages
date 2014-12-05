@@ -17,7 +17,7 @@ if (!isset($this->entity->customer->email) && !$_->config->com_sales->receipt_pr
 	return;
 }
 
-$sale = $this->entity->has_tag('sale');
+$sale = $this->entity->hasTag('sale');
 ?>
 <script type="text/javascript">
 	$_(function(){

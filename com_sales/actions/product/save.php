@@ -338,7 +338,7 @@ if ($_->config->com_sales->com_shop) {
 	$categories = array();
 	if (is_array($_REQUEST['categories']))
 		$categories = array_map('intval', $_REQUEST['categories']);
-	$categories = (array) $_->entity_manager->get_entities(
+	$categories = (array) $_->nymph->getEntities(
 			array('class' => com_sales_category),
 			array('&',
 				'tag' => array('com_sales', 'category'),
@@ -402,13 +402,13 @@ if ($product->stock_type == 'non_stocked' && $product->pricing_method == 'margin
 	pines_notice('Margin pricing is not available for non stocked items.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_sales_product, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'product'), 'strict' => array('name', $product->name), '!guid' => $product->guid));
+$test = $_->nymph->getEntity(array('class' => com_sales_product, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'product'), 'strict' => array('name', $product->name), '!guid' => $product->guid));
 if (isset($test)) {
 	$product->print_form();
 	pines_notice('There is already a product with that name. Please choose a different name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_sales_product, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'product'), 'strict' => array('sku', $product->sku), '!guid' => $product->guid));
+$test = $_->nymph->getEntity(array('class' => com_sales_product, 'skip_ac' => true), array('&', 'tag' => array('com_sales', 'product'), 'strict' => array('sku', $product->sku), '!guid' => $product->guid));
 if (isset($test)) {
 	$product->print_form();
 	pines_notice('There is already a product with that SKU. Please choose a different SKU.');
@@ -437,14 +437,14 @@ if ($product->save()) {
 	$categories = array();
 	if (is_array($_REQUEST['categories']))
 		$categories = array_map('intval', $_REQUEST['categories']);
-	$all_categories = $_->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'data' => array('enabled', true)));
+	$all_categories = $_->nymph->getEntities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'data' => array('enabled', true)));
 	foreach($all_categories as &$cur_cat) {
-		if (in_array($cur_cat->guid, $categories) && !$product->in_array($cur_cat->products)) {
+		if (in_array($cur_cat->guid, $categories) && !$product->inArray($cur_cat->products)) {
 			$cur_cat->products[] = $product;
 			if (!$cur_cat->save())
 				pines_error("Couldn't add product to category {$cur_cat->name}. Do you have permission?");
-		} elseif (!in_array($cur_cat->guid, $categories) && $product->in_array($cur_cat->products)) {
-			$key = $product->array_search($cur_cat->products);
+		} elseif (!in_array($cur_cat->guid, $categories) && $product->inArray($cur_cat->products)) {
+			$key = $product->arraySearch($cur_cat->products);
 			unset($cur_cat->products[$key]);
 			if (!$cur_cat->save())
 				pines_error("Couldn't remove product from category {$cur_cat->name}. Do you have permission?");

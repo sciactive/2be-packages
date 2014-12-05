@@ -89,7 +89,7 @@ class com_content extends component {
 
 		$module = new module('com_content', 'category/list', 'content');
 
-		$module->categories = $_->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category')));
+		$module->categories = $_->nymph->getEntities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category')));
 
 		if ( empty($module->categories) )
 			pines_notice('No categories found.');
@@ -112,7 +112,7 @@ class com_content extends component {
 			$module->pages = $category->pages;
 			$module->category = $category;
 		} else {
-			$module->pages = $_->entity_manager->get_entities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
+			$module->pages = $_->nymph->getEntities(array('class' => com_content_page), array('&', 'tag' => array('com_content', 'page')));
 		}
 
 		if ( empty($module->pages) )
@@ -212,8 +212,8 @@ class com_content extends component {
 		// This function will create the entity if it doesn't exist, and then it will create the natural_menu array.
 		
 		// Get sidemenu entity or create one
-		$sidemenu = $_->entity_manager->get_entity(
-			array('class' => entity),
+		$sidemenu = $_->nymph->getEntity(
+			array('class' => Entity),
 			array('&',
 				'tag' => array('com_content', 'sidemenu')
 			)
@@ -225,8 +225,8 @@ class com_content extends component {
 		
 		// Begin natural_menu creation.
 		// Get all the categories and pages where the tag array contains the tag.
-		$menu_entities = $_->entity_manager->get_entities(
-			array('class' => entity),
+		$menu_entities = $_->nymph->getEntities(
+			array('class' => Entity),
 			array('&',
 				'tag' => array('com_content'),
 				'array' => array(
@@ -300,8 +300,8 @@ class com_content extends component {
 			
 			// Find out if a PAGE has a category (we dont want it..top level only)
 			if ($menu_item->menu_item_type == 'page') {
-				$all_categories = $_->entity_manager->get_entities(
-					array('class' => entity),
+				$all_categories = $_->nymph->getEntities(
+					array('class' => Entity),
 					array('&',
 						'tag' => array('com_content'),
 						'tag' => array('category'),
@@ -312,7 +312,7 @@ class com_content extends component {
 				);
 				$category_that_page_is_in = false;
 				foreach ($all_categories as $cur_category) {
-					if ($cur_entity->in_array($cur_category->pages)) {
+					if ($cur_entity->inArray($cur_category->pages)) {
 						$category_that_page_is_in = true;
 						// Once it's true, it doesn't matter how many categories it applies to
 						// I don't want it
@@ -357,8 +357,8 @@ class com_content extends component {
 		// one might not contain new pages/categories in the children.
 		
 		// Get the newly saved entity
-		$sidemenu = $_->entity_manager->get_entity(
-			array('class' => entity),
+		$sidemenu = $_->nymph->getEntity(
+			array('class' => Entity),
 			array('&',
 				'tag' => array('com_content', 'sidemenu')
 			)
@@ -413,8 +413,8 @@ class com_content extends component {
 	public function get_sidemenu($type = 'sorted') {
 		global $_;
 		// Get the saved sidemenu entity if it exists
-		$sidemenu = $_->entity_manager->get_entity(
-			array('class' => entity),
+		$sidemenu = $_->nymph->getEntity(
+			array('class' => Entity),
 			array('&',
 				'tag' => array('com_content', 'sidemenu')
 			)

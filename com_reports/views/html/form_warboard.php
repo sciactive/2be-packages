@@ -86,8 +86,8 @@ $_->com_pgrid->load();
 			<tbody>
 			<?php foreach($this->groups as $cur_group) { ?>
 				<tr title="<?php e($cur_group->guid); ?>">
-					<td class="location_label"><input type="checkbox" name="locations[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->in_array($this->entity->locations) ? 'checked="checked" ' : ''; ?>/></td>
-					<td class="important_label"><input type="checkbox" name="important[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->in_array($this->entity->important) ? 'checked="checked" ' : ''; ?>/></td>
+					<td class="location_label"><input type="checkbox" name="locations[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->inArray($this->entity->locations) ? 'checked="checked" ' : ''; ?>/></td>
+					<td class="important_label"><input type="checkbox" name="important[]" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->inArray($this->entity->important) ? 'checked="checked" ' : ''; ?>/></td>
 					<td class="hq_label"><input type="radio" name="hq" value="<?php e($cur_group->guid); ?>" <?php echo $cur_group->is($this->entity->hq) ? 'checked="checked" ' : ''; ?>/></td>
 					<td><a data-entity="<?php e($cur_group->guid); ?>" data-entity-context="group"><?php e($cur_group->name); ?></a></td>
 					<td><a data-entity="<?php e($cur_group->parent->guid); ?>" data-entity-context="group"><?php e($cur_group->parent->name); ?></a></td>

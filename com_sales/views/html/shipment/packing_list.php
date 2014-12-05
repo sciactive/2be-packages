@@ -45,7 +45,7 @@ if ($_->current_template != 'tpl_print') {
 				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">Shipment ID</span></td>
 				<td style="width: 23%;"><?php e($this->entity->id); ?></td>
 				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">Ship Date</span></td>
-				<td style="width: 23%;"><?php e(format_date($this->entity->p_cdate, 'date_med')); ?></td>
+				<td style="width: 23%;"><?php e(format_date($this->entity->cdate, 'date_med')); ?></td>
 				<td style="width: 10%; text-align: right; border-left: none;"><span class="label label-default">Fulfilled By</span></td>
 				<td style="width: 23%;"><?php e($this->entity->user->name); ?></td>
 			</tr>

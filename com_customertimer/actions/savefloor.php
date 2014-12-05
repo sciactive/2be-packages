@@ -35,7 +35,7 @@ if ($_->uploader->check($_REQUEST['background']))
 // Station Layout
 $floor->stations = json_decode($_REQUEST['stations'], true);
 
-$test = $_->entity_manager->get_entity(array('class' => com_customertimer_floor, 'skip_ac' => true), array('&', 'data' => array('name', $floor->name), 'tag' => array('com_customertimer', 'floor')));
+$test = $_->nymph->getEntity(array('class' => com_customertimer_floor, 'skip_ac' => true), array('&', 'data' => array('name', $floor->name), 'tag' => array('com_customertimer', 'floor')));
 if (isset($test) && !$floor->is($test)) {
 	$floor->print_form();
 	pines_notice('There is already a floor with that name. Please choose a different name.');

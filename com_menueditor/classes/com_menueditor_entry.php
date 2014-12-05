@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\menueditor
  */
-class com_menueditor_entry extends entity {
+class com_menueditor_entry extends Entity {
+	const etype = 'com_menueditor_entry';
 	protected $tags = array('com_menueditor', 'entry');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_menueditor_entry extends entity {
 		// Defaults.
 		$this->enabled = true;
 		$this->top_menu = 'main_menu';
-	}
-
-	public static function etype() {
-		return 'com_menueditor_entry';
 	}
 
 	public function info($type) {

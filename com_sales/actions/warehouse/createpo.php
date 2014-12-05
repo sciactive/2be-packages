@@ -60,7 +60,7 @@ foreach (explode(',', $_REQUEST['id']) as $cur_id) {
 		foreach ($product->vendors as $cur_vendor)
 			$cur_vendors[] = $cur_vendor['entity'];
 		foreach ($vendors as $vkey => $cur_vendor)
-			if (!$cur_vendor->in_array($cur_vendors))
+			if (!$cur_vendor->inArray($cur_vendors))
 				unset($vendors[$vkey]);
 		if (!$vendors) {
 			pines_notice('All selected orders must have at least one vendor in common.');

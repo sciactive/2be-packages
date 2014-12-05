@@ -72,8 +72,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user']->pgrid_saved_states))
 			<td><?php e("{$dashboard->user->name} [{$dashboard->user->username}]"); ?></td>
 			<td><?php echo $dashboard->is($dashboard->user->dashboard) ? 'Yes' : 'No'; ?></td>
 			<td><?php e("{$dashboard->group->name} [{$dashboard->group->groupname}]"); ?></td>
-			<td><?php e(format_date($dashboard->p_cdate)); ?></td>
-			<td><?php e(format_date($dashboard->p_mdate)); ?></td>
+			<td><?php e(format_date($dashboard->cdate)); ?></td>
+			<td><?php e(format_date($dashboard->mdate)); ?></td>
 			<td><?php echo $dashboard->locked ? 'Yes' : 'No'; ?></td>
 			<td><?php e(count($dashboard->tabs)); ?></td>
 		</tr>

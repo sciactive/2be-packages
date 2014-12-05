@@ -60,10 +60,10 @@ if (isset($this->conditions)) {
 }
 
 // Advanced
-if (!empty($this->p_cdate))
-	$this->entity->p_cdate = strtotime($this->p_cdate);
-if (!empty($this->p_mdate))
-	$this->entity->p_mdate = strtotime($this->p_mdate);
+if (!empty($this->cdate))
+	$this->entity->cdate = strtotime($this->cdate);
+if (!empty($this->mdate))
+	$this->entity->mdate = strtotime($this->mdate);
 if (isset($this->publish_begin))
 	$this->entity->publish_begin = strtotime($this->publish_begin);
 if (!empty($this->publish_end))

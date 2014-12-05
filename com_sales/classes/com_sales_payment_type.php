@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_payment_type extends entity {
+class com_sales_payment_type extends Entity {
+	const etype = 'com_sales_payment_type';
 	protected $tags = array('com_sales', 'payment_type');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_sales_payment_type extends entity {
 		// Defaults.
 		$this->enabled = true;
 		$this->processing_type = 'com_sales/instant';
-	}
-
-	public static function etype() {
-		return 'com_sales_payment_type';
 	}
 
 	public function info($type) {

@@ -35,7 +35,7 @@ right database is as simple as installing a new component.
 <div class="btn-group pull-right">
 	<a class="btn btn-primary" href="http://2be.io/" target="_blank">2be.io</a>
 	<a class="btn btn-default" href="https://github.com/sciactive" target="_blank">2be on GitHub</a>
-	<a class="btn btn-default" href="https://twitter.com/2be_io" target="_blank">2be on Twitter</a>
+	<a class="btn btn-default" href="https://twitter.com/SciActive" target="_blank">SciActive on Twitter</a>
 	<a class="btn btn-default" href="http://sciactive.com/" target="_blank">SciActive</a>
 </div>
 <br style="clear: both; height: 1px;" />

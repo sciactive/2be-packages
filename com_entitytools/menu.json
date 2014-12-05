@@ -8,19 +8,11 @@
 		}
 	},
 		{
-			"path": "main_menu/system/entity_tools/test",
-			"text": "Test",
-			"href": ["com_entitytools","test"],
-			"depend": {
-				"ability": "com_entitytools/test"
-			}
-		},
-		{
 			"path": "main_menu/system/entity_tools/benchmark",
 			"text": "Benchmark",
 			"href": ["com_entitytools","benchmark"],
 			"depend": {
-				"ability": "com_entitytools/test"
+				"ability": "com_entitytools/benchmark"
 			}
 		},
 		{

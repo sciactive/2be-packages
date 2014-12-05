@@ -58,7 +58,7 @@ class com_mailer extends component {
 
 		$module = new module('com_mailer', 'rendition/list', 'content');
 
-		$module->renditions = $_->entity_manager->get_entities(
+		$module->renditions = $_->nymph->getEntities(
 				array('class' => com_mailer_rendition),
 				array('&',
 					'tag' => array('com_mailer', 'rendition')
@@ -80,7 +80,7 @@ class com_mailer extends component {
 
 		$module = new module('com_mailer', 'template/list', 'content');
 
-		$module->templates = $_->entity_manager->get_entities(
+		$module->templates = $_->nymph->getEntities(
 				array('class' => com_mailer_template),
 				array('&',
 					'tag' => array('com_mailer', 'template')
@@ -306,7 +306,7 @@ class com_mailer extends component {
 			$recipient = (object) array('email' => $recipient);
 
 		// Find any renditions.
-		$renditions = (array) $_->entity_manager->get_entities(
+		$renditions = (array) $_->nymph->getEntities(
 				array('class' => com_mailer_rendition),
 				array('&',
 					'tag' => array('com_mailer', 'rendition'),
@@ -340,7 +340,7 @@ class com_mailer extends component {
 						else
 							$check_email = trim($rendition->to);
 						// Check for a user or group with that email.
-						$user = $_->entity_manager->get_entity(
+						$user = $_->nymph->getEntity(
 								array('class' => user),
 								array('&',
 									'tag' => array('com_user', 'user'),
@@ -350,7 +350,7 @@ class com_mailer extends component {
 						if ($user)
 							$recipient = $user;
 						else {
-							$group = $_->entity_manager->get_entity(
+							$group = $_->nymph->getEntity(
 									array('class' => group),
 									array('&',
 										'tag' => array('com_user', 'group'),
@@ -432,7 +432,7 @@ class com_mailer extends component {
 		}
 
 		// Get the template.
-		$templates = (array) $_->entity_manager->get_entities(
+		$templates = (array) $_->nymph->getEntities(
 				array('class' => com_mailer_template),
 				array('&',
 					'tag' => array('com_mailer', 'template'),

@@ -23,7 +23,7 @@ function com_customer__cancel_appointments(&$object) {
 	global $_;
 
 	// Cancel any open customer follow-ups for this sale.
-	$follow_ups = $_->entity_manager->get_entities(
+	$follow_ups = $_->nymph->getEntities(
 			array('class' => com_customer_interaction),
 			array('&',
 				'data' => array('status', 'open'),

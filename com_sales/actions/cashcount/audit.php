@@ -16,7 +16,7 @@ if ( !gatekeeper('com_sales/auditcashcount') )
 
 // Default to the current cash count that is still open for this location.
 if (!isset($_REQUEST['id'])) {
-	$existing_counts = $_->entity_manager->get_entities(
+	$existing_counts = $_->nymph->getEntities(
 			array('class' => com_sales_cashcount),
 			array('&',
 				'tag' => array('com_sales', 'cashcount'),

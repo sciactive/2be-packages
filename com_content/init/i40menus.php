@@ -12,7 +12,7 @@
 defined('P_RUN') or die('Direct access prohibited');
 
 if ($_->config->com_content->show_cat_menus) {
-	$categories = (array) $_->entity_manager->get_entities(
+	$categories = (array) $_->nymph->getEntities(
 			array('class' => com_content_category),
 			array('&',
 				'tag' => array('com_content', 'category'),
@@ -105,7 +105,7 @@ if ($_->config->com_content->show_cat_menus) {
 }
 
 if ($_->config->com_content->show_page_menus) {
-	$pages = (array) $_->entity_manager->get_entities(
+	$pages = (array) $_->nymph->getEntities(
 			array('class' => com_content_page),
 			array('&',
 				'tag' => array('com_content', 'page'),

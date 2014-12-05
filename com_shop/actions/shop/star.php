@@ -26,7 +26,7 @@ while (true) {
 		break;
 	}
 
-	$key = $shop->array_search($_SESSION['user']->com_shop_starred);
+	$key = $shop->arraySearch($_SESSION['user']->com_shop_starred);
 	if ($key === false) {
 		$_SESSION['user']->com_shop_starred[] = $shop;
 		$_->page->ajax(json_encode(array('starred' => true)));

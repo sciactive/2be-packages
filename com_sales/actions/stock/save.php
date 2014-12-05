@@ -20,7 +20,7 @@ if (empty($list)) {
 	return;
 }
 
-$entities = (array) $_->entity_manager->get_entities(
+$entities = (array) $_->nymph->getEntities(
 		array('class' => com_sales_stock),
 		array('&',
 			'tag' => array('com_sales', 'stock')

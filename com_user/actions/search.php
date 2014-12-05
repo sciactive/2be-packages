@@ -43,7 +43,7 @@ if (empty($query)) {
 			$selector,
 			$selector2
 		);
-	$users = (array) call_user_func_array(array($_->entity_manager, 'get_entities'), $args);
+	$users = (array) call_user_func_array(array($_->nymph, 'getEntities'), $args);
 }
 
 foreach ($users as $key => &$cur_user) {

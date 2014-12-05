@@ -16,7 +16,7 @@ if ( !isset($_REQUEST['mail_id']) ) {
 	return false;
 }
 
-$mail = $_->entity_manager->get_entity(array(), array('&', 'guid' => (int) $_REQUEST['mail_id'], 'tag' => array('com_newsletter', 'mail')));
+$mail = $_->nymph->getEntity(array(), array('&', 'guid' => (int) $_REQUEST['mail_id'], 'tag' => array('com_newsletter', 'mail')));
 if ( !isset($mail) ) {
 	pines_error('Invalid mail!');
 	return false;

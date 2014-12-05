@@ -20,7 +20,7 @@ unset($module);
 if (isset($_SESSION['shop']))
 	return;
 
-$shop = $_->entity_manager->get_entity(
+$shop = $_->nymph->getEntity(
 		array('class' => com_shop_shop),
 		array('&',
 			'tag' => array('com_shop', 'shop'),

@@ -52,7 +52,7 @@ foreach ($descendants as $cur_group) {
 // Add all the users.
 foreach ($users as $cur_user) {
 	// Skip users who only have secondary groups.
-	if (!isset($cur_user->group->guid) || !($cur_user->group->is($group) || $cur_user->group->in_array($descendants)))
+	if (!isset($cur_user->group->guid) || !($cur_user->group->is($group) || $cur_user->group->inArray($descendants)))
 		continue;
 	// Skip users who aren't employees.
 	if (!$cur_user->employee)

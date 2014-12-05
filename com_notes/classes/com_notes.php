@@ -26,7 +26,7 @@ class com_notes extends component {
 
 		$module = new module('com_notes', 'thread/list', 'content');
 
-		$module->threads = $_->entity_manager->get_entities(
+		$module->threads = $_->nymph->getEntities(
 				array('class' => com_notes_thread),
 				array('&',
 					'tag' => array('com_notes', 'thread')

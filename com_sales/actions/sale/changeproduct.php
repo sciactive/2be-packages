@@ -22,7 +22,7 @@ if (!isset($sale->guid)) {
 }
 
 $key = (int) $_REQUEST['product'];
-$new_product = $_->entity_manager->get_entity(
+$new_product = $_->nymph->getEntity(
 		array('class' => com_sales_product),
 		array('&',
 			'tag' => array('com_sales', 'product'),
@@ -46,7 +46,7 @@ if ($sale->products[$key]['delivery'] != 'warehouse') {
 	return;
 }
 foreach ($sale->products[$key]['stock_entities'] as $cur_stock) {
-	if (!$cur_stock->in_array((array) $sale->products[$key]['returned_stock_entities'])) {
+	if (!$cur_stock->inArray((array) $sale->products[$key]['returned_stock_entities'])) {
 		pines_notice('Product specified has already been fulfilled or partially fulfilled.');
 		pines_redirect(pines_url('com_sales', 'sale/list'));
 		return;

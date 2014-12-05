@@ -10,8 +10,8 @@
  */
 /* @var $_ core *//* @var $this module */
 defined('P_RUN') or die('Direct access prohibited');
-$foobars = $_->entity_manager->get_entities(array('class' => com_example_foobar), array('&', 'tag' => array('com_example', 'foobar')));
-$_->entity_manager->sort($foobars, 'name');
+$foobars = $_->nymph->getEntities(array('class' => com_example_foobar), array('&', 'tag' => array('com_example', 'foobar')));
+$_->nymph->sort($foobars, 'name');
 ?>
 <div class="pf-form">
 	<div class="pf-element">

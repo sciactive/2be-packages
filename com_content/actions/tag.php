@@ -23,7 +23,7 @@ $selector = array('&',
 foreach ($tags as $cur_tag)
 	$selector['array'][] = array('content_tags', $cur_tag);
 
-$pages = $_->entity_manager->get_entities(
+$pages = $_->nymph->getEntities(
 		array('class' => com_content_page),
 		$selector
 	);

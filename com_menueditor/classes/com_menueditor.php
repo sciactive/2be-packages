@@ -133,7 +133,7 @@ class com_menueditor extends component {
 
 		$module = new module('com_menueditor', 'entry/list', 'content');
 
-		$module->entries = $_->entity_manager->get_entities(
+		$module->entries = $_->nymph->getEntities(
 				array('class' => com_menueditor_entry),
 				array('&',
 					'tag' => array('com_menueditor', 'entry')

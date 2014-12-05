@@ -34,7 +34,7 @@ if ($_->config->com_shop->review_in_payment_page) {
 }
 
 $module = new module('com_shop', 'checkout/payment', 'content');
-$module->payment_types = (array) $_->entity_manager->get_entities(
+$module->payment_types = (array) $_->nymph->getEntities(
 		array('class' => com_sales_payment_type, 'skip_ac' => true),
 		array('&',
 			'tag' => array('com_sales', 'payment_type'),

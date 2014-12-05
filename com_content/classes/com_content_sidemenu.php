@@ -16,17 +16,14 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\content
  */
-class com_content_sidemenu extends entity {
+class com_content_sidemenu extends Entity {
+	const etype = 'com_content_sidemenu';
 	protected $tags = array('com_content', 'sidemenu');
 
 	public function __construct($id = 0) {
 		if (parent::__construct($id) !== null)
 			return;
 		// Defaults.
-	}
-
-	public static function etype() {
-		return 'com_content_sidemenu';
 	}
 
 	/**

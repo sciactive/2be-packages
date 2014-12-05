@@ -29,7 +29,7 @@ switch ($_REQUEST['type']) {
 		}
 
 		if ($_->config->com_user->unverified_access)
-			$user->groups = (array) $_->entity_manager->get_entities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
+			$user->groups = (array) $_->nymph->getEntities(array('class' => group, 'skip_ac' => true), array('&', 'tag' => array('com_user', 'group'), 'data' => array('default_secondary', true)));
 		$user->enable();
 		unset($user->secret);
 		break;
@@ -46,7 +46,7 @@ switch ($_REQUEST['type']) {
 				return;
 			}
 		}
-		$test = $_->entity_manager->get_entity(
+		$test = $_->nymph->getEntity(
 				array('class' => user, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_user', 'user'),

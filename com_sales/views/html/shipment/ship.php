@@ -13,12 +13,12 @@ defined('P_RUN') or die('Direct access prohibited');
 $this->title = (!isset($this->entity->guid)) ? 'Editing New Shipment' : 'Editing ['.h($this->entity->id).']';
 $this->note = 'Provide shipment details in this form.';
 
-if ($this->entity->ref->has_tag('sale'))
+if ($this->entity->ref->hasTag('sale'))
 	$ref_class = 'com_sales_sale';
-elseif ($this->entity->ref->has_tag('transfer'))
+elseif ($this->entity->ref->hasTag('transfer'))
 	$ref_class = 'com_sales_transfer';
 else
-	$ref_class = 'entity';
+	$ref_class = 'Entity';
 
 ?>
 <style type="text/css" scoped="scoped">

@@ -93,8 +93,8 @@ $_->com_ptags->load();
 		<div>User: <span><?php echo ($this->entity->user) ? h("{$this->entity->user->name} [{$this->entity->user->username}]") : 'See Customer.'; ?></span></div>
 		<div>Group: <span><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-heading">
@@ -181,7 +181,7 @@ $_->com_ptags->load();
 	<?php } if (gatekeeper('com_testimonials/changestatus')) { ?>
 	<div class="pf-element">
 		<span class="pf-label">Auto-Approve</span>
-		<input class="pf-field" type="checkbox" name="approve" value="ON" <?php echo ($this->entity->has_tag('approved')) ? 'checked="checked"' : (isset($this->entity->guid) ? '' : 'checked="checked"') ; ?>/>
+		<input class="pf-field" type="checkbox" name="approve" value="ON" <?php echo ($this->entity->hasTag('approved')) ? 'checked="checked"' : (isset($this->entity->guid) ? '' : 'checked="checked"') ; ?>/>
 	</div>
 	<?php } ?>
 	<div class="pf-element pf-heading" style="margin-bottom: 20px;"></div>

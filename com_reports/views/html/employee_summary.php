@@ -200,7 +200,7 @@ if (isset($_->com_googledrive)) {
 			foreach ($this->invoices as $cur_invoice) {
 				if ($cur_invoice->status == 'voided')
 					continue;
-				if ($cur_invoice->has_tag('sale')) {
+				if ($cur_invoice->hasTag('sale')) {
 					foreach ($cur_invoice->products as $cur_product) {
 						if (!isset($totals[$cur_product['salesperson']->guid])){
 							$totals[$cur_product['salesperson']->guid] = array(
@@ -235,7 +235,7 @@ if (isset($_->com_googledrive)) {
 							}
 						}
 					}
-				} elseif ($cur_invoice->has_tag('return')) {
+				} elseif ($cur_invoice->hasTag('return')) {
 					foreach ($cur_invoice->products as $cur_product) {
 						if (!isset($totals[$cur_product['salesperson']->guid])){
 							$totals[$cur_product['salesperson']->guid] = array(

@@ -216,7 +216,7 @@ if (isset($_->com_googledrive)) {
 				);
 				$commissions = array();
 			}
-			if ($cur_invoice->has_tag('sale')) {
+			if ($cur_invoice->hasTag('sale')) {
 				$totals[$cur_invoice->group->guid]['qty_sold']++;
 				$totals[$cur_invoice->group->guid]['qty_net']++;
 				$totals[$cur_invoice->group->guid]['total_sold'] += $cur_invoice->subtotal;
@@ -233,7 +233,7 @@ if (isset($_->com_googledrive)) {
 						}
 					}
 				}
-			} elseif ($cur_invoice->has_tag('return')) {
+			} elseif ($cur_invoice->hasTag('return')) {
 				$totals[$cur_invoice->group->guid]['qty_returned']++;
 				$totals[$cur_invoice->group->guid]['qty_net']--;
 				$totals[$cur_invoice->group->guid]['total_returned'] += $cur_invoice->subtotal;

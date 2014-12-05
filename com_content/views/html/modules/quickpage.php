@@ -162,8 +162,8 @@ margin-left: 125px;
 	<input type="hidden" name="enable_custom_head" value="<?php e($this->enable_custom_head); ?>" />
 	<input type="hidden" name="custom_head" value="<?php e($this->custom_head); ?>" />
 	<input type="hidden" name="conditions" value="<?php e(isset($this->conditions) ? $this->conditions : '[]'); ?>" />
-	<input type="hidden" name="p_cdate" value="<?php e($this->p_cdate); ?>" />
-	<input type="hidden" name="p_mdate" value="<?php e($this->p_mdate); ?>" />
+	<input type="hidden" name="cdate" value="<?php e($this->cdate); ?>" />
+	<input type="hidden" name="mdate" value="<?php e($this->mdate); ?>" />
 	<input type="hidden" name="publish_begin" value="<?php e(!empty($this->publish_begin) ? $this->publish_begin : format_date(time(), 'full_med')); ?>" />
 	<input type="hidden" name="publish_end" value="<?php e($this->publish_end); ?>" />
 	<input type="hidden" name="show_title" value="<?php e(isset($this->show_title_save) ? $this->show_title_save : 'null'); ?>" />

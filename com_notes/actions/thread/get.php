@@ -14,13 +14,13 @@ defined('P_RUN') or die('Direct access prohibited');
 if ( !gatekeeper('com_notes/seethreads') )
 	punt_user(null, pines_url('com_notes', 'thread/list'));
 
-$entity = $_->entity_manager->get_entity(array('class' => $_REQUEST['context']), array('&', 'guid' => (int) $_REQUEST['id']));
+$entity = $_->nymph->getEntity(array('class' => $_REQUEST['context']), array('&', 'guid' => (int) $_REQUEST['id']));
 if (!isset($entity->guid)) {
 	$_->page->ajax(json_encode(false));
 	return;
 }
 
-$threads = $_->entity_manager->get_entities(
+$threads = $_->nymph->getEntities(
 		array('class' => com_notes_thread),
 		array('&',
 			'tag' => array('com_notes', 'thread'),
@@ -31,13 +31,13 @@ $threads = $_->entity_manager->get_entities(
 		)
 	);
 // Order threads by their modification date.
-$_->entity_manager->sort($threads, 'p_mdate');
+$_->nymph->sort($threads, 'mdate');
 
 $return = array();
 foreach ($threads as $cur_thread) {
 	$cur_struct = array(
 		'guid' => "$cur_thread->guid",
-		'date' => format_date($cur_thread->p_cdate, 'date_short'),
+		'date' => format_date($cur_thread->cdate, 'date_short'),
 		'user' => $cur_thread->user->name,
 		'privacy' => ($cur_thread->ac->other ? 'everyone' : ($cur_thread->ac->group ? 'my-group' : 'only-me')),
 		'notes' => array()

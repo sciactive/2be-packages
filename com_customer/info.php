@@ -21,7 +21,7 @@ return array(
 	'description' => 'Manage your customers using accounts. Features include membership and point tracking.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager&editor',
+		'service' => 'editor',
 		'component' => 'com_user&com_jquery&com_bootstrap&com_pgrid&com_pnotify&com_pform'
 	),
 	'recommend' => array(

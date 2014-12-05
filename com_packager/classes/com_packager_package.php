@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\packager
  */
-class com_packager_package extends entity {
+class com_packager_package extends Entity {
+	const etype = 'com_packager_package';
 	protected $tags = array('com_packager', 'package');
 
 	public function __construct($id = 0) {
@@ -27,10 +28,6 @@ class com_packager_package extends entity {
 		$this->meta = array();
 		$this->additional_files = array();
 		$this->exclude_files = array();
-	}
-
-	public static function etype() {
-		return 'com_packager_package';
 	}
 
 	public function info($type) {

@@ -132,7 +132,7 @@ if (empty($shop->name)) {
 	pines_notice('Please specify a name.');
 	return;
 }
-$test = $_->entity_manager->get_entity(array('class' => com_shop_shop, 'skip_ac' => true), array('&', 'tag' => array('com_shop', 'shop'), 'data' => array('name', $shop->name)));
+$test = $_->nymph->getEntity(array('class' => com_shop_shop, 'skip_ac' => true), array('&', 'tag' => array('com_shop', 'shop'), 'data' => array('name', $shop->name)));
 if (isset($test) && $test->guid != $_REQUEST['id']) {
 	$shop->print_form();
 	pines_notice('There is already a shop with that name. Please choose a different name.');

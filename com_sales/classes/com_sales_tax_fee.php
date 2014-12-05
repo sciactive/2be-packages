@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_tax_fee extends entity {
+class com_sales_tax_fee extends Entity {
+	const etype = 'com_sales_tax_fee';
 	protected $tags = array('com_sales', 'tax_fee');
 
 	public function __construct($id = 0) {
@@ -25,10 +26,6 @@ class com_sales_tax_fee extends entity {
 		// Defaults.
 		$this->enabled = true;
 		$this->locations = array();
-	}
-
-	public static function etype() {
-		return 'com_sales_tax_fee';
 	}
 
 	public function info($type) {

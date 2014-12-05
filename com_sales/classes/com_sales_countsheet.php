@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_countsheet extends entity {
+class com_sales_countsheet extends Entity {
+	const etype = 'com_sales_countsheet';
 	protected $tags = array('com_sales', 'countsheet');
 
 	public function __construct($id = 0) {
@@ -28,10 +29,6 @@ class com_sales_countsheet extends entity {
 		$this->matched = $this->missing = $this->potential = $this->invalid = array();
 		$this->matched_count = $this->missing_count = array();
 		$this->matched_serials = $this->missing_serials = array();
-	}
-
-	public static function etype() {
-		return 'com_sales_countsheet';
 	}
 
 	public function info($type) {
@@ -178,7 +175,7 @@ class com_sales_countsheet extends entity {
 		foreach ($entries as &$cur_entry) {
 			if ($cur_entry->qty <= 0)
 				continue;
-			$stock = (array) $_->entity_manager->get_entities(
+			$stock = (array) $_->nymph->getEntities(
 					array('class' => com_sales_stock, 'limit' => $cur_entry->qty),
 					$and_selector,
 					$not_selector,
@@ -204,7 +201,7 @@ class com_sales_countsheet extends entity {
 			// If there are more than one, it's not a serial.
 			if ($cur_entry->qty <= 0)
 				continue;
-			$stock = (array) $_->entity_manager->get_entities(
+			$stock = (array) $_->nymph->getEntities(
 					array('class' => com_sales_stock, 'limit' => 5),
 					$and_selector,
 					$not_selector,
@@ -219,7 +216,7 @@ class com_sales_countsheet extends entity {
 				// If the product isn't serialized, something's wrong, don't save it.
 				if (!$cur_stock->product->serialized)
 					continue;
-				if (!$cur_stock->in_array($this->potential[$cur_entry->code]['entries'])) {
+				if (!$cur_stock->inArray($this->potential[$cur_entry->code]['entries'])) {
 					$this->potential[$cur_entry->code]['name'] = $cur_entry->code;
 					// Entries, since it's in another location.
 					$this->potential[$cur_entry->code]['entries'][] = $cur_stock;
@@ -250,7 +247,7 @@ class com_sales_countsheet extends entity {
 				}
 			}
 			if (!$found) {
-				$stock_history = (array) $_->entity_manager->get_entities(
+				$stock_history = (array) $_->nymph->getEntities(
 						array('class' => com_sales_stock, 'limit' => 5),
 						array('&',
 							'strict' => array('serial', $cur_entry->code)
@@ -275,7 +272,7 @@ class com_sales_countsheet extends entity {
 			$this->invalid = array_merge($this->invalid, array_fill(0, $cur_entry->qty, $cur_entry->code));
 		}
 		// Find entries that should be counted, but weren't found.
-		$this->missing = (array) $_->entity_manager->get_entities(
+		$this->missing = (array) $_->nymph->getEntities(
 				array('class' => com_sales_stock),
 				$and_selector,
 				$not_selector,

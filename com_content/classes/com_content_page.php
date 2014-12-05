@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\content
  */
-class com_content_page extends entity {
+class com_content_page extends Entity {
+	const etype = 'com_content_page';
 	protected $tags = array('com_content', 'page');
 
 	public function __construct($id = 0) {
@@ -30,10 +31,6 @@ class com_content_page extends entity {
 		$this->conditions = array();
 		$this->publish_end = null;
 		$this->variants = array();
-	}
-
-	public static function etype() {
-		return 'com_content_page';
 	}
 
 	public function info($type) {
@@ -67,7 +64,7 @@ class com_content_page extends entity {
 	public function delete() {
 		global $_;
 		// Remove page from categories.
-		$cats = $_->entity_manager->get_entities(
+		$cats = $_->nymph->getEntities(
 				array('class' => com_content_category, 'skip_ac' => true),
 				array('&',
 					'tag' => array('com_content', 'category'),
@@ -75,7 +72,7 @@ class com_content_page extends entity {
 				)
 			);
 		foreach ($cats as &$cur_cat) {
-			while (($key = $this->array_search($cur_cat->pages)) !== false) {
+			while (($key = $this->arraySearch($cur_cat->pages)) !== false) {
 				unset($cur_cat->pages[$key]);
 				$cur_cat->pages = array_values($cur_cat->pages);
 			}
@@ -111,7 +108,7 @@ class com_content_page extends entity {
 	 */
 	public function get_categories() {
 		global $_;
-		$categories = (array) $_->entity_manager->get_entities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'ref' => array('pages', $this)));
+		$categories = (array) $_->nymph->getEntities(array('class' => com_content_category), array('&', 'tag' => array('com_content', 'category'), 'ref' => array('pages', $this)));
 		return $categories;
 	}
 
@@ -159,7 +156,7 @@ class com_content_page extends entity {
 		global $_;
 		$module = new module('com_content', 'page/form', 'content');
 		$module->entity = $this;
-		$module->categories = (array) $_->entity_manager->get_entities(
+		$module->categories = (array) $_->nymph->getEntities(
 				array('class' => com_content_category),
 				array('&',
 					'tag' => array('com_content', 'category'),

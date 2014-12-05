@@ -26,7 +26,7 @@ class com_example extends component {
 
 		$module = new module('com_example', 'foobar/list', 'content');
 
-		$module->foobars = $_->entity_manager->get_entities(
+		$module->foobars = $_->nymph->getEntities(
 				array('class' => com_example_foobar),
 				array('&',
 					'tag' => array('com_example', 'foobar')

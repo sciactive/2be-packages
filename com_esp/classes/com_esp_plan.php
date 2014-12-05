@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\esp
  */
-class com_esp_plan extends entity {
+class com_esp_plan extends Entity {
+	const etype = 'com_esp_plan';
 	protected $tags = array('com_esp', 'esp');
 
 	public function __construct($id = 0) {
@@ -26,10 +27,6 @@ class com_esp_plan extends entity {
 		$this->history = array();
 		$this->status = 'pending';
 		$this->disposed = 'pending';
-	}
-
-	public static function etype() {
-		return 'com_esp_plan';
 	}
 
 	public function info($type) {
@@ -94,7 +91,7 @@ class com_esp_plan extends entity {
 			return false;
 		global $_;
 		if (!isset($this->id))
-			$this->id = $_->entity_manager->new_uid('com_esp_plan_id');
+			$this->id = $_->nymph->newUID('com_esp_plan_id');
 		return parent::save();
 	}
 
@@ -128,7 +125,7 @@ class com_esp_plan extends entity {
 					array('location', $this->group)
 				)
 			);
-			$new_stock = $_->entity_manager->get_entity(array('class' => com_sales_stock), $selector);
+			$new_stock = $_->nymph->getEntity(array('class' => com_sales_stock), $selector);
 			if (isset($new_stock)) {
 				// Remove the item from inventory.
 				$new_product = $this->item;

@@ -21,7 +21,7 @@ return array(
 	'description' => 'An instant messenger that works within the website. Designed to use an XMPP (Jabber) server. Includes a script to authenticate users for the ejabberd server.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'user_manager&entity_manager&icons',
+		'service' => 'user_manager&icons',
 		'component' => 'com_jquery&com_bootstrap&com_pform&com_soundmanager',
 	),
 );

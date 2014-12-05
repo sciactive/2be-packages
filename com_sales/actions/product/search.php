@@ -19,7 +19,7 @@ $r_query = '/'.str_replace(' ', '.*', preg_quote($query)).'/i';
 
 // Get Product Entities.
 if ($query == '*') {
-	$products = $_->entity_manager->get_entities(
+	$products = $_->nymph->getEntities(
 			array('class' => com_sales_product),
 			array('&',
 				'tag' => array('com_sales', 'product'),
@@ -27,7 +27,7 @@ if ($query == '*') {
 			)
 		);
 } else {
-	$products = $_->entity_manager->get_entities(
+	$products = $_->nymph->getEntities(
 			array('class' => com_sales_product),
 			array('&',
 				'tag' => array('com_sales', 'product'),
@@ -42,7 +42,7 @@ if ($query == '*') {
 		);
 
 	// Also check categories
-	$categories = $_->entity_manager->get_entities(
+	$categories = $_->nymph->getEntities(
 			array('class' => com_sales_category),
 			array('&',
 				'tag' => array('com_sales', 'category'),
@@ -52,7 +52,7 @@ if ($query == '*') {
 		);
 	foreach ($categories as $cur_category) {
 		foreach ($cur_category->products as $cur_product) {
-			if ($cur_product && $cur_product->enabled == ($_REQUEST['enabled'] == 'true') && !$cur_product->in_array($products))
+			if ($cur_product && $cur_product->enabled == ($_REQUEST['enabled'] == 'true') && !$cur_product->inArray($products))
 				$products[] = $cur_product;
 		}
 	}
@@ -113,8 +113,8 @@ foreach ($products as $key => &$product) {
 	else
 		$product_images = 'None';
 
-	$created = format_date($product->p_cdate, 'date_short');
-	$modified = format_date($product->p_mdate, 'date_short');
+	$created = format_date($product->cdate, 'date_short');
+	$modified = format_date($product->mdate, 'date_short');
 	$expiration = (!empty($product->product_exp)) ? format_date($product->product_exp, 'date_short') : '';
 
 	$json_struct = (object) array(

@@ -21,7 +21,7 @@ return array(
 	'description' => 'Provides a more object oriented interface for creating emails in 2be. Supports attachments.',
 	'depend' => array(
 		'core' => '<3',
-		'service' => 'entity_manager&editor',
+		'service' => 'editor',
 		'component' => 'com_jquery&com_bootstrap&com_pgrid&com_markdown&com_pform'
 	),
 	'recommend' => array(

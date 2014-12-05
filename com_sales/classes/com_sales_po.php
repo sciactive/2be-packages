@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_po extends entity {
+class com_sales_po extends Entity {
+	const etype = 'com_sales_po';
 	protected $tags = array('com_sales', 'po');
 
 	public function __construct($id = 0) {
@@ -27,10 +28,6 @@ class com_sales_po extends entity {
 		$this->finished = false;
 		$this->destination = $_SESSION['user']->group;
 		$this->ac->other = 2;
-	}
-
-	public static function etype() {
-		return 'com_sales_po';
 	}
 
 	public function info($type) {
@@ -164,8 +161,8 @@ class com_sales_po extends entity {
 		$module = new module('com_sales', 'po/form', 'content');
 		$module->entity = $this;
 		$module->locations = (array) $_->user_manager->get_groups();
-		$module->shippers = (array) $_->entity_manager->get_entities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
-		$module->vendors = (array) $_->entity_manager->get_entities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
+		$module->shippers = (array) $_->nymph->getEntities(array('class' => com_sales_shipper), array('&', 'tag' => array('com_sales', 'shipper')));
+		$module->vendors = (array) $_->nymph->getEntities(array('class' => com_sales_vendor), array('&', 'tag' => array('com_sales', 'vendor')));
 
 		return $module;
 	}

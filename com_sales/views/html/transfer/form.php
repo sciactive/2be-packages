@@ -361,8 +361,8 @@ $missing_stock = array();
 		<div>User: <span class="date"><?php e("{$this->entity->user->name} [{$this->entity->user->username}]"); ?></span></div>
 		<div>Group: <span class="date"><?php e("{$this->entity->group->name} [{$this->entity->group->groupname}]"); ?></span></div>
 		<?php } ?>
-		<div>Created: <span class="date"><?php e(format_date($this->entity->p_cdate, 'full_short')); ?></span></div>
-		<div>Modified: <span class="date"><?php e(format_date($this->entity->p_mdate, 'full_short')); ?></span></div>
+		<div>Created: <span class="date"><?php e(format_date($this->entity->cdate, 'full_short')); ?></span></div>
+		<div>Modified: <span class="date"><?php e(format_date($this->entity->mdate, 'full_short')); ?></span></div>
 	</div>
 	<?php } ?>
 	<div class="pf-element">
@@ -452,7 +452,7 @@ $missing_stock = array();
 			<tbody>
 			<?php foreach($this->categories as $category) { ?>
 				<tr title="<?php e($category->guid); ?>" class="<?php echo $category->children ? 'parent ' : ''; ?><?php echo isset($category->parent) ? h("child ch_{$category->parent->guid} ") : ''; ?>">
-					<td><?php echo isset($category->parent) ? $category->array_search($category->parent->children) + 1 : '0' ; ?></td>
+					<td><?php echo isset($category->parent) ? $category->arraySearch($category->parent->children) + 1 : '0' ; ?></td>
 					<td><?php e($category->name); ?></td>
 					<td><?php echo count($category->products); ?></td>
 				</tr>
@@ -500,7 +500,7 @@ $missing_stock = array();
 						<?php }
 						} else {
 							foreach ($this->entity->stock as $cur_stock) {
-								if ($cur_stock->guid && !$cur_stock->in_array($this->entity->received))
+								if ($cur_stock->guid && !$cur_stock->inArray($this->entity->received))
 									$missing_stock[] = $cur_stock;
 								?>
 						<tr>

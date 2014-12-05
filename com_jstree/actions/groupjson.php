@@ -24,7 +24,7 @@ if ($_REQUEST['all'] == 'true') {
 			$cur_location->parent = null;
 			$cur_descendants = $cur_location->get_descendants();
 			foreach ($cur_descendants as $cur_descendant) {
-				if (!$cur_descendant->in_array($descendants) && !$cur_descendant->in_array($locations))
+				if (!$cur_descendant->inArray($descendants) && !$cur_descendant->inArray($locations))
 					$descendants[] = $cur_descendant;
 			}
 		}

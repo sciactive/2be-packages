@@ -133,7 +133,7 @@ $_->com_jstree->load();
 		<tr title="<?php e($sale->guid); ?>">
 			<td><a data-entity="<?php e($sale->guid); ?>" data-entity-context="com_sales_sale"><?php e($sale->id); ?></a></td>
 			<td>Sale <a href="javascript:void(0);" onclick="alert('Recent upgrades have changed the shipment system, and new sales will no longer show in this view. It will instead be just for shipments.');">(?)</a></td>
-			<td><?php echo $sale->has_tag('shipping_shipped') ? 'Shipped' : 'Not Shipped'; ?></td>
+			<td><?php echo $sale->hasTag('shipping_shipped') ? 'Shipped' : 'Not Shipped'; ?></td>
 			<td><?php e(format_date($sale->tender_date, 'full_sort')); ?></td>
 			<td><a data-entity="<?php e($sale->group->guid); ?>" data-entity-context="group"><?php e("{$sale->group->name} [{$sale->group->groupname}]"); ?></a></td>
 			<td><?php e($sale->shipping_address->name); ?><?php if (isset($sale->customer->guid)) { ?> (<a data-entity="<?php e($sale->customer->guid); ?>" data-entity-context="com_customer_customer"><?php e("{$sale->customer->guid}: {$sale->customer->name}"); ?></a>)<?php } ?></td>
@@ -142,18 +142,18 @@ $_->com_jstree->load();
 			<td><?php e(isset($sale->tracking_numbers) ? implode(', ', $sale->tracking_numbers) : ''); ?></td>
 		</tr>
 	<?php } foreach((array) $this->shipments as $shipment) {
-		if ($shipment->ref->has_tag('sale'))
+		if ($shipment->ref->hasTag('sale'))
 			$ref_class = 'com_sales_sale';
-		elseif ($shipment->ref->has_tag('transfer'))
+		elseif ($shipment->ref->hasTag('transfer'))
 			$ref_class = 'com_sales_transfer';
 		else
-			$ref_class = 'entity';
+			$ref_class = 'Entity';
 		?>
 		<tr title="<?php e($shipment->guid); ?>">
 			<td><a data-entity="<?php e($shipment->guid); ?>" data-entity-context="com_sales_shipment"><?php e($shipment->id); ?></a></td>
 			<td><a data-entity="<?php e($shipment->ref->guid); ?>" data-entity-context="<?php e($ref_class); ?>"><?php e($shipment->ref->info('name')); ?></a></td>
 			<td><?php echo $shipment->shipped ? 'Shipped' : 'Not Shipped'; ?> - <?php echo $shipment->delivered ? 'Delivered' : 'In Transit'; ?></td>
-			<td><?php e(format_date($shipment->p_cdate, 'full_sort')); ?></td>
+			<td><?php e(format_date($shipment->cdate, 'full_sort')); ?></td>
 			<td><a data-entity="<?php e($shipment->group->guid); ?>" data-entity-context="group"><?php e("{$shipment->group->name} [{$shipment->group->groupname}]"); ?></a></td>
 			<td><?php
 				e($shipment->shipping_address->name);

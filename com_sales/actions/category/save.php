@@ -131,7 +131,7 @@ if ((int) $_REQUEST['parent'] != $category->parent->guid) {
 	// The category has a different parent.
 	if (isset($category->parent)) {
 		// Remove the category from its parent.
-		$key = $category->array_search($category->parent->children);
+		$key = $category->arraySearch($category->parent->children);
 		if ($key !== false)
 			unset($category->parent->children[$key]);
 		if ($category->parent->save() && $category->save()) {

@@ -13,8 +13,8 @@ defined('P_RUN') or die('Direct access prohibited');
 
 $bc = '<li class="active"><span class="breadcrumb_item">'.h($this->entity->name).'</span></li>';
 
-if ($this->entity->has_tag('product')) {
-	$categories = (array) $_->entity_manager->get_entities(
+if ($this->entity->hasTag('product')) {
+	$categories = (array) $_->nymph->getEntities(
 			array('class' => com_sales_category),
 			array('&',
 				'tag' => array('com_sales', 'category'),
@@ -32,7 +32,7 @@ if ($this->entity->has_tag('product')) {
 			$cur_parent = $cur_parent->parent;
 		}
 	}
-} elseif ($this->entity->has_tag('category')) {
+} elseif ($this->entity->hasTag('category')) {
 	$cur_entity = $this->entity->parent;
 }
 

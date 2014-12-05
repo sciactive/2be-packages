@@ -16,7 +16,8 @@ defined('P_RUN') or die('Direct access prohibited');
  *
  * @package Components\sales
  */
-class com_sales_category extends entity {
+class com_sales_category extends Entity {
+	const etype = 'com_sales_category';
 	protected $tags = array('com_sales', 'category');
 
 	public function __construct($id = 0) {
@@ -36,10 +37,6 @@ class com_sales_category extends entity {
 		$this->title_use_name = true;
 		$this->title_position = 'prepend';
 		$this->meta_tags = array();
-	}
-
-	public static function etype() {
-		return 'com_sales_category';
 	}
 
 	public function info($type) {
@@ -75,7 +72,7 @@ class com_sales_category extends entity {
 	 */
 	public function delete() {
 		if (isset($this->parent)) {
-			$key = $this->array_search($this->parent->children);
+			$key = $this->arraySearch($this->parent->children);
 			if ($key === false) {
 				pines_log("Failed to find category in parent {$this->parent->name}.", 'error');
 				return false;
@@ -156,7 +153,7 @@ class com_sales_category extends entity {
 		global $_;
 		$module = new module('com_sales', 'category/form', 'content');
 		$module->entity = $this;
-		$module->categories = $_->entity_manager->get_entities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'data' => array('parent', null)));
+		$module->categories = $_->nymph->getEntities(array('class' => com_sales_category), array('&', 'tag' => array('com_sales', 'category'), 'data' => array('parent', null)));
 
 		return $module;
 	}
