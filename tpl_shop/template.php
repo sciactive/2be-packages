@@ -80,7 +80,7 @@ header('Content-Type: text/html');
 		}
 	?></div>
 	<nav id="nav" class="navbar navbar-static-top <?php echo $_->config->tpl_shop->alt_navbar ? 'navbar-inverse' : 'navbar-default'; ?>" role="navigation">
-		<div class="container-fluid">
+		<div class="container<?php e($_->config->tpl_shop->width === 'fluid' ? '-fluid' : ''); ?>">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
 					<span class="sr-only">Toggle navigation</span>
@@ -126,7 +126,7 @@ header('Content-Type: text/html');
 		</div>
 	</nav>
 	<div id="header">
-		<div class="container-fluid">
+		<div class="container<?php e($_->config->tpl_shop->width === 'fluid' ? '-fluid' : ''); ?>">
 			<div class="row">
 				<div class="col-sm-12 positions">
 					<div id="header_position"><?php echo $_->page->render_modules('header', 'module_header'); ?></div>
@@ -135,7 +135,7 @@ header('Content-Type: text/html');
 			</div>
 		</div>
 	</div>
-	<div id="page" class="container-fluid">
+	<div id="page" class="container<?php e($_->config->tpl_shop->width === 'fluid' ? '-fluid' : ''); ?>">
 		<div class="row">
 			<div id="breadcrumbs" class="col-sm-12"><?php echo $_->page->render_modules('breadcrumbs', 'module_header'); ?></div>
 		</div>
@@ -184,7 +184,7 @@ header('Content-Type: text/html');
 		</div>
 	</div>
 	<div id="footer" class="clearfix">
-		<div class="container">
+		<div class="container<?php e($_->config->tpl_shop->width === 'fluid' ? '-fluid' : ''); ?>">
 			<div class="row">
 				<div class="col-sm-12 positions">
 					<div id="footer_position"><?php echo $_->page->render_modules('footer', 'module_header'); ?></div>

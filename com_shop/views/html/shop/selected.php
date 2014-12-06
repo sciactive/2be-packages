@@ -29,11 +29,15 @@ defined('P_RUN') or die('Direct access prohibited');
 	}
 </style>
 <div id="p_muid_box">
-	<div><a href="<?php e(pines_url('com_shop', 'shop', array('id' => $_SESSION['shop']->guid))); ?>">
-			<?php if (isset($_SESSION['shop'])) { ?>
+	<div>
+		<?php if (isset($_SESSION['shop'])) { ?>
+		<a href="<?php e(pines_url('com_shop', 'shop', array('id' => $_SESSION['shop']->guid))); ?>">
 			<img alt="Current Shop: <?php e($_SESSION['shop']->name); ?>" title="Current Shop: <?php e($_SESSION['shop']->name); ?>" id="p_muid_thumbnail" src="<?php e($_->config->location.$_SESSION['shop']->thumbnail); ?>" />
-			<?php } else { ?>
+		</a>
+		<?php } else { ?>
+		<a href="<?php e(pines_url('com_shop', 'shop/edit')); ?>">
 			<span id="p_muid_thumbnail" class="label label-primary">No Shop</span>
-			<?php } ?>
-		</a></div>
+		</a>
+		<?php } ?>
+	</div>
 </div>

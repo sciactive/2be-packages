@@ -19,8 +19,7 @@
 			"text": "Per Condition",
 			"href": ["com_configure","list",{"percondition":"true"}],
 			"depend": {
-				"ability": "com_configure/edit|com_configure/view",
-				"service": "entity_manager"
+				"ability": "com_configure/edit|com_configure/view"
 			}
 		},
 		{

@@ -49,8 +49,8 @@ return array(
 		'name' => 'databases',
 		'cname' => 'Fortune Databases',
 		'description' => 'The databases to search for fortunes.',
-		'value' => pines_scandir('components/com_fortune/includes/'),
-		'options' => pines_scandir('components/com_fortune/includes/'),
+		'value' => file_exists('components/com_fortune/includes/') ? pines_scandir('components/com_fortune/includes/') : array(),
+		'options' => file_exists('components/com_fortune/includes/') ? pines_scandir('components/com_fortune/includes/') : array(),
 		'peruser' => true,
 	),
 );

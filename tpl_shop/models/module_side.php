@@ -15,10 +15,10 @@ defined('P_RUN') or die('Direct access prohibited');
 	<?php if ($this->show_title && (!empty($this->title) || !empty($this->note))) { ?>
 	<div class="module_title page-header">
 		<?php if (!empty($this->title)) { ?>
-		<h3><?php echo $this->title;
+		<h2><span><?php echo $this->title;
 		if (!empty($this->note)) { ?>
 			<small><?php echo $this->note; ?></small>
-		<?php } ?></h3>
+		<?php } ?><span></h2>
 		<?php } ?>
 	</div>
 	<?php } ?>

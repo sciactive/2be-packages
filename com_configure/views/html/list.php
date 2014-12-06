@@ -74,20 +74,24 @@ $this->title = 'Component Configuration';
 	<div class="user_picker">
 		<h3>Per User/Group Configuration</h3>
 		<div>
-			<select class="form-control" id="p_muid_user_select" name="user_select">
-				<option value="null">-- Pick a User/Group --</option>
-				<optgroup label="Groups">
-					<?php foreach ($this->groups as $cur_group) { ?>
-					<option value="<?php e($cur_group->guid); ?>group"<?php echo $cur_group->is($this->user) ? ' selected="selected"' : ''; ?>><?php e("$cur_group->name [$cur_group->groupname]"); ?></option>
-					<?php } ?>
-				</optgroup>
-				<optgroup label="Users">
-					<?php foreach ($this->users as $cur_user) { ?>
-					<option value="<?php e($cur_user->guid); ?>user"<?php echo $cur_user->is($this->user) ? ' selected="selected"' : ''; ?>><?php e("$cur_user->name [$cur_user->username]"); ?></option>
-					<?php } ?>
-				</optgroup>
-			</select>
-			<button class="btn btn-default" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
+			<div class="btn-group">
+				<select class="form-control pull-left" id="p_muid_user_select" name="user_select">
+					<option value="null">-- Pick a User/Group --</option>
+					<optgroup label="Groups">
+						<?php foreach ($this->groups as $cur_group) { ?>
+						<option value="<?php e($cur_group->guid); ?>group"<?php echo $cur_group->is($this->user) ? ' selected="selected"' : ''; ?>><?php e("$cur_group->name [$cur_group->groupname]"); ?></option>
+						<?php } ?>
+					</optgroup>
+					<optgroup label="Users">
+						<?php foreach ($this->users as $cur_user) { ?>
+						<option value="<?php e($cur_user->guid); ?>user"<?php echo $cur_user->is($this->user) ? ' selected="selected"' : ''; ?>><?php e("$cur_user->name [$cur_user->username]"); ?></option>
+						<?php } ?>
+					</optgroup>
+				</select>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-default" type="button" onclick="$_.com_configure_go(<?php e(json_encode(pines_url('com_configure', 'list'))); ?>)">Refresh</button>
+			</div>
 		</div>
 		<?php if (!$_->config->com_configure->peruser) { ?>
 		<p>
@@ -102,7 +106,7 @@ $this->title = 'Component Configuration';
 		<h3>Per Condition Configuration</h3>
 		<div class="btn-toolbar">
 			<div class="btn-group">
-				<select class="form-control" id="p_muid_user_select" name="user_select" style="float: left;">
+				<select class="form-control pull-left" id="p_muid_user_select" name="user_select">
 					<option value="null">-- Pick a Condition --</option>
 					<?php foreach ($this->conditions as $cur_condition) { ?>
 					<option value="<?php e($cur_condition->guid); ?>"<?php echo $cur_condition->is($this->user) ? ' selected="selected"' : ''; ?>><?php e($cur_condition->name); ?></option>

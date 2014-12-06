@@ -3,8 +3,7 @@
 		"path": "main_menu/system/entity_tools",
 		"text": "Entity Tools",
 		"depend": {
-			"children": true,
-			"service": "entity_manager"
+			"children": true
 		}
 	},
 		{
