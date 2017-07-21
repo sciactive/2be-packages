@@ -23,6 +23,6 @@ return array(
 		'core' => '<3',
 		'service' => 'configurator',
 		'component' => 'com_pform',
-		'function' => 'mysql_connect'
+		'function' => 'mysqli_connect'
 	),
 );

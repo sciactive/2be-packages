@@ -68,9 +68,9 @@ class com_mysql extends component {
 	 */
 	public function connect($host = null, $user = null, $password = null, $database = null) {
 		global $_;
-		// Check that the MySQL extension is installed.
-		if (!is_callable('mysql_connect')) {
-			pines_error('MySQL PHP extension is not available. It probably has not been installed. Please install and configure it in order to use MySQL.');
+		// Check that the MySQLi extension is installed.
+		if (!class_exists('mysqli')) {
+			pines_error('MySQLi PHP extension is not available. It probably has not been installed. Please install and configure it in order to use MySQL.');
 			return false;
 		}
 		// If we're setting up the DB, don't try to connect.
@@ -85,19 +85,8 @@ class com_mysql extends component {
 		}
 		// Connecting, selecting database
 		if (!$this->connected) {
-			if ( $this->link = @mysql_connect($host, $user, $password) ) {
-				if ( @mysql_select_db($database, $this->link) ) {
-					$this->connected = true;
-				} else {
-					$this->connected = false;
-					if (!isset($_SESSION['user']) && $host == 'localhost' && $user == '2be' && $password == 'password' && $database == '2be') {
-						if ($_->request_component != 'com_mysql')
-							pines_redirect(pines_url('com_mysql', 'setup'));
-					} else {
-						if (function_exists('pines_error'))
-							pines_error('Could not select database: ' . mysql_error());
-					}
-				}
+			if ( $this->link = @mysqli_connect($host, $user, $password, $database) ) {
+				$this->connected = true;
 			} else {
 				$this->connected = false;
 				if (!isset($_SESSION['user']) && $host == 'localhost' && $user == '2be' && $password == 'password' && $database == '2be') {
@@ -105,7 +94,8 @@ class com_mysql extends component {
 						pines_redirect(pines_url('com_mysql', 'setup'));
 				} else {
 					if (function_exists('pines_error'))
-						pines_error('Could not connect: ' . mysql_error());
+						pines_error('Could not select database: ' . mysqli_connect_error());
+					pines_error($host.', '.$user.', '.$password.', '.$database);
 				}
 			}
 		}
@@ -119,7 +109,7 @@ class com_mysql extends component {
 	 */
 	public function disconnect() {
 		if ($this->connected) {
-			mysql_close($this->link);
+			mysqli_close($this->link);
 			$this->connected = false;
 		}
 		return $this->connected;
