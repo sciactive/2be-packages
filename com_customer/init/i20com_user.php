@@ -22,7 +22,7 @@ defined('P_RUN') or die('Direct access prohibited');
  */
 function com_customer__save_user(&$array, $name, &$object) {
 	global $_;
-	return call_user_func(array($_->com_customer, 'save_user'), $array, $name, $object);
+	return call_user_func_array(array($_->com_customer, 'save_user'), array(&$array, $name, $object));
 }
 
 $_->hook->add_callback('user->save', -50, 'com_customer__save_user');
